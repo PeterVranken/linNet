@@ -54,8 +54,8 @@ from the Octave control toolbox can be applied just like that. This
 reaches from simple transfer function plotting to stability analyses and
 system response computation on arbitrary system input.
 
-[Figure 1: Simple example of a linear electronic circuit](https://linnet.googlecode.com/svn/wiki/trunk/frontPage/FirstIntroExample.jpg "Sample circuit")
-
+![FirstIntroExample.jpg](http://svn.code.sf.net/p/linnet-svn/code/wiki/frontPage/FirstIntroExample.jpg "Simple RLC circuit")  
+Figure 1: Simple example of a linear electronic circuit
 
 Please refer to figure 1 as an example of how linNet works. This is a
 simple RLC element with a transfer function of second order. It can be
@@ -95,12 +95,13 @@ Going to Octave and typing `G` to plot the transfer function (still
 using default device values) gives us figure 2. More plots or plots with
 altered device values are a matter of single commands in Octave.
 
-[Figure 2: Octave plot of transfer function of the above circuit](https://linnet.googlecode.com/svn/wiki/trunk/frontPage/FirstIntroExample_OctaveOutput.jpg "GNU Octave Plot of found transfer function")
+![Simple RLC circuit.jpg](http://svn.code.sf.net/p/linnet-svn/code/wiki/frontPage/FirstIntroExample_OctaveOutput.jpg "Simulation with Octave")  
+Figure 2: Octave plot of transfer function of the above circuit
 
 You will find the details of the usage of linNet, in particular
 installation, netlist syntax and Octave interface and an explanation of
 the mathematical concept of the software in the user guide. Please go to
-the tab Files in the header of this window to download the user guide. The
+the tab Files in the header of this window to download the [user guide](http://sourceforge.net/projects/linnet-svn/files/linNet-userGuide-1.0.1.pdf/download "linNet's manual"). The
 download of the ready-to-use, pre-compiled software (only Windows and
 Linux) with or without source files can be found there as further links.
 
