@@ -55,7 +55,7 @@ w2u = $(subst \,/,$(1))
 
 
 # A list of file names is written linewise into a text file. The file can be used as input
-# to other tools, like the AFT PROtroniC build script.
+# to other tools, like a linker or archiver.
 # Return value: undefined. The caller should invalidate the return value by putting the
 # call of the macro into a string eating expression, e.g. $(and $(call ...),)
 # $(1): Name of generated file
