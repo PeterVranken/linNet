@@ -539,7 +539,7 @@ signed int main(signed int argc, char *argv[])
            "-----------------------------------------------------------------------------\n"
            " " LIN_APP_NAME
                     " - The Software for symbolic Analysis of linear Electronic Circuits\n"
-           " Copyright (C) 2014 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)\n"
+           " Copyright (C) 2014-2023 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)\n"
            " This is free software; see the source for copying conditions. There is NO\n"
            " warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n"
            "-----------------------------------------------------------------------------";
@@ -631,7 +631,7 @@ signed int main(signed int argc, char *argv[])
     }
 
     /* Try to locate the application's resource files; look for the installation directory.
-       If it can be determined then the ptah is returned as malloc allocated string. */
+       If it can be determined then the path is returned as malloc allocated string. */
     assert(argc > 0);
     _installDir = fil_findApplication(argv[0]);
     if(_installDir != NULL)

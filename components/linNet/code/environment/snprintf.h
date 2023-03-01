@@ -20,7 +20,7 @@
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 /* Module interface
- *   snprintf_patchMinGW64
+ *   snprintf_patch
  */
 
 /*
@@ -35,17 +35,29 @@
  * Defines
  */
 
-/* Find out if we have a revision of GCC, which requires a patch of snprintf. */
-#if defined(__GNUC__) && defined(__MINGW64__)
-# if 10000*__GNUC__ + 100*__GNUC_MINOR__ + __GNUC_PATCHLEVEL__ > 40801
+/* Find out if we have a revision of GCC, which requires a patch of snprintf: The DEBUG
+   compilation executes an according test at the beginning of execution (see file
+   code/logger/log_logger.c, l.107). Try with and without the patch and see if you run into
+   the assertion. Use the patch only if the assertion fires when the patch is off. */
+#if defined(__GNUC__)
+# if 10000*__GNUC__ + 100*__GNUC_MINOR__ + __GNUC_PATCHLEVEL__ <= 40801  
+     &&  defined(__MINGW64__)
+#  define DO_PATCH_SNPRINTF
+# elif 10000*__GNUC__ + 100*__GNUC_MINOR__ + __GNUC_PATCHLEVEL__ == 80100
+    /* GCC 8.1.0 for Windows still requires the patch in both variants, 32 and 64 Bit.
+       (Checked for mingw-i686-8.1.0-release-win32-dwarf-rt_v6-rev0 and
+       mingw-w64-x86_64-8.1.0-posix-seh-rt_v6-rev0.) */
+#  define DO_PATCH_SNPRINTF
+# else
 #  error Double-check if patch of snprintf is still needed for this revision of GCC
 # endif
-# define DO_PATCH_SNPRINTF
+#else
+# error Double-check if patch of snprintf is needed for this compiler or c library
 #endif
 
 #ifdef DO_PATCH_SNPRINTF
 /** Overload orignal, buggy function snprintf with patched function. */
-# define snprintf snprintf_patchMinGW64
+# define snprintf snprintf_patch
 #endif
 
 
@@ -62,7 +74,6 @@
 /*
  * Global inline interface
  */
-
 
 #ifdef DO_PATCH_SNPRINTF
 /**
@@ -85,7 +96,7 @@
  * value is probably not what's documented for snprintf (see above).
  *   @param string
  * The result string, which is always null terminated, if only \a bufSize is greater than
- * null. Pass a buffer, which has room for at least \a bufSize characters.
+ * zero. Pass a buffer, which has room for at least \a bufSize characters.
  *   @param bufSize
  * The maximum number of written characters, including the terminating null character.
  *   @param formatString
@@ -94,11 +105,11 @@
  * The variable argument list to satisfy all formatting characters in \a formatString.
  */ 
 
-static inline signed int snprintf_patchMinGW64( char * __restrict__ string
-                                              , size_t bufSize
-                                              , const char * __restrict__ formatString
-                                              , ...
-                                              )
+static inline signed int snprintf_patch( char * __restrict__ string
+                                       , size_t bufSize
+                                       , const char * __restrict__ formatString
+                                       , ...
+                                       )
 {
     signed int retVal;
     if(bufSize > 0)
@@ -118,9 +129,7 @@ static inline signed int snprintf_patchMinGW64( char * __restrict__ string
     
     return retVal;
     
-} /* End of snprintf_patchMinGW64 */
-
-#undef DO_PATCH_SNPRINTF
+} /* End of snprintf_patch */
 #endif
 
 

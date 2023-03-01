@@ -37,6 +37,26 @@
  * Defines
  */
 
+/* Find out if we have a revision of GCC, which requires a local implementation of stricmp:
+   Try the build with and without the local implementation and see if you run into a linker
+   error. Use the local implementation only if compiler or linker complain about the
+   missing function. */
+#if defined(__GNUC__) 
+# if 10000*__GNUC__ + 100*__GNUC_MINOR__ + __GNUC_PATCHLEVEL__ <= 40801  
+     && !defined(__MINGW64__)
+#  define USE_LOCAL_STRICMP
+# elif 10000*__GNUC__ + 100*__GNUC_MINOR__ + __GNUC_PATCHLEVEL__ == 80100
+    /* GCC 8.1.0 for Windows contains the needed function in both variants, 32 and 64 Bit.
+       (Checked for mingw-i686-8.1.0-release-win32-dwarf-rt_v6-rev0 and
+       mingw-w64-x86_64-8.1.0-posix-seh-rt_v6-rev0.) */
+# else
+#  error Double-check if local implementation of stricmp is still needed for this revision \
+         of GCC
+# endif
+#else
+# error Double-check if local implementation of stricmp is needed for this compiler or c \
+        library
+#endif
 
 /*
  * Global type definitions
@@ -52,7 +72,7 @@
  * Global inline interface
  */
 
-#if defined(__GNUC__) && !defined(__MINGW64__)
+#ifdef USE_LOCAL_STRICMP
 /**
  * Case insensitive string compare.
  *   @return
