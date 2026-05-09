@@ -180,9 +180,10 @@ VPATH := $(srcDirList) $(targetDir)
 
 # Pattern rules for compilation of C and C++ source files.
 #   TODO You may need to add more include paths here.
+# -Wa,-a=$(patsubst %.o,%.lst,$@)
 cFlags += $(cDefines) -Wall -Wextra -Wstrict-overflow=4 -Wmissing-declarations              \
           -fno-exceptions -ffunction-sections -fdata-sections -MMD                          \
-          -Wa,-a=$(patsubst %.o,%.lst,$@) -std=c99                                          \
+          -std=c99                                                                          \
 		  $(foreach path,$(srcDirList) $(incDirList),-I$(path))                             \
           $(foreach def,$(defineList),-D$(def))
 ifeq ($(CONFIG),DEBUG)
@@ -257,10 +258,12 @@ $(targetDir)obj/listOfObjFiles.txt: $(objListWithPath) $(projectResourceFile)
 # using switch --cref. The warning can be ignored, the executable build product is not
 # affected. If a cross refenerce in the map file is of no particular use, one might
 # simply remove the switch to avoid the warning.
-lFlags = -Wl,--print-map,--cref,--warn-common
+#lFlags = -Wl,--print-map,--cref,--warn-common
+# TODO Linux requires 2>/dev/null
 $(targetDir)$(projectExe): $(targetDir)obj/listOfObjFiles.txt
 	$(info Linking project. Ouput is redirected to $(targetDir)$(project).map)
 	$(gcc) $(lFlags) -o $@ @$< -lm > $(targetDir)$(project).map
+	$(objdump) -dSl $@ > $(targetDir)$(project).lst 2>NUL
 
 # Delete all dependency files ignoring (-) the return code from Windows.
 .PHONY: cleanDep

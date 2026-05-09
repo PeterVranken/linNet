@@ -39,8 +39,10 @@
    compilation executes an according test at the beginning of execution (see file
    code/logger/log_logger.c, l.107). Try with and without the patch and see if you run into
    the assertion. Use the patch only if the assertion fires when the patch is off. */
-#if defined(__GNUC__)
-# if 10000*__GNUC__ + 100*__GNUC_MINOR__ + __GNUC_PATCHLEVEL__ <= 40801  
+#if defined( __clang__)
+    /* LLVM is a modern compiler and doesn't require patches. */
+#elif defined(__GNUC__)
+# if 10000*__GNUC__ + 100*__GNUC_MINOR__ + __GNUC_PATCHLEVEL__ <= 40801 \
      &&  defined(__MINGW64__)
 #  define DO_PATCH_SNPRINTF
 # elif 10000*__GNUC__ + 100*__GNUC_MINOR__ + __GNUC_PATCHLEVEL__ == 80100
@@ -103,7 +105,7 @@
  * The printf style format string.
  *   @param ...
  * The variable argument list to satisfy all formatting characters in \a formatString.
- */ 
+ */
 
 static inline signed int snprintf_patch( char * __restrict__ string
                                        , size_t bufSize
@@ -117,7 +119,7 @@ static inline signed int snprintf_patch( char * __restrict__ string
         va_list argptr;
         va_start(argptr, formatString);
         retVal = vsnprintf(string, bufSize, formatString, argptr);
-        
+
         /* The Windows MinGw port of GCC doesn't write a terminating null character at the
            end of the string. Add it now. */
         *(string+bufSize-1) = '\0';
@@ -126,9 +128,9 @@ static inline signed int snprintf_patch( char * __restrict__ string
     }
     else
         retVal = 0;
-    
+
     return retVal;
-    
+
 } /* End of snprintf_patch */
 #endif
 

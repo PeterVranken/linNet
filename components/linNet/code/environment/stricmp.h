@@ -41,8 +41,10 @@
    Try the build with and without the local implementation and see if you run into a linker
    error. Use the local implementation only if compiler or linker complain about the
    missing function. */
-#if defined(__GNUC__) 
-# if 10000*__GNUC__ + 100*__GNUC_MINOR__ + __GNUC_PATCHLEVEL__ <= 40801  
+#if defined(__clang__)
+    /* LLVM is a modern compiler and doesn't require patches. */
+#elif defined(__GNUC__)
+# if 10000*__GNUC__ + 100*__GNUC_MINOR__ + __GNUC_PATCHLEVEL__ <= 40801 \
      && !defined(__MINGW64__)
 #  define USE_LOCAL_STRICMP
 # elif 10000*__GNUC__ + 100*__GNUC_MINOR__ + __GNUC_PATCHLEVEL__ == 80100
@@ -85,7 +87,7 @@
  *   @remark
  * Based on http://stackoverflow.com/questions/5820810/case-insensitive-string-comp-in-c,
  * visited on Feb 1, 2014.
- */ 
+ */
 
 static signed int stricmp(char const *a, char const *b)
 {
@@ -98,7 +100,7 @@ static signed int stricmp(char const *a, char const *b)
         ++ a;
         ++ b;
     }
-    
+
 } /* End of stricmp */
 #endif /* function not available in GCC for mingw32 */
 

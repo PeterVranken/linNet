@@ -34,7 +34,11 @@ endif
 # PATH.
 #   CAUTION: Blanks in path designations found in the environment variable PATH can't be
 # processed. A search will not take place in those directories.
-toolsSearchPath = $(minGwSearchPath) $(subst :, ,$(subst ;, ,$(call w2u,$(PATH))))
+ifeq ($(OS),Windows_NT)
+    toolsSearchPath = $(minGwSearchPath) $(subst ;, ,$(call w2u,$(PATH)))
+else
+    toolsSearchPath = $(minGwSearchPath) $(subst :, ,$(call w2u,$(PATH)))
+endif
 #$(info Search path for external tools: $(toolsSearchPath))
 
 # Under Windows we have to look for gcc.exe rather than for gcc.
@@ -51,6 +55,7 @@ echo := $(call pathSearch,$(toolsSearchPath),echo$(dotExe))
 gawk := $(call pathSearch,$(toolsSearchPath),gawk$(dotExe))
 awk := $(gawk)
 gcc := $(call pathSearch,$(toolsSearchPath),gcc$(dotExe))
+#gcc := $(call pathSearch,$(toolsSearchPath),clang$(dotExe))
 g++ := $(call pathSearch,$(toolsSearchPath),g++$(dotExe))
 mkdir := $(call pathSearch,$(toolsSearchPath),mkdir$(dotExe))
 mv := $(call pathSearch,$(toolsSearchPath),mv$(dotExe))
@@ -59,6 +64,11 @@ pwd := $(call pathSearch,$(toolsSearchPath),pwd$(dotExe))
 rm := $(call pathSearch,$(toolsSearchPath),rm$(dotExe))
 rmdir := $(call pathSearch,$(toolsSearchPath),rmdir$(dotExe))
 touch := $(call pathSearch,$(toolsSearchPath),touch$(dotExe))
+
+objdump := $(call pathSearch,$(toolsSearchPath),objdump$(dotExe))
+ifeq ($(objdump),)
+    objdump := $(call pathSearch,$(toolsSearchPath),llvm-objdump$(dotExe))
+endif
 
 # TODO The resource compiler is system specific. We've added the Windows variant only.
 # Extend code for other systems if applicable.
@@ -71,8 +81,8 @@ endif
 make := $(MAKE)
 
 # A plausibility check that tools could be loacted.
-#$(info Make: $(make), gcc: $(gcc), windres: $(windres))
-ifeq ($(and $(make),$(gcc)),)
+$(info Make: $(make), gcc: $(gcc), objdump: $(objdump), windres: $(windres))
+ifeq ($(and $(make),$(gcc),$(objdump)),)
     $(error Required GNU tools can't be located. Most probable reasons are: You \
             didn't install the MinGW package or you didn't add the path to the MinGW \
             installation to the environment variable PATH and you didn't let environment \
