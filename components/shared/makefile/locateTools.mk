@@ -34,7 +34,11 @@ endif
 # PATH.
 #   CAUTION: Blanks in path designations found in the environment variable PATH can't be
 # processed. A search will not take place in those directories.
-toolsSearchPath = $(minGwSearchPath) $(subst :, ,$(subst ;, ,$(call w2u,$(PATH))))
+ifeq ($(OS),Windows_NT)
+    toolsSearchPath = $(minGwSearchPath) $(subst ;, ,$(call w2u,$(PATH)))
+else
+    toolsSearchPath = $(minGwSearchPath) $(subst :, ,$(call w2u,$(PATH)))
+endif
 #$(info Search path for external tools: $(toolsSearchPath))
 
 # Under Windows we have to look for gcc.exe rather than for gcc.
