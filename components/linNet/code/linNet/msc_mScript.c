@@ -2,7 +2,7 @@
  * @file msc_mScript.c
  *   Some support functions to generate an Octave M script.
  *
- * Copyright (C) 2014 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ * Copyright (C) 2014-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -233,13 +233,6 @@ void msc_initModule(log_hLogger_t hLogger)
 #ifdef  DEBUG
     /* The DEBUG compilation counts all references to all created objects. */
     _noRefsToObjects = 0;
-#endif
-
-#ifdef  DEBUG
-    /* Check if patch of snprintf is either not required or properly installed. */
-    char buf[3] = {[2] = '\0'};
-    snprintf(buf, 2, "%s World", "Hello");
-    assert(strlen(buf) == 1);
 #endif
 } /* End of msc_initModule */
 

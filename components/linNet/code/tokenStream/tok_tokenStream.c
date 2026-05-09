@@ -30,7 +30,7 @@
  * decision has been taken because most parsers have to handle a lot of single character
  * tokens like parenthesis and these are implicitly defined.
  *
- * Copyright (C) 1992-2014 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ * Copyright (C) 1992-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -1684,15 +1684,6 @@ boolean tok_createTokenStream( tok_hTokenStream_t * const phTokenStream
                              , const tok_tokenDescriptorTable_t * const pCustomTokenDefinition
                              )
 {
-#ifdef  DEBUG
-    /* Check if patch of snprintf is either not required or properly installed. */
-    {
-        char buf[3] = {[2] = '\0'};
-        snprintf(buf, 2, "%s World", "Hello");
-        assert(strlen(buf) == 1);
-    }
-#endif
-
     boolean useStdio = customFctGetChar == NULL;
 
     /* For stdio: We need to see either a file handle or a valid name. */
