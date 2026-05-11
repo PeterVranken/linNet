@@ -4,7 +4,7 @@
  * @file fil_file.h
  * Definition of global interface of module fil_file.c
  *
- * Copyright (C) 2014 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ * Copyright (C) 2014-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -61,6 +61,9 @@ char *fil_changeFileName( const char * const fileName
                         , const char * const newName
                         , const char * const newExt
                         );
+
+/** Create a folder. */
+int fil_mkdirRecursive(const char * const path);
 
 /** Copy a file. */
 boolean fil_copyFile(const char * const targetFilePath, const char * const srcFile);

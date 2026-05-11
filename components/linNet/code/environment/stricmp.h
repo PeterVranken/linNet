@@ -49,6 +49,7 @@
     /* GCC 8.1.0 for Windows contains the needed function in both variants, 32 and 64 Bit.
        (Checked for mingw-i686-8.1.0-release-win32-dwarf-rt_v6-rev0 and
        mingw-w64-x86_64-8.1.0-posix-seh-rt_v6-rev0.) */
+# elif 10000*__GNUC__ + 100*__GNUC_MINOR__ + __GNUC_PATCHLEVEL__ == 160100
 # else
 #  error Double-check if local implementation of stricmp is still needed for this revision \
          of GCC

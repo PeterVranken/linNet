@@ -2,7 +2,7 @@
  * @file fil_file.c
  * A collection of file and file name related operations.
  *
- * Copyright (C) 2014 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ * Copyright (C) 2014-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -21,10 +21,13 @@
  *   fil_splitPath
  *   fil_changeExtension
  *   fil_copyDir
+ *   fil_mkdirRecursive
  *   fil_findApplication
  * Local functions
+ *   isSlash
  *   removeTrailingSlash
  *   checkForInstallDir
+ *   makeDir
  */
 
 /*
@@ -86,7 +89,20 @@
  */
 
 /**
- * Clean a path designation: Often, there's a trailing path sepeartor character. This
+ * Check a character for being the path separator. The function is tolerant and accepts
+ * forward and backward slash, if compiled for the Windows platform.
+ *   @return
+ * Get \a true if \a c is a path separator.
+ *   @param[in] c
+ * The character to check.
+ */
+static inline boolean isSlash(char c)
+{
+    return c == '\\'  ||  c == '/';
+}
+
+/**
+ * Clean a path designation: Often, there's a trailing path separator character. This
  * function removes it if present. The passed string is modified in place.
  *   @return
  * The modified string is returned. This is the same character pointer as passed in.
@@ -103,7 +119,7 @@ static char *removeTrailingSlash(char * const path)
     if(strLen > 0)
     {
         char * const pLast = path + strLen - 1;
-        if(*pLast == cSL)
+        if(isSlash(*pLast))
             *pLast = '\0';
     }
     
@@ -385,6 +401,89 @@ boolean fil_copyFile(const char * const targetFilePath, const char * const srcFi
 
 
 
+/** 
+ * Create a directory.
+ *   This function is a wrapper around the platform specific function mkdir. For UNIX
+ * platforms, it sets the mode to full rights for the owner and read/execute for group and
+ * others.
+ *   @return
+ * Get a Boolean success message.
+ *   @param[in] path
+ * The path designation. It is passed as is to the platform function mkdir.
+ */
+static inline boolean makeDir(const char * const path)
+{
+    const boolean success = 
+        mkdir( path
+#ifdef __unix__
+             , /* mode: Full access to owner, read and execute for all others */ 
+               S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH
+#endif
+             ) == 0;
+    return success;
+    
+} /* End of makeDir. */
+
+
+/**
+ * Create a folder. The complete path to the folder is craeted, too, if it shouldn't exist
+ * yet.
+ *   @return Get some success information.
+ *   @retval 0  Path already existed (nothing created).
+ *   @retval 1  At least one directory was created.
+ *   @retval -1 An error occured.
+ */
+int fil_mkdirRecursive(const char * const path)
+{
+    if(path == NULL) 
+        return -1;
+
+    #define PATH_MAX_LEN    2048
+    size_t len;
+    len = strlen(path);
+    if (len == 0 || len >= PATH_MAX_LEN)
+        return -1;
+
+    /* We copy the needed path so that we can temporarily truncate it at folder boundaries.
+       We force it to end on a path separator. */
+    char tmp[len+2u];
+    strcpy(tmp, path);
+    if(!isSlash(tmp[len-1]))
+    {
+        tmp[len+0] = cSL;
+        tmp[len+1] = '\0';
+    }
+    
+    int created = 0;
+
+    /* Proceed till next path separator and create the partial path before as a single
+       directory with the non-recursive platform function. */
+    for(char *p=tmp+1; *p; ++p)
+    {
+        if(isSlash(*p))
+        {
+            /* Let the path string end after the next found folder name. */
+            *p = '\0';
+
+            if(makeDir(tmp))
+                created = 1;
+            else if(errno != EEXIST)
+                return -1;
+            else
+            {   
+                /* mkdir failed because directory already existed. For us not an error;
+                   function return code remains 0. */
+            }
+
+            /* Restore the original path. */
+            *p = cSL;
+        }
+    }
+
+    return created;
+    
+    #undef PATH_MAX_LEN
+} /* fil_mkdirRecursive */
 
 
 /**
@@ -400,7 +499,6 @@ boolean fil_copyFile(const char * const targetFilePath, const char * const srcFi
  *   @param srcDir
  * The source file or directory to be copied. May be a single file or a directory of those.
  */
-
 boolean fil_copyDir(const char * const targetDir, const char * const srcDir)
 {
 #if 0
@@ -426,12 +524,7 @@ boolean fil_copyDir(const char * const targetDir, const char * const srcDir)
         boolean success = true;
 
         /* Create empty directory at target location. */
-        if(mkdir( targetPath
-#ifdef __unix__
-                , /* mode: full access to anybody */ S_IRWXO | S_IRWXG | S_IRWXU
-#endif
-                ) != 0
-          )
+        if(makeDir(targetPath))
         {
             PRINTF("Can't create new directory %s\n", targetPath);
         }

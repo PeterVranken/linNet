@@ -44,6 +44,7 @@
 
 #include <stdlib.h>
 #include <stdint.h>
+#include <inttypes.h>
 #include <stdarg.h>
 #include <string.h>
 #include <time.h>
@@ -105,6 +106,7 @@ void log_initModule()
     char buf[3] = {[2] = '\0'};
     snprintf(buf, 2, "%s World", "Hello");
     assert(strlen(buf) == 1);
+printf("TODO Remove this after use: snprintf is working well\n");
 #endif
 } /* End of log_initModule */
 
@@ -326,7 +328,7 @@ void log_parseLogLevel(log_hLogger_t hObj, const char * const logLevelName)
     unsigned int logLevel;
     for(logLevel=0; logLevel<noLogLevels; ++logLevel)
     {
-        if(stricmp(logLevelName, logLevelAry[logLevel]) == 0)
+        if(strcasecmp(logLevelName, logLevelAry[logLevel]) == 0)
         {
             log_setLogLevel(hObj, logLevel);
             return;
@@ -618,13 +620,14 @@ static unsigned int logInternal( log_logger_t * const hObj
         const char *unitClock = hObj->lineFormat == log_fmtLong? " ms": "";
         snprintf( lineHeader + idxWhere
                 , sizeof(lineHeader) - idxWhere
-                , "%06" F_MAXU_T "%s - %6s - "
+                , "%06" PRIuMAX "%s - %6s - "
                 , cpuTimeInMs
                 , unitClock
                 , logLevelStringAry_[logLevel]
                 );
     } /* End if(Do we need to print a line header?) */
 #undef MAX_SIZE_LINE_HDR
+#undef F_MAXU_T
 
     unsigned int noChars = 0;
     boolean charsCounted = false;

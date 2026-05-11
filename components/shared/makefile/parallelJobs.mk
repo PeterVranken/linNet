@@ -78,5 +78,5 @@ targetRunDir ?= $(targetDir)
 run: makeDir
 	$(info Running $(call u2w,$(abspath $(targetDir)$(projectExe))) $(targetRunArgs) in directory $(targetRunDir))
 	$(MAKE) $(mFlags) $(targetDir)$(projectExe)
-	cd $(targetRunDir) & pwd & $(call u2w,$(abspath $(targetDir)$(projectExe))) $(targetRunArgs)
+	cd $(targetRunDir) & $(pwd) & $(call u2w,$(abspath $(targetDir)$(projectExe))) $(targetRunArgs)
 

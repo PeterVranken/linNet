@@ -2,7 +2,7 @@
  * @file lin_linNet.c
  *   Main function of linNet.
  *
- * Copyright (C) 2013-2014 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ * Copyright (C) 2013-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -210,12 +210,12 @@ static const char *getLogFileName( const opt_cmdLineOptions_t * const pCmdLine
  *   @return
  * \a true if operation succeeded, otherwise \a false.
  *   @param outputPath
- * The location of the output folder (i.e. its intended parent directory), not including
+ * The location of the output folder (i.e., its intended parent directory), not including
  * the final slash.
  *   @param folderName
  * The name of the folder that holds all required scripting.
  *   @param dontCopyPrivateScripts
- * Normally, the folder is self-contained, i.e. it contains the cicuit depending, generated
+ * Normally, the folder is self-contained, i.e., it contains the cicuit depending, generated
  * script representing the computation result plus some static, always-same scripts needed
  * to run the generated script code. This means that any result will contain the always
  * same support scripts. The user may decide to install this code in his Octave environment
@@ -236,7 +236,7 @@ static boolean makeOctaveOutputDir( const char * const outputPath
     char octavePath[strlen(outputPath) + sizeof(SL) + strlen(folderName)];
     snprintf(octavePath, sizeof(octavePath), "%s" SL "%s", outputPath, folderName);
 
-    /* Check if the aimed folder already exists: If so we do not force copying again (e.g.
+    /* Check if the aimed folder already exists: If so we do not force copying again (e.g.,
        to restore the static part of the scripting). It is a wanted use case that someone
        corrects or extends this part of the scripting and we should not discard his
        modifications. */
@@ -261,11 +261,7 @@ static boolean makeOctaveOutputDir( const char * const outputPath
     }
 
     /* Create the Octave folder at the aimed output path. */
-    boolean success = mkdir( octavePath
-#ifdef __unix__
-                           , /* mode: full access to anybody */ S_IRWXO | S_IRWXG | S_IRWXU
-#endif
-                           ) == 0;
+    boolean success = fil_mkdirRecursive(octavePath) >= 0;
     if(!success)
     {
         LOG_ERROR( hLog
@@ -351,9 +347,9 @@ static boolean makeOctaveOutputDir( const char * const outputPath
  *   @param dontCopyPrivateOctaveScripts
  * If Octave scripts should be generated: The actually generated, computation result
  * related scripts depend on some static, always same support scripts. If \a
- * dontCopyPrivateOctaveScripts is \a true then these files are added to the result. One
- * might e.g. have installed these files once as part of his Octave installation, so that
- * making a copy for each computation result would be counterproductive.
+ * dontCopyPrivateOctaveScripts is \a false then these files are added to the result. One
+ * might, e.g., have installed these files once as part of their Octave installation, so
+ * that making a copy for each computation result would be counterproductive.
  *   @param hLog
  * The logger to write all progress messages into.
  *   @see
@@ -539,7 +535,7 @@ signed int main(signed int argc, char *argv[])
            "-----------------------------------------------------------------------------\n"
            " " LIN_APP_NAME
                     " - The Software for symbolic Analysis of linear Electronic Circuits\n"
-           " Copyright (C) 2014-2023 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)\n"
+           " Copyright (C) 2014-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)\n"
            " This is free software; see the source for copying conditions. There is NO\n"
            " warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n"
            "-----------------------------------------------------------------------------";

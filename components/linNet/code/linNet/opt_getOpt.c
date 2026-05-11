@@ -2,7 +2,7 @@
  * @file opt_getOpt.c
  * Command line parser, using getopt.
  *
- * Copyright (C) 2014 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ * Copyright (C) 2014-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -53,63 +53,69 @@
 # define HELP_TEXT                                                                          \
 "usage: linNet [-hrsci] [-v <logLevel>] [-f <headerFormat>] [-l <logFileName>]"             \
 " [-o <outputPath>] [--] {<circuitFileName>}\n"                                             \
-"  h: Print this help and terminate\n"                                                      \
-"  r: Print the software revision and terminate\n"                                          \
-"  v: Verbosity; one out of INFO, RESULT, WARN, ERROR or FATAL. Default is RESULT\n"        \
-"  f: Log entry format, one out of raw, short or long. Default is long\n"                   \
-"  s: Silent. Do not echo results to stdout (but still write into log file)\n"              \
+"  h: Print this help and terminate.\n"                                                     \
+"  r: Print the software revision and terminate.\n"                                         \
+"  v: Verbosity; one out of INFO, RESULT, WARN, ERROR or FATAL. Default is RESULT.\n"       \
+"  f: Log entry format, one out of raw, short or long. Default is long.\n"                  \
+"  s: Silent. Do not echo results to stdout (but still write into log file).\n"             \
 "  l: Log file name. Default is not to open a log file. Precondition: Either a log file\n"  \
-"     is specified or -s is not given\n"                                                    \
-"  c: Clear log file at the beginning. Default is to append\n"                              \
-"  o: The path where to put the generated Octave code. The specified directory needs to\n"  \
-"     exist. Default is not to generate Octave code\n"                                      \
+"     is specified or -s is not given.\n"                                                   \
+"  c: Clear log file at the beginning. Default is to append.\n"                             \
+"  o: The path where to put the generated Octave code. The specified directory is created\n"\
+"     if it doesn't exist. Default is not to generate Octave code.\n"                       \
 "  i: Inhibit copying static Octave scripts. The generated Octave code builds on some\n"    \
 "     common scripts, which are normally copied into the output folder. Use -i to\n"        \
-"     not copy these files into each result\n"                                              \
+"     not copy these files into each result.\n"                                             \
 "  {<circuitFileName>}: A list of circuit files, each either *.ckt or *.cir. At least\n"    \
-"     one input file needs to be specified\n"
+"     one input file needs to be specified.\n"
 #else
 # define HELP_TEXT                                                                          \
 "usage: linNet [-hsci] [-v logLevel] [-f headerFormat] [-l[logFileName]] [-o[outputPath]]"  \
 " [--] {circuitFileName}\n"                                                                 \
 "Options:\n"                                                                                \
 "  -h, --help\n"                                                                            \
-"    Print this help and terminate\n"                                                       \
+"    Print this help and terminate.\n"                                                      \
 "  -r, --version\n"                                                                         \
-"    Print the software revision and terminate\n"                                           \
+"    Print the software revision and terminate.\n"                                          \
 "  -v LEVEL, --verbosity=LEVEL\n"                                                           \
 "    Verbosity of application; LEVEL is one out of INFO, RESULT, WARN, ERROR or FATAL.\n"   \
-"    Default is RESULT\n"                                                                   \
+"    Default is RESULT.\n"                                                                  \
 "  -f FORMAT, --format-of-log-entry=FORMAT\n"                                               \
-"    Log entry format, FORMAT is one out of raw, short or long. Default is long\n"          \
+"    Log entry format, FORMAT is one out of raw, short or long. Default is long.\n"         \
 "  -s, --silent\n"                                                                          \
 "    Silent operation, only a greeting is emitted. Do not echo results to stdout (but\n"    \
 "    still write into log file).\n"                                                         \
-"      Precondition: Silent mode must be chosen only if a log file is in use\n"             \
+"      Precondition: Silent mode must be chosen only if a log file is in use.\n"            \
 "  -l[FILENAME], --log-file-name[=FILENAME]\n"                                              \
 "    Log file name. No log file is opened if this option is not used. An appropriate\n"     \
 "    file name is chosen by the application if the option is used without argument\n"       \
 "    FILENAME.\n"                                                                           \
 "      Precondition: Either using a log file is specified or -s and --silent are not\n"     \
-"    given\n"                                                                               \
+"    given.\n"                                                                              \
 "  -c, --clear-log-file\n"                                                                  \
 "    Clear the log file at the beginning of operation. Default is to append to a possibly\n"\
-"    existing log file\n"                                                                   \
+"    existing log file.\n"                                                                  \
 "  -o[DIRNAME], --Octave-output-directory[=DIRNAME]\n"                                      \
-"    The path where to put the generated Octave code. The specified directory needs to\n"   \
-"    exist. No Octave code is generated if this option is not used. The generated code\n"   \
-"    is put into the current working directory if the option is used without argument\n"    \
-"    DIRNAME\n"                                                                             \
+"    The path where to put the generated Octave code. The specified directory is created\n" \
+"    if it doesn't exist.\n"                                                                \
+"      The generated code is put into the current working directory if the option is\n"     \
+"    used without argument DIRNAME.\n"                                                      \
+"      No Octave code is generated if this option is not used.\n"                           \
+"      Note, if the output directory already exists then the static, not input\n"           \
+"    dependent, common Octave code is not copied into the output directory; this enables\n" \
+"    making local modifications of that code without the danger of overwriting. See\n"      \
+"    --do-not-copy-common-Octave-code, also.\n"                                             \
 "  -i, --do-not-copy-common-Octave-code\n"                                                  \
 "    Inhibit copying static Octave scripts. The generated Octave code builds on some\n"     \
 "    common scripts, which are normally copied into the output folder. Use -i in order\n"   \
-"    to not copy these files into each result folder\n"                                     \
+"    to not copy these files into each result folder.\n"                                    \
+"\n"                                                                                        \
 "Input files:\n"                                                                            \
 "  Program arguments, which are neither options nor their arguments are considered input\n" \
 "  files. Pass the names of the circuit files to be processed, each either a *.ckt or a\n"  \
-"  *.cnl file. At least one input file needs to be specified\n"                             \
+"  *.cnl file. At least one input file needs to be specified.\n"                            \
 "    If the names of input files could clash with options or arguments then separate\n"     \
-"  options and input files in this order by a double hyphen (--)\n"
+"  options and input files in this order by a double hyphen (--).\n"
 #endif /* OPT_USE_POSIX_GETOPT */
 
 

@@ -4,7 +4,7 @@
  * @file lin_linNet.h
  * Definition of global interface of module lin_linNet.c
  *
- * Copyright (C) 2013 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ * Copyright (C) 2013-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -33,7 +33,7 @@
 #define LIN_APP_NAME    "linNet"
 
 /** The revision. */
-#define LIN_SW_REV      "1.0.1"
+#define LIN_SW_REV      "1.1.0"
 
 /** The name of the application's executable file. */
 #ifdef __WINNT__
