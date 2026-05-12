@@ -19,6 +19,7 @@
  */
 /* Module interface
  *   fil_splitPath
+ *   fil_concatPathFile
  *   fil_changeExtension
  *   fil_copyDir
  *   fil_mkdirRecursive
@@ -110,7 +111,7 @@ static inline boolean isSlash(char c)
  * The string pointer, which must not be a constant object like a string literal: If a
  * modification is needed then the function simply overwrites the last character with a
  * null character.
- */ 
+ */
 
 static char *removeTrailingSlash(char * const path)
 {
@@ -122,8 +123,8 @@ static char *removeTrailingSlash(char * const path)
         if(isSlash(*pLast))
             *pLast = '\0';
     }
-    
-    return path;    
+
+    return path;
 
 } /* End of removeTrailingSlash */
 
@@ -186,7 +187,7 @@ static boolean checkForInstallDir(const char *candidate)
  * The complete file name including the path.
  *   @remark The implementation is based on
  * http://stackoverflow.com/questions/1575278/function-to-split-a-filepath-into-path-and-file,
- * visted on Feb 21, 2014
+ * visted on Feb 21, 2014.
  */
 
 const char *fil_splitPath( char ** const pPath
@@ -247,6 +248,61 @@ const char *fil_splitPath( char ** const pPath
 
 
 
+/**
+ * Compose a file-path from a path and a file name. The concatenation of path and file name
+ * considers the right use of path separator characters.
+ *   @return
+ * The file-path is returned as malloc allocated string. The caller has to free the string
+ * after use.
+ *   @param path
+ * The path as a string. May or may not be terminated by a path separator character.\n
+ *   \a path may be NULL. NULL is handled as if it were the empty string.
+ *   @param fileName
+ * The file name, including an extension if applicable.
+ */
+
+const char *fil_concatPathFile(const char * const path, const char * const fileName)
+{
+    const size_t strLenPath = path != NULL? strlen(path): 0u;
+
+    boolean needSL;
+    if(strLenPath > 0u)
+    {
+        /* Special case Windows: if the path is no more then "c:" then we must not add a
+           separator character. Otherwise we always need one but path may already contain
+           it. */
+        if(isSlash(path[strLenPath-1u]))
+            needSL = false;
+#ifndef __unix__
+        else if(strLenPath == 2u  &&  path[1] == ':')
+            needSL = false;
+#endif
+        else
+            needSL = true;
+    }
+    else
+        needSL = false;
+
+    const size_t maxResultLen = strLenPath
+                                + (needSL? 1u: 0u) /* separator */
+                                + strlen(fileName)
+                                + 1u; /* termination */
+    char * const filePath = smalloc(maxResultLen, __FILE__, __LINE__);
+#ifdef DEBUG
+    const int noChars =
+#endif
+    snprintf( filePath
+            , maxResultLen
+            , "%s%s%s"
+            , strLenPath > 0? path: ""
+            , needSL? SL: ""
+            , fileName
+            );
+    assert(noChars >= 0  &&  (size_t)noChars < maxResultLen);
+
+    return filePath;
+
+} /* End of fil_concatPathFile */
 
 
 /**
@@ -393,7 +449,7 @@ boolean fil_copyFile(const char * const targetFilePath, const char * const srcFi
     {
         PRINTF("Failed to copy file %s to %s\n", srcFile, targetFilePath);
     }
-    
+
     return success;
 
 #undef PRINTF
@@ -401,7 +457,7 @@ boolean fil_copyFile(const char * const targetFilePath, const char * const srcFi
 
 
 
-/** 
+/**
  * Create a directory.
  *   This function is a wrapper around the platform specific function mkdir. For UNIX
  * platforms, it sets the mode to full rights for the owner and read/execute for group and
@@ -413,15 +469,15 @@ boolean fil_copyFile(const char * const targetFilePath, const char * const srcFi
  */
 static inline boolean makeDir(const char * const path)
 {
-    const boolean success = 
+    const boolean success =
         mkdir( path
 #ifdef __unix__
-             , /* mode: Full access to owner, read and execute for all others */ 
+             , /* mode: Full access to owner, read and execute for all others */
                S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH
 #endif
              ) == 0;
     return success;
-    
+
 } /* End of makeDir. */
 
 
@@ -429,13 +485,21 @@ static inline boolean makeDir(const char * const path)
  * Create a folder. The complete path to the folder is craeted, too, if it shouldn't exist
  * yet.
  *   @return Get some success information.
- *   @retval 0  Path already existed (nothing created).
- *   @retval 1  At least one directory was created.
- *   @retval -1 An error occured.
+ *     @retval 0  Path already existed (nothing created).
+ *     @retval 1  At least one directory was created.
+ *     @retval -1 An error occured.
+ *   @param[in] path
+ * The path designation. Absolute and relative paths are supported. Path elements like "." and ".." are supported.
  */
 int fil_mkdirRecursive(const char * const path)
 {
-    if(path == NULL) 
+#if 1
+# define PRINTF(...)  printf("fil_mkdirRecursive: " __VA_ARGS__)
+#else
+# define PRINTF(...)
+#endif
+
+    if(path == NULL)
         return -1;
 
     #define PATH_MAX_LEN    2048
@@ -453,11 +517,15 @@ int fil_mkdirRecursive(const char * const path)
         tmp[len+0] = cSL;
         tmp[len+1] = '\0';
     }
-    
+
     int created = 0;
 
     /* Proceed till next path separator and create the partial path before as a single
-       directory with the non-recursive platform function. */
+       directory with the non-recursive platform function.
+         We skip the first character. If it is a slash then the first iteration would call
+       mkdir(""), which is an invalid path. (And the root path doesn't require an mkdir.)
+       If it is another character, if just did the same as if executing the loop body:
+       advancing the pointer. */
     for(char *p=tmp+1; *p; ++p)
     {
         if(isSlash(*p))
@@ -466,13 +534,20 @@ int fil_mkdirRecursive(const char * const path)
             *p = '\0';
 
             if(makeDir(tmp))
+            {
+                PRINTF("mkdir created directory \"%s\"\n", tmp);
                 created = 1;
+            }
             else if(errno != EEXIST)
+            {
+                PRINTF("mkdir fails with %i to make directory \"%s\"\n", errno, tmp);
                 return -1;
+            }
             else
-            {   
+            {
                 /* mkdir failed because directory already existed. For us not an error;
                    function return code remains 0. */
+                PRINTF("mkdir reports directory \"%s\" as already existing\n", tmp);
             }
 
             /* Restore the original path. */
@@ -480,9 +555,10 @@ int fil_mkdirRecursive(const char * const path)
         }
     }
 
-    return created;
-    
     #undef PATH_MAX_LEN
+    return created;
+
+#undef PRINTF
 } /* fil_mkdirRecursive */
 
 
@@ -632,7 +708,7 @@ const char *fil_findApplication(const char * const appArg0)
     {
         PRINTF("First program argument doesn't designate installation dir\n");
     }
-    
+
     /* Try to relate the first program argument to the current working directory. */
     char * const cwd = getcwd(/* buffer */ NULL, /* size */ 0)
        , path2[strlen(cwd) + strlen(path) + sizeof(SL)];

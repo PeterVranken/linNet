@@ -4,7 +4,7 @@
  * @file smalloc.h
  * Definition of inline function smalloc (safe malloc).
  *
- * Copyright (C) 2013 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ * Copyright (C) 2013-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -93,7 +93,7 @@ static inline void *smalloc(size_t noBytes, const char * const fileName, unsigne
  * handled by error message and application abort, see void *smalloc(size_t, const char *
  * const, unsigned long) for details.
  *   @return
- * The malloc allocate memory chunk, which is initialized with a copy of the passed string,
+ * The malloc allocated memory chunk, which is initialized with a copy of the passed string,
  * is returned. Use void free(void*) to free the memeory after use.
  *   @param str
  * The string to copy.

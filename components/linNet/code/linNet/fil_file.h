@@ -53,6 +53,9 @@ const char *fil_splitPath( char ** const pPath
                          , const char *filePath
                          );
 
+/** Compose a file-path from a path and a file name. */
+const char *fil_concatPathFile(const char * const path, const char * const fileName);
+
 /** Compose a file name with changed extension from a given file name. */
 char *fil_changeExtension(const char * const fileName, const char * const newExt);
 

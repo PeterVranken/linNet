@@ -2,7 +2,7 @@
  * @file log_logger.c
  *   A simple logging class to write formatted status messages to stdout and into a file.
  *
- * Copyright (C) 2013 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ * Copyright (C) 2013-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -42,6 +42,8 @@
  * Include files
  */
 
+#include "log_logger.h"
+
 #include <stdlib.h>
 #include <stdint.h>
 #include <inttypes.h>
@@ -50,12 +52,11 @@
 #include <time.h>
 #include <assert.h>
 
-#include "types.h"
+#include "fil_file.h"
 #include "smalloc.h"
-#include "stricmp.h"
 #include "snprintf.h"
-#include "log_logger.h"
-
+#include "stricmp.h"
+#include "types.h"
 
 /*
  * Defines
@@ -178,7 +179,20 @@ boolean log_createLogger( log_hLogger_t * const phNewLogger
 
     if(fileName != NULL)
     {
-        pNewLogger->pLogFile = fopen(fileName, doAppend? "a": "w");
+        /* Ensure existence of aimed path. */
+        char *path;
+        fil_splitPath( &path
+                     , /* pPureFileName */ NULL
+                     , /* pExt */ NULL
+                     , fileName
+                     );
+        if(fil_mkdirRecursive(path) >= 0)
+            pNewLogger->pLogFile = fopen(fileName, doAppend? "a": "w");
+        else
+            pNewLogger->pLogFile = NULL;
+        
+        free(path);
+
         if(pNewLogger->pLogFile == NULL)
             pNewLogger->lastFileSystemErr = -1; // errno
     }

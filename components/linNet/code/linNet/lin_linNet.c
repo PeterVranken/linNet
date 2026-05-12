@@ -125,12 +125,12 @@ static const char *getTimeStr()
 /**
  * Figure out the name of the log file. It is either user-specified or derived from a circuit
  * file or application name.\n
- *   If a single input circuit file is processed then log file is named as the circuit file
- * and it is placed into to output folder.\n
+ *   If a single input circuit file is processed then the log file is named like the
+ * circuit file and it is placed into to the output folder.\n
  *   If several circuit files are processed then the common log file is placed into the
  * output folder. Its name is derived from the application name.
  *   @return
- * Get the file name as malloc allocated string. Or NULL if the user had specified: "don't
+ * Get the file name as malloc allocated string. Or NULL if the user had specified: "Don't
  * use a log file at all."
  *   @param pCmdLine
  * The result of the command line parsing is passed by reference.
@@ -166,9 +166,7 @@ static const char *getLogFileName( const opt_cmdLineOptions_t * const pCmdLine
         {
             /* If there are several input files, then we use the application name for the
                log file. */
-            char logFileName[strlen(path) + sizeof(SL) + sizeof(LIN_LOG_FILE_NAME)];
-            snprintf(logFileName, sizeof(logFileName), "%s" SL LIN_LOG_FILE_NAME, path);
-            return stralloccpy(logFileName);
+            return fil_concatPathFile(path, SL LIN_LOG_FILE_NAME);
         }
         else
         {
@@ -181,19 +179,18 @@ static const char *getLogFileName( const opt_cmdLineOptions_t * const pCmdLine
                          , circuitFileName
                          );
 
-            char logFileName[strlen(path) + sizeof(SL) + strlen(pureFileName)
-                             + sizeof(LIN_LOG_FILE_NAME_EXT)
-                            ];
+            /* File name with new extesnion. */            
+            char logFileName[strlen(pureFileName) + sizeof(LIN_LOG_FILE_NAME_EXT)];
             snprintf( logFileName
                     , sizeof(logFileName)
-                    , "%s" SL "%s%s"
-                    , path
+                    , "%s%s"
                     , pureFileName
                     , LIN_LOG_FILE_NAME_EXT
                     );
-            free((char*)pureFileName);
-            return stralloccpy(logFileName);
-
+            free(pureFileName);
+            
+            return fil_concatPathFile(path, logFileName);
+            
         } /* End if(One or multiple input files?) */
 
     } /* End if(Trivial situation or do we have to figure out the name?) */
@@ -233,8 +230,7 @@ static boolean makeOctaveOutputDir( const char * const outputPath
                                   )
 {
     /* Compose the full path to the folder to be made. */
-    char octavePath[strlen(outputPath) + sizeof(SL) + strlen(folderName)];
-    snprintf(octavePath, sizeof(octavePath), "%s" SL "%s", outputPath, folderName);
+    const char * const octavePath = fil_concatPathFile(outputPath, folderName);
 
     /* Check if the aimed folder already exists: If so we do not force copying again (e.g.,
        to restore the static part of the scripting). It is a wanted use case that someone
@@ -257,6 +253,7 @@ static boolean makeOctaveOutputDir( const char * const outputPath
 
         /* An already existing target folder is not considered a fault, we simply reuse
            that one and overwrite the generated, dynamic part of the Octave scripting. */
+        free((char*)octavePath);
         return true;
     }
 
@@ -279,16 +276,10 @@ static boolean makeOctaveOutputDir( const char * const outputPath
     {
         if(_installDir != NULL)
         {
-            char resourceFolder[strlen(_installDir)
-                                + sizeof(LIN_OCTAVE_CODE_TEMPLATE_FOLDER_NAME)
-                                + sizeof(SL)
-                               ];
-            snprintf( resourceFolder
-                    , sizeof(resourceFolder)
-                    , "%s" SL LIN_OCTAVE_CODE_TEMPLATE_FOLDER_NAME
-                    , _installDir
-                    );
-
+            const char * const resourceFolder = fil_concatPathFile
+                                                    (_installDir
+                                                    , SL LIN_OCTAVE_CODE_TEMPLATE_FOLDER_NAME
+                                                    );
             if(fil_copyDir(octavePath, resourceFolder))
             {
                 LOG_DEBUG( hLog
@@ -309,6 +300,7 @@ static boolean makeOctaveOutputDir( const char * const outputPath
                          , octavePath
                          );
             }
+            free((char*)resourceFolder);
         }
         else
         {
@@ -325,6 +317,7 @@ static boolean makeOctaveOutputDir( const char * const outputPath
            executable. */
     }
 
+    free((char*)octavePath);
     return success;
 
 } /* End of makeOctaveOutputDir */
@@ -453,21 +446,22 @@ static boolean processInputFile( const char * const circuitFileName
                 {
                     /* The name of the result specific script file is derived from the name
                        of the user-defined result. */
-                    msc_mScript_t *pMScript;
-                    char octaveFileName[strlen(octaveOutputPath)
-                                        + strlen(folderName)
+                    char octaveFileName[strlen(folderName)
                                         + strlen(pFreqDomainSolution->name)
-                                        + sizeof(SL SL ".m")
+                                        + sizeof(SL ".m")
                                        ];
                     snprintf( octaveFileName
                             , sizeof(octaveFileName)
-                            , "%s" SL "%s" SL "%s.m"
-                            , octaveOutputPath
+                            , "%s" SL "%s.m"
                             , folderName
                             , pFreqDomainSolution->name
                             );
+                    const char* const octaveFilePath = fil_concatPathFile( octaveOutputPath
+                                                                         , octaveFileName
+                                                                         );
+                    msc_mScript_t *pMScript;
                     if(msc_createMScript( &pMScript
-                                        , octaveFileName
+                                        , octaveFilePath
                                         , circuitFileName
                                         , pFreqDomainSolution->name
                                         )
@@ -482,7 +476,8 @@ static boolean processInputFile( const char * const circuitFileName
                         if(!msc_writeTextBlock(pMScript, msc_txtBlkTrailer))
                             successResult = false;
                     }
-
+                    free((char*)octaveFilePath);
+                    
                     /* The M script is now generated, the object is no longer used. */
                     msc_deleteMScript(pMScript);
                 }
