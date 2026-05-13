@@ -1,0 +1,24 @@
+\documentclass{article}
+\usepackage[european,siunitx]{circuitikz}
+\usetikzlibrary{arrows.meta}
+\begin{document}
+\begin{center}
+\begin{circuitikz}[american voltages, american currents]
+%\begin{circuitikz}
+\tikzset{>=Triangle} % Define tip of arrows drawn with [->]
+  \draw (0,0) node[above]{$U_{in}$} to[short, o-] ++(1,0) % Input node
+    to[R={$R_1$}] ++(3,0) coordinate(R1R2) to[R={$R_2$}] ++(3,0) coordinate(R2C2)
+    -- ++(1,0) node[op amp, noinv input up, anchor=+](OP){$OP$}
+    (OP.-) -- ++(0,-1) coordinate(y1) -- (y1 -| OP.out) -- (OP.out) % Feedback line
+    (R2C2) to[short, *-] ++(0,-1) to[C={$C_2$}] ++(0,-2) node[ground]{}
+    (OP.out) to[short, *-o] ++(1,0) node[above]{$U_{out}$}
+    (OP.out) -- ++(0,2) coordinate(y2) to[C={$C_1$}] (y2 -| R1R2)
+    to[short, -*] (R1R2)
+  ;
+  
+% Voltage arrow explicitly drawn as straight arrow
+%\draw[->] (-0.5,3.5) -- (-0.5,0.5) node[midway, right] {$\underline{u}_{in}$};
+  
+\end{circuitikz}
+\end{center}
+\end{document}
