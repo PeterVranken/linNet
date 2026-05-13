@@ -207,9 +207,9 @@ const char *fil_splitPath( char ** const pPath
 
     if(pPath != NULL)
     {
-        const size_t sizeOfPath = fileName - filePath + 1;
+        const size_t sizeOfPath = (size_t)(fileName - filePath + 1);
         *pPath = smalloc(sizeOfPath, __FILE__, __LINE__);
-        snprintf(*pPath, sizeOfPath, filePath);
+        snprintf(*pPath, sizeOfPath, "%s", filePath);
     }
 
     /* Do the same as before inside the found file name but look for the dot as separator. */
@@ -234,9 +234,9 @@ const char *fil_splitPath( char ** const pPath
            extension and might be empty. */
         if(pPureFileName != NULL)
         {
-            const size_t sizeOfPureFileName = extension - fileName + 1;
+            const size_t sizeOfPureFileName = (size_t)(extension - fileName + 1);
             *pPureFileName = smalloc(sizeOfPureFileName, __FILE__, __LINE__);
-            snprintf(*pPureFileName, sizeOfPureFileName, fileName);
+            snprintf(*pPureFileName, sizeOfPureFileName, "%s", fileName);
         }
         if(pExt != NULL)
             *pExt = stralloccpy(extension);
@@ -371,9 +371,9 @@ char *fil_changeFileName( const char * const fileName
 /**
  * Copy a file.
  *   @return
- * A Boolean success message is returned. If the function returns true then the error code
- * and message can be retrieved with the according function from the stdlib (errno,
- * strerror).
+ * A Boolean success message is returned. If the function returns \a false then the error
+ * code and message can be retrieved with the according function from the stdlib (\a errno,
+ * \a strerror).
  *   @param targetFilePath
  * The target file name including the path. The path needs to be an existing directory and
  * the file should not yet exist: otherwise it is silently overwritten.
@@ -388,7 +388,6 @@ boolean fil_copyFile(const char * const targetFilePath, const char * const srcFi
 #else
 # define PRINTF(formatStr, ...)
 #endif
-
 
     boolean success = true;
     FILE *hSrcFile = NULL
@@ -463,20 +462,24 @@ boolean fil_copyFile(const char * const targetFilePath, const char * const srcFi
  * platforms, it sets the mode to full rights for the owner and read/execute for group and
  * others.
  *   @return
- * Get a Boolean success message.
+ * Get a Boolean success message. It depends on \a existingDirIsOk what is considered
+ * success.
  *   @param[in] path
  * The path designation. It is passed as is to the platform function mkdir.
+ *   @param[in] existingDirIsOk
+ * \a true means: It is not considered an error if the directory couldn't be made for the
+ * simple reason that it already existed on entry into the function.\n
+ *   \a false: The function returns \a true only if the directory has been newly created.
  */
-static inline boolean makeDir(const char * const path)
+static inline boolean makeDir(const char * const path, boolean existingDirIsOk)
 {
-    const boolean success =
-        mkdir( path
+    const int res = mkdir( path
 #ifdef __unix__
-             , /* mode: Full access to owner, read and execute for all others */
-               S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH
-#endif
-             ) == 0;
-    return success;
+                         , /* mode: Full access to owner, read and execute for all others */
+                           S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH
+#endif                   
+                         );
+    return res == 0  ||  (existingDirIsOk &&  errno == EEXIST);
 
 } /* End of makeDir. */
 
@@ -489,11 +492,12 @@ static inline boolean makeDir(const char * const path)
  *     @retval 1  At least one directory was created.
  *     @retval -1 An error occured.
  *   @param[in] path
- * The path designation. Absolute and relative paths are supported. Path elements like "." and ".." are supported.
+ * The path designation. Absolute and relative paths are supported. Path elements like "."
+ * and ".." are supported.
  */
 int fil_mkdirRecursive(const char * const path)
 {
-#if 1
+#if 0
 # define PRINTF(...)  printf("fil_mkdirRecursive: " __VA_ARGS__)
 #else
 # define PRINTF(...)
@@ -533,7 +537,7 @@ int fil_mkdirRecursive(const char * const path)
             /* Let the path string end after the next found folder name. */
             *p = '\0';
 
-            if(makeDir(tmp))
+            if(makeDir(tmp, /*existingDirIsOk*/ false))
             {
                 PRINTF("mkdir created directory \"%s\"\n", tmp);
                 created = 1;
@@ -565,9 +569,9 @@ int fil_mkdirRecursive(const char * const path)
 /**
  * Copy a directory and its contents.
  *   @return
- * A Boolean success message is returned. If the function returns true then the error code
- * and message can be retrieved with the according function from the stdlib (errno,
- * strerror).
+ * A Boolean success message is returned. If the function returns \a false then the error
+ * code and message can be retrieved with the according function from the stdlib (\a errno,
+ * \a strerror).
  *   @param targetDir
  * The target directory name not including the final slash. This is an existing directory
  * and a recursive copy of \a srcDir will be found inside this directory if the function
@@ -585,8 +589,7 @@ boolean fil_copyDir(const char * const targetDir, const char * const srcDir)
 
     /* Compose the full path and name of the target file. */
     const char * const srcPureDirName = fil_splitPath(NULL, NULL, NULL, srcDir);
-    char targetPath[strlen(targetDir) + strlen(srcPureDirName) + sizeof(SL)];
-    snprintf(targetPath, sizeof(targetPath), "%s" SL "%s", targetDir, srcPureDirName);
+    const char * const targetPath = fil_concatPathFile(targetDir, srcPureDirName);
 
     /* Check if srcDir designates a single file or a directory. */
     DIR *hDir = opendir(srcDir);
@@ -595,21 +598,17 @@ boolean fil_copyDir(const char * const targetDir, const char * const srcDir)
     /* If it is a directory: Create such a directory as empty directory at the target
        location and copy all contained files by using this function recursively.
          Otherwise just copy the file. */
+    boolean success = false;
     if(hDir != NULL)
     {
-        boolean success = true;
-
         /* Create empty directory at target location. */
-        if(makeDir(targetPath))
-        {
-            PRINTF("Can't create new directory %s\n", targetPath);
-        }
-        else
+        if(makeDir(targetPath, /*existingDirIsOk*/ true))
         {
             PRINTF("Succesfully created directory %s\n", targetPath);
 
             /* Look for all files in srcDir (be it true files or sub-directories) and copy
                each by a recursive call of the same function. */
+            boolean successAllFiles = true;
             struct dirent *pDirEntry;
             while((pDirEntry=readdir(hDir)) != NULL)
             {
@@ -630,18 +629,28 @@ boolean fil_copyDir(const char * const targetDir, const char * const srcDir)
                         , pDirEntry->d_name
                         );
                 if(!fil_copyDir(targetPath, srcFileName))
-                    success = false;
+                    successAllFiles = false;
             }
+            
+            success = successAllFiles;
+        }
+        else
+        {
+            PRINTF("Can't create new directory %s, errno=%i\n", targetPath, errno);
         }
 
         closedir(hDir);
-        return success;
     }
     else
     {
         /* Copy the ordinary file. */
-        return fil_copyFile(targetPath, srcDir);
+        success = fil_copyFile(targetPath, srcDir);
     }
+    
+    free((char*)targetPath);
+
+    return success;
+    
 #undef PRINTF
 } /* End of fil_copyDir */
 

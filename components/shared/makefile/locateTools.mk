@@ -75,7 +75,7 @@ endif
 make := $(MAKE)
 
 # A plausibility check that tools could be loacted.
-$(info Make: $(make), gcc: $(gcc), mkdir: $(mkdir), echo: $(echo), pwd: $(pwd), windres: $(windres))
+#$(info Make: $(make), gcc: $(gcc), mkdir: $(mkdir), echo: $(echo), pwd: $(pwd), windres: $(windres))
 ifeq ($(and $(make),$(gcc),$(mkdir),echo: $(echo),$(pwd)),)
     $(error Required GNU tools can't be located. Most probable reasons are: You \
             didn't install the MinGW package or you didn't add the path to the MinGW \

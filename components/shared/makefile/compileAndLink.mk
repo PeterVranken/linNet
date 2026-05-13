@@ -6,7 +6,7 @@
 # Help on the syntax of this makefile is got at
 # http://www.gnu.org/software/make/manual/make.pdf.
 #
-# Copyright (C) 2012-2014 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+# Copyright (C) 2012-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
 #
 # This program is free software: you can redistribute it and/or modify it
 # under the terms of the GNU Lesser General Public License as published by the
@@ -180,11 +180,20 @@ VPATH := $(srcDirList) $(targetDir)
 
 # Pattern rules for compilation of C and C++ source files.
 #   TODO You may need to add more include paths here.
-cFlags += $(cDefines) -Wall -Wextra -Wstrict-overflow=4 -Wmissing-declarations              \
-          -fno-exceptions -ffunction-sections -fdata-sections -MMD                          \
-          -Wa,-a=$(patsubst %.o,%.lst,$@) -std=c99                                          \
-		  $(foreach path,$(srcDirList) $(incDirList),-I$(path))                             \
-          $(foreach def,$(defineList),-D$(def))
+cFlags = $(cDefines)                                                                        \
+         -fno-common -fno-exceptions -ffunction-sections -fdata-sections                    \
+         -fshort-enums -fdiagnostics-show-option -finline-functions -fmessage-length=0      \
+         -fzero-initialized-in-bss -fno-tree-loop-optimize                                  \
+         -Wall -Wno-main -Wno-old-style-declaration -Wextra -Wstrict-overflow=4             \
+         -Wmissing-declarations -Wno-parentheses -Wdiv-by-zero -Wcast-align -Wformat        \
+         -Wformat-security -Wignored-qualifiers -Wsign-conversion -Wsign-compare            \
+         -Werror=missing-declarations -Werror=implicit-function-declaration                 \
+         -Wno-nested-externs -Werror=int-to-pointer-cast -Werror=pointer-sign               \
+         -Werror=pointer-to-int-cast -Werror=return-local-addr -Werror=missing-prototypes   \
+         -Werror=missing-field-initializers -Werror=overflow                                \
+         -Wa,-a=$(patsubst %.o,%.lst,$@) -std=c99                                           \
+         $(foreach path,$(srcDirList) $(incDirList),-I$(path))                              \
+         $(foreach def,$(defineList),-D$(def))
 ifeq ($(CONFIG),DEBUG)
 	cFlags += -ggdb3 -O0
 else

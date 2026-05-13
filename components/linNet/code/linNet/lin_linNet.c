@@ -277,11 +277,13 @@ static boolean makeOctaveOutputDir( const char * const outputPath
         if(_installDir != NULL)
         {
             const char * const resourceFolder = fil_concatPathFile
-                                                    (_installDir
-                                                    , SL LIN_OCTAVE_CODE_TEMPLATE_FOLDER_NAME
-                                                    );
+                                                        (_installDir
+                                                        , LIN_OCTAVE_CODE_TEMPLATE_FOLDER_NAME
+                                                        );
+printf("fil_copyDir(%s, %s)\n", octavePath, resourceFolder);
             if(fil_copyDir(octavePath, resourceFolder))
             {
+printf("fil_copyDir() succeeded\n");
                 LOG_DEBUG( hLog
                          , "Template folder %s with Octave code successfully copied to"
                            " the aimed target location %s"
@@ -291,6 +293,7 @@ static boolean makeOctaveOutputDir( const char * const outputPath
             }
             else
             {
+printf("fil_copyDir() failed\n");
                 LOG_ERROR( hLog
                          , "Can't copy template folder %s with Octave code to the aimed"
                            " target location %s. The generated Octave scripts won't"

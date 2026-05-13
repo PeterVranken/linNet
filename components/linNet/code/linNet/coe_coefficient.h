@@ -5,7 +5,7 @@
  *   Definition of global interface of module coe_coefficient.c (besides inline interface,
  * see coe_coefficient.inlineInterface.h)
  *
- * Copyright (C) 2013 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ * Copyright (C) 2013-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -48,7 +48,7 @@
     constants occur either with power 0 or 1, the product is represented by a bit vector,
     where each bit means another constant.\n
       Any one out of the four unsigned integer types char, short, long and long long can be
-    used. The performance differences are however minor so that there's no good raeson not
+    used. The performance differences are however minor so that there's no good reason not
     to always use the 64 Bit type. Here's a performance measurement of a quite complex
     circuit (configuration PRODUCTION):\n
       win32, short:     5091 ms\n
