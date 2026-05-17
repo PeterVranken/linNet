@@ -1,0 +1,53 @@
+/**
+ * @file wikipediaExample.cnl
+ *   Test case for linNet.
+ * This test case reproduces the result for the example found at
+ * http://en.wikipedia.org/wiki/Symbolic_circuit_analysis as of Oct 2,
+ * 2014. 
+ *
+ * Copyright (C) 2014 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ *
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the
+ * Free Software Foundation, either version 3 of the License, or (at your
+ * option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/* In- and output voltages */
+U   Vin  kIn      gnd
+DEF Vout kOpBMOut gnd
+
+/* Top-left OP */
+R  R4   kIn     kOpTLIn
+R  R1   kOpTLIn kOpTLOut
+C  C1   kOpTLIn kOpTLOut
+OP OpTL kOpTLIn gnd      kOpTLOut
+
+/* Top-mid OP */
+R  R2   kOpTLOut kOpTMIn
+C  C2   kOpTMIn  kOpTMOut
+OP OpTM kOpTMIn  gnd      kOpTMOut
+
+/* Top-right OP */
+R  R5   kOpTMOut kOpTRIn
+R  R6   kOpTRIn  kOpTRout
+OP OpTR kOpTRIn  gnd      kOpTRout
+
+/* Feed-back top-right to top-left OP */
+R  R3   kOpTRout kOpTLIn
+
+/* Bottom-mid OP */
+R  R8   kOpTLOut kOpBMIn
+R  R11  kOpBMIn  kOpBMOut
+OP OpBM kOpBMIn  gnd      kOpBMOut
+
+/* Wanted results */
+PLOT G Vout Vin
