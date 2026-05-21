@@ -5,7 +5,7 @@
  * table lists these elements together with some of its properties. Access functions are
  * provided that permit to look for a symbolic element by a property.
  *
- * Copyright (C) 2013-2014 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ * Copyright (C) 2013-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -209,16 +209,16 @@ static boolean checkName( tbv_tableOfVariables_t * const pTable
  * Compare function for qsort; used to sort the device constants so that the result
  * presents them in the order R, L, C. Used by \a tbv_sortConstants.
  *   @return
- * >0 if second operand comes prior to the first operand in the aimed sort order\n
- * =0 if if order of bothe opearnds doesn't care in the aimed sort order (they are
- * identical with respect to the sort criteria)\n
- * <1 if second operand comes after the first operand in the aimed sort order
+ * >0, if second operand comes prior to the first operand in the aimed sort order.\n
+ * =0, if order of both operands doesn't care in the aimed sort order. (They are
+ * identical with respect to the sort criteria.)\n
+ * <1, if second operand comes after the first operand in the aimed sort order.
  *   @param pIdxDev1
- * Pointer into the sorted array; points to first comparsion operand.
+ * Pointer into the sorted array; points to first comparision operand.
  *   @param pIdxDev2
- * Pointer into the sorted array; points to second comparsion operand.
+ * Pointer into the sorted array; points to second comparision operand.
  *   @param pContext
- * Context pointer, which is passed unchanged to all invokations of this routine. Here it
+ * Context pointer, which is passed unchanged to all invocations of this routine. Here it
  * points to the table of variables.
  */
 
@@ -1009,7 +1009,8 @@ void tbv_sortConstants(tbv_tableOfVariables_t * const pTable)
 {
     /* Sort the indexes to the devices, so that the devices' names appear in the expected
        order if we iterate through the index array. This is ensured by the compare
-       function, which does a name lookup from the indexes to copmpare passed to it. */
+       function, which does a name lookup from the compared device indexes, which are
+       passed to it. */
     qsort_c( pTable->constantIdxToDevIdxAry
            , pTable->noConstants
            , sizeof(pTable->constantIdxToDevIdxAry[0])

@@ -4,7 +4,7 @@
  * @file pci_parserCircuit.h
  * Definition of global interface of module pci_parserCircuit.c
  *
- * Copyright (C) 2013-2014 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ * Copyright (C) 2013-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -76,7 +76,7 @@
     prior to the output. As an example, the resistor should come before the capacitor in
     order to get the common output of R*C rather than C*R.\n
       We want to see R-L-C. The constant sources, the op-amp and the current probe don't
-    appear as a symbol in the coeffcients of the LES, so they don't matter in this context.
+    appear as a symbol in the coefficients of the LES, so they don't matter in this context.
     The controlled sources often lead to results, which are interpreted as virtual change
     of the value of one of the physical values R, L or C, e.g. beta*R might appear in a
     bipolar transistor circuit. To support this interpretation it seems to be best to have
