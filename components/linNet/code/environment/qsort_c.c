@@ -2,7 +2,7 @@
  * Copyright (c) 2000-2006 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
- * 
+ *
  * This file contains Original Code and/or Modifications of Original Code
  * as defined in and that are subject to the Apple Public Source License
  * Version 2.0 (the 'License'). You may not use this file except in
@@ -11,10 +11,10 @@
  * unlawful or unlicensed copies of an Apple operating system, or to
  * circumvent, violate, or enable the circumvention or violation of, any
  * terms of an Apple operating system software license agreement.
- * 
+ *
  * Please obtain a copy of the License at
  * http://www.opensource.apple.com/apsl/ and read it before using this file.
- * 
+ *
  * The Original Code and all software distributed under the License are
  * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
  * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
@@ -22,14 +22,14 @@
  * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
  * Please see the License for the specific language governing rights and
  * limitations under the License.
- * 
+ *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_END@
  */
 /*
  * Copyright (c) 1995 NeXT Computer, Inc. All Rights Reserved
  *
  * Copyright (c) 1992, 1993
- *	The Regents of the University of California.  All rights reserved.
+ *  The Regents of the University of California.  All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -41,8 +41,8 @@
  *    documentation and/or other materials provided with the distribution.
  * 3. All advertising materials mentioning features or use of this software
  *    must display the following acknowledgement:
- *	This product includes software developed by the University of
- *	California, Berkeley and its contributors.
+ *  This product includes software developed by the University of
+ *  California, Berkeley and its contributors.
  * 4. Neither the name of the University nor the names of its contributors
  *    may be used to endorse or promote products derived from this software
  *    without specific prior written permission.
@@ -59,7 +59,7 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  *
- *	@(#)qsort.c	8.1 (Berkeley) 6/4/93
+ *  @(#)qsort.c     8.1 (Berkeley) 6/4/93
  */
 
 /*
@@ -71,6 +71,8 @@
  * parameter, serving as context. The context is initially passed to the qsort function.
  */
 
+#include <assert.h>
+#include <stdint.h>
 #include <sys/types.h>
 #include "qsort_c.h"
 
@@ -82,42 +84,42 @@ static inline char *med3( char *
                         );
 static inline void swapfunc(char *, char *, int, int);
 
-#define min(a, b)	(a) < (b) ? a : b
+#define min(a, b)   (a) < (b) ? a : b
 
 /*
  * Qsort routine from Bentley & McIlroy's "Engineering a Sort Function".
  */
-#define swapcode(TYPE, parmi, parmj, n) { 		\
-	long i = (n) / sizeof (TYPE); 			    \
-	TYPE *pi = (TYPE *) (parmi); 			    \
-	TYPE *pj = (TYPE *) (parmj); 			    \
-	do { 						                \
-		TYPE	t = *pi;			            \
-		*pi++ = *pj;				            \
-		*pj++ = t;				                \
-        } while (--i > 0);				        \
+#define swapcode(TYPE, parmi, parmj, n) {       \
+    int i = (int)(n) / (int)sizeof (TYPE);      \
+    TYPE *pi = (TYPE *) (parmi);                \
+    TYPE *pj = (TYPE *) (parmj);                \
+    do {                                        \
+        TYPE    t = *pi;                        \
+        *pi++ = *pj;                            \
+        *pj++ = t;                              \
+        } while (--i > 0);                      \
 }
 
-#define SWAPINIT(a, es) swaptype = ((char *)a - (char *)0) % sizeof(long) || \
-	es % sizeof(long) ? 2 : es == sizeof(long)? 0 : 1;
+#define SWAPINIT(a, es) swaptype = (uintptr_t)a % sizeof(long) || \
+    es % sizeof(long) ? 2 : es == sizeof(long)? 0 : 1;
 
 static inline void swapfunc(char *a, char *b, int n, int swaptype)
 {
-	if(swaptype <= 1) 
-		swapcode(long, a, b, n)
-	else
-		swapcode(char, a, b, n)
+    if(swaptype <= 1)
+        swapcode(long, a, b, n)
+    else
+        swapcode(char, a, b, n)
 }
 
-#define swap(a, b)					            \
-	if (swaptype == 0) {				        \
-		long t = *(long *)(a);			        \
-		*(long *)(a) = *(long *)(b);		    \
-		*(long *)(b) = t;			            \
-	} else						                \
-		swapfunc(a, b, es, swaptype)
+#define swap(a, b)                              \
+    if (swaptype == 0) {                        \
+        long t = *(long *)(a);                  \
+        *(long *)(a) = *(long *)(b);            \
+        *(long *)(b) = t;                       \
+    } else                                      \
+        swapfunc(a, b, (int)es, swaptype)
 
-#define vecswap(a, b, n) 	if ((n) > 0) swapfunc(a, b, n, swaptype)
+#define vecswap(a, b, n)    if ((n) > 0) swapfunc(a, b, n, swaptype)
 
 
 static inline char *med3( char *a
@@ -127,8 +129,8 @@ static inline char *med3( char *a
                         , const void * context
                         )
 {
-	return cmp(a, b, context) < 0 ?
-	       (cmp(b, c, context) < 0 ? b : (cmp(a, c, context) < 0 ? c : a ))
+    return cmp(a, b, context) < 0 ?
+           (cmp(b, c, context) < 0 ? b : (cmp(a, c, context) < 0 ? c : a ))
               :(cmp(b, c, context) > 0 ? b : (cmp(a, c, context) < 0 ? a : c ));
 }
 
@@ -140,79 +142,81 @@ void qsort_c( void *a
             , const void * context
             )
 {
-	char *pa, *pb, *pc, *pd, *pl, *pm, *pn;
-	int d, swaptype, swap_cnt;
-	int r;
+    char *pa, *pb, *pc, *pd, *pl, *pm, *pn;
+    int d, swaptype, swap_cnt;
+    int r;
 
-loop:	SWAPINIT(a, es);
-	swap_cnt = 0;
-	if (n < 7) {
-		for (pm = (char *)a + es; pm < (char *) a + n * es; pm += es)
-			for (pl = pm; pl > (char *) a && cmp(pl - es, pl, context) > 0;
-			     pl -= es)
-				swap(pl, pl - es);
-		return;
-	}
-	pm = (char *)a + (n / 2) * es;
-	if (n > 7) {
-		pl = a;
-		pn = (char *)a + (n - 1) * es;
-		if (n > 40) {
-			d = (n / 8) * es;
-			pl = med3(pl, pl + d, pl + 2 * d, cmp, context);
-			pm = med3(pm - d, pm, pm + d, cmp, context);
-			pn = med3(pn - 2 * d, pn - d, pn, cmp, context);
-		}
-		pm = med3(pl, pm, pn, cmp, context);
-	}
-	swap(a, pm);
-	pa = pb = (char *)a + es;
+loop:   SWAPINIT(a, es);
+    swap_cnt = 0;
+    if (n < 7) {
+        for (pm = (char *)a + es; pm < (char *) a + n * es; pm += es)
+            for (pl = pm; pl > (char *) a && cmp(pl - es, pl, context) > 0;
+                 pl -= es)
+                swap(pl, pl - es);
+        return;
+    }
+    pm = (char *)a + (n / 2) * es;
+    if (n > 7) {
+        pl = a;
+        pn = (char *)a + (n - 1) * es;
+        if (n > 40) {
+            d = (int)((n / 8) * es);
+            pl = med3(pl, pl + d, pl + 2 * d, cmp, context);
+            pm = med3(pm - d, pm, pm + d, cmp, context);
+            pn = med3(pn - 2 * d, pn - d, pn, cmp, context);
+        }
+        pm = med3(pl, pm, pn, cmp, context);
+    }
+    swap(a, pm);
+    pa = pb = (char *)a + es;
 
-	pc = pd = (char *)a + (n - 1) * es;
-	for (;;) {
-		while (pb <= pc && (r = cmp(pb, a, context)) <= 0) {
-			if (r == 0) {
-				swap_cnt = 1;
-				swap(pa, pb);
-				pa += es;
-			}
-			pb += es;
-		}
-		while (pb <= pc && (r = cmp(pc, a, context)) >= 0) {
-			if (r == 0) {
-				swap_cnt = 1;
-				swap(pc, pd);
-				pd -= es;
-			}
-			pc -= es;
-		}
-		if (pb > pc)
-			break;
-		swap(pb, pc);
-		swap_cnt = 1;
-		pb += es;
-		pc -= es;
-	}
-	if (swap_cnt == 0) {  /* Switch to insertion sort */
-		for (pm = (char *)a + es; pm < (char *) a + n * es; pm += es)
-			for (pl = pm; pl > (char *) a && cmp(pl - es, pl, context) > 0; 
-			     pl -= es)
-				swap(pl, pl - es);
-		return;
-	}
+    pc = pd = (char *)a + (n - 1) * es;
+    for (;;) {
+        while (pb <= pc && (r = cmp(pb, a, context)) <= 0) {
+            if (r == 0) {
+                swap_cnt = 1;
+                swap(pa, pb);
+                pa += es;
+            }
+            pb += es;
+        }
+        while (pb <= pc && (r = cmp(pc, a, context)) >= 0) {
+            if (r == 0) {
+                swap_cnt = 1;
+                swap(pc, pd);
+                pd -= es;
+            }
+            pc -= es;
+        }
+        if (pb > pc)
+            break;
+        swap(pb, pc);
+        swap_cnt = 1;
+        pb += es;
+        pc -= es;
+    }
+    if (swap_cnt == 0) {  /* Switch to insertion sort */
+        for (pm = (char *)a + es; pm < (char *) a + n * es; pm += es)
+            for (pl = pm; pl > (char *) a && cmp(pl - es, pl, context) > 0;
+                 pl -= es)
+                swap(pl, pl - es);
+        return;
+    }
 
-	pn = (char *)a + n * es;
-	r = min(pa - (char *)a, pb - pa);
-	vecswap(a, pb - r, r);
-	r = min((size_t)(pd - pc), pn - pd - es);
-	vecswap(pb, pn - r, r);
-	if ((size_t)(r = pb - pa) > es)
-		qsort_c(a, r / es, es, cmp, context);
-	if ((size_t)(r = pd - pc) > es) { 
-		/* Iterate rather than recurse to save stack space */
-		a = pn - r;
-		n = r / es;
-		goto loop;
-	}
-/*		qsort_c(pn - r, r / es, es, cmp, context);*/
+    pn = (char *)a + n * es;
+    assert((uintptr_t)pb >= (uintptr_t)pa);
+    r = min(pa - (char *)a, pb - pa);
+    vecswap(a, pb - r, r);
+    assert((uintptr_t)pd >= (uintptr_t)pc);
+    r = min(pd - pc, pn - pd - (int)es);
+    vecswap(pb, pn - r, r);
+    if ((size_t)(r = pb - pa) > es)
+        qsort_c(a, (size_t)r / es, es, cmp, context);
+    if ((size_t)(r = pd - pc) > es) {
+        /* Iterate rather than recurse to save stack space */
+        a = pn - r;
+        n = (size_t)r / es;
+        goto loop;
+    }
+/*      qsort_c(pn - r, r / es, es, cmp, context);*/
 }
