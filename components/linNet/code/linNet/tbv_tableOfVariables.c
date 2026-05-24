@@ -58,7 +58,6 @@
 #include <assert.h>
 
 #include "smalloc.h"
-#include "stricmp.h"
 #include "log_logger.h"
 #include "qsort_c.h"
 #include "rat_rationalNumber.h"
@@ -179,7 +178,7 @@ static boolean checkName( tbv_tableOfVariables_t * const pTable
     
     /* In general, s should be avoided as a name as it will appear in the final result as
        frequency variable. */
-    if(success && stricmp("s", nameToCheck) == 0)
+    if(success && strcasecmp("s", nameToCheck) == 0)
     {
         kindOfOtherObj = "the frequency variable";
         success = false;
@@ -246,7 +245,7 @@ static signed int cmpDeviceConstantNames( const void *pIdxDev1
         /* The sub-ordinated sort criterion is the name in alphabetic order. This will
            yield the expected behavior for the common use case of having names like R1, R2,
            R3. However, R10 would come before R9. */
-        return stricmp(pDeviceAry[idxDev2]->name, pDeviceAry[idxDev1]->name);
+        return strcasecmp(pDeviceAry[idxDev2]->name, pDeviceAry[idxDev1]->name);
     }
 } /* End of cmpDeviceConstantNames */
 

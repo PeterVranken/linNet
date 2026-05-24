@@ -55,7 +55,6 @@
 #include "fil_file.h"
 #include "smalloc.h"
 #include "snprintf.h"
-#include "stricmp.h"
 #include "types.h"
 
 /*
@@ -404,7 +403,7 @@ void log_parseLineFormat(log_hLogger_t hObj, const char *lineFormatName)
     unsigned int lineFormat;
     for(lineFormat=0; lineFormat<log_noLineFormats; ++lineFormat)
     {
-        if(stricmp(lineFormatName, lineFormatAry[lineFormat]) == 0)
+        if(strcasecmp(lineFormatName, lineFormatAry[lineFormat]) == 0)
         {
             log_setLineFormat(hObj, lineFormat);
             return;

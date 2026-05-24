@@ -68,7 +68,6 @@
 #include "types.h"
 #include "smalloc.h"
 #include "snprintf.h"
-#include "stricmp.h"
 #include "rat_rationalNumber.h"
 #include "pci_parserCircuit.h"
 #include "tok_tokenStream.h"
@@ -2441,14 +2440,14 @@ boolean pci_parseCircuitFile( log_hLogger_t hLogger
     /* Set the format. The decision is based on the file name: an extension .ckt is
        associated with the old format. */
     size_t lenName = strlen(inputFileName);
-    _isStdFormat = lenName < 4  || stricmp(&inputFileName[lenName-4], ".ckt") != 0;
+    _isStdFormat = lenName < 4  || strcasecmp(&inputFileName[lenName-4], ".ckt") != 0;
 
-    /* The elder format used to be case insensitive. Set stricmp as global string compare
+    /* The elder format used to be case insensitive. Set strcasecmp as global string compare
        function. */
     if(_isStdFormat)
         _strcmp = strcmp;
     else
-        _strcmp = stricmp;
+        _strcmp = strcasecmp;
 
     if(!parseError && !openInput(inputFileName, /* open */ true))
         parseError = true;
