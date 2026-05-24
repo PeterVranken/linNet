@@ -1,24 +1,51 @@
 \documentclass{article}
 \usepackage[european,siunitx]{circuitikz}
 \usetikzlibrary{arrows.meta}
+\usepackage{listings}
+\lstset{basicstyle=\footnotesize\ttfamily}
 \begin{document}
-\begin{center}
-\begin{circuitikz}[american voltages, american currents]
-%\begin{circuitikz}
-\tikzset{>=Triangle} % Define tip of arrows drawn with [->]
-  \draw (0,0) node[above]{$U_{in}$} to[short, o-] ++(1,0) % Input node
-    to[R={$R_1$}] ++(3,0) coordinate(R1R2) to[R={$R_2$}] ++(3,0) coordinate(R2C2)
-    -- ++(1,0) node[op amp, noinv input up, anchor=+](OP){$OP$}
-    (OP.-) -- ++(0,-1) coordinate(y1) -- (y1 -| OP.out) -- (OP.out) % Feedback line
-    (R2C2) to[short, *-] ++(0,-1) to[C={$C_2$}] ++(0,-2) node[ground]{}
-    (OP.out) to[short, *-o] ++(1,0) node[above]{$U_{out}$}
-    (OP.out) -- ++(0,2) coordinate(y2) to[C={$C_1$}] (y2 -| R1R2)
-    to[short, -*] (R1R2)
-  ;
-  
-% Voltage arrow explicitly drawn as straight arrow
-%\draw[->] (-0.5,3.5) -- (-0.5,0.5) node[midway, right] {$\underline{u}_{in}$};
-  
-\end{circuitikz}
-\end{center}
+
+This documernt presents a circuit that implements the Sallen-Key filter.
+The chosen configuration is a low-pass of second order. The schematics of
+the filter is shown in figure~\ref{figLPSallenKey} on page
+\pageref{figLPSallenKey} and the netlist for computing the transfer
+function is shown in listing~\ref{lstNetListSallenKeyLP}.
+
+\begin{figure}
+  \centering
+  \begin{circuitikz}
+  %\begin{circuitikz}[american voltages, american currents]
+
+    \tikzset{>=Triangle} % Define tip of arrows drawn with [->]
+
+    \draw (0,0) coordinate(Uin) to[short, o-] ++(0.1,0) % Input node
+      to[R={$R_1$}] ++(3,0) coordinate(R1R2) to[R={$R_2$}] ++(3,0) coordinate(R2C2)
+      -- ++(1,0) node[plain amp, noinv input up, anchor=+](OP){$OP$}
+      (OP.-) -- ++(0,-1) coordinate(y1) -- (y1 -| OP.out) -- (OP.out) % Feedback line
+    ;
+    \draw (R2C2) node[circ]{} to[C, l_={$C_2$}] ++(0,-2) node[ground]{}
+      (OP.out) to[short, *-o] ++(1,0) coordinate(Uout)
+      (OP.out) -- ++(0,2) coordinate(y2) to[C, l_={$C_1$}] (y2 -| R1R2)
+      to[short, -*] (R1R2)
+    ;
+
+    % Voltage arrow Uin explicitly drawn as straight arrow down to ground.
+    % Alternative: Add "node[above]{$U_{in}$}" behind coordinate(Uin).
+    \draw[->] ($(Uin)+(0,-0.25)$) -- ++(0,-1) node[midway, right]{$U_{in}$};
+    \draw ($(Uin)+(0,-1.5)$) node[above]{} to[short, o-] ++(0,-0.1) node[ground]{};
+
+    % Voltage arrow Uout explicitly drawn as straight arrow down to ground.
+    \draw[->] ($(Uout)+(0,-0.25)$) -- ++(0,-1) node[midway, right]{$U_{out}$};
+    \draw ($(Uout)+(0,-1.5)$) node[above]{} to[short, o-] ++(0,-0.1) node[ground]{};
+
+  \end{circuitikz}
+  \caption{Low-pass filter in Sallen-Key topology}
+  \label{figLPSallenKey}
+\end{figure}
+
+\lstinputlisting[ %language=Octave,
+%basicstyle=\small\ttfamily,
+caption={Netlist for calculating the Sallen-Key filter},
+captionpos=b,label=lstNetListSallenKeyLP]{sallen-key-LP.cnl}
+
 \end{document}

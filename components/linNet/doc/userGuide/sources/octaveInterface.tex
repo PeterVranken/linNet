@@ -267,35 +267,35 @@ with an example. Be \file{G.m} the generated Octave script:
 \end{flushleft}
 
 
-\section{Caveats of Octave}
-
-Although generally working well, has using Octave for numerical
-post-processing some weaknesses. The author has solely used Windows
-ports of Octave which might be worse than Linux releases with respect to
-functional failures and stability. The following is stated only for the
-Windows ports of release 3.4.3 and 3.6.4 running under Windows 7.
-
-Octave 3.6.4 has general problems with the figure windows. The chosen
-graphics back-end was ``fltk''.
-\begin{itemize}
-  \item The opened figure windows are initially black. The actual plots
-    appear only after some clicking into the window pane or on the
-    buttons to enforce a redraw    
-    
-  \item If the figure window is enlarged by dragging the corners with the
-    mouse than only the frame of the window is resized, the contents stay
-    the same. This is particular annoying when MIMO systems produce grids
-    of plots; these are initially tiny but can't be enlarged
-\end{itemize}
-
-These problems let to the decision to continue with the elder release
-3.4.3. Window handling is okay in this release.
-
-With Octave 3.4.3 we get a reproducible crash when running result \code{G}
-of netlist file
-\file{bandStop.makesOctave3-4-3-win32Crash.cnl}.\footnote{The file is
-contained in the source distribution of \linnet{}.} The \linnet{}
-generated file \file{G.m} looks however unsuspiciously and resembles
-dozens of other generated files which are successfully processed. Octave
-3.6.4 and MATLAB process file \file{G.m} successfully and plot the
-expected result.
+%\section{Caveats of Octave}
+%
+%Although generally working well, has using Octave for numerical
+%post-processing some weaknesses. The author has solely used Windows
+%ports of Octave which might be worse than Linux releases with respect to
+%functional failures and stability. The following is stated only for the
+%Windows ports of release 3.4.3 and 3.6.4 running under Windows 7.
+%
+%Octave 3.6.4 has general problems with the figure windows. The chosen
+%graphics back-end was ``fltk''.
+%\begin{itemize}
+%  \item The opened figure windows are initially black. The actual plots
+%    appear only after some clicking into the window pane or on the
+%    buttons to enforce a redraw    
+%    
+%  \item If the figure window is enlarged by dragging the corners with the
+%    mouse than only the frame of the window is resized, the contents stay
+%    the same. This is particular annoying when MIMO systems produce grids
+%    of plots; these are initially tiny but can't be enlarged
+%\end{itemize}
+%
+%These problems let to the decision to continue with the elder release
+%3.4.3. Window handling is okay in this release.
+%
+%With Octave 3.4.3 we get a reproducible crash when running result \code{G}
+%of netlist file
+%\file{bandStop.makesOctave3-4-3-win32Crash.cnl}.\footnote{The file is
+%contained in the source distribution of \linnet{}.} The \linnet{}
+%generated file \file{G.m} looks however unsuspiciously and resembles
+%dozens of other generated files which are successfully processed. Octave
+%3.6.4 and MATLAB process file \file{G.m} successfully and plot the
+%expected result.
