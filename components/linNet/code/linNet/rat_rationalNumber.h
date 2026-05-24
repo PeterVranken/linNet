@@ -25,6 +25,7 @@
  */
 
 #include <limits.h>
+#include <stdint.h>
 #include "types.h"
 #include "log_logger.h"
 
@@ -39,15 +40,6 @@
     Bit and the operations are done with 32 Bit. */
 #define RAT_USE_64BIT_ARITHMETIC    1
 
-
-#if RAT_USE_64BIT_ARITHMETIC == 1
-/** A mask that filters the sign bit of the externally known, shorter signed integer type. */
-# define RAT_SIGN_BIT_RAT_SIGNED_INT 0x80000000l
-#else
-/** A mask that filters the sign bit of the externally known, shorter signed integer type. */
-# define RAT_SIGN_BIT_RAT_SIGNED_INT 0x8000l
-#endif
-
 /** The rational number null. */
 #define RAT_NULL ((rat_num_t){.n = 0, .d = 1})
 
@@ -60,15 +52,15 @@
 /* Range of the signed integer and longer signed integer type used in the implementation of
    rational numbers. */
 #if RAT_USE_64BIT_ARITHMETIC == 1
-# define RAT_SIGNED_INT_MAX      (LONG_MAX)
-# define RAT_SIGNED_INT_MIN      (LONG_MIN)
-# define RAT_SIGNED_LONG_INT_MAX (LLONG_MAX)
-# define RAT_SIGNED_LONG_INT_MIN (LLONG_MIN)
+# define RAT_SIGNED_INT_MAX      (INT32_MAX)
+# define RAT_SIGNED_INT_MIN      (INT32_MIN)
+# define RAT_SIGNED_LONG_INT_MAX (INT64_MAX)
+# define RAT_SIGNED_LONG_INT_MIN (INT64_MIN)
 #else /* Use 16/32 Bit representation of rational numbers */
-# define RAT_SIGNED_INT_MAX      (SHRT_MAX)
-# define RAT_SIGNED_INT_MIN      (SHRT_MIN)
-# define RAT_SIGNED_LONG_INT_MAX (LONG_MAX)
-# define RAT_SIGNED_LONG_INT_MIN (LONG_MIN)
+# define RAT_SIGNED_INT_MAX      (INT16_MAX)
+# define RAT_SIGNED_INT_MIN      (INT16_MIN)
+# define RAT_SIGNED_LONG_INT_MAX (INT32_MAX)
+# define RAT_SIGNED_LONG_INT_MIN (INT32_MIN)
 #endif /* Short or long representation. */
 
 
@@ -81,14 +73,14 @@
     signed int type could be used, but we implement a simple overflow recognition by using
     signed long int and thus having signed long long int as kind of internal reserve to
     inspect results for being too large. */
-typedef signed long int rat_signed_int;
+typedef int32_t rat_signed_int;
 
 /** The type of integers used for rational numbers must not be the longest available type.
     A longer type is defined here to be used for internal overflow recognition. */
-typedef signed long long int rat_signed_long_int;
+typedef int64_t rat_signed_long_int;
 #else
-typedef signed short int rat_signed_int;
-typedef signed long int rat_signed_long_int;
+typedef int16_t rat_signed_int;
+typedef int32_t rat_signed_long_int;
 #endif
 
 
@@ -129,7 +121,7 @@ extern boolean rat_overflowFlag;
 
 static inline rat_signed_int rat_sign(rat_num_t a)
 {
-    if((a.n & RAT_SIGN_BIT_RAT_SIGNED_INT) == (a.d & RAT_SIGN_BIT_RAT_SIGNED_INT))
+    if((a.n < 0) == (a.d < 0))
         return (rat_signed_int)1;
     else
         return (rat_signed_int)-1;

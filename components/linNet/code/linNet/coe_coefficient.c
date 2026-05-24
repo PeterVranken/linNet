@@ -386,7 +386,7 @@ void coe_logCoefficient( const coe_coef_t * const pCoef
                 firstTerm = false;
             }
 
-            signed int idxVar = pTableOfVars->noConstants - 1;
+            signed int idxVar = (int)pTableOfVars->noConstants - 1;
             const coe_productOfConst_t prodOfConst = pAddend->productOfConst;
 
 #if 1 // Set to 0 in order to get a concise binary representation of the product of constants
@@ -404,7 +404,7 @@ void coe_logCoefficient( const coe_coef_t * const pCoef
 
                     assert((unsigned)idxVar < pTableOfVars->noConstants);
                     const pci_device_t * const pDev = tbv_getDeviceByBitIndex( pTableOfVars
-                                                                             , idxVar
+                                                                             , (unsigned)idxVar
                                                                              );
                     log_log(_log, log_continueLine, "%s", pDev->name);
                 }

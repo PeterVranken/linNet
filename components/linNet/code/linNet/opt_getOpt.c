@@ -407,8 +407,9 @@ boolean opt_parseCmdLine( opt_cmdLineOptions_t * const pCmdLineOptions
 
     if(optind < argc)
     {
-        pCmdLineOptions->noInputFiles = argc - optind;
-        pCmdLineOptions->idxFirstInputFile = optind;
+        pCmdLineOptions->noInputFiles = (unsigned)(argc - optind);
+        assert(optind >= 0);
+        pCmdLineOptions->idxFirstInputFile = (unsigned)optind;
     }
 
     /* The user input can contain contradictions and errors. */

@@ -374,8 +374,7 @@ static boolean analyseNetworkTopology( network_t * * const ppNetwork
             boolean isInterconnection;
 
         } nodeAry[4];
-        unsigned int noNodes
-                   , noOpAmps = 0;
+        unsigned int noNodes;
 
         switch(pDev->type)
         {
@@ -396,7 +395,6 @@ static boolean analyseNetworkTopology( network_t * * const ppNetwork
             break;
 
         case pci_devType_opAmp:
-            ++ noOpAmps;
             nodeAry[0].idxNode = pDev->idxNodeFrom;
             nodeAry[1].idxNode = pDev->idxNodeTo;
             nodeAry[2].idxNode = pDev->idxNodeOpOut;

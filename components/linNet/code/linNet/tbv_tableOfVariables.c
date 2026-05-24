@@ -1093,7 +1093,7 @@ void tbv_exportAsMCode( const tbv_tableOfVariables_t * const pTable
     const pci_device_t * const * const pDevAry = pTable->pCircuitNetList->pDeviceAry;
 
     signed int idxC;
-    for(idxC=pTable->noConstants-1; idxC>=0; --idxC)
+    for(idxC=(int)pTable->noConstants-1; idxC>=0; --idxC)
     {
         const unsigned int idxDev = pTable->constantIdxToDevIdxAry[idxC];
         assert(idxDev < pTable->pCircuitNetList->noDevices);

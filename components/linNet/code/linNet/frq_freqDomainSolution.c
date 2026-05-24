@@ -1545,7 +1545,7 @@ static unsigned int print(FILE *stream, const char * const formatString, ...)
        (negative) error information. */
     unsigned int retVal;
     if(noChars >= 0)
-        retVal = noChars;
+        retVal = (unsigned)noChars;
     else
     {
         /* It might seem that now writing an error message into the application log would
@@ -1684,7 +1684,7 @@ static void printExpression( FILE * const stream
                 }
 
                 signed int idxConst;
-                for(idxConst=noConst-1; idxConst>=0; --idxConst)
+                for(idxConst=(int)noConst-1; idxConst>=0; --idxConst)
                 {
                     if(pAddend->powerOfConstAry[idxConst] != 0)
                     {
@@ -1692,9 +1692,10 @@ static void printExpression( FILE * const stream
                             col += print(stream, "*");
                         firstFactor = false;
 
-                        const pci_device_t *const pDev = tbv_getDeviceByBitIndex( pTableOfVars
-                                                                                , idxConst
-                                                                                );
+                        const pci_device_t *const pDev = tbv_getDeviceByBitIndex
+                                                                        ( pTableOfVars
+                                                                        , (unsigned)idxConst
+                                                                        );
                         col += print(stream, "%s", pDev->name);
                         if(pAddend->powerOfConstAry[idxConst] != 1)
                         {
@@ -1916,7 +1917,7 @@ static const frq_frqDomExpressionAddend_t *
         }
 
         signed int idxConst;
-        for(idxConst=noConst-1; idxConst>=0; --idxConst)
+        for(idxConst=(int)noConst-1; idxConst>=0; --idxConst)
         {
             if(pAddend->powerOfConstAry[idxConst] != 0)
             {
@@ -1926,7 +1927,7 @@ static const frq_frqDomExpressionAddend_t *
                     col += print(stream, "*");
 
                 const pci_device_t * const pDev = tbv_getDeviceByBitIndex( pTableOfVars
-                                                                         , idxConst
+                                                                         , (unsigned)idxConst
                                                                          );
                 col += print(stream, "%s", pDev->name);
                 if(pAddend->powerOfConstAry[idxConst] != 1)
@@ -3036,8 +3037,9 @@ static boolean printSolution( const frq_freqDomainSolution_t * const pSolution
              );
 
         /* In case of a full result the independents are the knowns of the LES. */
-        const signed int indentDepth = strlen(tabStringText) + strlen(nameDependent)
-                                       + sizeof("  (s) = ") - 1;
+        const signed int indentDepth = (int)(strlen(tabStringText) + strlen(nameDependent)
+                                             + sizeof("  (s) = ") - 1u
+                                            );
         unsigned int idxIndependent;
         for(idxIndependent=0; idxIndependent<noIndependents; ++idxIndependent)
         {
@@ -3579,10 +3581,10 @@ boolean frq_createFreqDomainSolution( const frq_freqDomainSolution_t * * const p
                                        " single independent quantity. The given system has"
                                        " however %d inputs"
                                      , sol_getNameOfDependent( pAlgebraicSolution
-                                                             , idxSolutionDependent
+                                                             , (unsigned)idxSolutionDependent
                                                              )
                                      , sol_getNameOfDependent( pAlgebraicSolution
-                                                             , idxSolutionIndependent
+                                                             , (unsigned)idxSolutionIndependent
                                                              )
                                      , sol_getNoIndependents(pAlgebraicSolution)
                                      )
@@ -3601,10 +3603,10 @@ boolean frq_createFreqDomainSolution( const frq_freqDomainSolution_t * * const p
                                    " or system inputs must not be specified for"
                                    " a Bode plot result"
                                  , sol_getNameOfIndependent( pAlgebraicSolution
-                                                           , idxKnownIndependent
+                                                           , (unsigned)idxKnownIndependent
                                                            )
                                  , sol_getNameOfIndependent( pAlgebraicSolution
-                                                           , idxKnownDependent
+                                                           , (unsigned)idxKnownDependent
                                                            )
                                  , sol_getNoIndependents(pAlgebraicSolution)
                                  )

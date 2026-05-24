@@ -280,9 +280,9 @@ static const boolean *getVectorOfReqDependents(const sol_solution_t * const pSol
  */
 
 static void elementaryStep( coe_coefMatrix_t A
-                          , signed int step
-                          , signed int row
-                          , signed int col
+                          , unsigned int step
+                          , unsigned int row
+                          , unsigned int col
                           , const coe_coef_t * const pKnownDivisor
                           )
 {

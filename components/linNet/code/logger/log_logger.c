@@ -106,7 +106,6 @@ void log_initModule()
     char buf[3] = {[2] = '\0'};
     snprintf(buf, 2, "%s World", "Hello");
     assert(strlen(buf) == 1);
-printf("TODO Remove this after use: snprintf is working well\n");
 #endif
 } /* End of log_initModule */
 
@@ -629,7 +628,7 @@ static unsigned int logInternal( log_logger_t * const hObj
         assert(CLOCKS_PER_SEC == (clock_t)1000000);
 # define F_MAXU_T "ju"
 #endif
-        assert((int)logLevel >= 0 && (int)logLevel <= (int)log_noLogLevels);
+        assert((int)logLevel <= (int)log_noLogLevels);
         const char *unitClock = hObj->lineFormat == log_fmtLong? " ms": "";
         snprintf( lineHeader + idxWhere
                 , sizeof(lineHeader) - idxWhere

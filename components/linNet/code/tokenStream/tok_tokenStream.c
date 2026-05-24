@@ -1245,7 +1245,7 @@ static void readCustomSymbol(tok_hTokenStream_t hTStream, tok_token_t * const pT
        the form of an identifier. These don't play a role as they would have been
        recognizer already earlier in the check for identifiers. */
     signed int from = 0
-             , to   = hTStream->tokenDescriptorTable.noTokenDescriptions - 1;
+             , to   = (int)hTStream->tokenDescriptorTable.noTokenDescriptions - 1;
 
     /* The index of the character of the symbol, which is compared against the
        table in the current loop cycle. */
