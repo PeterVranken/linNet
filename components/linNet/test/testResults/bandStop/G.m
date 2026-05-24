@@ -2,7 +2,7 @@ function [tf_G deviceConstants wBode tiStep] = G(deviceConstants)
 
 %   [tf deviceConstants wBode tiStep] = G(deviceConstants)
 %                   The transfer function G of electric linear network
-%                   bandStop.cnl
+%                   testCases\bandStop.cnl
 %
 %   Input argument(s):
 %       deviceConstants
