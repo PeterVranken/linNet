@@ -1,0 +1,39 @@
+/**
+ * @file UseCaseOpFilter.cnl
+ *   Test case for linNet.
+ * This test demonstrates an op-amp filter with two time-constants. It is
+ * an example from the linNet manual, see Chapter 8, Typical Use Cases,
+ * for a discussion.
+ *
+ * Copyright (C) 2014-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ *
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the
+ * Free Software Foundation, either version 3 of the License, or (at your
+ * option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+// Definition of in- and output
+U   Uin  Ip  gnd
+DEF Uout out gnd
+
+// The circuit
+OP OP  Ip  Im  out
+R  R1  out Im  R1=1k
+C  C1  out Im  C1=1u
+R  R2  Im  gnd R2=1k
+C  C2  Im  gnd C2=22u
+
+// Definition of results
+PLOT G    Uout Uin
+RES  Gf   Uout
+RES  SIMO Uout U_Im I_OP
+PLOT Iop  I_OP Uin

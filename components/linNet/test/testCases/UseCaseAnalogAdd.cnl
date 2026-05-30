@@ -2,7 +2,8 @@
  * @file UseCaseAnalogAdd.cnl
  *   Test case for linNet.
  * This test demonstrates an analog added with additional low-pass
- * characteristics. 
+ * characteristics. It is an example from the linNet manual, see Chapter 8,
+ * Typical Use Cases, for a discussion.
  *   The two inputs are weighted in a ratio 1:2. The DC amplification is 4
  * and 8  for the first and second input, respectively. Due to the filter
  * characteristics, the amplification is reduced by a factor of ten for
