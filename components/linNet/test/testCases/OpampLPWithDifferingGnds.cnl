@@ -1,0 +1,54 @@
+/**
+ * @file OpampLPWithDifferingGnds.cnl
+ *
+ * This circuit demonstrates the importance of the ground node definition,
+ * when op-amps are used. The netlist defines twice the same op-amp
+ * circuit (a PI-controller); both times declaring another node as ground
+ * node.
+ *   The ground node has an impact on how an op-amp is internally modelled
+ * with a controlled voltage source, and choosing different nodes alters
+ * the internal calculation model. The transfer function is identical in
+ * both cases but the input impedances differs. Why this happens and what
+ * to do is explained in the linNet manual, section 5.4, The operational
+ * amplifier.
+ *
+ * Copyright (C) 2014-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ *
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the
+ * Free Software Foundation, either version 3 of the License, or (at your
+ * option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/* LP with "normal" ground */
+U    Uin1  in1    gnd1
+     
+OP   OP1   opInv1 gnd1   opOut1
+R    Rin1  in1    opInv1
+R    Rfb1  k1     opOut1
+C    C1    opInv1 k1
+     
+DEF  Uout1 opOut1 gnd1
+PLOT G1    Uout1  Uin1
+PLOT Z1    Uin1   I_Uin1  
+
+/* Same LP with other ground */
+U    Uin2  gnd2   null2
+     
+OP   OP2   opInv2 null2  opOut2
+R    Rin2  gnd2   opInv2
+R    Rfb2  k2     opOut2
+C    C2    opInv2 k2
+     
+DEF  Uout2 opOut2 null2
+PLOT G2    Uout2  Uin2
+PLOT Z2    Uin2   I_Uin2  
+
