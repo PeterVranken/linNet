@@ -8,8 +8,11 @@
  *   The ground node has an impact on how an op-amp is internally modelled
  * with a controlled voltage source, and choosing different nodes alters
  * the internal calculation model. The transfer function is identical in
- * both cases but the input impedances differs. Why this happens and what
- * to do is explained in the linNet manual, section 5.4, The operational
+ * both cases but the input impedances differs.
+ *   This is an example from the linNet manual. The manual shows for the
+ * same circuit a third choice of the ground node, which makes the
+ * calculation even fail and abort. Why all of this happens and what to do
+ * is explained in the linNet manual, section 5.4, The operational
  * amplifier.
  *
  * Copyright (C) 2014-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)

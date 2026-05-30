@@ -2,7 +2,7 @@ function [tf_msResult deviceConstants wBode tiStep] = msResult(deviceConstants)
 
 %   [tf deviceConstants wBode tiStep] = msResult(deviceConstants)
 %                   The transfer function msResult of electric linear network
-%                   fixedTestCases\3Nodes.doublicatedResultAnnouncement.cnl
+%                   C:\home\vranken\projects\linNetAtGitHub\linNet\components\linNet\test\4Nodes.cnl
 %
 %   Input argument(s):
 %       deviceConstants
