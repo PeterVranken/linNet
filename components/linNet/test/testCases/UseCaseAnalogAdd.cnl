@@ -1,0 +1,39 @@
+/**
+ * @file UseCaseAnalogAdd.cnl
+ *   Test case for linNet.
+ * This test demonstrates an analog added with additional low-pass
+ * characteristics. 
+ *   The two inputs are weighted in a ratio 1:2. The DC amplification is 4
+ * and 8  for the first and second input, respectively. Due to the filter
+ * characteristics, the amplification is reduced by a factor of ten for
+ * high frequencies.
+ *
+ * Copyright (C) 2014-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ *
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the
+ * Free Software Foundation, either version 3 of the License, or (at your
+ * option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+U    U1  in1 gnd
+U    U2  in2 gnd
+     
+R    R1  in1 op1 R1=1k
+R    R2  in2 op1 R2=1/2*R1
+R    R3  op1 out R3=4*R1
+R    R4  k1  out R4=1/10*R1
+C    C1  op1 k1  C1=100n
+     
+OP   OP  op1 gnd out
+
+RES  MIMO U_out I_OP
+PLOT G1   U_out U1
