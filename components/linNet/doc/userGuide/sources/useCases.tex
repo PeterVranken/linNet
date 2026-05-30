@@ -96,13 +96,13 @@ Only when looking at the generated Octave code one will recognize a
 difference. While the generated LTI object is still identical differs the
 default operation performed on this object in both cases. The results have
 been implemented as Octave scripts \file{G.m} and \file{Gf.m} in the
-output folder \file{opFilter}. If called just like that the default
-operation is performed: The Octave command \code{G} opens a figure window
-with a Bode plot (see figure \ref{figUseCaseOpFilter_Bode}), command
-\code{Gf} presents the plot of the step response (see figure
+output folder \file{opFilter}. When called without function arguments the
+default operation is performed: The Octave command \code{G} opens a figure
+window with a Bode plot (see figure \ref{figUseCaseOpFilter_Bode}),
+command \code{Gf} presents the plot of the step response (see figure
 \ref{figUseCaseOpFilter_step}). Regardless, both Octave scripts can be
 applied to produce the same plots and numeric results if you make use of
-the optional function parameters and return values. Please, refer to
+the optional function arguments and return values. Please, refer to
 section \ref{secOctaveInterface} for details.
 
 The next result, which is specified in the netlist file is called
@@ -228,7 +228,7 @@ The generated Octave script \file{MIMO.m} will plot the step response of
 the system, see figure \ref{figUseCaseAnalogAdd_step}. The step response is
 presented in a rectangular grid for each in- and output. The meaning of a
 single figure is the response of the related output if the related input
-undergoes a step and all other inputs are constantly null.
+undergoes a step and all other inputs are constantly zero.
 
 The second user-specified result uses the keyword \code{PLOT}. The
 dependency of a single quantity on a single other one is presented as Bode
@@ -486,16 +486,16 @@ consequently, the expected amplification (disregarding the inversion) is
 about the ratio of collector to emitter resistor,
 $\left| V \right| \simeq R_c/R_{e_{eff}}$.
 
-A further simplification is that the collector current is relatively
-independent of the circuitry in the collector. An hypothetical output
-current will therefore always mean an additional voltage drop at $R_c$,
-which is proportional to this resistor and the hypothetical current. This
-means that the circuit's output impedance has nearly the same value as
-$R_c$. According to our requirement we choose a value of $R_c=6.8$\,k, which
+A further simplification is that the collector current is largely
+independent of the collector circuitry. An hypothetical output current
+will therefore always mean an additional voltage drop at $R_c$, which is
+proportional to this resistor and the hypothetical current. This means
+that the circuit's output impedance has nearly the same value as $R_c$.
+According to our requirement we choose a value of $R_c=6.8$\,k, which
 means $R_{e_{eff}} \simeq 68\,\Omega$.
 
 The operating point of the collector (i.e. the voltage at input voltage
-null) should be somewhat above the middle of the supply voltage to get a
+zero) should be somewhat above the middle of the supply voltage to get a
 symmetric limit for both polarities of the input voltage. Given $R_c=6.8$\,k
 we want to have a collector current
 $I_c=5.7\text{\,V}/6.8\text{\,k}\Omega=0.84\text{\,mA}$. It holds
@@ -511,7 +511,7 @@ design goal $V=100$ already demanded a value of 68\,$\Omega$ for the
 relevant input frequency range. The answer is: Place the 68\,$\Omega$ behind
 a DC blocking capacitor and put a larger resistor for DC operation in
 parallel. We take the tenfold value for DC operation, $R_e=680\,\Omega$;
-this won't affect the previous findings too much or with other words,
+this won't affect the previous findings too much, or with other words
 $R_{e_{eff}}$ for the relevant input frequency range. For DC operation the
 effective emitter resistance is $R_e$ and the wanted value for $U_b$ becomes 
 $U_b=0.6\text{\,V}+680\text{\,}\Omega \cdot 0.84\text{\,mA}=1.17\text{\,V}$.
@@ -540,8 +540,8 @@ To \linnet{} the circuit is a system with three independent inputs and a
 list of dependent quantities under which our output voltage $U_{out}$. For
 us, the two inputs $U_{batt}$ and $U_{be}$ are constant values, we will
 have to put the constant values 12\,V and 0.6\,V into the resulting
-formulas. However, seeing $U_{batt}$ as a true input signal we can easily
-find e.g. the hum suppression of the circuit: Consider $U_{batt}$ had a
+formulas. However, seeing $U_{batt}$ as a true input signal, we can easily
+find, e.g., the hum suppression of the circuit: Consider $U_{batt}$ had a
 frequency component of the public power grid and ask for the transfer
 function from power supply to output voltage.
 
@@ -575,7 +575,7 @@ current.)
 
 The principal characteristics of the transistor circuit is the resulting
 amplification, the ratio of magnitudes of out- and input voltage. Due to
-the decoupling capacitors we have amplification null for DC. We have to
+the decoupling capacitors we have amplification zero for DC. We have to
 define the amplification as the voltage ratio at frequencies above the
 influence of the capacitors.
 
@@ -844,9 +844,9 @@ without noticeable damping.
 The explanation: In the computation of a MIMO system and if we ask for the
 transfer function of one of its inputs to one of its outputs, then the
 answer holds under the assumption that the other inputs have given values,
-e.g. null all the time (however the actual input function is irrelevant).
+e.g., zero all the time (however the actual input function is irrelevant).
 With other words its assumed that the inputs are driven with a source of
-output impedance null. For our circuit this has the consequence that the
+output impedance zero. For our circuit this has the consequence that the
 input capacitor $C_{in}$ stabilizes the base voltage of the transistor -
 here we have a good hum suppression. Accordingly, the collector current is
 also stablized but unfortunately this means that the collector voltage
