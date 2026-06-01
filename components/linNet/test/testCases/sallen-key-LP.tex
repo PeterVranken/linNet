@@ -1,18 +1,12 @@
-\documentclass{article}
+% See https://holatex.app/playground.html# for an online viewer.
+
+\documentclass[tikz]{standalone} % Standalone: Only graphics export.
 \usepackage[european,siunitx]{circuitikz}
 \usetikzlibrary{arrows.meta}
 \usepackage{listings}
 \lstset{basicstyle=\footnotesize\ttfamily}
 \begin{document}
 
-This documernt presents a circuit that implements the Sallen-Key filter.
-The chosen configuration is a low-pass of second order. The schematics of
-the filter is shown in figure~\ref{figLPSallenKey} on page
-\pageref{figLPSallenKey} and the netlist for computing the transfer
-function is shown in listing~\ref{lstNetListSallenKeyLP}.
-
-\begin{figure}
-  \centering
   \begin{circuitikz}
   %\begin{circuitikz}[american voltages, american currents]
 
@@ -39,13 +33,5 @@ function is shown in listing~\ref{lstNetListSallenKeyLP}.
     \draw ($(Uout)+(0,-1.5)$) node[above]{} to[short, o-] ++(0,-0.1) node[ground]{};
 
   \end{circuitikz}
-  \caption{Low-pass filter in Sallen-Key topology}
-  \label{figLPSallenKey}
-\end{figure}
-
-\lstinputlisting[ %language=Octave,
-%basicstyle=\small\ttfamily,
-caption={Netlist for calculating the Sallen-Key filter},
-captionpos=b,label=lstNetListSallenKeyLP]{sallen-key-LP.cnl}
 
 \end{document}
