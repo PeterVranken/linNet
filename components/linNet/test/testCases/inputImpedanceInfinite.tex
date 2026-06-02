@@ -1,0 +1,39 @@
+% See https://holatex.app/playground.html# for an online viewer.
+
+\documentclass[tikz]{standalone} % Standalone: Only graphics export.
+\usepackage[european,siunitx]{circuitikz}
+\usetikzlibrary{arrows.meta}
+\usepackage{listings}
+\lstset{basicstyle=\footnotesize\ttfamily}
+\begin{document}
+
+  \begin{circuitikz}
+
+    \tikzset{>=Triangle} % Define tip of arrows drawn with [->]
+    \ctikzset{voltage=straight}
+
+    \def\gapUin{0.2}
+    
+    % U_in to OP.
+    \draw (0,0) coordinate(Uin) to[short, o-] ++(1,0) 
+      node[plain amp, noinv input up, anchor=+](OP){$OP$};
+
+    % Feedback line
+    \draw (OP.-) -- ++(0,-1) coordinate(y1) -- (y1 -| OP.out) -- (OP.out);
+
+    % Connectors for input voltage Uin.
+    \draw (0,-1) to[short,o-] ++(0,-0.2) node[ground]{};
+
+    % Voltage arrow for input voltage U_in.
+    \draw[->] (0,-\gapUin) -- node[midway,left]{$U_{in}$} ($(0,-1)+(0,\gapUin)$);
+
+    % Connectors for input voltage U_out.
+    \draw (OP.out) to[short,*-o] ++(1,0) coordinate(out);
+    \draw ($(out)+(0,-1)$) coordinate(outgnd) to[short,o-] ++(0,-0.2) node[ground]{};
+
+    % Voltage arrow for input voltage U_out.
+    \draw[->] ($(out)+(0,-\gapUin)$) -- node[midway,right]{$U_{out}$} ($(outgnd)+(0,\gapUin)$);
+
+  \end{circuitikz}
+
+\end{document}

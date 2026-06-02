@@ -1,0 +1,15 @@
+/*
+ * Test: An op-amp based input follower has an infinite impedance. This is
+ * calculated correct by linNet but the resulting Octave code creates a
+ * transfer function object, which Octave would fail to calculate. The M
+ * code generator of linNet adds an error message to the script in order
+ * to avoid confusion.
+ *
+ * Copyright (C) 2013-2026 Peter Vranken
+ */
+
+OP OP in out out
+U Uin in gnd
+
+PLOT Z Uin I_Uin
+PLOT G U_out Uin
