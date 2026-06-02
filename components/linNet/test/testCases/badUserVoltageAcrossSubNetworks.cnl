@@ -1,0 +1,38 @@
+/**
+ * @file badUserVoltageAcrossSubNetworks.cnl
+ *   Test case for linNet.\n
+ * In a basically well-defined circuit consisting of two unconnected
+ * sub-networks, user-defined voltages make the calculation fail; the
+ * potential difference between the two sub-networks is undefined and a
+ * voltage between nodes from both sub-networks is hence undefined, too.
+ * linNet rejects this netlist.
+ *   Note, the same circuit without the bad voltage definitions can be
+ * found as srcUByU.cnl and can be computed.
+ *
+ * Copyright (C) 2015 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ *
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the
+ * Free Software Foundation, either version 3 of the License, or (at your
+ * option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+U Uin K1 gnd
+DEF U2 Kplus gnd
+
+DEF U3 gnd gnd2
+DEF U4 gnd gnd
+DEF U5 gnd2 gnd2
+DEF U6 Kplus Kplus
+
+U(U) k Kplus Kminus K1 gnd
+R Rgnd Kminus gnd2
+R Rout Kplus gnd2

@@ -1,6 +1,8 @@
-/*
- * Test: Four nodes and a branch in between all nodes to get a maximally
- * complex structure of the LES.
+/**
+ * @file 4Nodes.cnl
+ *   Test case for linNet.\n
+ * Four nodes and a branch in between all nodes to get a maximally complex
+ * structure of the LES.
  *
  * Check:
  *
@@ -19,7 +21,20 @@
  *
  * And analogously for Uout(U2).
  *
- * Copyright (C) 2013-2026 Peter Vranken
+ * Copyright (C) 2013-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ *
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the
+ * Free Software Foundation, either version 3 of the License, or (at your
+ * option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
 U U1  K3  K1
