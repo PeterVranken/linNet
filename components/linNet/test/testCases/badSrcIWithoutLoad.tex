@@ -1,0 +1,23 @@
+% See https://holatex.app/playground.html# for an online viewer.
+
+\documentclass[tikz]{standalone} % Standalone: Only graphics export.
+\usepackage[european,siunitx]{circuitikz}
+\usetikzlibrary{arrows.meta}
+\usepackage{listings}
+\lstset{basicstyle=\footnotesize\ttfamily}
+\begin{document}
+
+  \begin{circuitikz}
+
+    \tikzset{>=Triangle} % Define tip of arrows drawn with [->]
+    \ctikzset{voltage=straight}
+
+    \def\size{3}
+    \def\deltaUio{0.5}
+    
+    \draw (0,0) node[ground]{} coordinate(gnd)
+      to[dcisource,l=$I_0$,-o] ++(0,\size) node[above]{$K_1$} coordinate(K1);
+
+  \end{circuitikz}
+
+\end{document}
