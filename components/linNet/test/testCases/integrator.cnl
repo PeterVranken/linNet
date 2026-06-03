@@ -1,0 +1,7 @@
+// An instable (but in practice still useful) system: the ideal integrator.
+U   U1  in gnd
+
+OP  integ   op1 gnd  out
+
+R   R   in op1
+C   C   out op1
