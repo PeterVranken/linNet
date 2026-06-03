@@ -1,0 +1,25 @@
+% See https://holatex.app/playground.html# for an online viewer.
+
+\documentclass[tikz]{standalone} % Standalone: Only graphics export.
+\usepackage[european,siunitx]{circuitikz}
+\usetikzlibrary{arrows.meta}
+\usepackage{listings}
+\lstset{basicstyle=\footnotesize\ttfamily}
+\begin{document}
+
+  \begin{circuitikz}
+
+    \tikzset{>=Triangle} % Define tip of arrows drawn with [->]
+    \ctikzset{voltage=straight}
+
+    \def\size{3}
+    \def\deltaUio{0.5}
+    
+    \draw (0,0) node[left]{$in$} coordinate(in)
+      to[R=$R_1$,o-*] ++(\size,0) coordinate(R1R2)
+      to[R=$R_2$,*-] ++(0,-\size) node[ground]{};
+    \draw (R1R2) to[short,-o] ++(\deltaUio,0) node[right]{$out$} coordinate(out);
+
+  \end{circuitikz}
+
+\end{document}
