@@ -1,0 +1,41 @@
+% See https://holatex.app/playground.html# for an online viewer.
+
+\documentclass[tikz]{standalone} % Standalone: Only graphics export.
+\usepackage[european,siunitx]{circuitikz}
+\usetikzlibrary{arrows.meta}
+\usepackage{listings}
+\lstset{basicstyle=\footnotesize\ttfamily}
+\begin{document}
+
+  \begin{circuitikz}
+  %\begin{circuitikz}[american voltages, american currents]
+
+    \tikzset{>=Triangle} % Define tip of arrows drawn with [->]
+
+    \draw (0,0) coordinate(Kin) to[short, o-] ++(1,0) % Input node
+      node[plain amp, noinv input up, anchor=+](OP){$OP$}
+      (OP.-) -- ++(0,-1) coordinate(OP2_inMinus) to[R=$R_{up}$] 
+      (OP2_inMinus -| OP.out) -- (OP.out) % Feedback line
+      node[above]{$K_{out}$}
+    ;
+    \draw (OP2_inMinus) to[R=$R_{down}$, *-] ++(0,-1.8) node[ground]{};
+
+    \def\gapUin{0.2}
+
+    % Connectors for input voltage U1.
+    \draw (0,-1) coordinate(gnd_in) to[short,o-] ++(0,-0.4) node[ground]{};
+
+    % Voltage arrow for input voltage U1.
+    \draw[->] (0,-\gapUin) -- node[midway,left]{$U_1$} ($(0,-1)+(0,\gapUin)$);
+
+    % Connectors for output voltage.
+    \draw (OP.out) to[short, *-o] ++(0.5,0) coordinate(Kout);
+    \draw ($(Kout)+(0,-1)$) coordinate(gnd_out) to[short,o-] ++(0,-0.4) node[ground]{};
+
+    % Voltage arrow for output voltage.
+    \draw[->] ($(Kout)+(0,-\gapUin)$) -- node[midway,right]{$U_{K_{out}}$}
+      ($(Kout)+(0,-1)+(0,\gapUin)$);
+
+  \end{circuitikz}
+
+\end{document}
