@@ -1,0 +1,67 @@
+% See https://holatex.app/playground.html# for an online viewer.
+
+\documentclass[tikz]{standalone} % Standalone: Only graphics export.
+\usepackage[european,siunitx]{circuitikz}
+\usetikzlibrary{arrows.meta}
+\usepackage{listings}
+\lstset{basicstyle=\footnotesize\ttfamily}
+\begin{document}
+
+  \begin{circuitikz}
+
+    \tikzset{>=Triangle} % Define tip of arrows drawn with [->]
+    \ctikzset{voltage=straight}
+
+    \def\gapUin{0.2}
+    
+    % U_in to OP1.
+    \draw (0,0) coordinate(Uin) to[short, o-*] ++(0.5,0) coordinate(Rin1)
+      to[short] ++(1,0) node[plain amp, noinv input up, anchor=+](OP1){$OP_1$};
+    
+    % Input impedance.
+    \draw (Rin1) to[R=$R_{in_1}$] ++(0,-1.5) -- (0,-1.5);
+    
+    % Feedback line.
+    \draw (OP1.-) -- ++(0,-0.9) coordinate(y1) -- (y1 -| OP1.out) -- (OP1.out);
+
+    % Connectors for input voltage Uin1.
+    \draw (0,-1.5) node[below left]{$K_{01_{gnd}}$} to[short,o-] ++(0,-0.2) node[ground]{};
+
+    % Voltage arrow for input voltage U_in1.
+    \draw[->] (0,-\gapUin) -- node[midway,left]{$U_{in_1}$} ($(0,-1.5)+(0,\gapUin)$);
+
+    % Connectors for input voltage U_out1.
+    \draw (OP1.out) to[short,*-o] ++(1,0) coordinate(out1);
+    \draw ($(out1)+(0,-1.5)$) coordinate(out1gnd) node[below left]{$K_{01_{gnd}}$} to[short,o-] ++(0,-0.2) node[ground]{};
+
+    % Voltage arrow for input voltage U_out1.
+    \draw[->] ($(out1)+(0,-\gapUin)$) -- node[midway,right]{$U_{out_1}$} ($(out1gnd)+(0,\gapUin)$);
+    
+    \def\distance{4}    
+
+    % U_in to OP2.
+    \draw (0,-\distance) coordinate(Uin) to[short, o-*] ++(0.5,0) coordinate(Rin2)
+      to[short] ++(1,0) node[plain amp, noinv input up, anchor=+](OP2){$OP_2$};
+    
+    % Input impedance.
+    \draw (Rin2) to[R=$R_{in_2}$] ++(0,-1.5) -- ($(0,-1.5)+(0,-\distance)$);
+    
+    % Feedback line.
+    \draw (OP2.-) -- ++(0,-0.9) coordinate(y2) to[V, v_<=$U_{delta}$] (y2 -| OP2.out) -- (OP2.out);
+
+    % Connectors for input voltage Uin2.
+    \draw ($(0,-1.5)+(0,-\distance)$) node[below left]{$K_{02_{gnd}}$} to[short,o-] ++(0,-0.2) node[ground]{};
+
+    % Voltage arrow for input voltage U_in2.
+    \draw[->] ($(0,-\gapUin)+(0,-\distance)$) -- node[midway,left]{$U_{in_1}$} ($(0,-1.5)+(0,-\distance)+(0,\gapUin)$);
+
+    % Connectors for input voltage U_out2.
+    \draw (OP2.out) to[short,*-o] ++(1,0) coordinate(out2);
+    \draw ($(out2)+(0,-1.5)$) coordinate(out2gnd) node[below left]{$K_{02_{gnd}}$} to[short,o-] ++(0,-0.2) node[ground]{};
+
+    % Voltage arrow for input voltage U_out2.
+    \draw[->] ($(out2)+(0,-\gapUin)$) -- node[midway,right]{$U_{out_1}$} ($(out2gnd)+(0,\gapUin)$);
+    
+  \end{circuitikz}
+
+\end{document}

@@ -1,0 +1,34 @@
+/* Originally: K00_gnd used to be K0, in order to demonstrate the error message when no
+   ground node is found. After renaming, the circuit can be calculated.
+     Remarks: The shortcut of the input by Rin=0 doesn't affect the result calculation:
+   linNet calculates with the symbol Rin, no matter, which value it might have. Rin is not
+   element of the calculated results - it impacts the input impedance by ut not the
+   transfer function - and so it would not even hinder Octave from doing the numeric
+   calculations. 
+     The numeric coupling of the resistor values is not a functional coupling of the
+   circuits.
+     The unconnected networks don't impact the calculated result but the representation of
+   the same: The result defined for the second circuit is a function depending also on the
+   knowns of the unconnected other network; of course with factor zero, but still printed.
+   Conclusion: If there's not functional connection between the two circuits, it's better
+   to place them in two separate netlist files.
+     The feedback line of the op-amp contains a voltage source (which could be the model of
+   a diode in the true circuit). This leads to a delta in the output voltage. This is shown
+   correctly in the result, which is: Uout2(s) = Uin2(s) + Udelta(s). */
+
+/* An input voltage follower with input impedance reduced to Rin1. */
+U Uin1 K11 K01_gnd
+R Rin1 K11 K01_gnd Rin1=0
+OP OP1 K11 K21 K21
+DEF Uout1 K21 K01_gnd
+
+/* A second, unrelated, unconnected input voltage follower with input impedance reduced to
+   Rin2, which is 3 times Rin1. Note that the constant voltage source in the feedback line
+   makes the output voltage follow the input voltage with a constant offset. */
+U Uin2 K12 K02_gnd
+R Rin2 K12 K22 Rin2=3*Rin1
+OP OP2 K12 K22 K32
+U Udelta K32 K22
+DEF Uout2 K32 K02_gnd
+
+RES Ambiguous Uout2
