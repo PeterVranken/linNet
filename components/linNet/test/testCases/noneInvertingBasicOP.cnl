@@ -4,8 +4,8 @@
  * The basic non-inverting op-amp amplifier.\n
  *   No output voltage has been specified explicitly. linNet computes the full result. The
  * most interesting transfer function from the circuit input voltgae to the op-amp output
- * voltage can thus be found as dependency of the potential of node Kout on known voltage
- * U1, i.e., U_Kout(U1).
+ * voltage can thus be found as dependency of the unknown potential of node Kout on known
+ * voltage U1; look for U_Kout in output file allDependents.m.\n
  *  Note, in a full result, node potentials are always meant relative to ground. Which one
  * the ground node is is derived from the name of the nodes. linNet looks for a node named
  * "gnd" or "ground" or similar.
