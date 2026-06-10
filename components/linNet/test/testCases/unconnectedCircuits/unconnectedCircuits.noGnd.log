@@ -1,0 +1,11 @@
+Jun 10 22:18:06 2026 - 000004 ms - RESULT - 
+-----------------------------------------------------------------------------
+ linNet - The Software for symbolic Analysis of linear Electronic Circuits
+ Copyright (C) 2014-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ This is free software; see the source for copying conditions. There is NO
+ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+-----------------------------------------------------------------------------
+Jun 10 22:18:06 2026 - 000007 ms -   WARN - Line 41: Bad value 0 used in assignment
+Jun 10 22:18:06 2026 - 000007 ms - RESULT - Reading circuit file C:\home\vranken\projects\linNetAtGitHub\linNet\components\linNet\test\testCases\unconnectedCircuits\unconnectedCircuits.noGnd.cnl successfully done
+Jun 10 22:18:06 2026 - 000007 ms -   WARN - Input file specifies 2 unconnected graphs
+Jun 10 22:18:06 2026 - 000007 ms -  ERROR - No suitable ground node could be found in the circuit or in one of its sub-networks. A ground node is a node whose name contains either "gnd" or "ground" and which is not connected to the output of an op-amp. The ground node needs to be unambiguously defined within a sub-network

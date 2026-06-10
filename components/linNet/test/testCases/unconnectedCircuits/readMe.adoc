@@ -1,0 +1,11 @@
+This folder contains a linNet test case.
+
+See link:unconnectedCircuits.cnl[netlist file] and
+link:unconnectedCircuits.cnl[same netlist with injected error] for details
+of the circuit.
+
+[[figSchematics]]
+.Schematics
+image::unconnectedCircuits.svg[Schematics, width="70%", pdfwidth="70%", align="center"]
+
+
