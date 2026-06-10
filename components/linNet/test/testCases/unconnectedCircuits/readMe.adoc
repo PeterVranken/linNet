@@ -27,21 +27,22 @@ link:unconnectedCircuits/Ambiguous.m[results] are represented: the result
 of one circuit is expressed as a function that also includes known
 currents and voltages from the other (unconnected) circuit. Although these
 additional terms have a factor of zero, they are still shown in the
-output. Conclusion: If there is no functional connection between circuits,
-it is preferable to place them in separate netlist files. . The feedback
-line of the second op-amp contains a voltage source (which could be the
-model of a diode in the true circuit). This leads to a delta in the output
-voltage. This is shown correctly in the result, which is: `Uout2(s) =
-Uin2(s) + Udelta(s)`. . The shortcut of the inputs produced by
-`Rin1=Rin2=0` doesn't affect the result calculation: linNet calculates
-with the symbols `Rin1` and `Rin2`, no matter, which value they might
-have. Moreover, the demanded result depends neither on `Rin1` nor on
-`Rin2` - the resistors impact the input impedances but not the transfer
-functions - and so the shortcut would not even hinder Octave from doing
-the numeric calculations. . The numeric coupling of the resistor values is
-not a functional coupling of the circuits. It remain two unconnected
-circuits.
+output.
+  Conclusion: If there is no functional connection between circuits, it is
+preferable to place them in separate netlist files.
+. The feedback line of the second op-amp contains a voltage source (which
+could be the model of a diode in the true circuit). This leads to a delta
+in the output voltage. This is shown correctly in the result, which is:
+`Uout2(s) = Uin2(s) + Udelta(s)`.
+. The shortcut of the inputs produced by `Rin1=Rin2=0` doesn't affect the
+result calculation: linNet calculates with the symbols `Rin1` and `Rin2`,
+no matter, which value they might have. Moreover, the demanded result
+depends neither on `Rin1` nor on `Rin2` - the resistors impact the input
+impedances but not the transfer functions - and so the shortcut would not
+even hinder Octave from doing the numeric calculations.
+. The numeric coupling of the resistor values is not a functional coupling
+of the circuits. It remain two unconnected circuits.
 
 See link:unconnectedCircuits.cnl[netlist file] and
 link:unconnectedCircuits.noGnd.cnl[same netlist with injected error] for
-more details of the circuit.
+more details of the circuits.
