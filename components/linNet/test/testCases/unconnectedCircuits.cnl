@@ -1,28 +1,58 @@
-/* Originally: K00_gnd used to be K0, in order to demonstrate the error message when no
-   ground node is found. After renaming, the circuit can be calculated.
-     Remarks: The shortcut of the input by Rin=0 doesn't affect the result calculation:
-   linNet calculates with the symbol Rin, no matter, which value it might have. Rin is not
-   element of the calculated results - it impacts the input impedance by ut not the
-   transfer function - and so it would not even hinder Octave from doing the numeric
-   calculations. 
-     The numeric coupling of the resistor values is not a functional coupling of the
-   circuits.
-     The unconnected networks don't impact the calculated result but the representation of
-   the same: The result defined for the second circuit is a function depending also on the
-   knowns of the unconnected other network; of course with factor zero, but still printed.
-   Conclusion: If there's not functional connection between the two circuits, it's better
-   to place them in two separate netlist files.
-     The feedback line of the op-amp contains a voltage source (which could be the model of
-   a diode in the true circuit). This leads to a delta in the output voltage. This is shown
-   correctly in the result, which is: Uout2(s) = Uin2(s) + Udelta(s). */
+/**
+ * @file unconnectedCircuits.cnl
+ *   Test case for linNet.\n
+ * This netlist file contains two unconnected circuits. They are nearly identical; it are
+ * input followers using an op-amp with direct feedback from output to inverting input. The
+ * only difference is an additional voltage source in the feedback of the second op-amp,
+ * which results in an offset between in- and output voltage. Both circuits have a resistor
+ * in parallel to the input voltage. Due to the infinite input impedance of the (ideal)
+ * op-amp, this resistor becomes the input impedance of the circuit.\n
+ *   The netlist exists in two variants. The other file unconnectedCircuits.noGnd.cnl has
+ * the same circuit but node K01_gnd is named K01. This leads to an interesting and
+ * important error message; the circuit can't be calculated.\n
+ *   Further observations with this netlist:\n
+ *   1) Including two unconnected circuits in a single netlist does not affect the
+ * calculated results compared to placing each circuit in its own netlist file. However, it
+ * does affect how the results are represented: the result of one circuit is expressed as a
+ * function that also includes known currents and voltages from the other (unconnected)
+ * circuit. Although these additional terms have a factor of zero, they are still shown in
+ * the output.\n
+ *   Conclusion: If there is no functional connection between circuits, it is preferable to
+ * place them in separate netlist files.\n
+ *   2) The feedback line of the second op-amp contains a voltage source (which could be
+ * the model of a diode in the true circuit). This leads to a delta in the output voltage.
+ * This is shown correctly in the result, which is: Uout2(s) = Uin2(s) + Udelta(s).\n
+ *   3) The shortcut of the inputs produced by Rin1=Rin2=0 doesn't affect the result
+ * calculation: linNet calculates with the symbols Rin1 and Rin2, no matter, which value
+ * they might have. Moreover, the demanded result depends neither on Rin1 nor on Rin2 - the
+ * resistors impact the input impedances but not the transfer functions - and so the
+ * shortcut would not even hinder Octave from doing the numeric calculations.
+ *   4) The numeric coupling of the resistor values is not a functional coupling of the
+ * circuits. It remain two unconnected circuits.
+ *
+ * Copyright (C) 2013-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ *
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the
+ * Free Software Foundation, either version 3 of the License, or (at your
+ * option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
 
-/* An input voltage follower with input impedance reduced to Rin1. */
+/* An input follower with input impedance reduced to Rin1. */
 U Uin1 K11 K01_gnd
 R Rin1 K11 K01_gnd Rin1=0
 OP OP1 K11 K21 K21
 DEF Uout1 K21 K01_gnd
 
-/* A second, unrelated, unconnected input voltage follower with input impedance reduced to
+/* A second, unrelated, unconnected input follower with input impedance reduced to
    Rin2, which is 3 times Rin1. Note that the constant voltage source in the feedback line
    makes the output voltage follow the input voltage with a constant offset. */
 U Uin2 K12 K02_gnd
