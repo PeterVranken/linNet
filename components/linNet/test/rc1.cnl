@@ -1,0 +1,53 @@
+U   U1  in      xxx
+
+R   R   in      gnd
+C   C   gnd     xxx
+
+/* Main result is the transfer function from input to output voltage. We reference the
+   output voltage by implicit name, U_ followed by the name of a node. */
+PLOT G U_gnd U1
+
+/* Caution, this file produces an assertion:
+Jun 12 16:18:54 2026 - 000010 ms - RESULT - Reading circuit file rc1.cnl successfully done
+Assertion failed: !success || !storeDet, file code/linNet/sol_solver.c, line 924
+
+The assertion came after renaming node out into gnd. We have an error in the PLOT
+statement, U_out is no longer defined after renaming, but this is not the root cause.
+(Modifying the PLOT statement into "PLOT G U_gnd U1" produces the same assertion.)
+
+Background of renaming was demonstrating how the choice of the ground node impacts the
+calculation result. In the original circuit, node xxx used to be gnd and gnd used to be
+out.
+
+Root cause seems to be sol_solver.c, getVectorOfReqDependents(), l. 106, which recognizes
+the problem of bad potential references, but doesn't report it. Idea is to first calculate
+everything else so that most of the user results will still be available. We need to filter
+only the extreme situation, when this strategy leads to an empty set of remaining
+calculations. (It's probably not possible to just remove the assertion and go on; the
+solution object doesn't have a determinante and subsequent errors may result - this to be
+checked.)
+
+Besides the assertion, this revealed another issue: The result depends on the gnd node but
+without expcilitly naming a node gnd, linNet makes the choice itself but doesn't warn about
+it. Actually, without specifyingthe ground node but still specifying ratios of node
+voltages as 
+results, these results are undefined: Numerator and denonminator have an undefined offset
+(the delta voltage between expected and actual ground node)
+and the ratio depends on that offset. Not the calculation is wrong but the user's
+expectations. We need to make clear that the user didn't fully specify his demands.
+
+The problem shouldn't occur with results, which depend only on fully defined user voltages.
+In all other cases, if there is at least one other result, linNet should emit a warning if
+no ground node is specified. However, it'll be difficult to categorize the results
+accordingly. The cheap way out would be a warning, whichis always emitted when it comes to
+automatic ground node selection. Probably, we already have an according message on DEBUG or
+INFO level.
+
+The message:
+INFO - Node gnd is considered a ground node. The voltage at this node is considered null 
+can be considered a part of the result. Is it sufficient o make this level RESULT? Wouldn't
+it important to bring this into the Octave files, too? (les_linearEquationSystem.c, l. 960)
+
+Once the assertion is fixed, we can make this test case a threefold one, with different
+ground nodes selected and comparing the results.
+*/

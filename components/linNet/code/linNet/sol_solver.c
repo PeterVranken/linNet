@@ -87,11 +87,11 @@ static unsigned int _noRefsToObjects = 0;
 
 
 /**
- * The set of dependents(i.e. the unknowns of the LES and the user defined voltages), which
- * are required to compute all user defined results is figured out. All unknowns of the
- * LES, which are not in the set don't need to be computed by the solver. The set considers
- * all user-defined results, which may directly refer to unknowns of the LES but also
- * indirectly by referencing user-defined voltages.
+ * The set of dependents (i.e., the unknowns of the LES and the user defined voltages),
+ * which are required to compute all user defined results is figured out. All unknowns of
+ * the LES, which are not in the set don't need to be computed by the solver. The set
+ * considers all user-defined results, which may directly refer to unknowns of the LES but
+ * also indirectly by referencing user-defined voltages.
  *   @return
  * The set is returned as an ordered vector of Boolean, where element \a i of the vector
  * relates to unknown \a i of the LES, if \a i is lower then the number \a n of unknowns.
@@ -109,7 +109,7 @@ static const boolean *getVectorOfReqDependents(const sol_solution_t * const pSol
     const pci_circuit_t * const pCircuitNetList = pTableOfVars->pCircuitNetList;
     
     /* The result of this function is a Boolean vector, one element for each computable
-       dependent, either a true unknown of the LES or a derived dependent, i.e. a
+       dependent, either a true unknown of the LES or a derived dependent, i.e., a
        user-defined voltage. */
     const unsigned int noUnknowns  = pTableOfVars->noUnknowns 
                      , noVoltagesDefs = pCircuitNetList->noVoltageDefs
@@ -189,6 +189,7 @@ static const boolean *getVectorOfReqDependents(const sol_solution_t * const pSol
                 {
                     /* Error feedback is not given here; this is done later in module frq,
                        when presenting the results. */
+// TODO If all user defined voltages are rejected then we can end up with the situation that no dependent at all is required and the calucation of the LES ends with an assertion. We can check here if this happens and emit an error. Or select a dummy dependent so that calculation can go on and an error message is emitted only later.
                 }
             } /* End of for(All variables referenced from result definition) */ 
             
@@ -765,7 +766,7 @@ boolean sol_createSolution( const sol_solution_t * * const ppSolution
     unsigned int noKnowns, noUnknowns, noConstants;
     les_getNoVariables(pLES, &noKnowns, &noUnknowns, &noConstants);
 
-    /* The number of knowns can easily be null if no constant source is in use. But there
+    /* The number of knowns can easily be zero if no constant source is in use. But there
        should always be at least one device, hence two nodes, hence one unknown. */
     assert(noUnknowns > 0);
 
@@ -784,7 +785,7 @@ boolean sol_createSolution( const sol_solution_t * * const ppSolution
     pSol->pIsDependentAvailableAry = getVectorOfReqDependents(pSol);
     
     /* The core solver can bring the LES only in the shape of an upper triangular matrix,
-       i.e. only the solution of a single unknown is entirely figured out. This unknown is
+       i.e., only the solution of a single unknown is entirely figured out. This unknown is
        the last one in the order of columns. The function here overcomes this limitation by
        running the core solver once per unknown. Prior to calling the core solver it
        reorders the unknowns so that each of them is found once as last one.
@@ -795,6 +796,7 @@ boolean sol_createSolution( const sol_solution_t * * const ppSolution
           , storeDet = true
           , isSignOfDetInv = true;
     unsigned int idxUnknown;
+// TODO Pathologic result definitions can require zero unknowns (e.g., only U_gnd wanted). This is not caught beforehand and we leave the loop without any calculation and without storing the determinant in the solution. An assertion fires.
     for(idxUnknown=0; success && idxUnknown<noUnknowns; ++idxUnknown)
     {
         if(!pSol->pIsDependentAvailableAry[idxUnknown])
@@ -824,7 +826,7 @@ boolean sol_createSolution( const sol_solution_t * * const ppSolution
            fails if the system determinant is null. */
         if(success)
         {
-            success = solverLES( pLES->A, /* m */ noUnknowns, /* n */ noKnowns + noUnknowns);
+            success = solverLES(pLES->A, /* m */ noUnknowns, /* n */ noKnowns + noUnknowns);
 
             /* Logging can be done even if the solver fails: We could recognize the linear
                dependent equations in the reported last state of the elimination. */
@@ -914,11 +916,10 @@ boolean sol_createSolution( const sol_solution_t * * const ppSolution
                the determinant of the first loop as common denominator, so need to do a
                sign inversion in every other cycle.
                  Putting both together we need to do the inversion in the first and then in
-               every second cyle. */
+               every second cycle. */
             if(!isSignOfDetInv)
                 coe_mulConst(pSol->numeratorAry[idxUnknownInSol][idxKnown], /* constant */ -1);
         }
-        
     } /* End for(All required unknowns of the LES) */
 
     assert(!success || !storeDet);
