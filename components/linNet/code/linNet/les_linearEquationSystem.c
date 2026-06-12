@@ -96,7 +96,7 @@ typedef struct networkNodeRef_t
     /** The list is linked by this pointer and ends with a NULL. */
     struct networkNodeRef_t *pNext;
 
-    /** The reference to the node (by index into the net list representing the circuit). */
+    /** The reference to the node (by index into the netlist representing the circuit). */
     unsigned int idxNode;
 
     /** A specific check of the device interconnection: No two op-amps must be connected to
@@ -143,7 +143,7 @@ typedef struct
     boolean hasControlledSources;
 
     /** The entries in this data structure refer to a parse result, that describes all
-        nodes and devices in the circuit. A copy (by reference) of this net list
+        nodes and devices in the circuit. A copy (by reference) of this netlist
         representing the circuit we refer to is part of this object. */
     const pci_circuit_t *pCircuitNetList;
 
@@ -328,7 +328,7 @@ static void logNetworkTopology(const network_t * const pNetwork)
  * returned in * \a ppNetwork.\n
  *   If the function returns false then * \a ppNetwork will contain NULL.
  *   @param pCircuitNetList
- * The net list as returned by the parser.
+ * The netlist as returned by the parser.
  *   @see void deleteNetwork(network_t * const)
  */
 
@@ -356,7 +356,7 @@ static boolean analyseNetworkTopology( network_t * * const ppNetwork
         pNetwork->nodeRefAry[u].isInUse = false;
 #endif
 
-    /* Make the net list representing the circuit, which the network_t members refer to,
+    /* Make the netlist representing the circuit, which the network_t members refer to,
        accessible from the network object. */
     pNetwork->pCircuitNetList = pci_cloneByConstReference(pCircuitNetList);
 
@@ -666,8 +666,8 @@ static boolean analyseNetworkTopology( network_t * * const ppNetwork
     } /* End for(All user-defined voltages to check against cross sub-graph definition) */
 
     /* Write a representation of the found understanding of the network into the log. The
-       messages are of verbosity level DEBUG, so it doesn't make sense to do this on level
-       WARN or higher. */
+       messages are of verbosity level DEBUG, so it doesn't make sense to call the function
+       on a lower verbosity level. */
     if(log_checkLogLevel(_log, log_debug))
         logNetworkTopology(pNetwork);
 
@@ -697,7 +697,7 @@ static void deleteNetwork(network_t * const pNetwork)
     if(pNetwork == NULL)
         return;
 
-    /* Delete the reference to the net list representing the circuit. */
+    /* Delete the reference to the netlist representing the circuit. */
     assert(pNetwork->pCircuitNetList != NULL);
     pci_deleteParseResult(pNetwork->pCircuitNetList);
 
@@ -733,11 +733,11 @@ static void deleteNetwork(network_t * const pNetwork)
  *   @return
  * \a true if a suitable ground node could be determined or \a false otherwise.
  *   @param pIdxGroundNode
- * The index of the ground node pointing into the array of nodes in the net list
+ * The index of the ground node pointing into the array of nodes in the netlist
  * representing the circuit is returned as * \a pIdxGroundNode.\n
  *   If no suitable ground node can be found then PCI_NULL_NODE is returned.
  *   @param pCircuitNetList
- * The net list as returned by the input file parser.
+ * The netlist as returned by the input file parser.
  *   @param pHeadOfNodeList
  * The list of nodes belonging to the sub-graph.
  */
@@ -889,7 +889,7 @@ static void createNameOfUnknown( char name[]
  * and filled with all knowns, unknowns and constants found in the network.
  *   @param pNetwork
  * The representation of the network as got from the network topology analysis. Contains
- * the net list representing the circuit and the list of sub-graphs that form the complete
+ * the netlist representing the circuit and the list of sub-graphs that form the complete
  * network.
  *   @remark
  * The table of variables is allocated dynamically. The data structure needs to be freed
@@ -937,7 +937,7 @@ static boolean determineReqVariables( tbv_tableOfVariables_t * * const ppTableOf
         }
     } /* End for(All devices) */
 
-    /* Now we can create the empty table of variables. The net list representing the
+    /* Now we can create the empty table of variables. The netlist representing the
        circuit, which the table is related to, is made accessible from the table object. */
     tbv_tableOfVariables_t * const pTabOfVars = tbv_createTableOfVariables( noKnowns
                                                                           , noUnknowns
@@ -969,7 +969,7 @@ static boolean determineReqVariables( tbv_tableOfVariables_t * * const ppTableOf
         {
             unsigned int idxNode = pNodeRef->idxNode;
 
-            /* The voltage of each non ground node is one unknown. */
+            /* The voltage of each non-ground node is one unknown. */
             if(idxNode == idxNodeGnd)
             {
                 pNodeRef = pNodeRef->pNext;
@@ -2072,7 +2072,7 @@ static void addSrcIByIConditions( coe_coefMatrix_t const A
  *   @param pTableOfVars
  * The table of all constants, knowns and unknows, which are used in the LES by reference.
  *   @param idxDev
- * The index of the device as defined in the circuit net list object found in the table *
+ * The index of the device as defined in the circuit netlist object found in the table *
  * \a pTableOfVars of symbols.
  */
 
@@ -2200,7 +2200,7 @@ void les_shutdownModule()
 
 /**
  * Create a linear equation system that describes the ideal behavior of the electric
- * circuit, which is decribed by a net list in the input file.\n
+ * circuit, which is decribed by a netlist in the input file.\n
  *   The created LES object needs to be deleted after usage.
  *   @return
  * The input can contain a lot of logical errors, which inhibit the creation of a LES.
@@ -2215,7 +2215,7 @@ void les_shutdownModule()
  * The returned object can be input to a symbolic solver.
  *   @param pCircuitNetList
  * The reference to the object that represents the parse result of the input file. It
- * mainly contains the net list of the electric circuit.
+ * mainly contains the netlist of the electric circuit.
  *   @see void les_deleteLES(les_linearEquationSystem_t *)
  */
 
@@ -2232,7 +2232,7 @@ boolean les_createLES( les_linearEquationSystem_t * * const ppLES
     pLES->doWarn = true;
     pLES->A = NULL;
 
-    /* Analyse the network topology expressed in the net list representing the circuit and
+    /* Analyse the network topology expressed in the netlist representing the circuit and
        transform it into a more useful data structure. */
     network_t *pNetwork = NULL;
     boolean success = analyseNetworkTopology(&pNetwork, pCircuitNetList);
@@ -2431,7 +2431,7 @@ boolean les_setupLES( les_linearEquationSystem_t * const pLES
 
     /* Select the user demanded unknown for the solution.
          The order of unknowns has been determined at object creation time. This order
-       depends on the input net list and the network analysis algorithm and has no specific
+       depends on the input netlist and the network analysis algorithm and has no specific
        meaning in terms of user desires. However, by simply exchanging two columns of the
        (later) LES on user demand, we can achieve that any unknown is represented in column
        m of the LES and this is the column, which the solver returns the fully figured out

@@ -2127,9 +2127,9 @@ static boolean parseResultDefintion(pci_circuit_t * const pParseResult, boolean 
     }
             
     /* A series of identifiers follows up. For Bode plots we want to see exactely two, the
-       dependent followed by the independent quantity. A full result only has dependet
-       quantities, but number of those. What we parse are meaningless identifiers, but we
-       store them context dependent. */
+       dependent followed by the independent quantity. A full result only has dependent
+       quantities, but any number of those. What we parse are meaningless identifiers, but
+       we store them context dependent. */
     if(isFullResult)
     {
         if(!_parseError)
