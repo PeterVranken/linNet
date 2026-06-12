@@ -1,0 +1,28 @@
+/**
+ * @file probeI.cnl
+ *   Test case for linNet.\n
+ * A current source and a current probe form a closed circuit.\n
+ *   The current probe probeI creates a new calculated current. This current is not used
+ * anywhere (e.g., to control a voltage or current source), but it becomes element of the
+ * calculation result. (By default, only voltages are in an unspecified result.)\n
+ *   This simple circuit may be useful to better understand the way how the orientation of
+ * currents in sources and probes is defined.
+ *
+ * Copyright (C) 2014-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ *
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the
+ * Free Software Foundation, either version 3 of the License, or (at your
+ * option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+PI probeI inP gnd
+I I0 inP gnd

@@ -2,3 +2,6 @@
 # of these folders are identical copies of the template folder with Octave
 # resources.
 **/private/
+*.aux
+*.dvi
+*.html

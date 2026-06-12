@@ -1,0 +1,30 @@
+% See https://holatex.app/playground.html# for an online viewer.
+
+\documentclass[tikz]{standalone} % Standalone: Only graphics export.
+\usepackage[european,siunitx]{circuitikz}
+\usetikzlibrary{arrows.meta}
+\usepackage{listings}
+\lstset{basicstyle=\footnotesize\ttfamily}
+\begin{document}
+
+  \tikzset{ameter/.style={rmeterwa, t=A}}
+  \begin{circuitikz}
+
+    \tikzset{>=Triangle} % Define tip of arrows drawn with [->]
+    \ctikzset{voltage=straight}
+
+    \def\sizeX{2}
+    \def\sizeY{3}
+    
+    \draw (0,0) node[ground]{} coordinate(gnd)
+      to[dcisource,l=$I_0$,invert,*-] ++(0,\sizeY) node[above]{$inP$} coordinate(inP)
+      -- ++(\sizeX,0) to[ameter, i=$I_{probeI}$] ++(0,-\sizeY) -- (gnd);
+
+%    % The same drawing without showing the nodes in the schematics.
+%    \draw (0,0) coordinate(gnd)
+%      to[dcisource,l=$I_0$,invert] ++(0,\sizeY) coordinate(inP)
+%      -- ++(\sizeX,0) to[ameter, i=$I_{probeI}$] ++(0,-\sizeY) -- (gnd);
+
+  \end{circuitikz}
+
+\end{document}

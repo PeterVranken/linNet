@@ -2,7 +2,7 @@ function [tf_allDependents deviceConstants wBode tiStep] = allDependents(deviceC
 
 %   [tf deviceConstants wBode tiStep] = allDependents(deviceConstants)
 %                   The transfer function allDependents of electric linear network
-%                   probeI.cnl
+%                   C:\home\vranken\projects\linNetAtGitHub\linNet\components\linNet\test\testCases\srcI\srcI.cnl
 %
 %   Input argument(s):
 %       deviceConstants
@@ -65,51 +65,54 @@ end
 error(nargchk(0, 1, nargin))
 if nargin == 1
     % The values of the device constants are taken from function argument deviceConstants.
+    R	= deviceConstants.R;
 else
     % The default values of the device constants.
+    R	= 100;
 end
 error(nargchk(0, 4, nargout))
 if nargout >= 2
     % The values of the device constants are assigned to function result deviceConstants.
     deviceConstants  	= struct;
+    deviceConstants.R	= R;
 end
 
 % Result AllDependents in the frequency domain:
 
-% The solution for unknown U_inP:
-%   U_inP(s) = N_U_inP_I0(s)/D_U_inP_I0(s) * I0(s), with
-%     N_U_inP_I0(s) = 0
-%     D_U_inP_I0(s) = 1
-D_U_inP_I0 = [ 1	 % s^0
-             ].';
-N_U_inP_I0 = [ 0	 % s^0
-             ].';
+% The solution for unknown U_K1:
+%   U_K1(s) = N_U_K1_I0(s)/D_U_K1_I0(s) * I0(s), with
+%     N_U_K1_I0(s) = -R
+%     D_U_K1_I0(s) = 1
+D_U_K1_I0 = [ 1	 % s^0
+            ].';
+N_U_K1_I0 = [ -R	 % s^0
+            ].';
 
-% The solution for unknown I_probeI:
-%   I_probeI(s) = N_I_probeI_I0(s)/D_I_probeI_I0(s) * I0(s), with
-%     N_I_probeI_I0(s) = -1
-%     D_I_probeI_I0(s) = 1
-D_I_probeI_I0 = [ 1	 % s^0
-                ].';
-N_I_probeI_I0 = -[ 1	 % s^0
-                 ].';
+% The solution for unknown Uout:
+%   Uout(s) = N_Uout_I0(s)/D_Uout_I0(s) * I0(s), with
+%     N_Uout_I0(s) = -R
+%     D_Uout_I0(s) = 1
+D_Uout_I0 = [ 1	 % s^0
+            ].';
+N_Uout_I0 = [ -R	 % s^0
+            ].';
 
 % Create an Octave LTI system object from the data above. First shape a descriptor object.
 systemDesc_allDependents.name = 'allDependents';
 systemDesc_allDependents.numeratorAry = ...
-    { N_U_inP_I0
-      N_I_probeI_I0
+    { N_U_K1_I0
+      N_Uout_I0
     };
 systemDesc_allDependents.denominatorAry = ...
-    { D_U_inP_I0
-      D_I_probeI_I0
+    { D_U_K1_I0
+      D_Uout_I0
     };
 systemDesc_allDependents.inputNameAry = ...
     { 'I0'
     };
 systemDesc_allDependents.outputNameAry = ...
-    { 'U_inP'
-      'I_probeI'
+    { 'U_K1'
+      'Uout'
     };
 systemDesc_allDependents.plotInfo = ...
     struct( 'isLogX', {} ...

@@ -23,11 +23,10 @@ Further observations with this netlist:
 . Including two unconnected circuits in a single netlist does not affect
 the calculated results compared to placing each circuit in its own netlist
 file. However, it does affect how the
-link:unconnectedCircuits/Ambiguous.m[results] are represented: the result
-of one circuit is expressed as a function that also includes known
-currents and voltages from the other (unconnected) circuit. Although these
-additional terms have a factor of zero, they are still shown in the
-output.
+link:unconnectedCircuits.log[results] are represented: the result of one
+circuit is expressed as a function that also includes known currents and
+voltages from the other (unconnected) circuit. Although these additional
+terms have a factor of zero, they are still shown in the output.
   Conclusion: If there is no functional connection between circuits, it is
 preferable to place them in separate netlist files.
 . The feedback line of the second op-amp contains a voltage source (which

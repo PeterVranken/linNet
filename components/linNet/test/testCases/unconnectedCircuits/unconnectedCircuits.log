@@ -1,0 +1,22 @@
+Jun 10 22:17:57 2026 - 000003 ms - RESULT - 
+-----------------------------------------------------------------------------
+ linNet - The Software for symbolic Analysis of linear Electronic Circuits
+ Copyright (C) 2014-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ This is free software; see the source for copying conditions. There is NO
+ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+-----------------------------------------------------------------------------
+Jun 10 22:17:57 2026 - 000006 ms -   WARN - Line 52: Bad value 0 used in assignment
+Jun 10 22:17:57 2026 - 000006 ms - RESULT - Reading circuit file C:\home\vranken\projects\linNetAtGitHub\linNet\components\linNet\test\testCases\unconnectedCircuits\unconnectedCircuits.cnl successfully done
+Jun 10 22:17:57 2026 - 000006 ms -   WARN - Input file specifies 2 unconnected graphs
+Jun 10 22:17:57 2026 - 000006 ms - RESULT - User-defined result Ambiguous:
+The solution for unknown Uout2:
+  Uout2(s) = N_Uout2_Uin1(s)/D_Uout2_Uin1(s) * Uin1(s)
+             + N_Uout2_Uin2(s)/D_Uout2_Uin2(s) * Uin2(s)
+             + N_Uout2_Udelta(s)/D_Uout2_Udelta(s) * Udelta(s), with
+    N_Uout2_Uin1(s) = 0
+    D_Uout2_Uin1(s) = 1
+    N_Uout2_Uin2(s) = 1
+    D_Uout2_Uin2(s) = 1
+    N_Uout2_Udelta(s) = 1
+    D_Uout2_Udelta(s) = 1
+Jun 10 22:17:57 2026 - 000182 ms -   WARN - The device constant Rin1 has the suspicious value null. Please check your circuit file

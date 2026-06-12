@@ -1,0 +1,15 @@
+This folder contains linNet test case `srcI`:
+
+[[figSchematics]]
+.Schematics
+image::SrcI.svg[Schematics, width="30%", pdfwidth="30%", align="center"]
+
+Introduction of the current source: A current source and a resistive load
+form a closed circuit.
+
+Using statement `DEF`, the link:srcI.log[calculation result^] is extended
+by the computation of the voltage U~out~ across the load resistor -- due
+to the choice of the ground node, this voltage is identical to the
+potential of node K~1~.
+
+See link:srcI.cnl[netlist file^] for more details of the circuits.

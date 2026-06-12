@@ -1,0 +1,17 @@
+This folder contains linNet test case `probeI`:
+
+[[figSchematics]]
+.Schematics
+image::.\ProbeI.svg[Schematics, width="30%", pdfwidth="30%", align="center"]
+
+A current source and a current probe form a closed circuit.
+
+The current probe probeI creates a new calculated current. This current is
+not used anywhere (e.g., to control a voltage or current source), but it
+becomes element of the link:probeI.log[calculation result^]. (By default,
+only voltages are in an unspecified result.)
+
+This simple circuit may be useful to better understand the way how the
+orientation of currents in sources and probes is defined.
+
+See link:probeI.cnl[netlist file^] for more details of the circuits.
