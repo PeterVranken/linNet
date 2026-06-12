@@ -2,7 +2,7 @@ function [tf_allDependents deviceConstants wBode tiStep] = allDependents(deviceC
 
 %   [tf deviceConstants wBode tiStep] = allDependents(deviceConstants)
 %                   The transfer function allDependents of electric linear network
-%                   srcIByI.cnl
+%                   C:\home\vranken\projects\linNetAtGitHub\linNet\components\linNet\test\testCases\srcIByI\srcIByI.cnl
 %
 %   Input argument(s):
 %       deviceConstants
@@ -65,18 +65,18 @@ end
 error(nargchk(0, 1, nargin))
 if nargin == 1
     % The values of the device constants are taken from function argument deviceConstants.
-    Iout	= deviceConstants.Iout;
+    k	= deviceConstants.k;
     R	= deviceConstants.R;
 else
     % The default values of the device constants.
-    Iout	= 250;
+    k	= 250;
     R	= 100;
 end
 error(nargchk(0, 4, nargout))
 if nargout >= 2
     % The values of the device constants are assigned to function result deviceConstants.
     deviceConstants  	= struct;
-    deviceConstants.Iout	= Iout;
+    deviceConstants.k	= k;
     deviceConstants.R	= R;
 end
 
@@ -84,11 +84,11 @@ end
 
 % The solution for unknown U_out:
 %   U_out(s) = N_U_out_I0(s)/D_U_out_I0(s) * I0(s), with
-%     N_U_out_I0(s) = Iout*R
+%     N_U_out_I0(s) = k*R
 %     D_U_out_I0(s) = 1
 D_U_out_I0 = [ 1	 % s^0
              ].';
-N_U_out_I0 = [ Iout*R	 % s^0
+N_U_out_I0 = [ k*R	 % s^0
              ].';
 
 % The solution for unknown U_inP:

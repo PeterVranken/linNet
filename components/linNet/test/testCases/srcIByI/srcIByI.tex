@@ -1,0 +1,32 @@
+\documentclass[tikz]{standalone} % Standalone: Only graphics export.
+\usepackage[european,siunitx]{circuitikz}
+\usetikzlibrary{arrows.meta}
+\usepackage{listings}
+\lstset{basicstyle=\footnotesize\ttfamily}
+\begin{document}
+
+  \newcommand{\eq}{=}
+  \tikzset{ameter/.style={rmeterwa, t=A}}
+  \begin{circuitikz}
+
+    \tikzset{>=Triangle} % Define tip of arrows drawn with [->]
+    \ctikzset{voltage=straight}
+
+    \def\sizeX{2}
+    \def\sizeY{3}
+    \def\distX{6.5}
+    
+    \draw (0,0) node[ground]{} coordinate(gnd)
+      to[dcisource,l=$I_0$,invert,*-] ++(0,\sizeY) node[above]{$inP$} coordinate(inP)
+      -- ++(\sizeX,0) to[ameter, i=$I_{probeI}$] ++(0,-\sizeY) -- (gnd);
+      
+    \draw (\distX,0)
+      to[dcisource,l=$I(I_0)\eq k*I_{probeI}$,invert,*-] ++(0,\sizeY)
+      node[above]{$out$} coordinate(out)
+      -- ++(\sizeX,0) to[R,l_=$R$,v^=$U_{out}$] ++(0,-\sizeY) to[short,-*]
+      ($(gnd)+(\sizeX,0)$);
+
+
+  \end{circuitikz}
+
+\end{document}

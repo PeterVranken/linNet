@@ -1,0 +1,17 @@
+This folder contains linNet test case `srcIByI`:
+
+[[figSchematics]]
+.Schematics
+image::SrcIByI.svg[Schematics, width="60%", pdfwidth="60%", align="center"]
+
+Introduction of the current controlled current source:
+
+A current source and a current probe form a closed circuit.
+
+A second current source, which is controlled by the current sensed in
+the probe, and a resistive load form a second closed circuit. Both
+circuits share the same ground.
+
+link:srcIByI.log[Calculation result^]
+
+See link:srcIByI.cnl[netlist file^] for more details of the circuits.
