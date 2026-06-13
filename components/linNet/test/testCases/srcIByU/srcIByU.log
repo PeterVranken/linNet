@@ -1,0 +1,18 @@
+Jun 13 17:40:36 2026 - 000003 ms - RESULT - 
+-----------------------------------------------------------------------------
+ linNet - The Software for symbolic Analysis of linear Electronic Circuits
+ Copyright (C) 2014-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ This is free software; see the source for copying conditions. There is NO
+ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+-----------------------------------------------------------------------------
+Jun 13 17:40:36 2026 - 000004 ms - RESULT - Reading circuit file C:\home\vranken\projects\linNetAtGitHub\linNet\components\linNet\test\testCases\srcIByU\srcIByU.cnl successfully done
+Jun 13 17:40:36 2026 - 000004 ms - RESULT - User-defined result Z (Bode plot):
+The dependency of Uin on I_Uin:
+  Uin(s) = N_Uin_I_Uin(s)/D_Uin_I_Uin(s) * I_Uin(s), with
+    N_Uin_I_Uin(s) = 3*R1
+    D_Uin_I_Uin(s) = 1
+Jun 13 17:40:36 2026 - 000007 ms - RESULT - User-defined result G:
+The solution for unknown U_Kout:
+  U_Kout(s) = N_U_Kout_Uin(s)/D_U_Kout_Uin(s) * Uin(s), with
+    N_U_Kout_Uin(s) = -k*Rout
+    D_U_Kout_Uin(s) = 3

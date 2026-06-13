@@ -1,0 +1,38 @@
+/**
+ * @file srcIByU.cnl
+ *   Test case for linNet.\n
+ * Introduction of the voltage controlled current source:\n
+ *   The input circuit is a simple voltage divider. The divided input
+ * voltage is the control voltage of the current source in the second
+ * circuit.\n
+ *   A voltage controlled current source and a resistive load form a
+ * second circuit. Both circuits share the same ground.\n
+ *   The expected result is: U_Kout = -I0*Rout, I0=k*R2/(R1+R2+R3)*Uin,
+ * U_Kout=-k*(R2*Rout)/(R1+r2+r3)*Uin. Note k has the unit 1/Ohm.
+ *
+ * Copyright (C) 2014-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ *
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the
+ * Free Software Foundation, either version 3 of the License, or (at your
+ * option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+U Uin K1 gnd
+R R1 K1 K2
+R R2 K2 K3 R2=R1
+R R3 K3 gnd R3=R2
+
+I(U) k Kout gnd K2 K3
+R Rout Kout gnd
+
+PLOT Z Uin I_Uin
+RES G U_Kout

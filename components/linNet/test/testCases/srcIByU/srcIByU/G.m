@@ -1,8 +1,8 @@
-function [tf_Z deviceConstants wBode tiStep] = Z(deviceConstants)
+function [tf_G deviceConstants wBode tiStep] = G(deviceConstants)
 
-%   [tf deviceConstants wBode tiStep] = Z(deviceConstants)
-%                   The transfer function Z of electric linear network
-%                   srcIByU.cnl
+%   [tf deviceConstants wBode tiStep] = G(deviceConstants)
+%                   The transfer function G of electric linear network
+%                   C:\home\vranken\projects\linNetAtGitHub\linNet\components\linNet\test\testCases\srcIByU\srcIByU.cnl
 %
 %   Input argument(s):
 %       deviceConstants
@@ -28,14 +28,14 @@ function [tf_Z deviceConstants wBode tiStep] = Z(deviceConstants)
 %                   information was specified
 %
 %   Example(s):
-%       Z
+%       G
 %                   Plot the transfer or step function as defined in the
 %                   circuit file
-%       [tf_Z p] = Z
+%       [tf_G p] = G
 %                   Get a TF object and the default set of device constants
 %       p.R1 = 2*p.R2
 %                   (Modify the device constants in p)
-%       step(Z(p))
+%       step(G(p))
 %                   Plot the step response of the system with modified device
 %                   constants
 %
@@ -83,32 +83,32 @@ if nargout >= 2
     deviceConstants.Rout	= Rout;
 end
 
-% User-defined result Z (Bode plot):
+% User-defined result G:
 
-% The dependency of Uin on I_Uin:
-%   Uin(s) = N_Uin_I_Uin(s)/D_Uin_I_Uin(s) * I_Uin(s), with
-%     N_Uin_I_Uin(s) = 3*R1
-%     D_Uin_I_Uin(s) = 1
-D_Uin_I_Uin = [ 1	 % s^0
-              ].';
-N_Uin_I_Uin = [ 3*R1	 % s^0
-              ].';
+% The solution for unknown U_Kout:
+%   U_Kout(s) = N_U_Kout_Uin(s)/D_U_Kout_Uin(s) * Uin(s), with
+%     N_U_Kout_Uin(s) = -k*Rout
+%     D_U_Kout_Uin(s) = 3
+D_U_Kout_Uin = [ 3	 % s^0
+               ].';
+N_U_Kout_Uin = [ -k*Rout	 % s^0
+               ].';
 
 % Create an Octave LTI system object from the data above. First shape a descriptor object.
-systemDesc_Z.name = 'Z';
-systemDesc_Z.numeratorAry = ...
-    { N_Uin_I_Uin
+systemDesc_G.name = 'G';
+systemDesc_G.numeratorAry = ...
+    { N_U_Kout_Uin
     };
-systemDesc_Z.denominatorAry = ...
-    { D_Uin_I_Uin
+systemDesc_G.denominatorAry = ...
+    { D_U_Kout_Uin
     };
-systemDesc_Z.inputNameAry = ...
-    { 'I_Uin'
-    };
-systemDesc_Z.outputNameAry = ...
+systemDesc_G.inputNameAry = ...
     { 'Uin'
     };
-systemDesc_Z.plotInfo = ...
+systemDesc_G.outputNameAry = ...
+    { 'U_Kout'
+    };
+systemDesc_G.plotInfo = ...
     struct( 'isLogX', {} ...
           , 'noPoints', {} ...
           , 'freqMin', {} ...
@@ -116,25 +116,25 @@ systemDesc_Z.plotInfo = ...
           );
 
 % Create the Octave LTI system object from the descriptor.
-tf_Z = createLtiSystem(systemDesc_Z);
+tf_G = createLtiSystem(systemDesc_G);
 
 % Compute a suitable vector of frequency and time points.
-wBode  = getFrequencyVector(systemDesc_Z);
-tiStep = getSampleTimeVector(systemDesc_Z);
+wBode  = getFrequencyVector(systemDesc_G);
+tiStep = getSampleTimeVector(systemDesc_G);
 
 if nargout == 0
-    % Plot the transfer function of Z.
+    % Plot the step response of G.
     figure
-    bode(tf_Z, wBode)
-    disp(['This function can create the LTI system object tf_Z for you; please, type' char(10) ...
-          'help Z for more.' char(10) ...
+    step(tf_G, tiStep)
+    disp(['This function can create the LTI system object tf_G for you; please, type' char(10) ...
+          'help G for more.' char(10) ...
           '  You can use this object with functions like bode to plot the transfer function' char(10) ...
           'or step and impulse to plot the step or impulse response time functions or lsim' char(10) ...
           'to compute or plot the system response to arbitrary input signals. A stability' char(10) ...
           'analysis can be done using function nyquist. Please refer to the online help' char(10) ...
           'for these commands' char(10)] ...
         );
-    clear tf_Z tiStep wBode
+    clear tf_G tiStep wBode
 end
 
-end % of function Z
+end % of function G
