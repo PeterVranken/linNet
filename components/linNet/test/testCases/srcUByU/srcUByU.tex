@@ -1,0 +1,52 @@
+\documentclass[tikz]{standalone} % Standalone: Only graphics export.
+\usepackage[european,siunitx]{circuitikz}
+\usetikzlibrary{arrows.meta}
+\usepackage{listings}
+\lstset{basicstyle=\footnotesize\ttfamily}
+\begin{document}
+
+  \newcommand{\eq}{=}
+  \tikzset{ameter/.style={rmeterwa, t=A}}
+  \begin{circuitikz}
+
+    \tikzset{>=Triangle} % Define tip of arrows drawn with [->]
+    \ctikzset{voltage=straight}
+
+    \def\Lr{2.5}
+    \def\distY{{2*\Lr}}
+    \def\distX{3.5}
+    \def\deltaUio{0.8}
+    \def\gapUin{0.3}
+
+    \draw (0,0) coordinate(gnd) %node[ground, label=below left:{$gnd$}]{}
+      to[short,o-] ++(1.25,0) 
+      to[R,l=$R_{in}$] ++(0,\Lr) 
+      to[short,-o] (0,\Lr) coordinate(K1) node[above]{$K_1$};
+      
+    \draw (gnd) -- ++(0,-0.4) node[ground,label=left:{$gnd$}]{};
+    
+    % Voltage arrow for input voltage.
+    \draw[->] ($(K1)+(0,-\gapUin)$) -- node[midway,left]{$U_{in}$}
+      ($(gnd)+(0,\gapUin)$);
+
+    \draw (\distX,\distY) node[above]{$K_+$} 
+      to[V,v_=$U(U)\eq kU_{in}$] ++(0,-\Lr) node[left]{$K_-$}
+      to[R,l=$R_{gnd}$, -*] ++(0,-\Lr)
+      coordinate(gnd2) to[short,-*] ++(2,0) coordinate(BottomRout)
+      to[R,l=$R_{out}$,-*] ++(0,{2*\Lr}) coordinate(TopRout)
+      -- (\distX,\distY);
+
+    \draw (gnd2) -- ++(0,-0.4) node[ground,label=left:{$gnd_2$}]{};
+
+    % Connectors for output voltage U2.
+    \draw ($(TopRout)+(\deltaUio,0)$) to[short,o-] (TopRout);
+    \draw ($(BottomRout)+(\deltaUio,0)$) to[short,o-] (BottomRout);
+
+    % Voltage arrow for output voltage.
+    \draw[->] ($(TopRout)+(\deltaUio,-\gapUin)$) 
+      -- node[midway,right]{$U_2$}
+      ($(BottomRout)+(\deltaUio,\gapUin)$);
+
+  \end{circuitikz}
+
+\end{document}

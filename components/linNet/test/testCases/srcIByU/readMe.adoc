@@ -15,8 +15,8 @@ second circuit. Both circuits share the same ground.
 
 The expected result is:
 
-U~Kout~ = -I~0~\*R~out~, I~0~=k*R~2~/(R~1~+R~2~+R~3~) U~in~,
-U~Kout~=-k*(R~2~*R~out~)/(R~1~+R~2~+R~3~)*U~in~. Note k has the unit 1/Ohm.
+U~Kout~ = -I~0~\*R~out~, I~0~=k*R~2~/(R~1~+R~2~+R~3~)*U~in~,
+U~Kout~=-k*(R~2~*R~out~)/(R~1~+R~2~+R~3~)*U~in~. Note, k has the unit 1/Ohm.
 
 Please compare with the link:srcIByU.log[calculated result^]: The netlist
 specifies the ratios of the values of the different resistors. This leads

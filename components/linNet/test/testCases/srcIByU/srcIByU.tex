@@ -19,10 +19,10 @@
     \def\gapUin{0.3}
 
     \draw (0,0) coordinate(BottomUin)
-       to[short,o-*] ++({2*\Lr},0) coordinate(BottomR3)
-       to[R,l=$R_3$] ++(0,\sizeY) node[above]{$K_3$}
-       to[R,l_=$R_2$,v^<=$U_{K_2K_3}$] ++(-\Lr,0) node[above]{$K_2$}
-       to[R,l_=$R_1$,-o] ++(-\Lr,0) node[above]{$K_1$} coordinate(K1);
+      to[short,o-*] ++({2*\Lr},0) coordinate(BottomR3)
+      to[R,l=$R_3$] ++(0,\sizeY) node[above]{$K_3$}
+      to[R,l_=$R_2$,v^<=$U_{K_2K_3}$] ++(-\Lr,0) node[above]{$K_2$}
+      to[R,l_=$R_1$,-o] ++(-\Lr,0) node[above]{$K_1$} coordinate(K1);
 
     \draw (\distX,0) node[ground]{} coordinate(gnd)
       to[dcisource,l=$I(U)\eq k*U_{K_2K_3}$,invert,*-] ++(0,\sizeY)

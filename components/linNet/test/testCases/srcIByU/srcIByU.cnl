@@ -8,7 +8,7 @@
  *   A voltage controlled current source and a resistive load form a
  * second circuit. Both circuits share the same ground.\n
  *   The expected result is: U_Kout = -I0*Rout, I0=k*R2/(R1+R2+R3)*Uin,
- * U_Kout=-k*(R2*Rout)/(R1+r2+r3)*Uin. Note k has the unit 1/Ohm.
+ * U_Kout=-k*(R2*Rout)/(R1+r2+r3)*Uin. Note, k has the unit 1/Ohm.
  *
  * Copyright (C) 2014-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
  *

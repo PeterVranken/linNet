@@ -1,0 +1,41 @@
+/**
+ * @file srcUByU.cnl
+ *   Test case for linNet.\n
+ * Introduction of the voltage controlled voltage source:\n
+ *   The input voltage in the first circuit is at the same time the
+ * control voltage of the voltage source in the second circuit. The second
+ * source drives a voltage divider. The divided voltage is defined to
+ * become the system output voltage U2.\n
+ *   The two circuits form unconnected sub-networks. This requires the
+ * definition of a ground node in each circuit; otherwise linNet would
+ * autonomously select an arbitrary node as ground and all voltages, which
+ * are not user-defined (and which are thus node potentials) were no longer
+ * transparently defined.\n
+ *   The expected result is: U2 = k*Uin*Rout/(Rgnd+Rout).
+ *
+ * Copyright (C) 2014-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ *
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the
+ * Free Software Foundation, either version 3 of the License, or (at your
+ * option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+U Uin K1 gnd
+R Rin K1 gnd
+DEF U2 Kplus gnd2
+
+U(U) k Kplus Kminus K1 gnd
+R Rgnd Kminus gnd2
+R Rout Kplus gnd2
+
+/* Reduce the reported calculation result to the calculation of U2. */
+RES G U2
