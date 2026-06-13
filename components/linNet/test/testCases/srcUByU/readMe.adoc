@@ -9,7 +9,7 @@ Introduction of the voltage controlled voltage source:
 The input voltage in the first circuit is at the same time the
 control voltage of the voltage source in the second circuit. The second
 source drives a voltage divider. The divided voltage is defined to
-become the system output voltage U2.
+become the system output voltage U~2~.
 
 The two circuits form unconnected sub-networks. This requires the
 definition of a ground node in each circuit; otherwise linNet would
