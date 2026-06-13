@@ -1,0 +1,77 @@
+\documentclass[tikz]{standalone} % Standalone: Only graphics export.
+\usepackage[european,siunitx]{circuitikz}
+\usetikzlibrary{arrows.meta}
+\usepackage{listings}
+\lstset{basicstyle=\footnotesize\ttfamily}
+\begin{document}
+
+  \newcommand{\eq}{=}
+  \tikzset{ameter/.style={rmeterwa, t=A}}
+  \begin{circuitikz}
+
+    \tikzset{>=Triangle} % Define tip of arrows drawn with [->]
+    \ctikzset{voltage=straight}
+
+
+    \def\Lr{2.5}
+    \def\sizeX{2}
+    \def\distX{6.5}
+    \def\deltaUio{0}
+    \def\gapUin{0.3}
+    
+    \draw (0,0) coordinate(gnd0)
+      to[dcisource,l=$I_0$,*-] ++(0,{2*\Lr}) node[above]{$in$} coordinate(in)
+      -- ++(\sizeX,0) 
+      to[R,l=$R_{load}$] ++(0,-\Lr)
+      to[ameter, i=$I_{R_{load}}$] ++(0,-\Lr) -- (gnd0);
+
+    \draw (0,0)
+      -- ++(0,-0.4) node[ground,label=left:{$gnd_0$}]{};
+    
+    \draw (\distX,0) coordinate(gnd1)
+      to[V,v<=$U(U)\eq kI_{R_{load}}$] ++(0,\Lr)
+      %to[dcisource,l=$I(I_0)\eq k*I_{R_{load}}$,invert,*-] ++(0,\Lr)
+      node[above]{$U_+$} coordinate(Uplus)
+      to[R,l=$R_{out}$] ++(\Lr,0) coordinate(RightRout);
+
+    \draw (gnd1) -- ++(0,-0.4) node[ground,label=left:{$gnd_1$}]{};
+    
+    % Connectors for output voltage U_out.
+    \draw ($(RightRout)+(\deltaUio,0)$) node[above]{$out$}
+      to[short,o-] (RightRout);
+    \draw (gnd1) to[short,*-o] ++($(\Lr,0)+(\deltaUio,0)$) coordinate(BottomUout);
+
+    % Voltage arrow for output voltage.
+    \draw[->] ($(RightRout)+(\deltaUio,-\gapUin)$)
+      -- node[midway,right]{$U_{out}$}
+      ($(BottomUout)+(0,\gapUin)$);
+
+
+%      -- ++(\sizeX,0) to[R,l_=$R$,v^=$U_{out}$] ++(0,-\Lr) to[short,-*]
+%      ($(gnd0)+(\sizeX,0)$);
+
+%    \def\distY{{2*\Lr}}
+%    \def\distX{3.5}
+%
+%    \draw (0,0) %node[ground, label=below left:{$gnd$}]{}
+%      to[short,o-] ++(1.25,0) 
+%      to[R,l=$R_{in}$] ++(0,\Lr) 
+%      to[short,-o] (0,\Lr) coordinate(K1) node[above]{$K_1$};
+%      
+%    % Voltage arrow for input voltage.
+%    \draw[->] ($(K1)+(0,-\gapUin)$) -- node[midway,left]{$U_{in}$}
+%      ($(gnd)+(0,\gapUin)$);
+%
+%    \draw (\distX,\distY) node[above]{$K_+$} 
+%      to[V,v_=$U(U)\eq kU_{in}$] ++(0,-\Lr) node[left]{$K_-$}
+%      to[R,l=$R_{gnd}$, -*] ++(0,-\Lr)
+%      coordinate(gnd2) to[short,-*] ++(2,0) coordinate(BottomRout)
+%      to[R,l=$R_{out}$,-*] ++(0,{2*\Lr}) coordinate(TopRout)
+%      -- (\distX,\distY);
+%
+%    \draw (gnd2) -- ++(0,-0.4) node[ground,label=left:{$gnd_2$}]{};
+%
+
+  \end{circuitikz}
+
+\end{document}

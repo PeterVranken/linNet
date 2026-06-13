@@ -2,7 +2,7 @@ function [tf_allDependents deviceConstants wBode tiStep] = allDependents(deviceC
 
 %   [tf deviceConstants wBode tiStep] = allDependents(deviceConstants)
 %                   The transfer function allDependents of electric linear network
-%                   srcUByI.cnl
+%                   C:\home\vranken\projects\linNetAtGitHub\linNet\components\linNet\test\testCases\srcUByI\srcUByI.cnl
 %
 %   Input argument(s):
 %       deviceConstants
@@ -66,45 +66,69 @@ error(nargchk(0, 1, nargin))
 if nargin == 1
     % The values of the device constants are taken from function argument deviceConstants.
     k	= deviceConstants.k;
+    Rload	= deviceConstants.Rload;
+    Rout	= deviceConstants.Rout;
 else
     % The default values of the device constants.
     k	= 1;
+    Rload	= 100;
+    Rout	= 100;
 end
 error(nargchk(0, 4, nargout))
 if nargout >= 2
     % The values of the device constants are assigned to function result deviceConstants.
     deviceConstants  	= struct;
     deviceConstants.k	= k;
+    deviceConstants.Rload	= Rload;
+    deviceConstants.Rout	= Rout;
 end
 
 % Result AllDependents in the frequency domain:
 
 % The solution for unknown U_in:
 %   U_in(s) = N_U_in_I0(s)/D_U_in_I0(s) * I0(s), with
-%     N_U_in_I0(s) = 0
+%     N_U_in_I0(s) = Rload
 %     D_U_in_I0(s) = 1
 D_U_in_I0 = [ 1	 % s^0
             ].';
-N_U_in_I0 = [ 0	 % s^0
+N_U_in_I0 = [ Rload	 % s^0
             ].';
+
+% The solution for unknown U_K00:
+%   U_K00(s) = N_U_K00_I0(s)/D_U_K00_I0(s) * I0(s), with
+%     N_U_K00_I0(s) = 0
+%     D_U_K00_I0(s) = 1
+D_U_K00_I0 = [ 1	 % s^0
+             ].';
+N_U_K00_I0 = [ 0	 % s^0
+             ].';
+
+% The solution for unknown U_Uplus:
+%   U_Uplus(s) = N_U_Uplus_I0(s)/D_U_Uplus_I0(s) * I0(s), with
+%     N_U_Uplus_I0(s) = k
+%     D_U_Uplus_I0(s) = 1
+D_U_Uplus_I0 = [ 1	 % s^0
+               ].';
+N_U_Uplus_I0 = [ k	 % s^0
+               ].';
 
 % The solution for unknown U_out:
 %   U_out(s) = N_U_out_I0(s)/D_U_out_I0(s) * I0(s), with
-%     N_U_out_I0(s) = -k
+%     N_U_out_I0(s) = k
 %     D_U_out_I0(s) = 1
 D_U_out_I0 = [ 1	 % s^0
              ].';
-N_U_out_I0 = [ -k	 % s^0
+N_U_out_I0 = [ k	 % s^0
              ].';
 
-% The solution for unknown I_senseI0:
-%   I_senseI0(s) = N_I_senseI0_I0(s)/D_I_senseI0_I0(s) * I0(s), with
-%     N_I_senseI0_I0(s) = -1
-%     D_I_senseI0_I0(s) = 1
-D_I_senseI0_I0 = [ 1	 % s^0
-                 ].';
-N_I_senseI0_I0 = -[ 1	 % s^0
-                  ].';
+% The solution for unknown I_Rload:
+%   I_Rload(s) = N_I_Rload_I0(s)/D_I_Rload_I0(s) * I0(s), with
+%     N_I_Rload_I0(s) = 1
+%     D_I_Rload_I0(s) = 1
+D_I_Rload_I0 = [ 1	 % s^0
+               ].';
+N_I_Rload_I0 = [ 1	 % s^0
+               ].';
 
 % The solution for unknown I_k:
 %   I_k(s) = N_I_k_I0(s)/D_I_k_I0(s) * I0(s), with
@@ -119,14 +143,18 @@ N_I_k_I0 = [ 0	 % s^0
 systemDesc_allDependents.name = 'allDependents';
 systemDesc_allDependents.numeratorAry = ...
     { N_U_in_I0
+      N_U_K00_I0
+      N_U_Uplus_I0
       N_U_out_I0
-      N_I_senseI0_I0
+      N_I_Rload_I0
       N_I_k_I0
     };
 systemDesc_allDependents.denominatorAry = ...
     { D_U_in_I0
+      D_U_K00_I0
+      D_U_Uplus_I0
       D_U_out_I0
-      D_I_senseI0_I0
+      D_I_Rload_I0
       D_I_k_I0
     };
 systemDesc_allDependents.inputNameAry = ...
@@ -134,8 +162,10 @@ systemDesc_allDependents.inputNameAry = ...
     };
 systemDesc_allDependents.outputNameAry = ...
     { 'U_in'
+      'U_K00'
+      'U_Uplus'
       'U_out'
-      'I_senseI0'
+      'I_Rload'
       'I_k'
     };
 systemDesc_allDependents.plotInfo = ...

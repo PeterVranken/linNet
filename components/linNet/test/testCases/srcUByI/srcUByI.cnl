@@ -1,0 +1,38 @@
+/**
+ * @file srcUByI.cnl
+ *   Test case for linNet.\n
+ * Introduction of the current controlled voltage source:\n
+ *   The input current in the first circuit is at the same time the
+ * control current of the voltage source in the second circuit. The
+ * voltage of the second, controlled source is at the same time the system
+ * output voltage. (The output impedance Rout has no impact on the result
+ * as we don't have a load connected to the system output.)\n
+ *   The two circuits form unconnected sub-networks. This requires the
+ * definition of a ground node in each circuit; otherwise linNet would
+ * autonomously select an arbitrary node as ground and all voltages, which
+ * are not user-defined (and which are thus node potentials) were no
+ * longer transparently defined.\n
+ *   The expected result is: Uout = k*I0
+ *
+ * Copyright (C) 2014-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ *
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the
+ * Free Software Foundation, either version 3 of the License, or (at your
+ * option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+I I0 gnd0 in
+R Rload in K00
+PI I_Rload K00 gnd0
+
+U(I) k Uplus gnd1 I_Rload
+R Rout Uplus out

@@ -1,0 +1,25 @@
+This folder contains linNet test case `srcUByI`:
+
+[[figSchematics]]
+.Schematics
+image::SrcUByI.svg[Schematics, width="50%", pdfwidth="50%", align="center"]
+
+Introduction of the current controlled voltage source:
+
+The input current in the first circuit is at the same time the
+control current of the voltage source in the second circuit. The
+voltage of the second, controlled source is at the same time the system
+output voltage. (The output impedance R~out~ has no impact on the result
+as we don't have a load connected to the system output.)
+
+The two circuits form unconnected sub-networks. This requires the
+definition of a ground node in each circuit; otherwise linNet would
+autonomously select an arbitrary node as ground and all voltages, which
+are not user-defined (and which are thus node potentials) were no
+longer transparently defined.
+
+The expected result is: U~out~ = k*I~0~
+
+Please compare with the link:srcUByI.log[calculated result^].
+
+See link:srcUByI.cnl[netlist file^] for more details of the circuits.
