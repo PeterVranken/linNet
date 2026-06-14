@@ -14,7 +14,7 @@ link:impedance.log[Calculation results^]
 Octave scripts:
 
 . link:impedance/G.m[Transfer function G=U~out~(U~in~)^]
-. link:impedance/Zin.m[Input impedance^]
-. link:impedance/Zout.m[Output impedance^]
+. link:impedance/Zin.m[Input impedance Z~in~^]
+. link:impedance/Zout.m[Output impedance Z~out~^]
 
 See link:impedance.cnl[netlist file^] for more details of the circuit.

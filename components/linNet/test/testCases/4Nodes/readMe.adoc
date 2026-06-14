@@ -29,5 +29,4 @@ And analogously for Uout(U~2~).
 
 link:4Nodes.log[Calculation results^]
 
-See link:4Nodes.cnl[netlist file^] for more details of
-the circuits. 
+See link:4Nodes.cnl[netlist file^] for more details of the circuit.
