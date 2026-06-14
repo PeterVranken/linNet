@@ -1,12 +1,14 @@
 /**
  * @file badUserVoltageAcrossSubNetworks.cnl
- *   Test case for linNet.\n
+ * Test case for linNet.
+ *
  * In a basically well-defined circuit consisting of two unconnected
  * sub-networks, user-defined voltages make the calculation fail; the
  * potential difference between the two sub-networks is undefined and a
  * voltage between nodes from both sub-networks is hence undefined, too.
  * linNet rejects this netlist.
- *   Note, the same circuit without the bad voltage definitions can be
+ *
+ * Note, the same circuit without the bad voltage definitions can be
  * found as srcUByU.cnl and can be computed.
  *
  * Copyright (C) 2015 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)

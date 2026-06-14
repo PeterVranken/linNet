@@ -2,7 +2,7 @@ This folder contains linNet test case `inputImpedanceInfinite`:
 
 [[figSchematics]]
 .Schematics
-image::InputImpedanceInfinite.svg[Schematics, width="60%", pdfwidth="60%", align="center"]
+image::InputImpedanceInfinite.svg[Schematics, width="40%", pdfwidth="40%", align="center"]
 
 An op-amp based input follower has an infinite impedance. This is
 calculated correct by linNet but the resulting

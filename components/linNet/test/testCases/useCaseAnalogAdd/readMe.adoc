@@ -1,4 +1,4 @@
-This folder contains linNet test case `useCaseAnalogAdd.jpg`:
+This folder contains linNet test case `useCaseAnalogAdd`:
 
 [[figSchematics]]
 .Schematics

@@ -1,0 +1,12 @@
+Jun 14 12:12:27 2026 - 000002 ms - RESULT - 
+-----------------------------------------------------------------------------
+ linNet - The Software for symbolic Analysis of linear Electronic Circuits
+ Copyright (C) 2014-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ This is free software; see the source for copying conditions. There is NO
+ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+-----------------------------------------------------------------------------
+Jun 14 12:12:27 2026 - 000003 ms - RESULT - Reading circuit file C:\home\vranken\projects\linNetAtGitHub\linNet\components\linNet\test\testCases\badUserVoltageAcrossSubNetworks\badUserVoltageAcrossSubNetworks.cnl successfully done
+Jun 14 12:12:27 2026 - 000003 ms -  ERROR - The user-defined voltage U2 is defined as voltage potential difference between two nodes that belong to different unconnected sub-networks. The voltage potential difference between such nodes and hence the meaning of the voltage is undefined
+Jun 14 12:12:27 2026 - 000003 ms -  ERROR - The user-defined voltage U3 is defined as voltage potential difference between two nodes that belong to different unconnected sub-networks. The voltage potential difference between such nodes and hence the meaning of the voltage is undefined
+Jun 14 12:12:27 2026 - 000003 ms -  ERROR - Please correct your circuit and re-run the application
+Jun 14 12:12:27 2026 - 000003 ms -  ERROR - Input file doesn't specify a valid, computable electric circuit. Don't know what to do

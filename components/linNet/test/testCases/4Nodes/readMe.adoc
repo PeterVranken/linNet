@@ -1,4 +1,4 @@
-This folder contains linNet test case `4Nodes.jpg`:
+This folder contains linNet test case `4Nodes`:
 
 [[figSchematics]]
 .Schematics
