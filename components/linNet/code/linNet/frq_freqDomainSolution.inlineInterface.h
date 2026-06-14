@@ -186,7 +186,7 @@ static inline unsigned int frq_getNoIndependents
  * Get the total number of distinct solutions for distinct dependent quantities, which are
  * available in * \a pSolution. This may include original unknowns from the LES, which the
  * solution belongs to and/or user-defined voltages. In the specific case of a Bode plot
- * result the (only) dependent quantity could even be a known of the LES; here; inverse
+ * result the (only) dependent quantity could even be a known of the LES; here, inverse
  * result definitions are permitted.
  *   @return
  * The number of dependent quantities a solution is available for.
