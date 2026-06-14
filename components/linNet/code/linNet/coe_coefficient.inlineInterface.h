@@ -10,7 +10,7 @@
  * functions. By placing the inline interface in a secondary file, any client can decide
  * whether to include the additional header (and instantiate the functions) or not.
  *
- * Copyright (C) 2013 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ * Copyright (C) 2013-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -81,11 +81,10 @@ static inline coe_coefAddend_t *coe_newCoefAddend()
 
 
 /**
- * Return a coefficient object, that represents null. It has been allocated using the
- * global heap mem_hHeap_t coe_hHeapOfCoefAddend and needs to be freed after use with void
- * mem_free(heap_t *, void *).
+ * Return a coefficient object, that represents null or zero.
  *   @return
- * Get a pointer to the new object.
+ * Get a pointer to the new object. This is effectively the NULL pointer. The returned
+ * object must not be freed after use!
  */
 
 static inline coe_coefAddend_t *coe_coefAddendNull()
@@ -118,7 +117,7 @@ static inline coe_coefAddend_t *coe_coefAddendOne()
 
 
 /**
- * Check the addent of a coefficient object if it represents 1.
+ * Check the addent of a coefficient object if it represents zero.
  *   @return
  * Get the Boolean answer.
  */
