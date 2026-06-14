@@ -2,7 +2,7 @@ This folder contains linNet test case `impedance`:
 
 [[figSchematics]]
 .Schematics
-image::Impedance.svg[Schematics, width="30%", pdfwidth="30%", align="center"]
+image::Impedance.jpg[Schematics, width="40%", pdfwidth="40%", align="center"]
 
 This test case applies a passive RLC filter to demonstrate, how the
 complex in- and output impedance of a circuit can be calculated. It is an
@@ -12,7 +12,8 @@ discussion.
 link:impedance.log[Calculation results^]
 
 Octave scripts:
-. link:impedance/G.m[Transfer function U~out~(U~in~)^]
+
+. link:impedance/G.m[Transfer function G=U~out~(U~in~)^]
 . link:impedance/Zin.m[Input impedance^]
 . link:impedance/Zout.m[Output impedance^]
 
