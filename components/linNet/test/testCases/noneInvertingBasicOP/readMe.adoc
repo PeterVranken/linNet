@@ -1,0 +1,20 @@
+This folder contains linNet test case `noneInvertingBasicOP`:
+
+[[figSchematics]]
+.Schematics
+image::NoneInvertingBasicOP.svg[Schematics, width="40%", pdfwidth="40%", align="center"]
+
+No output voltage has been specified explicitly. linNet computes the full
+result. The most interesting transfer function from the circuit input
+voltage to the op-amp output voltage can thus be found as dependency of
+the unknown potential of node K~out~ on known voltage U~1~; look for
+`U_Kout` in the link:noneInvertingBasicOP.log[Calculation results^] and in
+the generated Octave script,
+link:noneInvertingBasicOP/allDependents.m[`allDependents.m`^].
+
+Note, in a full result, node potentials are always meant relative to
+ground. Which one the ground node is is derived from the name of the
+nodes. linNet looks for a node named "gnd" or "ground" or similar.
+
+See link:noneInvertingBasicOP.cnl[netlist file^] for more details of
+the circuits. 

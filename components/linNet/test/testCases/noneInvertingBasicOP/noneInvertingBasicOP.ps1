@@ -18,15 +18,19 @@ $scriptPath = [System.IO.Path]::GetDirectoryName($scriptFilePath)
 $baseName = [System.IO.Path]::GetFileNameWithoutExtension($scriptFilePath)
 Write-Host "Build LaTeX graphics $scriptPath\$baseName.tex"
 
-latex "$baseName.tex"
+# -jobname: To avoid a name clash with linNet's log-file of same name (which has precedence
+# as it is part of the uploaded data).
+del latex.log 2> nul
+latex -jobname=latex -quiet "$baseName.tex"
 
 # DVI to SVG export.
 if ($LASTEXITCODE -eq 0) {
-    dvisvgm "$baseName.dvi" --no-fonts -o (Capitalize-First("$baseName.svg"))
+    dvisvgm "latex.dvi" --no-fonts -o (Capitalize-First("$baseName.svg"))
     if ($LASTEXITCODE -ne 0) {
         Write-Error "Error running LaTeX tool dvisvgm. Please see previous error messages."
     }
 } else {
+    Get-Content latex.log
     Write-Error "Error running LaTeX. Please check your LaTeX source."
 }
 
