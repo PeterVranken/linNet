@@ -1,13 +1,15 @@
 /**
  * @file badSrcIWithoutLoad.cnl
- *   Test case for linNet.\n
- * A current source has no load impedance connected. This leads to an linear equation
- * system with zero determinant. linNet doesn't abort the calculation but ends with an
- * infinite node potential.\n
- *   The Octave script is still generated but the transfer function object it creates,
- * would be bad an make Octave fail when used. linNet has placed an explaining error
- * message in the script to avoid a hard to understand, generic, nonspecific Octave error
- * message.
+ * Test case for linNet.
+ *
+ * A current source has no load impedance connected. This leads to an
+ * linear equation system with zero determinant. linNet doesn't abort the
+ * calculation but ends with an infinite node potential.
+ *
+ * The Octave script is still generated but the transfer function object
+ * it creates, would be bad an make Octave fail when used. linNet has
+ * placed an explaining error message in the script to avoid a hard to
+ * understand, generic, nonspecific Octave error message.
  *
  * Copyright (C) 2014-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
  *

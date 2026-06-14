@@ -1,0 +1,19 @@
+This folder contains linNet test case `badSrcIWithoutLoad`:
+
+[[figSchematics]]
+.Schematics
+image::BadSrcIWithoutLoad.svg[Schematics, width="5%", pdfwidth="5%", align="center"]
+
+A current source has no load impedance connected. This leads to an linear
+equation system with zero determinant. linNet doesn't abort the
+calculation but ends with an infinite node potential.
+
+The Octave script is still generated but the transfer function object it
+creates, would be bad an make Octave fail when used. linNet has placed an
+explaining error message in the script to avoid a hard to understand,
+generic, nonspecific Octave error message.
+
+link:badSrcIWithoutLoad.log[Calculation results^]
+
+See link:badSrcIWithoutLoad.cnl[netlist file^] for more details of
+the circuits. 

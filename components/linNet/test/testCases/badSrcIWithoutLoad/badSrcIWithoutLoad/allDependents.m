@@ -2,7 +2,7 @@ function [tf_allDependents deviceConstants wBode tiStep] = allDependents(deviceC
 
 %   [tf deviceConstants wBode tiStep] = allDependents(deviceConstants)
 %                   The transfer function allDependents of electric linear network
-%                   C:\home\vranken\projects\linNetAtGitHub\linNet\components\linNet\test\testCases\badSrcIWithoutLoad.cnl
+%                   C:\home\vranken\projects\linNetAtGitHub\linNet\components\linNet\test\testCases\badSrcIWithoutLoad\badSrcIWithoutLoad.cnl
 %
 %   Input argument(s):
 %       deviceConstants
