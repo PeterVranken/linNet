@@ -2,7 +2,7 @@ function [tf_G1 deviceConstants wBode tiStep] = G1(deviceConstants)
 
 %   [tf deviceConstants wBode tiStep] = G1(deviceConstants)
 %                   The transfer function G1 of electric linear network
-%                   testCases\UseCaseAnalogAdd.cnl
+%                   C:\home\vranken\projects\linNetAtGitHub\linNet\components\linNet\test\testCases\useCaseAnalogAdd\useCaseAnalogAdd.cnl
 %
 %   Input argument(s):
 %       deviceConstants
