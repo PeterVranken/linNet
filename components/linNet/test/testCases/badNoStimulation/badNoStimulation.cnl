@@ -1,6 +1,7 @@
 /**
  * @file badNoStimulation.cnl
- *   Test case for linNet.\n
+ * Test case for linNet.
+ *
  * This test case proves the behavior of linNet for un-stimulated
  * networks, without defined in- or output voltages, so that it is
  * unclear, what to do. There's no energy in the circuit and all currents

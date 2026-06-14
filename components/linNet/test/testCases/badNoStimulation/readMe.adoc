@@ -1,0 +1,15 @@
+This folder contains linNet test case `badNoStimulation`:
+
+[[figSchematics]]
+.Schematics
+image::BadNoStimulation.svg[Schematics, width="30%", pdfwidth="30%", align="center"]
+
+This test case proves the behavior of linNet for un-stimulated
+networks, without defined in- or output voltages, so that it is
+unclear, what to do. There's no energy in the circuit and all currents
+and voltages are zero. linNet rejects the circuit with an error message.
+
+link:badNoStimulation.log[linNet calculation log file with error messages^]
+
+See link:badNoStimulation.cnl[netlist file^] for more details of
+the circuits. 

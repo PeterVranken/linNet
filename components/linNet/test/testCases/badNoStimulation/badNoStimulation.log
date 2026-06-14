@@ -1,0 +1,11 @@
+Jun 14 12:28:06 2026 - 000003 ms - RESULT - 
+-----------------------------------------------------------------------------
+ linNet - The Software for symbolic Analysis of linear Electronic Circuits
+ Copyright (C) 2014-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ This is free software; see the source for copying conditions. There is NO
+ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+-----------------------------------------------------------------------------
+Jun 14 12:28:06 2026 - 000004 ms - RESULT - Reading circuit file C:\home\vranken\projects\linNetAtGitHub\linNet\components\linNet\test\testCases\badNoStimulation\badNoStimulation.cnl successfully done
+Jun 14 12:28:06 2026 - 000004 ms -   WARN - No user-defined result found in input file. The solution for all dependent quantities is figured out instead. This generic result can become very bulky
+Jun 14 12:28:06 2026 - 000004 ms -  ERROR - The system has an abnormal solution with no independents. All dependents are null. No transfer function is figured out and no Octave script is generated. Please, consider to use at least one constant source in your circuit
+Jun 14 12:28:06 2026 - 000004 ms -  ERROR - User-defined result allDependents can't be computed due to previous errors
