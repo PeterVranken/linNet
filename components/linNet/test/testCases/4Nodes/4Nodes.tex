@@ -1,0 +1,53 @@
+% See https://holatex.app/playground.html# for an online viewer.
+
+\documentclass[tikz]{standalone} % Standalone: Only graphics export.
+\usepackage[european,siunitx]{circuitikz}
+\usetikzlibrary{arrows.meta}
+\usepackage{listings}
+\lstset{basicstyle=\footnotesize\ttfamily}
+\begin{document}
+
+  \begin{circuitikz}
+
+    \tikzset{>=Triangle} % Define tip of arrows drawn with [->]
+    \ctikzset{voltage=straight}
+
+    \def\size{5}
+    \def\deltaUio{0.8}
+    \def\gapUin{0.5}
+    
+    % The resistors.
+    \draw (0,0) node[left]{$K_3$} coordinate(K3)
+      to[R=$R_5$,*-*] ++(\size,0) node[above right]{$K_1$} coordinate(K1);
+    \draw (K1) to[R=$R_2$,-*] ++(0,-\size) node[below right]{$K_2$} coordinate(K2);
+    \draw (K2) to[R, l_=$R_6$,-*] ++(-\size,0) node[left]{${Gnd}$} coordinate(Gnd);
+    \draw (Gnd) to[R=$R_4$] ++(0,\size) coordinate(K3);
+    \draw (K3) -- ++(-45:1) to[R=$R_3$] ++(-45:2) -- (K2);
+    \draw (K1) -- ++(-135:1) to[R, l_=$R_1$] ++(-135:2) -- (Gnd);
+    
+    % Connectors for input voltage U_1.
+    \draw (0,\deltaUio) to[short,o-] (K3);
+    \draw (\size,\deltaUio) to[short,o-] (K1);
+    
+    % Voltage arrow for input voltage U_1.
+    \draw[->] ($(K3)+(\gapUin,\deltaUio)$) -- node[midway,above]{$U_1$} ($(K1)+(-\gapUin,\deltaUio)$);
+
+    % Connectors for input voltage U_2.
+    \draw ($(Gnd)+(0,-\deltaUio)$) to[short,o-] (Gnd);
+    \draw ($(K2)+(0,-\deltaUio)$) to[short,o-] (K2);
+    
+    % Voltage arrow for input voltage U_2.
+    \draw[<-] ($(Gnd)+(\gapUin,-\deltaUio)$) -- node[midway,above]{$U_2$} 
+      ($(K2)+(-\gapUin,-\deltaUio)$);
+
+    % Connectors for output voltage U_out.
+    \draw ($(K1)+(\deltaUio,0)$) to[short,o-] (K1);
+    \draw ($(K2)+(\deltaUio,0)$) to[short,o-] (K2);
+    
+    % Voltage arrow for output voltage.
+    \draw[->] ($(K1)+(\deltaUio,-\gapUin)$) -- node[midway,right]{$U_{out}$}
+      ($(K2)+(\deltaUio,\gapUin)$);
+
+  \end{circuitikz}
+
+\end{document}

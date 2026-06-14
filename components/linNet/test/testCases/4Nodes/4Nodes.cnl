@@ -1,6 +1,7 @@
 /**
  * @file 4Nodes.cnl
- *   Test case for linNet.\n
+ * Test case for linNet.
+ *
  * Four nodes and a branch in between all nodes to get a maximally complex
  * structure of the LES.
  *
