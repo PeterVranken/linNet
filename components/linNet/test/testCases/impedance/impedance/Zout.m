@@ -1,8 +1,8 @@
-function [tf_G deviceConstants wBode tiStep] = G(deviceConstants)
+function [tf_Zout deviceConstants wBode tiStep] = Zout(deviceConstants)
 
-%   [tf deviceConstants wBode tiStep] = G(deviceConstants)
-%                   The transfer function G of electric linear network
-%                   testCases\impedance.cnl
+%   [tf deviceConstants wBode tiStep] = Zout(deviceConstants)
+%                   The transfer function Zout of electric linear network
+%                   C:\home\vranken\projects\linNetAtGitHub\linNet\components\linNet\test\testCases\impedance\impedance.cnl
 %
 %   Input argument(s):
 %       deviceConstants
@@ -28,14 +28,14 @@ function [tf_G deviceConstants wBode tiStep] = G(deviceConstants)
 %                   information was specified
 %
 %   Example(s):
-%       G
+%       Zout
 %                   Plot the transfer or step function as defined in the
 %                   circuit file
-%       [tf_G p] = G
+%       [tf_Zout p] = Zout
 %                   Get a TF object and the default set of device constants
 %       p.R1 = 2*p.R2
 %                   (Modify the device constants in p)
-%       step(G(p))
+%       step(Zout(p))
 %                   Plot the step response of the system with modified device
 %                   constants
 %
@@ -86,39 +86,37 @@ if nargout >= 2
     deviceConstants.C	= C;
 end
 
-% User-defined result G (Bode plot):
+% User-defined result Zout (Bode plot):
 
-% The dependency of Uout on Uin:
-%   Uout(s) = N_Uout_Uin(s)/D_Uout_Uin(s) * Uin(s), with
-%     N_Uout_Uin(s) = Rc*Rl*L*C * s^2
-%                     +Rl*L * s
-%     D_Uout_Uin(s) = Rc*Rl*L*C * s^2
-%                     +(Rc*L + Rl*L) * s
-%                     +Rc*Rl
-D_Uout_Uin = [ Rc*Rl*L*C	 % s^2
-             ; (Rc*L + Rl*L)	 % s^1
-             ; Rc*Rl	 % s^0
-             ].';
-N_Uout_Uin = [ Rc*Rl*L*C	 % s^2
-             ; Rl*L	 % s^1
-             ; 0	 % s^0
-             ].';
+% The dependency of Uout on Iload:
+%   Uout(s) = N_Uout_Iload(s)/D_Uout_Iload(s) * Iload(s), with
+%     N_Uout_Iload(s) = Rc*Rl*L * s
+%     D_Uout_Iload(s) = Rc*Rl*L*C * s^2
+%                       +(Rc*L + Rl*L) * s
+%                       +Rc*Rl
+D_Uout_Iload = [ Rc*Rl*L*C	 % s^2
+               ; (Rc*L + Rl*L)	 % s^1
+               ; Rc*Rl	 % s^0
+               ].';
+N_Uout_Iload = [ Rc*Rl*L	 % s^1
+               ; 0	 % s^0
+               ].';
 
 % Create an Octave LTI system object from the data above. First shape a descriptor object.
-systemDesc_G.name = 'G';
-systemDesc_G.numeratorAry = ...
-    { N_Uout_Uin
+systemDesc_Zout.name = 'Zout';
+systemDesc_Zout.numeratorAry = ...
+    { N_Uout_Iload
     };
-systemDesc_G.denominatorAry = ...
-    { D_Uout_Uin
+systemDesc_Zout.denominatorAry = ...
+    { D_Uout_Iload
     };
-systemDesc_G.inputNameAry = ...
-    { 'Uin'
+systemDesc_Zout.inputNameAry = ...
+    { 'Iload'
     };
-systemDesc_G.outputNameAry = ...
+systemDesc_Zout.outputNameAry = ...
     { 'Uout'
     };
-systemDesc_G.plotInfo = ...
+systemDesc_Zout.plotInfo = ...
     struct( 'isLogX', {} ...
           , 'noPoints', {} ...
           , 'freqMin', {} ...
@@ -126,25 +124,25 @@ systemDesc_G.plotInfo = ...
           );
 
 % Create the Octave LTI system object from the descriptor.
-tf_G = createLtiSystem(systemDesc_G);
+tf_Zout = createLtiSystem(systemDesc_Zout);
 
 % Compute a suitable vector of frequency and time points.
-wBode  = getFrequencyVector(systemDesc_G);
-tiStep = getSampleTimeVector(systemDesc_G);
+wBode  = getFrequencyVector(systemDesc_Zout);
+tiStep = getSampleTimeVector(systemDesc_Zout);
 
 if nargout == 0
-    % Plot the transfer function of G.
+    % Plot the transfer function of Zout.
     figure
-    bode(tf_G, wBode)
-    disp(['This function can create the LTI system object tf_G for you; please, type' char(10) ...
-          'help G for more.' char(10) ...
+    bode(tf_Zout, wBode)
+    disp(['This function can create the LTI system object tf_Zout for you; please, type' char(10) ...
+          'help Zout for more.' char(10) ...
           '  You can use this object with functions like bode to plot the transfer function' char(10) ...
           'or step and impulse to plot the step or impulse response time functions or lsim' char(10) ...
           'to compute or plot the system response to arbitrary input signals. A stability' char(10) ...
           'analysis can be done using function nyquist. Please refer to the online help' char(10) ...
           'for these commands' char(10)] ...
         );
-    clear tf_G tiStep wBode
+    clear tf_Zout tiStep wBode
 end
 
-end % of function G
+end % of function Zout

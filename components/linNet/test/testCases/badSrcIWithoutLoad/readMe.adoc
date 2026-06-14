@@ -16,5 +16,5 @@ error message.
 
 link:badSrcIWithoutLoad.log[Calculation results^]
 
-See link:badSrcIWithoutLoad.cnl[netlist file^] for more details of
-the circuits. 
+See link:badSrcIWithoutLoad.cnl[netlist file^] for more details of the
+circuit.

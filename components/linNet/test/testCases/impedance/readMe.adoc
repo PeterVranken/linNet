@@ -1,0 +1,19 @@
+This folder contains linNet test case `impedance`:
+
+[[figSchematics]]
+.Schematics
+image::Impedance.svg[Schematics, width="30%", pdfwidth="30%", align="center"]
+
+This test case applies a passive RLC filter to demonstrate, how the
+complex in- and output impedance of a circuit can be calculated. It is an
+example from the linNet manual, see Chapter 8, Typical Use Cases, for a
+discussion.
+
+link:impedance.log[Calculation results^]
+
+Octave scripts:
+. link:impedance/G.m[Transfer function U~out~(U~in~)^]
+. link:impedance/Zin.m[Input impedance^]
+. link:impedance/Zout.m[Output impedance^]
+
+See link:impedance.cnl[netlist file^] for more details of the circuit.

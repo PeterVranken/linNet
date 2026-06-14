@@ -1,10 +1,11 @@
 /**
  * @file impedance.cnl
- *   Test case for linNet.
- * This test applies a passive RLC filter to demonstrate, how the complex
- * in- and output impedance of a circuit can be calculated. It is an
- * example from the linNet manual, see Chapter 8, Typical Use Cases, for a
- * discussion.
+ * Test case for linNet.
+ *
+ * This test case applies a passive RLC filter to demonstrate, how the
+ * complex in- and output impedance of a circuit can be calculated. It is
+ * an example from the linNet manual, see Chapter 8, Typical Use Cases,
+ * for a discussion.
  *
  * Copyright (C) 2014-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
  *

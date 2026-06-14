@@ -2,7 +2,7 @@ function [tf_Zin deviceConstants wBode tiStep] = Zin(deviceConstants)
 
 %   [tf deviceConstants wBode tiStep] = Zin(deviceConstants)
 %                   The transfer function Zin of electric linear network
-%                   testCases\impedance.cnl
+%                   C:\home\vranken\projects\linNetAtGitHub\linNet\components\linNet\test\testCases\impedance\impedance.cnl
 %
 %   Input argument(s):
 %       deviceConstants

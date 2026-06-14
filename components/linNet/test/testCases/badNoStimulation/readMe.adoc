@@ -11,5 +11,5 @@ and voltages are zero. linNet rejects the circuit with an error message.
 
 link:badNoStimulation.log[linNet calculation log file with error messages^]
 
-See link:badNoStimulation.cnl[netlist file^] for more details of
-the circuits. 
+See link:badNoStimulation.cnl[netlist file^] for more details of the
+circuit.

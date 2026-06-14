@@ -12,5 +12,5 @@ linNet adds an error message to the script in order to avoid confusion.
 
 link:inputImpedanceInfinite.log[Calculation results^]
 
-See link:inputImpedanceInfinite.cnl[netlist file^] for more details of
-the circuits. 
+See link:inputImpedanceInfinite.cnl[netlist file^] for more details of the
+circuit.
