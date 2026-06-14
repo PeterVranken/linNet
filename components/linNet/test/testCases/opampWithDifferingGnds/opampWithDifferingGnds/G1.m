@@ -1,8 +1,8 @@
-function [tf_G2 deviceConstants wBode tiStep] = G2(deviceConstants)
+function [tf_G1 deviceConstants wBode tiStep] = G1(deviceConstants)
 
-%   [tf deviceConstants wBode tiStep] = G2(deviceConstants)
-%                   The transfer function G2 of electric linear network
-%                   testCases\OpampLPWithDifferingGnds.cnl
+%   [tf deviceConstants wBode tiStep] = G1(deviceConstants)
+%                   The transfer function G1 of electric linear network
+%                   C:\home\vranken\projects\linNetAtGitHub\linNet\components\linNet\test\testCases\opampWithDifferingGnds\opampWithDifferingGnds.cnl
 %
 %   Input argument(s):
 %       deviceConstants
@@ -28,14 +28,14 @@ function [tf_G2 deviceConstants wBode tiStep] = G2(deviceConstants)
 %                   information was specified
 %
 %   Example(s):
-%       G2
+%       G1
 %                   Plot the transfer or step function as defined in the
 %                   circuit file
-%       [tf_G2 p] = G2
+%       [tf_G1 p] = G1
 %                   Get a TF object and the default set of device constants
 %       p.R1 = 2*p.R2
 %                   (Modify the device constants in p)
-%       step(G2(p))
+%       step(G1(p))
 %                   Plot the step response of the system with modified device
 %                   constants
 %
@@ -92,35 +92,35 @@ if nargout >= 2
     deviceConstants.C2	= C2;
 end
 
-% User-defined result G2 (Bode plot):
+% User-defined result G1 (Bode plot):
 
-% The dependency of Uout2 on Uin2:
-%   Uout2(s) = N_Uout2_Uin2(s)/D_Uout2_Uin2(s) * Uin2(s), with
-%     N_Uout2_Uin2(s) = -Rfb2*C2 * s
+% The dependency of Uout1 on Uin1:
+%   Uout1(s) = N_Uout1_Uin1(s)/D_Uout1_Uin1(s) * Uin1(s), with
+%     N_Uout1_Uin1(s) = -Rfb1*C1 * s
 %                       -1
-%     D_Uout2_Uin2(s) = Rin2*C2 * s
-D_Uout2_Uin2 = [ Rin2*C2	 % s^1
+%     D_Uout1_Uin1(s) = Rin1*C1 * s
+D_Uout1_Uin1 = [ Rin1*C1	 % s^1
                ; 0	 % s^0
                ].';
-N_Uout2_Uin2 = [ -Rfb2*C2	 % s^1
+N_Uout1_Uin1 = [ -Rfb1*C1	 % s^1
                ; -1	 % s^0
                ].';
 
 % Create an Octave LTI system object from the data above. First shape a descriptor object.
-systemDesc_G2.name = 'G2';
-systemDesc_G2.numeratorAry = ...
-    { N_Uout2_Uin2
+systemDesc_G1.name = 'G1';
+systemDesc_G1.numeratorAry = ...
+    { N_Uout1_Uin1
     };
-systemDesc_G2.denominatorAry = ...
-    { D_Uout2_Uin2
+systemDesc_G1.denominatorAry = ...
+    { D_Uout1_Uin1
     };
-systemDesc_G2.inputNameAry = ...
-    { 'Uin2'
+systemDesc_G1.inputNameAry = ...
+    { 'Uin1'
     };
-systemDesc_G2.outputNameAry = ...
-    { 'Uout2'
+systemDesc_G1.outputNameAry = ...
+    { 'Uout1'
     };
-systemDesc_G2.plotInfo = ...
+systemDesc_G1.plotInfo = ...
     struct( 'isLogX', {} ...
           , 'noPoints', {} ...
           , 'freqMin', {} ...
@@ -128,25 +128,25 @@ systemDesc_G2.plotInfo = ...
           );
 
 % Create the Octave LTI system object from the descriptor.
-tf_G2 = createLtiSystem(systemDesc_G2);
+tf_G1 = createLtiSystem(systemDesc_G1);
 
 % Compute a suitable vector of frequency and time points.
-wBode  = getFrequencyVector(systemDesc_G2);
-tiStep = getSampleTimeVector(systemDesc_G2);
+wBode  = getFrequencyVector(systemDesc_G1);
+tiStep = getSampleTimeVector(systemDesc_G1);
 
 if nargout == 0
-    % Plot the transfer function of G2.
+    % Plot the transfer function of G1.
     figure
-    bode(tf_G2, wBode)
-    disp(['This function can create the LTI system object tf_G2 for you; please, type' char(10) ...
-          'help G2 for more.' char(10) ...
+    bode(tf_G1, wBode)
+    disp(['This function can create the LTI system object tf_G1 for you; please, type' char(10) ...
+          'help G1 for more.' char(10) ...
           '  You can use this object with functions like bode to plot the transfer function' char(10) ...
           'or step and impulse to plot the step or impulse response time functions or lsim' char(10) ...
           'to compute or plot the system response to arbitrary input signals. A stability' char(10) ...
           'analysis can be done using function nyquist. Please refer to the online help' char(10) ...
           'for these commands' char(10)] ...
         );
-    clear tf_G2 tiStep wBode
+    clear tf_G1 tiStep wBode
 end
 
-end % of function G2
+end % of function G1

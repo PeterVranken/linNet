@@ -1,8 +1,8 @@
-function [tf_Z1 deviceConstants wBode tiStep] = Z1(deviceConstants)
+function [tf_Z2 deviceConstants wBode tiStep] = Z2(deviceConstants)
 
-%   [tf deviceConstants wBode tiStep] = Z1(deviceConstants)
-%                   The transfer function Z1 of electric linear network
-%                   testCases\OpampLPWithDifferingGnds.cnl
+%   [tf deviceConstants wBode tiStep] = Z2(deviceConstants)
+%                   The transfer function Z2 of electric linear network
+%                   C:\home\vranken\projects\linNetAtGitHub\linNet\components\linNet\test\testCases\opampWithDifferingGnds\opampWithDifferingGnds.cnl
 %
 %   Input argument(s):
 %       deviceConstants
@@ -28,14 +28,14 @@ function [tf_Z1 deviceConstants wBode tiStep] = Z1(deviceConstants)
 %                   information was specified
 %
 %   Example(s):
-%       Z1
+%       Z2
 %                   Plot the transfer or step function as defined in the
 %                   circuit file
-%       [tf_Z1 p] = Z1
+%       [tf_Z2 p] = Z2
 %                   Get a TF object and the default set of device constants
 %       p.R1 = 2*p.R2
 %                   (Modify the device constants in p)
-%       step(Z1(p))
+%       step(Z2(p))
 %                   Plot the step response of the system with modified device
 %                   constants
 %
@@ -92,32 +92,35 @@ if nargout >= 2
     deviceConstants.C2	= C2;
 end
 
-% User-defined result Z1 (Bode plot):
+% User-defined result Z2 (Bode plot):
 
-% The dependency of Uin1 on I_Uin1:
-%   Uin1(s) = N_Uin1_I_Uin1(s)/D_Uin1_I_Uin1(s) * I_Uin1(s), with
-%     N_Uin1_I_Uin1(s) = Rin1
-%     D_Uin1_I_Uin1(s) = 1
-D_Uin1_I_Uin1 = [ 1	 % s^0
+% The dependency of Uin2 on I_Uin2:
+%   Uin2(s) = N_Uin2_I_Uin2(s)/D_Uin2_I_Uin2(s) * I_Uin2(s), with
+%     N_Uin2_I_Uin2(s) = 1
+%     D_Uin2_I_Uin2(s) = 0
+D_Uin2_I_Uin2 = [ 0	 % s^0
                 ].';
-N_Uin1_I_Uin1 = [ Rin1	 % s^0
+error(['Denominator expression D_Uin2_I_Uin2 is null. The transfer function is' ...
+       ' undefined and no plots can be generated. Please check your circuit'] ...
+     );
+N_Uin2_I_Uin2 = [ 1	 % s^0
                 ].';
 
 % Create an Octave LTI system object from the data above. First shape a descriptor object.
-systemDesc_Z1.name = 'Z1';
-systemDesc_Z1.numeratorAry = ...
-    { N_Uin1_I_Uin1
+systemDesc_Z2.name = 'Z2';
+systemDesc_Z2.numeratorAry = ...
+    { N_Uin2_I_Uin2
     };
-systemDesc_Z1.denominatorAry = ...
-    { D_Uin1_I_Uin1
+systemDesc_Z2.denominatorAry = ...
+    { D_Uin2_I_Uin2
     };
-systemDesc_Z1.inputNameAry = ...
-    { 'I_Uin1'
+systemDesc_Z2.inputNameAry = ...
+    { 'I_Uin2'
     };
-systemDesc_Z1.outputNameAry = ...
-    { 'Uin1'
+systemDesc_Z2.outputNameAry = ...
+    { 'Uin2'
     };
-systemDesc_Z1.plotInfo = ...
+systemDesc_Z2.plotInfo = ...
     struct( 'isLogX', {} ...
           , 'noPoints', {} ...
           , 'freqMin', {} ...
@@ -125,25 +128,25 @@ systemDesc_Z1.plotInfo = ...
           );
 
 % Create the Octave LTI system object from the descriptor.
-tf_Z1 = createLtiSystem(systemDesc_Z1);
+tf_Z2 = createLtiSystem(systemDesc_Z2);
 
 % Compute a suitable vector of frequency and time points.
-wBode  = getFrequencyVector(systemDesc_Z1);
-tiStep = getSampleTimeVector(systemDesc_Z1);
+wBode  = getFrequencyVector(systemDesc_Z2);
+tiStep = getSampleTimeVector(systemDesc_Z2);
 
 if nargout == 0
-    % Plot the transfer function of Z1.
+    % Plot the transfer function of Z2.
     figure
-    bode(tf_Z1, wBode)
-    disp(['This function can create the LTI system object tf_Z1 for you; please, type' char(10) ...
-          'help Z1 for more.' char(10) ...
+    bode(tf_Z2, wBode)
+    disp(['This function can create the LTI system object tf_Z2 for you; please, type' char(10) ...
+          'help Z2 for more.' char(10) ...
           '  You can use this object with functions like bode to plot the transfer function' char(10) ...
           'or step and impulse to plot the step or impulse response time functions or lsim' char(10) ...
           'to compute or plot the system response to arbitrary input signals. A stability' char(10) ...
           'analysis can be done using function nyquist. Please refer to the online help' char(10) ...
           'for these commands' char(10)] ...
         );
-    clear tf_Z1 tiStep wBode
+    clear tf_Z2 tiStep wBode
 end
 
-end % of function Z1
+end % of function Z2
