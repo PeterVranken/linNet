@@ -2,7 +2,7 @@ This folder contains linNet test case `probeI`:
 
 [[figSchematics]]
 .Schematics
-image::.\ProbeI.svg[Schematics, width="30%", pdfwidth="30%", align="center"]
+image::.\ProbeI.svg[Schematics, width="20%", pdfwidth="20%", align="center"]
 
 A current source and a current probe form a closed circuit.
 
