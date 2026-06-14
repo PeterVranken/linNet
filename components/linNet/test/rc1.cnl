@@ -6,6 +6,8 @@ C   C   gnd     xxx
 /* Main result is the transfer function from input to output voltage. We reference the
    output voltage by implicit name, U_ followed by the name of a node. */
 PLOT G U_gnd U1
+RES R U1 // Fails, too
+
 
 /* Caution, this file produces an assertion:
 Jun 12 16:18:54 2026 - 000010 ms - RESULT - Reading circuit file rc1.cnl successfully done
