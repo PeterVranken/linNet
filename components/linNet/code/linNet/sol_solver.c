@@ -2,7 +2,7 @@
  * @file sol_solver.c
  * Symbolic solver for linear equations systems (LES)
  *
- * Copyright (C) 2013-2014 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ * Copyright (C) 2013-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -129,6 +129,7 @@ static const boolean *getVectorOfReqDependents(const sol_solution_t * const pSol
         pVectorOfReqDependents[u] = noUserResults == 0;
     if(noUserResults > 0)
     {
+        boolean isUnknownRequested = false;
         unsigned int u;
         for(u=0; u<noUserResults; ++u)
         {
@@ -162,15 +163,18 @@ static const boolean *getVectorOfReqDependents(const sol_solution_t * const pSol
                    has not yet been validated. We need to anticipate invalid or ambiguous
                    names. Ambiguities are reported by the function result, the returned
                    index tells if it is a dependent with respect to the LES. */
-                signed int idxDependent;   
-                const unsigned int noMatches = sol_findName( pSolution
-                                                           , &idxDependent
-                                                           , /* pIdxUnknown       */ NULL
-                                                           , /* pIdxUserDefVoltage*/ NULL
-                                                           , /* pIdxKnown         */ NULL
-                                                           , nameOfResVars[idxResVar]
-                                                           , /* doErrorReporting */ false
-                                                           );
+                signed int idxDependent
+                         , idxUnknown
+                         , idxKnown;   
+                const unsigned int noMatches = 
+                                        sol_findName( pSolution
+                                                    , &idxDependent
+                                                    , /* pIdxUnknown       */ &idxUnknown
+                                                    , /* pIdxUserDefVoltage*/ NULL
+                                                    , /* pIdxKnown         */ &idxKnown
+                                                    , nameOfResVars[idxResVar]
+                                                    , /* doErrorReporting */ false
+                                                    );
                 if(noMatches == 1  &&  idxDependent >= 0)
                 {
                     /* The required dependent can be both, a true unknown of the LES or a
@@ -178,6 +182,8 @@ static const boolean *getVectorOfReqDependents(const sol_solution_t * const pSol
                        computed unknowns. */
                     assert((unsigned)idxDependent < noDependents);
                     pVectorOfReqDependents[idxDependent] = true;
+                    if(idxUnknown >= 0)
+                        isUnknownRequested = true;
                     LOG_DEBUG( _log
                              , "Dependent %s (%d) is required for user defined result %s"
                              , nameOfResVars[idxResVar]
@@ -189,7 +195,18 @@ static const boolean *getVectorOfReqDependents(const sol_solution_t * const pSol
                 {
                     /* Error feedback is not given here; this is done later in module frq,
                        when presenting the results. */
-// TODO If all user defined voltages are rejected then we can end up with the situation that no dependent at all is required and the calucation of the LES ends with an assertion. We can check here if this happens and emit an error. Or select a dummy dependent so that calculation can go on and an error message is emitted only later.
+
+                    /* Bode plots may request known quantities for a result. */
+                    if(noMatches > 0)
+                    {
+                        assert(idxKnown >= 0);
+                        LOG_DEBUG( _log
+                                 , "Independent %s (%d) is required for user defined result %s"
+                                 , nameOfResVars[idxResVar]
+                                 , idxKnown
+                                 , pRes->name
+                                 );
+                    }
                 }
             } /* End of for(All variables referenced from result definition) */ 
             
@@ -221,6 +238,7 @@ static const boolean *getVectorOfReqDependents(const sol_solution_t * const pSol
                 {
                     assert(pUnknown->idxCol < noUnknowns);
                     pVectorOfReqDependents[pUnknown->idxCol] = true;
+                    isUnknownRequested = true;
                     LOG_DEBUG( _log
                              , "Dependent %s (%d) is required for user defined voltage %s"
                              , pUnknown->name
@@ -236,6 +254,7 @@ static const boolean *getVectorOfReqDependents(const sol_solution_t * const pSol
                 {
                     assert(pUnknown->idxCol < noUnknowns);
                     pVectorOfReqDependents[pUnknown->idxCol] = true;
+                    isUnknownRequested = true;
                     LOG_DEBUG( _log
                              , "Dependent %s (%d) is required for user defined voltage %s"
                              , pUnknown->name
@@ -248,6 +267,21 @@ static const boolean *getVectorOfReqDependents(const sol_solution_t * const pSol
             
         } /* End for(All user defined voltages) */
         
+        /* If all user defined results contain errors (they reference non-existent
+           quantities or they solely reference known quantities), then we end up with
+           computing no single unknown. This is not a problem as such; it'll be later
+           reported in detail when figuring out the user-defined results. Regardless, we
+           issue a general error already now. This is useful to avoid confusion about the
+           strange, empty calculation results, which are reported at verbosity levels
+           higher than RESULT. */
+        if(!isUnknownRequested)
+        {
+            LOG_ERROR( _log
+                     , "None of the user-defined results reference an unknown quantity."
+                       " The calculation result will be empty. Please check your result"
+                       " definitions. See other error messages for more details"
+                     );
+            }
     } /* End if(Do we have user-defined results or should all dependents be computed?) */
 
     return pVectorOfReqDependents;
@@ -348,7 +382,7 @@ static void elementaryStep( coe_coefMatrix_t A
                        has already been done. (If we'd truely store the product, we'd need
                        another representation of the constants: The products can have
                        constants to the power of two.)
-                         The exclusive or adds the bits (i.e. powers of constants) but
+                         The exclusive or adds the bits (i.e., powers of constants) but
                        because of the overrun it also implements the subtraction of the
                        divisor powers. The result is correct as we have already checked
                        that the final result for each bit is in the implemented range of
@@ -366,7 +400,7 @@ static void elementaryStep( coe_coefMatrix_t A
                        incrementally adding another addend with a factor of (absolute) one,
                        so the factor in the intermediate result can increase only in steps
                        of one with each computed addend of the resulting sum of products.
-                       There's no faster accumulation of the factor e.g. by multiplicative
+                       There's no faster accumulation of the factor, e.g., by multiplicative
                        effects. An overrun would therefore occur at earliest after having
                        figured out 2^31 products of addends. (And in fact it would require
                        many times more products as most of the terms are of course not
@@ -511,7 +545,7 @@ static void elementaryStep( coe_coefMatrix_t A
  * The solver for a linear equation system.\n
  *   The system is solved by the modified Gaussian elimination method. The required
  * algebraic structure the coefficients belongs to is less demanding than for the original
- * elimination: The division is not required. The modified elimination can e.g. be
+ * elimination: The division is not required. The modified elimination can, e.g., be
  * performed with integer numbers. The coefficients' algebraic structure needs to have the
  * sum and the multiplication operation.\n
  *   The arithmetic is not done in this routine; it only implements the control structure.
@@ -523,8 +557,8 @@ static void elementaryStep( coe_coefMatrix_t A
  * become an issue. The current implementation of the control structure just implements a
  * simple pivoting, which suffices for error-free sum and multiplication.
  *   @return
- * The function returns true if the LES could be solved. false ii e.g. returned in case of
- * linearly dependent equations.
+ * The function returns \a true if the LES could be solved. \a false is, e.g., returned in
+ * case of linearly dependent equations.
  *   @param A
  * The array of coefficients, which are manipulated in place. The result is returned in
  * place.\n
@@ -796,7 +830,6 @@ boolean sol_createSolution( const sol_solution_t * * const ppSolution
           , storeDet = true
           , isSignOfDetInv = true;
     unsigned int idxUnknown;
-// TODO Pathologic result definitions can require zero unknowns (e.g., only U_gnd wanted). This is not caught beforehand and we leave the loop without any calculation and without storing the determinant in the solution. An assertion fires.
     for(idxUnknown=0; success && idxUnknown<noUnknowns; ++idxUnknown)
     {
         if(!pSol->pIsDependentAvailableAry[idxUnknown])
@@ -922,8 +955,6 @@ boolean sol_createSolution( const sol_solution_t * * const ppSolution
         }
     } /* End for(All required unknowns of the LES) */
 
-    assert(!success || !storeDet);
-
     /* The additional results are user defined voltages. These voltages are differences of
        node voltages, which can easily be the same as an already found unknown. The
        difference of any pair of node voltages is defined in the same arithmetic space as
@@ -979,7 +1010,7 @@ boolean sol_createSolution( const sol_solution_t * * const ppSolution
             }
             else
             {
-                /* Plus pole of user voltage is ground, i.e. we set the first operand of
+                /* Plus pole of user voltage is ground, i.e., we set the first operand of
                    the difference to null. */
                 pSol->numeratorAry[idxSolution][idxKnown] = coe_coefAddendNull();
             }
@@ -1170,7 +1201,7 @@ const char *sol_getNameOfIndependent( const sol_solution_t * const pSolution
 /**
  * Get the number of dependent quantities, a solution object offers a solution for. This
  * number includes the original unknowns of the LES plus the dependent, user requested
- * unknowns (i.e. user defined voltages).
+ * unknowns (i.e., user defined voltages).
  *   @return
  * Get the number of distinct solutions in this object. This is at the same time the number
  * of dependent quantities and therefore spawns the index range in \a sol_getNameOfDependent.
@@ -1197,7 +1228,7 @@ unsigned int sol_getNoDependents(const sol_solution_t * const pSolution)
  * Search a solution for a quantity by name, regardless whether it is an original unknown
  * of the LES, a user-defined voltage or a known of the LES. Get either the indexes of an
  * unknown or user defined voltage and the related solution or the index of a known.\n
- *   The combined search is possible since names need to be globally unique, i.e. across
+ *   The combined search is possible since names need to be globally unique, i.e., across
  * the type of an object. The method may also be used to double-check a name for
  * ambiguity.\n
  *   The indexes are returned as signed integers. A value of -1 means that the object is
@@ -1441,7 +1472,7 @@ void sol_logSolution(const sol_solution_t *pSolution, log_logLevel_t logLevel)
                     log_log(_log, log_continueLine, "\n    N_%s = ", knownAry[idxKnown].name);
                     coe_logCoefficient( pSolution->numeratorAry[idxDependent][idxKnown]
                                       , pTableOfVars
-                                      , /* tabPos */ 4 + (2+strlen(knownAry[idxKnown].name)) + 3
+                                      , /*tabPos*/ 4 + (2+strlen(knownAry[idxKnown].name)) + 3
                                       );
                 }
             }
