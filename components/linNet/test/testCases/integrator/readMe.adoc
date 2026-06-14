@@ -1,0 +1,16 @@
+This folder contains linNet test case `integrator`:
+
+[[figSchematics]]
+.Schematics
+image::Integrator.svg[Schematics, width="30%", pdfwidth="30%", align="center"]
+
+An instable (but in practice still useful) system: the ideal integrator.
+
+TODO: Check and document, how the numeric post-processing with Octave
+behaves. See here the link:integrator/allDependents.m[Octave script with
+the transfer function object^].
+
+link:integrator.log[Calculation results^]
+
+See link:integrator.cnl[netlist file^] for more details of
+the circuits. 
