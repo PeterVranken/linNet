@@ -2,7 +2,7 @@ function [tf_G deviceConstants wBode tiStep] = G(deviceConstants)
 
 %   [tf deviceConstants wBode tiStep] = G(deviceConstants)
 %                   The transfer function G of electric linear network
-%                   C:\home\vranken\projects\linNetAtGitHub\linNet\components\linNet\test\testCases\inputImpedanceInfinite.cnl
+%                   C:\home\vranken\projects\linNetAtGitHub\linNet\components\linNet\test\testCases\inputImpedanceInfinite\inputImpedanceInfinite.cnl
 %
 %   Input argument(s):
 %       deviceConstants

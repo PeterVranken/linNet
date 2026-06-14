@@ -1,7 +1,8 @@
 /**
  * @file inputImpedanceInfinite.cnl
- *   Test case for linNet.\n
- * Test: An op-amp based input follower has an infinite impedance. This is
+ * Test case for linNet.
+ *
+ * An op-amp based input follower has an infinite impedance. This is
  * calculated correct by linNet but the resulting Octave code creates a
  * transfer function object, which Octave would fail to calculate. The M
  * code generator of linNet adds an error message to the script in order
