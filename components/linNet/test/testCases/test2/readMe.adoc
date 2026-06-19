@@ -1,0 +1,11 @@
+This folder contains linNet test case `test2`:
+
+[[figSchematics]]
+.Schematics
+image::Test2.svg[Schematics, width="70%", pdfwidth="70%", align="center"]
+
+A system of 3rd order.
+
+link:test2.log[Calculation results^]
+
+See link:test2.cnl[netlist file^] for more details of the circuit.
