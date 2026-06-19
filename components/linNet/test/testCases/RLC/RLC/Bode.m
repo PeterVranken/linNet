@@ -1,8 +1,8 @@
-function [tf_Res2 deviceConstants wBode tiStep] = Res2(deviceConstants)
+function [tf_Bode deviceConstants wBode tiStep] = Bode(deviceConstants)
 
-%   [tf deviceConstants wBode tiStep] = Res2(deviceConstants)
-%                   The transfer function Res2 of electric linear network
-%                   test.cnl
+%   [tf deviceConstants wBode tiStep] = Bode(deviceConstants)
+%                   The transfer function Bode of electric linear network
+%                   C:\home\vranken\projects\linNetAtGitHub\linNet\components\linNet\test\testCases\RLC\RLC.cnl
 %
 %   Input argument(s):
 %       deviceConstants
@@ -28,14 +28,14 @@ function [tf_Res2 deviceConstants wBode tiStep] = Res2(deviceConstants)
 %                   information was specified
 %
 %   Example(s):
-%       Res2
+%       Bode
 %                   Plot the transfer or step function as defined in the
 %                   circuit file
-%       [tf_Res2 p] = Res2
+%       [tf_Bode p] = Bode
 %                   Get a TF object and the default set of device constants
 %       p.R1 = 2*p.R2
 %                   (Modify the device constants in p)
-%       step(Res2(p))
+%       step(Bode(p))
 %                   Plot the step response of the system with modified device
 %                   constants
 %
@@ -86,107 +86,62 @@ if nargout >= 2
     deviceConstants.C	= C;
 end
 
-% User-defined result Res2:
+% User-defined result Bode (Bode plot):
 
-% The solution for unknown U_out:
-%   U_out(s) = N_U_out_U1(s)/D_U_out_U1(s) * U1(s)
-%              + N_U_out_U2(s)/D_U_out_U2(s) * U2(s), with
+% The dependency of U_out on U1:
+%   U_out(s) = N_U_out_U1(s)/D_U_out_U1(s) * U1(s), with
 %     N_U_out_U1(s) = R2
 %     D_U_out_U1(s) = (R1*L*C + R2*L*C) * s^2
 %                     +R1*R2*C * s
 %                     +(R1 + R2)
-%     N_U_out_U2(s) = R1
-%     D_U_out_U2(s) = D_U_out_U1(s)
 D_U_out_U1 = [ (R1*L*C + R2*L*C)	 % s^2
              ; R1*R2*C	 % s^1
              ; (R1 + R2)	 % s^0
              ].';
-D_U_out_U2 = D_U_out_U1;
 N_U_out_U1 = [ R2	 % s^0
              ].';
-N_U_out_U2 = [ R1	 % s^0
-             ].';
-
-% The solution for unknown U_K_L:
-%   U_K_L(s) = N_U_K_L_U1(s)/D_U_K_L_U1(s) * U1(s)
-%              + N_U_K_L_U2(s)/D_U_K_L_U2(s) * U2(s), with
-%     N_U_K_L_U1(s) = R2*L*C * s^2
-%                     +R2
-%     D_U_K_L_U1(s) = D_U_out_U1(s)
-%     N_U_K_L_U2(s) = R1*L*C * s^2
-%                     +R1
-%     D_U_K_L_U2(s) = D_U_out_U1(s)
-D_U_K_L_U1 = D_U_out_U1;
-D_U_K_L_U2 = D_U_out_U1;
-N_U_K_L_U1 = [ R2*L*C	 % s^2
-             ; 0	 % s^1
-             ; R2	 % s^0
-             ].';
-N_U_K_L_U2 = [ R1*L*C	 % s^2
-             ; 0	 % s^1
-             ; R1	 % s^0
-             ].';
-
-% The solution for unknown U_L:
-%   U_L(s) = N_U_L_U1(s)/D_U_L_U1(s) * U1(s)
-%            + N_U_L_U2(s)/D_U_L_U2(s) * U2(s), with
-%     N_U_L_U1(s) = -N_U_K_L_U1(s)
-%     D_U_L_U1(s) = D_U_out_U1(s)
-%     N_U_L_U2(s) = -N_U_K_L_U2(s)
-%     D_U_L_U2(s) = D_U_out_U1(s)
-D_U_L_U1 = D_U_out_U1;
-D_U_L_U2 = D_U_out_U1;
-N_U_L_U1 = -N_U_K_L_U1;
-N_U_L_U2 = -N_U_K_L_U2;
 
 % Create an Octave LTI system object from the data above. First shape a descriptor object.
-systemDesc_Res2.name = 'Res2';
-systemDesc_Res2.numeratorAry = ...
-    { N_U_out_U1 N_U_out_U2
-      N_U_K_L_U1 N_U_K_L_U2
-      N_U_L_U1 N_U_L_U2
+systemDesc_Bode.name = 'Bode';
+systemDesc_Bode.numeratorAry = ...
+    { N_U_out_U1
     };
-systemDesc_Res2.denominatorAry = ...
-    { D_U_out_U1 D_U_out_U2
-      D_U_K_L_U1 D_U_K_L_U2
-      D_U_L_U1 D_U_L_U2
+systemDesc_Bode.denominatorAry = ...
+    { D_U_out_U1
     };
-systemDesc_Res2.inputNameAry = ...
+systemDesc_Bode.inputNameAry = ...
     { 'U1'
-      'U2'
     };
-systemDesc_Res2.outputNameAry = ...
+systemDesc_Bode.outputNameAry = ...
     { 'U_out'
-      'U_K_L'
-      'U_L'
     };
-systemDesc_Res2.plotInfo = ...
-    struct( 'isLogX', false ...
-          , 'noPoints', 500 ...
+systemDesc_Bode.plotInfo = ...
+    struct( 'isLogX', true ...
+          , 'noPoints', 66 ...
           , 'freqMin', 10 ... % Hz
           , 'freqMax', 20000 ... % Hz
           );
 
 % Create the Octave LTI system object from the descriptor.
-tf_Res2 = createLtiSystem(systemDesc_Res2);
+tf_Bode = createLtiSystem(systemDesc_Bode);
 
 % Compute a suitable vector of frequency and time points.
-wBode  = getFrequencyVector(systemDesc_Res2);
-tiStep = getSampleTimeVector(systemDesc_Res2);
+wBode  = getFrequencyVector(systemDesc_Bode);
+tiStep = getSampleTimeVector(systemDesc_Bode);
 
 if nargout == 0
-    % Plot the step response of Res2.
+    % Plot the transfer function of Bode.
     figure
-    step(tf_Res2, tiStep)
-    disp(['This function can create the LTI system object tf_Res2 for you; please, type' char(10) ...
-          'help Res2 for more.' char(10) ...
+    bode(tf_Bode, wBode)
+    disp(['This function can create the LTI system object tf_Bode for you; please, type' char(10) ...
+          'help Bode for more.' char(10) ...
           '  You can use this object with functions like bode to plot the transfer function' char(10) ...
           'or step and impulse to plot the step or impulse response time functions or lsim' char(10) ...
           'to compute or plot the system response to arbitrary input signals. A stability' char(10) ...
           'analysis can be done using function nyquist. Please refer to the online help' char(10) ...
           'for these commands' char(10)] ...
         );
-    clear tf_Res2 tiStep wBode
+    clear tf_Bode tiStep wBode
 end
 
-end % of function Res2
+end % of function Bode

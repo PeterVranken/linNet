@@ -1,0 +1,14 @@
+This folder contains linNet test case `RLC`:
+
+[[figSchematics]]
+.Schematics
+image::RLC.svg[Schematics, width="70%", pdfwidth="70%", align="center"]
+
+An RLC combination, a system of 2nd order.
+
+The netlist  demonstrates the use of user-defined voltages and
+user-defined results.
+
+link:RLC.log[Calculation results^]
+
+See link:RLC.cnl[netlist file^] for more details of the circuit.

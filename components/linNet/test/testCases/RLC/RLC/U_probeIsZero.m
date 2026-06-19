@@ -1,8 +1,8 @@
-function [tf_Bode deviceConstants wBode tiStep] = Bode(deviceConstants)
+function [tf_U_probeIsZero deviceConstants wBode tiStep] = U_probeIsZero(deviceConstants)
 
-%   [tf deviceConstants wBode tiStep] = Bode(deviceConstants)
-%                   The transfer function Bode of electric linear network
-%                   test.cnl
+%   [tf deviceConstants wBode tiStep] = U_probeIsZero(deviceConstants)
+%                   The transfer function U_probeIsZero of electric linear network
+%                   C:\home\vranken\projects\linNetAtGitHub\linNet\components\linNet\test\testCases\RLC\RLC.cnl
 %
 %   Input argument(s):
 %       deviceConstants
@@ -28,14 +28,14 @@ function [tf_Bode deviceConstants wBode tiStep] = Bode(deviceConstants)
 %                   information was specified
 %
 %   Example(s):
-%       Bode
+%       U_probeIsZero
 %                   Plot the transfer or step function as defined in the
 %                   circuit file
-%       [tf_Bode p] = Bode
+%       [tf_U_probeIsZero p] = U_probeIsZero
 %                   Get a TF object and the default set of device constants
 %       p.R1 = 2*p.R2
 %                   (Modify the device constants in p)
-%       step(Bode(p))
+%       step(U_probeIsZero(p))
 %                   Plot the step response of the system with modified device
 %                   constants
 %
@@ -86,62 +86,66 @@ if nargout >= 2
     deviceConstants.C	= C;
 end
 
-% User-defined result Bode (Bode plot):
+% User-defined result U_probeIsZero:
 
-% The dependency of U_out on U1:
-%   U_out(s) = N_U_out_U1(s)/D_U_out_U1(s) * U1(s), with
-%     N_U_out_U1(s) = R2
-%     D_U_out_U1(s) = (R1*L*C + R2*L*C) * s^2
-%                     +R1*R2*C * s
-%                     +(R1 + R2)
-D_U_out_U1 = [ (R1*L*C + R2*L*C)	 % s^2
-             ; R1*R2*C	 % s^1
-             ; (R1 + R2)	 % s^0
-             ].';
-N_U_out_U1 = [ R2	 % s^0
-             ].';
+% The solution for unknown U_probe:
+%   U_probe(s) = N_U_probe_U1(s)/D_U_probe_U1(s) * U1(s)
+%                + N_U_probe_U2(s)/D_U_probe_U2(s) * U2(s), with
+%     N_U_probe_U1(s) = 0
+%     D_U_probe_U1(s) = 1
+%     N_U_probe_U2(s) = 0
+%     D_U_probe_U2(s) = 1
+D_U_probe_U1 = [ 1	 % s^0
+               ].';
+D_U_probe_U2 = [ 1	 % s^0
+               ].';
+N_U_probe_U1 = [ 0	 % s^0
+               ].';
+N_U_probe_U2 = [ 0	 % s^0
+               ].';
 
 % Create an Octave LTI system object from the data above. First shape a descriptor object.
-systemDesc_Bode.name = 'Bode';
-systemDesc_Bode.numeratorAry = ...
-    { N_U_out_U1
+systemDesc_U_probeIsZero.name = 'U_probeIsZero';
+systemDesc_U_probeIsZero.numeratorAry = ...
+    { N_U_probe_U1 N_U_probe_U2
     };
-systemDesc_Bode.denominatorAry = ...
-    { D_U_out_U1
+systemDesc_U_probeIsZero.denominatorAry = ...
+    { D_U_probe_U1 D_U_probe_U2
     };
-systemDesc_Bode.inputNameAry = ...
+systemDesc_U_probeIsZero.inputNameAry = ...
     { 'U1'
+      'U2'
     };
-systemDesc_Bode.outputNameAry = ...
-    { 'U_out'
+systemDesc_U_probeIsZero.outputNameAry = ...
+    { 'U_probe'
     };
-systemDesc_Bode.plotInfo = ...
-    struct( 'isLogX', true ...
-          , 'noPoints', 33 ...
-          , 'freqMin', 10 ... % Hz
-          , 'freqMax', 20000 ... % Hz
+systemDesc_U_probeIsZero.plotInfo = ...
+    struct( 'isLogX', {} ...
+          , 'noPoints', {} ...
+          , 'freqMin', {} ...
+          , 'freqMax', {} ...
           );
 
 % Create the Octave LTI system object from the descriptor.
-tf_Bode = createLtiSystem(systemDesc_Bode);
+tf_U_probeIsZero = createLtiSystem(systemDesc_U_probeIsZero);
 
 % Compute a suitable vector of frequency and time points.
-wBode  = getFrequencyVector(systemDesc_Bode);
-tiStep = getSampleTimeVector(systemDesc_Bode);
+wBode  = getFrequencyVector(systemDesc_U_probeIsZero);
+tiStep = getSampleTimeVector(systemDesc_U_probeIsZero);
 
 if nargout == 0
-    % Plot the transfer function of Bode.
+    % Plot the step response of U_probeIsZero.
     figure
-    bode(tf_Bode, wBode)
-    disp(['This function can create the LTI system object tf_Bode for you; please, type' char(10) ...
-          'help Bode for more.' char(10) ...
+    step(tf_U_probeIsZero, tiStep)
+    disp(['This function can create the LTI system object tf_U_probeIsZero for you; please, type' char(10) ...
+          'help U_probeIsZero for more.' char(10) ...
           '  You can use this object with functions like bode to plot the transfer function' char(10) ...
           'or step and impulse to plot the step or impulse response time functions or lsim' char(10) ...
           'to compute or plot the system response to arbitrary input signals. A stability' char(10) ...
           'analysis can be done using function nyquist. Please refer to the online help' char(10) ...
           'for these commands' char(10)] ...
         );
-    clear tf_Bode tiStep wBode
+    clear tf_U_probeIsZero tiStep wBode
 end
 
-end % of function Bode
+end % of function U_probeIsZero

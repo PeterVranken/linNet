@@ -46,32 +46,6 @@
       -- node[midway,right]{$U_{out}$}
       ($(BottomUout)+(0,\gapUin)$);
 
-
-%      -- ++(\sizeX,0) to[R,l_=$R$,v^=$U_{out}$] ++(0,-\Lr) to[short,-*]
-%      ($(gnd0)+(\sizeX,0)$);
-
-%    \def\distY{{2*\Lr}}
-%    \def\distX{3.5}
-%
-%    \draw (0,0) %node[ground, label=below left:{$gnd$}]{}
-%      to[short,o-] ++(1.25,0) 
-%      to[R,l=$R_{in}$] ++(0,\Lr) 
-%      to[short,-o] (0,\Lr) coordinate(K1) node[above]{$K_1$};
-%      
-%    % Voltage arrow for input voltage.
-%    \draw[->] ($(K1)+(0,-\gapUin)$) -- node[midway,left]{$U_{in}$}
-%      ($(gnd)+(0,\gapUin)$);
-%
-%    \draw (\distX,\distY) node[above]{$K_+$} 
-%      to[V,v_=$U(U)\eq kU_{in}$] ++(0,-\Lr) node[left]{$K_-$}
-%      to[R,l=$R_{gnd}$, -*] ++(0,-\Lr)
-%      coordinate(gnd2) to[short,-*] ++(2,0) coordinate(BottomRout)
-%      to[R,l=$R_{out}$,-*] ++(0,{2*\Lr}) coordinate(TopRout)
-%      -- (\distX,\distY);
-%
-%    \draw (gnd2) -- ++(0,-0.4) node[ground,label=left:{$gnd_2$}]{};
-%
-
   \end{circuitikz}
 
 \end{document}

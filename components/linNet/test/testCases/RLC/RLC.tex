@@ -1,0 +1,67 @@
+\documentclass[tikz]{standalone} % Standalone: Only graphics export.
+\usepackage[european,siunitx]{circuitikz}
+\usetikzlibrary{arrows.meta}
+\usepackage{listings}
+\lstset{basicstyle=\footnotesize\ttfamily}
+\begin{document}
+
+  \newcommand{\eq}{=}
+  \tikzset{ameter/.style={rmeterwa, t=A}}
+  \begin{circuitikz}
+
+    \tikzset{>=Triangle} % Define tip of arrows drawn with [->]
+    \ctikzset{voltage=straight}
+
+
+    \def\Lr{2.5}
+    \def\deltaUinY{1}
+    \def\deltaUinX{1.2}
+    \def\sizeY{3}
+    \def\deltaUio{1}
+    \def\gapUin{0.3}
+    
+    % Horizontal upper line.
+    \draw (0,\sizeY) coordinate(in1)
+      to[short,o-] ++(\deltaUinX,0)
+      to[R,l=$R_1$,-*] ++(\Lr,0) coordinate(Kl) node[above]{$K_l$}
+      to[L,l=$L$] ++(\Lr,0) coordinate(Klout) %node[above]{$K_{l_{out}}$} 
+      to[ameter,i=$I_L$,v=$U_{probe}$,-*] ++(\Lr,0) coordinate(TopC)
+      to[short,-o] ++(\deltaUio,0) coordinate(out) node[above]{$out$};
+    
+    % Second input line.
+    \draw (\deltaUinX,{\sizeY-\deltaUinY}) coordinate(in2)
+      to[R,l=$R_2$,o-] ++(\Lr,0)
+      -- (Kl);
+
+    % Down to C and bottom output connector.
+    \draw (TopC)
+      to[C,l_=$C$,-*] ++(0,-\sizeY) coordinate(BottomC)
+      to[short,-o] ++(\deltaUio,0) coordinate(BottomUout);
+
+    % Horizontal bottom (ground) line.
+    \draw (0,0) coordinate(BottomUin1)
+      to[short,o-o] ++(\deltaUinX,0) coordinate(BottomUin2)
+      -- (BottomC);
+
+    % Ground node.
+    \draw (BottomC)
+      -- ++(0,-0.4) node[ground]{};
+
+    % Voltage arrow for first input voltage.
+    \draw[->] ($(in1)+(0,-\gapUin)$)
+      -- node[midway,left]{$U_{in_1}$} ($(BottomUin1)+(0,\gapUin)$);
+
+    % Voltage arrow for second input voltage.
+    \draw[->] ($(in2)+(0,-\gapUin)$)
+      -- node[midway,left]{$U_{in_2}$} ($(BottomUin2)+(0,\gapUin)$);
+
+    % Voltage arrow for output voltage.
+    \draw[->] ($(out)+(0,-\gapUin)$)
+      -- node[midway,right]{$U_{out}$} ($(BottomUout)+(0,\gapUin)$);
+
+    % Voltage arrow for voltage U_LC.
+    \draw[->] ($(in2)+(\Lr,0)+(0,-\gapUin)$)
+      -- node[midway,left]{$U_{LC}$} ++(0,{-\sizeY+\deltaUinY+2*\gapUin});
+
+  \end{circuitikz}
+\end{document}

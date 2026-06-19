@@ -1,0 +1,66 @@
+/**
+ * @file RLC.cnl
+ *   Test case for linNet.\n
+ * An RLC combination, a system of 2nd order.\n
+ *   The netlist  demonstrates the use of user-defined voltages and
+ * user-defined results.
+ *
+ * Copyright (C) 2014-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ *
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the
+ * Free Software Foundation, either version 3 of the License, or (at your
+ * option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+U   U1  in1 gnd
+U   U2  in2 gnd 
+R   R1  in1 K_L
+R   R2  in2 K_L
+L   L   K_L K_Lout
+
+
+/* Measure the current through L by a current probe, which doesn't have
+   any impact on the circuit behavior. */
+PI  I_L K_Lout out
+
+/* The voltage drop at the current probe needs to be zero. */
+DEF U_probe K_Lout out
+
+C   C   out gnd
+
+/* User-defined voltage are specified as voltage between two nodes. */
+DEF U_LC K_L gnd
+
+/* Let Octave plot the dependency U_out(U1) in the frequency domain. The
+   default plot will show frequencies from 10 to 20000 Hz, with a density
+   of 20 points/decade.
+     Draw the plot by just typing U_out in Octave.
+     See manual, Section 4.3.3 amd 4.3.4 for more details. */
+PLOT Bode U_out U1 LOG 20 10 20k
+
+/* Let Octave plot the step response of several characteristic voltages in
+   the circuit. These can be node potentials (U_K_L, U_out) or
+   user-defined voltages (U_LC).
+     Please note that a node potential depends on the choice of the ground
+   node. A result for a node potential is undefined if the circuit doesn't
+   clearly defines the ground node but leaves the choice to linNet.
+     For systems with multiple inputs, Octave presents the step responses
+   by showing the selected output voltages for a step at each input in
+   separate plot windows. 
+     Draw the plot by just typing Res in Octave.
+     See manual, Section 4.3.2 and the following for more details. */
+RES Res U_out U_K_L U_LC LIN 500 10 20k
+
+/* Plausibility check: The voltage drop at a current probe needs to be
+   always zero. Let's have a dedicated user-defined result to prove it.
+   Look for U_probeIsZero in the linNet log file. */
+RES U_probeIsZero U_probe
