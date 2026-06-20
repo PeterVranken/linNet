@@ -1,8 +1,8 @@
-function [tf_secondResult deviceConstants wBode tiStep] = secondResult(deviceConstants)
+function [tf_G deviceConstants wBode tiStep] = G(deviceConstants)
 
-%   [tf deviceConstants wBode tiStep] = secondResult(deviceConstants)
-%                   The transfer function secondResult of electric linear network
-%                   test2.cnl
+%   [tf deviceConstants wBode tiStep] = G(deviceConstants)
+%                   The transfer function G of electric linear network
+%                   2poleLP.cnl
 %
 %   Input argument(s):
 %       deviceConstants
@@ -28,14 +28,14 @@ function [tf_secondResult deviceConstants wBode tiStep] = secondResult(deviceCon
 %                   information was specified
 %
 %   Example(s):
-%       secondResult
+%       G
 %                   Plot the transfer or step function as defined in the
 %                   circuit file
-%       [tf_secondResult p] = secondResult
+%       [tf_G p] = G
 %                   Get a TF object and the default set of device constants
 %       p.R1 = 2*p.R2
 %                   (Modify the device constants in p)
-%       step(secondResult(p))
+%       step(G(p))
 %                   Plot the step response of the system with modified device
 %                   constants
 %
@@ -65,95 +65,84 @@ end
 error(nargchk(0, 1, nargin))
 if nargin == 1
     % The values of the device constants are taken from function argument deviceConstants.
-    R1	= deviceConstants.R1;
-    R2	= deviceConstants.R2;
-    R3	= deviceConstants.R3;
-    L	= deviceConstants.L;
-    C	= deviceConstants.C;
-    C1	= deviceConstants.C1;
+    R	= deviceConstants.R;
+    Ct1	= deviceConstants.Ct1;
+    Ct2	= deviceConstants.Ct2;
 else
     % The default values of the device constants.
-    R1	= 100;
-    R2	= 100;
-    R3	= 100;
-    L	= 0.001;
-    C	= 1e-05;
-    C1	= 1e-05;
+    R	= 0.159155;
+    Ct1	= 0.01;
+    Ct2	= 0.0001;
 end
 error(nargchk(0, 4, nargout))
 if nargout >= 2
     % The values of the device constants are assigned to function result deviceConstants.
     deviceConstants  	= struct;
-    deviceConstants.R1	= R1;
-    deviceConstants.R2	= R2;
-    deviceConstants.R3	= R3;
-    deviceConstants.L	= L;
-    deviceConstants.C	= C;
-    deviceConstants.C1	= C1;
+    deviceConstants.R	= R;
+    deviceConstants.Ct1	= Ct1;
+    deviceConstants.Ct2	= Ct2;
 end
 
-% User-defined result secondResult (Bode plot):
+% User-defined result G (Bode plot):
 
-% The dependency of U_L on U1:
-%   U_L(s) = N_U_L_U1(s)/D_U_L_U1(s) * U1(s), with
-%     N_U_L_U1(s) = -R1*R3*L*C*C1 * s^3
-%                   -(R1*L*C1 - R2*L*C) * s^2
-%     D_U_L_U1(s) = (R1*R3*L*C*C1 + R2*R3*L*C*C1) * s^3
-%                   +(R1*R2*R3*C*C1 + R1*L*C + R1*L*C1 + R2*L*C + R2*L*C1) * s^2
-%                   +(R1*R2*C + R1*R2*C1 + R1*R3*C + R2*R3*C) * s
-%                   +(R1 + R2)
-D_U_L_U1 = [ (R1*R3*L*C*C1 + R2*R3*L*C*C1)	 % s^3
-           ; (R1*R2*R3*C*C1 + R1*L*C + R1*L*C1 + R2*L*C + R2*L*C1)	 % s^2
-           ; (R1*R2*C + R1*R2*C1 + R1*R3*C + R2*R3*C)	 % s^1
-           ; (R1 + R2)	 % s^0
-           ].';
-N_U_L_U1 = [ -R1*R3*L*C*C1	 % s^3
-           ; -(R1*L*C1 - R2*L*C)	 % s^2
-           ; 0	 % s^1
-           ; 0	 % s^0
-           ].';
+% The dependency of U2 on U1:
+%   U2(s) = N_U2_U1(s)/D_U2_U1(s) * U1(s), with
+%     N_U2_U1(s) = -R^2*Ct1*Ct2 * s^2
+%                  -(2*R*Ct1 + 2*R*Ct2) * s
+%                  -3
+%     D_U2_U1(s) = R^2*Ct1*Ct2 * s^2
+%                  +(R*Ct1 + R*Ct2) * s
+%                  +1
+D_U2_U1 = [ R^2*Ct1*Ct2	 % s^2
+          ; (R*Ct1 + R*Ct2)	 % s^1
+          ; 1	 % s^0
+          ].';
+N_U2_U1 = [ -R^2*Ct1*Ct2	 % s^2
+          ; -(2*R*Ct1 + 2*R*Ct2)	 % s^1
+          ; -3	 % s^0
+          ].';
 
 % Create an Octave LTI system object from the data above. First shape a descriptor object.
-systemDesc_secondResult.name = 'secondResult';
-systemDesc_secondResult.numeratorAry = ...
-    { N_U_L_U1
+systemDesc_G.name = 'G';
+systemDesc_G.numeratorAry = ...
+    { N_U2_U1
     };
-systemDesc_secondResult.denominatorAry = ...
-    { D_U_L_U1
+systemDesc_G.denominatorAry = ...
+    { D_U2_U1
     };
-systemDesc_secondResult.inputNameAry = ...
+systemDesc_G.inputNameAry = ...
     { 'U1'
     };
-systemDesc_secondResult.outputNameAry = ...
-    { 'U_L'
+systemDesc_G.outputNameAry = ...
+    { 'U2'
     };
-systemDesc_secondResult.plotInfo = ...
+systemDesc_G.plotInfo = ...
     struct( 'isLogX', true ...
-          , 'noPoints', 400 ...
+          , 'noPoints', 160 ...
           , 'freqMin', 10 ... % Hz
           , 'freqMax', 100000 ... % Hz
           );
 
 % Create the Octave LTI system object from the descriptor.
-tf_secondResult = createLtiSystem(systemDesc_secondResult);
+tf_G = createLtiSystem(systemDesc_G);
 
 % Compute a suitable vector of frequency and time points.
-wBode  = getFrequencyVector(systemDesc_secondResult);
-tiStep = getSampleTimeVector(systemDesc_secondResult);
+wBode  = getFrequencyVector(systemDesc_G);
+tiStep = getSampleTimeVector(systemDesc_G);
 
 if nargout == 0
-    % Plot the transfer function of secondResult.
+    % Plot the transfer function of G.
     figure
-    bode(tf_secondResult, wBode)
-    disp(['This function can create the LTI system object tf_secondResult for you; please, type' char(10) ...
-          'help secondResult for more.' char(10) ...
+    bode(tf_G, wBode)
+    disp(['This function can create the LTI system object tf_G for you; please, type' char(10) ...
+          'help G for more.' char(10) ...
           '  You can use this object with functions like bode to plot the transfer function' char(10) ...
           'or step and impulse to plot the step or impulse response time functions or lsim' char(10) ...
           'to compute or plot the system response to arbitrary input signals. A stability' char(10) ...
           'analysis can be done using function nyquist. Please refer to the online help' char(10) ...
           'for these commands' char(10)] ...
         );
-    clear tf_secondResult tiStep wBode
+    clear tf_G tiStep wBode
 end
 
-end % of function secondResult
+end % of function G

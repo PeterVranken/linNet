@@ -1,0 +1,20 @@
+This folder contains linNet test case `2poleLP`:
+
+[[figSchematics]]
+.Schematics
+image::2poleLP.svg[Schematics, width="80%", pdfwidth="80%", align="center"]
+
+This test case proves the correct computation of a low pass filter with
+two poles. The inverting op-amp configuration is used with a single
+resistor in the input (which means constant input impedance) and two RC
+elements in series with a resistor in the feedback line. All resistors are
+chosen identical so that the amplification begins with 3 with DC operation
+and falls to 2 and 1 when the corner frequencies of the RC elements are
+reached (or 9.5, 6, 0 dB, respectively). The capacitors are chosen such
+that these corner frequencies are different enough to see the steps in the
+Bode plot. The correct behavior is proven in the link:2poleLP/G.svg[Bode
+plot^].
+
+link:2poleLP.log[Calculation results^]
+
+See link:2poleLP.cnl[netlist file^] for more details of the circuit.

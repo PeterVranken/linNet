@@ -1,8 +1,10 @@
 /**
  * @file RLC.cnl
- *   Test case for linNet.\n
- * An RLC combination, a system of 2nd order.\n
- *   The netlist  demonstrates the use of user-defined voltages and
+ * Test case for linNet.
+ *
+ * An RLC combination, a system of 2nd order.
+ *
+ * The netlist  demonstrates the use of user-defined voltages and
  * user-defined results.
  *
  * Copyright (C) 2014-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)

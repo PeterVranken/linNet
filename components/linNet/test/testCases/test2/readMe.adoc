@@ -2,7 +2,7 @@ This folder contains linNet test case `test2`:
 
 [[figSchematics]]
 .Schematics
-image::Test2.svg[Schematics, width="70%", pdfwidth="70%", align="center"]
+image::Test2.svg[Schematics, width="40%", pdfwidth="40%", align="center"]
 
 A system of 3rd order.
 

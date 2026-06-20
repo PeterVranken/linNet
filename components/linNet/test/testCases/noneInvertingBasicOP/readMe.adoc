@@ -16,5 +16,5 @@ Note, in a full result, node potentials are always meant relative to
 ground. Which one the ground node is is derived from the name of the
 nodes. linNet looks for a node named "gnd" or "ground" or similar.
 
-See link:noneInvertingBasicOP.cnl[netlist file^] for more details of
-the circuits. 
+See link:noneInvertingBasicOP.cnl[netlist file^] for more details of the
+circuit.

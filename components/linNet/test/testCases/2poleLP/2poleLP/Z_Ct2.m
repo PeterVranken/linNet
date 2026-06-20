@@ -1,8 +1,8 @@
-function [tf_Z_Ct1 deviceConstants wBode tiStep] = Z_Ct1(deviceConstants)
+function [tf_Z_Ct2 deviceConstants wBode tiStep] = Z_Ct2(deviceConstants)
 
-%   [tf deviceConstants wBode tiStep] = Z_Ct1(deviceConstants)
-%                   The transfer function Z_Ct1 of electric linear network
-%                   testCases\2poleLP.cnl
+%   [tf deviceConstants wBode tiStep] = Z_Ct2(deviceConstants)
+%                   The transfer function Z_Ct2 of electric linear network
+%                   2poleLP.cnl
 %
 %   Input argument(s):
 %       deviceConstants
@@ -28,14 +28,14 @@ function [tf_Z_Ct1 deviceConstants wBode tiStep] = Z_Ct1(deviceConstants)
 %                   information was specified
 %
 %   Example(s):
-%       Z_Ct1
+%       Z_Ct2
 %                   Plot the transfer or step function as defined in the
 %                   circuit file
-%       [tf_Z_Ct1 p] = Z_Ct1
+%       [tf_Z_Ct2 p] = Z_Ct2
 %                   Get a TF object and the default set of device constants
 %       p.R1 = 2*p.R2
 %                   (Modify the device constants in p)
-%       step(Z_Ct1(p))
+%       step(Z_Ct2(p))
 %                   Plot the step response of the system with modified device
 %                   constants
 %
@@ -83,33 +83,33 @@ if nargout >= 2
     deviceConstants.Ct2	= Ct2;
 end
 
-% User-defined result Z_Ct1 (Bode plot):
+% User-defined result Z_Ct2 (Bode plot):
 
-% The dependency of U_Ct1 on I_Ct1:
-%   U_Ct1(s) = N_U_Ct1_I_Ct1(s)/D_U_Ct1_I_Ct1(s) * I_Ct1(s), with
-%     N_U_Ct1_I_Ct1(s) = 1
-%     D_U_Ct1_I_Ct1(s) = Ct1 * s
-D_U_Ct1_I_Ct1 = [ Ct1	 % s^1
+% The dependency of U_Ct2 on I_Ct2:
+%   U_Ct2(s) = N_U_Ct2_I_Ct2(s)/D_U_Ct2_I_Ct2(s) * I_Ct2(s), with
+%     N_U_Ct2_I_Ct2(s) = 1
+%     D_U_Ct2_I_Ct2(s) = Ct2 * s
+D_U_Ct2_I_Ct2 = [ Ct2	 % s^1
                 ; 0	 % s^0
                 ].';
-N_U_Ct1_I_Ct1 = [ 1	 % s^0
+N_U_Ct2_I_Ct2 = [ 1	 % s^0
                 ].';
 
 % Create an Octave LTI system object from the data above. First shape a descriptor object.
-systemDesc_Z_Ct1.name = 'Z_Ct1';
-systemDesc_Z_Ct1.numeratorAry = ...
-    { N_U_Ct1_I_Ct1
+systemDesc_Z_Ct2.name = 'Z_Ct2';
+systemDesc_Z_Ct2.numeratorAry = ...
+    { N_U_Ct2_I_Ct2
     };
-systemDesc_Z_Ct1.denominatorAry = ...
-    { D_U_Ct1_I_Ct1
+systemDesc_Z_Ct2.denominatorAry = ...
+    { D_U_Ct2_I_Ct2
     };
-systemDesc_Z_Ct1.inputNameAry = ...
-    { 'I_Ct1'
+systemDesc_Z_Ct2.inputNameAry = ...
+    { 'I_Ct2'
     };
-systemDesc_Z_Ct1.outputNameAry = ...
-    { 'U_Ct1'
+systemDesc_Z_Ct2.outputNameAry = ...
+    { 'U_Ct2'
     };
-systemDesc_Z_Ct1.plotInfo = ...
+systemDesc_Z_Ct2.plotInfo = ...
     struct( 'isLogX', {} ...
           , 'noPoints', {} ...
           , 'freqMin', {} ...
@@ -117,25 +117,25 @@ systemDesc_Z_Ct1.plotInfo = ...
           );
 
 % Create the Octave LTI system object from the descriptor.
-tf_Z_Ct1 = createLtiSystem(systemDesc_Z_Ct1);
+tf_Z_Ct2 = createLtiSystem(systemDesc_Z_Ct2);
 
 % Compute a suitable vector of frequency and time points.
-wBode  = getFrequencyVector(systemDesc_Z_Ct1);
-tiStep = getSampleTimeVector(systemDesc_Z_Ct1);
+wBode  = getFrequencyVector(systemDesc_Z_Ct2);
+tiStep = getSampleTimeVector(systemDesc_Z_Ct2);
 
 if nargout == 0
-    % Plot the transfer function of Z_Ct1.
+    % Plot the transfer function of Z_Ct2.
     figure
-    bode(tf_Z_Ct1, wBode)
-    disp(['This function can create the LTI system object tf_Z_Ct1 for you; please, type' char(10) ...
-          'help Z_Ct1 for more.' char(10) ...
+    bode(tf_Z_Ct2, wBode)
+    disp(['This function can create the LTI system object tf_Z_Ct2 for you; please, type' char(10) ...
+          'help Z_Ct2 for more.' char(10) ...
           '  You can use this object with functions like bode to plot the transfer function' char(10) ...
           'or step and impulse to plot the step or impulse response time functions or lsim' char(10) ...
           'to compute or plot the system response to arbitrary input signals. A stability' char(10) ...
           'analysis can be done using function nyquist. Please refer to the online help' char(10) ...
           'for these commands' char(10)] ...
         );
-    clear tf_Z_Ct1 tiStep wBode
+    clear tf_Z_Ct2 tiStep wBode
 end
 
-end % of function Z_Ct1
+end % of function Z_Ct2
