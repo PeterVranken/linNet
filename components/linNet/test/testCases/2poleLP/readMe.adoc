@@ -15,6 +15,19 @@ that these corner frequencies are different enough to see the steps in the
 Bode plot. The correct behavior is proven in the link:2poleLP/G.svg[Bode
 plot^].
 
-link:2poleLP.log[Calculation results^]
+A plausibility test has been implemented in the net list. The voltage drop
+at the capacitors are made user-defined voltages. The currents through the
+capacitors are measured with current probes. This allows having a result,
+which calculates the dependency of the voltage on the current --
+effectively the complex impedance of the capacitor. We expect to see the
+well-known result Z~c~=1/(C*s). Please compare with linNet's
+link:2poleLP.log[calculation result^]; look for `Z_Ct1` and `Z_Ct2`.
+
+Just an additional RC element has been added to the feedback line. The
+considerations with voltage drop at C~i~, current through c~i~ and
+resulting complex impedance have been dropped.
+
+Except for that it has one RC element and one order less, this circuit is
+nearly the same as in test case link:../3poleLP/[3poleLP^].
 
 See link:2poleLP.cnl[netlist file^] for more details of the circuit.

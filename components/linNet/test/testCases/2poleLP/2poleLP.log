@@ -1,12 +1,12 @@
-Dec 13 23:34:55 2014 - 000032 ms - RESULT - 
+Jun 20 12:02:23 2026 - 000002 ms - RESULT - 
 -----------------------------------------------------------------------------
  linNet - The Software for symbolic Analysis of linear Electronic Circuits
- Copyright (C) 2014 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ Copyright (C) 2014-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
  This is free software; see the source for copying conditions. There is NO
  warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 -----------------------------------------------------------------------------
-Dec 13 23:34:55 2014 - 000032 ms - RESULT - Reading circuit file C:\user\vranken\projects\linNet\trunk\components\linNet\test\testCases\2poleLP.cnl successfully done
-Dec 13 23:34:55 2014 - 000033 ms - RESULT - User-defined result G (Bode plot):
+Jun 20 12:02:23 2026 - 000003 ms - RESULT - Reading circuit file C:\home\vranken\projects\linNetAtGitHub\linNet\components\linNet\test\testCases\2poleLP\2poleLP.cnl successfully done
+Jun 20 12:02:23 2026 - 000004 ms - RESULT - User-defined result G (Bode plot):
 The dependency of U2 on U1:
   U2(s) = N_U2_U1(s)/D_U2_U1(s) * U1(s), with
     N_U2_U1(s) = -R^2*Ct1*Ct2 * s^2
@@ -15,75 +15,12 @@ The dependency of U2 on U1:
     D_U2_U1(s) = R^2*Ct1*Ct2 * s^2
                  +(R*Ct1 + R*Ct2) * s
                  +1
-Dec 13 23:34:55 2014 - 000036 ms - RESULT - User-defined result Z_Ct1 (Bode plot):
+Jun 20 12:02:23 2026 - 000006 ms - RESULT - User-defined result Z_Ct1 (Bode plot):
 The dependency of U_Ct1 on I_Ct1:
   U_Ct1(s) = N_U_Ct1_I_Ct1(s)/D_U_Ct1_I_Ct1(s) * I_Ct1(s), with
     N_U_Ct1_I_Ct1(s) = 1
     D_U_Ct1_I_Ct1(s) = Ct1 * s
-Dec 13 23:34:55 2014 - 000041 ms - RESULT - User-defined result Z_Ct2 (Bode plot):
-The dependency of U_Ct2 on I_Ct2:
-  U_Ct2(s) = N_U_Ct2_I_Ct2(s)/D_U_Ct2_I_Ct2(s) * I_Ct2(s), with
-    N_U_Ct2_I_Ct2(s) = 1
-    D_U_Ct2_I_Ct2(s) = Ct2 * s
-May 11 08:47:36 2026 - 000003 ms - RESULT - 
------------------------------------------------------------------------------
- linNet - The Software for symbolic Analysis of linear Electronic Circuits
- Copyright (C) 2014-2023 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
- This is free software; see the source for copying conditions. There is NO
- warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
------------------------------------------------------------------------------
-May 11 08:47:36 2026 - 000004 ms -  ERROR - Error opening circuit file. Can't open input file 2poleLP (errno: 13, Permission denied)
-May 11 08:47:36 2026 - 000012 ms -  ERROR - Reading circuit file 2poleLP failed
-May 11 08:47:45 2026 - 000003 ms - RESULT - 
------------------------------------------------------------------------------
- linNet - The Software for symbolic Analysis of linear Electronic Circuits
- Copyright (C) 2014-2023 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
- This is free software; see the source for copying conditions. There is NO
- warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
------------------------------------------------------------------------------
-May 11 08:47:45 2026 - 000026 ms - RESULT - Reading circuit file 2poleLP.cnl successfully done
-May 11 08:47:45 2026 - 000029 ms - RESULT - User-defined result G (Bode plot):
-The dependency of U2 on U1:
-  U2(s) = N_U2_U1(s)/D_U2_U1(s) * U1(s), with
-    N_U2_U1(s) = -R^2*Ct1*Ct2 * s^2
-                 -(2*R*Ct1 + 2*R*Ct2) * s
-                 -3
-    D_U2_U1(s) = R^2*Ct1*Ct2 * s^2
-                 +(R*Ct1 + R*Ct2) * s
-                 +1
-May 11 08:47:45 2026 - 000063 ms - RESULT - User-defined result Z_Ct1 (Bode plot):
-The dependency of U_Ct1 on I_Ct1:
-  U_Ct1(s) = N_U_Ct1_I_Ct1(s)/D_U_Ct1_I_Ct1(s) * I_Ct1(s), with
-    N_U_Ct1_I_Ct1(s) = 1
-    D_U_Ct1_I_Ct1(s) = Ct1 * s
-May 11 08:47:45 2026 - 000079 ms - RESULT - User-defined result Z_Ct2 (Bode plot):
-The dependency of U_Ct2 on I_Ct2:
-  U_Ct2(s) = N_U_Ct2_I_Ct2(s)/D_U_Ct2_I_Ct2(s) * I_Ct2(s), with
-    N_U_Ct2_I_Ct2(s) = 1
-    D_U_Ct2_I_Ct2(s) = Ct2 * s
-May 11 08:48:46 2026 - 000003 ms - RESULT - 
------------------------------------------------------------------------------
- linNet - The Software for symbolic Analysis of linear Electronic Circuits
- Copyright (C) 2014-2023 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
- This is free software; see the source for copying conditions. There is NO
- warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
------------------------------------------------------------------------------
-May 11 08:48:46 2026 - 000005 ms - RESULT - Reading circuit file 2poleLP.cnl successfully done
-May 11 08:48:46 2026 - 000009 ms - RESULT - User-defined result G (Bode plot):
-The dependency of U2 on U1:
-  U2(s) = N_U2_U1(s)/D_U2_U1(s) * U1(s), with
-    N_U2_U1(s) = -R^2*Ct1*Ct2 * s^2
-                 -(2*R*Ct1 + 2*R*Ct2) * s
-                 -3
-    D_U2_U1(s) = R^2*Ct1*Ct2 * s^2
-                 +(R*Ct1 + R*Ct2) * s
-                 +1
-May 11 08:48:46 2026 - 000056 ms - RESULT - User-defined result Z_Ct1 (Bode plot):
-The dependency of U_Ct1 on I_Ct1:
-  U_Ct1(s) = N_U_Ct1_I_Ct1(s)/D_U_Ct1_I_Ct1(s) * I_Ct1(s), with
-    N_U_Ct1_I_Ct1(s) = 1
-    D_U_Ct1_I_Ct1(s) = Ct1 * s
-May 11 08:48:46 2026 - 000089 ms - RESULT - User-defined result Z_Ct2 (Bode plot):
+Jun 20 12:02:23 2026 - 000007 ms - RESULT - User-defined result Z_Ct2 (Bode plot):
 The dependency of U_Ct2 on I_Ct2:
   U_Ct2(s) = N_U_Ct2_I_Ct2(s)/D_U_Ct2_I_Ct2(s) * I_Ct2(s), with
     N_U_Ct2_I_Ct2(s) = 1

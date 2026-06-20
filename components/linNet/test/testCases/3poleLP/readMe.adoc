@@ -1,0 +1,25 @@
+This folder contains linNet test case `3poleLP`:
+
+[[figSchematics]]
+.Schematics
+image::3poleLP.svg[Schematics, width="80%", pdfwidth="80%", align="center"]
+
+This test case proves the correct computation of a low pass filter with
+three poles. The inverting op-amp configuration is used with a single
+resistor in the input (which means constant input impedance) and three RC
+elements in series with a resistor in the feedback line. All resistors are
+chosen identical so that the amplification begins with 4 with DC operation
+and falls to 3, 2, 1 when the corner frequencies of the RC elements are
+reached (or 12, 9.5, 6, 0 dB, respectively). The capacitors are chosen
+such that these corner frequencies are different enough to see the steps
+in the Bode plot. The correct behavior is proven in the
+link:3poleLP/G.svg[Bode plot^].
+
+The circuit is nearly the same as in test case link:../2poleLP/[2poleLP^].
+Just an additional RC element has been added to the feedback line. The
+considerations with voltage drop at C~i~, current through c~i~ and
+resulting complex impedance have been dropped.
+
+link:3poleLP.log[Calculation results^]
+
+See link:3poleLP.cnl[netlist file^] for more details of the circuit.

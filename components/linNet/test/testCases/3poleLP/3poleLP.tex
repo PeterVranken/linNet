@@ -1,0 +1,84 @@
+% See https://holatex.app/playground.html# for an online viewer.
+
+\documentclass[tikz]{standalone} % Standalone: Only graphics export.
+\usepackage[european,siunitx]{circuitikz}
+\usetikzlibrary{arrows.meta}
+\usepackage{listings}
+\lstset{basicstyle=\footnotesize\ttfamily}
+\begin{document}
+
+  \newcommand{\eq}{=}
+  \tikzset{ameter/.style={rmeterwa, t=A}}
+  \begin{circuitikz}
+  %\begin{circuitikz}[american voltages, american currents]
+
+    \tikzset{>=Triangle} % Define tip of arrows drawn with [->]
+    \ctikzset{voltage=straight}
+
+    \def\lR{2.5}        % Length of device like R
+    \def\dFbY{2.5}        % Delta in direction Y of feedback line
+    \def\dRcX{0.3}      % Delta x between RC elements
+    \def\dRcY{0.7}      % Delta up/down of the two feedback rows
+    \def\dOpX{1.8*\lR}    % Move OP in x to middle of feedback line
+    \def\sizeY{\lR}     % Heights Uin
+    \def\lUio{0.8}      % Length of I/O connectors
+    \def\gapUio{0.3}    % Gap between I/O connector and voltage arrow
+
+    % Input, continued by lower part of feedback line.
+    \draw (0,\sizeY) coordinate(in)
+      to[R,l=$R$,o-*] ++(\lR,0) coordinate(BotLftFb)
+      -- ++(0,\dFbY) to[short,-*] ++(\dRcX,0) coordinate(lftRc1)
+      -- ++(0,-\dRcY)
+      to[C,l=$C_{t_1}$] ++(\lR,0)
+      to[short,-*] ++(0,\dRcY) coordinate(rhtRc1)
+      to[short,-*] ++(\dRcX,0) coordinate(lftRc2)
+      -- ++(0,-\dRcY)
+      to[C,l=$C_{t_2}$] ++(\lR,0)
+      to[short,-*] ++(0,\dRcY) coordinate(rhtRc2)
+      to[short,-*] ++(\dRcX,0) coordinate(lftRc3)
+      -- ++(0,-\dRcY)
+      to[C,l=$C_{t_3}$] ++(\lR,0)
+      to[short,-*] ++(0,\dRcY) coordinate(rhtRc3)
+      to[R,l=$R_u$] ++(\lR,0) coordinate(rhtRu);
+
+    % Upper left part of feedback line.
+    \draw (lftRc1) -- ++(0,\dRcY)
+    to[R,l=$R_{t_1}$] ++(\lR,0) coordinate(rhtRt1)
+    -- (rhtRt1 -| rhtRc1) -- (rhtRc1);
+
+    % Upper middle part of feedback line.
+    \draw (lftRc2) -- ++(0,\dRcY)
+    to[R,l=$R_{t_2}$] ++(\lR,0) coordinate(rhtRt2)
+    -- (rhtRt2-|rhtRc2) -- (rhtRc2);
+
+    % Upper right part of feedback line.
+    \draw (lftRc3) -- ++(0,\dRcY)
+    to[R,l=$R_{t_3}$] ++(\lR,0) coordinate(rhtRt3)
+    -- (rhtRt3-|rhtRc3) -- (rhtRc3);
+
+    % OP, output to Ru.
+    \draw (BotLftFb) -- ++(\dOpX,0)
+      node[plain amp,anchor=-](OP){$OP$}
+      (OP.out) -- (OP.out-|rhtRu) coordinate(BotRhtFb)
+      -- (rhtRu);
+
+    % Ground line.
+    \coordinate(origin) at (0,0);
+    \draw (origin) to[short,o-*] (origin-|OP.-)
+      to[short,-o] ($(origin-|BotRhtFb)+(\lUio,0)$) coordinate(gndOut);
+
+    % OP to ground symbol.
+    \draw (OP.+) -- (origin-|OP.-) node[ground]{};
+
+    % Voltage arrow for input voltage U1.
+    \draw[->] ($(in)+(0,-\gapUio)$) -- node[midway,left]{$U_1$} ($(origin)+(0,\gapUio)$);
+
+    % Connectors for output voltage.
+    \draw (BotRhtFb) to[short, *-o] ++(\lUio,0) coordinate(out);
+
+    % Voltage arrow for output voltage.
+    \draw[->] ($(out)+(0,-\gapUio)$) -- node[midway,right]{$U_2$}
+      ($(gndOut)+(0,\gapUio)$);
+  \end{circuitikz}
+
+\end{document}
