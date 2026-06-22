@@ -1,0 +1,35 @@
+% See https://holatex.app/playground.html# for an online viewer.
+
+\documentclass[tikz]{standalone} % Standalone: Only graphics export.
+\usepackage[european,siunitx]{circuitikz}
+\usetikzlibrary{arrows.meta}
+\usepackage{listings}
+\lstset{basicstyle=\footnotesize\ttfamily}
+\begin{document}
+
+  \newcommand{\eq}{=}
+  \tikzset{ameter/.style={rmeterwa, t=A}}
+  \begin{circuitikz}
+
+    \tikzset{>=Triangle} % Define tip of arrows drawn with [->]
+    \ctikzset{voltage=straight}
+
+    \def\size{5}
+    \def\deltaUio{0.8}
+    \def\gapUin{0.5}
+    \def\lR{2.5}
+
+    \draw(0,2*\lR) coordinate(in)
+      to[ameter,i=$I_{ctrl}$,o-] ++(\lR,0)
+      to[R,l=$R_{in}$] ++(0,-\lR)
+      to[dcisource,l=$I\eq k*I_{ctrl}$,-*] ++(0,-\lR) coordinate(BotI)
+      node[ground]{};
+    \draw (BotI)
+      to[short,-o] ++(-\lR,0) coordinate(inGnd);
+
+    % Voltage arrow for input voltage Uin.
+    \draw[->] ($(in)+(0,-\gapUin)$) -- node[midway,left]{$U_{in}$} ($(inGnd)+(0,\gapUin)$);
+
+  \end{circuitikz}
+
+\end{document}

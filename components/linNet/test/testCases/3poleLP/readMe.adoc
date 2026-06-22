@@ -2,7 +2,7 @@ This folder contains linNet test case `3poleLP`:
 
 [[figSchematics]]
 .Schematics
-image::3poleLP.svg[Schematics, width="80%", pdfwidth="80%", align="center"]
+image::3poleLP.svg[Schematics, width="70%", pdfwidth="70%", align="center"]
 
 This test case proves the correct computation of a low pass filter with
 three poles. The inverting op-amp configuration is used with a single

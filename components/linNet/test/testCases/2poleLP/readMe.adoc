@@ -15,7 +15,7 @@ that these corner frequencies are different enough to see the steps in the
 Bode plot. The correct behavior is proven in the link:2poleLP/G.svg[Bode
 plot^].
 
-A plausibility test has been implemented in the net list. The voltage drop
+A plausibility test has been implemented in the netlist. The voltage drop
 at the capacitors are made user-defined voltages. The currents through the
 capacitors are measured with current probes. This allows having a result,
 which calculates the dependency of the voltage on the current --

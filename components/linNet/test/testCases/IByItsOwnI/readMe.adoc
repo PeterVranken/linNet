@@ -1,0 +1,11 @@
+This folder contains linNet test case `IByItsOwnI`:
+
+[[figSchematics]]
+.Schematics
+image::IByItsOwnI.svg[Schematics, width="30%", pdfwidth="30%", align="center"]
+
+A current source is controlled by its own current; we thus have I=k*I or
+I=0. This can be checked in the link:IByItsOwnI.log[calculation results^],
+look for `I_ctrl`.
+
+See link:IByItsOwnI.cnl[netlist file^] for more details of the circuit.
