@@ -1,0 +1,19 @@
+This folder contains linNet test case `NgtD`:
+
+[[figSchematics]]
+.Schematics
+image::NgtD.svg[Schematics, width="30%", pdfwidth="30%", align="center"]
+
+This test case proves, that linNet has no problems with a system, which
+has a nominator power in s that is greater than the denominator power. In
+this circuit we get such a result for the input current I~U1~ due to a
+directly connected capacitor C. Look for `I_U1` in the
+link:NgtD.log[calculation results^] .
+
+Octave has problems to plot the time domain result, which would contain
+a Dirac function and emits the unspecific error message: "This
+descriptor system cannot be converted to regular state-space form."
+MATLAB also rejects the plot but it responds with a clear and
+appropriate error message.
+
+See link:NgtD.cnl[netlist file^] for more details of the circuit.

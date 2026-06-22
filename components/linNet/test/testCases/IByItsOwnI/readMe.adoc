@@ -4,8 +4,14 @@ This folder contains linNet test case `IByItsOwnI`:
 .Schematics
 image::IByItsOwnI.svg[Schematics, width="30%", pdfwidth="30%", align="center"]
 
-A current source is controlled by its own current; we thus have I=k*I or
-I=0. This can be checked in the link:IByItsOwnI.log[calculation results^],
-look for `I_ctrl`.
+We have a current-controlled current source whose controlling current is
+defined as the same current that flows through the source. We have I=k*I
+or I=0 (k=1, I=undetermined, can be disregarded as linNet takes it as a
+symbol, which may have any value.) This can be checked in the
+link:IByItsOwnI.log[calculation results^], look for `I_ctrl`.
+
+As a consequence, a series connection of a current probe and such a
+dependent current source behaves like an open circuit when inserted
+between two nodes, and does not influence the overall circuit solution.
 
 See link:IByItsOwnI.cnl[netlist file^] for more details of the circuit.
