@@ -1,0 +1,51 @@
+% See https://holatex.app/playground.html# for an online viewer.
+
+\documentclass[tikz]{standalone} % Standalone: Only graphics export.
+\usepackage[european,siunitx]{circuitikz}
+\usetikzlibrary{arrows.meta}
+\usepackage{listings}
+\lstset{basicstyle=\footnotesize\ttfamily}
+\begin{document}
+
+  \newcommand{\eq}{=}
+  \tikzset{ameter/.style={rmeterwa, t=A}}
+  \begin{circuitikz}
+
+    \tikzset{>=Triangle} % Define tip of arrows drawn with [->]
+    \ctikzset{voltage=straight}
+    
+    \def\size{5}
+    \def\deltaUio{0.8}
+    \def\gapUin{0.3}
+    \def\lR{2.5}
+
+    \draw(0,\lR) coordinate(in) node[above]{$in$}
+      to[R,l^=$R_1$,a=$2.68k$,o-*] ++(\lR,0) coordinate(RhtR1)
+      to[R,l=$R_3$,a=$6.2k$,-*] ++(\lR,0)
+      node[plain amp, noinv input up, anchor=+](OP){$LF356N$}
+      to[short] ++(0,0.5*\lR) coordinate(LftC1)
+      to[C,l=$C_1$,a=$1n$,-*] ++(\lR,0) coordinate(RhtC1)
+      to[short] ++(0,0.5*\lR)
+      to[R,l_=$R_2$,a^=$9k$] ++(-2*\lR,0)
+      to[short] (RhtR1)
+      to[C,l_=$C_2$,a^=$25n$,-*] ++(0,-\lR);
+    \draw(RhtC1) -- (RhtC1|-OP.out);
+    \draw(OP.out)
+      -- (RhtC1|-OP.out)
+      to[short,*-o] ++(\deltaUio,0) coordinate(out) node[above]{$out$};
+    \draw(0,0) coordinate(inGnd)
+      to[short,o-*] (inGnd-|OP.-)
+      to[short,-o] (inGnd-|out) coordinate(outGnd);
+    
+    % Form lower OP input down to the ground line.
+    \draw(OP.-) -- (inGnd-|OP.-) node[ground]{};
+      
+    % Voltage arrow for input voltage Ue.
+    \draw[->] ($(in)+(0,-\gapUin)$) -- node[midway,left]{$U_e$} ($(inGnd)+(0,\gapUin)$);
+
+    % Voltage arrow for output voltage UA.
+    \draw[->] ($(out)+(0,-\gapUin)$) -- node[midway,right]{$U_A$} ($(outGnd)+(0,\gapUin)$);
+
+  \end{circuitikz}
+
+\end{document}
