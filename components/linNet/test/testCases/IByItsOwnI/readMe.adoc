@@ -6,7 +6,7 @@ image::IByItsOwnI.svg[Schematics, width="30%", pdfwidth="30%", align="center"]
 
 We have a current-controlled current source whose controlling current is
 defined as the same current that flows through the source. We have I=k*I
-or I=0 (k=1, I=undetermined, can be disregarded as linNet takes it as a
+or I=0 (k=1, I=undetermined, can be disregarded as linNet considers k as a
 symbol, which may have any value.) This can be checked in the
 link:IByItsOwnI.log[calculation results^], look for `I_ctrl`.
 

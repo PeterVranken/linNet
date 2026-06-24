@@ -2,8 +2,14 @@
  * @file IByItsOwn.cnl
  * Test case for linNet.
  *
- * A current source is controlled by its own current; we thus have I = k*I
- * or I=0.
+ * We have a current-controlled current source whose controlling current
+ * is defined as the same current that flows through the source. We have
+ * I=k*I or I=0 (k=1, I=undetermined, can be disregarded as linNet
+ * considers k as a symbol, which may have any value.)
+ * 
+ * As a consequence, a series connection of a current probe and such a
+ * dependent current source behaves like an open circuit when inserted
+ * between two nodes, and does not influence the overall circuit solution.
  *
  * Copyright (C) 2013 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
  *
