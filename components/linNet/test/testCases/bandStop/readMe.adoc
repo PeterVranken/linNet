@@ -2,7 +2,7 @@ This folder contains linNet test case `bandStop`:
 
 [[figSchematics]]
 .Schematics
-image::bandStop.svg[Schematics, width="90%", pdfwidth="90%", align="center"]
+image::BandStop.svg[Schematics, width="90%", pdfwidth="90%", align="center"]
 
 The circuit implements a band stop filter. This is the
 link:bandStop.log[calculation result^] as linNet produces it:
