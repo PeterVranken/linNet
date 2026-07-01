@@ -1,9 +1,9 @@
 /**
- * @file bandStop.makesOctave3-4-3-win32Crash.cnl
- *   Test case for linNet.\n
+ * @file bandStop.cnl
+ * Test case for linNet.
+ *
  * A band-stop filter, which can be computed by linNet and which can be
- * numerically computed by Octave 3.6.4 on Windows and MATLAB but which
- * makes Octave 3.4.3 on Windows crash.
+ * numerically computed by Octave or MATLAB.
  *
  * Copyright (C) 2014 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
  *

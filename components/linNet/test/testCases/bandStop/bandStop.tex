@@ -1,0 +1,85 @@
+% See https://holatex.app/playground.html# for an online viewer.
+
+\documentclass[tikz]{standalone} % Standalone: Only graphics export.
+\usepackage[european,siunitx]{circuitikz}
+\usetikzlibrary{arrows.meta}
+\usepackage{listings}
+\lstset{basicstyle=\footnotesize\ttfamily}
+\begin{document}
+
+  \newcommand{\eq}{=}
+  \tikzset{ameter/.style={rmeterwa, t=A}}
+  \begin{circuitikz}
+
+    \tikzset{>=Triangle} % Define tip of arrows drawn with [->]
+    \ctikzset{voltage=straight}
+    
+    \def\size{5}
+    \def\deltaUio{1.2}
+    \def\gapUin{0.3}
+    \def\lR{3}
+    \def\lS{\lR / 2}
+    \def\deltaRC{0.7}
+    
+    \draw (0,2*\lR) coordinate(in)
+      to [short,o-*] ++(\deltaUio,0) coordinate(k4)
+      to [short,-*] ++(\lS,0) coordinate(LftRC)
+      to [short] ++(0,\deltaRC) 
+      to [C,l=$C$] ++(\lR,0) 
+      to [short,-*] ++(0,-\deltaRC) 
+      to [short,-*] ++(\lS,0) coordinate(TopR3)
+      to [short,-*] ++(\lS,0) coordinate(TopR2)
+      to [R,l=$R_2$,-*] ++(0,-\lR) coordinate(BotR2)
+      to [C,l=$C_1\eq C$,-*] ++(\lR,0) coordinate(k3) 
+      to [R,l=$R_{12}\eq R_1$,-*] ++(\lR,0) coordinate(TopR13) 
+      to [R,l_=$R_{13}\eq R_1$] ++(0,-\lR)
+      to [short] ++(-3*\lR,0) coordinate(RhtR1)
+      to [R,l=$R_1$] ++(-\lR,0)
+      to [short] (k4|-RhtR1)
+      to [short] (k4);
+    \draw (LftRC)
+      to [short] ++(0,-\deltaRC) 
+      to [R,l=$R_{31}\eq R_3$] ++(\lR,0) 
+      to [short,-*] ++(0,\deltaRC);
+    \draw (TopR3)
+      to [R,l=$R_{3}$] ++(0,-\lR) 
+      node [ground]{};
+    
+    \draw (TopR13)     
+      node [plain amp,noinv input up,anchor=out,rotate=-90,label={above:$OP_1$}](OP1){};
+    \draw (OP1.+)
+      to [short] (in-|OP1.+)
+      to [short] (TopR2);
+    \draw (OP1.-)
+      to [short] (k3|-OP1.-)
+      to [short] (k3);
+    
+    \draw (BotR2)
+      node[plain amp,noinv input up,anchor=out,rotate=90,label={below:$OP_2$}](OP2){};
+    \draw (OP2.+)
+      to [short,-*] (RhtR1-|OP2.+);
+    \draw (OP2.-)
+      to [short] (k3|-OP2.-)
+      to [short] (k3);
+    
+    % Connector for input voltage U1.
+    \draw ($(in)+(0,-\lR)$) coordinate(inGnd)
+      node[ground]{}
+      node[ocirc]{};
+    
+    % Connectors for output voltage U2.
+    \draw (TopR13) 
+      to [short,-o] ++(\deltaUio,0) coordinate(out);
+    \draw ($(out)+(0,-\lR)$) coordinate(outGnd)
+      node[ground]{}
+      node[ocirc]{};
+    
+    % Voltage arrow for input voltage U1.
+    \draw[->] ($(in)+(0,-\gapUin)$) -- node[midway,left]{$U_1$} ($(inGnd)+(0,\gapUin)$);
+
+    % Voltage arrow for output voltage U2.
+    \draw[->] ($(out)+(0,-\gapUin)$) -- node[midway,right]{$U_2$} ($(outGnd)+(0,\gapUin)$);
+
+  \end{circuitikz}
+
+\end{document}
