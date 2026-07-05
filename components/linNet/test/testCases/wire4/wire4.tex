@@ -1,0 +1,53 @@
+% See https://holatex.app/playground.html# for an online viewer.
+
+\documentclass[tikz]{standalone} % Standalone: Only graphics export.
+\usepackage[european,siunitx]{circuitikz}
+\usetikzlibrary{arrows.meta}
+\usepackage{listings}
+\lstset{basicstyle=\footnotesize\ttfamily}
+\begin{document}
+
+  \newcommand{\eq}{=}
+  \tikzset{ameter/.style={rmeterwa, t=A}}
+  \begin{circuitikz}
+
+    \tikzset{>=Triangle} % Define tip of arrows drawn with [->]
+    \ctikzset{voltage=straight}
+
+    \def\size{5}
+    \def\deltaUio{1}
+    \def\gapUin{0.25}
+    \def\lR{2.5}
+    
+    % The upper line.
+    \draw (0,\lR) coordinate(I)
+      to [R=$R_i$,o-] ++(\lR,0) coordinate(K1)
+      to [L=$L$,*-] ++(\lR,0) coordinate(K2)
+      to [L=$L$,*-] ++(\lR,0) coordinate(K3)
+      to [L=$L$,*-] ++(\lR,0) coordinate(K4)
+      to [L=$L$,*-] ++(\lR,0) coordinate(O)
+      to [ameter,i=$I_{R_l}$,-*] ++(\lR,0) coordinate(Oa)
+      to [short,-o] ++(\deltaUio,0) coordinate(out);
+
+    % The ground line.
+    \draw (0,0)
+      to [short,o-o] (0,0 -| out) coordinate(outGnd);
+
+    % The capacitors.
+    \draw (K1) to [C=$C$,-*] ++(0,-\lR);
+    \draw (K2) to [C=$C$,-*] ++(0,-\lR);
+    \draw (K3) to [C=$C$,-*] ++(0,-\lR) node [ground]{};
+    \draw (K4) to [C=$C$,-*] ++(0,-\lR);
+    
+    % The load resistor.
+    \draw (Oa) to [R=$R_l$,-*] ++(0,-\lR);
+   
+    % Voltage arrow for input voltage U_1.
+    \draw[->] ($(I)+(0,-\gapUin)$) -- node[midway,left]{$U_1$} (0,\gapUin);
+    
+    % Voltage arrow for output voltage.
+    \draw[->] ($(out)+(0,-\gapUin)$) -- node[midway,right]{$U_2$} ($(outGnd)+(0,\gapUin)$);
+
+  \end{circuitikz}
+
+\end{document}

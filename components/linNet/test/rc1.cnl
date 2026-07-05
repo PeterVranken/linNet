@@ -50,4 +50,6 @@ it important to bring this into the Octave files, too? (les_linearEquationSystem
 
 Once the assertion is fixed, we can make this test case a threefold one, with different
 ground nodes selected and comparing the results.
+
+Meanwhile: A fix is available as branch issues/1-bad-result-def-asserts.
 */

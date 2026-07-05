@@ -23,7 +23,7 @@
 U Uin in gnd
 
 /* The next devices are useless but harmless. They lead to
-   self-elimination in the matric coeffiecients when setting up the LES and
+   self-elimination in the matrix coeffiecients when setting up the LES and
    don't appear in the result. (Besides that Icycle is reported as input
    quantity with null effect.) */
 R Rcyclic in in
@@ -90,8 +90,8 @@ I(U) k3_u2i in in in in
 /* The next triple of devices leads to a correct. The cyclic current I_k
    is defined and known (k*Uin/Rload) but is neither computed nor
    reported. Due to the cycle connection it eliminates itself in the
-   coefficient when setting up the LES. In general, the current through
-   controlled current sources is not a reported unknown of the system; if
+   coefficient when setting up the LES. In general, the current through a
+   controlled current source is not a reported unknown of the system; if
    it is of any interest one needs to put a current probe in series. */
 //R Rload in k1
 //PI ctrl k1 gnd
