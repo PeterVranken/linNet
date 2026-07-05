@@ -1,12 +1,12 @@
-Jun 19 23:45:08 2026 - 000001 ms - RESULT - 
+Jul 05 18:11:29 2026 - 000003 ms - RESULT - 
 -----------------------------------------------------------------------------
  linNet - The Software for symbolic Analysis of linear Electronic Circuits
  Copyright (C) 2014-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
  This is free software; see the source for copying conditions. There is NO
  warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 -----------------------------------------------------------------------------
-Jun 19 23:45:08 2026 - 000001 ms - RESULT - Reading circuit file C:\home\vranken\projects\linNetAtGitHub\linNet\components\linNet\test\testCases\test2\test2.cnl successfully done
-Jun 19 23:45:08 2026 - 000001 ms - RESULT - User-defined result cmpUlWithUrlc:
+Jul 05 18:11:29 2026 - 000004 ms - RESULT - Reading circuit file C:\home\vranken\projects\linNetAtGitHub\linNet\components\linNet\test\testCases\test2\test2.cnl successfully done
+Jul 05 18:11:29 2026 - 000004 ms - RESULT - User-defined result cmpUlWithUrlc:
 The solution for unknown U_L:
   U_L(s) = N_U_L_U1(s)/D_U_L_U1(s) * U1(s)
            + N_U_L_U2(s)/D_U_L_U2(s) * U2(s), with
@@ -32,7 +32,7 @@ The solution for unknown U_K_l:
                     +R1*R3*C * s
                     +R1
     D_U_K_l_U2(s) = D_U_L_U1(s)
-Jun 19 23:45:08 2026 - 000005 ms - RESULT - User-defined result U_L (Bode plot):
+Jul 05 18:11:29 2026 - 000007 ms - RESULT - User-defined result U_L (Bode plot):
 The dependency of U_L on U1:
   U_L(s) = N_U_L_U1(s)/D_U_L_U1(s) * U1(s), with
     N_U_L_U1(s) = -R1*R3*L*C*C1 * s^3
@@ -41,17 +41,17 @@ The dependency of U_L on U1:
                   +(R1*R2*R3*C*C1 + R1*L*C + R1*L*C1 + R2*L*C + R2*L*C1) * s^2
                   +(R1*R2*C + R1*R2*C1 + R1*R3*C + R2*R3*C) * s
                   +(R1 + R2)
-Jun 19 23:45:08 2026 - 000006 ms - RESULT - User-defined result U_C (Bode plot):
+Jul 05 18:11:29 2026 - 000008 ms - RESULT - User-defined result U_C (Bode plot):
 The dependency of U_C on U1:
   U_C(s) = N_U_C_U1(s)/D_U_C_U1(s) * U1(s), with
-    N_U_C_U1(s) = (R1*R3*L*C*C1 + R2*R3*L*C*C1) * s^3
-                  +R1*R2*R3*C*C1 * s^2
-                  +R2*R3*C * s
+    N_U_C_U1(s) = (R1*L*C1 + R2*L*C1) * s^2
+                  +R1*R2*C1 * s
+                  +R2
     D_U_C_U1(s) = (R1*R3*L*C*C1 + R2*R3*L*C*C1) * s^3
                   +(R1*R2*R3*C*C1 + R1*L*C + R1*L*C1 + R2*L*C + R2*L*C1) * s^2
                   +(R1*R2*C + R1*R2*C1 + R1*R3*C + R2*R3*C) * s
                   +(R1 + R2)
-Jun 19 23:45:08 2026 - 000006 ms - RESULT - User-defined result U_LC (Bode plot):
+Jul 05 18:11:29 2026 - 000010 ms - RESULT - User-defined result U_LC (Bode plot):
 The dependency of U_LC on U1:
   U_LC(s) = N_U_LC_U1(s)/D_U_LC_U1(s) * U1(s), with
     N_U_LC_U1(s) = -R1*R3*L*C*C1 * s^3
@@ -62,3 +62,14 @@ The dependency of U_LC on U1:
                    +(R1*R2*R3*C*C1 + R1*L*C + R1*L*C1 + R2*L*C + R2*L*C1) * s^2
                    +(R1*R2*C + R1*R2*C1 + R1*R3*C + R2*R3*C) * s
                    +(R1 + R2)
+Jul 05 18:11:29 2026 - 000011 ms - RESULT - User-defined result U_out (Bode plot):
+The dependency of U_out on U1:
+  U_out(s) = N_U_out_U1(s)/D_U_out_U1(s) * U1(s), with
+    N_U_out_U1(s) = (R1*R3*L*C*C1 + R2*R3*L*C*C1) * s^3
+                    +(R1*R2*R3*C*C1 + R1*L*C1 + R2*L*C1) * s^2
+                    +(R1*R2*C1 + R2*R3*C) * s
+                    +R2
+    D_U_out_U1(s) = (R1*R3*L*C*C1 + R2*R3*L*C*C1) * s^3
+                    +(R1*R2*R3*C*C1 + R1*L*C + R1*L*C1 + R2*L*C + R2*L*C1) * s^2
+                    +(R1*R2*C + R1*R2*C1 + R1*R3*C + R2*R3*C) * s
+                    +(R1 + R2)

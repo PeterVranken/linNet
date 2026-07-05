@@ -96,9 +96,9 @@ end
 
 % The dependency of U_C on U1:
 %   U_C(s) = N_U_C_U1(s)/D_U_C_U1(s) * U1(s), with
-%     N_U_C_U1(s) = (R1*R3*L*C*C1 + R2*R3*L*C*C1) * s^3
-%                   +R1*R2*R3*C*C1 * s^2
-%                   +R2*R3*C * s
+%     N_U_C_U1(s) = (R1*L*C1 + R2*L*C1) * s^2
+%                   +R1*R2*C1 * s
+%                   +R2
 %     D_U_C_U1(s) = (R1*R3*L*C*C1 + R2*R3*L*C*C1) * s^3
 %                   +(R1*R2*R3*C*C1 + R1*L*C + R1*L*C1 + R2*L*C + R2*L*C1) * s^2
 %                   +(R1*R2*C + R1*R2*C1 + R1*R3*C + R2*R3*C) * s
@@ -108,10 +108,9 @@ D_U_C_U1 = [ (R1*R3*L*C*C1 + R2*R3*L*C*C1)	 % s^3
            ; (R1*R2*C + R1*R2*C1 + R1*R3*C + R2*R3*C)	 % s^1
            ; (R1 + R2)	 % s^0
            ].';
-N_U_C_U1 = [ (R1*R3*L*C*C1 + R2*R3*L*C*C1)	 % s^3
-           ; R1*R2*R3*C*C1	 % s^2
-           ; R2*R3*C	 % s^1
-           ; 0	 % s^0
+N_U_C_U1 = [ (R1*L*C1 + R2*L*C1)	 % s^2
+           ; R1*R2*C1	 % s^1
+           ; R2	 % s^0
            ].';
 
 % Create an Octave LTI system object from the data above. First shape a descriptor object.
