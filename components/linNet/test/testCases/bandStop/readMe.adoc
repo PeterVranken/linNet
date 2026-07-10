@@ -41,9 +41,9 @@ Q = ---------------
      2*SQRT(R1*R2)
 ----
 
-The transfer function has a zero at s^2^=-w~0~^2^ or s=jw~0~; so the
-frequency f~0~=w~0~/(2*pi) is entirely filtered out. This is the meaning
-of a notch filter.
+The link:bandStop/G.svg[transfer function] has a zero at s^2^=-w~0~^2^ or
+s=jw~0~; so the frequency f~0~=w~0~/(2*pi) is entirely filtered out. This
+is the meaning of a notch filter.
 
 These results would become even simpler with the additional device
 contraint R~2~=R~1~. We had w~0~=1/(R~1~C) as for a simple 1^st^ order RC

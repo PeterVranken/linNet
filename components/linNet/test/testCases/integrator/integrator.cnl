@@ -1,7 +1,36 @@
-// An instable (but in practice still useful) system: the ideal integrator.
+/**
+ * @file integrator.cnl
+ * Test case for linNet.
+ *
+ * The ideal integrator: An instable but in practice still very useful
+ * system. Frequency response and step response are plotted in Octave. The
+ * devices have been chosen such that the Octave plots assume a time
+ * constant of 1s.
+ *
+ * Copyright (C) 2013-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ *
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the
+ * Free Software Foundation, either version 3 of the License, or (at your
+ * option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
 U   U1  in gnd
 
 OP  integ   op1 gnd  out
 
-R   R   in op1
-C   C   out op1
+/* The RC combination is chosen such that the output voltage raises (absolute) by 1V/s and
+   U1=1V. */
+R   R   in op1  R=10k
+C   C   out op1 C=100u
+
+/* We prepare two default plots: frequency and step response. */
+PLOT G U_out U1
+RES Step U_out

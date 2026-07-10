@@ -1,0 +1,60 @@
+/**
+ * @file directCapacitiveCoupling.cnl
+ * Test case for linNet.
+ *
+ * An RLC element with an additional capacity, which couples in- and
+ * output directly and which makes it a system of 3rd order. The directly
+ * coupling capacitor makes the power of numerator and denominator of the
+ * transfer function equal and leads to a Dirac impulse in the impulse
+ * response.
+ *
+ * In the numeric post-processing, Octave handles this very well. Of
+ * course, it can't plot the Dirac function but it prints:
+ *
+ * Warning: System "tf" has direct feedthrough!
+ * The impulse 1.000000*delta(t) is omitted in the impulse response from input "U1" to output "U_out"
+ *
+ * Copyright (C) 2014-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ *
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the
+ * Free Software Foundation, either version 3 of the License, or (at your
+ * option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
+ 
+/* Same as test.cir plus so that a simple translation of
+   the system into a Octave state space representation is impossible. A
+   partial fraction decomposition is needed for that. */
+// Octave 10 has no problems any more. Everything is plausible. Including step function of U_out
+U   U1  in1 gnd
+U   U2  in2 gnd
+R   R1  in1 K_l
+R   R2  in2 K_l
+L   L   K_l out
+C   C   out K_rc
+R   R3  K_rc gnd
+C   C1  in1 out
+
+DEF U_L K_l out
+DEF U_C out K_rc
+DEF U_LC K_l K_rc
+
+RES cmpUlWithUrlc U_L U_K_l
+
+/* See the dependency of voltage drop at L, at C and at L+C on the input
+   voltage (while the other is assumed to be zero). */
+PLOT U_L U_L U1 LOG 100 10.0 100e3
+PLOT U_C U_C U1 LOG 100 10.0 100e3
+PLOT U_LC U_LC U1 LOG 100 10.0 100e3
+
+/* See the dependency of ouput voltage on the input U1, while U2 is
+   assumed zero. */
+PLOT U_out U_out U1 LOG 100 10.0 100e3

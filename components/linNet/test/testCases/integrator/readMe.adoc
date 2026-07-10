@@ -4,13 +4,11 @@ This folder contains linNet test case `integrator`:
 .Schematics
 image::Integrator.svg[Schematics, width="30%", pdfwidth="30%", align="center"]
 
-An instable (but in practice still useful) system: the ideal integrator.
-
-TODO: Check and document, how the numeric post-processing with Octave
-behaves. See here the link:integrator/allDependents.m[Octave script with
-the transfer function object^].
+The ideal integrator: An instable but in practice still very useful
+system. link:integrator/G.svg[Frequency response^] and
+link:integrator/Step.svg[step response^] are plotted in Octave. The devices
+have been chosen such that the Octave plots assume a time constant of 1s.
 
 link:integrator.log[Calculation results^]
 
-See link:integrator.cnl[netlist file^] for more details of
-the circuits. 
+See link:integrator.cnl[netlist file^] for more details of the circuit. 
