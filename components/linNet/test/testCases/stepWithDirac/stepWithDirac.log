@@ -1,12 +1,12 @@
-Jul 10 17:28:42 2026 - 000001 ms - RESULT - 
+Jul 10 17:36:33 2026 - 000002 ms - RESULT - 
 -----------------------------------------------------------------------------
  linNet - The Software for symbolic Analysis of linear Electronic Circuits
  Copyright (C) 2014-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
  This is free software; see the source for copying conditions. There is NO
  warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 -----------------------------------------------------------------------------
-Jul 10 17:28:42 2026 - 000001 ms - RESULT - Reading circuit file C:\home\vranken\projects\linNetAtGitHub\linNet\components\linNet\test\testCases\NgtD\NgtD.cnl successfully done
-Jul 10 17:28:42 2026 - 000001 ms - RESULT - User-defined result allDependents:
+Jul 10 17:36:33 2026 - 000002 ms - RESULT - Reading circuit file C:\home\vranken\projects\linNetAtGitHub\linNet\components\linNet\test\testCases\stepWithDirac\stepWithDirac.cnl successfully done
+Jul 10 17:36:33 2026 - 000002 ms - RESULT - User-defined result allDependents:
 The solution for unknown U_out:
   U_out(s) = N_U_out_U1(s)/D_U_out_U1(s) * U1(s), with
     N_U_out_U1(s) = R1
@@ -20,7 +20,7 @@ The solution for unknown I_U1:
     N_I_U1_U1(s) = (R1*C1 + R2*C1) * s
                    +1
     D_I_U1_U1(s) = D_U_out_U1(s)
-Jul 10 17:28:42 2026 - 000001 ms - RESULT - User-defined result G_I_U1 (Bode plot):
+Jul 10 17:36:33 2026 - 000004 ms - RESULT - User-defined result G_I_U1 (Bode plot):
 The dependency of I_U1 on U1:
   I_U1(s) = N_I_U1_U1(s)/D_I_U1_U1(s) * U1(s), with
     N_I_U1_U1(s) = (R1*C1 + R2*C1) * s

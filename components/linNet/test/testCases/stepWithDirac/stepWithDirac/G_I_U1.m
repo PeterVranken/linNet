@@ -1,8 +1,8 @@
-function [tf_allDependents deviceConstants wBode tiStep] = allDependents(deviceConstants)
+function [tf_G_I_U1 deviceConstants wBode tiStep] = G_I_U1(deviceConstants)
 
-%   [tf deviceConstants wBode tiStep] = allDependents(deviceConstants)
-%                   The transfer function allDependents of electric linear network
-%                   C:\home\vranken\projects\linNetAtGitHub\linNet\components\linNet\test\testCases\NgtD\NgtD.cnl
+%   [tf deviceConstants wBode tiStep] = G_I_U1(deviceConstants)
+%                   The transfer function G_I_U1 of electric linear network
+%                   C:\home\vranken\projects\linNetAtGitHub\linNet\components\linNet\test\testCases\stepWithDirac\stepWithDirac.cnl
 %
 %   Input argument(s):
 %       deviceConstants
@@ -28,14 +28,14 @@ function [tf_allDependents deviceConstants wBode tiStep] = allDependents(deviceC
 %                   information was specified
 %
 %   Example(s):
-%       allDependents
+%       G_I_U1
 %                   Plot the transfer or step function as defined in the
 %                   circuit file
-%       [tf_allDependents p] = allDependents
+%       [tf_G_I_U1 p] = G_I_U1
 %                   Get a TF object and the default set of device constants
 %       p.R1 = 2*p.R2
 %                   (Modify the device constants in p)
-%       step(allDependents(p))
+%       step(G_I_U1(p))
 %                   Plot the step response of the system with modified device
 %                   constants
 %
@@ -83,57 +83,34 @@ if nargout >= 2
     deviceConstants.C1	= C1;
 end
 
-% User-defined result allDependents:
+% User-defined result G_I_U1 (Bode plot):
 
-% The solution for unknown U_out:
-%   U_out(s) = N_U_out_U1(s)/D_U_out_U1(s) * U1(s), with
-%     N_U_out_U1(s) = R1
-%     D_U_out_U1(s) = (R1 + R2)
-D_U_out_U1 = [ (R1 + R2)	 % s^0
-             ].';
-N_U_out_U1 = [ R1	 % s^0
-             ].';
-
-% The solution for unknown U_in:
-%   U_in(s) = N_U_in_U1(s)/D_U_in_U1(s) * U1(s), with
-%     N_U_in_U1(s) = 1
-%     D_U_in_U1(s) = 1
-D_U_in_U1 = [ 1	 % s^0
-            ].';
-N_U_in_U1 = [ 1	 % s^0
-            ].';
-
-% The solution for unknown I_U1:
+% The dependency of I_U1 on U1:
 %   I_U1(s) = N_I_U1_U1(s)/D_I_U1_U1(s) * U1(s), with
 %     N_I_U1_U1(s) = (R1*C1 + R2*C1) * s
 %                    +1
-%     D_I_U1_U1(s) = D_U_out_U1(s)
-D_I_U1_U1 = D_U_out_U1;
+%     D_I_U1_U1(s) = (R1 + R2)
+D_I_U1_U1 = [ (R1 + R2)	 % s^0
+            ].';
 N_I_U1_U1 = [ (R1*C1 + R2*C1)	 % s^1
             ; 1	 % s^0
             ].';
 
 % Create an Octave LTI system object from the data above. First shape a descriptor object.
-systemDesc_allDependents.name = 'allDependents';
-systemDesc_allDependents.numeratorAry = ...
-    { N_U_out_U1
-      N_U_in_U1
-      N_I_U1_U1
+systemDesc_G_I_U1.name = 'G_I_U1';
+systemDesc_G_I_U1.numeratorAry = ...
+    { N_I_U1_U1
     };
-systemDesc_allDependents.denominatorAry = ...
-    { D_U_out_U1
-      D_U_in_U1
-      D_I_U1_U1
+systemDesc_G_I_U1.denominatorAry = ...
+    { D_I_U1_U1
     };
-systemDesc_allDependents.inputNameAry = ...
+systemDesc_G_I_U1.inputNameAry = ...
     { 'U1'
     };
-systemDesc_allDependents.outputNameAry = ...
-    { 'U_out'
-      'U_in'
-      'I_U1'
+systemDesc_G_I_U1.outputNameAry = ...
+    { 'I_U1'
     };
-systemDesc_allDependents.plotInfo = ...
+systemDesc_G_I_U1.plotInfo = ...
     struct( 'isLogX', {} ...
           , 'noPoints', {} ...
           , 'freqMin', {} ...
@@ -141,25 +118,25 @@ systemDesc_allDependents.plotInfo = ...
           );
 
 % Create the Octave LTI system object from the descriptor.
-tf_allDependents = createLtiSystem(systemDesc_allDependents);
+tf_G_I_U1 = createLtiSystem(systemDesc_G_I_U1);
 
 % Compute a suitable vector of frequency and time points.
-wBode  = getFrequencyVector(systemDesc_allDependents);
-tiStep = getSampleTimeVector(systemDesc_allDependents);
+wBode  = getFrequencyVector(systemDesc_G_I_U1);
+tiStep = getSampleTimeVector(systemDesc_G_I_U1);
 
 if nargout == 0
-    % Plot the step response of allDependents.
+    % Plot the transfer function of G_I_U1.
     figure
-    step(tf_allDependents, tiStep)
-    disp(['This function can create the LTI system object tf_allDependents for you; please, type' char(10) ...
-          'help allDependents for more.' char(10) ...
+    bode(tf_G_I_U1, wBode)
+    disp(['This function can create the LTI system object tf_G_I_U1 for you; please, type' char(10) ...
+          'help G_I_U1 for more.' char(10) ...
           '  You can use this object with functions like bode to plot the transfer function' char(10) ...
           'or step and impulse to plot the step or impulse response time functions or lsim' char(10) ...
           'to compute or plot the system response to arbitrary input signals. A stability' char(10) ...
           'analysis can be done using function nyquist. Please refer to the online help' char(10) ...
           'for these commands' char(10)] ...
         );
-    clear tf_allDependents tiStep wBode
+    clear tf_G_I_U1 tiStep wBode
 end
 
-end % of function allDependents
+end % of function G_I_U1
