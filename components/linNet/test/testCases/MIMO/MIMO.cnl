@@ -1,0 +1,46 @@
+/**
+ * @file MIMO.cnl
+ * Test case for linNet.
+ *
+ * An LC element with two independently injected input voltages serves as
+ * a simple MIMO system. Three voltages are calculated and form the system
+ * outputs.   
+ *
+ * In the numeric post-processing, Octave shows a matrix-plot with the
+ * step function of every output voltage depending on both inputs (while
+ * it assumes the other input to be zero).
+ *
+ * Copyright (C) 2014-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ *
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the
+ * Free Software Foundation, either version 3 of the License, or (at your
+ * option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
+ 
+/* This is the MI-part of MIMO: We have two input voltages. */
+U   U1  in1 gnd
+U   U2  in2 gnd
+
+R   R1  in1 K_l
+R   R2  in2 K_l
+L   L   K_l out
+C   C   out gnd
+
+/* We make the voltage drop across the inductivity visible. */
+DEF U_L K_l out
+
+/* Plot the frequency response of the output in dependency of the first
+   input, while the second input is pulled to ground. */ 
+PLOT G_out_U1 U_out U1 LOG 10 10 20k
+ 
+/* This is the MO-part of MIMO: We define the outputs of the system. */
+RES MIMO U_out U_K_l U_L LIN 500 50 20k

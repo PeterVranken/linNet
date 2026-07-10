@@ -1,0 +1,41 @@
+Jul 10 18:27:25 2026 - 000002 ms - RESULT - 
+-----------------------------------------------------------------------------
+ linNet - The Software for symbolic Analysis of linear Electronic Circuits
+ Copyright (C) 2014-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ This is free software; see the source for copying conditions. There is NO
+ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+-----------------------------------------------------------------------------
+Jul 10 18:27:25 2026 - 000003 ms - RESULT - Reading circuit file C:\home\vranken\projects\linNetAtGitHub\linNet\components\linNet\test\testCases\MIMO\MIMO.cnl successfully done
+Jul 10 18:27:25 2026 - 000003 ms - RESULT - User-defined result G_out_U1 (Bode plot):
+The dependency of U_out on U1:
+  U_out(s) = N_U_out_U1(s)/D_U_out_U1(s) * U1(s), with
+    N_U_out_U1(s) = R2
+    D_U_out_U1(s) = (R1*L*C + R2*L*C) * s^2
+                    +R1*R2*C * s
+                    +(R1 + R2)
+Jul 10 18:27:25 2026 - 000004 ms - RESULT - User-defined result MIMO:
+The solution for unknown U_out:
+  U_out(s) = N_U_out_U1(s)/D_U_out_U1(s) * U1(s)
+             + N_U_out_U2(s)/D_U_out_U2(s) * U2(s), with
+    N_U_out_U1(s) = R2
+    D_U_out_U1(s) = (R1*L*C + R2*L*C) * s^2
+                    +R1*R2*C * s
+                    +(R1 + R2)
+    N_U_out_U2(s) = R1
+    D_U_out_U2(s) = D_U_out_U1(s)
+The solution for unknown U_K_l:
+  U_K_l(s) = N_U_K_l_U1(s)/D_U_K_l_U1(s) * U1(s)
+             + N_U_K_l_U2(s)/D_U_K_l_U2(s) * U2(s), with
+    N_U_K_l_U1(s) = R2*L*C * s^2
+                    +R2
+    D_U_K_l_U1(s) = D_U_out_U1(s)
+    N_U_K_l_U2(s) = R1*L*C * s^2
+                    +R1
+    D_U_K_l_U2(s) = D_U_out_U1(s)
+The solution for unknown U_L:
+  U_L(s) = N_U_L_U1(s)/D_U_L_U1(s) * U1(s)
+           + N_U_L_U2(s)/D_U_L_U2(s) * U2(s), with
+    N_U_L_U1(s) = R2*L*C * s^2
+    D_U_L_U1(s) = D_U_out_U1(s)
+    N_U_L_U2(s) = R1*L*C * s^2
+    D_U_L_U2(s) = D_U_out_U1(s)
