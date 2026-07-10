@@ -83,7 +83,7 @@ if nargout >= 2
     deviceConstants.C1	= C1;
 end
 
-% Result AllDependents in the frequency domain:
+% User-defined result allDependents:
 
 % The solution for unknown U_out:
 %   U_out(s) = N_U_out_U1(s)/D_U_out_U1(s) * U1(s), with

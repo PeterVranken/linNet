@@ -7,7 +7,7 @@
  * In this circuit we get such a result for the input current I_in due to
  * the directly connected capacitor C1.
  *
- * Octave has problems to plot the time domain result, which would contain
+ * Octave has problems to plot the step function, which would contain
  * a Dirac function and emits the unspecific error message: "This
  * descriptor system cannot be converted to regular state-space form."
  * MATLAB rejects the plot, too, but it responds with a clear and
@@ -34,3 +34,10 @@ U   U1  in  gnd
 C   C1  in  gnd
 R   R1  out gnd
 R   R2  in  out
+
+/* We let linNet calculate all unknowns of the small circuit. */
+RES allDependents U_out U_in I_U1
+
+/* We define a second result for the input current. This time to get a plot of the
+   frequency response in dependency of the input voltage. */
+PLOT G_I_U1 I_U1 U1
