@@ -2,7 +2,7 @@ function [tf_U_L deviceConstants wBode tiStep] = U_L(deviceConstants)
 
 %   [tf deviceConstants wBode tiStep] = U_L(deviceConstants)
 %                   The transfer function U_L of electric linear network
-%                   C:\home\vranken\projects\linNetAtGitHub\linNet\components\linNet\test\testCases\test2\test2.cnl
+%                   C:\home\vranken\projects\linNetAtGitHub\linNet\components\linNet\test\testCases\directCapacitiveCoupling\directCapacitiveCoupling.cnl
 %
 %   Input argument(s):
 %       deviceConstants

@@ -30,10 +30,6 @@
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
  
-/* Same as test.cir plus so that a simple translation of
-   the system into a Octave state space representation is impossible. A
-   partial fraction decomposition is needed for that. */
-// Octave 10 has no problems any more. Everything is plausible. Including step function of U_out
 U   U1  in1 gnd
 U   U2  in2 gnd
 R   R1  in1 K_l

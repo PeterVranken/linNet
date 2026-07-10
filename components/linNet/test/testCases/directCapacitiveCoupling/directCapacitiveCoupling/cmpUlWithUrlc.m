@@ -2,7 +2,7 @@ function [tf_cmpUlWithUrlc deviceConstants wBode tiStep] = cmpUlWithUrlc(deviceC
 
 %   [tf deviceConstants wBode tiStep] = cmpUlWithUrlc(deviceConstants)
 %                   The transfer function cmpUlWithUrlc of electric linear network
-%                   C:\home\vranken\projects\linNetAtGitHub\linNet\components\linNet\test\testCases\test2\test2.cnl
+%                   C:\home\vranken\projects\linNetAtGitHub\linNet\components\linNet\test\testCases\directCapacitiveCoupling\directCapacitiveCoupling.cnl
 %
 %   Input argument(s):
 %       deviceConstants
