@@ -1,0 +1,128 @@
+Jul 11 22:42:57 2026 - 000007 ms - RESULT - 
+-----------------------------------------------------------------------------
+ linNet - The Software for symbolic Analysis of linear Electronic Circuits
+ Copyright (C) 2014-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ This is free software; see the source for copying conditions. There is NO
+ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+-----------------------------------------------------------------------------
+Jul 11 22:42:57 2026 - 000009 ms - RESULT - Reading circuit file C:\home\vranken\projects\linNetAtGitHub\linNet\components\linNet\test\testCases\useCaseBipolarTModel\useCaseBipolarTModel.cnl successfully done
+Jul 11 22:42:57 2026 - 000011 ms - RESULT - User-defined result DC:
+The solution for unknown U_C:
+  U_C(s) = N_U_C_Ubatt(s)/D_U_C_Ubatt(s) * Ubatt(s)
+           + N_U_C_Uin(s)/D_U_C_Uin(s) * Uin(s)
+           + N_U_C_Ube(s)/D_U_C_Ube(s) * Ube(s), with
+    N_U_C_Ubatt(s) = (beta*R1*R2*Re*Rec*Ce*Cin + R1*R2*Re*Rec*Ce*Cin) * s^2
+                     +(beta*R1*R2*Re*Cin + beta*R1*Re*Rec*Ce - beta*R2*Rc*Re*Ce
+                       - beta*R2*Rc*Rec*Ce + beta*R2*Re*Rec*Ce + R1*R2*Re*Ce
+                       + R1*R2*Re*Cin + R1*R2*Rec*Ce + R1*Re*Rec*Ce + R2*Re*Rec*Ce
+                      ) * s
+                     +(beta*R1*Re - beta*R2*Rc + beta*R2*Re + R1*R2 + R1*Re
+                       + R2*Re
+                      )
+    D_U_C_Ubatt(s) = (beta*R1*R2*Re*Rec*Ce*Cin + R1*R2*Re*Rec*Ce*Cin) * s^2
+                     +(beta*R1*R2*Re*Cin + beta*R1*Re*Rec*Ce + beta*R2*Re*Rec*Ce
+                       + R1*R2*Re*Ce + R1*R2*Re*Cin + R1*R2*Rec*Ce + R1*Re*Rec*Ce
+                       + R2*Re*Rec*Ce
+                      ) * s
+                     +(beta*R1*Re + beta*R2*Re + R1*R2 + R1*Re + R2*Re)
+    N_U_C_Uin(s) = -(beta*R1*R2*Rc*Re*Ce*Cin + beta*R1*R2*Rc*Rec*Ce*Cin) * s^2
+                   -beta*R1*R2*Rc*Cin * s
+    D_U_C_Uin(s) = D_U_C_Ubatt(s)
+    N_U_C_Ube(s) = (beta*R1*R2*Rc*Re*Ce*Cin + beta*R1*R2*Rc*Rec*Ce*Cin) * s^2
+                   +(beta*R1*R2*Rc*Cin + beta*R1*Rc*Re*Ce + beta*R1*Rc*Rec*Ce
+                     + beta*R2*Rc*Re*Ce + beta*R2*Rc*Rec*Ce
+                    ) * s
+                   +(beta*R1*Rc + beta*R2*Rc)
+    D_U_C_Ube(s) = D_U_C_Ubatt(s)
+The solution for unknown U_B:
+  U_B(s) = N_U_B_Ubatt(s)/D_U_B_Ubatt(s) * Ubatt(s)
+           + N_U_B_Uin(s)/D_U_B_Uin(s) * Uin(s)
+           + N_U_B_Ube(s)/D_U_B_Ube(s) * Ube(s), with
+    N_U_B_Ubatt(s) = (beta*R2*Re*Rec*Ce + R2*Re*Rec*Ce) * s
+                     +(beta*R2*Re + R2*Re)
+    D_U_B_Ubatt(s) = D_U_C_Ubatt(s)
+    N_U_B_Uin(s) = (beta*R1*R2*Re*Rec*Ce*Cin + R1*R2*Re*Rec*Ce*Cin) * s^2
+                   +(beta*R1*R2*Re*Cin + R1*R2*Re*Cin) * s
+    D_U_B_Uin(s) = D_U_C_Ubatt(s)
+    N_U_B_Ube(s) = (R1*R2*Re*Ce + R1*R2*Rec*Ce) * s
+                   +R1*R2
+    D_U_B_Ube(s) = D_U_C_Ubatt(s)
+The solution for unknown I_Ubatt:
+  I_Ubatt(s) = N_I_Ubatt_Ubatt(s)/D_I_Ubatt_Ubatt(s) * Ubatt(s)
+               + N_I_Ubatt_Uin(s)/D_I_Ubatt_Uin(s) * Uin(s)
+               + N_I_Ubatt_Ube(s)/D_I_Ubatt_Ube(s) * Ube(s), with
+    N_I_Ubatt_Ubatt(s) = (beta*R2*Re*Rec*Ce*Cin + R2*Re*Rec*Ce*Cin) * s^2
+                         +(beta*R2*Re*Ce + beta*R2*Re*Cin + beta*R2*Rec*Ce
+                           + beta*Re*Rec*Ce + R2*Re*Ce + R2*Re*Cin + R2*Rec*Ce
+                           + Re*Rec*Ce
+                          ) * s
+                         +(beta*R2 + beta*Re + R2 + Re)
+    D_I_Ubatt_Ubatt(s) = D_U_C_Ubatt(s)
+    N_I_Ubatt_Uin(s) = (beta*R1*R2*Re*Ce*Cin + beta*R1*R2*Rec*Ce*Cin - beta*R2*Re*Rec*Ce*Cin
+                        - R2*Re*Rec*Ce*Cin
+                       ) * s^2
+                       +(beta*R1*R2*Cin - beta*R2*Re*Cin - R2*Re*Cin) * s
+    D_I_Ubatt_Uin(s) = D_U_C_Ubatt(s)
+    N_I_Ubatt_Ube(s) = -(beta*R1*R2*Re*Ce*Cin + beta*R1*R2*Rec*Ce*Cin) * s^2
+                       -(beta*R1*R2*Cin + beta*R1*Re*Ce + beta*R1*Rec*Ce
+                         + beta*R2*Re*Ce + beta*R2*Rec*Ce + R2*Re*Ce + R2*Rec*Ce
+                        ) * s
+                       -(beta*R1 + beta*R2 + R2)
+    D_I_Ubatt_Ube(s) = D_U_C_Ubatt(s)
+The solution for unknown I_base:
+  I_base(s) = N_I_base_Ubatt(s)/D_I_base_Ubatt(s) * Ubatt(s)
+              + N_I_base_Uin(s)/D_I_base_Uin(s) * Uin(s)
+              + N_I_base_Ube(s)/D_I_base_Ube(s) * Ube(s), with
+    N_I_base_Ubatt(s) = (R2*Re*Ce + R2*Rec*Ce) * s
+                        +R2
+    D_I_base_Ubatt(s) = D_U_C_Ubatt(s)
+    N_I_base_Uin(s) = (R1*R2*Re*Ce*Cin + R1*R2*Rec*Ce*Cin) * s^2
+                      +R1*R2*Cin * s
+    D_I_base_Uin(s) = D_U_C_Ubatt(s)
+    N_I_base_Ube(s) = -(R1*R2*Re*Ce*Cin + R1*R2*Rec*Ce*Cin) * s^2
+                      -(R1*R2*Cin + R1*Re*Ce + R1*Rec*Ce + R2*Re*Ce + R2*Rec*Ce) * s
+                      -(R1 + R2)
+    D_I_base_Ube(s) = D_U_C_Ubatt(s)
+Jul 11 22:42:57 2026 - 000015 ms - RESULT - User-defined result G (Bode plot):
+The dependency of U_out on Uin:
+  U_out(s) = N_U_out_Uin(s)/D_U_out_Uin(s) * Uin(s), with
+    N_U_out_Uin(s) = -(beta*R1*R2*Rc*Re*Ce*Cin + beta*R1*R2*Rc*Rec*Ce*Cin) * s^2
+                     -beta*R1*R2*Rc*Cin * s
+    D_U_out_Uin(s) = (beta*R1*R2*Re*Rec*Ce*Cin + R1*R2*Re*Rec*Ce*Cin) * s^2
+                     +(beta*R1*R2*Re*Cin + beta*R1*Re*Rec*Ce + beta*R2*Re*Rec*Ce
+                       + R1*R2*Re*Ce + R1*R2*Re*Cin + R1*R2*Rec*Ce + R1*Re*Rec*Ce
+                       + R2*Re*Rec*Ce
+                      ) * s
+                     +(beta*R1*Re + beta*R2*Re + R1*R2 + R1*Re + R2*Re)
+Jul 11 22:42:57 2026 - 000017 ms - RESULT - User-defined result Z (Bode plot):
+The dependency of Uin on I_Uin:
+  Uin(s) = N_Uin_I_Uin(s)/D_Uin_I_Uin(s) * I_Uin(s), with
+    N_Uin_I_Uin(s) = (beta*R1*R2*Re*Rec*Ce*Cin + R1*R2*Re*Rec*Ce*Cin) * s^2
+                     +(beta*R1*R2*Re*Cin + beta*R1*Re*Rec*Ce + beta*R2*Re*Rec*Ce
+                       + R1*R2*Re*Ce + R1*R2*Re*Cin + R1*R2*Rec*Ce + R1*Re*Rec*Ce
+                       + R2*Re*Rec*Ce
+                      ) * s
+                     +(beta*R1*Re + beta*R2*Re + R1*R2 + R1*Re + R2*Re)
+    D_Uin_I_Uin(s) = (beta*R1*Re*Rec*Ce*Cin + beta*R2*Re*Rec*Ce*Cin + R1*R2*Re*Ce*Cin
+                      + R1*R2*Rec*Ce*Cin + R1*Re*Rec*Ce*Cin + R2*Re*Rec*Ce*Cin
+                     ) * s^2
+                     +(beta*R1*Re*Cin + beta*R2*Re*Cin + R1*R2*Cin + R1*Re*Cin
+                       + R2*Re*Cin
+                      ) * s
+Jul 11 22:42:57 2026 - 000019 ms - RESULT - User-defined result humSupp (Bode plot):
+The dependency of U_out on Ubatt:
+  U_out(s) = N_U_out_Ubatt(s)/D_U_out_Ubatt(s) * Ubatt(s), with
+    N_U_out_Ubatt(s) = (beta*R1*R2*Re*Rec*Ce*Cin + R1*R2*Re*Rec*Ce*Cin) * s^2
+                       +(beta*R1*R2*Re*Cin + beta*R1*Re*Rec*Ce - beta*R2*Rc*Re*Ce
+                         - beta*R2*Rc*Rec*Ce + beta*R2*Re*Rec*Ce + R1*R2*Re*Ce
+                         + R1*R2*Re*Cin + R1*R2*Rec*Ce + R1*Re*Rec*Ce + R2*Re*Rec*Ce
+                        ) * s
+                       +(beta*R1*Re - beta*R2*Rc + beta*R2*Re + R1*R2 + R1*Re
+                         + R2*Re
+                        )
+    D_U_out_Ubatt(s) = (beta*R1*R2*Re*Rec*Ce*Cin + R1*R2*Re*Rec*Ce*Cin) * s^2
+                       +(beta*R1*R2*Re*Cin + beta*R1*Re*Rec*Ce + beta*R2*Re*Rec*Ce
+                         + R1*R2*Re*Ce + R1*R2*Re*Cin + R1*R2*Rec*Ce + R1*Re*Rec*Ce
+                         + R2*Re*Rec*Ce
+                        ) * s
+                       +(beta*R1*Re + beta*R2*Re + R1*R2 + R1*Re + R2*Re)

@@ -2,7 +2,7 @@ This folder contains linNet test case `useCaseBipolarTModel`:
 
 [[figSchematics]]
 .Schematics
-image::UseCaseBipolarTModel.jpg[Schematics, width="30%", pdfwidth="30%", align="center"]
+image::UseCaseBipolarTModel.jpg[Schematics, width="40%", pdfwidth="40%", align="center"]
 
 Single stage linear audio amplifier using bipolar transistor. Both,
 link:useCaseBipolarTModel/G.svg[frequency response^] and DC operation point
