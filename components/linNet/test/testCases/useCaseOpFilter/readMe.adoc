@@ -2,7 +2,7 @@ This folder contains linNet test case `useCaseOpFilter`:
 
 [[figSchematics]]
 .Schematics
-image::UseCaseOpFilter.jpg[Schematics, width="50%", pdfwidth="50%", align="center"]
+image::UseCaseOpFilter.jpg[Schematics, width="30%", pdfwidth="30%", align="center"]
 
 This test demonstrates an op-amp filter with two time-constants. It is an
 example from the linNet manual, see Chapter 8, Typical Use Cases, for a
@@ -11,5 +11,5 @@ calculated with Octave in the numeric post-processing.
 
 link:useCaseOpFilter.log[Calculation results^]
 
-See link:useCaseOpFilter.cnl[netlist file^] for more details of
-the circuits. 
+See link:useCaseOpFilter.cnl[netlist file^] for more details of the
+circuit.

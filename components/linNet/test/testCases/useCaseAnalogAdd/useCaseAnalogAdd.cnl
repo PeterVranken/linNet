@@ -1,5 +1,5 @@
 /**
- * @file UseCaseAnalogAdd.cnl
+ * @file useCaseAnalogAdd.cnl
  * Test case for linNet.
  *
  * This test demonstrates an analog added with additional low-pass

@@ -1,5 +1,5 @@
 /**
- * @file UseCaseOpFilter.cnl
+ * @file useCaseOpFilter.cnl
  *   Test case for linNet.
  * This test demonstrates an op-amp filter with two time-constants. It is
  * an example from the linNet manual, see Chapter 8, Typical Use Cases,

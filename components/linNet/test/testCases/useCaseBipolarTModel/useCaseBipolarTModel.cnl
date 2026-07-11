@@ -1,0 +1,51 @@
+/**
+ * @file useCaseBipolarTModel.cnl
+ *   Test case for linNet.
+ *
+ * Single stage linear audio amplifier using bipolar transistor. Both,
+ * frequency response and DC operation point of the stage can be discussed
+ * based on the linNet calculation results.
+ * 
+ * The circuit is an example from the linNet manual, see Chapter 8.3,
+ * Transistor model, for the detailled discussion.
+ * 
+ * An added, manually made M script, BipolarTModel_opRangeByLsim.m, helps
+ * understanding what the strictly linear behavior of linNet means - what
+ * can be simulated, what fails to simulate.
+ *
+ * Copyright (C) 2014-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ *
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the
+ * Free Software Foundation, either version 3 of the License, or (at your
+ * option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
+ 
+U    Ubatt   vss   gnd   // 12 V
+U    Uin     in    gnd      
+C    Cin     in    B     Cin=100u
+R    R1      vss   B     R1=10k
+R    R2      B     gnd   R2=1.2k
+R    Rc      vss   C     Rc=6.8k
+R    Re      E     gnd   Re=680
+R    Rec     E     rce   Rec=68
+C    Ce      rce   gnd   Ce=4.7u
+C    Cout    C     out   Cout=1.5u
+
+/* The actual transistor model T1 */
+PI   I_base  B     b1
+U    Ube     b1    E     // 0.6 V
+I(I) beta    C     E     I_base  beta=250
+
+RES  DC      U_C   U_B   I_Ubatt I_base
+PLOT G       U_out Uin   LOG 50  10 20k
+PLOT Z       Uin   I_Uin LOG 50  10 20k
+PLOT humSupp U_out Ubatt LOG 500 10 100

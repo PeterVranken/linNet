@@ -15,5 +15,5 @@ high frequencies.
 
 link:useCaseAnalogAdd.log[Calculation results^]
 
-See link:useCaseAnalogAdd.cnl[netlist file^] for more details of
-the circuits. 
+See link:useCaseAnalogAdd.cnl[netlist file^] for more details of the
+circuit.
