@@ -1,0 +1,47 @@
+Jul 11 21:49:00 2026 - 000004 ms - RESULT - 
+-----------------------------------------------------------------------------
+ linNet - The Software for symbolic Analysis of linear Electronic Circuits
+ Copyright (C) 2014-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ This is free software; see the source for copying conditions. There is NO
+ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+-----------------------------------------------------------------------------
+Jul 11 21:49:00 2026 - 000006 ms - RESULT - Reading circuit file C:\home\vranken\projects\linNetAtGitHub\linNet\components\linNet\test\testCases\useCaseOpFilter\useCaseOpFilter.cnl successfully done
+Jul 11 21:49:00 2026 - 000006 ms - RESULT - User-defined result G (Bode plot):
+The dependency of Uout on Uin:
+  Uout(s) = N_Uout_Uin(s)/D_Uout_Uin(s) * Uin(s), with
+    N_Uout_Uin(s) = (R1*R2*C1 + R1*R2*C2) * s
+                    +(R1 + R2)
+    D_Uout_Uin(s) = R1*R2*C1 * s
+                    +R2
+Jul 11 21:49:00 2026 - 000008 ms - RESULT - User-defined result Gf:
+The solution for unknown Uout:
+  Uout(s) = N_Uout_Uin(s)/D_Uout_Uin(s) * Uin(s), with
+    N_Uout_Uin(s) = (R1*R2*C1 + R1*R2*C2) * s
+                    +(R1 + R2)
+    D_Uout_Uin(s) = R1*R2*C1 * s
+                    +R2
+Jul 11 21:49:00 2026 - 000010 ms - RESULT - User-defined result SIMO:
+The solution for unknown Uout:
+  Uout(s) = N_Uout_Uin(s)/D_Uout_Uin(s) * Uin(s), with
+    N_Uout_Uin(s) = (R1*R2*C1 + R1*R2*C2) * s
+                    +(R1 + R2)
+    D_Uout_Uin(s) = R1*R2*C1 * s
+                    +R2
+The solution for unknown U_Im:
+  U_Im(s) = N_U_Im_Uin(s)/D_U_Im_Uin(s) * Uin(s), with
+    N_U_Im_Uin(s) = 1
+    D_U_Im_Uin(s) = 1
+The solution for unknown I_OP:
+  I_OP(s) = N_I_OP_Uin(s)/D_I_OP_Uin(s) * Uin(s), with
+    N_I_OP_Uin(s) = R1*R2*C1*C2 * s^2
+                    +(R1*C1 + R2*C2) * s
+                    +1
+    D_I_OP_Uin(s) = D_Uout_Uin(s)
+Jul 11 21:49:00 2026 - 000013 ms - RESULT - User-defined result Iop (Bode plot):
+The dependency of I_OP on Uin:
+  I_OP(s) = N_I_OP_Uin(s)/D_I_OP_Uin(s) * Uin(s), with
+    N_I_OP_Uin(s) = R1*R2*C1*C2 * s^2
+                    +(R1*C1 + R2*C2) * s
+                    +1
+    D_I_OP_Uin(s) = R1*R2*C1 * s
+                    +R2
