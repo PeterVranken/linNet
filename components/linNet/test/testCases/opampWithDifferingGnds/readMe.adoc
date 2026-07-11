@@ -1,8 +1,8 @@
-This folder contains linNet test case `opampWithDifferingGnds.jpg`:
+This folder contains linNet test case `opampWithDifferingGnds`:
 
 [[figSchematics]]
 .Schematics
-image::OpampWithDifferingGnds.jpg[Schematics, width="30%", pdfwidth="30%", align="center"]
+image::OpampWithDifferingGnds.jpg[Schematics, width="70%", pdfwidth="70%", align="center"]
 
 This circuit demonstrates the importance of the ground node definition,
 when op-amps are used. The netlist defines twice the same op-amp
