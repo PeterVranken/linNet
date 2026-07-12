@@ -1,0 +1,13 @@
+This folder contains linNet test case `UByUWithSameOutputs`:
+
+[[figSchematics]]
+.Schematics
+image::UByUWithSameOutputs.svg[Schematics, width="50%", pdfwidth="50%", align="center"]
+
+Test of fault handling: Prove that connecting two ends of a controlled
+voltage source to the same node leads to linear contradictory equations.
+This can be checked in the link:UByUWithSameOutputs.log[calculation
+results^].
+
+See link:UByUWithSameOutputs.cnl[netlist file^] for more details of the
+circuit.

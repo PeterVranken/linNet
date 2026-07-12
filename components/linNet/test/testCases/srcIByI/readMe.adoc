@@ -14,4 +14,4 @@ circuits share the same ground.
 
 link:srcIByI.log[Calculation result^]
 
-See link:srcIByI.cnl[netlist file^] for more details of the circuits.
+See link:srcIByI.cnl[netlist file^] for more details of the circuit.

@@ -22,4 +22,4 @@ Please compare with the link:srcIByU.log[calculated result^]: The netlist
 specifies the ratios of the values of the different resistors. This leads
 to a further simplification of the expected result.
 
-See link:srcIByU.cnl[netlist file^] for more details of the circuits.
+See link:srcIByU.cnl[netlist file^] for more details of the circuit.

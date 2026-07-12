@@ -10,11 +10,11 @@ of the stage can be discussed based on the linNet
 link:useCaseBipolarTModel.log[calculation results^].
 
 The circuit is an example from the
-link:../../../doc/userGuide/linNet-userGuide.pdf[linNet manual], see
+link:../../../doc/userGuide/linNet-userGuide.pdf[linNet manual^], see
 Chapter 8.3, Transistor model, for the detailled discussion.
 
 An added, manually made M script,
-link:useCaseBipolarTModel/BipolarTModel_opRangeByLsim.m[`BipolarTModel_opRangeByLsim.m`],
+link:useCaseBipolarTModel/BipolarTModel_opRangeByLsim.m[`BipolarTModel_opRangeByLsim.m`^],
 helps understanding what the strictly linear behavior of linNet means --
 what can be simulated, what fails to simulate.
 
