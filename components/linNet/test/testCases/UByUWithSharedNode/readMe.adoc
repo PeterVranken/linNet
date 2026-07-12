@@ -1,0 +1,38 @@
+This folder contains linNet test case `UByUWithSharedNode`:
+
+[[figSchematics]]
+.Schematics
+image::UByUWithSharedNode.svg[Schematics, width="50%", pdfwidth="50%", align="center"]
+
+This test case proves, that a voltage controlled voltage source may have
+one (but only one) of its control inputs connected to one of the voltage
+outputs.
+
+Expected solution for U(U) = U~K3~:
+
+----
+          U0 - U(U)
+U_K2K3 = ----------- * R2     | Use: k*U_K2K3 = U(U)
+            R1+R2
+
+            k*R2
+U(U) = --------------- * U0
+        R1 + (k+1)*R2
+        
+        U0-U(U)
+I_U0 = ---------              | Inserting U(U)
+         R1+R2
+         
+              1
+     = --------------- * U0
+        R1 + (k+1)*R2
+----
+
+Note, R~3~ must not determine the voltage balance but only the current
+distribution between resistor and controlled voltage source.
+
+Please compare with the linNet link:UByUWithSharedNode.log[calculation
+results^].
+
+See link:UByUWithSharedNode.cnl[netlist file^] for more details of the
+circuit.

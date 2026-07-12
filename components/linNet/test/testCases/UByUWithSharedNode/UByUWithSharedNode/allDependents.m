@@ -2,7 +2,7 @@ function [tf_allDependents deviceConstants wBode tiStep] = allDependents(deviceC
 
 %   [tf deviceConstants wBode tiStep] = allDependents(deviceConstants)
 %                   The transfer function allDependents of electric linear network
-%                   testCases\UByUWithSharedNode.cnl
+%                   C:\home\vranken\projects\linNetAtGitHub\linNet\components\linNet\test\testCases\UByUWithSharedNode\UByUWithSharedNode.cnl
 %
 %   Input argument(s):
 %       deviceConstants
@@ -65,13 +65,13 @@ end
 error(nargchk(0, 1, nargin))
 if nargin == 1
     % The values of the device constants are taken from function argument deviceConstants.
-    Ubad	= deviceConstants.Ubad;
+    k	= deviceConstants.k;
     R1	= deviceConstants.R1;
     R2	= deviceConstants.R2;
     R3	= deviceConstants.R3;
 else
     % The default values of the device constants.
-    Ubad	= 1;
+    k	= 1;
     R1	= 100;
     R2	= 100;
     R3	= 100;
@@ -80,7 +80,7 @@ error(nargchk(0, 4, nargout))
 if nargout >= 2
     % The values of the device constants are assigned to function result deviceConstants.
     deviceConstants  	= struct;
-    deviceConstants.Ubad	= Ubad;
+    deviceConstants.k	= k;
     deviceConstants.R1	= R1;
     deviceConstants.R2	= R2;
     deviceConstants.R3	= R3;
@@ -99,19 +99,19 @@ N_U_K1_U0 = [ 1	 % s^0
 
 % The solution for unknown U_K2:
 %   U_K2(s) = N_U_K2_U0(s)/D_U_K2_U0(s) * U0(s), with
-%     N_U_K2_U0(s) = (Ubad*R2 + R2)
-%     D_U_K2_U0(s) = (Ubad*R2 + R1 + R2)
-D_U_K2_U0 = [ (Ubad*R2 + R1 + R2)	 % s^0
+%     N_U_K2_U0(s) = (k*R2 + R2)
+%     D_U_K2_U0(s) = (k*R2 + R1 + R2)
+D_U_K2_U0 = [ (k*R2 + R1 + R2)	 % s^0
             ].';
-N_U_K2_U0 = [ (Ubad*R2 + R2)	 % s^0
+N_U_K2_U0 = [ (k*R2 + R2)	 % s^0
             ].';
 
 % The solution for unknown U_K3:
 %   U_K3(s) = N_U_K3_U0(s)/D_U_K3_U0(s) * U0(s), with
-%     N_U_K3_U0(s) = Ubad*R2
+%     N_U_K3_U0(s) = k*R2
 %     D_U_K3_U0(s) = D_U_K2_U0(s)
 D_U_K3_U0 = D_U_K2_U0;
-N_U_K3_U0 = [ Ubad*R2	 % s^0
+N_U_K3_U0 = [ k*R2	 % s^0
             ].';
 
 % The solution for unknown I_U0:
@@ -122,14 +122,14 @@ D_I_U0_U0 = D_U_K2_U0;
 N_I_U0_U0 = [ 1	 % s^0
             ].';
 
-% The solution for unknown I_Ubad:
-%   I_Ubad(s) = N_I_Ubad_U0(s)/D_I_Ubad_U0(s) * U0(s), with
-%     N_I_Ubad_U0(s) = (Ubad*R2 - R3)
-%     D_I_Ubad_U0(s) = (Ubad*R2*R3 + R1*R3 + R2*R3)
-D_I_Ubad_U0 = [ (Ubad*R2*R3 + R1*R3 + R2*R3)	 % s^0
-              ].';
-N_I_Ubad_U0 = [ (Ubad*R2 - R3)	 % s^0
-              ].';
+% The solution for unknown I_k:
+%   I_k(s) = N_I_k_U0(s)/D_I_k_U0(s) * U0(s), with
+%     N_I_k_U0(s) = (k*R2 - R3)
+%     D_I_k_U0(s) = (k*R2*R3 + R1*R3 + R2*R3)
+D_I_k_U0 = [ (k*R2*R3 + R1*R3 + R2*R3)	 % s^0
+           ].';
+N_I_k_U0 = [ (k*R2 - R3)	 % s^0
+           ].';
 
 % Create an Octave LTI system object from the data above. First shape a descriptor object.
 systemDesc_allDependents.name = 'allDependents';
@@ -138,14 +138,14 @@ systemDesc_allDependents.numeratorAry = ...
       N_U_K2_U0
       N_U_K3_U0
       N_I_U0_U0
-      N_I_Ubad_U0
+      N_I_k_U0
     };
 systemDesc_allDependents.denominatorAry = ...
     { D_U_K1_U0
       D_U_K2_U0
       D_U_K3_U0
       D_I_U0_U0
-      D_I_Ubad_U0
+      D_I_k_U0
     };
 systemDesc_allDependents.inputNameAry = ...
     { 'U0'
@@ -155,7 +155,7 @@ systemDesc_allDependents.outputNameAry = ...
       'U_K2'
       'U_K3'
       'I_U0'
-      'I_Ubad'
+      'I_k'
     };
 systemDesc_allDependents.plotInfo = ...
     struct( 'isLogX', {} ...

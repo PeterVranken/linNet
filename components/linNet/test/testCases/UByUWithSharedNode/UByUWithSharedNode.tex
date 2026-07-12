@@ -1,0 +1,38 @@
+% See https://holatex.app/playground.html# for an online viewer.
+
+\documentclass[tikz]{standalone} % Standalone: Only graphics export.
+\usepackage[european,siunitx]{circuitikz}
+\usetikzlibrary{arrows.meta}
+\usepackage{listings}
+\lstset{basicstyle=\footnotesize\ttfamily}
+\begin{document}
+
+  \newcommand{\eq}{=}
+  \tikzset{ameter/.style={rmeterwa, t=A}}
+  \begin{circuitikz}
+
+    \tikzset{>=Triangle} % Define tip of arrows drawn with [->]
+    \ctikzset{voltage=straight}
+
+    \def\size{5}
+    \def\deltaUio{0.8}
+    \def\gapUin{0.3}
+    \def\lR{2.5}
+
+    \draw(0,\lR) coordinate(in0) node[above]{$K_1$}
+      to[R,l=$R_1$,o-] ++(\lR,0) node[above]{$K_2$}
+      to[R,l=$R_2$,v=$U_{K_2 K_3}$,-*] ++(\lR,0) node[above]{$K_3$}
+      to[R,l=$R_3$,-*] ++(0,-\lR) coordinate(gnd) node[ground]{}
+      to[short] ++(0.75*\lR,0)
+      to[V,v_<=$U(U)\eq kU_{K_2 K_3}$] ++(0,\lR)
+      to[short] ++(-0.75*\lR,0);
+
+    \draw(0,0) coordinate(in0Gnd)
+      to[short,o-] (gnd);
+
+    % Voltage arrow for input voltage U0.
+    \draw[->] ($(in0)+(0,-\gapUin)$) -- node[midway,left]{$U_0$} ($(in0Gnd)+(0,\gapUin)$);
+
+  \end{circuitikz}
+
+\end{document}
