@@ -1,0 +1,18 @@
+This folder contains several linNet test case from publication "Aktiver
+Tiefpass mit Operationsverstärker", downloaded at Fachhochschule Zürich on
+Mar 5~th~, 2014. The publication proposes different variants
+(configurations) of a low pass filter of 4th order, all of them from two
+stages a the basic op-amp filter of 2~nd~ order.
+
+Here, we see the schematics of one of the resulting filters; it is a
+Tschebyscheff low pass with a cutoff frequency of 10 kHz:
+
+[[figSchematics]]
+.Schematics
+image::Tschebyscheff-schematics-Fig-2.2.svg[Schematics, width="80%", pdfwidth="80%", align="center"]
+
+link:Tschebyscheff-schematics-Fig-2.2.log[Calculation results^] for the
+Tschebyscheff low pass in Figure 2.2.
+
+See link:Tschebyscheff-schematics-Fig-2.2.cnl[netlist file^] for more details of
+the Tschebyscheff low pass in Figure 2.2. 
