@@ -1,0 +1,77 @@
+% See https://holatex.app/playground.html# for an online viewer.
+
+\documentclass[tikz]{standalone} % Standalone: Only graphics export.
+\usepackage[european,siunitx]{circuitikz}
+\usetikzlibrary{arrows.meta}
+\usepackage{listings}
+\lstset{basicstyle=\footnotesize\ttfamily}
+\begin{document}
+
+  \newcommand{\eq}{=}
+  \tikzset{ameter/.style={rmeterwa, t=A}}
+  \begin{circuitikz}
+
+    \tikzset{>=Triangle} % Define tip of arrows drawn with [->]
+    \ctikzset{voltage=straight}
+    
+    \def\size{5}
+    \def\deltaUio{0.8}
+    \def\gapUin{0.3}
+    \def\lR{2.5}
+    \def\deltaX{8}
+    
+    \draw (0,\lR) coordinate(in) %node[above]{$in$}
+      to [R,l^=$R_1$,a=$2.68k$,o-*] ++(\lR,0) coordinate(RhtR1)
+      to [R,l=$R_3$,a=$6.2k$,-*] ++(\lR,0)
+      node [op amp,anchor=-](OP){$LF356N$}
+      to [C,l=$C_1$,a=$1n$,-*] ++(0,\lR) coordinate(TopC1)
+      to [short] ++(-\lR0,0) % coordinate(TopR2)
+      to [R,l_=$R_2$,a^=$9k$] (RhtR1)
+      to [C,l_=$C_2$,a^=$25n$,-*] ++(0,-\lR);
+    \draw (OP.out)
+      to [short,*-] (OP.out|-TopC1)
+      to [short] (TopC1);
+      
+    \draw (OP.out)
+      to [short] ++(\deltaUio,0) coordinate(out)
+      to [short] (in-|out);
+    \draw(0,0) coordinate(inGnd)
+      to [short,o-*] (inGnd-|OP.+)
+      to [short,-*] (inGnd-|out) coordinate(outGnd) node[ground]{};
+    
+    % From lower OP input down to the ground line.
+    \draw(OP.+) -- (inGnd-|OP.+);
+    
+    \draw (in-|out) coordinate(in2)
+      to [R,l^=$R_4$,a=$256\Omega$,-*] ++(\lR,0) coordinate(RhtR4)
+      to [R,l=$R_6$,a=$556\Omega$,-*] ++(\lR,0)
+      node [op amp,anchor=-](OP2){$LF356N$}
+      to [C,l=$C_3$,a=$1n$,-*] ++(0,\lR) coordinate(TopC3)
+      to [short] ++(-\lR0,0) % coordinate(TopR5)
+      to [R,l_=$R_5$,a^=$812\Omega$] (RhtR4)
+      to [C,l_=$C_4$,a^=$680n$,-*] ++(0,-\lR);
+    \draw (OP2.out)
+      to [short] (OP2.out|-TopC3)
+      to [short] (TopC3);
+      
+    \draw (OP2.out)
+      to [short,*-o] ++(\deltaUio,0) coordinate(out2); %node[above]{$out$}
+    \draw(outGnd) %coordinate(inGnd)
+      to [short,-*] (inGnd-|OP2.+)
+      to [short,-o] (inGnd-|out2) coordinate(out2Gnd);
+    
+    % From lower OP2 input down to the ground line.
+    \draw(OP2.+) -- (inGnd-|OP2.+);
+      
+    % Voltage arrow for input voltage UE.
+    \draw[->] ($(in)+(0,-\gapUin)$) -- node[midway,left]{$\mathit{UE}$} ($(inGnd)+(0,\gapUin)$);
+
+    % Voltage arrow for output voltage UA1 of first stage.
+    \draw[->] ($(out)+(0,-\gapUin)$) -- node[midway,right]{$\mathit{UA}_1$} ($(outGnd)+(0,\gapUin)$);
+    
+    % Voltage arrow for output voltage UA.
+    \draw[->] ($(out2)+(0,-\gapUin)$) -- node[midway,right]{$\mathit{UA}$} ($(out2Gnd)+(0,\gapUin)$);
+
+  \end{circuitikz}
+
+\end{document}

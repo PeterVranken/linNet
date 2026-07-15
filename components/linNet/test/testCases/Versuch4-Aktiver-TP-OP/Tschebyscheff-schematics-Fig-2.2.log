@@ -1,0 +1,51 @@
+Jul 15 22:16:57 2026 - 000004 ms - RESULT - 
+-----------------------------------------------------------------------------
+ linNet - The Software for symbolic Analysis of linear Electronic Circuits
+ Copyright (C) 2014-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ This is free software; see the source for copying conditions. There is NO
+ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+-----------------------------------------------------------------------------
+Jul 15 22:16:57 2026 - 000005 ms - RESULT - Reading circuit file C:\home\vranken\projects\linNetAtGitHub\linNet\components\linNet\test\testCases\Versuch4-Aktiver-TP-OP\Tschebyscheff-schematics-Fig-2.2.cnl successfully done
+Jul 15 22:16:57 2026 - 000006 ms - RESULT - User-defined result G (Bode plot):
+The dependency of UA on UE:
+  UA(s) = N_UA_UE(s)/D_UA_UE(s) * UE(s), with
+    N_UA_UE(s) = R2*R5
+    D_UA_UE(s) = R1*R2*R3*R4*R5*R6*C1*C2*C3*C4 * s^4
+                 +(R1*R2*R3*R4*R5*C1*C2*C3 + R1*R2*R3*R4*R6*C1*C2*C3 + R1*R2*R3*R5*R6*C1*C2*C3
+                   + R1*R2*R4*R5*R6*C1*C3*C4 + R1*R3*R4*R5*R6*C1*C3*C4 + R2*R3*R4*R5*R6*C1*C3*C4
+                  ) * s^3
+                 +(R1*R2*R3*R4*C1*C2 + R1*R2*R4*R5*C1*C3 + R1*R2*R4*R6*C1*C3
+                   + R1*R2*R5*R6*C1*C3 + R1*R3*R4*R5*C1*C3 + R1*R3*R4*R6*C1*C3
+                   + R1*R3*R5*R6*C1*C3 + R1*R4*R5*R6*C3*C4 + R2*R3*R4*R5*C1*C3
+                   + R2*R3*R4*R6*C1*C3 + R2*R3*R5*R6*C1*C3
+                  ) * s^2
+                 +(R1*R2*R4*C1 + R1*R3*R4*C1 + R1*R4*R5*C3 + R1*R4*R6*C3
+                   + R1*R5*R6*C3 + R2*R3*R4*C1
+                  ) * s
+                 +R1*R4
+Jul 15 22:16:57 2026 - 000062 ms - RESULT - User-defined result G1 (Bode plot):
+The dependency of UA1 on UE:
+  UA1(s) = N_UA1_UE(s)/D_UA1_UE(s) * UE(s), with
+    N_UA1_UE(s) = -R2*R4*R5*R6*C3*C4 * s^2
+                  -(R2*R4*R5*C3 + R2*R4*R6*C3 + R2*R5*R6*C3) * s
+                  -R2*R4
+    D_UA1_UE(s) = R1*R2*R3*R4*R5*R6*C1*C2*C3*C4 * s^4
+                  +(R1*R2*R3*R4*R5*C1*C2*C3 + R1*R2*R3*R4*R6*C1*C2*C3 + R1*R2*R3*R5*R6*C1*C2*C3
+                    + R1*R2*R4*R5*R6*C1*C3*C4 + R1*R3*R4*R5*R6*C1*C3*C4 + R2*R3*R4*R5*R6*C1*C3*C4
+                   ) * s^3
+                  +(R1*R2*R3*R4*C1*C2 + R1*R2*R4*R5*C1*C3 + R1*R2*R4*R6*C1*C3
+                    + R1*R2*R5*R6*C1*C3 + R1*R3*R4*R5*C1*C3 + R1*R3*R4*R6*C1*C3
+                    + R1*R3*R5*R6*C1*C3 + R1*R4*R5*R6*C3*C4 + R2*R3*R4*R5*C1*C3
+                    + R2*R3*R4*R6*C1*C3 + R2*R3*R5*R6*C1*C3
+                   ) * s^2
+                  +(R1*R2*R4*C1 + R1*R3*R4*C1 + R1*R4*R5*C3 + R1*R4*R6*C3
+                    + R1*R5*R6*C3 + R2*R3*R4*C1
+                   ) * s
+                  +R1*R4
+Jul 15 22:16:57 2026 - 000063 ms - RESULT - User-defined result G2 (Bode plot):
+The dependency of UA on UE_2:
+  UA(s) = N_UA_UE_2(s)/D_UA_UE_2(s) * UE_2(s), with
+    N_UA_UE_2(s) = -R5
+    D_UA_UE_2(s) = R4*R5*R6*C3*C4 * s^2
+                   +(R4*R5*C3 + R4*R6*C3 + R5*R6*C3) * s
+                   +R4

@@ -2,7 +2,7 @@ function [tf_Zi deviceConstants wBode tiStep] = Zi(deviceConstants)
 
 %   [tf deviceConstants wBode tiStep] = Zi(deviceConstants)
 %                   The transfer function Zi of electric linear network
-%                   testCases\Versuch4-Aktiver-TP-OP.cnl
+%                   C:\home\vranken\projects\linNetAtGitHub\linNet\components\linNet\test\testCases\Versuch4-Aktiver-TP-OP\Versuch4-Aktiver-TP-OP.cnl
 %
 %   Input argument(s):
 %       deviceConstants

@@ -2,7 +2,7 @@ This folder contains linNet test case `UByUWithSharedNode`:
 
 [[figSchematics]]
 .Schematics
-image::UByUWithSharedNode.svg[Schematics, width="50%", pdfwidth="50%", align="center"]
+image::UByUWithSharedNode.svg[Schematics, width="60%", pdfwidth="60%", align="center"]
 
 This test case proves, that a voltage controlled voltage source may have
 one (but only one) of its control inputs connected to one of the voltage
@@ -31,7 +31,7 @@ I_U0 = ---------              | Inserting U(U)
 Note, R~3~ must not determine the voltage balance but only the current
 distribution between resistor and controlled voltage source.
 
-Please compare with the linNet link:UByUWithSharedNode.log[calculation
+Please, compare with the linNet link:UByUWithSharedNode.log[calculation
 results^].
 
 See link:UByUWithSharedNode.cnl[netlist file^] for more details of the
