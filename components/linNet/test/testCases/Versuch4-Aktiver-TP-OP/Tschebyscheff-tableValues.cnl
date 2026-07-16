@@ -8,8 +8,9 @@
  * characteristics and a cutoff frequency of 10 kHz.
  *
  * The filter schematics and the device values have been taken from a
- * student thesis, Aktiver Tiefpass mit Operationsverstärker, downloaded
- * at Fachhochschule Zürich on Mar 5th, 2014.
+ * student internship report, Aktiver Tiefpass mit Operationsverstärker,
+ * downloaded as http://www.geoid.ch/misc/labor/Versuch4-Aktiver-TP-OP.pdf
+ * on Mar 5th, 2014.
  *
  * There are different *.cnl files with identical netlist. Only the device
  * values are chosen differently. The PDF document proposes Butterworth
