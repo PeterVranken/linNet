@@ -1,10 +1,10 @@
 /**
- * @file Tschebyscheff-tableValues.cnl
+ * @file Chebyshev-schematics-Fig-2.2.cnl
  * Test case for linNet.
  *
  * A 4th-order LP filter, which can be computed by linNet and which can be
  * numerically computed by Octave or MATLAB. The device value are
- * configured such that the Octave default plots show Tschebyscheff
+ * configured such that the Octave default plots show Chebyshev
  * characteristics and a cutoff frequency of 10 kHz.
  *
  * The filter schematics and the device values have been taken from a
@@ -14,13 +14,13 @@
  *
  * There are different *.cnl files with identical netlist. Only the device
  * values are chosen differently. The PDF document proposes Butterworth
- * and Tschebyscheff filters and it makes the distinction between
+ * and Chebyshev filters and it makes the distinction between
  * theoretically calculated values and those of deliverable devices from
  * the standard series. The different netlist files implement all four
  * variants. 
  *
- * Here, we have the Tschebyscheff low pass according to the table with
- * theoretic values on page 8 of the document.
+ * Here, we have the Chebyshev low pass according to Figure 2.2 on
+ * page 8 of the document.
  *
  * Copyright (C) 2014-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
  *
@@ -38,28 +38,33 @@
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
+/* Filter according to Versuch4-Aktiver-TP-OP.pdf
+   (http://www.geoid.ch/misc/labor/Versuch4-Aktiver-TP-OP.pdf as of Mar 5,
+   2014, figure 1.1. */
+// Devices values according to the schematics Abbildung 2.2 on page 8.
+
 U UE        in          gnd
 DEF UE_2    out1in2     gnd
 DEF UA1     out1in2     gnd
 DEF UA      out         gnd
 
 /* First stage */
-R R1        in      K11             R1=2.86k
-R R2        K11     out1in2         R2=9k
-R R3        K11     K12             R3=6.2k
+R R1        in      K11             R1=3.6k
+R R2        K11     out1in2         R2=11.3k
+R R3        K11     K12             R3=5.6k
 
 C C1        K12     out1in2         C1=1n
-C C2        K11     gnd             C2=25n
+C C2        K11     gnd             C2=22n
 
 OP LF356N_1 K12     gnd     out1in2
 
 /* Second stage */
-R R4        out1in2 K21             R4=256
-R R5        K21     out             R5=812
-R R6        K21     K22             R6=556
+R R4        out1in2 K21             R4=253
+R R5        K21     out             R5=800
+R R6        K21     K22             R6=560
 
 C C3        K22     out             C3=1n
-C C4        K21     gnd             C4=674n
+C C4        K21     gnd             C4=680n
 
 OP LF356N_2 K22     gnd     out
 

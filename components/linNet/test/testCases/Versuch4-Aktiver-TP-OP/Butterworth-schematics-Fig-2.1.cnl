@@ -14,7 +14,7 @@
  *
  * There are different *.cnl files with identical netlist. Only the device
  * values are chosen differently. The PDF document proposes Butterworth
- * and Tschebyscheff filters and it makes the distinction between
+ * and Chebyshev filters and it makes the distinction between
  * theoretically calculated values and those of deliverable devices from
  * the standard series. The different netlist files implement all four
  * variants. 

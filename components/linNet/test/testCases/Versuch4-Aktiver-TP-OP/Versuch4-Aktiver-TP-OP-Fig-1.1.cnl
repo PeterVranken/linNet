@@ -1,10 +1,10 @@
 /**
- * @file Tschebyscheff-tableValues.cnl
+ * @file Chebyshev-tableValues.cnl
  * Test case for linNet.
  *
  * A 2nd-order LP filter, which can be computed by linNet and which can be
  * numerically computed by Octave or MATLAB. Two stages of this kind can
- * be put in series to realize a Butterworth or Tschebyscheff filter of
+ * be put in series to realize a Butterworth or Chebyshev filter of
  * 4th order.
  *
  * The filter schematics and the device values have been taken from a
@@ -13,10 +13,14 @@
  * on Mar 5th, 2014.
  *
  * The netlist implements the filter stage shown in Figure 1.1 on page 1.
- * The chosen device values realize the first stage of the Tschebyscheff
+ * The chosen device values realize the first stage of the Chebyshev
  * low pass according to the table with theoretic values on page 8 of the
  * document.
  *
+ * The netlist has been completed by a load current, which allows to
+ * specify result Zo, the output impedance. (Which we expect to be zero as
+ * it is the output of an ideal op-amp.)
+ * 
  * Copyright (C) 2014 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
  *
  * This program is free software: you can redistribute it and/or modify it
