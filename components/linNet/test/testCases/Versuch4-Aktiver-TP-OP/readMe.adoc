@@ -1,18 +1,73 @@
-This folder contains several linNet test case from publication "Aktiver
-Tiefpass mit Operationsverstärker", downloaded at Fachhochschule Zürich on
-Mar 5~th~, 2014. The publication proposes different variants
-(configurations) of a low pass filter of 4th order, all of them from two
-stages a the basic op-amp filter of 2~nd~ order.
+= Butterworth and Chebyshev
+
+This folder contains several linNet test cases from publication "Aktiver
+Tiefpass mit Operationsverstärker", downloaded as
+http://www.geoid.ch/misc/labor/Versuch4-Aktiver-TP-OP.pdf on Mar 5^th^,
+2014. The publication proposes different variants (configurations) of a
+low pass filter of 4^th^ order, all of them made from two consecutive
+stages of a basic
+link:Versuch4-Aktiver-TP-OP-Fig-1.1.svg[op-amp filter of 2^nd^ order^].
+
+== Chebyshev low pass filter
 
 Here, we see the schematics of one of the resulting filters; it is a
-Tschebyscheff low pass with a cutoff frequency of 10 kHz:
+Chebyshev low pass with a cutoff frequency of 10 kHz. The device value are
+the same as in Figure 2.2 on page 8 of the original document:
 
 [[figSchematics]]
-.Schematics
-image::Tschebyscheff-schematics-Fig-2.2.svg[Schematics, width="80%", pdfwidth="80%", align="center"]
+.Chebyshev low pass, 4^th^ order, with standardized device values
+image::Chebyshev-schematics-Fig-2.2.svg[Chebyshev low pass, width="80%", pdfwidth="80%", align="center"]
 
-link:Tschebyscheff-schematics-Fig-2.2.log[Calculation results^] for the
-Tschebyscheff low pass in Figure 2.2.
+The other filter variants differ only in the chosen device values; their
+otherwise identical schematics aren't shown here.
 
-See link:Tschebyscheff-schematics-Fig-2.2.cnl[netlist file^] for more details of
-the Tschebyscheff low pass in Figure 2.2. 
+== Other filter variants and results
+
+[[tabVariants]]
+.The implemented filter variants
+[options="noheader",cols="3,2,2,2,2,2", width="80%"]
+|=======
+|Butterworth, table values
+|link:Butterworth-tableValues/G.svg[Frequency Response^]
+|link:Butterworth-tableValues/G1.svg[Stage 1 only^]
+|link:Butterworth-tableValues/G2.svg[Stage 2 only^]
+|link:Butterworth-tableValues.cnl[Netlist^]
+|link:Butterworth-tableValues.log[Calculation Result^]
+
+|Butterworth, Fig 2.1
+|link:Butterworth-schematics-Fig-2.1/G.svg[Frequency Response^]
+|link:Butterworth-schematics-Fig-2.1/G1.svg[Stage 1 only^]
+|link:Butterworth-schematics-Fig-2.1/G2.svg[Stage 2 only^]
+|link:Butterworth-schematics-Fig-2.1.cnl[Netlist^]
+|link:Butterworth-schematics-Fig-2.1.log[Calculation Result^]
+
+|Chebyshev, table values
+|link:Chebyshev-tableValues/G.svg[Frequency Response^]
+|link:Chebyshev-tableValues/G1.svg[Stage 1 only^]
+|link:Chebyshev-tableValues/G2.svg[Stage 2 only^]
+|link:Chebyshev-tableValues.cnl[Netlist^]
+|link:Chebyshev-tableValues.log[Calculation Result^]
+
+|Chebyshev, Fig 2.2
+|link:Chebyshev-schematics-Fig-2.2/G.svg[Frequency Response^]
+|link:Chebyshev-schematics-Fig-2.2/G1.svg[Stage 1 only^]
+|link:Chebyshev-schematics-Fig-2.2/G2.svg[Stage 2 only^]
+|link:Chebyshev-schematics-Fig-2.2.cnl[Netlist^]
+|link:Chebyshev-schematics-Fig-2.2.log[Calculation Result^]
+
+|=======
+
+It is instructive to look first at the frequency responses of the two
+stages, columns 3 and 4, and then to see how they combine to the designed
+overall filter frequency response in column 2.
+
+The link:Versuch4-Aktiver-TP-OP-Fig-1.1/Zi.svg[input impedance^] of the
+filter is determined at the individual stage. The result of the numerical
+calculation in Octave is displayed as a frequency response in dB. For low
+frequencies, the values ​​are approximately 69 dB for the Chebyshev filter,
+corresponding to 10^(69/20), which is the value of R~1~. Close to the
+cutoff frequency, the impedance rises to its maximum of 6.5 kΩ.
+
+// Local Variables:
+// coding: utf-8
+// End:
