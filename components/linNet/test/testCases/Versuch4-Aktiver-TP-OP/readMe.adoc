@@ -1,18 +1,18 @@
 = Butterworth and Chebyshev
 
-This folder contains several linNet test cases from publication "Aktiver
-Tiefpass mit Operationsverstärker", downloaded as
-http://www.geoid.ch/misc/labor/Versuch4-Aktiver-TP-OP.pdf on Mar 5^th^,
-2014. The publication proposes different variants (configurations) of a
-low pass filter of 4^th^ order, all of them made from two consecutive
-stages of a basic
+This folder contains several linNet test cases from publication
+link:Versuch4-Aktiver-TP-OP.pdf["Aktiver Tiefpass mit Operationsverstärker"^],
+downloaded as http://www.geoid.ch/misc/labor/Versuch4-Aktiver-TP-OP.pdf on
+Mar 5^th^, 2014 (website no longer available). The publication proposes
+different variants of a low pass filter of 4^th^ order, all of them made
+from two consecutive stages of a basic
 link:Versuch4-Aktiver-TP-OP-Fig-1.1.svg[op-amp filter of 2^nd^ order^].
 
 == Chebyshev low pass filter
 
 Here, we see the schematics of one of the resulting filters; it is a
-Chebyshev low pass with a cutoff frequency of 10 kHz. The device value are
-the same as in Figure 2.2 on page 8 of the original document:
+Chebyshev low pass with a cutoff frequency of 10 kHz. The device values
+are the same as in Figure 2.2 on page 8 of the original document:
 
 [[figSchematics]]
 .Chebyshev low pass, 4^th^ order, with standardized device values
