@@ -2,7 +2,7 @@ function [tf_G deviceConstants wBode tiStep] = G(deviceConstants)
 
 %   [tf deviceConstants wBode tiStep] = G(deviceConstants)
 %                   The transfer function G of electric linear network
-%                   C:\home\vranken\projects\linNetAtGitHub\linNet\components\linNet\test\testCases\Versuch4-Aktiver-TP-OP\Versuch4-Aktiver-TP-OP.cnl
+%                   C:\home\vranken\projects\linNetAtGitHub\linNet\components\linNet\test\testCases\Versuch4-Aktiver-TP-OP\Versuch4-Aktiver-TP-OP-Fig-1.1.cnl
 %
 %   Input argument(s):
 %       deviceConstants
@@ -91,29 +91,29 @@ end
 
 % User-defined result G (Bode plot):
 
-% The dependency of UA on Ue:
-%   UA(s) = N_UA_Ue(s)/D_UA_Ue(s) * Ue(s), with
-%     N_UA_Ue(s) = -R2
-%     D_UA_Ue(s) = R1*R2*R3*C1*C2 * s^2
+% The dependency of UA on UE:
+%   UA(s) = N_UA_UE(s)/D_UA_UE(s) * UE(s), with
+%     N_UA_UE(s) = -R2
+%     D_UA_UE(s) = R1*R2*R3*C1*C2 * s^2
 %                  +(R1*R2*C1 + R1*R3*C1 + R2*R3*C1) * s
 %                  +R1
-D_UA_Ue = [ R1*R2*R3*C1*C2	 % s^2
+D_UA_UE = [ R1*R2*R3*C1*C2	 % s^2
           ; (R1*R2*C1 + R1*R3*C1 + R2*R3*C1)	 % s^1
           ; R1	 % s^0
           ].';
-N_UA_Ue = [ -R2	 % s^0
+N_UA_UE = [ -R2	 % s^0
           ].';
 
 % Create an Octave LTI system object from the data above. First shape a descriptor object.
 systemDesc_G.name = 'G';
 systemDesc_G.numeratorAry = ...
-    { N_UA_Ue
+    { N_UA_UE
     };
 systemDesc_G.denominatorAry = ...
-    { D_UA_Ue
+    { D_UA_UE
     };
 systemDesc_G.inputNameAry = ...
-    { 'Ue'
+    { 'UE'
     };
 systemDesc_G.outputNameAry = ...
     { 'UA'

@@ -68,6 +68,62 @@ frequencies, the values ​​are approximately 69 dB for the Chebyshev filter,
 corresponding to 10^(69/20), which is the value of R~1~. Close to the
 cutoff frequency, the impedance rises to its maximum of 6.5 kΩ.
 
+== Separation of transfer functions of both stages
+
+For the fourth-order filters, linNet allows to define a user voltage at the
+output of the first op-amp. In a second step, it allows to define user
+result G~1~, which calculates the dependency of this voltage on the system
+input voltage U~E~. (And similar G~2~ for the second stage. The according
+plots are presented in the table above.) Here, we see a limitation of
+linNet. It calculates G~1~ as a system of 4^th^ order, although we know
+that G~1~ is identical to the calculation result of second order of the
+isolated stage. (Because the output impedance of the op-amp is zero.)
+
+Result G~1~ from file
+link:Chebyshev-schematics-Fig-2.2.log[`Chebyshev-schematics-Fig-2.2.log`^]
+needs to be identical to result G from file
+link:Versuch4-Aktiver-TP-OP-Fig-1.1.log[`Versuch4-Aktiver-TP-OP-Fig-1.1.log`^].
+
+linNet cannot reduce the fourth-order result G~1~ to the second-order
+result G. This indicates that schematics should not contain non-essential
+devices or components when interested in the analytical result for a
+transfer function. For the plots shown above, this is irrelevant.
+
+Of course, result G~1~ is not wrong. Let's compare both results:
+
+With
+
+          N_UA1_UE
+    G1 = ----------
+          D_UA1_UE
+        
+and 
+
+         N_UA_UE
+    G = ---------
+         D_UA_UE
+
+and defining k as:
+    
+          N_UA1_UE     k*N_UA_UE
+    G1 = ---------- = -----------
+          D_UA1_UE     k*D_UA_UE
+    
+or:
+    
+         N_UA1_UE     N_UA1_UE
+    k = ---------- = ----------  (with N_UA_UE = -R2)
+         N_UA_UE        -R2
+      
+      = R4*R5*R6*C3*C4 * s^2 + (R4*R5*C3 + R4*R6*C3 + R5*R6*C3) * s + R4
+    
+we still need to prove that:
+    
+    D_UA1_UE = k*D_UA_UE
+
+This is indeed the case. (Simple but long polynomial multiplication; for
+powers s^0^ and s^4^ of G~1~, you can see the identity immediately.)
+
 // Local Variables:
 // coding: utf-8
 // End:

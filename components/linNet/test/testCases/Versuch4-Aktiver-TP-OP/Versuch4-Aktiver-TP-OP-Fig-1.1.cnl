@@ -37,7 +37,7 @@
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-U Ue        in  gnd
+U UE        in  gnd
 DEF UA      out gnd
 
 R R1        in  K1   R1=2.86k
@@ -53,6 +53,6 @@ OP LF356N   K2  gnd     out
    impedance. */
 I IA        gnd out
 
-PLOT        G   UA  Ue      LOG     50  10  20k
-PLOT        Zi  Ue  I_Ue    LOG     50  0.1 20k
+PLOT        G   UA  UE      LOG     50  10  20k
+PLOT        Zi  UE  I_UE    LOG     50  0.1 20k
 PLOT        Zo  UA  IA      LOG     50  0.1 20k

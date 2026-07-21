@@ -1,28 +1,28 @@
-Dec 10 11:37:25 2014 - 000024 ms - RESULT - 
+Jul 21 22:41:00 2026 - 000002 ms - RESULT - 
 -----------------------------------------------------------------------------
  linNet - The Software for symbolic Analysis of linear Electronic Circuits
- Copyright (C) 2014 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ Copyright (C) 2014-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
  This is free software; see the source for copying conditions. There is NO
  warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 -----------------------------------------------------------------------------
-Dec 10 11:37:25 2014 - 000024 ms - RESULT - Reading circuit file C:\user\vranken\projects\linNet\trunk\components\linNet\test\Versuch4-Aktiver-TP-OP.cnl successfully done
-Dec 10 11:37:25 2014 - 000024 ms - RESULT - User-defined result G (Bode plot):
-The dependency of UA on Ue:
-  UA(s) = N_UA_Ue(s)/D_UA_Ue(s) * Ue(s), with
-    N_UA_Ue(s) = -R2
-    D_UA_Ue(s) = R1*R2*R3*C1*C2 * s^2
+Jul 21 22:41:00 2026 - 000004 ms - RESULT - Reading circuit file C:\home\vranken\projects\linNetAtGitHub\linNet\components\linNet\test\testCases\Versuch4-Aktiver-TP-OP\Versuch4-Aktiver-TP-OP-Fig-1.1.cnl successfully done
+Jul 21 22:41:00 2026 - 000004 ms - RESULT - User-defined result G (Bode plot):
+The dependency of UA on UE:
+  UA(s) = N_UA_UE(s)/D_UA_UE(s) * UE(s), with
+    N_UA_UE(s) = -R2
+    D_UA_UE(s) = R1*R2*R3*C1*C2 * s^2
                  +(R1*R2*C1 + R1*R3*C1 + R2*R3*C1) * s
                  +R1
-Dec 10 11:37:25 2014 - 000041 ms - RESULT - User-defined result Zi (Bode plot):
-The dependency of Ue on I_Ue:
-  Ue(s) = N_Ue_I_Ue(s)/D_Ue_I_Ue(s) * I_Ue(s), with
-    N_Ue_I_Ue(s) = R1*R2*R3*C1*C2 * s^2
+Jul 21 22:41:00 2026 - 000004 ms - RESULT - User-defined result Zi (Bode plot):
+The dependency of UE on I_UE:
+  UE(s) = N_UE_I_UE(s)/D_UE_I_UE(s) * I_UE(s), with
+    N_UE_I_UE(s) = R1*R2*R3*C1*C2 * s^2
                    +(R1*R2*C1 + R1*R3*C1 + R2*R3*C1) * s
                    +R1
-    D_Ue_I_Ue(s) = R2*R3*C1*C2 * s^2
+    D_UE_I_UE(s) = R2*R3*C1*C2 * s^2
                    +(R2*C1 + R3*C1) * s
                    +1
-Dec 10 11:37:25 2014 - 000046 ms - RESULT - User-defined result Zo (Bode plot):
+Jul 21 22:41:00 2026 - 000004 ms - RESULT - User-defined result Zo (Bode plot):
 The dependency of UA on IA:
   UA(s) = N_UA_IA(s)/D_UA_IA(s) * IA(s), with
     N_UA_IA(s) = 0

@@ -2,7 +2,7 @@ function [tf_Zi deviceConstants wBode tiStep] = Zi(deviceConstants)
 
 %   [tf deviceConstants wBode tiStep] = Zi(deviceConstants)
 %                   The transfer function Zi of electric linear network
-%                   C:\home\vranken\projects\linNetAtGitHub\linNet\components\linNet\test\testCases\Versuch4-Aktiver-TP-OP\Versuch4-Aktiver-TP-OP.cnl
+%                   C:\home\vranken\projects\linNetAtGitHub\linNet\components\linNet\test\testCases\Versuch4-Aktiver-TP-OP\Versuch4-Aktiver-TP-OP-Fig-1.1.cnl
 %
 %   Input argument(s):
 %       deviceConstants
@@ -91,19 +91,19 @@ end
 
 % User-defined result Zi (Bode plot):
 
-% The dependency of Ue on I_Ue:
-%   Ue(s) = N_Ue_I_Ue(s)/D_Ue_I_Ue(s) * I_Ue(s), with
-%     N_Ue_I_Ue(s) = R1*R2*R3*C1*C2 * s^2
+% The dependency of UE on I_UE:
+%   UE(s) = N_UE_I_UE(s)/D_UE_I_UE(s) * I_UE(s), with
+%     N_UE_I_UE(s) = R1*R2*R3*C1*C2 * s^2
 %                    +(R1*R2*C1 + R1*R3*C1 + R2*R3*C1) * s
 %                    +R1
-%     D_Ue_I_Ue(s) = R2*R3*C1*C2 * s^2
+%     D_UE_I_UE(s) = R2*R3*C1*C2 * s^2
 %                    +(R2*C1 + R3*C1) * s
 %                    +1
-D_Ue_I_Ue = [ R2*R3*C1*C2	 % s^2
+D_UE_I_UE = [ R2*R3*C1*C2	 % s^2
             ; (R2*C1 + R3*C1)	 % s^1
             ; 1	 % s^0
             ].';
-N_Ue_I_Ue = [ R1*R2*R3*C1*C2	 % s^2
+N_UE_I_UE = [ R1*R2*R3*C1*C2	 % s^2
             ; (R1*R2*C1 + R1*R3*C1 + R2*R3*C1)	 % s^1
             ; R1	 % s^0
             ].';
@@ -111,16 +111,16 @@ N_Ue_I_Ue = [ R1*R2*R3*C1*C2	 % s^2
 % Create an Octave LTI system object from the data above. First shape a descriptor object.
 systemDesc_Zi.name = 'Zi';
 systemDesc_Zi.numeratorAry = ...
-    { N_Ue_I_Ue
+    { N_UE_I_UE
     };
 systemDesc_Zi.denominatorAry = ...
-    { D_Ue_I_Ue
+    { D_UE_I_UE
     };
 systemDesc_Zi.inputNameAry = ...
-    { 'I_Ue'
+    { 'I_UE'
     };
 systemDesc_Zi.outputNameAry = ...
-    { 'Ue'
+    { 'UE'
     };
 systemDesc_Zi.plotInfo = ...
     struct( 'isLogX', true ...
