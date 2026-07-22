@@ -49,4 +49,4 @@ L   L4    K4 O    L4=L
 
 PLOT G    U2    U1
 PLOT G_I  I_Rl  I_U1  
-
+RES  stepResp U2
