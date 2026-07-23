@@ -1,12 +1,12 @@
-Dec 16 22:18:44 2014 - 000044 ms - RESULT - 
+Jul 23 22:29:19 2026 - 000003 ms - RESULT - 
 -----------------------------------------------------------------------------
  linNet - The Software for symbolic Analysis of linear Electronic Circuits
- Copyright (C) 2014 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ Copyright (C) 2014-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
  This is free software; see the source for copying conditions. There is NO
  warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 -----------------------------------------------------------------------------
-Dec 16 22:18:44 2014 - 000044 ms - RESULT - Reading circuit file C:\user\vranken\projects\linNet\trunk\components\linNet\test\testCases\wire6.cnl successfully done
-Dec 16 22:18:44 2014 - 000336 ms - RESULT - User-defined result G (Bode plot):
+Jul 23 22:29:19 2026 - 000003 ms - RESULT - Reading circuit file C:\home\vranken\projects\linNetAtGitHub\linNet\components\linNet\test\testCases\wire\wire6.cnl successfully done
+Jul 23 22:29:19 2026 - 000093 ms - RESULT - User-defined result G (Bode plot):
 The dependency of U2 on U1:
   U2(s) = N_U2_U1(s)/D_U2_U1(s) * U1(s), with
     N_U2_U1(s) = Rl
@@ -23,7 +23,7 @@ The dependency of U2 on U1:
                  +36*Rl*L*C * s^2
                  +(6*Rl^2*C + 6*L) * s
                  +2*Rl
-Dec 16 22:18:44 2014 - 000345 ms - RESULT - User-defined result G_I (Bode plot):
+Jul 23 22:29:19 2026 - 000095 ms - RESULT - User-defined result G_I (Bode plot):
 The dependency of I_Rl on I_U1:
   I_Rl(s) = N_I_Rl_I_U1(s)/D_I_Rl_I_U1(s) * I_U1(s), with
     N_I_Rl_I_U1(s) = 1
@@ -40,3 +40,20 @@ The dependency of I_Rl on I_U1:
                      +21*L*C * s^2
                      +6*Rl*C * s
                      +1
+Jul 23 22:29:19 2026 - 000099 ms - RESULT - User-defined result stepResp:
+The solution for unknown U2:
+  U2(s) = N_U2_U1(s)/D_U2_U1(s) * U1(s), with
+    N_U2_U1(s) = Rl
+    D_U2_U1(s) = Rl*L^6*C^6 * s^12
+                 +(Rl^2*L^5*C^6 + L^6*C^5) * s^11
+                 +12*Rl*L^5*C^5 * s^10
+                 +(10*Rl^2*L^4*C^5 + 10*L^5*C^4) * s^9
+                 +54*Rl*L^4*C^4 * s^8
+                 +(36*Rl^2*L^3*C^4 + 36*L^4*C^3) * s^7
+                 +112*Rl*L^3*C^3 * s^6
+                 +(56*Rl^2*L^2*C^3 + 56*L^3*C^2) * s^5
+                 +105*Rl*L^2*C^2 * s^4
+                 +(35*Rl^2*L*C^2 + 35*L^2*C) * s^3
+                 +36*Rl*L*C * s^2
+                 +(6*Rl^2*C + 6*L) * s
+                 +2*Rl

@@ -1,12 +1,12 @@
-Dec 16 22:18:49 2014 - 000047 ms - RESULT - 
+Jul 23 22:34:51 2026 - 000003 ms - RESULT - 
 -----------------------------------------------------------------------------
  linNet - The Software for symbolic Analysis of linear Electronic Circuits
- Copyright (C) 2014 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ Copyright (C) 2014-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
  This is free software; see the source for copying conditions. There is NO
  warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 -----------------------------------------------------------------------------
-Dec 16 22:18:49 2014 - 000048 ms - RESULT - Reading circuit file C:\user\vranken\projects\linNet\trunk\components\linNet\test\testCases\wire8.cnl successfully done
-Dec 16 22:20:13 2014 - 083988 ms - RESULT - User-defined result G (Bode plot):
+Jul 23 22:34:51 2026 - 000004 ms - RESULT - Reading circuit file C:\home\vranken\projects\linNetAtGitHub\linNet\components\linNet\test\testCases\wire\wire8.cnl successfully done
+Jul 23 22:35:34 2026 - 043146 ms - RESULT - User-defined result G (Bode plot):
 The dependency of U2 on U1:
   U2(s) = N_U2_U1(s)/D_U2_U1(s) * U1(s), with
     N_U2_U1(s) = Rl
@@ -27,7 +27,7 @@ The dependency of U2 on U1:
                  +64*Rl*L*C * s^2
                  +(8*Rl^2*C + 8*L) * s
                  +2*Rl
-Dec 16 22:20:13 2014 - 083998 ms - RESULT - User-defined result G_I (Bode plot):
+Jul 23 22:35:34 2026 - 043151 ms - RESULT - User-defined result G_I (Bode plot):
 The dependency of I_Rl on I_U1:
   I_Rl(s) = N_I_Rl_I_U1(s)/D_I_Rl_I_U1(s) * I_U1(s), with
     N_I_Rl_I_U1(s) = 1
@@ -48,3 +48,24 @@ The dependency of I_Rl on I_U1:
                      +36*L*C * s^2
                      +8*Rl*C * s
                      +1
+Jul 23 22:35:34 2026 - 043158 ms - RESULT - User-defined result stepResp:
+The solution for unknown U2:
+  U2(s) = N_U2_U1(s)/D_U2_U1(s) * U1(s), with
+    N_U2_U1(s) = Rl
+    D_U2_U1(s) = Rl*L^8*C^8 * s^16
+                 +(Rl^2*L^7*C^8 + L^8*C^7) * s^15
+                 +16*Rl*L^7*C^7 * s^14
+                 +(14*Rl^2*L^6*C^7 + 14*L^7*C^6) * s^13
+                 +104*Rl*L^6*C^6 * s^12
+                 +(78*Rl^2*L^5*C^6 + 78*L^6*C^5) * s^11
+                 +352*Rl*L^5*C^5 * s^10
+                 +(220*Rl^2*L^4*C^5 + 220*L^5*C^4) * s^9
+                 +660*Rl*L^4*C^4 * s^8
+                 +(330*Rl^2*L^3*C^4 + 330*L^4*C^3) * s^7
+                 +672*Rl*L^3*C^3 * s^6
+                 +(252*Rl^2*L^2*C^3 + 252*L^3*C^2) * s^5
+                 +336*Rl*L^2*C^2 * s^4
+                 +(84*Rl^2*L*C^2 + 84*L^2*C) * s^3
+                 +64*Rl*L*C * s^2
+                 +(8*Rl^2*C + 8*L) * s
+                 +2*Rl

@@ -25,7 +25,7 @@
  * clearer this pattern becomes.
  * 
  * The depenceny U2(U1) has been specified twice in the netlist: Once
- * using keyword BODE and once using `RES`. The leads twice to the same
+ * using keyword BODE and once using `RES`. This leads twice to the same
  * calculation result, but the generated Octave scripts behave
  * differently. G.m creates a Bode plot of the frequency response, while
  * stepResp.m plots the step response.
@@ -82,9 +82,3 @@ L   L7    K7 O    L7=L
 PLOT G    U2    U1
 PLOT G_I  I_Rl  I_U1  
 RES  stepResp U2
-
-/* Demonstrate the behavior of the wire as a kind of delay line by
-   plotting the voltage in the middle of the wire. */
-PLOT G2   U_K2  U1
-PLOT G4   U_K4  U1
-PLOT G6   U_K6  U1

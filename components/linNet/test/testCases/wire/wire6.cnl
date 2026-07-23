@@ -25,7 +25,7 @@
  * clearer this pattern becomes.
  * 
  * The depenceny U2(U1) has been specified twice in the netlist: Once
- * using keyword BODE and once using `RES`. The leads twice to the same
+ * using keyword BODE and once using `RES`. This leads twice to the same
  * calculation result, but the generated Octave scripts behave
  * differently. G.m creates a Bode plot of the frequency response, while
  * stepResp.m plots the step response.
