@@ -1,4 +1,4 @@
-This folder contains linNet test case `wire4`:
+This folder contains linNet test case `wire`:
 
 [[figSchematics]]
 .Schematics
@@ -33,5 +33,5 @@ the link:wire4/G.svg[frequency response^], while `stepResp.m` plots the
 link:wire4/stepResp.svg[step response^].footnote:[
   Please note, the double result definition has been done for convenience
 only; both of the scripts can be used to plot frequency response, impulse
-and step responses, etc. Just the default plot makes the difference. See
-Octave help of the scripts for details.]
+and step responses, etc. Just the default plot behavior makes the
+difference. See Octave help of the scripts for details.]

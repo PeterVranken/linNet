@@ -1,0 +1,38 @@
+Dec 16 22:18:43 2014 - 000051 ms - RESULT - 
+-----------------------------------------------------------------------------
+ linNet - The Software for symbolic Analysis of linear Electronic Circuits
+ Copyright (C) 2014 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ This is free software; see the source for copying conditions. There is NO
+ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+-----------------------------------------------------------------------------
+Dec 16 22:18:43 2014 - 000053 ms - RESULT - Reading circuit file C:\user\vranken\projects\linNet\trunk\components\linNet\test\testCases\wire5.cnl successfully done
+Dec 16 22:18:43 2014 - 000096 ms - RESULT - User-defined result G (Bode plot):
+The dependency of U2 on U1:
+  U2(s) = N_U2_U1(s)/D_U2_U1(s) * U1(s), with
+    N_U2_U1(s) = Rl
+    D_U2_U1(s) = Rl*L^5*C^5 * s^10
+                 +(Rl^2*L^4*C^5 + L^5*C^4) * s^9
+                 +10*Rl*L^4*C^4 * s^8
+                 +(8*Rl^2*L^3*C^4 + 8*L^4*C^3) * s^7
+                 +35*Rl*L^3*C^3 * s^6
+                 +(21*Rl^2*L^2*C^3 + 21*L^3*C^2) * s^5
+                 +50*Rl*L^2*C^2 * s^4
+                 +(20*Rl^2*L*C^2 + 20*L^2*C) * s^3
+                 +25*Rl*L*C * s^2
+                 +(5*Rl^2*C + 5*L) * s
+                 +2*Rl
+Dec 16 22:18:43 2014 - 000104 ms - RESULT - User-defined result G_I (Bode plot):
+The dependency of I_Rl on I_U1:
+  I_Rl(s) = N_I_Rl_I_U1(s)/D_I_Rl_I_U1(s) * I_U1(s), with
+    N_I_Rl_I_U1(s) = 1
+    D_I_Rl_I_U1(s) = L^5*C^5 * s^10
+                     +Rl*L^4*C^5 * s^9
+                     +9*L^4*C^4 * s^8
+                     +8*Rl*L^3*C^4 * s^7
+                     +28*L^3*C^3 * s^6
+                     +21*Rl*L^2*C^3 * s^5
+                     +35*L^2*C^2 * s^4
+                     +20*Rl*L*C^2 * s^3
+                     +15*L*C * s^2
+                     +5*Rl*C * s
+                     +1
