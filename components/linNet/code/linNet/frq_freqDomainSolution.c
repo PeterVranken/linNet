@@ -4195,35 +4195,6 @@ boolean frq_exportAsMCode( const frq_freqDomainSolution_t * const pSolution
     stream = msc_borrowStream(pMScript);
     print(stream, ";\n\n");
 
-#if 0 // No longer used for an M code function file.
-
-    /* Remove the no longer used expressions from the (global) workspace, like
-         clear N_U_out_U1 N_U_out_U2 D_U_out_U1 D_U_out_U2 */
-    print( stream
-         , "%% Delete no longer used temporary expressions. They should not spoil"
-           " the global workspace.\n"
-           "clear"
-         );
-    unsigned int noPairsSoFar = 0;
-    for(idxDependent=0; idxDependent<noDependents; ++idxDependent)
-    {
-        for(idxIndependent=0; idxIndependent<noIndependents; ++idxIndependent)
-        {
-            ++ noPairsSoFar;
-            print( stream
-                 , " %s %s"
-                 , getNameOfNumerator(pSolution, idxDependent, idxIndependent)
-                 , getNameOfDenominator(pSolution, idxDependent, idxIndependent)
-                 );
-        }
-
-        /* Break line after some output. */
-        if(noPairsSoFar % 2 == 0  &&  noPairsSoFar < noDependents*noIndependents)
-            print(stream, " ...\n     "); /* strlen("clear") */
-    }
-    print(stream, "\n\n");
-#endif
-
     /* Make Octave create the actual LTI system object by calling a creator function with
        the descriptor object shaped just before. */
     print(stream, "%% Create the Octave LTI system object from the descriptor.\n");
@@ -4247,11 +4218,24 @@ boolean frq_exportAsMCode( const frq_freqDomainSolution_t * const pSolution
     print(stream, "if nargout == 0\n");
     if(frq_getIsBodePlot(pSolution))
     {
-        print(stream, "    %% Plot the transfer function of %s.\n", systemName);
         print( stream
-             , "    figure\n"
-               "    bode(tf_%s, wBode)\n"
+             , "    %% Plot the transfer function of %s. By post-processing, disable LaTeX\n"
+               "    %% interpretation in all graphic subelements of the new figure window.\n"
              , systemName
+             );
+        print( stream
+             , "    hFig = figure('Name', 'Frequency Response of %s', 'NumberTitle', 'off');\n"
+               "    if ~isempty(wBode)\n"
+               "        bode(tf_%s, wBode)\n"
+               "    else\n"
+               "        bode(tf_%s)\n"
+               "    end\n"
+             , systemName
+             , systemName
+             , systemName
+             );
+        print( stream
+             , "    set(findobj(hFig, '-property', 'interpreter'), 'interpreter', 'none')\n"
              );
     }
     else
@@ -4260,9 +4244,23 @@ boolean frq_exportAsMCode( const frq_freqDomainSolution_t * const pSolution
            as initial plot. */
         print(stream, "    %% Plot the step response of %s.\n", systemName);
         print( stream
-             , "    figure\n"
+             , "    %% Plot the step response of %s. By post-processing, disable LaTeX\n"
+               "    %% interpretation in all graphic subelements of the new figure window.\n"
+             , systemName
+             );
+        print( stream
+             , "    hFig = figure('Name', 'Step Response of %s', 'NumberTitle', 'off');\n"
                "    step(tf_%s, tiStep)\n"
              , systemName
+             , systemName
+             , systemName
+             );
+        print( stream
+             , "    hAx = findall(hFig, 'type', 'axes');\n"
+               "    hYLabel = cell2mat(get(hAx, 'ylabel'));\n"
+               "    set(hYLabel, 'interpreter', 'none')\n"
+               "    hTitle = cell2mat(get(hAx, 'title'));\n"
+               "    set(hTitle, 'interpreter', 'none')\n"
              );
     }
 

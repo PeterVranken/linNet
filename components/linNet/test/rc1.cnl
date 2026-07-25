@@ -31,7 +31,7 @@ checked.)
 
 Besides the assertion, this revealed another issue: The result depends on the gnd node but
 without expcilitly naming a node gnd, linNet makes the choice itself but doesn't warn about
-it. Actually, without specifyingthe ground node but still specifying ratios of node
+it. Actually, without specifying the ground node but still specifying ratios of node
 voltages as 
 results, these results are undefined: Numerator and denonminator have an undefined offset
 (the delta voltage between expected and actual ground node)

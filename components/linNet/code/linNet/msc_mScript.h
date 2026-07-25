@@ -72,19 +72,19 @@ typedef struct msc_mScript_t
 typedef enum
 {
     /** The file header, copyright notice, license, etc. */
-    msc_txtBlkHeader
+    msc_txtBlkHeader,
     
-    /** The cosing elements of the file. */
-    , msc_txtBlkTrailer
+    /** The closing elements of the file. */
+    msc_txtBlkTrailer,
     
     /** A blank line. */
-    , msc_txtBlkBlankLine
+    msc_txtBlkBlankLine,
 
     /** A command to add all required folders to the Octave search path. */
-    , msc_txtBlkAddPath
+    msc_txtBlkAddPath,
     
     /** A command to load all required Octave packages. */
-    , msc_txtBlkLoadPkgs
+    msc_txtBlkLoadPkgs,
     
 } msc_enumTextBlock_t;
              
@@ -130,7 +130,7 @@ boolean msc_createMScript( msc_mScript_t ** const ppMScript
 /** Get another reference to the same object. */
 msc_mScript_t *msc_cloneByReference(msc_mScript_t * const pExistingObj);
 
-/** Delete a  or a reference to it after use. */
+/** Delete an object or a reference to it after use. */
 void msc_deleteMScript(msc_mScript_t * const pMScript);
 
 /** Write a particular, predefined part of the generated M script. */
