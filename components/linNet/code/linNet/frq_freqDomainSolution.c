@@ -4253,7 +4253,6 @@ boolean frq_exportAsMCode( const frq_freqDomainSolution_t * const pSolution
                "    step(tf_%s, tiStep)\n"
              , systemName
              , systemName
-             , systemName
              );
         print( stream
              , "    hAx = findall(hFig, 'type', 'axes');\n"
