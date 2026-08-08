@@ -2,7 +2,7 @@ function [tf_MIMO deviceConstants wBode tiStep] = MIMO(deviceConstants)
 
 %   [tf deviceConstants wBode tiStep] = MIMO(deviceConstants)
 %                   The transfer function MIMO of electric linear network
-%                   C:\home\vranken\projects\linNetAtGitHub\linNet\components\linNet\test\testCases\MIMO\MIMO.cnl
+%                   testCases\MIMO\MIMO.cnl
 %
 %   Input argument(s):
 %       deviceConstants

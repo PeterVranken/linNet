@@ -1,13 +1,13 @@
-Jun 12 15:45:05 2026 - 000002 ms - RESULT - 
+Jul 26 17:25:21 2026 - 000001 ms - RESULT - 
 -----------------------------------------------------------------------------
  linNet - The Software for symbolic Analysis of linear Electronic Circuits
- Copyright (C) 2014-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ Copyright (C) 2014-2026 Peter Vranken (https://github.com/PeterVranken/linNet)
  This is free software; see the source for copying conditions. There is NO
  warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 -----------------------------------------------------------------------------
-Jun 12 15:45:05 2026 - 000002 ms - RESULT - Reading circuit file C:\home\vranken\projects\linNetAtGitHub\linNet\components\linNet\test\testCases\probeI\probeI.cnl successfully done
-Jun 12 15:45:05 2026 - 000002 ms -   WARN - No user-defined result found in input file. The solution for all dependent quantities is figured out instead. This generic result can become very bulky
-Jun 12 15:45:05 2026 - 000002 ms - RESULT - Result AllDependents in the frequency domain:
+Jul 26 17:25:21 2026 - 000017 ms - RESULT - Reading circuit file testCases\probeI\probeI.cnl successfully done
+Jul 26 17:25:21 2026 - 000020 ms -   WARN - No user-defined result found in input file. The solution for all dependent quantities is figured out instead. This generic result can become very bulky
+Jul 26 17:25:21 2026 - 000026 ms - RESULT - Result AllDependents in the frequency domain:
 The solution for unknown U_inP:
   U_inP(s) = N_U_inP_I0(s)/D_U_inP_I0(s) * I0(s), with
     N_U_inP_I0(s) = 0

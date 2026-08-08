@@ -20,7 +20,7 @@ or -- on a Windows system -- double-click on
 openDoxygenHelp.cmd
 
 The documentation can be generated for various outputs in according
-folders, e.g. html and latex.
+folders, e.g., html and latex.
 
 Please consider that any change in the doxyfile must not use absolute
 paths (which easily happens if you use the doyygen GUI with its browse

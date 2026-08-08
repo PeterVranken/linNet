@@ -2,7 +2,7 @@ function [tf_G_out_U1 deviceConstants wBode tiStep] = G_out_U1(deviceConstants)
 
 %   [tf deviceConstants wBode tiStep] = G_out_U1(deviceConstants)
 %                   The transfer function G_out_U1 of electric linear network
-%                   C:\home\vranken\projects\linNetAtGitHub\linNet\components\linNet\test\testCases\MIMO\MIMO.cnl
+%                   testCases\MIMO\MIMO.cnl
 %
 %   Input argument(s):
 %       deviceConstants

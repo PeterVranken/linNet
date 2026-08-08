@@ -1,10 +1,10 @@
-Jul 12 16:53:01 2026 - 000002 ms - RESULT - 
+Jul 26 17:25:23 2026 - 000002 ms - RESULT - 
 -----------------------------------------------------------------------------
  linNet - The Software for symbolic Analysis of linear Electronic Circuits
- Copyright (C) 2014-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ Copyright (C) 2014-2026 Peter Vranken (https://github.com/PeterVranken/linNet)
  This is free software; see the source for copying conditions. There is NO
  warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 -----------------------------------------------------------------------------
-Jul 12 16:53:01 2026 - 000002 ms - RESULT - Reading circuit file C:\home\vranken\projects\linNetAtGitHub\linNet\components\linNet\test\testCases\UByUWithSameOutputs\UByUWithSameOutputs.cnl successfully done
-Jul 12 16:53:01 2026 - 000002 ms -  ERROR - Gauss elimination of LES is aborted. Pivoting doesn't find any non null coefficient in the 1. elimination step. The equations are linear dependent or contradictory. Please double-check your circuit net list
-Jul 12 16:53:01 2026 - 000002 ms -  ERROR - The LES could not be solved. The circuit has an undefined behavior. Most probable, you have an invalid interconnection of sources, current probes and/or op-amps in your circuit
+Jul 26 17:25:23 2026 - 000021 ms - RESULT - Reading circuit file testCases\UByUWithSameOutputs\UByUWithSameOutputs.cnl successfully done
+Jul 26 17:25:23 2026 - 000025 ms -  ERROR - Gauss elimination of LES is aborted. Pivoting doesn't find any non null coefficient in the 1. elimination step. The equations are linear dependent or contradictory. Please double-check your circuit net list
+Jul 26 17:25:23 2026 - 000036 ms -  ERROR - The LES could not be solved. The circuit has an undefined behavior. Most probable, you have an invalid interconnection of sources, current probes and/or op-amps in your circuit
