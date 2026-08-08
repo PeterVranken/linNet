@@ -51,7 +51,7 @@ from the Octave control toolbox can be applied just like that. This
 reaches from simple transfer function plotting to stability analyses and
 system response computation on arbitrary system input.
 
-![Schematic of a simple electronis circuit consisting of one resitor, impedance and capacitance](resources/FirstIntroExample.jpg "Simple example of a linear electronic circuit")
+![Schematic of a simple electronis circuit consisting of one resistor, impedance and capacitance](components/linNet/doc/userGuide/sources/figures/FirstIntroExample.jpg "Simple example of a linear electronic circuit")
 
 *Figure 1: Simple example of a linear electronic circuit*
 
@@ -84,21 +84,23 @@ default device values) gives us a nice Bode plot of the transfer function;
 please refer to figure 2. More plots or plots with altered device values
 are a matter of single commands in Octave.
 
-![Example of Bode plot as produced by Octave](resources/FirstIntroExample_OctaveOutput.jpg "Octave plot using the linNet generated LTI object")
+![Example of Bode plot as produced by Octave](components/linNet/doc/userGuide/sources/figures/FirstIntroExample_OctaveOutput.jpg "Octave plot using the linNet generated LTI object")
 
 *Figure 2: Octave plot using the linNet generated LTI object*
 
 You will find the details of the usage of linNet, in particular
 installation, netlist syntax and Octave interface and an explanation of
 the mathematical concept of the software in the user guide
-[linNet-userGuide.pdf](linNet-userGuide.pdf "linNet manual"), located here
-at GitHub for reference.
+[linNet-userGuide.pdf](components/linNet/doc/userGuide/linNet-userGuide.pdf "linNet manual"),
+located here at GitHub for reference and of course contained in the
+release packages.
 
-The source code of linNet is hosted at SourceForge; please see
-<https://sourceforge.net/projects/linnet-svn/>. There, you will also find
-download buttons for ready-to-use distributions with manual, samples and
-executable binaries for Windows and Linux. Mac users will have to compile
-the software, the makefile and source code files are prepared to do so.
+The source code of linNet is hosted at GitHub; please see
+<https://github.com/PeterVranken/linNet/tree/main/components/linNet/>. In
+the repository's _Releases_ area, you find the links to download
+ready-to-use distributions with manual, samples and executable binaries
+for Windows. Mac and Linux users will have to compile the software, the
+makefile and source code files are prepared to do so.
 
 linNet means "linear network". It founds on a symbolic solver for
 linear equation systems. There's no way to model any non linear effects
