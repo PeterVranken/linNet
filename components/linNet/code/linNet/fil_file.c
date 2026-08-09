@@ -473,6 +473,7 @@ boolean fil_copyFile(const char * const targetFilePath, const char * const srcFi
  */
 static inline boolean makeDir(const char * const path, boolean existingDirIsOk)
 {
+    assert(path != NULL);
     const int res = mkdir( path
 #ifdef __unix__
                          , /* mode: Full access to owner, read and execute for all others */
@@ -485,7 +486,7 @@ static inline boolean makeDir(const char * const path, boolean existingDirIsOk)
 
 
 /**
- * Create a folder. The complete path to the folder is craeted, too, if it shouldn't exist
+ * Create a folder. The complete path to the folder is created, too, if it shouldn't exist
  * yet.
  *   @return Get some success information.
  *     @retval 0  Path already existed (nothing created).
@@ -503,8 +504,11 @@ int fil_mkdirRecursive(const char * const path)
 # define PRINTF(...)
 #endif
 
+    PRINTF("Path to create: \"%s\" (%p)\n", path, path);
     if(path == NULL)
         return -1;
+    if(path[0] == '\0')
+        return 0;
 
     #define PATH_MAX_LEN    2048
     size_t len;
@@ -528,7 +532,7 @@ int fil_mkdirRecursive(const char * const path)
        directory with the non-recursive platform function.
          We skip the first character. If it is a slash then the first iteration would call
        mkdir(""), which is an invalid path. (And the root path doesn't require an mkdir.)
-       If it is another character, if just did the same as if executing the loop body:
+       If it is another character, this does just the same as if executing the loop body:
        advancing the pointer. */
     for(char *p=tmp+1; *p; ++p)
     {

@@ -179,7 +179,7 @@ static const char *getLogFileName( const opt_cmdLineOptions_t * const pCmdLine
                          , circuitFileName
                          );
 
-            /* File name with new extesnion. */            
+            /* File name with new extension. */            
             char logFileName[strlen(pureFileName) + sizeof(LIN_LOG_FILE_NAME_EXT)];
             snprintf( logFileName
                     , sizeof(logFileName)
@@ -244,12 +244,12 @@ static boolean makeOctaveOutputDir( const char * const outputPath
         /* The next message needs to be done on lowest level: If we have more than a
            single result definition for one and the same circuit file then we will
            necessarily see this message for result 2, 3, ... */
-        LOG_DEBUG( hLog
-                 , "Octave output folder %s already exists. The input related parts"
-                   " of the Octave code are re-generated and existing files are overwritten."
-                   " The static, problem independent parts of the code are not re-generated"
-                 , octavePath
-                 );
+        LOG_INFO( hLog
+                , "Octave output folder %s already exists. The input dependent parts"
+                  " of the Octave code are re-generated and existing files are overwritten."
+                  " The static, problem independent parts of the code are not re-generated"
+                , octavePath
+                );
 
         /* An already existing target folder is not considered a fault, we simply reuse
            that one and overwrite the generated, dynamic part of the Octave scripting. */
