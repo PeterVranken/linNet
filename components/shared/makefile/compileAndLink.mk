@@ -191,7 +191,7 @@ cFlags = $(cDefines)                                                            
          -Wno-nested-externs -Werror=int-to-pointer-cast -Werror=pointer-sign               \
          -Werror=pointer-to-int-cast -Werror=return-local-addr -Werror=missing-prototypes   \
          -Werror=missing-field-initializers -Werror=overflow                                \
-         -Wa,-a=$(patsubst %.o,%.lst,$@) -std=c99                                           \
+         -MMD -MP -Wa,-a=$(patsubst %.o,%.lst,$@) -std=c99                                  \
          $(foreach path,$(srcDirList) $(incDirList),-I$(path))                              \
          $(foreach def,$(defineList),-D$(def))
 ifeq ($(CONFIG),DEBUG)
