@@ -87,28 +87,34 @@
 "    still write into log file).\n"                                                         \
 "      Precondition: Silent mode must be chosen only if a log file is in use.\n"            \
 "  -l[FILENAME], --log-file-name[=FILENAME]\n"                                              \
-"    Log file name. No log file is opened if this option is not used. An appropriate\n"     \
-"    file name is chosen by the application if the option is used without argument\n"       \
-"    FILENAME.\n"                                                                           \
+"    Log file name. FILENAME is a file path designation. The specified directory is\n"      \
+"    created if it doesn't exist.\n"                                                        \
+"      If -l is used without argument FILENAME then the log file name is derived from the\n"\
+"    only input file name or it is linNet.log if there are multiple input files. The\n"     \
+"    location of the log file is the output folder set with -o or the current working\n"    \
+"    directory, if -o is not used.\n"                                                       \
+"      No log file is opened if this option is not used.\n"                                 \
 "      Precondition: Either using a log file is specified or -s and --silent are not\n"     \
 "    given.\n"                                                                              \
 "  -c, --clear-log-file\n"                                                                  \
 "    Clear the log file at the beginning of operation. Default is to append to a possibly\n"\
 "    existing log file.\n"                                                                  \
 "  -o[DIRNAME], --Octave-output-directory[=DIRNAME]\n"                                      \
-"    The path where to put the generated Octave code. The specified directory is created\n" \
-"    if it doesn't exist.\n"                                                                \
-"      The generated code is put into the current working directory if the option is\n"     \
-"    used without argument DIRNAME.\n"                                                      \
+"    The path where to put the generated Octave code (and potentially the log file, see\n"  \
+"    --log-file-name). The specified directory is created if it doesn't exist.\n"           \
+"      All produced Octave code is collected in a newly created folder, which is a direct\n"\
+"    child of DIRNAME. Such a folder is created for each input file and the folder name\n"  \
+"    is derived from the input file name.\n"                                                \
+"      If the option is used without argument, DIRNAME is the current working directory.\n" \
 "      No Octave code is generated if this option is not used.\n"                           \
-"      Note, if the output directory already exists then the static, not input\n"           \
-"    dependent, common Octave code is not copied into the output directory; this enables\n" \
+"      Note, if the output directory already exists then the common, not problem\n"         \
+"    dependent Octave script code is not copied into the output directory; this enables\n"  \
 "    making local modifications of that code without the danger of overwriting. See\n"      \
 "    --do-not-copy-common-Octave-code, also.\n"                                             \
 "  -i, --do-not-copy-common-Octave-code\n"                                                  \
-"    Inhibit copying static Octave scripts. The generated Octave code builds on some\n"     \
-"    common scripts, which are normally copied into the output folder. Use -i in order\n"   \
-"    to not copy these files into each result folder.\n"                                    \
+"    Inhibit copying common, problem independent Octave scripts. The generated Octave\n"    \
+"    code builds on some common, invariant scripts, which are normally copied into the\n"   \
+"    output folder. Use -i in order to not copy these files into each result folder.\n"     \
 "\n"                                                                                        \
 "Input files:\n"                                                                            \
 "  Program arguments, which are neither options nor their arguments are considered input\n" \

@@ -245,9 +245,10 @@ static boolean makeOctaveOutputDir( const char * const outputPath
            single result definition for one and the same circuit file then we will
            necessarily see this message for result 2, 3, ... */
         LOG_INFO( hLog
-                , "Octave output folder %s already exists. The input dependent parts"
-                  " of the Octave code are re-generated and existing files are overwritten."
-                  " The static, problem independent parts of the code are not re-generated"
+                , "Octave output folder %s already exists. The problem dependent parts"
+                  " of the Octave code are re-generated and existing M script files are"
+                  " overwritten. The common, problem independent parts of the M script code"
+                  " aren't re-generated"
                 , octavePath
                 );
 
