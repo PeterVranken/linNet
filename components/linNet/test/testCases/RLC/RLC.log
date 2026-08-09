@@ -1,19 +1,19 @@
-Jun 19 22:12:39 2026 - 000000 ms - RESULT - 
+Jul 26 17:25:22 2026 - 000002 ms - RESULT - 
 -----------------------------------------------------------------------------
  linNet - The Software for symbolic Analysis of linear Electronic Circuits
- Copyright (C) 2014-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ Copyright (C) 2014-2026 Peter Vranken (https://github.com/PeterVranken/linNet)
  This is free software; see the source for copying conditions. There is NO
  warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 -----------------------------------------------------------------------------
-Jun 19 22:12:39 2026 - 000001 ms - RESULT - Reading circuit file C:\home\vranken\projects\linNetAtGitHub\linNet\components\linNet\test\testCases\RLC\RLC.cnl successfully done
-Jun 19 22:12:39 2026 - 000001 ms - RESULT - User-defined result Bode (Bode plot):
+Jul 26 17:25:22 2026 - 000020 ms - RESULT - Reading circuit file testCases\RLC\RLC.cnl successfully done
+Jul 26 17:25:22 2026 - 000024 ms - RESULT - User-defined result Bode (Bode plot):
 The dependency of U_out on U1:
   U_out(s) = N_U_out_U1(s)/D_U_out_U1(s) * U1(s), with
     N_U_out_U1(s) = R2
     D_U_out_U1(s) = (R1*L*C + R2*L*C) * s^2
                     +R1*R2*C * s
                     +(R1 + R2)
-Jun 19 22:12:39 2026 - 000002 ms - RESULT - User-defined result Res:
+Jul 26 17:25:22 2026 - 000036 ms - RESULT - User-defined result Res:
 The solution for unknown U_out:
   U_out(s) = N_U_out_U1(s)/D_U_out_U1(s) * U1(s)
              + N_U_out_U2(s)/D_U_out_U2(s) * U2(s), with
@@ -39,7 +39,7 @@ The solution for unknown U_LC:
     D_U_LC_U1(s) = D_U_out_U1(s)
     N_U_LC_U2(s) = N_U_K_L_U2(s)
     D_U_LC_U2(s) = D_U_out_U1(s)
-Jun 19 22:12:39 2026 - 000002 ms - RESULT - User-defined result U_probeIsZero:
+Jul 26 17:25:22 2026 - 000079 ms - RESULT - User-defined result U_probeIsZero:
 The solution for unknown U_probe:
   U_probe(s) = N_U_probe_U1(s)/D_U_probe_U1(s) * U1(s)
                + N_U_probe_U2(s)/D_U_probe_U2(s) * U2(s), with

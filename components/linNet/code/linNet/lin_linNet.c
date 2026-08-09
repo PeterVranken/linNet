@@ -179,7 +179,7 @@ static const char *getLogFileName( const opt_cmdLineOptions_t * const pCmdLine
                          , circuitFileName
                          );
 
-            /* File name with new extesnion. */            
+            /* File name with new extension. */            
             char logFileName[strlen(pureFileName) + sizeof(LIN_LOG_FILE_NAME_EXT)];
             snprintf( logFileName
                     , sizeof(logFileName)
@@ -244,12 +244,12 @@ static boolean makeOctaveOutputDir( const char * const outputPath
         /* The next message needs to be done on lowest level: If we have more than a
            single result definition for one and the same circuit file then we will
            necessarily see this message for result 2, 3, ... */
-        LOG_DEBUG( hLog
-                 , "Octave output folder %s already exists. The input related parts"
-                   " of the Octave code are re-generated and existing files are overwritten."
-                   " The static, problem independent parts of the code are not re-generated"
-                 , octavePath
-                 );
+        LOG_INFO( hLog
+                , "Octave output folder %s already exists. The input dependent parts"
+                  " of the Octave code are re-generated and existing files are overwritten."
+                  " The static, problem independent parts of the code are not re-generated"
+                , octavePath
+                );
 
         /* An already existing target folder is not considered a fault, we simply reuse
            that one and overwrite the generated, dynamic part of the Octave scripting. */
@@ -280,10 +280,8 @@ static boolean makeOctaveOutputDir( const char * const outputPath
                                                         (_installDir
                                                         , LIN_OCTAVE_CODE_TEMPLATE_FOLDER_NAME
                                                         );
-printf("fil_copyDir(%s, %s)\n", octavePath, resourceFolder);
             if(fil_copyDir(octavePath, resourceFolder))
             {
-printf("fil_copyDir() succeeded\n");
                 LOG_DEBUG( hLog
                          , "Template folder %s with Octave code successfully copied to"
                            " the aimed target location %s"
@@ -293,7 +291,6 @@ printf("fil_copyDir() succeeded\n");
             }
             else
             {
-printf("fil_copyDir() failed\n");
                 LOG_ERROR( hLog
                          , "Can't copy template folder %s with Octave code to the aimed"
                            " target location %s. The generated Octave scripts won't"
@@ -533,7 +530,7 @@ signed int main(signed int argc, char *argv[])
            "-----------------------------------------------------------------------------\n"
            " " LIN_APP_NAME
                     " - The Software for symbolic Analysis of linear Electronic Circuits\n"
-           " Copyright (C) 2014-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)\n"
+           " Copyright (C) 2014-2026 Peter Vranken (https://github.com/PeterVranken/linNet)\n"
            " This is free software; see the source for copying conditions. There is NO\n"
            " warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n"
            "-----------------------------------------------------------------------------";

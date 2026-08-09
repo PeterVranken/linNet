@@ -104,8 +104,16 @@ void log_initModule()
 #ifdef  DEBUG
     /* Check if patch of snprintf is either not required or properly installed. */
     char buf[3] = {[2] = '\0'};
+    
+    /* The warning "format-truncation" is locally switched off. Justification: The
+       violation has been made by intention and only for some self test in DEBUG
+       compilation. */
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wformat-truncation"
     snprintf(buf, 2, "%s World", "Hello");
+#pragma GCC diagnostic pop
     assert(strlen(buf) == 1);
+
 #endif
 } /* End of log_initModule */
 

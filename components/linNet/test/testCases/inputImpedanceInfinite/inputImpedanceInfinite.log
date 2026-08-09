@@ -1,17 +1,17 @@
-Jun 14 12:06:22 2026 - 000001 ms - RESULT - 
+Jul 26 17:25:21 2026 - 000000 ms - RESULT - 
 -----------------------------------------------------------------------------
  linNet - The Software for symbolic Analysis of linear Electronic Circuits
- Copyright (C) 2014-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ Copyright (C) 2014-2026 Peter Vranken (https://github.com/PeterVranken/linNet)
  This is free software; see the source for copying conditions. There is NO
  warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 -----------------------------------------------------------------------------
-Jun 14 12:06:22 2026 - 000001 ms - RESULT - Reading circuit file C:\home\vranken\projects\linNetAtGitHub\linNet\components\linNet\test\testCases\inputImpedanceInfinite\inputImpedanceInfinite.cnl successfully done
-Jun 14 12:06:22 2026 - 000001 ms - RESULT - User-defined result Z (Bode plot):
+Jul 26 17:25:21 2026 - 000015 ms - RESULT - Reading circuit file testCases\inputImpedanceInfinite\inputImpedanceInfinite.cnl successfully done
+Jul 26 17:25:21 2026 - 000020 ms - RESULT - User-defined result Z (Bode plot):
 The dependency of Uin on I_Uin:
   Uin(s) = N_Uin_I_Uin(s)/D_Uin_I_Uin(s) * I_Uin(s), with
     N_Uin_I_Uin(s) = 1
     D_Uin_I_Uin(s) = 0
-Jun 14 12:06:22 2026 - 000001 ms - RESULT - User-defined result G (Bode plot):
+Jul 26 17:25:21 2026 - 000029 ms - RESULT - User-defined result G (Bode plot):
 The dependency of U_out on Uin:
   U_out(s) = N_U_out_Uin(s)/D_U_out_Uin(s) * Uin(s), with
     N_U_out_Uin(s) = 1

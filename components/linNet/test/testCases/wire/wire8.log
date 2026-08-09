@@ -1,12 +1,12 @@
-Jul 23 22:34:51 2026 - 000003 ms - RESULT - 
+Jul 26 17:25:25 2026 - 000001 ms - RESULT - 
 -----------------------------------------------------------------------------
  linNet - The Software for symbolic Analysis of linear Electronic Circuits
- Copyright (C) 2014-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ Copyright (C) 2014-2026 Peter Vranken (https://github.com/PeterVranken/linNet)
  This is free software; see the source for copying conditions. There is NO
  warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 -----------------------------------------------------------------------------
-Jul 23 22:34:51 2026 - 000004 ms - RESULT - Reading circuit file C:\home\vranken\projects\linNetAtGitHub\linNet\components\linNet\test\testCases\wire\wire8.cnl successfully done
-Jul 23 22:35:34 2026 - 043146 ms - RESULT - User-defined result G (Bode plot):
+Jul 26 17:25:25 2026 - 000016 ms - RESULT - Reading circuit file testCases\wire\wire8.cnl successfully done
+Jul 26 17:26:06 2026 - 040642 ms - RESULT - User-defined result G (Bode plot):
 The dependency of U2 on U1:
   U2(s) = N_U2_U1(s)/D_U2_U1(s) * U1(s), with
     N_U2_U1(s) = Rl
@@ -27,7 +27,7 @@ The dependency of U2 on U1:
                  +64*Rl*L*C * s^2
                  +(8*Rl^2*C + 8*L) * s
                  +2*Rl
-Jul 23 22:35:34 2026 - 043151 ms - RESULT - User-defined result G_I (Bode plot):
+Jul 26 17:26:06 2026 - 040674 ms - RESULT - User-defined result G_I (Bode plot):
 The dependency of I_Rl on I_U1:
   I_Rl(s) = N_I_Rl_I_U1(s)/D_I_Rl_I_U1(s) * I_U1(s), with
     N_I_Rl_I_U1(s) = 1
@@ -48,7 +48,7 @@ The dependency of I_Rl on I_U1:
                      +36*L*C * s^2
                      +8*Rl*C * s
                      +1
-Jul 23 22:35:34 2026 - 043158 ms - RESULT - User-defined result stepResp:
+Jul 26 17:26:06 2026 - 040712 ms - RESULT - User-defined result stepResp:
 The solution for unknown U2:
   U2(s) = N_U2_U1(s)/D_U2_U1(s) * U1(s), with
     N_U2_U1(s) = Rl
