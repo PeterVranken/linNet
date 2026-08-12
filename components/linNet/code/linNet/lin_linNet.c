@@ -357,7 +357,7 @@ static boolean processInputFile( const char * const circuitFileName
                                , log_hLogger_t hLog
                                )
 {
-    /* Parse the input file and generate a net list object. */
+    /* Parse the input file and generate a netlist object. */
     const pci_circuit_t *pParseResult = NULL;
     boolean success = pci_parseCircuitFile( hLog
                                           , &pParseResult

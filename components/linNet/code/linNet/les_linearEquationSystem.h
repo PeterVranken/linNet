@@ -79,7 +79,7 @@ void les_initModule(log_hLogger_t hGlobalLogger);
     orphaned handles, etc. */
 void les_shutdownModule(void);
 
-/** Create the linear equation system from the net list representing the electric circuit. */
+/** Create the linear equation system from the netlist representing the electric circuit. */
 boolean les_createLES( les_linearEquationSystem_t * * const ppLES
                      , const pci_circuit_t * const pCircuitNetList
                      );

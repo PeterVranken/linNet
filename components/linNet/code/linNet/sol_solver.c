@@ -100,7 +100,7 @@ static unsigned int _noRefsToObjects = 0;
  *   The returned vector is malloc allocated and needs to be freed after use.
  *   @param pSolution
  * The pointer to the solution object. If called during object construction: The table of
- * variables and the circuit net list need to be setup before this function may be called.
+ * variables and the circuit netlist need to be setup before this function may be called.
  */
 
 static const boolean *getVectorOfReqDependents(const sol_solution_t * const pSolution)
@@ -612,7 +612,7 @@ static boolean solverLES( coe_coefMatrix_t A
                              , "Gauss elimination of LES is aborted. Pivoting doesn't find"
                                " any non zero coefficient in the %u. elimination step. The"
                                " equations are linear dependent or contradictory. Please"
-                               " double-check your circuit net list"
+                               " double-check your circuit netlist"
                              , elimStep+1
                              )
                     return false;

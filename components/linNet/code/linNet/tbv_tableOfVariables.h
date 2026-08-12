@@ -119,36 +119,36 @@ typedef struct tbv_tableOfVariables_t
 
     /** Some node properties are related to knowns and unknowns and are held in this
         object. A map permits to directly access these properties via the node's linear
-        index in the circuit net list. */
+        index in the circuit netlist. */
     unsigned int *nodeIdxToUnknownIdxAry;
     
     /** Some device properties are related to knowns and are held in this object. A map
         permits to directly access these properties via the devices's linear index in the
-        circuit net list. */
+        circuit netlist. */
     unsigned int *devIdxToKnownIdxAry;
     
     /** Some device properties are related to unknowns and are held in this object. A map
         permits to directly access these properties via the devices's linear index in the
-        circuit net list. */
+        circuit netlist. */
     unsigned int *devIdxToUnknownIdxAry;
     
     /** The (physical) constants are related to (some of) the interconnected devices. These
-        devices are referenced by index into the table of device in the nested net list *
+        devices are referenced by index into the table of device in the nested netlist *
         \a pCircuitNetList.\n
           The main property of a constant, the bit vector it is represented by in a product
         of constants, is stored implicitly only: index 0 means bit vector 0x1, index 1
         means 0x2, index 2 means 0x4, and so forth. */
     unsigned int *constantIdxToDevIdxAry;
 
-    /** Some operations need to follow the link from a device in the net list * \a
+    /** Some operations need to follow the link from a device in the netlist * \a
         pCircuitNetList to a constant. Here we have the inverse lookup table, inverse to \a
         constantDevIdxAry. */
     unsigned int *devIdxToConstantIdxAry;
 
 
-    /** The entries of the different tables refer to the net list representing the circuit,
+    /** The entries of the different tables refer to the netlist representing the circuit,
         which holds details about nodes and interconnected devices. Here is a copy (by
-        reference) to the related net list. */
+        reference) to the related netlist. */
     const pci_circuit_t *pCircuitNetList;
 
 } tbv_tableOfVariables_t;

@@ -434,7 +434,7 @@ tbv_tableOfVariables_t *tbv_createTableOfVariables( unsigned int noKnowns
 
 /**
  * Copy a table of variables. It is a shallow copy, the immediate members are copied, in
- * particular the arrays of knowns, unknowns and constants, but the associated net list
+ * particular the arrays of knowns, unknowns and constants, but the associated netlist
  * object is copied only by reference.
  *   @return
  * A pointer to a new table is returned. Some memory has been allocated on the heap;
@@ -773,7 +773,7 @@ void tbv_logTableOfVariables(const tbv_tableOfVariables_t * const pTable)
  * Knowns are related to devices (constant sources). A lookup function by device index is
  * defined. To support the lookup function the index of the device is passed to this
  * function. The index is related to the linear array of devices in the parse result (i.e.
- * the circuit net list object).
+ * the circuit netlist object).
  *   @remark
  * An error because of an overful table is reported by assertion only as it is considered
  * an internal implementation error. Errors caused by bad user input are reported to the

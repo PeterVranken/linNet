@@ -121,7 +121,7 @@ static tok_token_t _token = TOK_UNINITIALIZED_TOKEN;
 static boolean _parseError = false;
 
 /** The parser still supports an old-fashioned style of circuit input files, which is
-    compatible with the net list of an early release of the simulation tool SPICE.\n
+    compatible with the netlist of an early release of the simulation tool SPICE.\n
       At run-time, this flag indicates to the parser's sub-routines, which input format to
     support. true means the new, standard format. */
 static boolean _isStdFormat = false;
