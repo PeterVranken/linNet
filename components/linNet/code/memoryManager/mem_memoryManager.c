@@ -10,7 +10,7 @@
  * comparison to the general purpose heap malloc/free is essential.\n
  *   To further increase the performance for applictions, which heavily deal with linked
  * lists, it has decided to make the free-list structure identical to the client's list
- * structure, i.e. the element linking pointer is the same inside the memory management and
+ * structure, i.e., the element linking pointer is the same inside the memory management and
  * at the application side. The element handling can't be done typesafe in C as a memory
  * manager can be instatiated for data objects of different data types. Taking both
  * considerations into repect an important constraint on the handled data objects can be
@@ -456,11 +456,11 @@ void *mem_malloc(heap_t *pHeap)
  * the sequence of returned, allocated data objects only this way, he must not consider the
  * returned data an array of n elements!
  *   @return
- * The pointer to the head of the returned list, i.e. to the first data object in the list.
+ * The pointer to the head of the returned list, i.e., to the first data object in the list.
  *   @param pHeap
  * The handle to the heap as got from mem_createHeap.
  *   @param lenOfList
- * The length of the list, i.e. the number of linked data objects. lenOfList is greater
+ * The length of the list, i.e., the number of linked data objects. lenOfList is greater
  * than 1.
  *   @remark
  * The client may disregard and overwrite the link pointer in the first data bytes of each
@@ -530,7 +530,7 @@ void mem_free(heap_t *pHeap, void *pDataObj)
  *   @param pHeap
  * The handle to the heap the data objects belongs to.
  *   @param pHeadOfList
- * The pointer to the head of the list that is returned to the heap, i.e. the first one of
+ * The pointer to the head of the list that is returned to the heap, i.e., the first one of
  * the linked data objects.
  */
 

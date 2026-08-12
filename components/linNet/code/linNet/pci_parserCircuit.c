@@ -127,7 +127,7 @@ static boolean _parseError = false;
 static boolean _isStdFormat = false;
 
 /* The number of voltage sources needs to be one and only one in the elder format; there it
-   is the system input definition (i.e. the only independent of the only result) at the
+   is the system input definition (i.e., the only independent of the only result) at the
    same time. This global variable is used to count the parsed definitions. */
 static unsigned int _noOldStyleInputDefs = 0;
 
@@ -651,7 +651,7 @@ static boolean parseListOfNodes( pci_circuit_t * const pParseResult
 
 /**
  * It's structurally basically possible to have different devices of same name. If devices
- * of same name are properly related (i.e. it's explicitly stated that they have the same
+ * of same name are properly related (i.e., it's explicitly stated that they have the same
  * physical value) then it will even lead to a useful result. In all other cases the
  * result's representation is ambiguous and misleading (but not wrong). The old input
  * syntax supported devices of same name; today's standard format doesn't. To stay
@@ -1274,7 +1274,7 @@ static boolean parseDevValueAssignment( boolean *pAssignmentFound
                controlled current source. */
             if(devType != pci_devType_srcIByU)
             {
-                /* Parse the LHS, e.g. R= */
+                /* Parse the LHS, e.g., R= */
                 assert(_token.type == tok_tokenTypeIdentifier);
                 boolean okay = strlen(_token.value.identifier) == 1;
                 if(okay)
@@ -1537,7 +1537,7 @@ static boolean parseDeviceDef(pci_circuit_t * const pParseResult)
             *(char*)devName = 'U';
 
             /* The number of voltage sources needs to be one and only one in the elder format;
-               there it is the system input definition (i.e. the only independent of the only
+               there it is the system input definition (i.e., the only independent of the only
                result) at the same time. A global variable is used to double-check this, a
                possible error is emitted at the end. */
             ++ _noOldStyleInputDefs;
@@ -2237,7 +2237,7 @@ static boolean parseResultDefintion(pci_circuit_t * const pParseResult, boolean 
 
 
 /**
- * Validate that a node is a true, physical network node, i.e. that it really is connected
+ * Validate that a node is a true, physical network node, i.e., that it really is connected
  * to an electrical connector of a device (but not only to a voltage sense input or not at
  * all).
  *   @return
@@ -2852,7 +2852,7 @@ const char *pci_getNameOfDeviceType(const pci_device_t * const pDevice)
 
 /**
  * Render a plot information object as Octave script code. The object is represented as a M
- * code struct; the generated M code can e.g. be used as RHS of an assignment.
+ * code struct; the generated M code can, e.g., be used as RHS of an assignment.
  *   @param pPlotInfo
  * The reference to the rendered plot information object is passed. NULL may be passed if
  * no specific plot information is known and plot attributes are modelled as "don't care".

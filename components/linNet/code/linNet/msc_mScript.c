@@ -425,7 +425,7 @@ void msc_deleteMScript(msc_mScript_t * const pMScript)
 
 
 /**
- * Write a predefined text block into the generated M file. Such a text block can e.g. be
+ * Write a predefined text block into the generated M file. Such a text block can, e.g., be
  * the file header or a blank line. See enumeration msc_enumTextBlock_t.
  *   @return
  * The function returns the success. A false indicates a problem, most probable an error in

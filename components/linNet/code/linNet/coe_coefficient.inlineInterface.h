@@ -135,7 +135,7 @@ static inline boolean coe_isCoefAddendNull(const coe_coefAddend_t * const pAdden
  * *coe_newCoefAddend(). If the addend is part of a linked list of addends, then the
  * followers of the deleted addend are ignored.
  *   @param pCoefAddend
- * The pointer to the returned (i.e. freed) coefficient addend object.
+ * The pointer to the returned (i.e., freed) coefficient addend object.
  */
 
 static inline void coe_freeCoefAddend(coe_coefAddend_t *pCoefAddend)
@@ -165,10 +165,10 @@ static inline void coe_freeCoef(coe_coef_t *pCoef)
 
 
 /**
- * Compute the sum of a coefficient and a single addend (i.e. a product of constants and a
+ * Compute the sum of a coefficient and a single addend (i.e., a product of constants and a
  * numeric factor). The operation is done in place.
  *   @param ppCoef
- * The coefficient object by reference. This object is changed in place, i.e. it is
+ * The coefficient object by reference. This object is changed in place, i.e., it is
  * replaced by the sum if it and the new addend.
  *   @param factor
  * The new addend is passed as pair of primitive data types. Here the numeric factor, which

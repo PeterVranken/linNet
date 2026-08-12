@@ -58,7 +58,7 @@ typedef struct sol_solution_t
     coe_coef_t *pDeterminant;
     
     /** An array of numerators of result terms. There's one such term for each combination
-        of dependent (i.e. unknown or user defined voltage) and known:
+        of dependent (i.e., unknown or user defined voltage) and known:
         numeratorAry[idxDependent][idxKnown]. */
     coe_coefMatrix_t numeratorAry;
     
@@ -95,7 +95,7 @@ const sol_solution_t *sol_cloneByConstReference(const sol_solution_t * const pEx
 /** Delete a solution object as got from sol_createSolution. */
 void sol_deleteSolution(const sol_solution_t * const pConstSolution);
 
-/** Get the number of unknowns, i.e. of independent quantities, a solution object offers a
+/** Get the number of unknowns, i.e., of independent quantities, a solution object offers a
     solution for. */
 unsigned int sol_getNoIndependents(const sol_solution_t * const pSolution);
 

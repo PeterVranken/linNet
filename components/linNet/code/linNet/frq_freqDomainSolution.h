@@ -127,12 +127,12 @@ typedef struct frq_freqDomainSolution_t
         term for each known in each solution. */
     frq_normalizedFrqDomExpressionMatrix_t numeratorAry;
 
-    /** The names of all numerator expressions, used e.g. as variable names in the
+    /** The names of all numerator expressions, used, e.g., as variable names in the
         generated Octave script. */
     const char * **numeratorNameAry;
     
-    /** The names of all (final) denominator expressions, used e.g. as variable names in the
-        generated Octave script. */
+    /** The names of all (final) denominator expressions, used, e.g., as variable names in
+        the generated Octave script. */
     const char * **denominatorNameAry;
 
 } frq_freqDomainSolution_t;

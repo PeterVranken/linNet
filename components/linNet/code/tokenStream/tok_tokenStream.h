@@ -50,7 +50,7 @@
 
 /** This switch decides whether the function tok_getTokenType is compiled. Normally, this
     function will be used for debug and testing purpose only but is not required in the
-    production code. Therefore, setting the macro can be done from outside, e.g. controlled
+    production code. Therefore, setting the macro can be done from outside, e.g., controlled
     by the makefile.
       @remark The function tok_getTokenType makes a switch/case of the different known
     token types. As these depent (partly) on the compile time application configuration the
@@ -165,7 +165,7 @@ typedef struct tok_token_t
 typedef struct tok_tokenStream_t *tok_hTokenStream_t;
 
 
-/** Some syntax constructs of the tokenizer are optional, i.e. they can be switched on or
+/** Some syntax constructs of the tokenizer are optional, i.e., they can be switched on or
     off in order to customize the behavior.\n
       Use the values of this enumeration with method tok_setBoolOption to set the options
     appropriately. */
@@ -185,7 +185,7 @@ typedef enum
         Default is false. */
     , tok_optionBinLiteral
 
-    /** Floating point numbers can have a one-character exponent, e.g. 1k meaning 1e3 or
+    /** Floating point numbers can have a one-character exponent, e.g., 1k meaning 1e3 or
         23.4u meaning 23.4e-6. Default is false.\n
           The table of supported suffixes has been taken from
         http://searchstorage.techtarget.com/definition/Kilo-mega-giga-tera-peta-and-all-that,
@@ -272,7 +272,7 @@ typedef union
     double-check for doubly defined smbols.
       @remark Using identical token values (or \a type) is valid and supported. Different
     character sequences would be reported in a transparent way to the client as same token.
-    One could e.g. define the \a symbol ";" as \a type \a tok_tokenTypeEndOfLine, in which
+    One could, e.g., define the \a symbol ";" as \a type \a tok_tokenTypeEndOfLine, in which
     case the semicolon would have the same meaning to the client parser as an end of line
     character. */
 typedef struct tok_tokenDescriptor_t
@@ -298,7 +298,7 @@ typedef struct tok_tokenDescriptorTable_t
         compilation (by assertion).
           @remark Using identical token values (or \a type) is valid and supported.
         Different character sequences would be reported in a transparent way to the client
-        as same token. One could e.g. define the \a symbol ";" as \a type \a
+        as same token. One could, e.g., define the \a symbol ";" as \a type \a
         tok_tokenTypeEndOfLine, in which case the semicolon would have the same meaning to
         the client parser as an end of line character. */
     const tok_tokenDescriptor_t *tokenDescriptorAry;

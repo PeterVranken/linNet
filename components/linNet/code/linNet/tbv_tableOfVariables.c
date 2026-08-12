@@ -772,7 +772,7 @@ void tbv_logTableOfVariables(const tbv_tableOfVariables_t * const pTable)
  *   @param idxDevice
  * Knowns are related to devices (constant sources). A lookup function by device index is
  * defined. To support the lookup function the index of the device is passed to this
- * function. The index is related to the linear array of devices in the parse result (i.e.
+ * function. The index is related to the linear array of devices in the parse result (i.e.,
  * the circuit netlist object).
  *   @remark
  * An error because of an overful table is reported by assertion only as it is considered

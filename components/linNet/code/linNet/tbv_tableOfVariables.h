@@ -74,7 +74,7 @@ typedef struct
     /** The index of the column in the LES, which belongs to this unknown. */
     unsigned int idxCol;
 
-    /** If idxNode is not PCI_NULL_NODE, i.e. if the unknown is related to a node's voltage
+    /** If idxNode is not PCI_NULL_NODE, i.e., if the unknown is related to a node's voltage
         potential, then this field holds the identification of the sub-net the node belongs
         to. */
     unsigned int idSubNet;

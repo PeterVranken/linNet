@@ -202,7 +202,7 @@ void coe_shutdownModule()
 
 
 /**
- * A coefficient object is entirely copied, i.e. a single addend must not be passed.
+ * A coefficient object is entirely copied, i.e., a single addend must not be passed.
  *   @return
  * The copy is returned.
  *   @param pCoef
@@ -440,7 +440,7 @@ void coe_logCoefficient( const coe_coef_t * const pCoef
 
 
 /**
- * Print the a matrix of coefficients (i.e. the linear equation system) to the application
+ * Print the a matrix of coefficients (i.e., the linear equation system) to the application
  * log.
  *   @param logLevel
  * The log level at which the output becomes visible. No output is created if the logger

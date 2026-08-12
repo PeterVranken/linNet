@@ -202,7 +202,7 @@ static inline log_lineFormat_t log_getLineFormat(log_hLogger_t hObj)
 unsigned int log_getLengthOfLineHeader(log_hLogger_t hObj);
 
 /** Get the eror status of the last recent output operation.
-      @return The error information is the return value of the stdio function; see e.g. for
+      @return The error information is the return value of the stdio function; see, e.g., for
     fputs. */
 static inline int log_ferror(log_hLogger_t hObj)
     { return hObj->lastFileSystemErr; }

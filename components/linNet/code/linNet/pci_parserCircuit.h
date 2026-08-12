@@ -78,7 +78,7 @@
       We want to see R-L-C. The constant sources, the op-amp and the current probe don't
     appear as a symbol in the coefficients of the LES, so they don't matter in this context.
     The controlled sources often lead to results, which are interpreted as virtual change
-    of the value of one of the physical values R, L or C, e.g. beta*R might appear in a
+    of the value of one of the physical values R, L or C, e.g., beta*R might appear in a
     bipolar transistor circuit. To support this interpretation it seems to be best to have
     the controlled sources prior to the constant physical devices.
       @remark Caution, any change of the enumeration needs an according adaptation of the
@@ -146,7 +146,7 @@ typedef struct
         PCI_NULL_DEVICE for all devices other than current controlled sources. */
     unsigned int idxCurrentProbe;
 
-    /** A device can be related to another one in a simple way, e.g. a resistor can be
+    /** A device can be related to another one in a simple way, e.g., a resistor can be
         defined to have double the resistance of another one. */
     pci_deviceRelation_t devRelation;
 
@@ -192,7 +192,7 @@ typedef struct
     plotted as Bode diagram or a complete solution. */
 typedef struct
 {
-    /** The name of the result. The name is used e.g. as part of the title of frequency
+    /** The name of the result. The name is used, e.g., as part of the title of frequency
         response plots. */
     const char *name;
 

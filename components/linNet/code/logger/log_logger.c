@@ -430,7 +430,7 @@ void log_parseLineFormat(log_hLogger_t hObj, const char *lineFormatName)
 
 /**
  * The format of the line can be chosen, which means that every line of output is preceeded
- * by a certain header, containing e.g. a time stamp. This function returns the number of
+ * by a certain header, containing, e.g., a time stamp. This function returns the number of
  * characters of the chosen line header.
  *   @return
  * Get the length of the current selected header of the logger.
@@ -554,7 +554,7 @@ void log_flush(log_logger_t * const hObj)
  *   @param hObj
  * The handle to the logger object to operate on.
  *   @param logLevel
- * The log level (i.e. importance level) of this message.
+ * The log level (i.e., importance level) of this message.
  *   @param formatString
  * A printf-style format string, which is followed by an argument list of appropriate,
  * variable length.
@@ -721,7 +721,7 @@ static unsigned int logInternal( log_logger_t * const hObj
  *   @param hObj
  * The handle to the logger object to operate on.
  *   @param logLevel
- * The log level (i.e. importance level) of this message.
+ * The log level (i.e., importance level) of this message.
  *   @param formatString
  * A printf-style format string, which is followed by an argument list of appropriate,
  * variable length.
@@ -772,7 +772,7 @@ unsigned int log_log( log_logger_t * const hObj
  *   @param hObj
  * The handle to the logger object to operate on.
  *   @param logLevel
- * The log level (i.e. importance level) of this message.
+ * The log level (i.e., importance level) of this message.
  *   @param formatString
  * A printf-style format string, which is followed by an argument list of appropriate,
  * variable length.

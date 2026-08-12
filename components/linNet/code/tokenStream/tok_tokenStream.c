@@ -26,7 +26,7 @@
  * front of the next end of line character. All three needed tags can be configured.\n
  *   As long as no syntax error is found the scanner always returns a token. If it cannot
  * match an input character to any of the more complex token types it'll return the
- * character itself as token, i.e. the token type is set to the character code. This design
+ * character itself as token, i.e., the token type is set to the character code. This design
  * decision has been taken because most parsers have to handle a lot of single character
  * tokens like parenthesis and these are implicitly defined.
  *
@@ -116,7 +116,7 @@
 #define EOL ((signed int)'\n')
 
 
-/** Use a constant number as string literal, e.g. for static, compile time status messages. */
+/** Use a constant number as string literal, e.g., for static, compile time status messages. */
 #define NUM_LITERAL_TO_STR(num)  INTERNAL_TO_STR(num)
 #define INTERNAL_TO_STR(num) #num
 
@@ -125,7 +125,7 @@
  * Local type definitions
  */
 
-/** Some syntax construct of the tokenizer are optional, i.e. they can be switched on or
+/** Some syntax construct of the tokenizer are optional, i.e., they can be switched on or
     off in order to customize the behavior. */
 typedef struct syntaxOptions_t
 {
@@ -238,7 +238,7 @@ typedef struct tok_tokenStream_t
  *   @param sizeOfArray
  * The number of elements in \a array.
  *   @param sizeOfElement
- * The size in Byte of each element in the array, e.g. sizeof(array[0]).
+ * The size in Byte of each element in the array, e.g., sizeof(array[0]).
  *   @param compare
  * The array contents are opaque to the algorithm, but it is based on the order of elements
  * with respect to an also unknown ordering criterion. Therfore the comparison itself is
@@ -760,7 +760,7 @@ static void readString(tok_hTokenStream_t hTStream, tok_token_t * const pToken)
         /* Consume the leading double quote. */
         ch = nextChar(hTStream);
 
-        /* Read until EOF or the closing, i.e. not escaped, double quote. */
+        /* Read until EOF or the closing, i.e., not escaped, double quote. */
         str = readStringLiteral(hTStream);
 
         /* readStringLiteral consumed the characters until it saw the closing
@@ -1653,7 +1653,7 @@ static void deleteTokenDescriptorTable(tok_tokenStream_t * const pTokenStream)
  * The name of the file (or character stream), which is parsed. Mainly used for logging.
  * Only, if hFile is NULL then it really needs to be the name of (and path to) an existing
  * file. This file will then be opened for read access and be parsed.\n
- *   If there's no reasonable name (e.g. in case of custom character input) then pass NULL
+ *   If there's no reasonable name (e.g., in case of custom character input) then pass NULL
  * or the empty string.
  *   @param hStream
  * The parsed stream object. Either a stream from the stdio library or a custom stream of

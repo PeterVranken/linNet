@@ -1,10 +1,10 @@
-Jul 26 17:25:23 2026 - 000002 ms - RESULT - 
+Aug 12 16:18:48 2026 - 000004 ms - RESULT - 
 -----------------------------------------------------------------------------
  linNet - The Software for symbolic Analysis of linear Electronic Circuits
  Copyright (C) 2014-2026 Peter Vranken (https://github.com/PeterVranken/linNet)
  This is free software; see the source for copying conditions. There is NO
  warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 -----------------------------------------------------------------------------
-Jul 26 17:25:23 2026 - 000021 ms - RESULT - Reading circuit file testCases\UByUWithSameOutputs\UByUWithSameOutputs.cnl successfully done
-Jul 26 17:25:23 2026 - 000025 ms -  ERROR - Gauss elimination of LES is aborted. Pivoting doesn't find any non null coefficient in the 1. elimination step. The equations are linear dependent or contradictory. Please double-check your circuit net list
-Jul 26 17:25:23 2026 - 000036 ms -  ERROR - The LES could not be solved. The circuit has an undefined behavior. Most probable, you have an invalid interconnection of sources, current probes and/or op-amps in your circuit
+Aug 12 16:18:48 2026 - 000043 ms - RESULT - Reading circuit file testCases\UByUWithSameOutputs\UByUWithSameOutputs.cnl successfully done
+Aug 12 16:18:48 2026 - 000056 ms -  ERROR - Gauss elimination of LES is aborted. Pivoting doesn't find any non zero coefficient in the 1. elimination step. The equations are linear dependent or contradictory. Please double-check your circuit netlist
+Aug 12 16:18:48 2026 - 000084 ms -  ERROR - The LES could not be solved. The circuit has an undefined behavior. Most probable, you have an invalid interconnection of sources, current probes and/or op-amps in your circuit

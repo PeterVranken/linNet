@@ -435,7 +435,7 @@ boolean opt_parseCmdLine( opt_cmdLineOptions_t * const pCmdLineOptions
  * can be printed as the simple types they are defined but a true interpretation is not
  * possible. Therefore, this function will probably be useful for debugging purpose only.
  *   @param stream
- * An open stream from the stdlib to write in, pass e.g. stdout.
+ * An open stream from the stdlib to write in, pass, e.g., stdout.
  *   @param pCmdLineOptions
  * The struct with all user input as got from \a opt_parseCmdLine. You can print the struct
  * even if the parser had reported a problem.
