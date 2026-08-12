@@ -50,7 +50,7 @@ typedef struct sol_solution_t
     const tbv_tableOfVariables_t *pTableOfVars;
 
     /** A Boolean vector indicating which of the dependent quantities have been computed.
-        The other solutions in \a numeratorAry are null coefficients. */
+        The other solutions in \a numeratorAry are null coefficients (representing zero). */
     const boolean *pIsDependentAvailableAry;    
     
     /** The determinant of the LES and the denominator of all terms of the solution at the

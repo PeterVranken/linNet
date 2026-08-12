@@ -267,7 +267,7 @@ boolean opt_parseCmdLine( opt_cmdLineOptions_t * const pCmdLineOptions
       , .flag = NULL
       , .val = 'o'
       }
-    /* End of list: All null values */
+    /* End of list: All zero/NULL values */
     , {.name = NULL, .has_arg = 0, .flag = NULL, .val = 0}
     };
 #endif /* OPT_USE_POSIX_GETOPT != 0 */

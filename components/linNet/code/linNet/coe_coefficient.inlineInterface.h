@@ -172,7 +172,7 @@ static inline void coe_freeCoef(coe_coef_t *pCoef)
  * replaced by the sum if it and the new addend.
  *   @param factor
  * The new addend is passed as pair of primitive data types. Here the numeric factor, which
- * must not be null.
+ * must not be zero.
  *   @param productOfConsts
  * The new addend is passed as pair of primitive data types. Here the product of constants.
  */
@@ -211,7 +211,7 @@ static inline void coe_addAddend( coe_coef_t ** const ppCoef
            added. */
         if((pAddend->factor+=factor) == 0)
         {
-            /* The sum of the factors is null, the addend is eliminated. Remove the list
+            /* The sum of the factors is zero, the addend is eliminated. Remove the list
                element from the coefficient. */
             (*ppAddend) = pAddend->pNext;
             coe_freeCoefAddend(pAddend);

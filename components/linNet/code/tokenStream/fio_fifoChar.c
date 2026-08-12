@@ -157,7 +157,7 @@ static void freeMemChunk(fifoBlock_t *pBlock)
  * Get the handle of the new object.
  *   @param blockSize
  * The size of a single, malloc allocated chunk of memory. Whenever more elements are
- * stored as this number a new chunk is allocated to enlarge the FIFO. Must not be null.
+ * stored as this number a new chunk is allocated to enlarge the FIFO. Must not be zero.
  */
 
 fio_hFifoChar_t fio_createFifoChar(unsigned int blockSize)

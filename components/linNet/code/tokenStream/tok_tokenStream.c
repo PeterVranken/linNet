@@ -1572,7 +1572,7 @@ static void createTokenDescriptorTable
     }
     else
     {
-        /* No custom tokens, set everything to null/NULL. */
+        /* No custom tokens, set everything to zero/NULL. */
         pTokenStream->tokenDescriptorTable.noTokenDescriptions = 0;
         pTokenStream->tokenDescriptorTable.tokenDescriptorAry = NULL;
         pTokenStream->tokenDescriptorTable.startComment = NULL;

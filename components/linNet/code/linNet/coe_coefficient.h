@@ -128,7 +128,7 @@ coe_coef_t *coe_cloneByDeepCopy(const coe_coef_t *pCoef);
 #if 1
 CRM_DECLARE_CREATE_MATRIX(/* modulePrefix */  coe, /* elementType_t */ coe_coef_t*)
 #else // For documentation purpose:
-/** Create a rectangular matrix of null coefficients. */
+/** Create a rectangular matrix of zero coefficients. */
 coe_coefMatrix_t coe_createMatrix(unsigned int noRows, unsigned int noCols);
 
 /** Delete a matrix of coefficients after use. */

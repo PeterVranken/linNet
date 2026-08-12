@@ -550,7 +550,7 @@ void log_flush(log_logger_t * const hObj)
  * Write some logging information to the log file and maybe to stdout also.
  *   @return
  * The number of written characters. If the stdio function return an error this number is
- * not available and this method returns null regardless of possibly written characters.
+ * not available and this method returns zero regardless of possibly written characters.
  *   @param hObj
  * The handle to the logger object to operate on.
  *   @param logLevel
@@ -717,7 +717,7 @@ static unsigned int logInternal( log_logger_t * const hObj
  * verbosity.
  *   @return
  * The number of written characters. If the stdio function return an error this number is
- * not available and this method returns null regardless of possibly written characters.
+ * not available and this method returns zero regardless of possibly written characters.
  *   @param hObj
  * The handle to the logger object to operate on.
  *   @param logLevel
@@ -768,7 +768,7 @@ unsigned int log_log( log_logger_t * const hObj
  *   Do not call this function directly, only use the macros offered in the header file.
  *   @return
  * The number of written characters. If the stdio function return an error this number is
- * not available and this method returns null regardless of possibly written characters.
+ * not available and this method returns zero regardless of possibly written characters.
  *   @param hObj
  * The handle to the logger object to operate on.
  *   @param logLevel

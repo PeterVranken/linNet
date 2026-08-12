@@ -110,7 +110,7 @@ static inline boolean isSlash(char c)
  *   @param path
  * The string pointer, which must not be a constant object like a string literal: If a
  * modification is needed then the function simply overwrites the last character with a
- * null character.
+ * zero character.
  */
 
 static char *removeTrailingSlash(char * const path)

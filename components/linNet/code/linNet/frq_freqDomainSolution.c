@@ -28,7 +28,7 @@
  * previously described form of addends, where all individual powers are signed.\n
  *   A normalized expression is derived from the result expression of the transformation
  * described in the previous paragraph by determining a factor such that the remaining
- * expression has a minimum individual power of null for each device constant and for the
+ * expression has a minimum individual power of zero for each device constant and for the
  * frequency variable s. Where "minimum" is meant across all addends of the expression.
  * There will be at least one addend having s^0, one (other) addend having R1^0, one
  * (other) addend having R2^0, and on so on. Negative powers do no longer occur. Moreover,
@@ -51,7 +51,7 @@
  * for identity; they can be canceled in their entirety if so. (There's no chance to find
  * more complex common divisors.) After cancellation the two expressions are denormalized
  * by multiplying the canceled normalization factors into the remaining expressions. It's
- * guaranteed that both expressions still have individual powers greater or equal to null
+ * guaranteed that both expressions still have individual powers greater or equal to zero
  * and numeric coefficients with denominator one. (Cancellation has been done
  * accordingly.)\n
  *   To find common terms, the two expressions are put into a map of such and this addend
@@ -340,7 +340,7 @@ static inline frq_frqDomExpressionAddend_t *newExpressionAddend()
 
 
 /**
- * Return a addend object, that represents null. It has been allocated using the
+ * Return a addend object, that represents zero. It has been allocated using the
  * global heap mem_hHeap_t _hHeapOfAddends and needs to be freed after use with void
  * mem_free(heap_t *, void *).
  *   @return
@@ -378,7 +378,7 @@ static inline frq_frqDomExpressionAddend_t *expressionAddendOne()
 
 
 /**
- * Check the addend of an expression if it represents null.
+ * Check the addend of an expression if it is a null object, i.e., if it represents zero.
  *   @return
  * Get the Boolean answer.
  */
@@ -428,7 +428,7 @@ static inline void freeExpression(const frq_frqDomExpression_t * const pExpressi
 
 
 /**
- * Return an expression, that represents null. Its addends have been allocated using the
+ * Return an expression, that represents zero. Its addends have been allocated using the
  * global heap mem_hHeap_t _hHeapOfAddends and need to be freed after use with void
  * mem_free(heap_t *, void *).
  *   @return
@@ -474,7 +474,7 @@ static inline frq_normalizedFrqDomExpression_t *normalizedExpressionOne()
 
 
 /**
- * Check a normalized expression object if it represents 0.
+ * Check a normalized expression object if it represents zero.
  *   @return
  * Get the Boolean answer.
  */
@@ -568,8 +568,8 @@ CRM_CREATE_MATRIX( /* context */             string
  * device constants. Higher powers come first. The power of the frequency variable has
  * precedence over the power of the physical constants.
  *   @return
- * The result is greater than null if op1 is "greater" than op2, null if they have the same
- * "size" and less than null if op2 is greater than op1.
+ * The result is greater than zero if op1 is "greater" than op2, zero if they have the same
+ * "size" and less than zero if op2 is greater than op1.
  *   @param op1
  * First operand of comparison.
  *   @param op2
@@ -587,7 +587,7 @@ static signed int cmpExprAddendPower( const frq_frqDomExpressionAddend_t * const
                                     , boolean ignoreFreqVar
                                     )
 {
-    /* Null is less tha any other addend. */
+    /* Zero is less than any other addend. */
     if(isExpressionAddendNull(pOp1))
         return isExpressionAddendNull(pOp2)? 0: -1;
     else if(isExpressionAddendNull(pOp2))
@@ -651,12 +651,12 @@ static unsigned int getNoAddendsOfSamePowerOfS(const frq_frqDomExpressionAddend_
  * not a well-defined operation but rather a common sense decision. A typical result of the
  * circuit computation is
  * infinite, e.g., for the input impedance of an op-amp. In this case the denominator is
- * null. We'd however like to decide between +inf and -inf and this depends on the sign of
+ * zero. We'd however like to decide between +inf and -inf and this depends on the sign of
  * the numerator. However, the numerator is a complex expression in s and doesn't have a
  * sign just like that. Most intuitive seems to be taking the sign at s=0, i.e., the
  * behavior of the circuit for direct current. However, even this is difficult: If there
- * are several terms with s to the power null than we'd need the specific device values to
- * find the solution - which we don't have. And if there's no such term (expression is null
+ * are several terms with s to the power of zero than we'd need the specific device values to
+ * find the solution - which we don't have. And if there's no such term (expression is zero
  * for s=0) then we can't take this decision at all. The function returns a positive sign
  * for unclear situations and -1 only if there's a single term in s^0 and if this term has
  * a negative coefficient.
@@ -767,7 +767,7 @@ static boolean isAbsEqualExpressions( boolean * const pHaveSameSign
                                     , const unsigned int noConst
                                     )
 {
-    /* Handle trivial situations: One or both operands are null. */
+    /* Handle trivial situations: One or both operands are zero. */
     if(isExpressionAddendNull(pOp1) && isExpressionAddendNull(pOp2))
     {
         *pHaveSameSign = true;
@@ -934,7 +934,7 @@ static frq_frqDomExpression_t *mulByAddendAndCpy
  *   @param pExpression
  * The operand expression prior to the call and the result after return.
  *   @param pDivisor
- * The other operand, the addend to divide by. Must not be null.
+ * The other operand, the addend to divide by. Must not be zero.
  *   @param noConst
  * The total number of device constants, which are in use in the given system.
  */
@@ -945,7 +945,7 @@ static frq_frqDomExpression_t *divByAddend( frq_frqDomExpression_t * const pExpr
                                           )
 {
     /* Division by numeric factor is actually done as product with reciprocal value. The
-       divisor must not be null, this is double checked by assertion. */
+       divisor must not be zero, this is double checked by assertion. */
     const rat_num_t factor = rat_reciprocal(pDivisor->factor);
 
     /* This operation does not impact the defined order of terms; a simple
@@ -980,11 +980,11 @@ static frq_frqDomExpression_t *divByAddend( frq_frqDomExpression_t * const pExpr
  * ordinary, not normalized exression.
  *   @param ppExpression
  * The manipulated expression is passed as a pointer to the pointer of its head addend. May
- * be a null expression.
+ * be a null expression representing zero.
  *   @param pNewFreqDomainAddend
- * The addend to add is passed by reference. It may be a null addend. The manipulated
- * expression takes ownership of the object, the caller must no longer use or reference it
- * after return. Particularly, he must not free the addend object.
+ * The addend to add is passed by reference. It may be a null addend representing zero. The
+ * manipulated expression takes ownership of the object, the caller must no longer use or
+ * reference it after return. Particularly, he must not free the addend object.
  *   @param noConst
  * The total number of device constants, which are in use in the given system.
  */
@@ -1193,7 +1193,7 @@ static inline const char *getNameOfDenominator
  * The pointer to the transformed expression addend is returned in * \a
  * ppFrqDomExpressionAddend. The addend is newly allocated and needs to be freed after
  * use.\n
- *   A null addend is returned in case of errors.
+ *   A null addend (the representation of zero) is returned in case of errors.
  *   @param pAlgebraicAddend
  * The transformed algebraic addend.
  *   @param pTableOfVars
@@ -1208,7 +1208,8 @@ static boolean transformAddend( frq_frqDomExpressionAddend_t ** const ppFrqDomEx
 {
     boolean success = true;
 
-    /* We create a one to benefit from the side effect of setting most members to null. */
+    /* We create a one to benefit from the side effect of setting most members to
+       zero/NULL. */
     frq_frqDomExpressionAddend_t *pNewAddend = expressionAddendOne();
 
     /* The addend is a product of a numeric factor and a set of device constants. The
@@ -1314,7 +1315,7 @@ static boolean transformAddend( frq_frqDomExpressionAddend_t ** const ppFrqDomEx
  * represented as the product of this factor and a remaining expression. For the remaining
  * expression holds:\n
  *   The powers of device constants and of s are not negative and there's at least one
- * addend which uses power null.\n
+ * addend which uses a power of zero.\n
  *   The numeric coefficient of the addend of the highest power in s is positive.\n
  *   The numeric coefficients of all addends are integer numbers.
  *   @param ppNormAddend
@@ -1322,7 +1323,7 @@ static boolean transformAddend( frq_frqDomExpressionAddend_t ** const ppFrqDomEx
  * ppNormAddend. The addend object is newly created and needs to be freed after use.
  *   @param pExpression
  * A pointer to the expression or to the pointer to its head addend. It must
- * not be the null expression, as the operation is not defined for such.
+ * not be the null expression (representing zero), as the operation is not defined for such.
  *   @param noConst
  * The total number of device constants, which are in use in the given system.
  */
@@ -1453,7 +1454,7 @@ static boolean transformExpression
 {
     const unsigned int noConst = pTableOfVars->noConstants;
 
-    /* The new expression starts as a null addend. */
+    /* The new expression starts as a null addend, representing zero. */
     frq_frqDomExpression_t *pNewFreqDomainExpr = expressionAddendNull();
 
     /* The operation basically is a loop over all addends of the algebraic expression,
@@ -1524,7 +1525,7 @@ static void getBlankTabString( char * const extendedTabString
  * stream error messages.
  *   @return
  * The number of printed characters as an unsigned number. If the output yields a stream
- * error message the function returns null.
+ * error message the function returns zero.
  *   @param stream
  * The output stream to write to.
  *   @param formatString
@@ -1551,7 +1552,7 @@ static unsigned int print(FILE *stream, const char * const formatString, ...)
         /* It might seem that now writing an error message into the application log would
            be an option, but it isn't. This function is only used on the streams of the
            application logger. If we get an error, we can't log the problem into the
-           identical erroneous stream. The probablity of an error is close to null and the
+           identical erroneous stream. The probablity of an error is close to zero and the
            problem will be apparent by getting no ouput. No action is taken. */
         retVal = 0;
     }
@@ -1599,9 +1600,9 @@ static void printExpression( FILE * const stream
 
     if(isExpressionAddendNull(pExpr))
     {
-        /* The format of the ouput in case of a null expression needs to be done in sync
-           with the general output code in the else clause. We could also decide to have a
-           +0. */
+        /* The format of the ouput in case of a null expression (representing zero) needs
+           to be done in sync with the general output code in the else clause. We could
+           also decide to have a +0. */
         col += print(stream, "0");
     }
     else
@@ -1989,10 +1990,10 @@ static const frq_frqDomExpressionAddend_t *
 
 /**
  * Decide if an expression is simple. This function is used for rendering of the results.
- * If an expression has already benn rendered then normally it won't be rendered again.
+ * If an expression has already been rendered then normally it won't be rendered again.
  * Instead the already printed expression is referenced by name. However, if an expression
  * is simple (in the sense of this function) it would be rendered again rather than
- * referencing an earlier copy. Most popular examples of such simple examples are a null or
+ * referencing an earlier copy. Most popular examples of such simple examples are a zero or
  * a one expression.\n
  *   @return
  * Get the boolean statement if the the passed epression is simple.
@@ -2007,12 +2008,12 @@ static boolean isExpressionSimple( const frq_frqDomExpression_t * const pExpr
                                  )
 {
     /* Definition: A simple expression is a purely numeric expression. The power of s and
-       the powers of all device constants are null in all terms. */
+       the powers of all device constants are zero in all terms. */
 
     if(isExpressionAddendNull(pExpr))
         return true;
 
-    /* An expression with several addends can't have only null powers. */
+    /* An expression with several addends can't have only zero powers. */
     if(!isExpressionAddendNull(pExpr->pNext) || pExpr->powerOfS != 0)
         return false;
 
@@ -2208,9 +2209,9 @@ static void printNamedExpressionAsMCode( FILE * const stream
 
         if(isExpressionAddendNull(pExpr))
         {
-            /* The format of the ouput in case of a null expression needs to be done in
-               sync with the general output code in the else clause. We could also decide
-               to have a +0. */
+            /* The format of the ouput in case of a null expression (representing zero)
+               needs to be done in sync with the general output code in the else clause. We
+               could also decide to have a +0. */
             print(stream, "0\t %% s^0\n%s", tabStringVecElem);
         }
         else
@@ -2228,14 +2229,14 @@ static void printNamedExpressionAsMCode( FILE * const stream
                expression are ordered in groups of same power of s. Highest powers come
                first, which is the order expected by the Octave functions. However, there
                will be powers in s, which do not occur in the expression and thus in no
-               group. Here we have to insert null coefficients into the Octave vector. */
+               group. Here we have to insert zero coefficients into the Octave vector. */
             const frq_frqDomExpressionAddend_t *pAddend = pExpr;
             signed int powerOfS;
             for(powerOfS=pAddend->powerOfS; powerOfS>=0; --powerOfS)
             {
                 if(!isExpressionAddendNull(pAddend) &&  pAddend->powerOfS == powerOfS)
                 {
-                    /* Export the non null coefficient of the term of the next present
+                    /* Export the non zero coefficient of the term of the next present
                        power in s. */
                     pAddend = printCoefInSAsMCode( stream
                                                  , pAddend
@@ -2246,8 +2247,8 @@ static void printNamedExpressionAsMCode( FILE * const stream
                 }
                 else
                 {
-                    /* The expression doesn't contain a term in the next power of s, so we need
-                       to write a null value. */
+                    /* The expression doesn't contain a term in the next power of s, so we
+                       need to write a zero value. */
                     print(stream, "0\t %% s^%d", powerOfS);
 
                 } /* End if(Power of s contained in exported expression?) */
@@ -2261,7 +2262,7 @@ static void printNamedExpressionAsMCode( FILE * const stream
 
             assert(isExpressionAddendNull(pAddend));
 
-        } /* End if(Special case of a null expression?) */
+        } /* End if(Special case of a zero expression?) */
 
         /* .': Octave doesn't care but MATLAB requires row vectors. */
         print(stream, "].'");
@@ -2301,8 +2302,8 @@ static void cancelFraction( frq_frqDomExpression_t ** const ppCancelledExprNum
 
     if(isNormalizedExpressionNull(pNExprDenom))
     {
-        /* A denominator of null normally leads to the representation 1/0 for infinite.
-           Only if the numerator is also null we say 0/0, meaning an undefined value. */
+        /* A denominator of zero normally leads to the representation 1/0 for infinite.
+           Only if the numerator is also zero we say 0/0, meaning an undefined value. */
         if(isNormalizedExpressionNull(pNExprNum))
             pNum = expressionAddendNull();
         else
@@ -2311,13 +2312,13 @@ static void cancelFraction( frq_frqDomExpression_t ** const ppCancelledExprNum
 #if 0
             /* Weakness of concept: The "sign" of the numerator expression is not
                sufficient to distinguish between +inf and -inf. We don't know from which
-               side of the null axis the denominator approached the null. Example: A
-               constant current source feeds the conductance Y. The output voltage is
-               1/Y*I0. If Y approaches null - realized by removing it from the circuit -
-               then the voltage would rise to +inf. The solution found by the solver is 1/0
-               and sign(1) seems to be the correct sign of inf. But actually, and depending
-               on the order of nodes in the circuit net, the system could also figure out
-               the solution as -1/-Y*I0 and for Y->0 (i.e., Y removed): -1/0 and sign(-1) is
+               side of the axis the denominator approached zero. Example: A constant
+               current source feeds the conductance Y. The output voltage is 1/Y*I0. If Y
+               approaches zero - realized by removing it from the circuit - then the
+               voltage would rise to +inf. The solution found by the solver is 1/0 and
+               sign(1) seems to be the correct sign of inf. But actually, and depending on
+               the order of nodes in the circuit net, the system could also figure out the
+               solution as -1/-Y*I0 and for Y->0 (i.e., Y removed): -1/0 and sign(-1) is
                not the expected sign of inf. Just seeing D=0 doesn't permit to retrieve the
                correct sign of infinite.
                  @todo The best way out would be to introduce a representation of infinite,
@@ -2362,7 +2363,7 @@ static void cancelFraction( frq_frqDomExpression_t ** const ppCancelledExprNum
         for(idxConst=0; idxConst<noConst; ++idxConst)
         {
             /* To get rid of all negative individual powers and to guarantee the existence
-               of the individual power of null in at least one term we need to extend the
+               of the individual power of zero in at least one term we need to extend the
                common factors with the negated minimum of the individual powers in both
                common factors. */
             if(pComFactorNum->powerOfConstAry[idxConst]
@@ -2426,7 +2427,7 @@ static void cancelFraction( frq_frqDomExpression_t ** const ppCancelledExprNum
         freeExpressionAddend(pFactorCancel);
         freeExpressionAddend(pOne);
 
-    } /* End if(N and D are not null or trivial situation otherwise?) */
+    } /* End if(N and D are not zero or trivial situation otherwise?) */
 
     /* In either case pNum and pDenom now hold the cancelled, denormalized expressions,
        which can be returned. Both expressions are newly allocated and need to be freed
@@ -3149,12 +3150,12 @@ static boolean printSolution( const frq_freqDomainSolution_t * const pSolution
                                            , printMargin
                                            );
 
-                /* Write an error statement if the denominator is null: The Octave
+                /* Write an error statement if the denominator is zero: The Octave
                    functions don't respond with useful error feedback in this case. */
                 if(isExpressionAddendNull(pExpr))
                 {
                     print( stream
-                         , "error(['Denominator expression %s is null. The transfer"
+                         , "error(['Denominator expression %s is zero. The transfer"
                            " function is' ...\n"
                            "       ' undefined and no plots can be generated. Please"
                            " check your circuit'] ...\n"
@@ -3380,7 +3381,7 @@ boolean frq_createFreqDomainSolution( const frq_freqDomainSolution_t * * const p
         /* Allocate memory for all terms of the result. There's one term per known and
            per unknown a solution is demanded for. Such a term has an individual
            numerator and all have the same common denominator.
-             The denominator and all elements of the matrix are initialized to the null
+             The denominator and all elements of the matrix are initialized to the zero
            expression. After this step, the standard deconstructor can be called on the
            half-way completed object (in case of errors).
              User defined voltages of interest are handled like the original unknowns
@@ -3681,7 +3682,7 @@ boolean frq_createFreqDomainSolution( const frq_freqDomainSolution_t * * const p
         assert(noDependents > 0);
         LOG_ERROR( _log
                  , "The system has an abnormal solution with no independents. All"
-                   " dependents are null. No transfer function is figured out and no"
+                   " dependents are zero. No transfer function is figured out and no"
                    " Octave script is generated. Please, consider to use at least one"
                    " constant source in your circuit"
                  )

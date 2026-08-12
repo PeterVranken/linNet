@@ -56,7 +56,7 @@
 /** A mask of bits in the internally used longer integer type, which must not be set in
     proper result values. If a number bit in the mask is found to be set in the preliminary
     result then we decide on overflow. ("Number bit" means: a set bit for positive numbers
-    and a null bit for negative numbers.) */
+    and a zero bit for negative numbers.) */
 # define OVF_MASK    ((signed long long)0xffffffff80000000)
 
 /** A mask that filters the sign bit of the longer signed integer type. */
@@ -144,10 +144,10 @@ static void reportOverflow(rat_signed_long_int n, rat_signed_long_int d)
  * Get the gcd of \a a and \a b. The sign of gcd is the sign of the operands if they have
  * identical sign or undefined otherwise.
  *   @param a
- * The first numeric operand, a signed integer. If \a a is null then the function returns
+ * The first numeric operand, a signed integer. If \a a is zero then the function returns
  * \a b.
  *   @param b
- * The second numeric operand, a signed integer. If \a b is null then the function returns
+ * The second numeric operand, a signed integer. If \a b is zero then the function returns
  * \a a.
  *   @see rat_signed_int rat_gcd(rat_signed_int, rat_signed_int)
  */
@@ -228,7 +228,7 @@ static rat_num_t approximate(rat_signed_long_int n, rat_signed_long_int d)
         d >>= 4;
         
         /* We can have an underflow in either number. If n is affected, we end up with the
-           correct approximation 0. An underflow of d needs to be handled; denominator null
+           correct approximation 0. An underflow of d needs to be handled; denominator zero
            is forbidden. */
         if(d == 0)
         {
@@ -368,8 +368,8 @@ void rat_shutdownModule()
  * to check the global error flag.
  *   @return
  * Get the LCM. The sign is positive if both operands have the same size and undefined if
- * they have differing signs. If at least one operand is null then the LCM is defined to be
- * also null.
+ * they have differing signs. If at least one operand is zero then the LCM is defined to be
+ * also zero.
  *   @param a
  * The first numeric operand, a signed integer.
  *   @param b
@@ -383,11 +383,11 @@ rat_signed_int rat_lcm(rat_signed_int a, rat_signed_int b)
        can always safely be computed in this range just like that. */
     rat_signed_int gcd = rat_gcd(a, b);
     
-    /* The only pit fall: If a and b are null then the gcd becomes null also and the
+    /* The only pit fall: If a and b are zero then the gcd becomes zero also and the
        division will fail. */
     if(gcd == 0)
     {
-        /* a and b are null and the LCM is defined to be null also. */
+        /* a and b are zero and the LCM is defined to be zero also. */
         assert(a == 0  &&  b == 0);
         return 0;
     }

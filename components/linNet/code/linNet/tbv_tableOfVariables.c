@@ -1186,13 +1186,13 @@ void tbv_exportAsMCode( const tbv_tableOfVariables_t * const pTable
             if(value == 0.0)
             {
                 LOG_WARN( _log
-                        , "The device constant %s has the suspicious value null."
+                        , "The device constant %s has the suspicious value zero."
                           " Please check your circuit file"
                         , pDev->name
                         )
                 fprintf( hMFile
                        , "%swarning('The device constant %s has the suspicious value"
-                         " null. Please check your circuit file')\n"
+                         " zero. Please check your circuit file')\n"
                        , indentStr
                        , pDev->name
                        );

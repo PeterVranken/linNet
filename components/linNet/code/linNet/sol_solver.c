@@ -305,7 +305,8 @@ static const boolean *getVectorOfReqDependents(const sol_solution_t * const pSol
  * place.
  *   @param step
  * The elimination step of the Gauss elimination. In fact, step+i, i = 1..m-step-1, are the
- * indexes of the equations which are manipulated to get another leading null coefficient.
+ * indexes of the equations which are manipulated to get another leading null coefficient
+ * (representing zero).
  *   @param row
  * The row index of the coefficient under operation.
  *   @param col
@@ -321,14 +322,14 @@ static void elementaryStep( coe_coefMatrix_t A
                           , const coe_coef_t * const pKnownDivisor
                           )
 {
-    /* If the current diagonal element is null then the determinant is already known to be
-       null and we must not have got here. */
+    /* If the current diagonal element is zero then the determinant is already known to be
+       zero and we must not have got here. */
     assert(!coe_isCoefAddendNull(A[step][step]));
 
     /* In the first step we compute the numerator of the quotient as the sum of two
        products of two coefficients each. At the end of this step *pNumerator will take the
        value A(m,n)*A(step,step)-A(step,n)*A(m,step). (See below for a refinement of this
-       statement.) We start with null and add two times the products of all combinations of
+       statement.) We start with zero and add two times the products of all combinations of
        terms from first and second coeffcient. */
     coe_coef_t *pNumerator = coe_coefAddendNull();
     const coe_productOfConst_t prodOfCDiv = pKnownDivisor->productOfConst;
@@ -359,7 +360,7 @@ static void elementaryStep( coe_coefMatrix_t A
 
                 /* It is proven that the numerator of the quotient will eventually contain
                    only such addends, which can be divided by the first addend of the
-                   denominator such that all resulting constants have powers of null or one.
+                   denominator such that all resulting constants have powers of zero or one.
                    Intermediate results could basically occur here that do not fit into this
                    pattern but they would sooner or later be anyway eliminated by similar
                    addends of inverse sign. Therefore we may decide to immediately discard
@@ -567,7 +568,7 @@ static void elementaryStep( coe_coefMatrix_t A
  * returns true than this area is a diagonal matrix, where A[i][i], i=0..m-1, holds the
  * denominator of the solution for unknown i.\n
  *   A[0..m-1][m..n-1] holds the left hand side of the LES (where the sign of these
- * coefficients is such that the sum of all row elements becomes null). Column i, i=m..n-1,
+ * coefficients is such that the sum of all row elements becomes zero). Column i, i=m..n-1,
  * holds the coefficients belonging to the known input variable i-m. If the algorithm
  * returns true than this area contains the numerators of the solution. A[i][j+m]*V_j,
  * i=0..m-1, j=0..n-m-1, is the complete numerator of the result for unknown i.
@@ -593,10 +594,10 @@ static boolean solverLES( coe_coefMatrix_t A
     boolean doSignInversion = false;
     for(elimStep=0; elimStep<m-1; ++elimStep)
     {
-        /* Pivoting: Avoid a generalizing product with a null coefficient, which would
-           break the algorithm. We look for a line, whose coefficient under progress is not
-           null. Such a line needs to exist, otherwise it was the prove that the LES
-           contains linear dependent or contradictory equations. */
+        /* Pivoting: Avoid a generalizing product with a null coefficient (representing
+           zero), which would break the algorithm. We look for a line, whose coefficient
+           under progress is not zero. Such a line needs to exist, otherwise it was the
+           prove that the LES contains linear dependent or contradictory equations. */
         if(coe_isCoefAddendNull(A[elimStep][elimStep]))
         {
             unsigned int idxPivotRow = elimStep;
@@ -609,7 +610,7 @@ static boolean solverLES( coe_coefMatrix_t A
                        (physical) constraints, which apply to an electric circuit. */
                     LOG_ERROR( _log
                              , "Gauss elimination of LES is aborted. Pivoting doesn't find"
-                               " any non null coefficient in the %u. elimination step. The"
+                               " any non zero coefficient in the %u. elimination step. The"
                                " equations are linear dependent or contradictory. Please"
                                " double-check your circuit net list"
                              , elimStep+1
@@ -635,7 +636,7 @@ static boolean solverLES( coe_coefMatrix_t A
                the denominator is this determinant. */
             doSignInversion = !doSignInversion;
 
-        } /* End if(Pivot element is null) */
+        } /* End if(Pivot element is zero) */
 
         /* Do the coefficient elimination/manipulation for all remaining, not yet handled
            rows and columns. */
@@ -649,7 +650,7 @@ static boolean solverLES( coe_coefMatrix_t A
                 elementaryStep(A, elimStep, row, col, pDivisor);
             }
 
-            /* We set the eliminated coefficient explicitly to null. This operation is
+            /* We set the eliminated coefficient explicitly to zero. This operation is
                useless with respect to the wanted result but it frees some memory and is
                advantageous for logging purpose. */
             coe_freeCoef(A[row][elimStep]);
@@ -685,7 +686,7 @@ static boolean solverLES( coe_coefMatrix_t A
        intermediate sign changes caused by pivoting. We want to do so. */
     if(doSignInversion)
     {
-        /* All non null coefficients of the last equation after the last elimination step
+        /* All non zero coefficients of the last equation after the last elimination step
            are sign inverted. The equation is thus not changed. */
         unsigned int col;
         for(col=m-1; col<n; ++col)
@@ -810,7 +811,7 @@ boolean sol_createSolution( const sol_solution_t * * const ppSolution
 
     /* There's one result for each unknown and for each voltage of interest (which can be
        identical to an unknown). Each such result has as many terms as there are
-       knowns. The elements of the matrix are preset with null coefficients. */
+       knowns. The elements of the matrix are preset with zero coefficients. */
     pSol->numeratorAry = coe_createMatrix(noUnknowns+noUserDefVoltages, noKnowns);
     pSol->pDeterminant = coe_coefAddendNull();
 
@@ -836,7 +837,7 @@ boolean sol_createSolution( const sol_solution_t * * const ppSolution
         {
             LOG_INFO( _log
                     , "Unknown %s (%u) is not required for the final result(s) and hence"
-                      " not computed. Its value is set to null"
+                      " not computed. Its value is set to zero"
                     , unknownAry[idxUnknown].name
                     , idxUnknown
                     )
@@ -856,7 +857,7 @@ boolean sol_createSolution( const sol_solution_t * * const ppSolution
         isSignOfDetInv = !isSignOfDetInv;
 
         /* Run the symbolic solver, which makes an upper triangular matrix from the LES. It
-           fails if the system determinant is null. */
+           fails if the system determinant is zero. */
         if(success)
         {
             success = solverLES(pLES->A, /* m */ noUnknowns, /* n */ noKnowns + noUnknowns);
@@ -899,8 +900,8 @@ boolean sol_createSolution( const sol_solution_t * * const ppSolution
         {
             /* The ownership of the coefficient that holds the determinant is moved from
                *pLES to the newly created solution object. The coefficient in *pLES is set
-               to the null object in order to inhibit later freeing of the moved
-               coefficient object. */
+               to the null object (representing zero) in order to inhibit later freeing of
+               the moved coefficient object. */
             assert(coe_isCoefAddendNull(pSol->pDeterminant));
             pSol->pDeterminant = pLES->A[noUnknowns-1][noUnknowns-1];
             pLES->A[noUnknowns-1][noUnknowns-1] = coe_coefAddendNull();
@@ -930,7 +931,7 @@ boolean sol_createSolution( const sol_solution_t * * const ppSolution
         /* Store the terms of the result of this unknown in the solution object. One such
            term exists for each known.
              The ownership of the coefficients that hold the terms is moved from *pLES to
-           the newly created solution object. The coefficients in *pLES are set to null
+           the newly created solution object. The coefficients in *pLES are set to zero
            objects in order to inhibit later freeing of the moved coefficient objects. */
         unsigned int idxKnown;
         const unsigned int idxUnknownInSol = pTabOfVars->unknownLookUpAry[idxUnknown].idxCol;
@@ -942,7 +943,7 @@ boolean sol_createSolution( const sol_solution_t * * const ppSolution
             pLES->A[noUnknowns-1][noUnknowns+idxKnown] = coe_coefAddendNull();
 
             /* The LES had been set up with all terms on one side and the condition sum of
-               all is null. This means that the coefficients of the numerators need to be
+               all is zero. This means that the coefficients of the numerators need to be
                sign inverted in the result.
                  We have to consider also that in each loop one pair of columns of the LES is
                swapped, which leads to a sign inversion of the determinant. We have stored
@@ -973,7 +974,7 @@ boolean sol_createSolution( const sol_solution_t * * const ppSolution
         {
             LOG_INFO( _log
                     , "User defined voltage %s (%u) is not required for the final result(s)"
-                      " and hence not computed. Its value is set to null"
+                      " and hence not computed. Its value is set to zero"
                     , pVoltageDef->name
                     , idxUserDefVoltage
                     )
@@ -1011,7 +1012,7 @@ boolean sol_createSolution( const sol_solution_t * * const ppSolution
             else
             {
                 /* Plus pole of user voltage is ground, i.e., we set the first operand of
-                   the difference to null. */
+                   the difference to null (representing zero). */
                 pSol->numeratorAry[idxSolution][idxKnown] = coe_coefAddendNull();
             }
 
@@ -1026,7 +1027,7 @@ boolean sol_createSolution( const sol_solution_t * * const ppSolution
             }
             else
             {
-                /* Minus pole of user voltage is ground, we have to subtract null, which
+                /* Minus pole of user voltage is ground, we have to subtract zero, which
                    means doing nothing. */
             }
         }

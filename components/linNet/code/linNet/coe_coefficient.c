@@ -128,7 +128,7 @@ static void addAddendToExpr(coe_coef_t ** const ppCoef, coe_coefAddend_t * const
            added. */
         if((pAddend->factor+=pNewAddend->factor) == 0)
         {
-            /* The sum of the factors is null, the addend is eliminated. Remove the list
+            /* The sum of the factors is zero, the addend is eliminated. Remove the list
                element from the coefficient. Furthermore, the passed, new addend needs to
                be eliminated. */
             (*ppAddend) = pAddend->pNext;
@@ -232,7 +232,7 @@ coe_coef_t *coe_cloneByDeepCopy(const coe_coef_t *pCoef)
 
     } /* End while(All addends of the coefficient) */
     
-    /* End the list with a next pointer to the null term. */
+    /* End the list with a next pointer to the zero term. */
     (*ppNext) = coe_coefAddendNull();
 
     /* Free the dummy head element but return its tail as result. */
@@ -296,8 +296,8 @@ boolean coe_checkOrderOfAddends(coe_coef_t *pCoef)
  * object is done disregarding this order criterion then this function can be called
  * on the just assembled coefficient object prior to its first use.\n
  *   The sorting algorithm is very simple and of order O(n^2). The use of this function can
- * be avoided in most use cases by creating a new coefficient object as a null object and
- * then adding its terms with function void coe_addAddend(coe_coef_t **, const
+ * be avoided in most use cases by creating a new coefficient object as a null/zero object
+ * and then adding its terms with function void coe_addAddend(coe_coef_t **, const
  * coe_numericFactor_t, coe_productOfConst_t). This is more elegant but doesn't perform
  * better (also O(n^2)).
  *   @param ppCoef
@@ -357,7 +357,7 @@ void coe_logCoefficient( const coe_coef_t * const pCoef
 
     if(coe_isCoefAddendNull(pCoef))
     {
-        /* The format of the ouput in case of a null coefficient needs to be done in sync
+        /* The format of the ouput in case of a zero coefficient needs to be done in sync
            with the general output code in the else clause. We could also decide to have a
            +0. */
         log_log(_log, log_continueLine, " 0");
@@ -433,7 +433,7 @@ void coe_logCoefficient( const coe_coef_t * const pCoef
         }
         while(!coe_isCoefAddendNull(pAddend));
         
-    } /* End if(Special case of a null coefficient?) */
+    } /* End if(Special case of a zero coefficient?) */
     
 } /* End of coe_logCoefficient */
 
@@ -503,7 +503,7 @@ void coe_logMatrix( log_logLevel_t logLevel
  *   @param pCoef
  * The coefficient to operate on is passed by reference.
  *   @param constant
- * A constant integer not equal to null.
+ * A constant integer not equal to zero.
  */
 
 coe_coef_t *coe_mulConst(coe_coef_t * const pCoef, signed int constant)
@@ -580,9 +580,9 @@ coe_coef_t *coe_diff(coe_coef_t *pResOperand1, const coe_coef_t * const pOperand
             assert(pOp1->productOfConst == prodOfConstOp2);
             pOp1->factor -= pOp2->factor;
 
-            /* If the difference of factor is null we need to remove the addend from the
+            /* If the difference of factors is zero we need to remove the addend from the
                list; a factor 0 of a product is by definition an invalid representation of
-               null. */
+               zero. */
             if(pOp1->factor == 0)
             {
                 *ppOp1 = pOp1->pNext;

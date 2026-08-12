@@ -1932,7 +1932,7 @@ static void addSrcIByUConditions( coe_coefMatrix_t const A
        for node "to" and with inverted sign for node "from". These are four terms to add in
        total. However, if the node "from" or "to" is a ground node then two of the terms
        are not needed (as the current balance of a ground node is linear dependent) and if
-       one out of nodeCtrlX is a ground node than U(nodeCtrlX) is null by definition and
+       one out of nodeCtrlX is a ground node than U(nodeCtrlX) is zero by definition and
        the term is also omitted. We have either one, two or four terms.
          A node is a ground node if the queried unknown is the NULL pointer. */
     const tbv_unknownVariable_t * const pUnknownUCtrlPlus = tbv_getUnknownByNode
@@ -2083,7 +2083,7 @@ static void addSrcIByIConditions( coe_coefMatrix_t const A
  * superimposed by a single device.
  *   @param A
  * The matrix m*n of pointers to coefficients. Prior to the first call of this routine the
- * matrix is initialized to all null coefficients (or NULL pointers).
+ * matrix is initialized to all zero coefficients (or NULL pointers).
  *   @param pTableOfVars
  * The table of all constants, knowns and unknows, which are used in the LES by reference.
  *   @param idxDev
@@ -2283,7 +2283,7 @@ boolean les_createLES( les_linearEquationSystem_t * * const ppLES
 
     deleteNetwork(pNetwork);
 
-    /* Allocate space for the coefficients and reset them to null. */
+    /* Allocate space for the coefficients and reset them to zero. */
     if(success)
     {
         const unsigned int noRows = pLES->pTableOfVars->noUnknowns
@@ -2463,7 +2463,7 @@ boolean les_setupLES( les_linearEquationSystem_t * const pLES
                          , noUnknowns = pTableOfVars->noUnknowns
                          , noCols = noUnknowns + noKnowns;
 
-        /* Free all previously used coefficients and reset them to null. */
+        /* Free all previously used coefficients and reset them to zero. */
         unsigned int m, n;
         for(m=0; m<noUnknowns; ++m)
         {

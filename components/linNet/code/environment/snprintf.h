@@ -79,12 +79,12 @@
 #ifdef DO_PATCH_SNPRINTF
 /**
  * The built-in version of snprintf in GCC MinGW 4.8.1 does not work correctly. It fails to
- * terminate a truncated string with the null character. Instead of writing \a n-1
- * characters plus the null termination it writes the first \a n characters. Consequently,
+ * terminate a truncated string with the zero character. Instead of writing \a n-1
+ * characters plus the zero termination it writes the first \a n characters. Consequently,
  * the caller sees the wrong result string, probably being longer than the permitted buffer
  * length \a n.\n
  *   This patched function first calls the invalid built-in (actually the also invalid
- * derivate vsnprintf) and then it unconditionally writes a null character into the very
+ * derivate vsnprintf) and then it unconditionally writes a zero character into the very
  * last buffer place. This is not what a correct implementation of snprintf is expected to
  * do but it has the same behavior if the return value is not evaluated in the respect of a
  * guaranteed number of untouched characters at the buffer end.\n
@@ -96,10 +96,10 @@
  * The return value of the built-in vsnprintf is returned by the patched function. This
  * value is probably not what's documented for snprintf (see above).
  *   @param string
- * The result string, which is always null terminated, if only \a bufSize is greater than
+ * The result string, which is always zero terminated, if only \a bufSize is greater than
  * zero. Pass a buffer, which has room for at least \a bufSize characters.
  *   @param bufSize
- * The maximum number of written characters, including the terminating null character.
+ * The maximum number of written characters, including the terminating zero character.
  *   @param formatString
  * The printf style format string.
  *   @param ...
@@ -119,7 +119,7 @@ static inline signed int snprintf_patch( char * __restrict__ string
         va_start(argptr, formatString);
         retVal = vsnprintf(string, bufSize, formatString, argptr);
 
-        /* The Windows MinGw port of GCC doesn't write a terminating null character at the
+        /* The Windows MinGw port of GCC doesn't write a terminating zero character at the
            end of the string. Add it now. */
         *(string+bufSize-1) = '\0';
 

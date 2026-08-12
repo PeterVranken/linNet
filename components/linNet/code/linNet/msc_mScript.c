@@ -161,7 +161,7 @@ function [tf_%s deviceConstants wBode tiStep] = %s(deviceConstants)\n\
     
     /* The warning "format-security" is locally switched off. Justification: We prefer
        snprintf over strncat because of its better behavior with respect to adding a
-       trailing null character. */
+       trailing zero character. */
     #pragma GCC diagnostic push
     #pragma GCC diagnostic ignored "-Wformat-security"
     snprintf(yearStr, 5, timeStr+20);

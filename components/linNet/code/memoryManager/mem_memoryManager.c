@@ -312,7 +312,7 @@ mem_hHeap_t mem_createHeap( log_hLogger_t hLogger
     pHeap->sizeOfObj = SIZEOF_ALIGNED(sizeOfDataObjects);
     pHeap->sizeOfChunk = allocationBlockSize;
     
-    /* No chunk at the moment, empty free list, size null. */
+    /* No chunk at the moment, empty free list, size zero. */
     pHeap->pHeadOfChunkList = NULL;
     pHeap->pTailOfChunkList = NULL;
     pHeap->pHeadOfFreeList = NULL;
@@ -348,14 +348,14 @@ mem_hHeap_t mem_createHeap( log_hLogger_t hLogger
  * Delete a heap. All references to currently allocated data objects become invalid and
  * must no longer be used.
  *   @return
- * The number of still allocated data objects is returned, i.e. data objects on the heap,
+ * The number of still allocated data objects is returned, i.e., data objects on the heap,
  * which had not been freed before deletion of heap. Normally it is an error in the client
  * application if this value is not equal to zero.
  *   @param pHeap
  * The handle to the heap as got from mem_createHeap.
  *   @param warnIfUnfreedMem
- * If true, a warning is written to the logger if un-freed elements exit, i.e. when the
- * function returns a non null value.
+ * If true, a warning is written to the log if un-freed elements exit, i.e., when the
+ * function returns a non zero value.
  */
 
 unsigned long mem_deleteHeap(heap_t *pHeap, boolean warnIfUnfreedMem)
