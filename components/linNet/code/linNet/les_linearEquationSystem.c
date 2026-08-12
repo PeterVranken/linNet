@@ -2,7 +2,7 @@
  * @file les_linearEquationSystem.c
  *   Analyse the parsed network structure and create the linear equation system.
  *
- * Copyright (C) 2013-2014 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ * Copyright (C) 2013-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -224,7 +224,7 @@ static subNetwork_t *lookForSubNetByNode( const network_t * const pNetwork
  *   @param ppHeadOfMinorList
  * A pointer to the pointer variable that points to the head of the second node list. This
  * list is transfered to the end of the major list and the pointer to the head of the
- * second list is set to NULL, i.e. \a *ppHeadOfMinorList = NULL. After return there won't
+ * second list is set to NULL, i.e., \a *ppHeadOfMinorList = NULL. After return there won't
  * be doubled references to the elements of the minor list.
  */
 
@@ -642,7 +642,7 @@ static boolean analyseNetworkTopology( network_t * * const ppNetwork
         } /* End switch(Do we have a kind of device, which requires a connectivity check?) */
 
     } /* End for(All devices to check for valid connections) */
-    
+
     /* Continue the check, check the user-defined voltages. */
     unsigned int idxVolDef;
     for(idxVolDef=0; idxVolDef<pCircuitNetList->noVoltageDefs; ++idxVolDef)
@@ -723,11 +723,11 @@ static void deleteNetwork(network_t * const pNetwork)
 
 
 /**
- * Select one node out of all nodes of a sub-grapgh, which shall have voltage null.
+ * Select one node out of all nodes of a sub-graph, which shall have voltage potential zero.
  * Basically any node can be defined to play this roll. However, typical use cases will
- * define a node to have a name like gnd or ground. If we can find such a node, we will use
+ * define a node having a name like gnd or ground. If we can find such a node, we will use
  * it otherwise we (arbitrarily) use the first node.\n
- *   There's one hard condition to be fulfillied: The ouput of the op-amp must not be
+ *   There's one hard condition to be fulfilled: The ouput of the op-amp must not be
  * connected to the ground node; this is because of the way the op-amp is expressed as a
  * linear equation.
  *   @return
@@ -759,7 +759,7 @@ static boolean findNodeGnd( unsigned int * const pIdxGroundNode
     boolean opAmpInCircuit = false;
 
     /* Respect the user's choice: We do a simple string compare on the nodes' names and
-       look one called gnd or similar. */
+       look for one called gnd or similar. */
     *pIdxGroundNode = PCI_NULL_NODE;
     do
     {
@@ -811,7 +811,22 @@ static boolean findNodeGnd( unsigned int * const pIdxGroundNode
     if(success &&  *pIdxGroundNode == PCI_NULL_NODE)
     {
         if(!opAmpInCircuit)
+        {
             *pIdxGroundNode = pHeadOfNodeList->idxNode;
+
+            LOG_WARN( _log
+                    , "The circuit or one of its sub-networks doesn't have a clearly"
+                      " defined ground node. Node %s is automatically selected as"
+                      " ground node. All results, which refer to a node voltage will"
+                      " depend on this decision and may not match your expectation."
+                      " Please, to avoid confusion, explicitly mark a particular"
+                      " node as ground node, or solely use calculation results that"
+                      " base on user-defined voltages only, i.e., only on node voltage"
+                      " differences. A node is marked as ground node by choosing a"
+                      " name, which contains \"gnd\" or \"ground\"."
+                    , pCircuitNetList->nodeNameAry[*pIdxGroundNode]
+                    );
+        }
         else
             success = false;
     }
@@ -869,7 +884,7 @@ static void createNameOfUnknown( char name[]
     }
 
     /* Different to the (basically better suited strncpy) will strncat always write a
-       terminating null character. */
+       terminating zero character. */
     strncat(name, userObject, maxLen);
 
 } /* End of createNameOfUnknown */
@@ -882,7 +897,7 @@ static void createNameOfUnknown( char name[]
  * required in the LES describing the network. This is pass one of making the LES. After
  * return, we have a data structure describing all variables and constants in use.
  *   @return
- * The function will indicate failure by return value \a false, e.g. if the permitted
+ * The function will indicate failure by return value \a false, e.g., if the permitted
  * number of constants or knowns or unknowns is exceeded.
  *   @param ppTableOfVars
  * The reference to the table of variables is passed. The table is created at the beginning
@@ -953,16 +968,16 @@ static boolean determineReqVariables( tbv_tableOfVariables_t * * const ppTableOf
     while(pSubNet != NULL)
     {
         unsigned int idxNodeGnd;
-        if(!findNodeGnd(&idxNodeGnd, pCircuitNetList, pSubNet->pHeadOfNodeList))
-            success = false;
-        else
+        if(findNodeGnd(&idxNodeGnd, pCircuitNetList, pSubNet->pHeadOfNodeList))
         {
             LOG_INFO( _log
                     , "Node %s is considered a ground node. The voltage at this"
-                      " node is considered null"
+                      " node is considered zero"
                     , pCircuitNetList->nodeNameAry[idxNodeGnd]
                     )
         }
+        else
+            success = false;
 
         const networkNodeRef_t *pNodeRef = pSubNet->pHeadOfNodeList;
         while(success &&  pNodeRef != NULL)
@@ -1051,7 +1066,7 @@ static boolean determineReqVariables( tbv_tableOfVariables_t * * const ppTableOf
                    for the current probes:
                      Typically the voltage source will be named U1, Uin, Uload etc. which
                    leads to I_U1, I_Uin, I_Uload as current designations. The output
-                   current of an op-amp would e.g. become I_OP1, which is also okay.
+                   current of an op-amp would e.g., become I_OP1, which is also okay.
                      For current probes one would easily give it a name like Ibase, Iin,
                    Iout if these are the sensed currents. Out naming scheme would lead to
                    currents like I_Ibase, I_Iin, I_Iout in the result formulas. The user
@@ -1074,7 +1089,7 @@ static boolean determineReqVariables( tbv_tableOfVariables_t * * const ppTableOf
                 {
                     devName += sizeof(SYMBOL_PREFIX_CURRENT)-1;
                 }
-                
+
                 const unsigned int maxSizeOfName = MAX_SIZE_OF_SYMBOL_PREFIX
                                                    + strlen(pDev->name);
                 char nameUnknown[maxSizeOfName];
@@ -1199,7 +1214,7 @@ static void addSrcUConditions( coe_coefMatrix_t const A
 
     /* Extend the current balances of the two connected nodes by a new term
        describing the current flowing through the voltage source.
-         Don't do this, if the connected node is a ground node, i.e. if the returned
+         Don't do this, if the connected node is a ground node, i.e., if the returned
        unknown is the NULL pointer. */
     const tbv_unknownVariable_t * const pUnknownUFrom = tbv_getUnknownByNode
                                                                 ( pTableOfVars
@@ -1210,7 +1225,7 @@ static void addSrcUConditions( coe_coefMatrix_t const A
         /* factor: The current is flowing into the node the device's pin "from" is
            connected to; this is by definition a positive current. */
         coe_addAddend( &A[pUnknownUFrom->idxRow][idxColUnknownI]
-                     , /* factor */          +1 
+                     , /* factor */          +1
                      , /* productOfConsts */ 0
                      );
     }
@@ -1235,7 +1250,7 @@ static void addSrcUConditions( coe_coefMatrix_t const A
        of the source. The equation to make is:
          U(nodeFrom) - U(nodeTo) - U0 = 0,
        where U0 is the known voltage of the source, a system input. Both U(nodeX) can be
-       null, if this node is the ground node. In which case the term simply doesn't appear
+       zero, if this node is the ground node. In which case the term simply doesn't appear
        in the made equation. */
     const unsigned int idxEqSuppl = pUnknownI->idxRow;
     if(pUnknownUFrom != NULL)
@@ -1302,7 +1317,7 @@ static void addSrcIConditions( coe_coefMatrix_t const A
 
     /* Extend the current balances of the two connected nodes by a new term
        describing the current flowing through the current source.
-         Don't do this, if the connected node is a ground node, i.e. if the returned
+         Don't do this, if the connected node is a ground node, i.e., if the returned
        unknown is the NULL pointer. */
     const tbv_unknownVariable_t * const pUnknownUFrom = tbv_getUnknownByNode
                                                                 ( pTableOfVars
@@ -1493,9 +1508,9 @@ static void addOpAmpConditions( coe_coefMatrix_t const A
                  );
 
     /* The additional unknown requires an additional equation. This equation says,
-       that the voltage difference between the two inputs is null. The equation to make is:
+       that the voltage difference between the two inputs is zero. The equation to make is:
          U(nodeFrom) - U(nodeTo) = 0
-       Both U(nodeX) can be null, if this node is the ground node. In which case the term
+       Both U(nodeX) can be zero, if this node is the ground node. In which case the term
        simply doesn't appear in the made equation. */
     const unsigned int idxEqSuppl = pUnknownI->idxRow;
     const tbv_unknownVariable_t * const pUnknownUFrom = tbv_getUnknownByNode
@@ -1564,7 +1579,7 @@ static void addCurrentProbeConditions( coe_coefMatrix_t const A
 
     /* Extend the current balances of the two connected nodes by a new term
        describing the current flowing through the probe.
-         Don't do this, if the connected node is a ground node, i.e. if the returned
+         Don't do this, if the connected node is a ground node, i.e., if the returned
        unknown is the NULL pointer. */
     const tbv_unknownVariable_t * const pUnknownUFrom = tbv_getUnknownByNode
                                                                 ( pTableOfVars
@@ -1601,7 +1616,7 @@ static void addCurrentProbeConditions( coe_coefMatrix_t const A
        that the current probe equalizes the voltage potentials between the two connectors.
        The equation to make is:
          U(nodeFrom) - U(nodeTo) = 0
-       Both U(nodeX) can be null, if this node is the ground node. In which case the term
+       Both U(nodeX) can be zero, if this node is the ground node. In which case the term
        simply doesn't appear in the made equation. */
     const unsigned int idxEqSuppl = pUnknownI->idxRow;
     if(pUnknownUFrom != NULL)
@@ -1667,7 +1682,7 @@ static void addSrcUByUConditions( coe_coefMatrix_t const A
 
     /* Extend the current balances of the two connected nodes by a new term
        describing the current flowing through the voltage source.
-         Don't do this, if the connected node is a ground node, i.e. if the returned
+         Don't do this, if the connected node is a ground node, i.e., if the returned
        unknown is the NULL pointer. */
     const tbv_unknownVariable_t * const pUnknownUFrom = tbv_getUnknownByNode
                                                                 ( pTableOfVars
@@ -1703,7 +1718,7 @@ static void addSrcUByUConditions( coe_coefMatrix_t const A
        The equation to make is:
          U(nodeFrom) - U(nodeTo) - k*U(nodeCtrlPlus) + k*U(nodeCtrlMinus) = 0,
        where k is the device constant of the source. Each out of the four U(nodeX)
-       can be null, if this node is the ground node. In which case the term simply
+       can be zero, if this node is the ground node. In which case the term simply
        doesn't appear in the made equation. */
     coe_productOfConst_t k = tbv_getConstantByDevice(pTableOfVars, idxDevice);
     const unsigned int idxEqSuppl = pUnknownI->idxRow;
@@ -1796,7 +1811,7 @@ static void addSrcUByIConditions( coe_coefMatrix_t const A
 
     /* Extend the current balances of the two connected nodes by a new term
        describing the current flowing through the voltage source.
-         Don't do this, if the connected node is a ground node, i.e. if the returned
+         Don't do this, if the connected node is a ground node, i.e., if the returned
        unknown is the NULL pointer. */
     const tbv_unknownVariable_t * const pUnknownUFrom = tbv_getUnknownByNode
                                                                 ( pTableOfVars
@@ -1832,7 +1847,7 @@ static void addSrcUByIConditions( coe_coefMatrix_t const A
        The equation to make is:
          U(nodeFrom) - U(nodeTo) - k*Ictrl = 0,
        where k is the device constant of the source and Ictrl is the current through the
-       related current probe. Each of the two U(nodeX) can be null, if this node is the
+       related current probe. Each of the two U(nodeX) can be zero, if this node is the
        ground node. In which case the term simply doesn't appear in the made equation. */
     if(pUnknownUFrom != NULL)
     {
@@ -2025,7 +2040,7 @@ static void addSrcIByIConditions( coe_coefMatrix_t const A
 
     /* Extend the current balances of the two connected nodes by a new term
        describing the current flowing through the current source.
-         Don't do this, if the connected node is a ground node, i.e. if the returned
+         Don't do this, if the connected node is a ground node, i.e., if the returned
        unknown is the NULL pointer. */
     const tbv_unknownVariable_t * const pUnknownUFrom = tbv_getUnknownByNode
                                                                 ( pTableOfVars
@@ -2211,7 +2226,7 @@ void les_shutdownModule()
  * The pointer to the created LES object is returned in * \a ppLES if the function
  * succeeds. Otherwise * \a ppLES will contain NULL.\n
  *   The created object contains the matrix of coefficients of the LES plus additional,
- * related information, e.g. about the (physical) constants refered to in the coefficients.
+ * related information, e.g., about the (physical) constants refered to in the coefficients.
  * The returned object can be input to a symbolic solver.
  *   @param pCircuitNetList
  * The reference to the object that represents the parse result of the input file. It
