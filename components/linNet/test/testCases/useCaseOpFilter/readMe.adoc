@@ -9,7 +9,12 @@ example from the linNet manual, see Chapter 8, Typical Use Cases, for a
 discussion. The link:useCaseOpFilter/G.svg[frequency response^] can be
 calculated with Octave in the numeric post-processing.
 
-link:useCaseOpFilter.log[Calculation results^]
+One of the signals the link:useCaseOpFilter.cnl[netlist] defines is the
+current I~OP~, the output current of the op-amp. This is an instable
+system. The numerator has a higher power in s as the denominator and the
+current exceeds any limit for increasing frequencies. The numeric Octave
+post-processing fails to plot the step function for this system; generated
+script `SIMO.m` aborts with error. However, the Bode plot for the same
+signal can be plotted; script `Iop.m` executes well.
 
-See link:useCaseOpFilter.cnl[netlist file^] for more details of the
-circuit.
+link:useCaseOpFilter.log[Calculation results^]
