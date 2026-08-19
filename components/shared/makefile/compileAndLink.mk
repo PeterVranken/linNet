@@ -185,9 +185,10 @@ cFlags = $(cDefines)                                                            
          -fshort-enums -fdiagnostics-show-option -finline-functions -fmessage-length=0      \
          -fzero-initialized-in-bss -fno-tree-loop-optimize                                  \
          -Wall -Wno-main -Wno-old-style-declaration -Wextra -Wstrict-overflow=4             \
-         -Wmissing-declarations -Wno-parentheses -Wdiv-by-zero -Wcast-align -Wformat        \
+         -Wno-parentheses -Wdiv-by-zero -Wcast-align -Wformat                               \
          -Wformat-security -Wignored-qualifiers -Wsign-conversion -Wsign-compare            \
          -Werror=missing-declarations -Werror=implicit-function-declaration                 \
+         -Werror=maybe-uninitialized                                                        \
          -Wno-nested-externs -Werror=int-to-pointer-cast -Werror=pointer-sign               \
          -Werror=pointer-to-int-cast -Werror=return-local-addr -Werror=missing-prototypes   \
          -Werror=missing-field-initializers -Werror=overflow                                \
@@ -213,11 +214,11 @@ $(targetDir)obj/%.o: %.c
 # expansion.
 %.i: %.c
 	$(info Preprocessing C file $(notdir $<) to text file $(patsubst %.c,%.i,$<))
-	$(gcc) -E $(filter-out -MMD,$(cFlags)) -o $(patsubst %.c,%.i,$<) $<
+	$(gcc) -E $(filter-out -MMD -MP,$(cFlags)) -o $(patsubst %.c,%.i,$<) $<
 
 %.i: %.cpp
 	$(info Preprocessing C++ file $(notdir $<) to text file $(patsubst %.cpp,%.i,$<))
-	$(gcc) -E $(filter-out -MMD,$(cFlags)) -o $(patsubst %.cpp,%.i,$<) $<
+	$(gcc) -E $(filter-out -MMD -MP,$(cFlags)) -o $(patsubst %.cpp,%.i,$<) $<
 
 # Windows only: A global resource file is compiled to a binary representation of the
 # application's icons. The binary representation is linked with the executable. This makes
