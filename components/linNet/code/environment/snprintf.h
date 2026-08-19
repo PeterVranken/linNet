@@ -48,7 +48,8 @@
        (Checked for mingw-i686-8.1.0-release-win32-dwarf-rt_v6-rev0 and
        mingw-w64-x86_64-8.1.0-posix-seh-rt_v6-rev0.) */
 #  define DO_PATCH_SNPRINTF
-# elif 10000*__GNUC__ + 100*__GNUC_MINOR__ + __GNUC_PATCHLEVEL__ == 160100
+# elif 10000*__GNUC__ + 100*__GNUC_MINOR__ + __GNUC_PATCHLEVEL__ == 160100      \
+       || 10000*__GNUC__ + 100*__GNUC_MINOR__ + __GNUC_PATCHLEVEL__ == 130200
 # else
 #  error Double-check if patch of snprintf is still needed for this revision of GCC
 # endif
