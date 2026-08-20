@@ -1,7 +1,7 @@
 #
-# Generic Makefile for GNU Make 3.81
+# Generic Makefile for GNU Make 3.82 (MinGW port only)
 #
-# Compilation and linkage of C(++) code.
+# Build of project.
 #
 # Help on the syntax of this makefile is got at
 # http://www.gnu.org/software/make/manual/make.pdf.
@@ -24,67 +24,61 @@
 # Preconditions
 # =============
 #
-# The makefile is intended to be executed by the GNU make utility 3.81.
-#   The name of the project needs to be assigned to the makefile macro projectName, see
-# heading part of the code section of this makefile.
-#   The Windows path needs to contain the location of the GNU compiler/linker etc. This is
-# the folder containing e.g. gcc or gcc.exe.
-#   For your convenience, the Windows path should contain the location of the GNU make
-# processor. If you name this file either makefile or GNUmakefile you will just have to
-# type "make" in order to get your make process running.
+# The makefile is intended to be executed by the GNU make utility 3.82. The MinGW is
+# required, the Cygwin/msys port handles paths under Windows differently and will fail. The
+# easiest way to ensure the right port is an executable named mingw32-make.exe. In case of
+# doubts, run "make --version" to see.
 #   This makefile does not handle blanks in any paths or file names. Please rename your
 # paths and files accordingly prior to using this makefile.
 #
-# Targets
-# =======
+# Targets and Options
+# ===================
 #
-# The makefile provides several targets, which can be combined on the command line. Get
-# some help on the available targets by invoking the makefile using
+# The makefile provides several targets, which can be combined on the command line.
+#   Some options can be set on either command line or down below in this main makefile. For
+# example, the build confiuration, DEBUG or PRODUCTION, can be set.
+#   Get some help on the available targets and options by invoking the makefile using:
+#
 #   make help
-#
-# Options
-# =======
-#
-# Options may be passed on the command line.
-#   The follow options may be used:
-#   CONFIGURATION: The compile configuration is one out of DEBUG (default) or PRODUCTION. By
-# means of defining or undefining macros for the C compiler, different code configurations
-# can be produced. Please refer to the comments below to get an explanation of the meaning
-# of the supported configurations and which according #defines have to be used in the C
-# source code files.
 #
 # Input Files
 # ===========
 #
 # The makefile compiles and links all source files which are located in a given list of
-# source directories. The list of directories is hard coded in the makefile, please look
-# for the setting of srcDirList below.
+# source directories. The list of directories is configured in this main makefile, please
+# look for the setting of srcDirList below.
 #   A second list of files is found as cFileListExcl. These C/C++ files are excluded from
 # build.
+#
 
-# The name of the project is used for several build products.
+# The name of the project.
 project := linNet
 
-# The directory, from where to run the compiled target when yielding target run. Defaults
-# to the directory, where the compiled target is located.
-targetRunDir := test
+# The name stem of the final build artifacts.
+target := $(project)
 
-# A list of arguments passed to the compiled target when yielding target run.
-targetRunArgs := -v INFO -f short -c -l -o $(ARG) -- $(CNL)
+# Specify a blank separated list of directories holding source files. The directories are
+# searched recursively for C/C++ and assembler source files.
+#   Caution, absolute paths are not supported. Use paths only, which relate to the path of
+# this makefile.
+srcDirList := src/
 
-# Specify a blank separated list of directories holding source files.
-srcDirList := src/environment/ src/tokenStream/ src/logger/ src/memoryManager/ src/linNet/
-
-# Exclusion list: Edit the list of excluded files. A blank separated list of source files
-# (with extension but without path) is expected, which are excluded from the compilation of
-# all *.c and *.cpp
+# Exclusion list: Edit the list of excluded files. A blank separated list of C or assembler
+# source files is expected (all file designations with relative path), which are excluded
+# from build.
 cFileListExcl :=
 
 # Additional include directories (besides the source directories and common, project
 # independent paths).
 incDirList :=
 
+# A blank separated list of C defines for compilation, with or without value.
+defineList :=
+
+# Blanks separated list of sub-ordinated archives to link with the application.
+libList :=
+
 # Now go into the project independent implementation of the compile and link rules using
 # the project specific settings made above.
 sharedMakefilePath = makefile/
-include $(sharedMakefilePath)parallelJobs.mk
+include $(sharedMakefilePath)buildProject.mk

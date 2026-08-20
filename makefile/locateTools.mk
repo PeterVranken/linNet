@@ -1,84 +1,66 @@
-# 
-# Makefile for GNU Make 3.81
 #
-# Locate all the external tools used by the other makefile fragments.
+# Generic Makefile for GNU Make 3.82 (MinGW port only)
 #
-# This makefile fragment depends on functions.mk.
+# Inspect environment variables and system search path to find out, where the executables,
+# compiler, linker, etc., are located.
 #
 # Help on the syntax of this makefile is got at
 # http://www.gnu.org/software/make/manual/make.pdf.
 #
+ifndef LOCATE_TOOLS_INCLUDED
+LOCATE_TOOLS_INCLUDED := 1
 
-# Only uncomment the next line when running this fragment independently for maintenace
-# purpose.
-#include commonFunctions.mk
+# Compose a path to a tool from an environment variable with the installation directory,
+# $(1), and the name of the executable, $(2). Note, $(1) may contain blanks.
+getToolPath = $(call u2w,$(1)$(2).exe)
 
+# Check for the presence of a file, $(1). Note, $(1) may contains blanks.
+#   The function returns either the (confirmed) file-path or nothing if the file is not
+# existent.
+checkForFile = $(wildcard $(call escapeBlanks,$(call w2u,$(1))))
+#$(info This file exists: $(if $(call checkForFile,makefile/locateTools.mk),true (as $(call checkForFile,makefile/locateTools.mk)),false))
 
-# The MinGW package comes along with a lot of application installers and so there may be
-# more than one installation on the system and in the system's search path. A dedicated
-# environment variable may be used to select a particular MinGW installation.
-ifneq ($(MINGW_HOME),)
-    # Caution: External paths (like here in the environment variable) do not comply with
-    # the makefile style rule that paths end with the slash.
-    minGwSearchPath := $(call w2u,$(MINGW_HOME))
-    minGwSearchPath := $(call noTrailingSlash,$(minGwSearchPath))
-    minGwSearchPath := $(addprefix $(minGwSearchPath)/,bin msys/1.0/bin)
-else
-    minGwSearchPath :=
-endif
+# Check if a tool named $(2) can be found and started from directory $(1). $(1) may contain
+# blanks and it ends with a trailing backslash
+getAndValidateToolPath = $(call quoteExecutable,$(or $(call checkForFile,$(call getToolPath,$(1),$(2))),$(error Configured tool $(call getToolPath,$(1),$(2)) doesn't exist. Please check the specified installation path $(1))))
 
+# Different releases of GCC use different executable names.
+gcc-prefix :=
 
-# Find the tools preferably in the folder specified by environment variable MINGW_HOME but
-# look secondary in the system search path also. The system search path is expected as
-# either colon or semicolon separated list of path designations in the environment variable
-# PATH.
-#   CAUTION: Blanks in path designations found in the environment variable PATH can't be
-# processed. A search will not take place in those directories.
-ifeq ($(OS),Windows_NT)
-    toolsSearchPath = $(minGwSearchPath) $(subst ;, ,$(call w2u,$(PATH)))
-else
-    toolsSearchPath = $(minGwSearchPath) $(subst :, ,$(call w2u,$(PATH)))
-endif
-#$(info Search path for external tools: $(toolsSearchPath))
+# The required tools are located using the configuration settings, particularly the
+# installation directories.
+gcc := $(call getAndValidateToolPath,$(MINGW_HOME)\bin\,$(gcc-prefix)gcc)
+g++ := $(call getAndValidateToolPath,$(MINGW_HOME)\bin\,$(gcc-prefix)g++)
+ar := $(call getAndValidateToolPath,$(MINGW_HOME)\bin\,$(gcc-prefix)ar)
+objcopy := $(call getAndValidateToolPath,$(MINGW_HOME)\bin\,$(gcc-prefix)objcopy)
+size := $(call getAndValidateToolPath,$(MINGW_HOME)\bin\,$(gcc-prefix)size)
+windres := $(call getAndValidateToolPath,$(MINGW_HOME)\bin\,$(gcc-prefix)windres)
 
-# Under Windows we have to look for gcc.exe rather than for gcc.
-ifeq ($(OS),Windows_NT)
-    dotExe := .exe
-else
-    dotExe :=
-endif
+#java := $(call getAndValidateToolPath,$(JAVA_BIN)\,java)
 
-# Now use the path search to get all absolute tool paths for later use.
-#cat := $(call pathSearch,$(toolsSearchPath),cat$(dotExe))
-#cp := $(call pathSearch,$(toolsSearchPath),cp$(dotExe))
-echo := $(call pathSearch,$(toolsSearchPath),echo$(dotExe))
-#gawk := $(call pathSearch,$(toolsSearchPath),gawk$(dotExe))
-#awk := $(gawk)
-gcc := $(call pathSearch,$(toolsSearchPath),gcc$(dotExe))
-#g++ := $(call pathSearch,$(toolsSearchPath),g++$(dotExe))
-mkdir := $(call pathSearch,$(toolsSearchPath),mkdir$(dotExe))
-#mv := $(call pathSearch,$(toolsSearchPath),mv$(dotExe))
-#now := $(call pathSearch,$(toolsSearchPath),now$(dotExe))
-pwd := $(call pathSearch,$(toolsSearchPath),pwd$(dotExe))
-rm := $(call pathSearch,$(toolsSearchPath),rm$(dotExe))
-#rmdir := $(call pathSearch,$(toolsSearchPath),rmdir$(dotExe))
-#touch := $(call pathSearch,$(toolsSearchPath),touch$(dotExe))
-
-# TODO The resource compiler is system specific. We've added the Windows variant only.
-# Extend code for other systems if applicable.
-ifeq ($(OS),Windows_NT)
-    windres := $(call pathSearch,$(toolsSearchPath),windres$(dotExe))
-endif
+echo := $(call getAndValidateToolPath,$(UNIX_TOOLS_BIN)\,echo)
+mkdir := $(call getAndValidateToolPath,$(UNIX_TOOLS_BIN)\,mkdir)
+#pwd := $(call getAndValidateToolPath,$(UNIX_TOOLS_BIN)\,pwd)
+rm := $(call getAndValidateToolPath,$(UNIX_TOOLS_BIN)\,rm)
+rmdir := $(call getAndValidateToolPath,$(UNIX_TOOLS_BIN)\,rmdir)
 
 # The make tool is different: We need to use the same one as has been invoked by the user
 # and as is executing this makefile fragment.
-make := $(MAKE)
+make := $(call quoteExecutable,$(MAKE))
 
-# A plausibility check that tools could be loacted.
-#$(info Make: $(make), gcc: $(gcc), mkdir: $(mkdir), echo: $(echo), pwd: $(pwd), windres: $(windres))
-ifeq ($(and $(make),$(gcc),$(mkdir),echo: $(echo),$(pwd)),)
-    $(error Required GNU tools can't be located. Most probable reasons are: You \
-            didn't install the MinGW package or you didn't add the path to the MinGW \
-            installation to the environment variable PATH and you didn't let environment \
-            variable MINGW_HOME point to that directory)
-endif
+.PHONY: versionGCC helpGCC builtinMacrosGCC
+versionGCC:
+	$(info GCC: $(call u2w,$(gcc)))
+	$(gcc) --version
+helpGCC:
+	$(gcc) -v --help
+builtinMacrosGCC:
+	$(gcc) -dM -E - < nul
+
+# Temporarily uncomment the next line to double check the correct selection of tool
+# binaries.
+#$(info make: $(make), gcc: $(gcc), java: $(java), mkdir: $(mkdir), echo: $(echo), SubWCRev: $(SubWCRev))
+
+else
+$(error This makefile shouldn't be called twice. There's a problem in your makefile structure)
+endif # LOCATE_TOOLS_INCLUDED
