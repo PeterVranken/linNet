@@ -5,7 +5,7 @@ make -s build
 
 or
 
-make -s build CONFIG=PRODUCTION
+make -sO build CONFIG=PRODUCTION
 
 The GCC tool chain needs to be on the system search path. GNU make 3.81 or
 higher is required.

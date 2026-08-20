@@ -6,7 +6,7 @@
 # Help on the syntax of this makefile is got at
 # http://www.gnu.org/software/make/manual/make.pdf.
 #
-# Copyright (C) 2012-2014 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+# Copyright (C) 2012-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
 #
 # This program is free software: you can redistribute it and/or modify it
 # under the terms of the GNU Lesser General Public License as published by the
@@ -73,7 +73,7 @@ targetRunDir := test
 targetRunArgs := -v INFO -f short -c -l -o $(ARG) -- $(CNL)
 
 # Specify a blank separated list of directories holding source files.
-srcDirList := code/environment/ code/tokenStream/ code/logger/ code/memoryManager/ code/linNet/
+srcDirList := src/environment/ src/tokenStream/ src/logger/ src/memoryManager/ src/linNet/
 
 # Exclusion list: Edit the list of excluded files. A blank separated list of source files
 # (with extension but without path) is expected, which are excluded from the compilation of
@@ -86,5 +86,5 @@ incDirList :=
 
 # Now go into the project independent implementation of the compile and link rules using
 # the project specific settings made above.
-sharedMakefilePath = ../shared/makefile/
+sharedMakefilePath = makefile/
 include $(sharedMakefilePath)parallelJobs.mk
