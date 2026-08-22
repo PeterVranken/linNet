@@ -1,0 +1,28 @@
+Jul 28 11:40:33 2014 - 000026 ms - RESULT - 
+-----------------------------------------------------------------------------
+ linNet - The Software for symbolic Analysis of linear Electronic Circuits
+ Copyright (C) 1991, 2013-2014 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ This is free software; see the source for copying conditions. There is NO
+ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+-----------------------------------------------------------------------------
+Jul 28 11:40:33 2014 - 000029 ms - RESULT - Reading circuit file C:\user\vranken\projects\linNet\trunk\components\linNet\test\testCases\inverseTF.cnl successfully done
+Jul 28 11:40:33 2014 - 000029 ms - RESULT - User-defined result G (Bode plot):
+User-defined result G (Bode plot):
+The dependency of U_op_q on U1:
+  U_op_q(s) = N_U_op_q_U1(s)/D_U_op_q_U1(s) * U1(s), with
+    N_U_op_q_U1(s) = -R^2*CT1*CT2 * s^2
+                     -(2*R*CT1 + 2*R*CT2) * s
+                     -3
+    D_U_op_q_U1(s) = R^2*CT1*CT2 * s^2
+                     +(R*CT1 + R*CT2) * s
+                     +1
+Jul 28 11:40:33 2014 - 000034 ms - RESULT - User-defined result G_inv (Bode plot):
+User-defined result G_inv (Bode plot):
+The dependency of U1 on U_op_q:
+  U1(s) = N_U1_U_op_q(s)/D_U1_U_op_q(s) * U_op_q(s), with
+    N_U1_U_op_q(s) = -R^2*CT1*CT2 * s^2
+                     -(R*CT1 + R*CT2) * s
+                     -1
+    D_U1_U_op_q(s) = R^2*CT1*CT2 * s^2
+                     +(2*R*CT1 + 2*R*CT2) * s
+                     +3
