@@ -1,0 +1,14 @@
+Jul 28 13:33:00 2014 - 000022 ms - RESULT - 
+-----------------------------------------------------------------------------
+ linNet - The Software for symbolic Analysis of linear Electronic Circuits
+ Copyright (C) 1991, 2013-2014 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ This is free software; see the source for copying conditions. There is NO
+ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+-----------------------------------------------------------------------------
+Jul 28 13:33:00 2014 - 000023 ms - RESULT - Reading circuit file C:\user\vranken\projects\linNet\trunk\components\linNet\test\testCases\exampleManual.cnl successfully done
+Jul 28 13:33:00 2014 - 000023 ms - RESULT - User-defined result VDiv:
+User-defined result VDiv:
+The solution for unknown Uout:
+  Uout(s) = N_Uout_Uin(s)/D_Uout_Uin(s) * Uin(s), with
+    N_Uout_Uin(s) = 1
+    D_Uout_Uin(s) = 4
