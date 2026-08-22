@@ -1,0 +1,19 @@
+Aug 22 21:59:46 2026 - 000001 ms - RESULT - 
+-----------------------------------------------------------------------------
+ linNet - The Software for symbolic Analysis of linear Electronic Circuits
+ Copyright (C) 2014-2026 Peter Vranken (https://github.com/PeterVranken/linNet)
+ This is free software; see the source for copying conditions. There is NO
+ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+-----------------------------------------------------------------------------
+Aug 22 21:59:46 2026 - 000001 ms - RESULT - Reading circuit file C:\home\vranken\projects\linNetAtGitHub\linNet\test\testCases\badUserDefResults\badUserDefResults.cnl successfully done
+Aug 22 21:59:46 2026 - 000001 ms -  ERROR - None of the user-defined results reference an unknown quantity. The calculation result will be empty. Please check your result definitions. See other error messages for more details
+Aug 22 21:59:46 2026 - 000001 ms -  ERROR - A solution refers to quantity U_gnd. No such quantity is defined. The list of quantities, which can be referenced:
+  Dependent quantities:
+    U_in
+    U_n1
+    I_U1
+  Independent quantities:
+    U1
+Aug 22 21:59:46 2026 - 000001 ms -  ERROR - User-defined result G (Bode plot) can't be computed due to previous errors
+Aug 22 21:59:46 2026 - 000001 ms -  ERROR - A full result has been requested for quantity U1. This is invalid as U1 is a known quantity of the system (i.e., a system input)
+Aug 22 21:59:46 2026 - 000001 ms -  ERROR - User-defined result R can't be computed due to previous errors

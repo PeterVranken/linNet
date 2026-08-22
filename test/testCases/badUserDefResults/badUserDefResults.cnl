@@ -1,0 +1,35 @@
+/**
+ * @file badUserDefResults.cnl
+ * Test case for linNet.
+ *
+ * A basically correct netlist is combined with a few result definitions, which fail for
+ * different reasons. See calculation log file for the resulting error messages.
+ *
+ * Copyright (C) 2014-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ *
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the
+ * Free Software Foundation, either version 3 of the License, or (at your
+ * option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
+U   U1  in      n1
+
+R   R   in      gnd
+C   C   gnd     n1
+
+/* Bad Bode plot result: We reference the output voltage by implicit name, U_ followed by
+   the name of a node, but the node is the ground node, which is not element of the
+   calculation. It is the reference point for all other nodes and implicitly has the
+   voltage zero. */
+PLOT G U_gnd U1
+
+/* Bad full result: U1 is not a dependent quentity but an independent, given system input. */
+RES R U1

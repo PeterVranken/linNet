@@ -1,0 +1,10 @@
+This folder contains linNet test case `badUserDefResults`:
+
+[[figSchematics]]
+.Schematics
+image::BadUserDefResults.svg[Schematics, width="5%", pdfwidth="5%", align="center"]
+
+A basically correct link:badUserDefResults.cnl[netlist] is combined with a
+few result definitions, which fail for different reasons. See
+link:badUserDefResults.log[calculation log file] for the resulting error
+messages.
