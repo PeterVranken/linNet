@@ -1,0 +1,36 @@
+Dec 08 15:19:12 2014 - 000031 ms - RESULT - 
+-----------------------------------------------------------------------------
+ linNet - The Software for symbolic Analysis of linear Electronic Circuits
+ Copyright (C) 2014 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ This is free software; see the source for copying conditions. There is NO
+ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+-----------------------------------------------------------------------------
+Dec 08 15:19:12 2014 - 000032 ms - RESULT - Reading circuit file C:\user\vranken\projects\linNet\trunk\components\linNet\test\testCases\octagon.cnl successfully done
+Dec 08 15:19:22 2014 - 009975 ms - RESULT - User-defined result G (Bode plot):
+The dependency of U2 on U1:
+  U2(s) = N_U2_U1(s)/D_U2_U1(s) * U1(s), with
+    N_U2_U1(s) = 1
+    D_U2_U1(s) = 2
+Dec 08 15:19:22 2014 - 009986 ms - RESULT - User-defined result Z (Bode plot):
+The dependency of U1 on I_U1:
+  U1(s) = N_U1_I_U1(s)/D_U1_I_U1(s) * I_U1(s), with
+    N_U1_I_U1(s) = 6*R
+    D_U1_I_U1(s) = 7
+Dec 25 15:59:04 2014 - 000053 ms - RESULT - 
+-----------------------------------------------------------------------------
+ linNet - The Software for symbolic Analysis of linear Electronic Circuits
+ Copyright (C) 2014 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ This is free software; see the source for copying conditions. There is NO
+ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+-----------------------------------------------------------------------------
+Dec 25 15:59:04 2014 - 000059 ms - RESULT - Reading circuit file .\octagon.cnl successfully done
+Dec 25 15:59:15 2014 - 010147 ms - RESULT - User-defined result G (Bode plot):
+The dependency of U2 on U1:
+  U2(s) = N_U2_U1(s)/D_U2_U1(s) * U1(s), with
+    N_U2_U1(s) = 1
+    D_U2_U1(s) = 2
+Dec 25 15:59:15 2014 - 010168 ms - RESULT - User-defined result Z (Bode plot):
+The dependency of U1 on I_U1:
+  U1(s) = N_U1_I_U1(s)/D_U1_I_U1(s) * I_U1(s), with
+    N_U1_I_U1(s) = 6*R
+    D_U1_I_U1(s) = 7
