@@ -1,0 +1,865 @@
+Dec 01 20:55:10 2014 - 000065 ms - RESULT - 
+-----------------------------------------------------------------------------
+ linNet - The Software for symbolic Analysis of linear Electronic Circuits
+ Copyright (C) 1991, 2013-2014 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ This is free software; see the source for copying conditions. There is NO
+ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+-----------------------------------------------------------------------------
+Dec 01 20:55:10 2014 - 000065 ms -   INFO - Log file name is .\opInputCurrentNull.log
+Dec 01 20:55:10 2014 - 000071 ms -  DEBUG - Application installation directory is C:\user\vranken\projects\linNet\trunk\components\linNet\bin\win32\DEBUG
+Dec 01 20:55:10 2014 - 000081 ms -  DEBUG - mem_createHeap: Create new heap Coefficient of LES, client data object size 16 Byte, effectively 16 Byte
+Dec 01 20:55:10 2014 - 000093 ms -  DEBUG - mem:allocNewChunk: Allocating another chunk of 1000 objects for heap Coefficient of LES. Total heap size now: 16000 Byte
+Dec 01 20:55:10 2014 - 000104 ms -  DEBUG - mem_createHeap: Create new heap Network, client data object size 8 Byte, effectively 8 Byte
+Dec 01 20:55:10 2014 - 000112 ms -  DEBUG - mem:allocNewChunk: Allocating another chunk of 10 objects for heap Network. Total heap size now: 80 Byte
+Dec 01 20:55:10 2014 - 000122 ms -  DEBUG - mem_createHeap: Create new heap Addend of frequency domain expression, client data object size 272 Byte, effectively 272 Byte
+Dec 01 20:55:10 2014 - 000132 ms -  DEBUG - mem:allocNewChunk: Allocating another chunk of 100 objects for heap Addend of frequency domain expression. Total heap size now: 27200 Byte
+Dec 01 20:55:10 2014 - 000143 ms -   INFO - Start reading circuit file opInputCurrentNull.cnl
+Dec 01 20:55:10 2014 - 000148 ms -  DEBUG - Line 3: Found device definition: Uin, Voltage source, constant (0), connected to in, gnd, (n.c.), (n.c.), no value is specified
+Dec 01 20:55:10 2014 - 000159 ms -  DEBUG - Line 4: Found device definition: Rin, Resistor (6), connected to in, k, (n.c.), (n.c.), no value is specified
+Dec 01 20:55:10 2014 - 000169 ms -  DEBUG - Line 5: Found device definition: OP, Op-Amp (10), connected to k, gnd, out, (n.c.), no value is specified
+Dec 01 20:55:10 2014 - 000178 ms -  DEBUG - Line 5: Found device definition: Rback, Resistor (6), connected to out, k, (n.c.), (n.c.), no value is specified
+Dec 01 20:55:10 2014 - 000188 ms - RESULT - Reading circuit file opInputCurrentNull.cnl successfully done
+Dec 01 20:55:10 2014 - 000193 ms -  DEBUG - Network topology after parsing input:
+Dec 01 20:55:10 2014 - 000196 ms -  DEBUG -   Sub-network 1:
+Dec 01 20:55:10 2014 - 000199 ms -  DEBUG -     Node 01, out
+Dec 01 20:55:10 2014 - 000202 ms -  DEBUG -     Node 02, in
+Dec 01 20:55:10 2014 - 000206 ms -  DEBUG -     Node 03, gnd
+Dec 01 20:55:10 2014 - 000209 ms -  DEBUG -     Node 04, k
+Dec 01 20:55:10 2014 - 000212 ms -  DEBUG - Network consists of 1 unconnected graphs with a total of 4 nodes
+Dec 01 20:55:10 2014 - 000218 ms -   INFO - Node gnd is considered a ground node. The voltage at this node is considered null
+Dec 01 20:55:10 2014 - 000225 ms -   INFO - Linear equation system (5, 6) has 1 knowns, 5 unknowns and 2 constants
+Dec 01 20:55:10 2014 - 000230 ms -  DEBUG - LES prior to elimination for unknown U_out:
+Dec 01 20:55:10 2014 - 000234 ms -  DEBUG - Table of symbolic objects:
+Dec 01 20:55:10 2014 - 000238 ms -  DEBUG - 1 known variables:
+Dec 01 20:55:10 2014 - 000241 ms -  DEBUG -   0) Uin, column in LES: 5
+Dec 01 20:55:10 2014 - 000245 ms -  DEBUG - 5 unknown variables:
+Dec 01 20:55:10 2014 - 000249 ms -  DEBUG -   0) U_out, voltage of node, position in LES: (0, 4), sub-net: 1
+Dec 01 20:55:10 2014 - 000254 ms -  DEBUG -   1) U_in, voltage of node, position in LES: (1, 1), sub-net: 1
+Dec 01 20:55:10 2014 - 000259 ms -  DEBUG -   2) U_k, voltage of node, position in LES: (2, 2), sub-net: 1
+Dec 01 20:55:10 2014 - 000264 ms -  DEBUG -   3) I_Uin, internal unknown current, position in LES: (3, 3), sub-net: -1
+Dec 01 20:55:10 2014 - 000270 ms -  DEBUG -   4) I_OP, internal unknown current, position in LES: (4, 0), sub-net: -1
+Dec 01 20:55:10 2014 - 000275 ms -  DEBUG - 2 constants:
+Dec 01 20:55:10 2014 - 000278 ms -  DEBUG -   0) Rin, Resistor, internal representation: 0x1
+Dec 01 20:55:10 2014 - 000283 ms -  DEBUG -   1) Rback, Resistor, internal representation: 0x2
+Dec 01 20:55:10 2014 - 000288 ms -  DEBUG - The linear equation system (5, 6):
+Dec 01 20:55:10 2014 - 000292 ms -  DEBUG -   Row 0:
+Dec 01 20:55:10 2014 - 000295 ms -  DEBUG -     ( 0, 0): +1
+Dec 01 20:55:10 2014 - 000298 ms -  DEBUG -     ( 0, 1):  0
+Dec 01 20:55:10 2014 - 000302 ms -  DEBUG -     ( 0, 2): +Rback
+Dec 01 20:55:10 2014 - 000306 ms -  DEBUG -     ( 0, 3):  0
+Dec 01 20:55:10 2014 - 000309 ms -  DEBUG -     ( 0, 4): -Rback
+Dec 01 20:55:10 2014 - 000313 ms -  DEBUG -     ( 0, 5):  0
+Dec 01 20:55:10 2014 - 000317 ms -  DEBUG -   Row 1:
+Dec 01 20:55:10 2014 - 000320 ms -  DEBUG -     ( 1, 0):  0
+Dec 01 20:55:10 2014 - 000324 ms -  DEBUG -     ( 1, 1): -Rin
+Dec 01 20:55:10 2014 - 000327 ms -  DEBUG -     ( 1, 2): +Rin
+Dec 01 20:55:10 2014 - 000331 ms -  DEBUG -     ( 1, 3): +1
+Dec 01 20:55:10 2014 - 000334 ms -  DEBUG -     ( 1, 4):  0
+Dec 01 20:55:10 2014 - 000337 ms -  DEBUG -     ( 1, 5):  0
+Dec 01 20:55:10 2014 - 000340 ms -  DEBUG -   Row 2:
+Dec 01 20:55:10 2014 - 000344 ms -  DEBUG -     ( 2, 0):  0
+Dec 01 20:55:10 2014 - 000347 ms -  DEBUG -     ( 2, 1): +Rin
+Dec 01 20:55:10 2014 - 000351 ms -  DEBUG -     ( 2, 2): -Rback-Rin
+Dec 01 20:55:10 2014 - 000354 ms -  DEBUG -     ( 2, 3):  0
+Dec 01 20:55:10 2014 - 000358 ms -  DEBUG -     ( 2, 4): +Rback
+Dec 01 20:55:10 2014 - 000361 ms -  DEBUG -     ( 2, 5):  0
+Dec 01 20:55:10 2014 - 000365 ms -  DEBUG -   Row 3:
+Dec 01 20:55:10 2014 - 000368 ms -  DEBUG -     ( 3, 0):  0
+Dec 01 20:55:10 2014 - 000371 ms -  DEBUG -     ( 3, 1): +1
+Dec 01 20:55:10 2014 - 000374 ms -  DEBUG -     ( 3, 2):  0
+Dec 01 20:55:10 2014 - 000378 ms -  DEBUG -     ( 3, 3):  0
+Dec 01 20:55:10 2014 - 000381 ms -  DEBUG -     ( 3, 4):  0
+Dec 01 20:55:10 2014 - 000384 ms -  DEBUG -     ( 3, 5): -1
+Dec 01 20:55:10 2014 - 000388 ms -  DEBUG -   Row 4:
+Dec 01 20:55:10 2014 - 000391 ms -  DEBUG -     ( 4, 0):  0
+Dec 01 20:55:10 2014 - 000395 ms -  DEBUG -     ( 4, 1):  0
+Dec 01 20:55:10 2014 - 000398 ms -  DEBUG -     ( 4, 2): +1
+Dec 01 20:55:10 2014 - 000402 ms -  DEBUG -     ( 4, 3):  0
+Dec 01 20:55:10 2014 - 000406 ms -  DEBUG -     ( 4, 4):  0
+Dec 01 20:55:10 2014 - 000409 ms -  DEBUG -     ( 4, 5):  0
+Dec 01 20:55:10 2014 - 000413 ms -  DEBUG - LES after elimination of U_out:
+Dec 01 20:55:10 2014 - 000417 ms -  DEBUG - The linear equation system (5, 6):
+Dec 01 20:55:10 2014 - 000422 ms -  DEBUG -   Row 0:
+Dec 01 20:55:10 2014 - 000425 ms -  DEBUG -     ( 0, 0): +1
+Dec 01 20:55:10 2014 - 000428 ms -  DEBUG -     ( 0, 1):  0
+Dec 01 20:55:10 2014 - 000431 ms -  DEBUG -     ( 0, 2): +Rback
+Dec 01 20:55:10 2014 - 000435 ms -  DEBUG -     ( 0, 3):  0
+Dec 01 20:55:10 2014 - 000438 ms -  DEBUG -     ( 0, 4): -Rback
+Dec 01 20:55:10 2014 - 000441 ms -  DEBUG -     ( 0, 5):  0
+Dec 01 20:55:10 2014 - 000444 ms -  DEBUG -   Row 1:
+Dec 01 20:55:10 2014 - 000447 ms -  DEBUG -     ( 1, 0):  0
+Dec 01 20:55:10 2014 - 000451 ms -  DEBUG -     ( 1, 1): -Rin
+Dec 01 20:55:10 2014 - 000454 ms -  DEBUG -     ( 1, 2): +Rin
+Dec 01 20:55:10 2014 - 000458 ms -  DEBUG -     ( 1, 3): +1
+Dec 01 20:55:10 2014 - 000461 ms -  DEBUG -     ( 1, 4):  0
+Dec 01 20:55:10 2014 - 000465 ms -  DEBUG -     ( 1, 5):  0
+Dec 01 20:55:10 2014 - 000469 ms -  DEBUG -   Row 2:
+Dec 01 20:55:10 2014 - 000472 ms -  DEBUG -     ( 2, 0):  0
+Dec 01 20:55:10 2014 - 000476 ms -  DEBUG -     ( 2, 1):  0
+Dec 01 20:55:10 2014 - 000479 ms -  DEBUG -     ( 2, 2): +Rback*Rin
+Dec 01 20:55:10 2014 - 000483 ms -  DEBUG -     ( 2, 3): -Rin
+Dec 01 20:55:10 2014 - 000486 ms -  DEBUG -     ( 2, 4): -Rback*Rin
+Dec 01 20:55:10 2014 - 000491 ms -  DEBUG -     ( 2, 5):  0
+Dec 01 20:55:10 2014 - 000494 ms -  DEBUG -   Row 3:
+Dec 01 20:55:10 2014 - 000496 ms -  DEBUG -     ( 3, 0):  0
+Dec 01 20:55:10 2014 - 000499 ms -  DEBUG -     ( 3, 1):  0
+Dec 01 20:55:10 2014 - 000502 ms -  DEBUG -     ( 3, 2):  0
+Dec 01 20:55:10 2014 - 000506 ms -  DEBUG -     ( 3, 3): +Rback+Rin
+Dec 01 20:55:10 2014 - 000510 ms -  DEBUG -     ( 3, 4): +Rback*Rin
+Dec 01 20:55:10 2014 - 000513 ms -  DEBUG -     ( 3, 5): -Rback*Rin
+Dec 01 20:55:10 2014 - 000517 ms -  DEBUG -   Row 4:
+Dec 01 20:55:10 2014 - 000520 ms -  DEBUG -     ( 4, 0):  0
+Dec 01 20:55:10 2014 - 000523 ms -  DEBUG -     ( 4, 1):  0
+Dec 01 20:55:10 2014 - 000526 ms -  DEBUG -     ( 4, 2):  0
+Dec 01 20:55:10 2014 - 000529 ms -  DEBUG -     ( 4, 3):  0
+Dec 01 20:55:10 2014 - 000532 ms -  DEBUG -     ( 4, 4): +Rback
+Dec 01 20:55:10 2014 - 000536 ms -  DEBUG -     ( 4, 5): +Rin
+Dec 01 20:55:10 2014 - 000539 ms -  DEBUG - LES prior to elimination for unknown U_in:
+Dec 01 20:55:10 2014 - 000544 ms -  DEBUG - Table of symbolic objects:
+Dec 01 20:55:10 2014 - 000548 ms -  DEBUG - 1 known variables:
+Dec 01 20:55:10 2014 - 000551 ms -  DEBUG -   0) Uin, column in LES: 5
+Dec 01 20:55:10 2014 - 000555 ms -  DEBUG - 5 unknown variables:
+Dec 01 20:55:10 2014 - 000559 ms -  DEBUG -   0) U_out, voltage of node, position in LES: (0, 1), sub-net: 1
+Dec 01 20:55:10 2014 - 000564 ms -  DEBUG -   1) U_in, voltage of node, position in LES: (1, 4), sub-net: 1
+Dec 01 20:55:10 2014 - 000569 ms -  DEBUG -   2) U_k, voltage of node, position in LES: (2, 2), sub-net: 1
+Dec 01 20:55:10 2014 - 000574 ms -  DEBUG -   3) I_Uin, internal unknown current, position in LES: (3, 3), sub-net: -1
+Dec 01 20:55:10 2014 - 000580 ms -  DEBUG -   4) I_OP, internal unknown current, position in LES: (4, 0), sub-net: -1
+Dec 01 20:55:10 2014 - 000585 ms -  DEBUG - 2 constants:
+Dec 01 20:55:10 2014 - 000588 ms -  DEBUG -   0) Rin, Resistor, internal representation: 0x1
+Dec 01 20:55:10 2014 - 000593 ms -  DEBUG -   1) Rback, Resistor, internal representation: 0x2
+Dec 01 20:55:10 2014 - 000598 ms -  DEBUG - The linear equation system (5, 6):
+Dec 01 20:55:10 2014 - 000601 ms -  DEBUG -   Row 0:
+Dec 01 20:55:10 2014 - 000604 ms -  DEBUG -     ( 0, 0): +1
+Dec 01 20:55:10 2014 - 000608 ms -  DEBUG -     ( 0, 1): -Rback
+Dec 01 20:55:10 2014 - 000611 ms -  DEBUG -     ( 0, 2): +Rback
+Dec 01 20:55:10 2014 - 000615 ms -  DEBUG -     ( 0, 3):  0
+Dec 01 20:55:10 2014 - 000619 ms -  DEBUG -     ( 0, 4):  0
+Dec 01 20:55:10 2014 - 000622 ms -  DEBUG -     ( 0, 5):  0
+Dec 01 20:55:10 2014 - 000625 ms -  DEBUG -   Row 1:
+Dec 01 20:55:10 2014 - 000628 ms -  DEBUG -     ( 1, 0):  0
+Dec 01 20:55:10 2014 - 000631 ms -  DEBUG -     ( 1, 1):  0
+Dec 01 20:55:10 2014 - 000634 ms -  DEBUG -     ( 1, 2): +Rin
+Dec 01 20:55:10 2014 - 000637 ms -  DEBUG -     ( 1, 3): +1
+Dec 01 20:55:10 2014 - 000640 ms -  DEBUG -     ( 1, 4): -Rin
+Dec 01 20:55:10 2014 - 000644 ms -  DEBUG -     ( 1, 5):  0
+Dec 01 20:55:10 2014 - 000647 ms -  DEBUG -   Row 2:
+Dec 01 20:55:10 2014 - 000650 ms -  DEBUG -     ( 2, 0):  0
+Dec 01 20:55:10 2014 - 000653 ms -  DEBUG -     ( 2, 1): +Rback
+Dec 01 20:55:10 2014 - 000657 ms -  DEBUG -     ( 2, 2): -Rback-Rin
+Dec 01 20:55:10 2014 - 000660 ms -  DEBUG -     ( 2, 3):  0
+Dec 01 20:55:10 2014 - 000664 ms -  DEBUG -     ( 2, 4): +Rin
+Dec 01 20:55:10 2014 - 000667 ms -  DEBUG -     ( 2, 5):  0
+Dec 01 20:55:10 2014 - 000670 ms -  DEBUG -   Row 3:
+Dec 01 20:55:10 2014 - 000673 ms -  DEBUG -     ( 3, 0):  0
+Dec 01 20:55:10 2014 - 000676 ms -  DEBUG -     ( 3, 1):  0
+Dec 01 20:55:10 2014 - 000679 ms -  DEBUG -     ( 3, 2):  0
+Dec 01 20:55:10 2014 - 000682 ms -  DEBUG -     ( 3, 3):  0
+Dec 01 20:55:10 2014 - 000685 ms -  DEBUG -     ( 3, 4): +1
+Dec 01 20:55:10 2014 - 000688 ms -  DEBUG -     ( 3, 5): -1
+Dec 01 20:55:10 2014 - 000691 ms -  DEBUG -   Row 4:
+Dec 01 20:55:10 2014 - 000694 ms -  DEBUG -     ( 4, 0):  0
+Dec 01 20:55:10 2014 - 000698 ms -  DEBUG -     ( 4, 1):  0
+Dec 01 20:55:10 2014 - 000701 ms -  DEBUG -     ( 4, 2): +1
+Dec 01 20:55:10 2014 - 000705 ms -  DEBUG -     ( 4, 3):  0
+Dec 01 20:55:10 2014 - 000708 ms -  DEBUG -     ( 4, 4):  0
+Dec 01 20:55:10 2014 - 000712 ms -  DEBUG -     ( 4, 5):  0
+Dec 01 20:55:10 2014 - 000716 ms -  DEBUG - Pivoting in elimination step 1: Line exchange 1 <-> 2
+Dec 01 20:55:10 2014 - 000721 ms -  DEBUG - Pivoting in elimination step 3: Line exchange 3 <-> 4
+Dec 01 20:55:10 2014 - 000726 ms -  DEBUG - LES after elimination of U_in:
+Dec 01 20:55:10 2014 - 000730 ms -  DEBUG - The linear equation system (5, 6):
+Dec 01 20:55:10 2014 - 000734 ms -  DEBUG -   Row 0:
+Dec 01 20:55:10 2014 - 000737 ms -  DEBUG -     ( 0, 0): +1
+Dec 01 20:55:10 2014 - 000741 ms -  DEBUG -     ( 0, 1): -Rback
+Dec 01 20:55:10 2014 - 000744 ms -  DEBUG -     ( 0, 2): +Rback
+Dec 01 20:55:10 2014 - 000748 ms -  DEBUG -     ( 0, 3):  0
+Dec 01 20:55:10 2014 - 000751 ms -  DEBUG -     ( 0, 4):  0
+Dec 01 20:55:10 2014 - 000755 ms -  DEBUG -     ( 0, 5):  0
+Dec 01 20:55:10 2014 - 000757 ms -  DEBUG -   Row 1:
+Dec 01 20:55:10 2014 - 000760 ms -  DEBUG -     ( 1, 0):  0
+Dec 01 20:55:10 2014 - 000763 ms -  DEBUG -     ( 1, 1): +Rback
+Dec 01 20:55:10 2014 - 000767 ms -  DEBUG -     ( 1, 2): -Rback-Rin
+Dec 01 20:55:10 2014 - 000771 ms -  DEBUG -     ( 1, 3):  0
+Dec 01 20:55:10 2014 - 000774 ms -  DEBUG -     ( 1, 4): +Rin
+Dec 01 20:55:10 2014 - 000778 ms -  DEBUG -     ( 1, 5):  0
+Dec 01 20:55:10 2014 - 000781 ms -  DEBUG -   Row 2:
+Dec 01 20:55:10 2014 - 000784 ms -  DEBUG -     ( 2, 0):  0
+Dec 01 20:55:10 2014 - 000787 ms -  DEBUG -     ( 2, 1):  0
+Dec 01 20:55:10 2014 - 000790 ms -  DEBUG -     ( 2, 2): +Rback*Rin
+Dec 01 20:55:10 2014 - 000794 ms -  DEBUG -     ( 2, 3): +Rback
+Dec 01 20:55:10 2014 - 000797 ms -  DEBUG -     ( 2, 4): -Rback*Rin
+Dec 01 20:55:10 2014 - 000801 ms -  DEBUG -     ( 2, 5):  0
+Dec 01 20:55:10 2014 - 000804 ms -  DEBUG -   Row 3:
+Dec 01 20:55:10 2014 - 000807 ms -  DEBUG -     ( 3, 0):  0
+Dec 01 20:55:10 2014 - 000811 ms -  DEBUG -     ( 3, 1):  0
+Dec 01 20:55:10 2014 - 000814 ms -  DEBUG -     ( 3, 2):  0
+Dec 01 20:55:10 2014 - 000818 ms -  DEBUG -     ( 3, 3): -Rback
+Dec 01 20:55:10 2014 - 000821 ms -  DEBUG -     ( 3, 4): +Rback*Rin
+Dec 01 20:55:10 2014 - 000825 ms -  DEBUG -     ( 3, 5):  0
+Dec 01 20:55:10 2014 - 000828 ms -  DEBUG -   Row 4:
+Dec 01 20:55:10 2014 - 000831 ms -  DEBUG -     ( 4, 0):  0
+Dec 01 20:55:10 2014 - 000834 ms -  DEBUG -     ( 4, 1):  0
+Dec 01 20:55:10 2014 - 000837 ms -  DEBUG -     ( 4, 2):  0
+Dec 01 20:55:10 2014 - 000840 ms -  DEBUG -     ( 4, 3):  0
+Dec 01 20:55:11 2014 - 000843 ms -  DEBUG -     ( 4, 4): -Rback
+Dec 01 20:55:11 2014 - 000847 ms -  DEBUG -     ( 4, 5): +Rback
+Dec 01 20:55:11 2014 - 000850 ms -  DEBUG - LES prior to elimination for unknown U_k:
+Dec 01 20:55:11 2014 - 000855 ms -  DEBUG - Table of symbolic objects:
+Dec 01 20:55:11 2014 - 000859 ms -  DEBUG - 1 known variables:
+Dec 01 20:55:11 2014 - 000862 ms -  DEBUG -   0) Uin, column in LES: 5
+Dec 01 20:55:11 2014 - 000866 ms -  DEBUG - 5 unknown variables:
+Dec 01 20:55:11 2014 - 000870 ms -  DEBUG -   0) U_out, voltage of node, position in LES: (0, 1), sub-net: 1
+Dec 01 20:55:11 2014 - 000875 ms -  DEBUG -   1) U_in, voltage of node, position in LES: (1, 2), sub-net: 1
+Dec 01 20:55:11 2014 - 000880 ms -  DEBUG -   2) U_k, voltage of node, position in LES: (2, 4), sub-net: 1
+Dec 01 20:55:11 2014 - 000885 ms -  DEBUG -   3) I_Uin, internal unknown current, position in LES: (3, 3), sub-net: -1
+Dec 01 20:55:11 2014 - 000891 ms -  DEBUG -   4) I_OP, internal unknown current, position in LES: (4, 0), sub-net: -1
+Dec 01 20:55:11 2014 - 000896 ms -  DEBUG - 2 constants:
+Dec 01 20:55:11 2014 - 000900 ms -  DEBUG -   0) Rin, Resistor, internal representation: 0x1
+Dec 01 20:55:11 2014 - 000904 ms -  DEBUG -   1) Rback, Resistor, internal representation: 0x2
+Dec 01 20:55:11 2014 - 000909 ms -  DEBUG - The linear equation system (5, 6):
+Dec 01 20:55:11 2014 - 000913 ms -  DEBUG -   Row 0:
+Dec 01 20:55:11 2014 - 000916 ms -  DEBUG -     ( 0, 0): +1
+Dec 01 20:55:11 2014 - 000919 ms -  DEBUG -     ( 0, 1): -Rback
+Dec 01 20:55:11 2014 - 000923 ms -  DEBUG -     ( 0, 2):  0
+Dec 01 20:55:11 2014 - 000927 ms -  DEBUG -     ( 0, 3):  0
+Dec 01 20:55:11 2014 - 000930 ms -  DEBUG -     ( 0, 4): +Rback
+Dec 01 20:55:11 2014 - 000933 ms -  DEBUG -     ( 0, 5):  0
+Dec 01 20:55:11 2014 - 000936 ms -  DEBUG -   Row 1:
+Dec 01 20:55:11 2014 - 000939 ms -  DEBUG -     ( 1, 0):  0
+Dec 01 20:55:11 2014 - 000942 ms -  DEBUG -     ( 1, 1):  0
+Dec 01 20:55:11 2014 - 000945 ms -  DEBUG -     ( 1, 2): -Rin
+Dec 01 20:55:11 2014 - 000949 ms -  DEBUG -     ( 1, 3): +1
+Dec 01 20:55:11 2014 - 000952 ms -  DEBUG -     ( 1, 4): +Rin
+Dec 01 20:55:11 2014 - 000956 ms -  DEBUG -     ( 1, 5):  0
+Dec 01 20:55:11 2014 - 000959 ms -  DEBUG -   Row 2:
+Dec 01 20:55:11 2014 - 000962 ms -  DEBUG -     ( 2, 0):  0
+Dec 01 20:55:11 2014 - 000965 ms -  DEBUG -     ( 2, 1): +Rback
+Dec 01 20:55:11 2014 - 000969 ms -  DEBUG -     ( 2, 2): +Rin
+Dec 01 20:55:11 2014 - 000973 ms -  DEBUG -     ( 2, 3):  0
+Dec 01 20:55:11 2014 - 000976 ms -  DEBUG -     ( 2, 4): -Rback-Rin
+Dec 01 20:55:11 2014 - 000980 ms -  DEBUG -     ( 2, 5):  0
+Dec 01 20:55:11 2014 - 000984 ms -  DEBUG -   Row 3:
+Dec 01 20:55:11 2014 - 000986 ms -  DEBUG -     ( 3, 0):  0
+Dec 01 20:55:11 2014 - 000990 ms -  DEBUG -     ( 3, 1):  0
+Dec 01 20:55:11 2014 - 000993 ms -  DEBUG -     ( 3, 2): +1
+Dec 01 20:55:11 2014 - 000997 ms -  DEBUG -     ( 3, 3):  0
+Dec 01 20:55:11 2014 - 001000 ms -  DEBUG -     ( 3, 4):  0
+Dec 01 20:55:11 2014 - 001003 ms -  DEBUG -     ( 3, 5): -1
+Dec 01 20:55:11 2014 - 001006 ms -  DEBUG -   Row 4:
+Dec 01 20:55:11 2014 - 001009 ms -  DEBUG -     ( 4, 0):  0
+Dec 01 20:55:11 2014 - 001012 ms -  DEBUG -     ( 4, 1):  0
+Dec 01 20:55:11 2014 - 001015 ms -  DEBUG -     ( 4, 2):  0
+Dec 01 20:55:11 2014 - 001018 ms -  DEBUG -     ( 4, 3):  0
+Dec 01 20:55:11 2014 - 001022 ms -  DEBUG -     ( 4, 4): +1
+Dec 01 20:55:11 2014 - 001025 ms -  DEBUG -     ( 4, 5):  0
+Dec 01 20:55:11 2014 - 001028 ms -  DEBUG - Pivoting in elimination step 1: Line exchange 1 <-> 2
+Dec 01 20:55:11 2014 - 001033 ms -  DEBUG - LES after elimination of U_k:
+Dec 01 20:55:11 2014 - 001037 ms -  DEBUG - The linear equation system (5, 6):
+Dec 01 20:55:11 2014 - 001041 ms -  DEBUG -   Row 0:
+Dec 01 20:55:11 2014 - 001044 ms -  DEBUG -     ( 0, 0): +1
+Dec 01 20:55:11 2014 - 001048 ms -  DEBUG -     ( 0, 1): -Rback
+Dec 01 20:55:11 2014 - 001051 ms -  DEBUG -     ( 0, 2):  0
+Dec 01 20:55:11 2014 - 001054 ms -  DEBUG -     ( 0, 3):  0
+Dec 01 20:55:11 2014 - 001058 ms -  DEBUG -     ( 0, 4): +Rback
+Dec 01 20:55:11 2014 - 001062 ms -  DEBUG -     ( 0, 5):  0
+Dec 01 20:55:11 2014 - 001065 ms -  DEBUG -   Row 1:
+Dec 01 20:55:11 2014 - 001067 ms -  DEBUG -     ( 1, 0):  0
+Dec 01 20:55:11 2014 - 001071 ms -  DEBUG -     ( 1, 1): +Rback
+Dec 01 20:55:11 2014 - 001077 ms -  DEBUG -     ( 1, 2): +Rin
+Dec 01 20:55:11 2014 - 001083 ms -  DEBUG -     ( 1, 3):  0
+Dec 01 20:55:11 2014 - 001089 ms -  DEBUG -     ( 1, 4): -Rback-Rin
+Dec 01 20:55:11 2014 - 001093 ms -  DEBUG -     ( 1, 5):  0
+Dec 01 20:55:11 2014 - 001097 ms -  DEBUG -   Row 2:
+Dec 01 20:55:11 2014 - 001100 ms -  DEBUG -     ( 2, 0):  0
+Dec 01 20:55:11 2014 - 001104 ms -  DEBUG -     ( 2, 1):  0
+Dec 01 20:55:11 2014 - 001107 ms -  DEBUG -     ( 2, 2): -Rback*Rin
+Dec 01 20:55:11 2014 - 001112 ms -  DEBUG -     ( 2, 3): +Rback
+Dec 01 20:55:11 2014 - 001116 ms -  DEBUG -     ( 2, 4): +Rback*Rin
+Dec 01 20:55:11 2014 - 001120 ms -  DEBUG -     ( 2, 5):  0
+Dec 01 20:55:11 2014 - 001124 ms -  DEBUG -   Row 3:
+Dec 01 20:55:11 2014 - 001127 ms -  DEBUG -     ( 3, 0):  0
+Dec 01 20:55:11 2014 - 001130 ms -  DEBUG -     ( 3, 1):  0
+Dec 01 20:55:11 2014 - 001134 ms -  DEBUG -     ( 3, 2):  0
+Dec 01 20:55:11 2014 - 001138 ms -  DEBUG -     ( 3, 3): -Rback
+Dec 01 20:55:11 2014 - 001142 ms -  DEBUG -     ( 3, 4): -Rback*Rin
+Dec 01 20:55:11 2014 - 001146 ms -  DEBUG -     ( 3, 5): +Rback*Rin
+Dec 01 20:55:11 2014 - 001150 ms -  DEBUG -   Row 4:
+Dec 01 20:55:11 2014 - 001154 ms -  DEBUG -     ( 4, 0):  0
+Dec 01 20:55:11 2014 - 001157 ms -  DEBUG -     ( 4, 1):  0
+Dec 01 20:55:11 2014 - 001161 ms -  DEBUG -     ( 4, 2):  0
+Dec 01 20:55:11 2014 - 001164 ms -  DEBUG -     ( 4, 3):  0
+Dec 01 20:55:11 2014 - 001168 ms -  DEBUG -     ( 4, 4): +Rback
+Dec 01 20:55:11 2014 - 001171 ms -  DEBUG -     ( 4, 5):  0
+Dec 01 20:55:11 2014 - 001176 ms -  DEBUG - LES prior to elimination for unknown I_Uin:
+Dec 01 20:55:11 2014 - 001181 ms -  DEBUG - Table of symbolic objects:
+Dec 01 20:55:11 2014 - 001184 ms -  DEBUG - 1 known variables:
+Dec 01 20:55:11 2014 - 001188 ms -  DEBUG -   0) Uin, column in LES: 5
+Dec 01 20:55:11 2014 - 001192 ms -  DEBUG - 5 unknown variables:
+Dec 01 20:55:11 2014 - 001196 ms -  DEBUG -   0) U_out, voltage of node, position in LES: (0, 1), sub-net: 1
+Dec 01 20:55:11 2014 - 001202 ms -  DEBUG -   1) U_in, voltage of node, position in LES: (1, 2), sub-net: 1
+Dec 01 20:55:11 2014 - 001208 ms -  DEBUG -   2) U_k, voltage of node, position in LES: (2, 3), sub-net: 1
+Dec 01 20:55:11 2014 - 001214 ms -  DEBUG -   3) I_Uin, internal unknown current, position in LES: (3, 4), sub-net: -1
+Dec 01 20:55:11 2014 - 001220 ms -  DEBUG -   4) I_OP, internal unknown current, position in LES: (4, 0), sub-net: -1
+Dec 01 20:55:11 2014 - 001225 ms -  DEBUG - 2 constants:
+Dec 01 20:55:11 2014 - 001229 ms -  DEBUG -   0) Rin, Resistor, internal representation: 0x1
+Dec 01 20:55:11 2014 - 001233 ms -  DEBUG -   1) Rback, Resistor, internal representation: 0x2
+Dec 01 20:55:11 2014 - 001238 ms -  DEBUG - The linear equation system (5, 6):
+Dec 01 20:55:11 2014 - 001242 ms -  DEBUG -   Row 0:
+Dec 01 20:55:11 2014 - 001245 ms -  DEBUG -     ( 0, 0): +1
+Dec 01 20:55:11 2014 - 001249 ms -  DEBUG -     ( 0, 1): -Rback
+Dec 01 20:55:11 2014 - 001253 ms -  DEBUG -     ( 0, 2):  0
+Dec 01 20:55:11 2014 - 001256 ms -  DEBUG -     ( 0, 3): +Rback
+Dec 01 20:55:11 2014 - 001260 ms -  DEBUG -     ( 0, 4):  0
+Dec 01 20:55:11 2014 - 001263 ms -  DEBUG -     ( 0, 5):  0
+Dec 01 20:55:11 2014 - 001267 ms -  DEBUG -   Row 1:
+Dec 01 20:55:11 2014 - 001269 ms -  DEBUG -     ( 1, 0):  0
+Dec 01 20:55:11 2014 - 001273 ms -  DEBUG -     ( 1, 1):  0
+Dec 01 20:55:11 2014 - 001276 ms -  DEBUG -     ( 1, 2): -Rin
+Dec 01 20:55:11 2014 - 001279 ms -  DEBUG -     ( 1, 3): +Rin
+Dec 01 20:55:11 2014 - 001283 ms -  DEBUG -     ( 1, 4): +1
+Dec 01 20:55:11 2014 - 001287 ms -  DEBUG -     ( 1, 5):  0
+Dec 01 20:55:11 2014 - 001289 ms -  DEBUG -   Row 2:
+Dec 01 20:55:11 2014 - 001292 ms -  DEBUG -     ( 2, 0):  0
+Dec 01 20:55:11 2014 - 001295 ms -  DEBUG -     ( 2, 1): +Rback
+Dec 01 20:55:11 2014 - 001300 ms -  DEBUG -     ( 2, 2): +Rin
+Dec 01 20:55:11 2014 - 001303 ms -  DEBUG -     ( 2, 3): -Rback-Rin
+Dec 01 20:55:11 2014 - 001307 ms -  DEBUG -     ( 2, 4):  0
+Dec 01 20:55:11 2014 - 001311 ms -  DEBUG -     ( 2, 5):  0
+Dec 01 20:55:11 2014 - 001315 ms -  DEBUG -   Row 3:
+Dec 01 20:55:11 2014 - 001318 ms -  DEBUG -     ( 3, 0):  0
+Dec 01 20:55:11 2014 - 001323 ms -  DEBUG -     ( 3, 1):  0
+Dec 01 20:55:11 2014 - 001326 ms -  DEBUG -     ( 3, 2): +1
+Dec 01 20:55:11 2014 - 001330 ms -  DEBUG -     ( 3, 3):  0
+Dec 01 20:55:11 2014 - 001334 ms -  DEBUG -     ( 3, 4):  0
+Dec 01 20:55:11 2014 - 001338 ms -  DEBUG -     ( 3, 5): -1
+Dec 01 20:55:11 2014 - 001342 ms -  DEBUG -   Row 4:
+Dec 01 20:55:11 2014 - 001345 ms -  DEBUG -     ( 4, 0):  0
+Dec 01 20:55:11 2014 - 001349 ms -  DEBUG -     ( 4, 1):  0
+Dec 01 20:55:11 2014 - 001353 ms -  DEBUG -     ( 4, 2):  0
+Dec 01 20:55:11 2014 - 001357 ms -  DEBUG -     ( 4, 3): +1
+Dec 01 20:55:11 2014 - 001361 ms -  DEBUG -     ( 4, 4):  0
+Dec 01 20:55:11 2014 - 001365 ms -  DEBUG -     ( 4, 5):  0
+Dec 01 20:55:11 2014 - 001369 ms -  DEBUG - Pivoting in elimination step 1: Line exchange 1 <-> 2
+Dec 01 20:55:11 2014 - 001374 ms -  DEBUG - LES after elimination of I_Uin:
+Dec 01 20:55:11 2014 - 001378 ms -  DEBUG - The linear equation system (5, 6):
+Dec 01 20:55:11 2014 - 001382 ms -  DEBUG -   Row 0:
+Dec 01 20:55:11 2014 - 001385 ms -  DEBUG -     ( 0, 0): +1
+Dec 01 20:55:11 2014 - 001389 ms -  DEBUG -     ( 0, 1): -Rback
+Dec 01 20:55:11 2014 - 001393 ms -  DEBUG -     ( 0, 2):  0
+Dec 01 20:55:11 2014 - 001396 ms -  DEBUG -     ( 0, 3): +Rback
+Dec 01 20:55:11 2014 - 001400 ms -  DEBUG -     ( 0, 4):  0
+Dec 01 20:55:11 2014 - 001404 ms -  DEBUG -     ( 0, 5):  0
+Dec 01 20:55:11 2014 - 001408 ms -  DEBUG -   Row 1:
+Dec 01 20:55:11 2014 - 001411 ms -  DEBUG -     ( 1, 0):  0
+Dec 01 20:55:11 2014 - 001415 ms -  DEBUG -     ( 1, 1): +Rback
+Dec 01 20:55:11 2014 - 001419 ms -  DEBUG -     ( 1, 2): +Rin
+Dec 01 20:55:11 2014 - 001422 ms -  DEBUG -     ( 1, 3): -Rback-Rin
+Dec 01 20:55:11 2014 - 001426 ms -  DEBUG -     ( 1, 4):  0
+Dec 01 20:55:11 2014 - 001430 ms -  DEBUG -     ( 1, 5):  0
+Dec 01 20:55:11 2014 - 001434 ms -  DEBUG -   Row 2:
+Dec 01 20:55:11 2014 - 001437 ms -  DEBUG -     ( 2, 0):  0
+Dec 01 20:55:11 2014 - 001440 ms -  DEBUG -     ( 2, 1):  0
+Dec 01 20:55:11 2014 - 001444 ms -  DEBUG -     ( 2, 2): -Rback*Rin
+Dec 01 20:55:11 2014 - 001448 ms -  DEBUG -     ( 2, 3): +Rback*Rin
+Dec 01 20:55:11 2014 - 001452 ms -  DEBUG -     ( 2, 4): +Rback
+Dec 01 20:55:11 2014 - 001456 ms -  DEBUG -     ( 2, 5):  0
+Dec 01 20:55:11 2014 - 001459 ms -  DEBUG -   Row 3:
+Dec 01 20:55:11 2014 - 001463 ms -  DEBUG -     ( 3, 0):  0
+Dec 01 20:55:11 2014 - 001466 ms -  DEBUG -     ( 3, 1):  0
+Dec 01 20:55:11 2014 - 001470 ms -  DEBUG -     ( 3, 2):  0
+Dec 01 20:55:11 2014 - 001474 ms -  DEBUG -     ( 3, 3): -Rback*Rin
+Dec 01 20:55:11 2014 - 001478 ms -  DEBUG -     ( 3, 4): -Rback
+Dec 01 20:55:11 2014 - 001482 ms -  DEBUG -     ( 3, 5): +Rback*Rin
+Dec 01 20:55:11 2014 - 001485 ms -  DEBUG -   Row 4:
+Dec 01 20:55:11 2014 - 001489 ms -  DEBUG -     ( 4, 0):  0
+Dec 01 20:55:11 2014 - 001493 ms -  DEBUG -     ( 4, 1):  0
+Dec 01 20:55:11 2014 - 001496 ms -  DEBUG -     ( 4, 2):  0
+Dec 01 20:55:11 2014 - 001500 ms -  DEBUG -     ( 4, 3):  0
+Dec 01 20:55:11 2014 - 001504 ms -  DEBUG -     ( 4, 4): -Rback
+Dec 01 20:55:11 2014 - 001507 ms -  DEBUG -     ( 4, 5): +Rback*Rin
+Dec 01 20:55:11 2014 - 001511 ms -  DEBUG - LES prior to elimination for unknown I_OP:
+Dec 01 20:55:11 2014 - 001516 ms -  DEBUG - Table of symbolic objects:
+Dec 01 20:55:11 2014 - 001519 ms -  DEBUG - 1 known variables:
+Dec 01 20:55:11 2014 - 001523 ms -  DEBUG -   0) Uin, column in LES: 5
+Dec 01 20:55:11 2014 - 001527 ms -  DEBUG - 5 unknown variables:
+Dec 01 20:55:11 2014 - 001530 ms -  DEBUG -   0) U_out, voltage of node, position in LES: (0, 1), sub-net: 1
+Dec 01 20:55:11 2014 - 001535 ms -  DEBUG -   1) U_in, voltage of node, position in LES: (1, 2), sub-net: 1
+Dec 01 20:55:11 2014 - 001540 ms -  DEBUG -   2) U_k, voltage of node, position in LES: (2, 3), sub-net: 1
+Dec 01 20:55:11 2014 - 001546 ms -  DEBUG -   3) I_Uin, internal unknown current, position in LES: (3, 0), sub-net: -1
+Dec 01 20:55:11 2014 - 001551 ms -  DEBUG -   4) I_OP, internal unknown current, position in LES: (4, 4), sub-net: -1
+Dec 01 20:55:11 2014 - 001557 ms -  DEBUG - 2 constants:
+Dec 01 20:55:11 2014 - 001561 ms -  DEBUG -   0) Rin, Resistor, internal representation: 0x1
+Dec 01 20:55:11 2014 - 001566 ms -  DEBUG -   1) Rback, Resistor, internal representation: 0x2
+Dec 01 20:55:11 2014 - 001571 ms -  DEBUG - The linear equation system (5, 6):
+Dec 01 20:55:11 2014 - 001575 ms -  DEBUG -   Row 0:
+Dec 01 20:55:11 2014 - 001578 ms -  DEBUG -     ( 0, 0):  0
+Dec 01 20:55:11 2014 - 001582 ms -  DEBUG -     ( 0, 1): -Rback
+Dec 01 20:55:11 2014 - 001586 ms -  DEBUG -     ( 0, 2):  0
+Dec 01 20:55:11 2014 - 001590 ms -  DEBUG -     ( 0, 3): +Rback
+Dec 01 20:55:11 2014 - 001593 ms -  DEBUG -     ( 0, 4): +1
+Dec 01 20:55:11 2014 - 001597 ms -  DEBUG -     ( 0, 5):  0
+Dec 01 20:55:11 2014 - 001601 ms -  DEBUG -   Row 1:
+Dec 01 20:55:11 2014 - 001604 ms -  DEBUG -     ( 1, 0): +1
+Dec 01 20:55:11 2014 - 001607 ms -  DEBUG -     ( 1, 1):  0
+Dec 01 20:55:11 2014 - 001611 ms -  DEBUG -     ( 1, 2): -Rin
+Dec 01 20:55:11 2014 - 001614 ms -  DEBUG -     ( 1, 3): +Rin
+Dec 01 20:55:11 2014 - 001618 ms -  DEBUG -     ( 1, 4):  0
+Dec 01 20:55:11 2014 - 001621 ms -  DEBUG -     ( 1, 5):  0
+Dec 01 20:55:11 2014 - 001625 ms -  DEBUG -   Row 2:
+Dec 01 20:55:11 2014 - 001628 ms -  DEBUG -     ( 2, 0):  0
+Dec 01 20:55:11 2014 - 001631 ms -  DEBUG -     ( 2, 1): +Rback
+Dec 01 20:55:11 2014 - 001634 ms -  DEBUG -     ( 2, 2): +Rin
+Dec 01 20:55:11 2014 - 001638 ms -  DEBUG -     ( 2, 3): -Rback-Rin
+Dec 01 20:55:11 2014 - 001642 ms -  DEBUG -     ( 2, 4):  0
+Dec 01 20:55:11 2014 - 001645 ms -  DEBUG -     ( 2, 5):  0
+Dec 01 20:55:11 2014 - 001648 ms -  DEBUG -   Row 3:
+Dec 01 20:55:11 2014 - 001651 ms -  DEBUG -     ( 3, 0):  0
+Dec 01 20:55:11 2014 - 001655 ms -  DEBUG -     ( 3, 1):  0
+Dec 01 20:55:11 2014 - 001658 ms -  DEBUG -     ( 3, 2): +1
+Dec 01 20:55:11 2014 - 001662 ms -  DEBUG -     ( 3, 3):  0
+Dec 01 20:55:11 2014 - 001665 ms -  DEBUG -     ( 3, 4):  0
+Dec 01 20:55:11 2014 - 001668 ms -  DEBUG -     ( 3, 5): -1
+Dec 01 20:55:11 2014 - 001671 ms -  DEBUG -   Row 4:
+Dec 01 20:55:11 2014 - 001674 ms -  DEBUG -     ( 4, 0):  0
+Dec 01 20:55:11 2014 - 001677 ms -  DEBUG -     ( 4, 1):  0
+Dec 01 20:55:11 2014 - 001681 ms -  DEBUG -     ( 4, 2):  0
+Dec 01 20:55:11 2014 - 001684 ms -  DEBUG -     ( 4, 3): +1
+Dec 01 20:55:11 2014 - 001688 ms -  DEBUG -     ( 4, 4):  0
+Dec 01 20:55:11 2014 - 001691 ms -  DEBUG -     ( 4, 5):  0
+Dec 01 20:55:11 2014 - 001695 ms -  DEBUG - Pivoting in elimination step 0: Line exchange 0 <-> 1
+Dec 01 20:55:11 2014 - 001701 ms -  DEBUG - LES after elimination of I_OP:
+Dec 01 20:55:11 2014 - 001705 ms -  DEBUG - The linear equation system (5, 6):
+Dec 01 20:55:11 2014 - 001709 ms -  DEBUG -   Row 0:
+Dec 01 20:55:11 2014 - 001712 ms -  DEBUG -     ( 0, 0): +1
+Dec 01 20:55:11 2014 - 001716 ms -  DEBUG -     ( 0, 1):  0
+Dec 01 20:55:11 2014 - 001719 ms -  DEBUG -     ( 0, 2): -Rin
+Dec 01 20:55:11 2014 - 001723 ms -  DEBUG -     ( 0, 3): +Rin
+Dec 01 20:55:11 2014 - 001727 ms -  DEBUG -     ( 0, 4):  0
+Dec 01 20:55:11 2014 - 001730 ms -  DEBUG -     ( 0, 5):  0
+Dec 01 20:55:11 2014 - 001734 ms -  DEBUG -   Row 1:
+Dec 01 20:55:11 2014 - 001737 ms -  DEBUG -     ( 1, 0):  0
+Dec 01 20:55:11 2014 - 001740 ms -  DEBUG -     ( 1, 1): -Rback
+Dec 01 20:55:11 2014 - 001744 ms -  DEBUG -     ( 1, 2):  0
+Dec 01 20:55:11 2014 - 001747 ms -  DEBUG -     ( 1, 3): +Rback
+Dec 01 20:55:11 2014 - 001751 ms -  DEBUG -     ( 1, 4): +1
+Dec 01 20:55:11 2014 - 001754 ms -  DEBUG -     ( 1, 5):  0
+Dec 01 20:55:11 2014 - 001757 ms -  DEBUG -   Row 2:
+Dec 01 20:55:11 2014 - 001760 ms -  DEBUG -     ( 2, 0):  0
+Dec 01 20:55:11 2014 - 001763 ms -  DEBUG -     ( 2, 1):  0
+Dec 01 20:55:11 2014 - 001767 ms -  DEBUG -     ( 2, 2): -Rback*Rin
+Dec 01 20:55:11 2014 - 001770 ms -  DEBUG -     ( 2, 3): +Rback*Rin
+Dec 01 20:55:11 2014 - 001774 ms -  DEBUG -     ( 2, 4): -Rback
+Dec 01 20:55:11 2014 - 001778 ms -  DEBUG -     ( 2, 5):  0
+Dec 01 20:55:11 2014 - 001781 ms -  DEBUG -   Row 3:
+Dec 01 20:55:11 2014 - 001784 ms -  DEBUG -     ( 3, 0):  0
+Dec 01 20:55:11 2014 - 001788 ms -  DEBUG -     ( 3, 1):  0
+Dec 01 20:55:11 2014 - 001791 ms -  DEBUG -     ( 3, 2):  0
+Dec 01 20:55:11 2014 - 001794 ms -  DEBUG -     ( 3, 3): -Rback*Rin
+Dec 01 20:55:11 2014 - 001798 ms -  DEBUG -     ( 3, 4): +Rback
+Dec 01 20:55:11 2014 - 001803 ms -  DEBUG -     ( 3, 5): +Rback*Rin
+Dec 01 20:55:11 2014 - 001807 ms -  DEBUG -   Row 4:
+Dec 01 20:55:11 2014 - 001810 ms -  DEBUG -     ( 4, 0):  0
+Dec 01 20:55:11 2014 - 001813 ms -  DEBUG -     ( 4, 1):  0
+Dec 01 20:55:11 2014 - 001816 ms -  DEBUG -     ( 4, 2):  0
+Dec 01 20:55:11 2014 - 001819 ms -  DEBUG -     ( 4, 3):  0
+Dec 01 20:55:11 2014 - 001822 ms -  DEBUG -     ( 4, 4): +Rback
+Dec 01 20:55:11 2014 - 001826 ms -  DEBUG -     ( 4, 5): +Rback*Rin
+Dec 01 20:55:11 2014 - 001830 ms -   INFO - The solution of the linear equation system (5,6). All constants have the physical meaning of (complex) conductance:
+  U_out = N_Uin/D * Uin:
+    N_Uin = -Rin
+  U_in = N_Uin/D * Uin:
+    N_Uin = +Rback
+  U_k = N_Uin/D * Uin:
+    N_Uin =  0
+  I_Uin = N_Uin/D * Uin:
+    N_Uin = +Rback*Rin
+  I_OP = N_Uin/D * Uin:
+    N_Uin = -Rback*Rin
+  D = +Rback
+Dec 01 20:55:12 2014 - 001880 ms -   WARN - No user-defined result found in input file. The solution for all dependent quantities is figured out instead. This generic result can become very bulky
+Dec 01 20:55:12 2014 - 001891 ms - RESULT - Dec 01 20:55:12 2014 - 001896 ms -  DEBUG - createExpressionMap: The map contains 4 expressions. 6 expressions are reused
+Result AllDependents in the frequency domain:
+Dec 01 20:55:12 2014 - 001979 ms -  DEBUG - createExpressionMap: The map contains 4 expressions. 6 expressions are reused
+The solution for unknown U_out:
+  U_out(s) = N_U_out_Uin(s)/D_U_out_Uin(s) * Uin(s), with
+    N_U_out_Uin(s) = -Rback
+    D_U_out_Uin(s) = Rin
+The solution for unknown U_in:
+  U_in(s) = N_U_in_Uin(s)/D_U_in_Uin(s) * Uin(s), with
+    N_U_in_Uin(s) = 1
+    D_U_in_Uin(s) = 1
+The solution for unknown U_k:
+  U_k(s) = N_U_k_Uin(s)/D_U_k_Uin(s) * Uin(s), with
+    N_U_k_Uin(s) = 0
+    D_U_k_Uin(s) = 1
+The solution for unknown I_Uin:
+  I_Uin(s) = N_I_Uin_Uin(s)/D_I_Uin_Uin(s) * Uin(s), with
+    N_I_Uin_Uin(s) = 1
+    D_I_Uin_Uin(s) = Rin
+The solution for unknown I_OP:
+  I_OP(s) = N_I_OP_Uin(s)/D_I_OP_Uin(s) * Uin(s), with
+    N_I_OP_Uin(s) = -1
+    D_I_OP_Uin(s) = Rin
+Dec 01 20:55:12 2014 - 002005 ms -  DEBUG - Template folder C:\user\vranken\projects\linNet\trunk\components\linNet\bin\win32\DEBUG\private with Octave code successfully copied to the aimed target location .\opInputCurrentNull
+Dec 01 20:55:12 2014 - 002019 ms -  DEBUG - Octave M file .\opInputCurrentNull\allDependents.m is opened for write access
+Dec 01 20:55:12 2014 - 002025 ms -   INFO - Device constant Rback is assigned the default value 100
+Dec 01 20:55:12 2014 - 002029 ms -   INFO - Device constant Rin is assigned the default value 100
+Dec 01 20:55:12 2014 - 002034 ms -  DEBUG - createExpressionMap: The map contains 4 expressions. 6 expressions are reused
+Dec 01 20:55:12 2014 - 002045 ms -   INFO - Octave file .\opInputCurrentNull\allDependents.m successfully written
+Dec 01 20:55:12 2014 - 002049 ms -  DEBUG - mem_deleteHeap: Delete heap Addend of frequency domain expression, with a total size of 100 data objects (27244 Byte) in 1 chunks of memory
+Dec 01 20:55:12 2014 - 002060 ms -  DEBUG - mem_deleteHeap: Delete heap Network, with a total size of 10 data objects (124 Byte) in 1 chunks of memory
+Dec 01 20:55:12 2014 - 002070 ms -  DEBUG - mem_deleteHeap: Delete heap Coefficient of LES, with a total size of 1000 data objects (16044 Byte) in 1 chunks of memory
+Dec 01 20:56:35 2014 - 000054 ms - RESULT - 
+-----------------------------------------------------------------------------
+ linNet - The Software for symbolic Analysis of linear Electronic Circuits
+ Copyright (C) 1991, 2013-2014 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ This is free software; see the source for copying conditions. There is NO
+ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+-----------------------------------------------------------------------------
+Dec 01 20:56:35 2014 - 000055 ms - RESULT - Reading circuit file opInputCurrentNull.cnl successfully done
+Dec 01 20:56:35 2014 - 000059 ms -   WARN - No user-defined result found in input file. The solution for all dependent quantities is figured out instead. This generic result can become very bulky
+Dec 01 20:56:35 2014 - 000070 ms - RESULT - Result AllDependents in the frequency domain:
+The solution for unknown U_out:
+  U_out(s) = N_U_out_Uin(s)/D_U_out_Uin(s) * Uin(s), with
+    N_U_out_Uin(s) = -Rback
+    D_U_out_Uin(s) = Rin
+The solution for unknown U_in:
+  U_in(s) = N_U_in_Uin(s)/D_U_in_Uin(s) * Uin(s), with
+    N_U_in_Uin(s) = 1
+    D_U_in_Uin(s) = 1
+The solution for unknown U_k:
+  U_k(s) = N_U_k_Uin(s)/D_U_k_Uin(s) * Uin(s), with
+    N_U_k_Uin(s) = 0
+    D_U_k_Uin(s) = 1
+The solution for unknown U_op1:
+  U_op1(s) = N_U_op1_Uin(s)/D_U_op1_Uin(s) * Uin(s), with
+    N_U_op1_Uin(s) = 0
+    D_U_op1_Uin(s) = 1
+The solution for unknown U_op2:
+  U_op2(s) = N_U_op2_Uin(s)/D_U_op2_Uin(s) * Uin(s), with
+    N_U_op2_Uin(s) = 0
+    D_U_op2_Uin(s) = 1
+The solution for unknown I_Uin:
+  I_Uin(s) = N_I_Uin_Uin(s)/D_I_Uin_Uin(s) * Uin(s), with
+    N_I_Uin_Uin(s) = 1
+    D_I_Uin_Uin(s) = Rin
+The solution for unknown I_OP:
+  I_OP(s) = N_I_OP_Uin(s)/D_I_OP_Uin(s) * Uin(s), with
+    N_I_OP_Uin(s) = -1
+    D_I_OP_Uin(s) = Rin
+The solution for unknown I_in1:
+  I_in1(s) = N_I_in1_Uin(s)/D_I_in1_Uin(s) * Uin(s), with
+    N_I_in1_Uin(s) = 0
+    D_I_in1_Uin(s) = 1
+The solution for unknown I_in2:
+  I_in2(s) = N_I_in2_Uin(s)/D_I_in2_Uin(s) * Uin(s), with
+    N_I_in2_Uin(s) = 0
+    D_I_in2_Uin(s) = 1
+Dec 01 20:56:59 2014 - 000052 ms - RESULT - 
+-----------------------------------------------------------------------------
+ linNet - The Software for symbolic Analysis of linear Electronic Circuits
+ Copyright (C) 1991, 2013-2014 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ This is free software; see the source for copying conditions. There is NO
+ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+-----------------------------------------------------------------------------
+Dec 01 20:56:59 2014 - 000053 ms - RESULT - Reading circuit file opInputCurrentNull.cnl successfully done
+Dec 01 20:56:59 2014 - 000059 ms -   WARN - No user-defined result found in input file. The solution for all dependent quantities is figured out instead. This generic result can become very bulky
+Dec 01 20:56:59 2014 - 000072 ms - RESULT - Result AllDependents in the frequency domain:
+The solution for unknown U_out:
+  U_out(s) = N_U_out_Uin(s)/D_U_out_Uin(s) * Uin(s), with
+    N_U_out_Uin(s) = -Rback
+    D_U_out_Uin(s) = Rin
+The solution for unknown U_in:
+  U_in(s) = N_U_in_Uin(s)/D_U_in_Uin(s) * Uin(s), with
+    N_U_in_Uin(s) = 1
+    D_U_in_Uin(s) = 1
+The solution for unknown U_k:
+  U_k(s) = N_U_k_Uin(s)/D_U_k_Uin(s) * Uin(s), with
+    N_U_k_Uin(s) = 0
+    D_U_k_Uin(s) = 1
+The solution for unknown U_op2:
+  U_op2(s) = N_U_op2_Uin(s)/D_U_op2_Uin(s) * Uin(s), with
+    N_U_op2_Uin(s) = 0
+    D_U_op2_Uin(s) = 1
+The solution for unknown U_op1:
+  U_op1(s) = N_U_op1_Uin(s)/D_U_op1_Uin(s) * Uin(s), with
+    N_U_op1_Uin(s) = 0
+    D_U_op1_Uin(s) = 1
+The solution for unknown I_Uin:
+  I_Uin(s) = N_I_Uin_Uin(s)/D_I_Uin_Uin(s) * Uin(s), with
+    N_I_Uin_Uin(s) = 1
+    D_I_Uin_Uin(s) = Rin
+The solution for unknown I_OP:
+  I_OP(s) = N_I_OP_Uin(s)/D_I_OP_Uin(s) * Uin(s), with
+    N_I_OP_Uin(s) = -1
+    D_I_OP_Uin(s) = Rin
+The solution for unknown I_in1:
+  I_in1(s) = N_I_in1_Uin(s)/D_I_in1_Uin(s) * Uin(s), with
+    N_I_in1_Uin(s) = 0
+    D_I_in1_Uin(s) = 1
+The solution for unknown I_in2:
+  I_in2(s) = N_I_in2_Uin(s)/D_I_in2_Uin(s) * Uin(s), with
+    N_I_in2_Uin(s) = 0
+    D_I_in2_Uin(s) = 1
+Dec 01 20:58:18 2014 - 000058 ms - RESULT - 
+-----------------------------------------------------------------------------
+ linNet - The Software for symbolic Analysis of linear Electronic Circuits
+ Copyright (C) 1991, 2013-2014 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ This is free software; see the source for copying conditions. There is NO
+ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+-----------------------------------------------------------------------------
+Dec 01 20:58:18 2014 - 000059 ms - RESULT - Reading circuit file opInputCurrentNull.cnl successfully done
+Dec 01 20:58:18 2014 - 000064 ms -   WARN - No user-defined result found in input file. The solution for all dependent quantities is figured out instead. This generic result can become very bulky
+Dec 01 20:58:18 2014 - 000074 ms - RESULT - Result AllDependents in the frequency domain:
+The solution for unknown U_op3:
+  U_op3(s) = N_U_op3_Uin(s)/D_U_op3_Uin(s) * Uin(s), with
+    N_U_op3_Uin(s) = -Rback
+    D_U_op3_Uin(s) = Rin
+The solution for unknown U_out:
+  U_out(s) = N_U_out_Uin(s)/D_U_out_Uin(s) * Uin(s), with
+    N_U_out_Uin(s) = -Rback
+    D_U_out_Uin(s) = Rin
+The solution for unknown U_in:
+  U_in(s) = N_U_in_Uin(s)/D_U_in_Uin(s) * Uin(s), with
+    N_U_in_Uin(s) = 1
+    D_U_in_Uin(s) = 1
+The solution for unknown U_k:
+  U_k(s) = N_U_k_Uin(s)/D_U_k_Uin(s) * Uin(s), with
+    N_U_k_Uin(s) = 0
+    D_U_k_Uin(s) = 1
+The solution for unknown U_op1:
+  U_op1(s) = N_U_op1_Uin(s)/D_U_op1_Uin(s) * Uin(s), with
+    N_U_op1_Uin(s) = 0
+    D_U_op1_Uin(s) = 1
+The solution for unknown U_op2:
+  U_op2(s) = N_U_op2_Uin(s)/D_U_op2_Uin(s) * Uin(s), with
+    N_U_op2_Uin(s) = 0
+    D_U_op2_Uin(s) = 1
+The solution for unknown I_Uin:
+  I_Uin(s) = N_I_Uin_Uin(s)/D_I_Uin_Uin(s) * Uin(s), with
+    N_I_Uin_Uin(s) = 1
+    D_I_Uin_Uin(s) = Rin
+The solution for unknown I_OP:
+  I_OP(s) = N_I_OP_Uin(s)/D_I_OP_Uin(s) * Uin(s), with
+    N_I_OP_Uin(s) = -1
+    D_I_OP_Uin(s) = Rin
+The solution for unknown I_in1:
+  I_in1(s) = N_I_in1_Uin(s)/D_I_in1_Uin(s) * Uin(s), with
+    N_I_in1_Uin(s) = 0
+    D_I_in1_Uin(s) = 1
+The solution for unknown I_in2:
+  I_in2(s) = N_I_in2_Uin(s)/D_I_in2_Uin(s) * Uin(s), with
+    N_I_in2_Uin(s) = 0
+    D_I_in2_Uin(s) = 1
+The solution for unknown I_op:
+  I_op(s) = N_I_op_Uin(s)/D_I_op_Uin(s) * Uin(s), with
+    N_I_op_Uin(s) = -1
+    D_I_op_Uin(s) = Rin
+Dec 01 20:58:36 2014 - 000053 ms - RESULT - 
+-----------------------------------------------------------------------------
+ linNet - The Software for symbolic Analysis of linear Electronic Circuits
+ Copyright (C) 1991, 2013-2014 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ This is free software; see the source for copying conditions. There is NO
+ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+-----------------------------------------------------------------------------
+Dec 01 20:58:36 2014 - 000053 ms - RESULT - Reading circuit file opInputCurrentNull.cnl successfully done
+Dec 01 20:58:36 2014 - 000058 ms -  ERROR - The name I_OP is ambiguous. It is already in use for an internal unknown current
+Dec 01 20:58:36 2014 - 000064 ms -  ERROR - I_OP is the name of an unknown quantity. The name is internally derived from a node or device name by a simple process, which neither recognizes nor resolves clashes with existing names. Please rename the object with the conflicting name instead
+Dec 01 20:59:43 2014 - 000070 ms - RESULT - 
+-----------------------------------------------------------------------------
+ linNet - The Software for symbolic Analysis of linear Electronic Circuits
+ Copyright (C) 1991, 2013-2014 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ This is free software; see the source for copying conditions. There is NO
+ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+-----------------------------------------------------------------------------
+Dec 01 20:59:43 2014 - 000070 ms - RESULT - Reading circuit file opInputCurrentNull.cnl successfully done
+Dec 01 20:59:43 2014 - 000076 ms -   WARN - No user-defined result found in input file. The solution for all dependent quantities is figured out instead. This generic result can become very bulky
+Dec 01 20:59:43 2014 - 000089 ms - RESULT - Result AllDependents in the frequency domain:
+The solution for unknown U_op3:
+  U_op3(s) = N_U_op3_Uin(s)/D_U_op3_Uin(s) * Uin(s), with
+    N_U_op3_Uin(s) = -Rback
+    D_U_op3_Uin(s) = Rin
+The solution for unknown U_out:
+  U_out(s) = N_U_out_Uin(s)/D_U_out_Uin(s) * Uin(s), with
+    N_U_out_Uin(s) = -Rback
+    D_U_out_Uin(s) = Rin
+The solution for unknown U_in:
+  U_in(s) = N_U_in_Uin(s)/D_U_in_Uin(s) * Uin(s), with
+    N_U_in_Uin(s) = 1
+    D_U_in_Uin(s) = 1
+The solution for unknown U_k:
+  U_k(s) = N_U_k_Uin(s)/D_U_k_Uin(s) * Uin(s), with
+    N_U_k_Uin(s) = 0
+    D_U_k_Uin(s) = 1
+The solution for unknown U_op1:
+  U_op1(s) = N_U_op1_Uin(s)/D_U_op1_Uin(s) * Uin(s), with
+    N_U_op1_Uin(s) = 0
+    D_U_op1_Uin(s) = 1
+The solution for unknown U_op2:
+  U_op2(s) = N_U_op2_Uin(s)/D_U_op2_Uin(s) * Uin(s), with
+    N_U_op2_Uin(s) = 0
+    D_U_op2_Uin(s) = 1
+The solution for unknown I_Uin:
+  I_Uin(s) = N_I_Uin_Uin(s)/D_I_Uin_Uin(s) * Uin(s), with
+    N_I_Uin_Uin(s) = 1
+    D_I_Uin_Uin(s) = Rin
+The solution for unknown I_OP:
+  I_OP(s) = N_I_OP_Uin(s)/D_I_OP_Uin(s) * Uin(s), with
+    N_I_OP_Uin(s) = -1
+    D_I_OP_Uin(s) = Rin
+The solution for unknown I_in1:
+  I_in1(s) = N_I_in1_Uin(s)/D_I_in1_Uin(s) * Uin(s), with
+    N_I_in1_Uin(s) = 0
+    D_I_in1_Uin(s) = 1
+The solution for unknown I_in2:
+  I_in2(s) = N_I_in2_Uin(s)/D_I_in2_Uin(s) * Uin(s), with
+    N_I_in2_Uin(s) = 0
+    D_I_in2_Uin(s) = 1
+The solution for unknown I_out:
+  I_out(s) = N_I_out_Uin(s)/D_I_out_Uin(s) * Uin(s), with
+    N_I_out_Uin(s) = -1
+    D_I_out_Uin(s) = Rin
+Dec 01 21:01:37 2014 - 000063 ms - RESULT - 
+-----------------------------------------------------------------------------
+ linNet - The Software for symbolic Analysis of linear Electronic Circuits
+ Copyright (C) 1991, 2013-2014 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ This is free software; see the source for copying conditions. There is NO
+ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+-----------------------------------------------------------------------------
+Dec 01 21:01:37 2014 - 000064 ms - RESULT - Reading circuit file opInputCurrentNull.cnl successfully done
+Dec 01 21:01:37 2014 - 000070 ms -   WARN - No user-defined result found in input file. The solution for all dependent quantities is figured out instead. This generic result can become very bulky
+Dec 01 21:01:37 2014 - 000082 ms - RESULT - Result AllDependents in the frequency domain:
+The solution for unknown U_op3:
+  U_op3(s) = N_U_op3_Uin(s)/D_U_op3_Uin(s) * Uin(s), with
+    N_U_op3_Uin(s) = -Rback
+    D_U_op3_Uin(s) = Rin
+The solution for unknown U_out:
+  U_out(s) = N_U_out_Uin(s)/D_U_out_Uin(s) * Uin(s), with
+    N_U_out_Uin(s) = -Rback
+    D_U_out_Uin(s) = Rin
+The solution for unknown U_in:
+  U_in(s) = N_U_in_Uin(s)/D_U_in_Uin(s) * Uin(s), with
+    N_U_in_Uin(s) = 1
+    D_U_in_Uin(s) = 1
+The solution for unknown U_k:
+  U_k(s) = N_U_k_Uin(s)/D_U_k_Uin(s) * Uin(s), with
+    N_U_k_Uin(s) = 0
+    D_U_k_Uin(s) = 1
+The solution for unknown U_op1:
+  U_op1(s) = N_U_op1_Uin(s)/D_U_op1_Uin(s) * Uin(s), with
+    N_U_op1_Uin(s) = 0
+    D_U_op1_Uin(s) = 1
+The solution for unknown U_op2:
+  U_op2(s) = N_U_op2_Uin(s)/D_U_op2_Uin(s) * Uin(s), with
+    N_U_op2_Uin(s) = 0
+    D_U_op2_Uin(s) = 1
+The solution for unknown U_open:
+  U_open(s) = N_U_open_Uin(s)/D_U_open_Uin(s) * Uin(s), with
+    N_U_open_Uin(s) = -Rback
+    D_U_open_Uin(s) = Rin
+The solution for unknown I_Uin:
+  I_Uin(s) = N_I_Uin_Uin(s)/D_I_Uin_Uin(s) * Uin(s), with
+    N_I_Uin_Uin(s) = 1
+    D_I_Uin_Uin(s) = Rin
+The solution for unknown I_OP:
+  I_OP(s) = N_I_OP_Uin(s)/D_I_OP_Uin(s) * Uin(s), with
+    N_I_OP_Uin(s) = -1
+    D_I_OP_Uin(s) = Rin
+The solution for unknown I_in1:
+  I_in1(s) = N_I_in1_Uin(s)/D_I_in1_Uin(s) * Uin(s), with
+    N_I_in1_Uin(s) = 0
+    D_I_in1_Uin(s) = 1
+The solution for unknown I_in2:
+  I_in2(s) = N_I_in2_Uin(s)/D_I_in2_Uin(s) * Uin(s), with
+    N_I_in2_Uin(s) = 0
+    D_I_in2_Uin(s) = 1
+The solution for unknown I_load:
+  I_load(s) = N_I_load_Uin(s)/D_I_load_Uin(s) * Uin(s), with
+    N_I_load_Uin(s) = -1
+    D_I_load_Uin(s) = Rin
+The solution for unknown I_out:
+  I_out(s) = N_I_out_Uin(s)/D_I_out_Uin(s) * Uin(s), with
+    N_I_out_Uin(s) = 0
+    D_I_out_Uin(s) = 1
+Dec 01 21:02:19 2014 - 000070 ms - RESULT - 
+-----------------------------------------------------------------------------
+ linNet - The Software for symbolic Analysis of linear Electronic Circuits
+ Copyright (C) 1991, 2013-2014 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ This is free software; see the source for copying conditions. There is NO
+ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+-----------------------------------------------------------------------------
+Dec 01 21:02:19 2014 - 000071 ms - RESULT - Reading circuit file opInputCurrentNull.cnl successfully done
+Dec 01 21:02:19 2014 - 000076 ms - RESULT - User-defined result I_in1:
+The solution for unknown I_in2:
+  I_in2(s) = N_I_in2_Uin(s)/D_I_in2_Uin(s) * Uin(s), with
+    N_I_in2_Uin(s) = 0
+    D_I_in2_Uin(s) = 1
+The solution for unknown I_out:
+  I_out(s) = N_I_out_Uin(s)/D_I_out_Uin(s) * Uin(s), with
+    N_I_out_Uin(s) = 0
+    D_I_out_Uin(s) = 1
+The solution for unknown I_load:
+  I_load(s) = N_I_load_Uin(s)/D_I_load_Uin(s) * Uin(s), with
+    N_I_load_Uin(s) = -1
+    D_I_load_Uin(s) = Rin
+The solution for unknown I_OP:
+  I_OP(s) = N_I_OP_Uin(s)/D_I_OP_Uin(s) * Uin(s), with
+    N_I_OP_Uin(s) = -1
+    D_I_OP_Uin(s) = Rin
+Dec 01 21:02:46 2014 - 000069 ms - RESULT - 
+-----------------------------------------------------------------------------
+ linNet - The Software for symbolic Analysis of linear Electronic Circuits
+ Copyright (C) 1991, 2013-2014 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ This is free software; see the source for copying conditions. There is NO
+ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+-----------------------------------------------------------------------------
+Dec 01 21:02:46 2014 - 000070 ms - RESULT - Reading circuit file opInputCurrentNull.cnl successfully done
+Dec 01 21:02:46 2014 - 000076 ms - RESULT - User-defined result IOfInterest:
+The solution for unknown I_in1:
+  I_in1(s) = N_I_in1_Uin(s)/D_I_in1_Uin(s) * Uin(s), with
+    N_I_in1_Uin(s) = 0
+    D_I_in1_Uin(s) = 1
+The solution for unknown I_in2:
+  I_in2(s) = N_I_in2_Uin(s)/D_I_in2_Uin(s) * Uin(s), with
+    N_I_in2_Uin(s) = 0
+    D_I_in2_Uin(s) = 1
+The solution for unknown I_out:
+  I_out(s) = N_I_out_Uin(s)/D_I_out_Uin(s) * Uin(s), with
+    N_I_out_Uin(s) = 0
+    D_I_out_Uin(s) = 1
+The solution for unknown I_load:
+  I_load(s) = N_I_load_Uin(s)/D_I_load_Uin(s) * Uin(s), with
+    N_I_load_Uin(s) = -1
+    D_I_load_Uin(s) = Rin
+The solution for unknown I_OP:
+  I_OP(s) = N_I_OP_Uin(s)/D_I_OP_Uin(s) * Uin(s), with
+    N_I_OP_Uin(s) = -1
+    D_I_OP_Uin(s) = Rin
+Dec 01 21:06:06 2014 - 000045 ms - RESULT - 
+-----------------------------------------------------------------------------
+ linNet - The Software for symbolic Analysis of linear Electronic Circuits
+ Copyright (C) 2014 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ This is free software; see the source for copying conditions. There is NO
+ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+-----------------------------------------------------------------------------
+Dec 01 21:06:06 2014 - 000046 ms - RESULT - Reading circuit file opInputCurrentNull.cnl successfully done
+Dec 01 21:06:06 2014 - 000051 ms - RESULT - User-defined result IOfInterest:
+The solution for unknown I_in1:
+  I_in1(s) = N_I_in1_Uin(s)/D_I_in1_Uin(s) * Uin(s), with
+    N_I_in1_Uin(s) = 0
+    D_I_in1_Uin(s) = 1
+The solution for unknown I_in2:
+  I_in2(s) = N_I_in2_Uin(s)/D_I_in2_Uin(s) * Uin(s), with
+    N_I_in2_Uin(s) = 0
+    D_I_in2_Uin(s) = 1
+The solution for unknown I_out:
+  I_out(s) = N_I_out_Uin(s)/D_I_out_Uin(s) * Uin(s), with
+    N_I_out_Uin(s) = 0
+    D_I_out_Uin(s) = 1
+The solution for unknown I_load:
+  I_load(s) = N_I_load_Uin(s)/D_I_load_Uin(s) * Uin(s), with
+    N_I_load_Uin(s) = -1
+    D_I_load_Uin(s) = Rin
+The solution for unknown I_OP:
+  I_OP(s) = N_I_OP_Uin(s)/D_I_OP_Uin(s) * Uin(s), with
+    N_I_OP_Uin(s) = -1
+    D_I_OP_Uin(s) = Rin
