@@ -1,0 +1,1559 @@
+Oct 02 12:14:27 2014 - 000059 ms - RESULT - 
+-----------------------------------------------------------------------------
+ linNet - The Software for symbolic Analysis of linear Electronic Circuits
+ Copyright (C) 1991, 2013-2014 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ This is free software; see the source for copying conditions. There is NO
+ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+-----------------------------------------------------------------------------
+Oct 02 12:14:27 2014 - 000060 ms - RESULT - Reading circuit file wikipediaExample.cnl successfully done
+Oct 02 12:14:27 2014 - 000069 ms -   WARN - Input file specifies 3 unconnected graphs
+Oct 02 12:14:27 2014 - 000075 ms - RESULT - User-defined result G (Bode plot):
+The dependency of Vout on Vin:
+  Vout(s) = N_Vout_Vin(s)/D_Vout_Vin(s) * Vin(s), with
+    N_Vout_Vin(s) = 0
+    D_Vout_Vin(s) = 1
+Oct 02 12:14:27 2014 - 000093 ms -  ERROR - Can't copy template folder C:\user\vranken\projects\linNet\trunk\components\linNet\bin\win32\DEBUG\private with Octave code to the aimed target location .\wikipediaExample. The generated Octave scripts won't be usable. Please check for conflicting file and folder names and check access rights
+Oct 02 12:17:05 2014 - 000050 ms - RESULT - 
+-----------------------------------------------------------------------------
+ linNet - The Software for symbolic Analysis of linear Electronic Circuits
+ Copyright (C) 1991, 2013-2014 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ This is free software; see the source for copying conditions. There is NO
+ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+-----------------------------------------------------------------------------
+Oct 02 12:17:05 2014 - 000050 ms -   INFO - Log file name is .\wikipediaExample.log
+Oct 02 12:17:05 2014 - 000055 ms -  DEBUG - Application installation directory is C:\user\vranken\projects\linNet\trunk\components\linNet\bin\win32\DEBUG
+Oct 02 12:17:05 2014 - 000061 ms -  DEBUG - mem_createHeap: Create new heap Coefficient of LES, client data object size 16 Byte, effectively 16 Byte
+Oct 02 12:17:05 2014 - 000066 ms -  DEBUG - mem:allocNewChunk: Allocating another chunk of 1000 objects for heap Coefficient of LES. Total heap size now: 16000 Byte
+Oct 02 12:17:05 2014 - 000072 ms -  DEBUG - mem_createHeap: Create new heap Network, client data object size 8 Byte, effectively 8 Byte
+Oct 02 12:17:05 2014 - 000076 ms -  DEBUG - mem:allocNewChunk: Allocating another chunk of 10 objects for heap Network. Total heap size now: 80 Byte
+Oct 02 12:17:05 2014 - 000081 ms -  DEBUG - mem_createHeap: Create new heap Addend of frequency domain expression, client data object size 272 Byte, effectively 272 Byte
+Oct 02 12:17:05 2014 - 000087 ms -  DEBUG - mem:allocNewChunk: Allocating another chunk of 100 objects for heap Addend of frequency domain expression. Total heap size now: 27200 Byte
+Oct 02 12:17:05 2014 - 000093 ms -   INFO - Start reading circuit file wikipediaExample.cnl
+Oct 02 12:17:05 2014 - 000095 ms -  DEBUG - Line 25: Found a device definition
+Oct 02 12:17:05 2014 - 000097 ms -  DEBUG - Line 26: Found device definition: Vin, type 5, connected to kIn, gnd, (n.c.), (n.c.), no value is specified
+Oct 02 12:17:05 2014 - 000102 ms -  DEBUG - Line 29: Found a device definition
+Oct 02 12:17:05 2014 - 000103 ms -  DEBUG - Line 30: Found device definition: R4, type 0, connected to kIn, kOpTLIn, (n.c.), (n.c.), no value is specified
+Oct 02 12:17:05 2014 - 000108 ms -  DEBUG - Line 30: Found a device definition
+Oct 02 12:17:05 2014 - 000109 ms -  DEBUG - Line 31: Found device definition: R1, type 0, connected to kOpTLIn, kOpTLout, (n.c.), (n.c.), no value is specified
+Oct 02 12:17:05 2014 - 000114 ms -  DEBUG - Line 31: Found a device definition
+Oct 02 12:17:05 2014 - 000116 ms -  DEBUG - Line 32: Found device definition: C1, type 3, connected to kOpTLIn, kOpTLout, (n.c.), (n.c.), no value is specified
+Oct 02 12:17:05 2014 - 000121 ms -  DEBUG - Line 32: Found a device definition
+Oct 02 12:17:05 2014 - 000123 ms -  DEBUG - Line 33: Found device definition: OpTL, type 4, connected to kOpTLIn, gnd, kOpTLout, (n.c.), no value is specified
+Oct 02 12:17:05 2014 - 000128 ms -  DEBUG - Line 35: Found a device definition
+Oct 02 12:17:05 2014 - 000130 ms -  DEBUG - Line 36: Found device definition: R2, type 0, connected to kOpTLOut, kOpTMin, (n.c.), (n.c.), no value is specified
+Oct 02 12:17:05 2014 - 000135 ms -  DEBUG - Line 36: Found a device definition
+Oct 02 12:17:05 2014 - 000136 ms -  DEBUG - Line 37: Found device definition: C2, type 3, connected to kOpTMIn, kOpTMout, (n.c.), (n.c.), no value is specified
+Oct 02 12:17:05 2014 - 000141 ms -  DEBUG - Line 37: Found a device definition
+Oct 02 12:17:05 2014 - 000142 ms -  DEBUG - Line 38: Found device definition: OpTM, type 4, connected to kOpTMIn, gnd, kOpTMout, (n.c.), no value is specified
+Oct 02 12:17:05 2014 - 000147 ms -  DEBUG - Line 40: Found a device definition
+Oct 02 12:17:05 2014 - 000148 ms -  DEBUG - Line 41: Found device definition: R5, type 0, connected to kOpTMOut, kOpTRin, (n.c.), (n.c.), no value is specified
+Oct 02 12:17:05 2014 - 000152 ms -  DEBUG - Line 41: Found a device definition
+Oct 02 12:17:05 2014 - 000154 ms -  DEBUG - Line 42: Found device definition: R6, type 0, connected to kOpTRIn, kOpTRout, (n.c.), (n.c.), no value is specified
+Oct 02 12:17:05 2014 - 000158 ms -  DEBUG - Line 42: Found a device definition
+Oct 02 12:17:05 2014 - 000160 ms -  DEBUG - Line 43: Found device definition: OpTR, type 4, connected to kOpTRIn, gnd, kOpTRout, (n.c.), no value is specified
+Oct 02 12:17:05 2014 - 000164 ms -  DEBUG - Line 45: Found a device definition
+Oct 02 12:17:05 2014 - 000166 ms -  DEBUG - Line 46: Found device definition: R3, type 0, connected to kOpTRout, kOpTLIn, (n.c.), (n.c.), no value is specified
+Oct 02 12:17:05 2014 - 000174 ms -  DEBUG - Line 48: Found a device definition
+Oct 02 12:17:05 2014 - 000178 ms -  DEBUG - Line 49: Found device definition: R8, type 0, connected to kOpTLOut, kOpBMin, (n.c.), (n.c.), no value is specified
+Oct 02 12:17:05 2014 - 000187 ms -  DEBUG - Line 49: Found a device definition
+Oct 02 12:17:05 2014 - 000192 ms -  DEBUG - Line 50: Found device definition: R11, type 0, connected to kOpBMIn, kOpBMout, (n.c.), (n.c.), no value is specified
+Oct 02 12:17:05 2014 - 000201 ms -  DEBUG - Line 50: Found a device definition
+Oct 02 12:17:05 2014 - 000205 ms -  DEBUG - Line 51: Found device definition: OpBM, type 4, connected to kOpBMIn, gnd, kOpBMout, (n.c.), no value is specified
+Oct 02 12:17:05 2014 - 000214 ms - RESULT - Reading circuit file wikipediaExample.cnl successfully done
+Oct 02 12:17:05 2014 - 000219 ms -  DEBUG - mem:allocNewChunk: Allocating another chunk of 10 objects for heap Network. Total heap size now: 160 Byte
+Oct 02 12:17:05 2014 - 000228 ms -  DEBUG - Network topology after parsing input:
+Oct 02 12:17:05 2014 - 000232 ms -  DEBUG -   Sub-network 1:
+Oct 02 12:17:05 2014 - 000235 ms -  DEBUG -     Node 01, kOpTLOut
+Oct 02 12:17:05 2014 - 000238 ms -  DEBUG -     Node 02, kOpTMin
+Oct 02 12:17:05 2014 - 000241 ms -  DEBUG -     Node 03, kOpBMin
+Oct 02 12:17:05 2014 - 000244 ms -  DEBUG -   Sub-network 2:
+Oct 02 12:17:05 2014 - 000248 ms -  DEBUG -     Node 01, kOpTMOut
+Oct 02 12:17:05 2014 - 000251 ms -  DEBUG -     Node 02, kOpTRin
+Oct 02 12:17:05 2014 - 000255 ms -  DEBUG -   Sub-network 3:
+Oct 02 12:17:05 2014 - 000258 ms -  DEBUG -     Node 01, kOpBMIn
+Oct 02 12:17:05 2014 - 000262 ms -  DEBUG -     Node 02, kOpBMout
+Oct 02 12:17:05 2014 - 000266 ms -  DEBUG -     Node 03, kOpTRIn
+Oct 02 12:17:05 2014 - 000270 ms -  DEBUG -     Node 04, kOpTRout
+Oct 02 12:17:05 2014 - 000274 ms -  DEBUG -     Node 05, kOpTMIn
+Oct 02 12:17:05 2014 - 000278 ms -  DEBUG -     Node 06, kOpTMout
+Oct 02 12:17:05 2014 - 000281 ms -  DEBUG -     Node 07, kIn
+Oct 02 12:17:05 2014 - 000285 ms -  DEBUG -     Node 08, gnd
+Oct 02 12:17:05 2014 - 000289 ms -  DEBUG -     Node 09, kOpTLIn
+Oct 02 12:17:05 2014 - 000293 ms -  DEBUG -     Node 10, kOpTLout
+Oct 02 12:17:05 2014 - 000297 ms -  DEBUG - Network consists of 3 unconnected graphs with a total of 15 nodes
+Oct 02 12:17:05 2014 - 000303 ms -   WARN - Input file specifies 3 unconnected graphs
+Oct 02 12:17:05 2014 - 000307 ms -   INFO - Node kOpTLOut is considered a ground node. The voltage at this node is considered null
+Oct 02 12:17:05 2014 - 000315 ms -   INFO - Node kOpTMOut is considered a ground node. The voltage at this node is considered null
+Oct 02 12:17:05 2014 - 000323 ms -   INFO - Node gnd is considered a ground node. The voltage at this node is considered null
+Oct 02 12:17:05 2014 - 000329 ms -   INFO - Linear equation system (17, 18) has 1 knowns, 17 unknowns and 10 constants
+Oct 02 12:17:05 2014 - 000335 ms -  DEBUG - Dependent Vout (17) is required for user defined result G
+Oct 02 12:17:05 2014 - 000339 ms -  DEBUG - Dependent U_kOpBMout (4) is required for user defined voltage Vout
+Oct 02 12:17:05 2014 - 000344 ms -   INFO - Unknown U_kOpTMin (0) is not required for the final result(s) and hence not computed. Its value is set to null
+Oct 02 12:17:05 2014 - 000354 ms -   INFO - Unknown U_kOpBMin (1) is not required for the final result(s) and hence not computed. Its value is set to null
+Oct 02 12:17:05 2014 - 000363 ms -   INFO - Unknown U_kOpTRin (2) is not required for the final result(s) and hence not computed. Its value is set to null
+Oct 02 12:17:05 2014 - 000372 ms -   INFO - Unknown U_kOpBMIn (3) is not required for the final result(s) and hence not computed. Its value is set to null
+Oct 02 12:17:05 2014 - 000382 ms -  DEBUG - LES prior to elimination for unknown U_kOpBMout:
+Oct 02 12:17:05 2014 - 000386 ms -  DEBUG - Table of symbolic objects:
+Oct 02 12:17:05 2014 - 000389 ms -  DEBUG - 1 known variables:
+Oct 02 12:17:05 2014 - 000393 ms -  DEBUG -   0) Vin, column in LES: 17
+Oct 02 12:17:05 2014 - 000396 ms -  DEBUG - 17 unknown variables:
+Oct 02 12:17:05 2014 - 000400 ms -  DEBUG -   0) U_kOpTMin, voltage of node, position in LES: (0, 0), sub-net: 1
+Oct 02 12:17:05 2014 - 000405 ms -  DEBUG -   1) U_kOpBMin, voltage of node, position in LES: (1, 1), sub-net: 1
+Oct 02 12:17:05 2014 - 000410 ms -  DEBUG -   2) U_kOpTRin, voltage of node, position in LES: (2, 2), sub-net: 2
+Oct 02 12:17:05 2014 - 000416 ms -  DEBUG -   3) U_kOpBMIn, voltage of node, position in LES: (3, 3), sub-net: 3
+Oct 02 12:17:05 2014 - 000421 ms -  DEBUG -   4) U_kOpBMout, voltage of node, position in LES: (4, 16), sub-net: 3
+Oct 02 12:17:05 2014 - 000426 ms -  DEBUG -   5) U_kOpTRIn, voltage of node, position in LES: (5, 5), sub-net: 3
+Oct 02 12:17:05 2014 - 000431 ms -  DEBUG -   6) U_kOpTRout, voltage of node, position in LES: (6, 6), sub-net: 3
+Oct 02 12:17:05 2014 - 000436 ms -  DEBUG -   7) U_kOpTMIn, voltage of node, position in LES: (7, 7), sub-net: 3
+Oct 02 12:17:05 2014 - 000442 ms -  DEBUG -   8) U_kOpTMout, voltage of node, position in LES: (8, 8), sub-net: 3
+Oct 02 12:17:05 2014 - 000447 ms -  DEBUG -   9) U_kIn, voltage of node, position in LES: (9, 9), sub-net: 3
+Oct 02 12:17:05 2014 - 000452 ms -  DEBUG -   10) U_kOpTLIn, voltage of node, position in LES: (10, 10), sub-net: 3
+Oct 02 12:17:05 2014 - 000458 ms -  DEBUG -   11) U_kOpTLout, voltage of node, position in LES: (11, 11), sub-net: 3
+Oct 02 12:17:05 2014 - 000464 ms -  DEBUG -   12) I_Vin, internal unknown current, position in LES: (12, 12), sub-net: -1
+Oct 02 12:17:05 2014 - 000470 ms -  DEBUG -   13) I_OpTL, internal unknown current, position in LES: (13, 13), sub-net: -1
+Oct 02 12:17:05 2014 - 000475 ms -  DEBUG -   14) I_OpTM, internal unknown current, position in LES: (14, 14), sub-net: -1
+Oct 02 12:17:05 2014 - 000481 ms -  DEBUG -   15) I_OpTR, internal unknown current, position in LES: (15, 15), sub-net: -1
+Oct 02 12:17:05 2014 - 000488 ms -  DEBUG -   16) I_OpBM, internal unknown current, position in LES: (16, 4), sub-net: -1
+Oct 02 12:17:05 2014 - 000494 ms -  DEBUG - 10 constants:
+Oct 02 12:17:05 2014 - 000497 ms -  DEBUG -   0) C2, L, inductivity, internal representation: 0x1
+Oct 02 12:17:05 2014 - 000502 ms -  DEBUG -   1) C1, L, inductivity, internal representation: 0x2
+Oct 02 12:17:05 2014 - 000507 ms -  DEBUG -   2) R8, R, resistor, internal representation: 0x4
+Oct 02 12:17:05 2014 - 000512 ms -  DEBUG -   3) R6, R, resistor, internal representation: 0x8
+Oct 02 12:17:05 2014 - 000516 ms -  DEBUG -   4) R5, R, resistor, internal representation: 0x10
+Oct 02 12:17:05 2014 - 000521 ms -  DEBUG -   5) R4, R, resistor, internal representation: 0x20
+Oct 02 12:17:05 2014 - 000525 ms -  DEBUG -   6) R3, R, resistor, internal representation: 0x40
+Oct 02 12:17:05 2014 - 000530 ms -  DEBUG -   7) R2, R, resistor, internal representation: 0x80
+Oct 02 12:17:05 2014 - 000535 ms -  DEBUG -   8) R11, R, resistor, internal representation: 0x100
+Oct 02 12:17:05 2014 - 000539 ms -  DEBUG -   9) R1, R, resistor, internal representation: 0x200
+Oct 02 12:17:05 2014 - 000544 ms -  DEBUG - The linear equation system (17, 18):
+Oct 02 12:17:05 2014 - 000548 ms -  DEBUG -   Row 0:
+Oct 02 12:17:05 2014 - 000551 ms -  DEBUG -     ( 0, 0): -R2
+Oct 02 12:17:05 2014 - 000554 ms -  DEBUG -     ( 0, 1):  0
+Oct 02 12:17:05 2014 - 000558 ms -  DEBUG -     ( 0, 2):  0
+Oct 02 12:17:05 2014 - 000561 ms -  DEBUG -     ( 0, 3):  0
+Oct 02 12:17:05 2014 - 000564 ms -  DEBUG -     ( 0, 4):  0
+Oct 02 12:17:05 2014 - 000567 ms -  DEBUG -     ( 0, 5):  0
+Oct 02 12:17:05 2014 - 000571 ms -  DEBUG -     ( 0, 6):  0
+Oct 02 12:17:05 2014 - 000574 ms -  DEBUG -     ( 0, 7):  0
+Oct 02 12:17:05 2014 - 000577 ms -  DEBUG -     ( 0, 8):  0
+Oct 02 12:17:05 2014 - 000580 ms -  DEBUG -     ( 0, 9):  0
+Oct 02 12:17:05 2014 - 000583 ms -  DEBUG -     ( 0,10):  0
+Oct 02 12:17:05 2014 - 000586 ms -  DEBUG -     ( 0,11):  0
+Oct 02 12:17:05 2014 - 000589 ms -  DEBUG -     ( 0,12):  0
+Oct 02 12:17:05 2014 - 000593 ms -  DEBUG -     ( 0,13):  0
+Oct 02 12:17:05 2014 - 000596 ms -  DEBUG -     ( 0,14):  0
+Oct 02 12:17:05 2014 - 000600 ms -  DEBUG -     ( 0,15):  0
+Oct 02 12:17:05 2014 - 000604 ms -  DEBUG -     ( 0,16):  0
+Oct 02 12:17:05 2014 - 000607 ms -  DEBUG -     ( 0,17):  0
+Oct 02 12:17:05 2014 - 000611 ms -  DEBUG -   Row 1:
+Oct 02 12:17:05 2014 - 000614 ms -  DEBUG -     ( 1, 0):  0
+Oct 02 12:17:05 2014 - 000617 ms -  DEBUG -     ( 1, 1): -R8
+Oct 02 12:17:05 2014 - 000620 ms -  DEBUG -     ( 1, 2):  0
+Oct 02 12:17:05 2014 - 000623 ms -  DEBUG -     ( 1, 3):  0
+Oct 02 12:17:05 2014 - 000626 ms -  DEBUG -     ( 1, 4):  0
+Oct 02 12:17:05 2014 - 000629 ms -  DEBUG -     ( 1, 5):  0
+Oct 02 12:17:05 2014 - 000632 ms -  DEBUG -     ( 1, 6):  0
+Oct 02 12:17:05 2014 - 000635 ms -  DEBUG -     ( 1, 7):  0
+Oct 02 12:17:05 2014 - 000638 ms -  DEBUG -     ( 1, 8):  0
+Oct 02 12:17:05 2014 - 000641 ms -  DEBUG -     ( 1, 9):  0
+Oct 02 12:17:05 2014 - 000644 ms -  DEBUG -     ( 1,10):  0
+Oct 02 12:17:05 2014 - 000647 ms -  DEBUG -     ( 1,11):  0
+Oct 02 12:17:05 2014 - 000650 ms -  DEBUG -     ( 1,12):  0
+Oct 02 12:17:05 2014 - 000653 ms -  DEBUG -     ( 1,13):  0
+Oct 02 12:17:05 2014 - 000656 ms -  DEBUG -     ( 1,14):  0
+Oct 02 12:17:05 2014 - 000659 ms -  DEBUG -     ( 1,15):  0
+Oct 02 12:17:05 2014 - 000662 ms -  DEBUG -     ( 1,16):  0
+Oct 02 12:17:05 2014 - 000665 ms -  DEBUG -     ( 1,17):  0
+Oct 02 12:17:05 2014 - 000668 ms -  DEBUG -   Row 2:
+Oct 02 12:17:05 2014 - 000671 ms -  DEBUG -     ( 2, 0):  0
+Oct 02 12:17:05 2014 - 000674 ms -  DEBUG -     ( 2, 1):  0
+Oct 02 12:17:05 2014 - 000678 ms -  DEBUG -     ( 2, 2): -R5
+Oct 02 12:17:05 2014 - 000681 ms -  DEBUG -     ( 2, 3):  0
+Oct 02 12:17:05 2014 - 000685 ms -  DEBUG -     ( 2, 4):  0
+Oct 02 12:17:05 2014 - 000688 ms -  DEBUG -     ( 2, 5):  0
+Oct 02 12:17:05 2014 - 000692 ms -  DEBUG -     ( 2, 6):  0
+Oct 02 12:17:05 2014 - 000695 ms -  DEBUG -     ( 2, 7):  0
+Oct 02 12:17:05 2014 - 000699 ms -  DEBUG -     ( 2, 8):  0
+Oct 02 12:17:05 2014 - 000702 ms -  DEBUG -     ( 2, 9):  0
+Oct 02 12:17:05 2014 - 000706 ms -  DEBUG -     ( 2,10):  0
+Oct 02 12:17:05 2014 - 000709 ms -  DEBUG -     ( 2,11):  0
+Oct 02 12:17:05 2014 - 000713 ms -  DEBUG -     ( 2,12):  0
+Oct 02 12:17:05 2014 - 000716 ms -  DEBUG -     ( 2,13):  0
+Oct 02 12:17:05 2014 - 000720 ms -  DEBUG -     ( 2,14):  0
+Oct 02 12:17:05 2014 - 000724 ms -  DEBUG -     ( 2,15):  0
+Oct 02 12:17:05 2014 - 000727 ms -  DEBUG -     ( 2,16):  0
+Oct 02 12:17:05 2014 - 000731 ms -  DEBUG -     ( 2,17):  0
+Oct 02 12:17:05 2014 - 000734 ms -  DEBUG -   Row 3:
+Oct 02 12:17:05 2014 - 000738 ms -  DEBUG -     ( 3, 0):  0
+Oct 02 12:17:05 2014 - 000741 ms -  DEBUG -     ( 3, 1):  0
+Oct 02 12:17:05 2014 - 000745 ms -  DEBUG -     ( 3, 2):  0
+Oct 02 12:17:05 2014 - 000749 ms -  DEBUG -     ( 3, 3): -R11
+Oct 02 12:17:05 2014 - 000752 ms -  DEBUG -     ( 3, 4):  0
+Oct 02 12:17:05 2014 - 000756 ms -  DEBUG -     ( 3, 5):  0
+Oct 02 12:17:05 2014 - 000759 ms -  DEBUG -     ( 3, 6):  0
+Oct 02 12:17:05 2014 - 000763 ms -  DEBUG -     ( 3, 7):  0
+Oct 02 12:17:05 2014 - 000766 ms -  DEBUG -     ( 3, 8):  0
+Oct 02 12:17:05 2014 - 000770 ms -  DEBUG -     ( 3, 9):  0
+Oct 02 12:17:05 2014 - 000774 ms -  DEBUG -     ( 3,10):  0
+Oct 02 12:17:05 2014 - 000777 ms -  DEBUG -     ( 3,11):  0
+Oct 02 12:17:05 2014 - 000781 ms -  DEBUG -     ( 3,12):  0
+Oct 02 12:17:05 2014 - 000784 ms -  DEBUG -     ( 3,13):  0
+Oct 02 12:17:05 2014 - 000788 ms -  DEBUG -     ( 3,14):  0
+Oct 02 12:17:05 2014 - 000791 ms -  DEBUG -     ( 3,15):  0
+Oct 02 12:17:05 2014 - 000795 ms -  DEBUG -     ( 3,16): +R11
+Oct 02 12:17:05 2014 - 000799 ms -  DEBUG -     ( 3,17):  0
+Oct 02 12:17:05 2014 - 000802 ms -  DEBUG -   Row 4:
+Oct 02 12:17:05 2014 - 000805 ms -  DEBUG -     ( 4, 0):  0
+Oct 02 12:17:05 2014 - 000809 ms -  DEBUG -     ( 4, 1):  0
+Oct 02 12:17:05 2014 - 000813 ms -  DEBUG -     ( 4, 2):  0
+Oct 02 12:17:05 2014 - 000816 ms -  DEBUG -     ( 4, 3): +R11
+Oct 02 12:17:05 2014 - 000820 ms -  DEBUG -     ( 4, 4): +1
+Oct 02 12:17:05 2014 - 000823 ms -  DEBUG -     ( 4, 5):  0
+Oct 02 12:17:05 2014 - 000826 ms -  DEBUG -     ( 4, 6):  0
+Oct 02 12:17:05 2014 - 000830 ms -  DEBUG -     ( 4, 7):  0
+Oct 02 12:17:05 2014 - 000833 ms -  DEBUG -     ( 4, 8):  0
+Oct 02 12:17:05 2014 - 000836 ms -  DEBUG -     ( 4, 9):  0
+Oct 02 12:17:05 2014 - 000839 ms -  DEBUG -     ( 4,10):  0
+Oct 02 12:17:05 2014 - 000843 ms -  DEBUG -     ( 4,11):  0
+Oct 02 12:17:05 2014 - 000846 ms -  DEBUG -     ( 4,12):  0
+Oct 02 12:17:05 2014 - 000849 ms -  DEBUG -     ( 4,13):  0
+Oct 02 12:17:05 2014 - 000852 ms -  DEBUG -     ( 4,14):  0
+Oct 02 12:17:05 2014 - 000856 ms -  DEBUG -     ( 4,15):  0
+Oct 02 12:17:05 2014 - 000859 ms -  DEBUG -     ( 4,16): -R11
+Oct 02 12:17:05 2014 - 000863 ms -  DEBUG -     ( 4,17):  0
+Oct 02 12:17:05 2014 - 000866 ms -  DEBUG -   Row 5:
+Oct 02 12:17:05 2014 - 000869 ms -  DEBUG -     ( 5, 0):  0
+Oct 02 12:17:05 2014 - 000872 ms -  DEBUG -     ( 5, 1):  0
+Oct 02 12:17:05 2014 - 000876 ms -  DEBUG -     ( 5, 2):  0
+Oct 02 12:17:05 2014 - 000880 ms -  DEBUG -     ( 5, 3):  0
+Oct 02 12:17:05 2014 - 000884 ms -  DEBUG -     ( 5, 4):  0
+Oct 02 12:17:05 2014 - 000887 ms -  DEBUG -     ( 5, 5): -R6
+Oct 02 12:17:05 2014 - 000891 ms -  DEBUG -     ( 5, 6): +R6
+Oct 02 12:17:05 2014 - 000894 ms -  DEBUG -     ( 5, 7):  0
+Oct 02 12:17:05 2014 - 000897 ms -  DEBUG -     ( 5, 8):  0
+Oct 02 12:17:05 2014 - 000900 ms -  DEBUG -     ( 5, 9):  0
+Oct 02 12:17:05 2014 - 000903 ms -  DEBUG -     ( 5,10):  0
+Oct 02 12:17:05 2014 - 000906 ms -  DEBUG -     ( 5,11):  0
+Oct 02 12:17:05 2014 - 000909 ms -  DEBUG -     ( 5,12):  0
+Oct 02 12:17:05 2014 - 000912 ms -  DEBUG -     ( 5,13):  0
+Oct 02 12:17:05 2014 - 000915 ms -  DEBUG -     ( 5,14):  0
+Oct 02 12:17:05 2014 - 000918 ms -  DEBUG -     ( 5,15):  0
+Oct 02 12:17:05 2014 - 000921 ms -  DEBUG -     ( 5,16):  0
+Oct 02 12:17:05 2014 - 000924 ms -  DEBUG -     ( 5,17):  0
+Oct 02 12:17:05 2014 - 000927 ms -  DEBUG -   Row 6:
+Oct 02 12:17:05 2014 - 000930 ms -  DEBUG -     ( 6, 0):  0
+Oct 02 12:17:05 2014 - 000933 ms -  DEBUG -     ( 6, 1):  0
+Oct 02 12:17:05 2014 - 000937 ms -  DEBUG -     ( 6, 2):  0
+Oct 02 12:17:05 2014 - 000940 ms -  DEBUG -     ( 6, 3):  0
+Oct 02 12:17:05 2014 - 000944 ms -  DEBUG -     ( 6, 4):  0
+Oct 02 12:17:05 2014 - 000947 ms -  DEBUG -     ( 6, 5): +R6
+Oct 02 12:17:05 2014 - 000951 ms -  DEBUG -     ( 6, 6): -R3-R6
+Oct 02 12:17:05 2014 - 000955 ms -  DEBUG -     ( 6, 7):  0
+Oct 02 12:17:05 2014 - 000958 ms -  DEBUG -     ( 6, 8):  0
+Oct 02 12:17:05 2014 - 000962 ms -  DEBUG -     ( 6, 9):  0
+Oct 02 12:17:05 2014 - 000965 ms -  DEBUG -     ( 6,10): +R3
+Oct 02 12:17:05 2014 - 000969 ms -  DEBUG -     ( 6,11):  0
+Oct 02 12:17:05 2014 - 000972 ms -  DEBUG -     ( 6,12):  0
+Oct 02 12:17:05 2014 - 000976 ms -  DEBUG -     ( 6,13):  0
+Oct 02 12:17:05 2014 - 000979 ms -  DEBUG -     ( 6,14):  0
+Oct 02 12:17:05 2014 - 000983 ms -  DEBUG -     ( 6,15): +1
+Oct 02 12:17:05 2014 - 000987 ms -  DEBUG -     ( 6,16):  0
+Oct 02 12:17:05 2014 - 000990 ms -  DEBUG -     ( 6,17):  0
+Oct 02 12:17:05 2014 - 000994 ms -  DEBUG -   Row 7:
+Oct 02 12:17:05 2014 - 000997 ms -  DEBUG -     ( 7, 0):  0
+Oct 02 12:17:05 2014 - 001001 ms -  DEBUG -     ( 7, 1):  0
+Oct 02 12:17:05 2014 - 001004 ms -  DEBUG -     ( 7, 2):  0
+Oct 02 12:17:05 2014 - 001008 ms -  DEBUG -     ( 7, 3):  0
+Oct 02 12:17:06 2014 - 001011 ms -  DEBUG -     ( 7, 4):  0
+Oct 02 12:17:06 2014 - 001015 ms -  DEBUG -     ( 7, 5):  0
+Oct 02 12:17:06 2014 - 001018 ms -  DEBUG -     ( 7, 6):  0
+Oct 02 12:17:06 2014 - 001022 ms -  DEBUG -     ( 7, 7): -C2
+Oct 02 12:17:06 2014 - 001026 ms -  DEBUG -     ( 7, 8): +C2
+Oct 02 12:17:06 2014 - 001029 ms -  DEBUG -     ( 7, 9):  0
+Oct 02 12:17:06 2014 - 001033 ms -  DEBUG -     ( 7,10):  0
+Oct 02 12:17:06 2014 - 001036 ms -  DEBUG -     ( 7,11):  0
+Oct 02 12:17:06 2014 - 001040 ms -  DEBUG -     ( 7,12):  0
+Oct 02 12:17:06 2014 - 001043 ms -  DEBUG -     ( 7,13):  0
+Oct 02 12:17:06 2014 - 001047 ms -  DEBUG -     ( 7,14):  0
+Oct 02 12:17:06 2014 - 001050 ms -  DEBUG -     ( 7,15):  0
+Oct 02 12:17:06 2014 - 001054 ms -  DEBUG -     ( 7,16):  0
+Oct 02 12:17:06 2014 - 001058 ms -  DEBUG -     ( 7,17):  0
+Oct 02 12:17:06 2014 - 001061 ms -  DEBUG -   Row 8:
+Oct 02 12:17:06 2014 - 001064 ms -  DEBUG -     ( 8, 0):  0
+Oct 02 12:17:06 2014 - 001068 ms -  DEBUG -     ( 8, 1):  0
+Oct 02 12:17:06 2014 - 001072 ms -  DEBUG -     ( 8, 2):  0
+Oct 02 12:17:06 2014 - 001075 ms -  DEBUG -     ( 8, 3):  0
+Oct 02 12:17:06 2014 - 001079 ms -  DEBUG -     ( 8, 4):  0
+Oct 02 12:17:06 2014 - 001082 ms -  DEBUG -     ( 8, 5):  0
+Oct 02 12:17:06 2014 - 001086 ms -  DEBUG -     ( 8, 6):  0
+Oct 02 12:17:06 2014 - 001089 ms -  DEBUG -     ( 8, 7): +C2
+Oct 02 12:17:06 2014 - 001093 ms -  DEBUG -     ( 8, 8): -C2
+Oct 02 12:17:06 2014 - 001097 ms -  DEBUG -     ( 8, 9):  0
+Oct 02 12:17:06 2014 - 001100 ms -  DEBUG -     ( 8,10):  0
+Oct 02 12:17:06 2014 - 001104 ms -  DEBUG -     ( 8,11):  0
+Oct 02 12:17:06 2014 - 001108 ms -  DEBUG -     ( 8,12):  0
+Oct 02 12:17:06 2014 - 001111 ms -  DEBUG -     ( 8,13):  0
+Oct 02 12:17:06 2014 - 001115 ms -  DEBUG -     ( 8,14): +1
+Oct 02 12:17:06 2014 - 001118 ms -  DEBUG -     ( 8,15):  0
+Oct 02 12:17:06 2014 - 001122 ms -  DEBUG -     ( 8,16):  0
+Oct 02 12:17:06 2014 - 001125 ms -  DEBUG -     ( 8,17):  0
+Oct 02 12:17:06 2014 - 001129 ms -  DEBUG -   Row 9:
+Oct 02 12:17:06 2014 - 001132 ms -  DEBUG -     ( 9, 0):  0
+Oct 02 12:17:06 2014 - 001136 ms -  DEBUG -     ( 9, 1):  0
+Oct 02 12:17:06 2014 - 001139 ms -  DEBUG -     ( 9, 2):  0
+Oct 02 12:17:06 2014 - 001143 ms -  DEBUG -     ( 9, 3):  0
+Oct 02 12:17:06 2014 - 001147 ms -  DEBUG -     ( 9, 4):  0
+Oct 02 12:17:06 2014 - 001150 ms -  DEBUG -     ( 9, 5):  0
+Oct 02 12:17:06 2014 - 001154 ms -  DEBUG -     ( 9, 6):  0
+Oct 02 12:17:06 2014 - 001157 ms -  DEBUG -     ( 9, 7):  0
+Oct 02 12:17:06 2014 - 001161 ms -  DEBUG -     ( 9, 8):  0
+Oct 02 12:17:06 2014 - 001165 ms -  DEBUG -     ( 9, 9): -R4
+Oct 02 12:17:06 2014 - 001168 ms -  DEBUG -     ( 9,10): +R4
+Oct 02 12:17:06 2014 - 001172 ms -  DEBUG -     ( 9,11):  0
+Oct 02 12:17:06 2014 - 001175 ms -  DEBUG -     ( 9,12): +1
+Oct 02 12:17:06 2014 - 001179 ms -  DEBUG -     ( 9,13):  0
+Oct 02 12:17:06 2014 - 001183 ms -  DEBUG -     ( 9,14):  0
+Oct 02 12:17:06 2014 - 001186 ms -  DEBUG -     ( 9,15):  0
+Oct 02 12:17:06 2014 - 001189 ms -  DEBUG -     ( 9,16):  0
+Oct 02 12:17:06 2014 - 001193 ms -  DEBUG -     ( 9,17):  0
+Oct 02 12:17:06 2014 - 001197 ms -  DEBUG -   Row 10:
+Oct 02 12:17:06 2014 - 001200 ms -  DEBUG -     (10, 0):  0
+Oct 02 12:17:06 2014 - 001203 ms -  DEBUG -     (10, 1):  0
+Oct 02 12:17:06 2014 - 001207 ms -  DEBUG -     (10, 2):  0
+Oct 02 12:17:06 2014 - 001211 ms -  DEBUG -     (10, 3):  0
+Oct 02 12:17:06 2014 - 001214 ms -  DEBUG -     (10, 4):  0
+Oct 02 12:17:06 2014 - 001218 ms -  DEBUG -     (10, 5):  0
+Oct 02 12:17:06 2014 - 001222 ms -  DEBUG -     (10, 6): +R3
+Oct 02 12:17:06 2014 - 001225 ms -  DEBUG -     (10, 7):  0
+Oct 02 12:17:06 2014 - 001230 ms -  DEBUG -     (10, 8):  0
+Oct 02 12:17:06 2014 - 001233 ms -  DEBUG -     (10, 9): +R4
+Oct 02 12:17:06 2014 - 001236 ms -  DEBUG -     (10,10): -R1-R3-R4
+                                                         -C1
+Oct 02 12:17:06 2014 - 001244 ms -  DEBUG -     (10,11): +R1+C1
+Oct 02 12:17:06 2014 - 001248 ms -  DEBUG -     (10,12):  0
+Oct 02 12:17:06 2014 - 001251 ms -  DEBUG -     (10,13):  0
+Oct 02 12:17:06 2014 - 001255 ms -  DEBUG -     (10,14):  0
+Oct 02 12:17:06 2014 - 001258 ms -  DEBUG -     (10,15):  0
+Oct 02 12:17:06 2014 - 001262 ms -  DEBUG -     (10,16):  0
+Oct 02 12:17:06 2014 - 001265 ms -  DEBUG -     (10,17):  0
+Oct 02 12:17:06 2014 - 001268 ms -  DEBUG -   Row 11:
+Oct 02 12:17:06 2014 - 001271 ms -  DEBUG -     (11, 0):  0
+Oct 02 12:17:06 2014 - 001274 ms -  DEBUG -     (11, 1):  0
+Oct 02 12:17:06 2014 - 001278 ms -  DEBUG -     (11, 2):  0
+Oct 02 12:17:06 2014 - 001281 ms -  DEBUG -     (11, 3):  0
+Oct 02 12:17:06 2014 - 001285 ms -  DEBUG -     (11, 4):  0
+Oct 02 12:17:06 2014 - 001288 ms -  DEBUG -     (11, 5):  0
+Oct 02 12:17:06 2014 - 001292 ms -  DEBUG -     (11, 6):  0
+Oct 02 12:17:06 2014 - 001295 ms -  DEBUG -     (11, 7):  0
+Oct 02 12:17:06 2014 - 001299 ms -  DEBUG -     (11, 8):  0
+Oct 02 12:17:06 2014 - 001302 ms -  DEBUG -     (11, 9):  0
+Oct 02 12:17:06 2014 - 001306 ms -  DEBUG -     (11,10): +R1+C1
+Oct 02 12:17:06 2014 - 001310 ms -  DEBUG -     (11,11): -R1-C1
+Oct 02 12:17:06 2014 - 001313 ms -  DEBUG -     (11,12):  0
+Oct 02 12:17:06 2014 - 001317 ms -  DEBUG -     (11,13): +1
+Oct 02 12:17:06 2014 - 001321 ms -  DEBUG -     (11,14):  0
+Oct 02 12:17:06 2014 - 001324 ms -  DEBUG -     (11,15):  0
+Oct 02 12:17:06 2014 - 001328 ms -  DEBUG -     (11,16):  0
+Oct 02 12:17:06 2014 - 001331 ms -  DEBUG -     (11,17):  0
+Oct 02 12:17:06 2014 - 001335 ms -  DEBUG -   Row 12:
+Oct 02 12:17:06 2014 - 001338 ms -  DEBUG -     (12, 0):  0
+Oct 02 12:17:06 2014 - 001342 ms -  DEBUG -     (12, 1):  0
+Oct 02 12:17:06 2014 - 001345 ms -  DEBUG -     (12, 2):  0
+Oct 02 12:17:06 2014 - 001349 ms -  DEBUG -     (12, 3):  0
+Oct 02 12:17:06 2014 - 001353 ms -  DEBUG -     (12, 4):  0
+Oct 02 12:17:06 2014 - 001356 ms -  DEBUG -     (12, 5):  0
+Oct 02 12:17:06 2014 - 001360 ms -  DEBUG -     (12, 6):  0
+Oct 02 12:17:06 2014 - 001363 ms -  DEBUG -     (12, 7):  0
+Oct 02 12:17:06 2014 - 001367 ms -  DEBUG -     (12, 8):  0
+Oct 02 12:17:06 2014 - 001370 ms -  DEBUG -     (12, 9): +1
+Oct 02 12:17:06 2014 - 001374 ms -  DEBUG -     (12,10):  0
+Oct 02 12:17:06 2014 - 001378 ms -  DEBUG -     (12,11):  0
+Oct 02 12:17:06 2014 - 001381 ms -  DEBUG -     (12,12):  0
+Oct 02 12:17:06 2014 - 001385 ms -  DEBUG -     (12,13):  0
+Oct 02 12:17:06 2014 - 001389 ms -  DEBUG -     (12,14):  0
+Oct 02 12:17:06 2014 - 001392 ms -  DEBUG -     (12,15):  0
+Oct 02 12:17:06 2014 - 001395 ms -  DEBUG -     (12,16):  0
+Oct 02 12:17:06 2014 - 001399 ms -  DEBUG -     (12,17): -1
+Oct 02 12:17:06 2014 - 001403 ms -  DEBUG -   Row 13:
+Oct 02 12:17:06 2014 - 001406 ms -  DEBUG -     (13, 0):  0
+Oct 02 12:17:06 2014 - 001410 ms -  DEBUG -     (13, 1):  0
+Oct 02 12:17:06 2014 - 001413 ms -  DEBUG -     (13, 2):  0
+Oct 02 12:17:06 2014 - 001417 ms -  DEBUG -     (13, 3):  0
+Oct 02 12:17:06 2014 - 001421 ms -  DEBUG -     (13, 4):  0
+Oct 02 12:17:06 2014 - 001425 ms -  DEBUG -     (13, 5):  0
+Oct 02 12:17:06 2014 - 001428 ms -  DEBUG -     (13, 6):  0
+Oct 02 12:17:06 2014 - 001432 ms -  DEBUG -     (13, 7):  0
+Oct 02 12:17:06 2014 - 001435 ms -  DEBUG -     (13, 8):  0
+Oct 02 12:17:06 2014 - 001439 ms -  DEBUG -     (13, 9):  0
+Oct 02 12:17:06 2014 - 001442 ms -  DEBUG -     (13,10): +1
+Oct 02 12:17:06 2014 - 001446 ms -  DEBUG -     (13,11):  0
+Oct 02 12:17:06 2014 - 001450 ms -  DEBUG -     (13,12):  0
+Oct 02 12:17:06 2014 - 001453 ms -  DEBUG -     (13,13):  0
+Oct 02 12:17:06 2014 - 001457 ms -  DEBUG -     (13,14):  0
+Oct 02 12:17:06 2014 - 001460 ms -  DEBUG -     (13,15):  0
+Oct 02 12:17:06 2014 - 001464 ms -  DEBUG -     (13,16):  0
+Oct 02 12:17:06 2014 - 001467 ms -  DEBUG -     (13,17):  0
+Oct 02 12:17:06 2014 - 001472 ms -  DEBUG -   Row 14:
+Oct 02 12:17:06 2014 - 001475 ms -  DEBUG -     (14, 0):  0
+Oct 02 12:17:06 2014 - 001478 ms -  DEBUG -     (14, 1):  0
+Oct 02 12:17:06 2014 - 001482 ms -  DEBUG -     (14, 2):  0
+Oct 02 12:17:06 2014 - 001486 ms -  DEBUG -     (14, 3):  0
+Oct 02 12:17:06 2014 - 001490 ms -  DEBUG -     (14, 4):  0
+Oct 02 12:17:06 2014 - 001493 ms -  DEBUG -     (14, 5):  0
+Oct 02 12:17:06 2014 - 001497 ms -  DEBUG -     (14, 6):  0
+Oct 02 12:17:06 2014 - 001500 ms -  DEBUG -     (14, 7): +1
+Oct 02 12:17:06 2014 - 001504 ms -  DEBUG -     (14, 8):  0
+Oct 02 12:17:06 2014 - 001507 ms -  DEBUG -     (14, 9):  0
+Oct 02 12:17:06 2014 - 001511 ms -  DEBUG -     (14,10):  0
+Oct 02 12:17:06 2014 - 001514 ms -  DEBUG -     (14,11):  0
+Oct 02 12:17:06 2014 - 001518 ms -  DEBUG -     (14,12):  0
+Oct 02 12:17:06 2014 - 001521 ms -  DEBUG -     (14,13):  0
+Oct 02 12:17:06 2014 - 001525 ms -  DEBUG -     (14,14):  0
+Oct 02 12:17:06 2014 - 001529 ms -  DEBUG -     (14,15):  0
+Oct 02 12:17:06 2014 - 001532 ms -  DEBUG -     (14,16):  0
+Oct 02 12:17:06 2014 - 001535 ms -  DEBUG -     (14,17):  0
+Oct 02 12:17:06 2014 - 001539 ms -  DEBUG -   Row 15:
+Oct 02 12:17:06 2014 - 001542 ms -  DEBUG -     (15, 0):  0
+Oct 02 12:17:06 2014 - 001546 ms -  DEBUG -     (15, 1):  0
+Oct 02 12:17:06 2014 - 001550 ms -  DEBUG -     (15, 2):  0
+Oct 02 12:17:06 2014 - 001554 ms -  DEBUG -     (15, 3):  0
+Oct 02 12:17:06 2014 - 001557 ms -  DEBUG -     (15, 4):  0
+Oct 02 12:17:06 2014 - 001561 ms -  DEBUG -     (15, 5): +1
+Oct 02 12:17:06 2014 - 001564 ms -  DEBUG -     (15, 6):  0
+Oct 02 12:17:06 2014 - 001568 ms -  DEBUG -     (15, 7):  0
+Oct 02 12:17:06 2014 - 001571 ms -  DEBUG -     (15, 8):  0
+Oct 02 12:17:06 2014 - 001575 ms -  DEBUG -     (15, 9):  0
+Oct 02 12:17:06 2014 - 001578 ms -  DEBUG -     (15,10):  0
+Oct 02 12:17:06 2014 - 001582 ms -  DEBUG -     (15,11):  0
+Oct 02 12:17:06 2014 - 001586 ms -  DEBUG -     (15,12):  0
+Oct 02 12:17:06 2014 - 001589 ms -  DEBUG -     (15,13):  0
+Oct 02 12:17:06 2014 - 001592 ms -  DEBUG -     (15,14):  0
+Oct 02 12:17:06 2014 - 001596 ms -  DEBUG -     (15,15):  0
+Oct 02 12:17:06 2014 - 001600 ms -  DEBUG -     (15,16):  0
+Oct 02 12:17:06 2014 - 001603 ms -  DEBUG -     (15,17):  0
+Oct 02 12:17:06 2014 - 001607 ms -  DEBUG -   Row 16:
+Oct 02 12:17:06 2014 - 001610 ms -  DEBUG -     (16, 0):  0
+Oct 02 12:17:06 2014 - 001613 ms -  DEBUG -     (16, 1):  0
+Oct 02 12:17:06 2014 - 001617 ms -  DEBUG -     (16, 2):  0
+Oct 02 12:17:06 2014 - 001621 ms -  DEBUG -     (16, 3): +1
+Oct 02 12:17:06 2014 - 001625 ms -  DEBUG -     (16, 4):  0
+Oct 02 12:17:06 2014 - 001628 ms -  DEBUG -     (16, 5):  0
+Oct 02 12:17:06 2014 - 001632 ms -  DEBUG -     (16, 6):  0
+Oct 02 12:17:06 2014 - 001635 ms -  DEBUG -     (16, 7):  0
+Oct 02 12:17:06 2014 - 001639 ms -  DEBUG -     (16, 8):  0
+Oct 02 12:17:06 2014 - 001642 ms -  DEBUG -     (16, 9):  0
+Oct 02 12:17:06 2014 - 001646 ms -  DEBUG -     (16,10):  0
+Oct 02 12:17:06 2014 - 001650 ms -  DEBUG -     (16,11):  0
+Oct 02 12:17:06 2014 - 001653 ms -  DEBUG -     (16,12):  0
+Oct 02 12:17:06 2014 - 001657 ms -  DEBUG -     (16,13):  0
+Oct 02 12:17:06 2014 - 001661 ms -  DEBUG -     (16,14):  0
+Oct 02 12:17:06 2014 - 001664 ms -  DEBUG -     (16,15):  0
+Oct 02 12:17:06 2014 - 001668 ms -  DEBUG -     (16,16):  0
+Oct 02 12:17:06 2014 - 001672 ms -  DEBUG -     (16,17):  0
+Oct 02 12:17:06 2014 - 001675 ms -  DEBUG - Pivoting in elimination step 8: Line exchange 8 <-> 14
+Oct 02 12:17:06 2014 - 001681 ms -  DEBUG - Pivoting in elimination step 11: Line exchange 11 <-> 12
+Oct 02 12:17:06 2014 - 001685 ms -  DEBUG - LES after elimination of U_kOpBMout:
+Oct 02 12:17:06 2014 - 001690 ms -  DEBUG - The linear equation system (17, 18):
+Oct 02 12:17:06 2014 - 001694 ms -  DEBUG -   Row 0:
+Oct 02 12:17:06 2014 - 001696 ms -  DEBUG -     ( 0, 0): -R2
+Oct 02 12:17:06 2014 - 001699 ms -  DEBUG -     ( 0, 1):  0
+Oct 02 12:17:06 2014 - 001702 ms -  DEBUG -     ( 0, 2):  0
+Oct 02 12:17:06 2014 - 001705 ms -  DEBUG -     ( 0, 3):  0
+Oct 02 12:17:06 2014 - 001708 ms -  DEBUG -     ( 0, 4):  0
+Oct 02 12:17:06 2014 - 001712 ms -  DEBUG -     ( 0, 5):  0
+Oct 02 12:17:06 2014 - 001715 ms -  DEBUG -     ( 0, 6):  0
+Oct 02 12:17:06 2014 - 001718 ms -  DEBUG -     ( 0, 7):  0
+Oct 02 12:17:06 2014 - 001722 ms -  DEBUG -     ( 0, 8):  0
+Oct 02 12:17:06 2014 - 001725 ms -  DEBUG -     ( 0, 9):  0
+Oct 02 12:17:06 2014 - 001728 ms -  DEBUG -     ( 0,10):  0
+Oct 02 12:17:06 2014 - 001732 ms -  DEBUG -     ( 0,11):  0
+Oct 02 12:17:06 2014 - 001735 ms -  DEBUG -     ( 0,12):  0
+Oct 02 12:17:06 2014 - 001739 ms -  DEBUG -     ( 0,13):  0
+Oct 02 12:17:06 2014 - 001743 ms -  DEBUG -     ( 0,14):  0
+Oct 02 12:17:06 2014 - 001746 ms -  DEBUG -     ( 0,15):  0
+Oct 02 12:17:06 2014 - 001750 ms -  DEBUG -     ( 0,16):  0
+Oct 02 12:17:06 2014 - 001753 ms -  DEBUG -     ( 0,17):  0
+Oct 02 12:17:06 2014 - 001757 ms -  DEBUG -   Row 1:
+Oct 02 12:17:06 2014 - 001760 ms -  DEBUG -     ( 1, 0):  0
+Oct 02 12:17:06 2014 - 001764 ms -  DEBUG -     ( 1, 1): +R2*R8
+Oct 02 12:17:06 2014 - 001767 ms -  DEBUG -     ( 1, 2):  0
+Oct 02 12:17:06 2014 - 001771 ms -  DEBUG -     ( 1, 3):  0
+Oct 02 12:17:06 2014 - 001775 ms -  DEBUG -     ( 1, 4):  0
+Oct 02 12:17:06 2014 - 001778 ms -  DEBUG -     ( 1, 5):  0
+Oct 02 12:17:06 2014 - 001782 ms -  DEBUG -     ( 1, 6):  0
+Oct 02 12:17:06 2014 - 001786 ms -  DEBUG -     ( 1, 7):  0
+Oct 02 12:17:06 2014 - 001789 ms -  DEBUG -     ( 1, 8):  0
+Oct 02 12:17:06 2014 - 001793 ms -  DEBUG -     ( 1, 9):  0
+Oct 02 12:17:06 2014 - 001796 ms -  DEBUG -     ( 1,10):  0
+Oct 02 12:17:06 2014 - 001800 ms -  DEBUG -     ( 1,11):  0
+Oct 02 12:17:06 2014 - 001803 ms -  DEBUG -     ( 1,12):  0
+Oct 02 12:17:06 2014 - 001807 ms -  DEBUG -     ( 1,13):  0
+Oct 02 12:17:06 2014 - 001811 ms -  DEBUG -     ( 1,14):  0
+Oct 02 12:17:06 2014 - 001814 ms -  DEBUG -     ( 1,15):  0
+Oct 02 12:17:06 2014 - 001818 ms -  DEBUG -     ( 1,16):  0
+Oct 02 12:17:06 2014 - 001821 ms -  DEBUG -     ( 1,17):  0
+Oct 02 12:17:06 2014 - 001825 ms -  DEBUG -   Row 2:
+Oct 02 12:17:06 2014 - 001828 ms -  DEBUG -     ( 2, 0):  0
+Oct 02 12:17:06 2014 - 001832 ms -  DEBUG -     ( 2, 1):  0
+Oct 02 12:17:06 2014 - 001836 ms -  DEBUG -     ( 2, 2): -R2*R5*R8
+Oct 02 12:17:06 2014 - 001840 ms -  DEBUG -     ( 2, 3):  0
+Oct 02 12:17:06 2014 - 001843 ms -  DEBUG -     ( 2, 4):  0
+Oct 02 12:17:06 2014 - 001846 ms -  DEBUG -     ( 2, 5):  0
+Oct 02 12:17:06 2014 - 001850 ms -  DEBUG -     ( 2, 6):  0
+Oct 02 12:17:06 2014 - 001853 ms -  DEBUG -     ( 2, 7):  0
+Oct 02 12:17:06 2014 - 001857 ms -  DEBUG -     ( 2, 8):  0
+Oct 02 12:17:06 2014 - 001861 ms -  DEBUG -     ( 2, 9):  0
+Oct 02 12:17:06 2014 - 001864 ms -  DEBUG -     ( 2,10):  0
+Oct 02 12:17:06 2014 - 001868 ms -  DEBUG -     ( 2,11):  0
+Oct 02 12:17:06 2014 - 001871 ms -  DEBUG -     ( 2,12):  0
+Oct 02 12:17:06 2014 - 001875 ms -  DEBUG -     ( 2,13):  0
+Oct 02 12:17:06 2014 - 001878 ms -  DEBUG -     ( 2,14):  0
+Oct 02 12:17:06 2014 - 001882 ms -  DEBUG -     ( 2,15):  0
+Oct 02 12:17:06 2014 - 001885 ms -  DEBUG -     ( 2,16):  0
+Oct 02 12:17:06 2014 - 001889 ms -  DEBUG -     ( 2,17):  0
+Oct 02 12:17:06 2014 - 001892 ms -  DEBUG -   Row 3:
+Oct 02 12:17:06 2014 - 001896 ms -  DEBUG -     ( 3, 0):  0
+Oct 02 12:17:06 2014 - 001899 ms -  DEBUG -     ( 3, 1):  0
+Oct 02 12:17:06 2014 - 001903 ms -  DEBUG -     ( 3, 2):  0
+Oct 02 12:17:06 2014 - 001907 ms -  DEBUG -     ( 3, 3): +R11*R2*R5*R8
+Oct 02 12:17:06 2014 - 001911 ms -  DEBUG -     ( 3, 4):  0
+Oct 02 12:17:06 2014 - 001914 ms -  DEBUG -     ( 3, 5):  0
+Oct 02 12:17:06 2014 - 001917 ms -  DEBUG -     ( 3, 6):  0
+Oct 02 12:17:06 2014 - 001921 ms -  DEBUG -     ( 3, 7):  0
+Oct 02 12:17:06 2014 - 001924 ms -  DEBUG -     ( 3, 8):  0
+Oct 02 12:17:06 2014 - 001928 ms -  DEBUG -     ( 3, 9):  0
+Oct 02 12:17:06 2014 - 001931 ms -  DEBUG -     ( 3,10):  0
+Oct 02 12:17:06 2014 - 001935 ms -  DEBUG -     ( 3,11):  0
+Oct 02 12:17:06 2014 - 001939 ms -  DEBUG -     ( 3,12):  0
+Oct 02 12:17:06 2014 - 001942 ms -  DEBUG -     ( 3,13):  0
+Oct 02 12:17:06 2014 - 001946 ms -  DEBUG -     ( 3,14):  0
+Oct 02 12:17:06 2014 - 001949 ms -  DEBUG -     ( 3,15):  0
+Oct 02 12:17:06 2014 - 001953 ms -  DEBUG -     ( 3,16): -R11*R2*R5*R8
+Oct 02 12:17:06 2014 - 001957 ms -  DEBUG -     ( 3,17):  0
+Oct 02 12:17:06 2014 - 001960 ms -  DEBUG -   Row 4:
+Oct 02 12:17:06 2014 - 001963 ms -  DEBUG -     ( 4, 0):  0
+Oct 02 12:17:06 2014 - 001966 ms -  DEBUG -     ( 4, 1):  0
+Oct 02 12:17:06 2014 - 001970 ms -  DEBUG -     ( 4, 2):  0
+Oct 02 12:17:06 2014 - 001973 ms -  DEBUG -     ( 4, 3):  0
+Oct 02 12:17:06 2014 - 001977 ms -  DEBUG -     ( 4, 4): +R11*R2*R5*R8
+Oct 02 12:17:06 2014 - 001981 ms -  DEBUG -     ( 4, 5):  0
+Oct 02 12:17:06 2014 - 001984 ms -  DEBUG -     ( 4, 6):  0
+Oct 02 12:17:06 2014 - 001987 ms -  DEBUG -     ( 4, 7):  0
+Oct 02 12:17:06 2014 - 001991 ms -  DEBUG -     ( 4, 8):  0
+Oct 02 12:17:06 2014 - 001994 ms -  DEBUG -     ( 4, 9):  0
+Oct 02 12:17:06 2014 - 001998 ms -  DEBUG -     ( 4,10):  0
+Oct 02 12:17:06 2014 - 002001 ms -  DEBUG -     ( 4,11):  0
+Oct 02 12:17:06 2014 - 002005 ms -  DEBUG -     ( 4,12):  0
+Oct 02 12:17:06 2014 - 002008 ms -  DEBUG -     ( 4,13):  0
+Oct 02 12:17:07 2014 - 002012 ms -  DEBUG -     ( 4,14):  0
+Oct 02 12:17:07 2014 - 002016 ms -  DEBUG -     ( 4,15):  0
+Oct 02 12:17:07 2014 - 002019 ms -  DEBUG -     ( 4,16):  0
+Oct 02 12:17:07 2014 - 002023 ms -  DEBUG -     ( 4,17):  0
+Oct 02 12:17:07 2014 - 002026 ms -  DEBUG -   Row 5:
+Oct 02 12:17:07 2014 - 002030 ms -  DEBUG -     ( 5, 0):  0
+Oct 02 12:17:07 2014 - 002033 ms -  DEBUG -     ( 5, 1):  0
+Oct 02 12:17:07 2014 - 002037 ms -  DEBUG -     ( 5, 2):  0
+Oct 02 12:17:07 2014 - 002041 ms -  DEBUG -     ( 5, 3):  0
+Oct 02 12:17:07 2014 - 002044 ms -  DEBUG -     ( 5, 4):  0
+Oct 02 12:17:07 2014 - 002047 ms -  DEBUG -     ( 5, 5): -R11*R2*R5*R6*R8
+Oct 02 12:17:07 2014 - 002052 ms -  DEBUG -     ( 5, 6): +R11*R2*R5*R6*R8
+Oct 02 12:17:07 2014 - 002056 ms -  DEBUG -     ( 5, 7):  0
+Oct 02 12:17:07 2014 - 002060 ms -  DEBUG -     ( 5, 8):  0
+Oct 02 12:17:07 2014 - 002063 ms -  DEBUG -     ( 5, 9):  0
+Oct 02 12:17:07 2014 - 002066 ms -  DEBUG -     ( 5,10):  0
+Oct 02 12:17:07 2014 - 002069 ms -  DEBUG -     ( 5,11):  0
+Oct 02 12:17:07 2014 - 002072 ms -  DEBUG -     ( 5,12):  0
+Oct 02 12:17:07 2014 - 002075 ms -  DEBUG -     ( 5,13):  0
+Oct 02 12:17:07 2014 - 002078 ms -  DEBUG -     ( 5,14):  0
+Oct 02 12:17:07 2014 - 002081 ms -  DEBUG -     ( 5,15):  0
+Oct 02 12:17:07 2014 - 002084 ms -  DEBUG -     ( 5,16):  0
+Oct 02 12:17:07 2014 - 002087 ms -  DEBUG -     ( 5,17):  0
+Oct 02 12:17:07 2014 - 002090 ms -  DEBUG -   Row 6:
+Oct 02 12:17:07 2014 - 002093 ms -  DEBUG -     ( 6, 0):  0
+Oct 02 12:17:07 2014 - 002096 ms -  DEBUG -     ( 6, 1):  0
+Oct 02 12:17:07 2014 - 002099 ms -  DEBUG -     ( 6, 2):  0
+Oct 02 12:17:07 2014 - 002103 ms -  DEBUG -     ( 6, 3):  0
+Oct 02 12:17:07 2014 - 002107 ms -  DEBUG -     ( 6, 4):  0
+Oct 02 12:17:07 2014 - 002110 ms -  DEBUG -     ( 6, 5):  0
+Oct 02 12:17:07 2014 - 002114 ms -  DEBUG -     ( 6, 6): +R11*R2*R3*R5*R6*R8
+Oct 02 12:17:07 2014 - 002118 ms -  DEBUG -     ( 6, 7):  0
+Oct 02 12:17:07 2014 - 002121 ms -  DEBUG -     ( 6, 8):  0
+Oct 02 12:17:07 2014 - 002124 ms -  DEBUG -     ( 6, 9):  0
+Oct 02 12:17:07 2014 - 002127 ms -  DEBUG -     ( 6,10): -R11*R2*R3*R5*R6*R8
+Oct 02 12:17:07 2014 - 002132 ms -  DEBUG -     ( 6,11):  0
+Oct 02 12:17:07 2014 - 002135 ms -  DEBUG -     ( 6,12):  0
+Oct 02 12:17:07 2014 - 002138 ms -  DEBUG -     ( 6,13):  0
+Oct 02 12:17:07 2014 - 002141 ms -  DEBUG -     ( 6,14):  0
+Oct 02 12:17:07 2014 - 002144 ms -  DEBUG -     ( 6,15): -R11*R2*R5*R6*R8
+Oct 02 12:17:07 2014 - 002149 ms -  DEBUG -     ( 6,16):  0
+Oct 02 12:17:07 2014 - 002152 ms -  DEBUG -     ( 6,17):  0
+Oct 02 12:17:07 2014 - 002155 ms -  DEBUG -   Row 7:
+Oct 02 12:17:07 2014 - 002158 ms -  DEBUG -     ( 7, 0):  0
+Oct 02 12:17:07 2014 - 002161 ms -  DEBUG -     ( 7, 1):  0
+Oct 02 12:17:07 2014 - 002164 ms -  DEBUG -     ( 7, 2):  0
+Oct 02 12:17:07 2014 - 002168 ms -  DEBUG -     ( 7, 3):  0
+Oct 02 12:17:07 2014 - 002171 ms -  DEBUG -     ( 7, 4):  0
+Oct 02 12:17:07 2014 - 002175 ms -  DEBUG -     ( 7, 5):  0
+Oct 02 12:17:07 2014 - 002178 ms -  DEBUG -     ( 7, 6):  0
+Oct 02 12:17:07 2014 - 002182 ms -  DEBUG -     ( 7, 7): -R11*R2*R3*R5*R6*R8*C2
+Oct 02 12:17:07 2014 - 002187 ms -  DEBUG -     ( 7, 8): +R11*R2*R3*R5*R6*R8*C2
+Oct 02 12:17:07 2014 - 002192 ms -  DEBUG -     ( 7, 9):  0
+Oct 02 12:17:07 2014 - 002195 ms -  DEBUG -     ( 7,10):  0
+Oct 02 12:17:07 2014 - 002198 ms -  DEBUG -     ( 7,11):  0
+Oct 02 12:17:07 2014 - 002201 ms -  DEBUG -     ( 7,12):  0
+Oct 02 12:17:07 2014 - 002204 ms -  DEBUG -     ( 7,13):  0
+Oct 02 12:17:07 2014 - 002207 ms -  DEBUG -     ( 7,14):  0
+Oct 02 12:17:07 2014 - 002210 ms -  DEBUG -     ( 7,15):  0
+Oct 02 12:17:07 2014 - 002213 ms -  DEBUG -     ( 7,16):  0
+Oct 02 12:17:07 2014 - 002216 ms -  DEBUG -     ( 7,17):  0
+Oct 02 12:17:07 2014 - 002219 ms -  DEBUG -   Row 8:
+Oct 02 12:17:07 2014 - 002222 ms -  DEBUG -     ( 8, 0):  0
+Oct 02 12:17:07 2014 - 002225 ms -  DEBUG -     ( 8, 1):  0
+Oct 02 12:17:07 2014 - 002230 ms -  DEBUG -     ( 8, 2):  0
+Oct 02 12:17:07 2014 - 002233 ms -  DEBUG -     ( 8, 3):  0
+Oct 02 12:17:07 2014 - 002236 ms -  DEBUG -     ( 8, 4):  0
+Oct 02 12:17:07 2014 - 002240 ms -  DEBUG -     ( 8, 5):  0
+Oct 02 12:17:07 2014 - 002243 ms -  DEBUG -     ( 8, 6):  0
+Oct 02 12:17:07 2014 - 002247 ms -  DEBUG -     ( 8, 7):  0
+Oct 02 12:17:07 2014 - 002250 ms -  DEBUG -     ( 8, 8): -R11*R2*R3*R5*R6*R8*C2
+Oct 02 12:17:07 2014 - 002255 ms -  DEBUG -     ( 8, 9):  0
+Oct 02 12:17:07 2014 - 002258 ms -  DEBUG -     ( 8,10):  0
+Oct 02 12:17:07 2014 - 002261 ms -  DEBUG -     ( 8,11):  0
+Oct 02 12:17:07 2014 - 002264 ms -  DEBUG -     ( 8,12):  0
+Oct 02 12:17:07 2014 - 002267 ms -  DEBUG -     ( 8,13):  0
+Oct 02 12:17:07 2014 - 002270 ms -  DEBUG -     ( 8,14):  0
+Oct 02 12:17:07 2014 - 002273 ms -  DEBUG -     ( 8,15):  0
+Oct 02 12:17:07 2014 - 002276 ms -  DEBUG -     ( 8,16):  0
+Oct 02 12:17:07 2014 - 002279 ms -  DEBUG -     ( 8,17):  0
+Oct 02 12:17:07 2014 - 002282 ms -  DEBUG -   Row 9:
+Oct 02 12:17:07 2014 - 002285 ms -  DEBUG -     ( 9, 0):  0
+Oct 02 12:17:07 2014 - 002289 ms -  DEBUG -     ( 9, 1):  0
+Oct 02 12:17:07 2014 - 002292 ms -  DEBUG -     ( 9, 2):  0
+Oct 02 12:17:07 2014 - 002295 ms -  DEBUG -     ( 9, 3):  0
+Oct 02 12:17:07 2014 - 002299 ms -  DEBUG -     ( 9, 4):  0
+Oct 02 12:17:07 2014 - 002303 ms -  DEBUG -     ( 9, 5):  0
+Oct 02 12:17:07 2014 - 002306 ms -  DEBUG -     ( 9, 6):  0
+Oct 02 12:17:07 2014 - 002310 ms -  DEBUG -     ( 9, 7):  0
+Oct 02 12:17:07 2014 - 002313 ms -  DEBUG -     ( 9, 8):  0
+Oct 02 12:17:07 2014 - 002317 ms -  DEBUG -     ( 9, 9): +R11*R2*R3*R4*R5*R6*R8*C2
+Oct 02 12:17:07 2014 - 002322 ms -  DEBUG -     ( 9,10): -R11*R2*R3*R4*R5*R6*R8*C2
+Oct 02 12:17:07 2014 - 002326 ms -  DEBUG -     ( 9,11):  0
+Oct 02 12:17:07 2014 - 002330 ms -  DEBUG -     ( 9,12): -R11*R2*R3*R5*R6*R8*C2
+Oct 02 12:17:07 2014 - 002333 ms -  DEBUG -     ( 9,13):  0
+Oct 02 12:17:07 2014 - 002337 ms -  DEBUG -     ( 9,14):  0
+Oct 02 12:17:07 2014 - 002340 ms -  DEBUG -     ( 9,15):  0
+Oct 02 12:17:07 2014 - 002343 ms -  DEBUG -     ( 9,16):  0
+Oct 02 12:17:07 2014 - 002346 ms -  DEBUG -     ( 9,17):  0
+Oct 02 12:17:07 2014 - 002349 ms -  DEBUG -   Row 10:
+Oct 02 12:17:07 2014 - 002352 ms -  DEBUG -     (10, 0):  0
+Oct 02 12:17:07 2014 - 002355 ms -  DEBUG -     (10, 1):  0
+Oct 02 12:17:07 2014 - 002359 ms -  DEBUG -     (10, 2):  0
+Oct 02 12:17:07 2014 - 002362 ms -  DEBUG -     (10, 3):  0
+Oct 02 12:17:07 2014 - 002366 ms -  DEBUG -     (10, 4):  0
+Oct 02 12:17:07 2014 - 002369 ms -  DEBUG -     (10, 5):  0
+Oct 02 12:17:07 2014 - 002373 ms -  DEBUG -     (10, 6):  0
+Oct 02 12:17:07 2014 - 002377 ms -  DEBUG -     (10, 7):  0
+Oct 02 12:17:07 2014 - 002380 ms -  DEBUG -     (10, 8):  0
+Oct 02 12:17:07 2014 - 002383 ms -  DEBUG -     (10, 9):  0
+Oct 02 12:17:07 2014 - 002387 ms -  DEBUG -     (10,10): -R1*R11*R2*R3*R4*R5*R6*R8*C2-R11*R2*R3*R4*R5*R6*R8*C1*C2
+Oct 02 12:17:07 2014 - 002393 ms -  DEBUG -     (10,11): +R1*R11*R2*R3*R4*R5*R6*R8*C2+R11*R2*R3*R4*R5*R6*R8*C1*C2
+Oct 02 12:17:07 2014 - 002399 ms -  DEBUG -     (10,12): +R11*R2*R3*R4*R5*R6*R8*C2
+Oct 02 12:17:07 2014 - 002403 ms -  DEBUG -     (10,13):  0
+Oct 02 12:17:07 2014 - 002406 ms -  DEBUG -     (10,14):  0
+Oct 02 12:17:07 2014 - 002410 ms -  DEBUG -     (10,15): +R11*R2*R3*R4*R5*R6*R8*C2
+Oct 02 12:17:07 2014 - 002414 ms -  DEBUG -     (10,16):  0
+Oct 02 12:17:07 2014 - 002418 ms -  DEBUG -     (10,17):  0
+Oct 02 12:17:07 2014 - 002421 ms -  DEBUG -   Row 11:
+Oct 02 12:17:07 2014 - 002424 ms -  DEBUG -     (11, 0):  0
+Oct 02 12:17:07 2014 - 002427 ms -  DEBUG -     (11, 1):  0
+Oct 02 12:17:07 2014 - 002430 ms -  DEBUG -     (11, 2):  0
+Oct 02 12:17:07 2014 - 002433 ms -  DEBUG -     (11, 3):  0
+Oct 02 12:17:07 2014 - 002436 ms -  DEBUG -     (11, 4):  0
+Oct 02 12:17:07 2014 - 002439 ms -  DEBUG -     (11, 5):  0
+Oct 02 12:17:07 2014 - 002442 ms -  DEBUG -     (11, 6):  0
+Oct 02 12:17:07 2014 - 002445 ms -  DEBUG -     (11, 7):  0
+Oct 02 12:17:07 2014 - 002448 ms -  DEBUG -     (11, 8):  0
+Oct 02 12:17:07 2014 - 002451 ms -  DEBUG -     (11, 9):  0
+Oct 02 12:17:07 2014 - 002454 ms -  DEBUG -     (11,10):  0
+Oct 02 12:17:07 2014 - 002457 ms -  DEBUG -     (11,11): -R1*R11*R2*R3*R4*R5*R6*R8*C2-R11*R2*R3*R4*R5*R6*R8*C1*C2
+Oct 02 12:17:07 2014 - 002463 ms -  DEBUG -     (11,12): -R1*R11*R2*R3*R5*R6*R8*C2-R11*R2*R3*R4*R5*R6*R8*C2-R11*R2*R3*R5*R6*R8*C1*C2
+Oct 02 12:17:07 2014 - 002472 ms -  DEBUG -     (11,13):  0
+Oct 02 12:17:07 2014 - 002475 ms -  DEBUG -     (11,14):  0
+Oct 02 12:17:07 2014 - 002478 ms -  DEBUG -     (11,15): -R11*R2*R3*R4*R5*R6*R8*C2
+Oct 02 12:17:07 2014 - 002483 ms -  DEBUG -     (11,16):  0
+Oct 02 12:17:07 2014 - 002487 ms -  DEBUG -     (11,17): +R1*R11*R2*R3*R4*R5*R6*R8*C2+R11*R2*R3*R4*R5*R6*R8*C1*C2
+Oct 02 12:17:07 2014 - 002492 ms -  DEBUG -   Row 12:
+Oct 02 12:17:07 2014 - 002495 ms -  DEBUG -     (12, 0):  0
+Oct 02 12:17:07 2014 - 002499 ms -  DEBUG -     (12, 1):  0
+Oct 02 12:17:07 2014 - 002502 ms -  DEBUG -     (12, 2):  0
+Oct 02 12:17:07 2014 - 002505 ms -  DEBUG -     (12, 3):  0
+Oct 02 12:17:07 2014 - 002508 ms -  DEBUG -     (12, 4):  0
+Oct 02 12:17:07 2014 - 002511 ms -  DEBUG -     (12, 5):  0
+Oct 02 12:17:07 2014 - 002514 ms -  DEBUG -     (12, 6):  0
+Oct 02 12:17:07 2014 - 002517 ms -  DEBUG -     (12, 7):  0
+Oct 02 12:17:07 2014 - 002520 ms -  DEBUG -     (12, 8):  0
+Oct 02 12:17:07 2014 - 002523 ms -  DEBUG -     (12, 9):  0
+Oct 02 12:17:07 2014 - 002526 ms -  DEBUG -     (12,10):  0
+Oct 02 12:17:07 2014 - 002529 ms -  DEBUG -     (12,11):  0
+Oct 02 12:17:07 2014 - 002532 ms -  DEBUG -     (12,12): -R1*R11*R2*R3*R4*R5*R6*R8*C2-R11*R2*R3*R4*R5*R6*R8*C1*C2
+Oct 02 12:17:07 2014 - 002538 ms -  DEBUG -     (12,13): -R1*R11*R2*R3*R4*R5*R6*R8*C2-R11*R2*R3*R4*R5*R6*R8*C1*C2
+Oct 02 12:17:07 2014 - 002543 ms -  DEBUG -     (12,14):  0
+Oct 02 12:17:07 2014 - 002547 ms -  DEBUG -     (12,15): -R1*R11*R2*R3*R4*R5*R6*R8*C2-R11*R2*R3*R4*R5*R6*R8*C1*C2
+Oct 02 12:17:07 2014 - 002553 ms -  DEBUG -     (12,16):  0
+Oct 02 12:17:07 2014 - 002556 ms -  DEBUG -     (12,17):  0
+Oct 02 12:17:07 2014 - 002560 ms -  DEBUG -   Row 13:
+Oct 02 12:17:07 2014 - 002563 ms -  DEBUG -     (13, 0):  0
+Oct 02 12:17:07 2014 - 002565 ms -  DEBUG -     (13, 1):  0
+Oct 02 12:17:07 2014 - 002568 ms -  DEBUG -     (13, 2):  0
+Oct 02 12:17:07 2014 - 002571 ms -  DEBUG -     (13, 3):  0
+Oct 02 12:17:07 2014 - 002574 ms -  DEBUG -     (13, 4):  0
+Oct 02 12:17:07 2014 - 002577 ms -  DEBUG -     (13, 5):  0
+Oct 02 12:17:07 2014 - 002580 ms -  DEBUG -     (13, 6):  0
+Oct 02 12:17:07 2014 - 002583 ms -  DEBUG -     (13, 7):  0
+Oct 02 12:17:07 2014 - 002586 ms -  DEBUG -     (13, 8):  0
+Oct 02 12:17:07 2014 - 002590 ms -  DEBUG -     (13, 9):  0
+Oct 02 12:17:07 2014 - 002593 ms -  DEBUG -     (13,10):  0
+Oct 02 12:17:07 2014 - 002596 ms -  DEBUG -     (13,11):  0
+Oct 02 12:17:07 2014 - 002599 ms -  DEBUG -     (13,12):  0
+Oct 02 12:17:07 2014 - 002602 ms -  DEBUG -     (13,13): -R1*R11*R2*R3*R5*R6*R8*C2-R11*R2*R3*R5*R6*R8*C1*C2
+Oct 02 12:17:07 2014 - 002607 ms -  DEBUG -     (13,14):  0
+Oct 02 12:17:07 2014 - 002611 ms -  DEBUG -     (13,15): -R1*R11*R2*R3*R5*R6*R8*C2-R11*R2*R3*R5*R6*R8*C1*C2
+Oct 02 12:17:07 2014 - 002616 ms -  DEBUG -     (13,16):  0
+Oct 02 12:17:07 2014 - 002619 ms -  DEBUG -     (13,17): -R1*R11*R2*R3*R4*R5*R6*R8*C2-R11*R2*R3*R4*R5*R6*R8*C1*C2
+Oct 02 12:17:07 2014 - 002625 ms -  DEBUG -   Row 14:
+Oct 02 12:17:07 2014 - 002628 ms -  DEBUG -     (14, 0):  0
+Oct 02 12:17:07 2014 - 002631 ms -  DEBUG -     (14, 1):  0
+Oct 02 12:17:07 2014 - 002634 ms -  DEBUG -     (14, 2):  0
+Oct 02 12:17:07 2014 - 002637 ms -  DEBUG -     (14, 3):  0
+Oct 02 12:17:07 2014 - 002640 ms -  DEBUG -     (14, 4):  0
+Oct 02 12:17:07 2014 - 002643 ms -  DEBUG -     (14, 5):  0
+Oct 02 12:17:07 2014 - 002647 ms -  DEBUG -     (14, 6):  0
+Oct 02 12:17:07 2014 - 002650 ms -  DEBUG -     (14, 7):  0
+Oct 02 12:17:07 2014 - 002654 ms -  DEBUG -     (14, 8):  0
+Oct 02 12:17:07 2014 - 002657 ms -  DEBUG -     (14, 9):  0
+Oct 02 12:17:07 2014 - 002661 ms -  DEBUG -     (14,10):  0
+Oct 02 12:17:07 2014 - 002664 ms -  DEBUG -     (14,11):  0
+Oct 02 12:17:07 2014 - 002668 ms -  DEBUG -     (14,12):  0
+Oct 02 12:17:07 2014 - 002672 ms -  DEBUG -     (14,13):  0
+Oct 02 12:17:07 2014 - 002675 ms -  DEBUG -     (14,14): -R1*R11*R2*R3*R5*R6*R8*C2-R11*R2*R3*R5*R6*R8*C1*C2
+Oct 02 12:17:07 2014 - 002681 ms -  DEBUG -     (14,15):  0
+Oct 02 12:17:07 2014 - 002685 ms -  DEBUG -     (14,16):  0
+Oct 02 12:17:07 2014 - 002688 ms -  DEBUG -     (14,17):  0
+Oct 02 12:17:07 2014 - 002692 ms -  DEBUG -   Row 15:
+Oct 02 12:17:07 2014 - 002694 ms -  DEBUG -     (15, 0):  0
+Oct 02 12:17:07 2014 - 002697 ms -  DEBUG -     (15, 1):  0
+Oct 02 12:17:07 2014 - 002700 ms -  DEBUG -     (15, 2):  0
+Oct 02 12:17:07 2014 - 002704 ms -  DEBUG -     (15, 3):  0
+Oct 02 12:17:07 2014 - 002707 ms -  DEBUG -     (15, 4):  0
+Oct 02 12:17:07 2014 - 002710 ms -  DEBUG -     (15, 5):  0
+Oct 02 12:17:07 2014 - 002713 ms -  DEBUG -     (15, 6):  0
+Oct 02 12:17:07 2014 - 002717 ms -  DEBUG -     (15, 7):  0
+Oct 02 12:17:07 2014 - 002721 ms -  DEBUG -     (15, 8):  0
+Oct 02 12:17:07 2014 - 002724 ms -  DEBUG -     (15, 9):  0
+Oct 02 12:17:07 2014 - 002727 ms -  DEBUG -     (15,10):  0
+Oct 02 12:17:07 2014 - 002731 ms -  DEBUG -     (15,11):  0
+Oct 02 12:17:07 2014 - 002735 ms -  DEBUG -     (15,12):  0
+Oct 02 12:17:07 2014 - 002738 ms -  DEBUG -     (15,13):  0
+Oct 02 12:17:07 2014 - 002742 ms -  DEBUG -     (15,14):  0
+Oct 02 12:17:07 2014 - 002746 ms -  DEBUG -     (15,15): -R1*R11*R2*R5*R6*R8*C2-R11*R2*R5*R6*R8*C1*C2
+Oct 02 12:17:07 2014 - 002751 ms -  DEBUG -     (15,16):  0
+Oct 02 12:17:07 2014 - 002755 ms -  DEBUG -     (15,17):  0
+Oct 02 12:17:07 2014 - 002758 ms -  DEBUG -   Row 16:
+Oct 02 12:17:07 2014 - 002761 ms -  DEBUG -     (16, 0):  0
+Oct 02 12:17:07 2014 - 002764 ms -  DEBUG -     (16, 1):  0
+Oct 02 12:17:07 2014 - 002767 ms -  DEBUG -     (16, 2):  0
+Oct 02 12:17:07 2014 - 002770 ms -  DEBUG -     (16, 3):  0
+Oct 02 12:17:07 2014 - 002773 ms -  DEBUG -     (16, 4):  0
+Oct 02 12:17:07 2014 - 002776 ms -  DEBUG -     (16, 5):  0
+Oct 02 12:17:07 2014 - 002779 ms -  DEBUG -     (16, 6):  0
+Oct 02 12:17:07 2014 - 002782 ms -  DEBUG -     (16, 7):  0
+Oct 02 12:17:07 2014 - 002785 ms -  DEBUG -     (16, 8):  0
+Oct 02 12:17:07 2014 - 002788 ms -  DEBUG -     (16, 9):  0
+Oct 02 12:17:07 2014 - 002791 ms -  DEBUG -     (16,10):  0
+Oct 02 12:17:07 2014 - 002794 ms -  DEBUG -     (16,11):  0
+Oct 02 12:17:07 2014 - 002797 ms -  DEBUG -     (16,12):  0
+Oct 02 12:17:07 2014 - 002800 ms -  DEBUG -     (16,13):  0
+Oct 02 12:17:07 2014 - 002803 ms -  DEBUG -     (16,14):  0
+Oct 02 12:17:07 2014 - 002806 ms -  DEBUG -     (16,15):  0
+Oct 02 12:17:07 2014 - 002809 ms -  DEBUG -     (16,16): -R1*R11*R2*R5*R6*R8*C2-R11*R2*R5*R6*R8*C1*C2
+Oct 02 12:17:07 2014 - 002814 ms -  DEBUG -     (16,17):  0
+Oct 02 12:17:07 2014 - 002818 ms -   INFO - Unknown U_kOpTRIn (5) is not required for the final result(s) and hence not computed. Its value is set to null
+Oct 02 12:17:07 2014 - 002827 ms -   INFO - Unknown U_kOpTRout (6) is not required for the final result(s) and hence not computed. Its value is set to null
+Oct 02 12:17:07 2014 - 002837 ms -   INFO - Unknown U_kOpTMIn (7) is not required for the final result(s) and hence not computed. Its value is set to null
+Oct 02 12:17:07 2014 - 002846 ms -   INFO - Unknown U_kOpTMout (8) is not required for the final result(s) and hence not computed. Its value is set to null
+Oct 02 12:17:07 2014 - 002855 ms -   INFO - Unknown U_kIn (9) is not required for the final result(s) and hence not computed. Its value is set to null
+Oct 02 12:17:07 2014 - 002865 ms -   INFO - Unknown U_kOpTLIn (10) is not required for the final result(s) and hence not computed. Its value is set to null
+Oct 02 12:17:07 2014 - 002874 ms -   INFO - Unknown U_kOpTLout (11) is not required for the final result(s) and hence not computed. Its value is set to null
+Oct 02 12:17:07 2014 - 002883 ms -   INFO - Unknown I_Vin (12) is not required for the final result(s) and hence not computed. Its value is set to null
+Oct 02 12:17:07 2014 - 002893 ms -   INFO - Unknown I_OpTL (13) is not required for the final result(s) and hence not computed. Its value is set to null
+Oct 02 12:17:07 2014 - 002902 ms -   INFO - Unknown I_OpTM (14) is not required for the final result(s) and hence not computed. Its value is set to null
+Oct 02 12:17:07 2014 - 002911 ms -   INFO - Unknown I_OpTR (15) is not required for the final result(s) and hence not computed. Its value is set to null
+Oct 02 12:17:07 2014 - 002921 ms -   INFO - Unknown I_OpBM (16) is not required for the final result(s) and hence not computed. Its value is set to null
+Oct 02 12:17:07 2014 - 002930 ms -   INFO - The solution of the linear equation system (17,18). All constants have the physical meaning of (complex) conductance:
+  U_kOpTMin = (not available)
+  U_kOpBMin = (not available)
+  U_kOpTRin = (not available)
+  U_kOpBMIn = (not available)
+  U_kOpBMout = N_Vin/D * Vin:
+    N_Vin =  0
+  U_kOpTRIn = (not available)
+  U_kOpTRout = (not available)
+  U_kOpTMIn = (not available)
+  U_kOpTMout = (not available)
+  U_kIn = (not available)
+  U_kOpTLIn = (not available)
+  U_kOpTLout = (not available)
+  I_Vin = (not available)
+  I_OpTL = (not available)
+  I_OpTM = (not available)
+  I_OpTR = (not available)
+  I_OpBM = (not available)
+  Vout = N_Vin/D * Vin:
+    N_Vin =  0
+  D = -R1*R11*R2*R5*R6*R8*C2-R11*R2*R5*R6*R8*C1*C2
+Oct 02 12:17:08 2014 - 003016 ms - RESULT - Oct 02 12:17:08 2014 - 003020 ms -  DEBUG - createExpressionMap: The map contains 2 expressions. 0 expressions are reused
+User-defined result G (Bode plot):
+Oct 02 12:17:08 2014 - 003041 ms -  DEBUG - createExpressionMap: The map contains 2 expressions. 0 expressions are reused
+The dependency of Vout on Vin:
+  Vout(s) = N_Vout_Vin(s)/D_Vout_Vin(s) * Vin(s), with
+    N_Vout_Vin(s) = 0
+    D_Vout_Vin(s) = 1
+Oct 02 12:17:08 2014 - 003047 ms -  DEBUG - Octave output folder .\wikipediaExample already exists. The input related parts of the Octave code are re-generated and existing files are overwritten. The static, problem independent parts of the code are not re-generated
+Oct 02 12:17:08 2014 - 003065 ms -  DEBUG - Octave M file .\wikipediaExample\G.m is opened for write access
+Oct 02 12:17:08 2014 - 003070 ms -   INFO - Device constant R1 is assigned the default value 100
+Oct 02 12:17:08 2014 - 003074 ms -   INFO - Device constant R11 is assigned the default value 100
+Oct 02 12:17:08 2014 - 003079 ms -   INFO - Device constant R2 is assigned the default value 100
+Oct 02 12:17:08 2014 - 003083 ms -   INFO - Device constant R3 is assigned the default value 100
+Oct 02 12:17:08 2014 - 003089 ms -   INFO - Device constant R4 is assigned the default value 100
+Oct 02 12:17:08 2014 - 003094 ms -   INFO - Device constant R5 is assigned the default value 100
+Oct 02 12:17:08 2014 - 003099 ms -   INFO - Device constant R6 is assigned the default value 100
+Oct 02 12:17:08 2014 - 003104 ms -   INFO - Device constant R8 is assigned the default value 100
+Oct 02 12:17:08 2014 - 003108 ms -   INFO - Device constant C1 is assigned the default value 1e-005
+Oct 02 12:17:08 2014 - 003113 ms -   INFO - Device constant C2 is assigned the default value 1e-005
+Oct 02 12:17:08 2014 - 003118 ms -  DEBUG - createExpressionMap: The map contains 2 expressions. 0 expressions are reused
+Oct 02 12:17:08 2014 - 003126 ms -   INFO - Octave file .\wikipediaExample\G.m successfully written
+Oct 02 12:17:08 2014 - 003130 ms -  DEBUG - mem_deleteHeap: Delete heap Addend of frequency domain expression, with a total size of 100 data objects (27244 Byte) in 1 chunks of memory
+Oct 02 12:17:08 2014 - 003140 ms -  DEBUG - mem_deleteHeap: Delete heap Network, with a total size of 20 data objects (212 Byte) in 2 chunks of memory
+Oct 02 12:17:08 2014 - 003149 ms -  DEBUG - mem_deleteHeap: Delete heap Coefficient of LES, with a total size of 1000 data objects (16044 Byte) in 1 chunks of memory
+Oct 02 12:21:41 2014 - 000063 ms - RESULT - 
+-----------------------------------------------------------------------------
+ linNet - The Software for symbolic Analysis of linear Electronic Circuits
+ Copyright (C) 1991, 2013-2014 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ This is free software; see the source for copying conditions. There is NO
+ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+-----------------------------------------------------------------------------
+Oct 02 12:21:41 2014 - 000064 ms -   INFO - Log file name is .\wikipediaExample.log
+Oct 02 12:21:41 2014 - 000068 ms -  DEBUG - Application installation directory is C:\user\vranken\projects\linNet\trunk\components\linNet\bin\win32\DEBUG
+Oct 02 12:21:41 2014 - 000078 ms -  DEBUG - mem_createHeap: Create new heap Coefficient of LES, client data object size 16 Byte, effectively 16 Byte
+Oct 02 12:21:41 2014 - 000088 ms -  DEBUG - mem:allocNewChunk: Allocating another chunk of 1000 objects for heap Coefficient of LES. Total heap size now: 16000 Byte
+Oct 02 12:21:41 2014 - 000101 ms -  DEBUG - mem_createHeap: Create new heap Network, client data object size 8 Byte, effectively 8 Byte
+Oct 02 12:21:41 2014 - 000110 ms -  DEBUG - mem:allocNewChunk: Allocating another chunk of 10 objects for heap Network. Total heap size now: 80 Byte
+Oct 02 12:21:41 2014 - 000120 ms -  DEBUG - mem_createHeap: Create new heap Addend of frequency domain expression, client data object size 272 Byte, effectively 272 Byte
+Oct 02 12:21:41 2014 - 000130 ms -  DEBUG - mem:allocNewChunk: Allocating another chunk of 100 objects for heap Addend of frequency domain expression. Total heap size now: 27200 Byte
+Oct 02 12:21:41 2014 - 000141 ms -   INFO - Start reading circuit file wikipediaExample.cnl
+Oct 02 12:21:41 2014 - 000145 ms -  DEBUG - Line 25: Found a device definition
+Oct 02 12:21:41 2014 - 000149 ms -  DEBUG - Line 26: Found device definition: Vin, type 5, connected to kIn, gnd, (n.c.), (n.c.), no value is specified
+Oct 02 12:21:42 2014 - 000158 ms -  DEBUG - Line 29: Found a device definition
+Oct 02 12:21:42 2014 - 000162 ms -  DEBUG - Line 30: Found device definition: R4, type 0, connected to kIn, kOpTLIn, (n.c.), (n.c.), no value is specified
+Oct 02 12:21:42 2014 - 000172 ms -  DEBUG - Line 30: Found a device definition
+Oct 02 12:21:42 2014 - 000176 ms -  DEBUG - Line 31: Found device definition: R1, type 0, connected to kOpTLIn, kOpTLOut, (n.c.), (n.c.), no value is specified
+Oct 02 12:21:42 2014 - 000185 ms -  DEBUG - Line 31: Found a device definition
+Oct 02 12:21:42 2014 - 000189 ms -  DEBUG - Line 32: Found device definition: C1, type 3, connected to kOpTLIn, kOpTLOut, (n.c.), (n.c.), no value is specified
+Oct 02 12:21:42 2014 - 000198 ms -  DEBUG - Line 32: Found a device definition
+Oct 02 12:21:42 2014 - 000202 ms -  DEBUG - Line 33: Found device definition: OpTL, type 4, connected to kOpTLIn, gnd, kOpTLOut, (n.c.), no value is specified
+Oct 02 12:21:42 2014 - 000211 ms -  DEBUG - Line 35: Found a device definition
+Oct 02 12:21:42 2014 - 000215 ms -  DEBUG - Line 36: Found device definition: R2, type 0, connected to kOpTLOut, kOpTMin, (n.c.), (n.c.), no value is specified
+Oct 02 12:21:42 2014 - 000225 ms -  DEBUG - Line 36: Found a device definition
+Oct 02 12:21:42 2014 - 000229 ms -  DEBUG - Line 37: Found device definition: C2, type 3, connected to kOpTMIn, kOpTMOut, (n.c.), (n.c.), no value is specified
+Oct 02 12:21:42 2014 - 000238 ms -  DEBUG - Line 37: Found a device definition
+Oct 02 12:21:42 2014 - 000242 ms -  DEBUG - Line 38: Found device definition: OpTM, type 4, connected to kOpTMIn, gnd, kOpTMOut, (n.c.), no value is specified
+Oct 02 12:21:42 2014 - 000251 ms -  DEBUG - Line 40: Found a device definition
+Oct 02 12:21:42 2014 - 000255 ms -  DEBUG - Line 41: Found device definition: R5, type 0, connected to kOpTMOut, kOpTRIn, (n.c.), (n.c.), no value is specified
+Oct 02 12:21:42 2014 - 000266 ms -  DEBUG - Line 41: Found a device definition
+Oct 02 12:21:42 2014 - 000270 ms -  DEBUG - Line 42: Found device definition: R6, type 0, connected to kOpTRIn, kOpTRout, (n.c.), (n.c.), no value is specified
+Oct 02 12:21:42 2014 - 000280 ms -  DEBUG - Line 42: Found a device definition
+Oct 02 12:21:42 2014 - 000284 ms -  DEBUG - Line 43: Found device definition: OpTR, type 4, connected to kOpTRIn, gnd, kOpTRout, (n.c.), no value is specified
+Oct 02 12:21:42 2014 - 000293 ms -  DEBUG - Line 45: Found a device definition
+Oct 02 12:21:42 2014 - 000297 ms -  DEBUG - Line 46: Found device definition: R3, type 0, connected to kOpTRout, kOpTLIn, (n.c.), (n.c.), no value is specified
+Oct 02 12:21:42 2014 - 000306 ms -  DEBUG - Line 48: Found a device definition
+Oct 02 12:21:42 2014 - 000310 ms -  DEBUG - Line 49: Found device definition: R8, type 0, connected to kOpTLOut, kOpBMIn, (n.c.), (n.c.), no value is specified
+Oct 02 12:21:42 2014 - 000319 ms -  DEBUG - Line 49: Found a device definition
+Oct 02 12:21:42 2014 - 000323 ms -  DEBUG - Line 50: Found device definition: R11, type 0, connected to kOpBMIn, kOpBMOut, (n.c.), (n.c.), no value is specified
+Oct 02 12:21:42 2014 - 000333 ms -  DEBUG - Line 50: Found a device definition
+Oct 02 12:21:42 2014 - 000337 ms -  DEBUG - Line 51: Found device definition: OpBM, type 4, connected to kOpBMIn, gnd, kOpBMOut, (n.c.), no value is specified
+Oct 02 12:21:42 2014 - 000346 ms - RESULT - Reading circuit file wikipediaExample.cnl successfully done
+Oct 02 12:21:42 2014 - 000351 ms -  DEBUG - mem:allocNewChunk: Allocating another chunk of 10 objects for heap Network. Total heap size now: 160 Byte
+Oct 02 12:21:42 2014 - 000360 ms -  DEBUG - Network topology after parsing input:
+Oct 02 12:21:42 2014 - 000364 ms -  DEBUG -   Sub-network 1:
+Oct 02 12:21:42 2014 - 000368 ms -  DEBUG -     Node 01, kOpTMIn
+Oct 02 12:21:42 2014 - 000371 ms -  DEBUG -     Node 02, kOpTMOut
+Oct 02 12:21:42 2014 - 000375 ms -  DEBUG -     Node 03, kIn
+Oct 02 12:21:42 2014 - 000378 ms -  DEBUG -     Node 04, gnd
+Oct 02 12:21:42 2014 - 000382 ms -  DEBUG -     Node 05, kOpTLIn
+Oct 02 12:21:42 2014 - 000386 ms -  DEBUG -     Node 06, kOpTLOut
+Oct 02 12:21:42 2014 - 000389 ms -  DEBUG -     Node 07, kOpTMin
+Oct 02 12:21:42 2014 - 000393 ms -  DEBUG -     Node 08, kOpTRIn
+Oct 02 12:21:42 2014 - 000397 ms -  DEBUG -     Node 09, kOpTRout
+Oct 02 12:21:42 2014 - 000400 ms -  DEBUG -     Node 10, kOpBMIn
+Oct 02 12:21:42 2014 - 000404 ms -  DEBUG -     Node 11, kOpBMOut
+Oct 02 12:21:42 2014 - 000408 ms -  DEBUG - Network consists of 1 unconnected graphs with a total of 11 nodes
+Oct 02 12:21:42 2014 - 000413 ms -   INFO - Node gnd is considered a ground node. The voltage at this node is considered null
+Oct 02 12:21:42 2014 - 000418 ms -   INFO - Linear equation system (15, 16) has 1 knowns, 15 unknowns and 10 constants
+Oct 02 12:21:42 2014 - 000424 ms -  DEBUG - Dependent Vout (15) is required for user defined result G
+Oct 02 12:21:42 2014 - 000429 ms -  DEBUG - Dependent U_kOpBMOut (9) is required for user defined voltage Vout
+Oct 02 12:21:42 2014 - 000434 ms -   INFO - Unknown U_kOpTMIn (0) is not required for the final result(s) and hence not computed. Its value is set to null
+Oct 02 12:21:42 2014 - 000444 ms -   INFO - Unknown U_kOpTMOut (1) is not required for the final result(s) and hence not computed. Its value is set to null
+Oct 02 12:21:42 2014 - 000454 ms -   INFO - Unknown U_kIn (2) is not required for the final result(s) and hence not computed. Its value is set to null
+Oct 02 12:21:42 2014 - 000463 ms -   INFO - Unknown U_kOpTLIn (3) is not required for the final result(s) and hence not computed. Its value is set to null
+Oct 02 12:21:42 2014 - 000472 ms -   INFO - Unknown U_kOpTLOut (4) is not required for the final result(s) and hence not computed. Its value is set to null
+Oct 02 12:21:42 2014 - 000481 ms -   INFO - Unknown U_kOpTMin (5) is not required for the final result(s) and hence not computed. Its value is set to null
+Oct 02 12:21:42 2014 - 000491 ms -   INFO - Unknown U_kOpTRIn (6) is not required for the final result(s) and hence not computed. Its value is set to null
+Oct 02 12:21:42 2014 - 000500 ms -   INFO - Unknown U_kOpTRout (7) is not required for the final result(s) and hence not computed. Its value is set to null
+Oct 02 12:21:42 2014 - 000509 ms -   INFO - Unknown U_kOpBMIn (8) is not required for the final result(s) and hence not computed. Its value is set to null
+Oct 02 12:21:42 2014 - 000519 ms -  DEBUG - LES prior to elimination for unknown U_kOpBMOut:
+Oct 02 12:21:42 2014 - 000523 ms -  DEBUG - Table of symbolic objects:
+Oct 02 12:21:42 2014 - 000526 ms -  DEBUG - 1 known variables:
+Oct 02 12:21:42 2014 - 000530 ms -  DEBUG -   0) Vin, column in LES: 15
+Oct 02 12:21:42 2014 - 000534 ms -  DEBUG - 15 unknown variables:
+Oct 02 12:21:42 2014 - 000537 ms -  DEBUG -   0) U_kOpTMIn, voltage of node, position in LES: (0, 0), sub-net: 1
+Oct 02 12:21:42 2014 - 000543 ms -  DEBUG -   1) U_kOpTMOut, voltage of node, position in LES: (1, 1), sub-net: 1
+Oct 02 12:21:42 2014 - 000548 ms -  DEBUG -   2) U_kIn, voltage of node, position in LES: (2, 2), sub-net: 1
+Oct 02 12:21:42 2014 - 000553 ms -  DEBUG -   3) U_kOpTLIn, voltage of node, position in LES: (3, 3), sub-net: 1
+Oct 02 12:21:42 2014 - 000558 ms -  DEBUG -   4) U_kOpTLOut, voltage of node, position in LES: (4, 4), sub-net: 1
+Oct 02 12:21:42 2014 - 000563 ms -  DEBUG -   5) U_kOpTMin, voltage of node, position in LES: (5, 5), sub-net: 1
+Oct 02 12:21:42 2014 - 000568 ms -  DEBUG -   6) U_kOpTRIn, voltage of node, position in LES: (6, 6), sub-net: 1
+Oct 02 12:21:42 2014 - 000573 ms -  DEBUG -   7) U_kOpTRout, voltage of node, position in LES: (7, 7), sub-net: 1
+Oct 02 12:21:42 2014 - 000578 ms -  DEBUG -   8) U_kOpBMIn, voltage of node, position in LES: (8, 8), sub-net: 1
+Oct 02 12:21:42 2014 - 000584 ms -  DEBUG -   9) U_kOpBMOut, voltage of node, position in LES: (9, 14), sub-net: 1
+Oct 02 12:21:42 2014 - 000589 ms -  DEBUG -   10) I_Vin, internal unknown current, position in LES: (10, 10), sub-net: -1
+Oct 02 12:21:42 2014 - 000594 ms -  DEBUG -   11) I_OpTL, internal unknown current, position in LES: (11, 11), sub-net: -1
+Oct 02 12:21:42 2014 - 000600 ms -  DEBUG -   12) I_OpTM, internal unknown current, position in LES: (12, 12), sub-net: -1
+Oct 02 12:21:42 2014 - 000606 ms -  DEBUG -   13) I_OpTR, internal unknown current, position in LES: (13, 13), sub-net: -1
+Oct 02 12:21:42 2014 - 000611 ms -  DEBUG -   14) I_OpBM, internal unknown current, position in LES: (14, 9), sub-net: -1
+Oct 02 12:21:42 2014 - 000617 ms -  DEBUG - 10 constants:
+Oct 02 12:21:42 2014 - 000620 ms -  DEBUG -   0) C2, L, inductivity, internal representation: 0x1
+Oct 02 12:21:42 2014 - 000625 ms -  DEBUG -   1) C1, L, inductivity, internal representation: 0x2
+Oct 02 12:21:42 2014 - 000630 ms -  DEBUG -   2) R8, R, resistor, internal representation: 0x4
+Oct 02 12:21:42 2014 - 000634 ms -  DEBUG -   3) R6, R, resistor, internal representation: 0x8
+Oct 02 12:21:42 2014 - 000638 ms -  DEBUG -   4) R5, R, resistor, internal representation: 0x10
+Oct 02 12:21:42 2014 - 000643 ms -  DEBUG -   5) R4, R, resistor, internal representation: 0x20
+Oct 02 12:21:42 2014 - 000647 ms -  DEBUG -   6) R3, R, resistor, internal representation: 0x40
+Oct 02 12:21:42 2014 - 000652 ms -  DEBUG -   7) R2, R, resistor, internal representation: 0x80
+Oct 02 12:21:42 2014 - 000656 ms -  DEBUG -   8) R11, R, resistor, internal representation: 0x100
+Oct 02 12:21:42 2014 - 000661 ms -  DEBUG -   9) R1, R, resistor, internal representation: 0x200
+Oct 02 12:21:42 2014 - 000666 ms -  DEBUG - The linear equation system (15, 16):
+Oct 02 12:21:42 2014 - 000669 ms -  DEBUG -   Row 0:
+Oct 02 12:21:42 2014 - 000673 ms -  DEBUG -     ( 0, 0): -C2
+Oct 02 12:21:42 2014 - 000676 ms -  DEBUG -     ( 0, 1): +C2
+Oct 02 12:21:42 2014 - 000680 ms -  DEBUG -     ( 0, 2):  0
+Oct 02 12:21:42 2014 - 000682 ms -  DEBUG -     ( 0, 3):  0
+Oct 02 12:21:42 2014 - 000685 ms -  DEBUG -     ( 0, 4):  0
+Oct 02 12:21:42 2014 - 000688 ms -  DEBUG -     ( 0, 5):  0
+Oct 02 12:21:42 2014 - 000691 ms -  DEBUG -     ( 0, 6):  0
+Oct 02 12:21:42 2014 - 000694 ms -  DEBUG -     ( 0, 7):  0
+Oct 02 12:21:42 2014 - 000697 ms -  DEBUG -     ( 0, 8):  0
+Oct 02 12:21:42 2014 - 000700 ms -  DEBUG -     ( 0, 9):  0
+Oct 02 12:21:42 2014 - 000703 ms -  DEBUG -     ( 0,10):  0
+Oct 02 12:21:42 2014 - 000706 ms -  DEBUG -     ( 0,11):  0
+Oct 02 12:21:42 2014 - 000710 ms -  DEBUG -     ( 0,12):  0
+Oct 02 12:21:42 2014 - 000713 ms -  DEBUG -     ( 0,13):  0
+Oct 02 12:21:42 2014 - 000716 ms -  DEBUG -     ( 0,14):  0
+Oct 02 12:21:42 2014 - 000719 ms -  DEBUG -     ( 0,15):  0
+Oct 02 12:21:42 2014 - 000722 ms -  DEBUG -   Row 1:
+Oct 02 12:21:42 2014 - 000725 ms -  DEBUG -     ( 1, 0): +C2
+Oct 02 12:21:42 2014 - 000729 ms -  DEBUG -     ( 1, 1): -R5-C2
+Oct 02 12:21:42 2014 - 000732 ms -  DEBUG -     ( 1, 2):  0
+Oct 02 12:21:42 2014 - 000735 ms -  DEBUG -     ( 1, 3):  0
+Oct 02 12:21:42 2014 - 000738 ms -  DEBUG -     ( 1, 4):  0
+Oct 02 12:21:42 2014 - 000742 ms -  DEBUG -     ( 1, 5):  0
+Oct 02 12:21:42 2014 - 000745 ms -  DEBUG -     ( 1, 6): +R5
+Oct 02 12:21:42 2014 - 000749 ms -  DEBUG -     ( 1, 7):  0
+Oct 02 12:21:42 2014 - 000753 ms -  DEBUG -     ( 1, 8):  0
+Oct 02 12:21:42 2014 - 000756 ms -  DEBUG -     ( 1, 9):  0
+Oct 02 12:21:42 2014 - 000759 ms -  DEBUG -     ( 1,10):  0
+Oct 02 12:21:42 2014 - 000763 ms -  DEBUG -     ( 1,11):  0
+Oct 02 12:21:42 2014 - 000766 ms -  DEBUG -     ( 1,12): +1
+Oct 02 12:21:42 2014 - 000770 ms -  DEBUG -     ( 1,13):  0
+Oct 02 12:21:42 2014 - 000774 ms -  DEBUG -     ( 1,14):  0
+Oct 02 12:21:42 2014 - 000777 ms -  DEBUG -     ( 1,15):  0
+Oct 02 12:21:42 2014 - 000781 ms -  DEBUG -   Row 2:
+Oct 02 12:21:42 2014 - 000784 ms -  DEBUG -     ( 2, 0):  0
+Oct 02 12:21:42 2014 - 000788 ms -  DEBUG -     ( 2, 1):  0
+Oct 02 12:21:42 2014 - 000792 ms -  DEBUG -     ( 2, 2): -R4
+Oct 02 12:21:42 2014 - 000795 ms -  DEBUG -     ( 2, 3): +R4
+Oct 02 12:21:42 2014 - 000799 ms -  DEBUG -     ( 2, 4):  0
+Oct 02 12:21:42 2014 - 000803 ms -  DEBUG -     ( 2, 5):  0
+Oct 02 12:21:42 2014 - 000806 ms -  DEBUG -     ( 2, 6):  0
+Oct 02 12:21:42 2014 - 000810 ms -  DEBUG -     ( 2, 7):  0
+Oct 02 12:21:42 2014 - 000813 ms -  DEBUG -     ( 2, 8):  0
+Oct 02 12:21:42 2014 - 000817 ms -  DEBUG -     ( 2, 9):  0
+Oct 02 12:21:42 2014 - 000820 ms -  DEBUG -     ( 2,10): +1
+Oct 02 12:21:42 2014 - 000824 ms -  DEBUG -     ( 2,11):  0
+Oct 02 12:21:42 2014 - 000827 ms -  DEBUG -     ( 2,12):  0
+Oct 02 12:21:42 2014 - 000831 ms -  DEBUG -     ( 2,13):  0
+Oct 02 12:21:42 2014 - 000834 ms -  DEBUG -     ( 2,14):  0
+Oct 02 12:21:42 2014 - 000838 ms -  DEBUG -     ( 2,15):  0
+Oct 02 12:21:42 2014 - 000841 ms -  DEBUG -   Row 3:
+Oct 02 12:21:42 2014 - 000845 ms -  DEBUG -     ( 3, 0):  0
+Oct 02 12:21:42 2014 - 000849 ms -  DEBUG -     ( 3, 1):  0
+Oct 02 12:21:42 2014 - 000852 ms -  DEBUG -     ( 3, 2): +R4
+Oct 02 12:21:42 2014 - 000856 ms -  DEBUG -     ( 3, 3): -R1-R3-R4
+                                                         -C1
+Oct 02 12:21:42 2014 - 000864 ms -  DEBUG -     ( 3, 4): +R1+C1
+Oct 02 12:21:42 2014 - 000868 ms -  DEBUG -     ( 3, 5):  0
+Oct 02 12:21:42 2014 - 000871 ms -  DEBUG -     ( 3, 6):  0
+Oct 02 12:21:42 2014 - 000874 ms -  DEBUG -     ( 3, 7): +R3
+Oct 02 12:21:42 2014 - 000877 ms -  DEBUG -     ( 3, 8):  0
+Oct 02 12:21:42 2014 - 000880 ms -  DEBUG -     ( 3, 9):  0
+Oct 02 12:21:42 2014 - 000883 ms -  DEBUG -     ( 3,10):  0
+Oct 02 12:21:42 2014 - 000886 ms -  DEBUG -     ( 3,11):  0
+Oct 02 12:21:42 2014 - 000889 ms -  DEBUG -     ( 3,12):  0
+Oct 02 12:21:42 2014 - 000892 ms -  DEBUG -     ( 3,13):  0
+Oct 02 12:21:42 2014 - 000895 ms -  DEBUG -     ( 3,14):  0
+Oct 02 12:21:42 2014 - 000898 ms -  DEBUG -     ( 3,15):  0
+Oct 02 12:21:42 2014 - 000901 ms -  DEBUG -   Row 4:
+Oct 02 12:21:42 2014 - 000904 ms -  DEBUG -     ( 4, 0):  0
+Oct 02 12:21:42 2014 - 000907 ms -  DEBUG -     ( 4, 1):  0
+Oct 02 12:21:42 2014 - 000911 ms -  DEBUG -     ( 4, 2):  0
+Oct 02 12:21:42 2014 - 000914 ms -  DEBUG -     ( 4, 3): +R1+C1
+Oct 02 12:21:42 2014 - 000918 ms -  DEBUG -     ( 4, 4): -R1-R2-R8
+                                                         -C1
+Oct 02 12:21:42 2014 - 000926 ms -  DEBUG -     ( 4, 5): +R2
+Oct 02 12:21:42 2014 - 000930 ms -  DEBUG -     ( 4, 6):  0
+Oct 02 12:21:42 2014 - 000933 ms -  DEBUG -     ( 4, 7):  0
+Oct 02 12:21:42 2014 - 000936 ms -  DEBUG -     ( 4, 8): +R8
+Oct 02 12:21:42 2014 - 000939 ms -  DEBUG -     ( 4, 9):  0
+Oct 02 12:21:42 2014 - 000942 ms -  DEBUG -     ( 4,10):  0
+Oct 02 12:21:42 2014 - 000945 ms -  DEBUG -     ( 4,11): +1
+Oct 02 12:21:42 2014 - 000948 ms -  DEBUG -     ( 4,12):  0
+Oct 02 12:21:42 2014 - 000951 ms -  DEBUG -     ( 4,13):  0
+Oct 02 12:21:42 2014 - 000954 ms -  DEBUG -     ( 4,14):  0
+Oct 02 12:21:42 2014 - 000957 ms -  DEBUG -     ( 4,15):  0
+Oct 02 12:21:42 2014 - 000960 ms -  DEBUG -   Row 5:
+Oct 02 12:21:42 2014 - 000963 ms -  DEBUG -     ( 5, 0):  0
+Oct 02 12:21:42 2014 - 000966 ms -  DEBUG -     ( 5, 1):  0
+Oct 02 12:21:42 2014 - 000970 ms -  DEBUG -     ( 5, 2):  0
+Oct 02 12:21:42 2014 - 000973 ms -  DEBUG -     ( 5, 3):  0
+Oct 02 12:21:42 2014 - 000977 ms -  DEBUG -     ( 5, 4): +R2
+Oct 02 12:21:42 2014 - 000981 ms -  DEBUG -     ( 5, 5): -R2
+Oct 02 12:21:42 2014 - 000984 ms -  DEBUG -     ( 5, 6):  0
+Oct 02 12:21:42 2014 - 000988 ms -  DEBUG -     ( 5, 7):  0
+Oct 02 12:21:42 2014 - 000991 ms -  DEBUG -     ( 5, 8):  0
+Oct 02 12:21:42 2014 - 000995 ms -  DEBUG -     ( 5, 9):  0
+Oct 02 12:21:42 2014 - 000999 ms -  DEBUG -     ( 5,10):  0
+Oct 02 12:21:42 2014 - 001002 ms -  DEBUG -     ( 5,11):  0
+Oct 02 12:21:42 2014 - 001006 ms -  DEBUG -     ( 5,12):  0
+Oct 02 12:21:42 2014 - 001009 ms -  DEBUG -     ( 5,13):  0
+Oct 02 12:21:42 2014 - 001013 ms -  DEBUG -     ( 5,14):  0
+Oct 02 12:21:42 2014 - 001016 ms -  DEBUG -     ( 5,15):  0
+Oct 02 12:21:42 2014 - 001020 ms -  DEBUG -   Row 6:
+Oct 02 12:21:42 2014 - 001023 ms -  DEBUG -     ( 6, 0):  0
+Oct 02 12:21:42 2014 - 001027 ms -  DEBUG -     ( 6, 1): +R5
+Oct 02 12:21:42 2014 - 001031 ms -  DEBUG -     ( 6, 2):  0
+Oct 02 12:21:42 2014 - 001034 ms -  DEBUG -     ( 6, 3):  0
+Oct 02 12:21:42 2014 - 001038 ms -  DEBUG -     ( 6, 4):  0
+Oct 02 12:21:42 2014 - 001041 ms -  DEBUG -     ( 6, 5):  0
+Oct 02 12:21:42 2014 - 001045 ms -  DEBUG -     ( 6, 6): -R5-R6
+Oct 02 12:21:42 2014 - 001049 ms -  DEBUG -     ( 6, 7): +R6
+Oct 02 12:21:42 2014 - 001052 ms -  DEBUG -     ( 6, 8):  0
+Oct 02 12:21:42 2014 - 001056 ms -  DEBUG -     ( 6, 9):  0
+Oct 02 12:21:42 2014 - 001059 ms -  DEBUG -     ( 6,10):  0
+Oct 02 12:21:42 2014 - 001063 ms -  DEBUG -     ( 6,11):  0
+Oct 02 12:21:42 2014 - 001066 ms -  DEBUG -     ( 6,12):  0
+Oct 02 12:21:42 2014 - 001070 ms -  DEBUG -     ( 6,13):  0
+Oct 02 12:21:42 2014 - 001074 ms -  DEBUG -     ( 6,14):  0
+Oct 02 12:21:42 2014 - 001077 ms -  DEBUG -     ( 6,15):  0
+Oct 02 12:21:42 2014 - 001081 ms -  DEBUG -   Row 7:
+Oct 02 12:21:42 2014 - 001084 ms -  DEBUG -     ( 7, 0):  0
+Oct 02 12:21:42 2014 - 001087 ms -  DEBUG -     ( 7, 1):  0
+Oct 02 12:21:42 2014 - 001091 ms -  DEBUG -     ( 7, 2):  0
+Oct 02 12:21:42 2014 - 001095 ms -  DEBUG -     ( 7, 3): +R3
+Oct 02 12:21:42 2014 - 001098 ms -  DEBUG -     ( 7, 4):  0
+Oct 02 12:21:42 2014 - 001102 ms -  DEBUG -     ( 7, 5):  0
+Oct 02 12:21:42 2014 - 001105 ms -  DEBUG -     ( 7, 6): +R6
+Oct 02 12:21:42 2014 - 001109 ms -  DEBUG -     ( 7, 7): -R3-R6
+Oct 02 12:21:42 2014 - 001113 ms -  DEBUG -     ( 7, 8):  0
+Oct 02 12:21:42 2014 - 001116 ms -  DEBUG -     ( 7, 9):  0
+Oct 02 12:21:42 2014 - 001120 ms -  DEBUG -     ( 7,10):  0
+Oct 02 12:21:42 2014 - 001123 ms -  DEBUG -     ( 7,11):  0
+Oct 02 12:21:42 2014 - 001127 ms -  DEBUG -     ( 7,12):  0
+Oct 02 12:21:42 2014 - 001130 ms -  DEBUG -     ( 7,13): +1
+Oct 02 12:21:42 2014 - 001134 ms -  DEBUG -     ( 7,14):  0
+Oct 02 12:21:42 2014 - 001137 ms -  DEBUG -     ( 7,15):  0
+Oct 02 12:21:42 2014 - 001141 ms -  DEBUG -   Row 8:
+Oct 02 12:21:42 2014 - 001144 ms -  DEBUG -     ( 8, 0):  0
+Oct 02 12:21:42 2014 - 001148 ms -  DEBUG -     ( 8, 1):  0
+Oct 02 12:21:42 2014 - 001151 ms -  DEBUG -     ( 8, 2):  0
+Oct 02 12:21:42 2014 - 001155 ms -  DEBUG -     ( 8, 3):  0
+Oct 02 12:21:43 2014 - 001159 ms -  DEBUG -     ( 8, 4): +R8
+Oct 02 12:21:43 2014 - 001163 ms -  DEBUG -     ( 8, 5):  0
+Oct 02 12:21:43 2014 - 001166 ms -  DEBUG -     ( 8, 6):  0
+Oct 02 12:21:43 2014 - 001170 ms -  DEBUG -     ( 8, 7):  0
+Oct 02 12:21:43 2014 - 001173 ms -  DEBUG -     ( 8, 8): -R11-R8
+Oct 02 12:21:43 2014 - 001177 ms -  DEBUG -     ( 8, 9):  0
+Oct 02 12:21:43 2014 - 001180 ms -  DEBUG -     ( 8,10):  0
+Oct 02 12:21:43 2014 - 001184 ms -  DEBUG -     ( 8,11):  0
+Oct 02 12:21:43 2014 - 001187 ms -  DEBUG -     ( 8,12):  0
+Oct 02 12:21:43 2014 - 001191 ms -  DEBUG -     ( 8,13):  0
+Oct 02 12:21:43 2014 - 001194 ms -  DEBUG -     ( 8,14): +R11
+Oct 02 12:21:43 2014 - 001198 ms -  DEBUG -     ( 8,15):  0
+Oct 02 12:21:43 2014 - 001202 ms -  DEBUG -   Row 9:
+Oct 02 12:21:43 2014 - 001205 ms -  DEBUG -     ( 9, 0):  0
+Oct 02 12:21:43 2014 - 001209 ms -  DEBUG -     ( 9, 1):  0
+Oct 02 12:21:43 2014 - 001212 ms -  DEBUG -     ( 9, 2):  0
+Oct 02 12:21:43 2014 - 001216 ms -  DEBUG -     ( 9, 3):  0
+Oct 02 12:21:43 2014 - 001220 ms -  DEBUG -     ( 9, 4):  0
+Oct 02 12:21:43 2014 - 001223 ms -  DEBUG -     ( 9, 5):  0
+Oct 02 12:21:43 2014 - 001227 ms -  DEBUG -     ( 9, 6):  0
+Oct 02 12:21:43 2014 - 001230 ms -  DEBUG -     ( 9, 7):  0
+Oct 02 12:21:43 2014 - 001234 ms -  DEBUG -     ( 9, 8): +R11
+Oct 02 12:21:43 2014 - 001237 ms -  DEBUG -     ( 9, 9): +1
+Oct 02 12:21:43 2014 - 001241 ms -  DEBUG -     ( 9,10):  0
+Oct 02 12:21:43 2014 - 001245 ms -  DEBUG -     ( 9,11):  0
+Oct 02 12:21:43 2014 - 001248 ms -  DEBUG -     ( 9,12):  0
+Oct 02 12:21:43 2014 - 001252 ms -  DEBUG -     ( 9,13):  0
+Oct 02 12:21:43 2014 - 001255 ms -  DEBUG -     ( 9,14): -R11
+Oct 02 12:21:43 2014 - 001259 ms -  DEBUG -     ( 9,15):  0
+Oct 02 12:21:43 2014 - 001262 ms -  DEBUG -   Row 10:
+Oct 02 12:21:43 2014 - 001266 ms -  DEBUG -     (10, 0):  0
+Oct 02 12:21:43 2014 - 001269 ms -  DEBUG -     (10, 1):  0
+Oct 02 12:21:43 2014 - 001273 ms -  DEBUG -     (10, 2): +1
+Oct 02 12:21:43 2014 - 001277 ms -  DEBUG -     (10, 3):  0
+Oct 02 12:21:43 2014 - 001280 ms -  DEBUG -     (10, 4):  0
+Oct 02 12:21:43 2014 - 001284 ms -  DEBUG -     (10, 5):  0
+Oct 02 12:21:43 2014 - 001287 ms -  DEBUG -     (10, 6):  0
+Oct 02 12:21:43 2014 - 001291 ms -  DEBUG -     (10, 7):  0
+Oct 02 12:21:43 2014 - 001294 ms -  DEBUG -     (10, 8):  0
+Oct 02 12:21:43 2014 - 001298 ms -  DEBUG -     (10, 9):  0
+Oct 02 12:21:43 2014 - 001301 ms -  DEBUG -     (10,10):  0
+Oct 02 12:21:43 2014 - 001305 ms -  DEBUG -     (10,11):  0
+Oct 02 12:21:43 2014 - 001309 ms -  DEBUG -     (10,12):  0
+Oct 02 12:21:43 2014 - 001312 ms -  DEBUG -     (10,13):  0
+Oct 02 12:21:43 2014 - 001316 ms -  DEBUG -     (10,14):  0
+Oct 02 12:21:43 2014 - 001319 ms -  DEBUG -     (10,15): -1
+Oct 02 12:21:43 2014 - 001323 ms -  DEBUG -   Row 11:
+Oct 02 12:21:43 2014 - 001327 ms -  DEBUG -     (11, 0):  0
+Oct 02 12:21:43 2014 - 001330 ms -  DEBUG -     (11, 1):  0
+Oct 02 12:21:43 2014 - 001334 ms -  DEBUG -     (11, 2):  0
+Oct 02 12:21:43 2014 - 001337 ms -  DEBUG -     (11, 3): +1
+Oct 02 12:21:43 2014 - 001341 ms -  DEBUG -     (11, 4):  0
+Oct 02 12:21:43 2014 - 001344 ms -  DEBUG -     (11, 5):  0
+Oct 02 12:21:43 2014 - 001348 ms -  DEBUG -     (11, 6):  0
+Oct 02 12:21:43 2014 - 001352 ms -  DEBUG -     (11, 7):  0
+Oct 02 12:21:43 2014 - 001355 ms -  DEBUG -     (11, 8):  0
+Oct 02 12:21:43 2014 - 001359 ms -  DEBUG -     (11, 9):  0
+Oct 02 12:21:43 2014 - 001362 ms -  DEBUG -     (11,10):  0
+Oct 02 12:21:43 2014 - 001366 ms -  DEBUG -     (11,11):  0
+Oct 02 12:21:43 2014 - 001369 ms -  DEBUG -     (11,12):  0
+Oct 02 12:21:43 2014 - 001373 ms -  DEBUG -     (11,13):  0
+Oct 02 12:21:43 2014 - 001376 ms -  DEBUG -     (11,14):  0
+Oct 02 12:21:43 2014 - 001380 ms -  DEBUG -     (11,15):  0
+Oct 02 12:21:43 2014 - 001383 ms -  DEBUG -   Row 12:
+Oct 02 12:21:43 2014 - 001387 ms -  DEBUG -     (12, 0): +1
+Oct 02 12:21:43 2014 - 001390 ms -  DEBUG -     (12, 1):  0
+Oct 02 12:21:43 2014 - 001394 ms -  DEBUG -     (12, 2):  0
+Oct 02 12:21:43 2014 - 001398 ms -  DEBUG -     (12, 3):  0
+Oct 02 12:21:43 2014 - 001401 ms -  DEBUG -     (12, 4):  0
+Oct 02 12:21:43 2014 - 001405 ms -  DEBUG -     (12, 5):  0
+Oct 02 12:21:43 2014 - 001408 ms -  DEBUG -     (12, 6):  0
+Oct 02 12:21:43 2014 - 001412 ms -  DEBUG -     (12, 7):  0
+Oct 02 12:21:43 2014 - 001416 ms -  DEBUG -     (12, 8):  0
+Oct 02 12:21:43 2014 - 001419 ms -  DEBUG -     (12, 9):  0
+Oct 02 12:21:43 2014 - 001423 ms -  DEBUG -     (12,10):  0
+Oct 02 12:21:43 2014 - 001426 ms -  DEBUG -     (12,11):  0
+Oct 02 12:21:43 2014 - 001430 ms -  DEBUG -     (12,12):  0
+Oct 02 12:21:43 2014 - 001433 ms -  DEBUG -     (12,13):  0
+Oct 02 12:21:43 2014 - 001437 ms -  DEBUG -     (12,14):  0
+Oct 02 12:21:43 2014 - 001441 ms -  DEBUG -     (12,15):  0
+Oct 02 12:21:43 2014 - 001444 ms -  DEBUG -   Row 13:
+Oct 02 12:21:43 2014 - 001448 ms -  DEBUG -     (13, 0):  0
+Oct 02 12:21:43 2014 - 001451 ms -  DEBUG -     (13, 1):  0
+Oct 02 12:21:43 2014 - 001455 ms -  DEBUG -     (13, 2):  0
+Oct 02 12:21:43 2014 - 001458 ms -  DEBUG -     (13, 3):  0
+Oct 02 12:21:43 2014 - 001462 ms -  DEBUG -     (13, 4):  0
+Oct 02 12:21:43 2014 - 001466 ms -  DEBUG -     (13, 5):  0
+Oct 02 12:21:43 2014 - 001469 ms -  DEBUG -     (13, 6): +1
+Oct 02 12:21:43 2014 - 001473 ms -  DEBUG -     (13, 7):  0
+Oct 02 12:21:43 2014 - 001476 ms -  DEBUG -     (13, 8):  0
+Oct 02 12:21:43 2014 - 001480 ms -  DEBUG -     (13, 9):  0
+Oct 02 12:21:43 2014 - 001484 ms -  DEBUG -     (13,10):  0
+Oct 02 12:21:43 2014 - 001487 ms -  DEBUG -     (13,11):  0
+Oct 02 12:21:43 2014 - 001491 ms -  DEBUG -     (13,12):  0
+Oct 02 12:21:43 2014 - 001494 ms -  DEBUG -     (13,13):  0
+Oct 02 12:21:43 2014 - 001498 ms -  DEBUG -     (13,14):  0
+Oct 02 12:21:43 2014 - 001501 ms -  DEBUG -     (13,15):  0
+Oct 02 12:21:43 2014 - 001505 ms -  DEBUG -   Row 14:
+Oct 02 12:21:43 2014 - 001508 ms -  DEBUG -     (14, 0):  0
+Oct 02 12:21:43 2014 - 001511 ms -  DEBUG -     (14, 1):  0
+Oct 02 12:21:43 2014 - 001515 ms -  DEBUG -     (14, 2):  0
+Oct 02 12:21:43 2014 - 001519 ms -  DEBUG -     (14, 3):  0
+Oct 02 12:21:43 2014 - 001522 ms -  DEBUG -     (14, 4):  0
+Oct 02 12:21:43 2014 - 001526 ms -  DEBUG -     (14, 5):  0
+Oct 02 12:21:43 2014 - 001530 ms -  DEBUG -     (14, 6):  0
+Oct 02 12:21:43 2014 - 001533 ms -  DEBUG -     (14, 7):  0
+Oct 02 12:21:43 2014 - 001537 ms -  DEBUG -     (14, 8): +1
+Oct 02 12:21:43 2014 - 001540 ms -  DEBUG -     (14, 9):  0
+Oct 02 12:21:43 2014 - 001544 ms -  DEBUG -     (14,10):  0
+Oct 02 12:21:43 2014 - 001548 ms -  DEBUG -     (14,11):  0
+Oct 02 12:21:43 2014 - 001551 ms -  DEBUG -     (14,12):  0
+Oct 02 12:21:43 2014 - 001555 ms -  DEBUG -     (14,13):  0
+Oct 02 12:21:43 2014 - 001558 ms -  DEBUG -     (14,14):  0
+Oct 02 12:21:43 2014 - 001562 ms -  DEBUG -     (14,15):  0
+Oct 02 12:21:43 2014 - 001566 ms -  DEBUG - LES after elimination of U_kOpBMOut:
+Oct 02 12:21:43 2014 - 001571 ms -  DEBUG - The linear equation system (15, 16):
+Oct 02 12:21:43 2014 - 001575 ms -  DEBUG -   Row 0:
+Oct 02 12:21:43 2014 - 001578 ms -  DEBUG -     ( 0, 0): -C2
+Oct 02 12:21:43 2014 - 001581 ms -  DEBUG -     ( 0, 1): +C2
+Oct 02 12:21:43 2014 - 001585 ms -  DEBUG -     ( 0, 2):  0
+Oct 02 12:21:43 2014 - 001588 ms -  DEBUG -     ( 0, 3):  0
+Oct 02 12:21:43 2014 - 001591 ms -  DEBUG -     ( 0, 4):  0
+Oct 02 12:21:43 2014 - 001594 ms -  DEBUG -     ( 0, 5):  0
+Oct 02 12:21:43 2014 - 001597 ms -  DEBUG -     ( 0, 6):  0
+Oct 02 12:21:43 2014 - 001600 ms -  DEBUG -     ( 0, 7):  0
+Oct 02 12:21:43 2014 - 001603 ms -  DEBUG -     ( 0, 8):  0
+Oct 02 12:21:43 2014 - 001606 ms -  DEBUG -     ( 0, 9):  0
+Oct 02 12:21:43 2014 - 001609 ms -  DEBUG -     ( 0,10):  0
+Oct 02 12:21:43 2014 - 001612 ms -  DEBUG -     ( 0,11):  0
+Oct 02 12:21:43 2014 - 001615 ms -  DEBUG -     ( 0,12):  0
+Oct 02 12:21:43 2014 - 001618 ms -  DEBUG -     ( 0,13):  0
+Oct 02 12:21:43 2014 - 001621 ms -  DEBUG -     ( 0,14):  0
+Oct 02 12:21:43 2014 - 001624 ms -  DEBUG -     ( 0,15):  0
+Oct 02 12:21:43 2014 - 001627 ms -  DEBUG -   Row 1:
+Oct 02 12:21:43 2014 - 001630 ms -  DEBUG -     ( 1, 0):  0
+Oct 02 12:21:43 2014 - 001633 ms -  DEBUG -     ( 1, 1): +R5*C2
+Oct 02 12:21:43 2014 - 001637 ms -  DEBUG -     ( 1, 2):  0
+Oct 02 12:21:43 2014 - 001641 ms -  DEBUG -     ( 1, 3):  0
+Oct 02 12:21:43 2014 - 001644 ms -  DEBUG -     ( 1, 4):  0
+Oct 02 12:21:43 2014 - 001648 ms -  DEBUG -     ( 1, 5):  0
+Oct 02 12:21:43 2014 - 001651 ms -  DEBUG -     ( 1, 6): -R5*C2
+Oct 02 12:21:43 2014 - 001655 ms -  DEBUG -     ( 1, 7):  0
+Oct 02 12:21:43 2014 - 001658 ms -  DEBUG -     ( 1, 8):  0
+Oct 02 12:21:43 2014 - 001662 ms -  DEBUG -     ( 1, 9):  0
+Oct 02 12:21:43 2014 - 001665 ms -  DEBUG -     ( 1,10):  0
+Oct 02 12:21:43 2014 - 001669 ms -  DEBUG -     ( 1,11):  0
+Oct 02 12:21:43 2014 - 001672 ms -  DEBUG -     ( 1,12): -C2
+Oct 02 12:21:43 2014 - 001676 ms -  DEBUG -     ( 1,13):  0
+Oct 02 12:21:43 2014 - 001680 ms -  DEBUG -     ( 1,14):  0
+Oct 02 12:21:43 2014 - 001683 ms -  DEBUG -     ( 1,15):  0
+Oct 02 12:21:43 2014 - 001686 ms -  DEBUG -   Row 2:
+Oct 02 12:21:43 2014 - 001690 ms -  DEBUG -     ( 2, 0):  0
+Oct 02 12:21:43 2014 - 001693 ms -  DEBUG -     ( 2, 1):  0
+Oct 02 12:21:43 2014 - 001696 ms -  DEBUG -     ( 2, 2): -R4*R5*C2
+Oct 02 12:21:43 2014 - 001700 ms -  DEBUG -     ( 2, 3): +R4*R5*C2
+Oct 02 12:21:43 2014 - 001704 ms -  DEBUG -     ( 2, 4):  0
+Oct 02 12:21:43 2014 - 001708 ms -  DEBUG -     ( 2, 5):  0
+Oct 02 12:21:43 2014 - 001711 ms -  DEBUG -     ( 2, 6):  0
+Oct 02 12:21:43 2014 - 001715 ms -  DEBUG -     ( 2, 7):  0
+Oct 02 12:21:43 2014 - 001718 ms -  DEBUG -     ( 2, 8):  0
+Oct 02 12:21:43 2014 - 001722 ms -  DEBUG -     ( 2, 9):  0
+Oct 02 12:21:43 2014 - 001726 ms -  DEBUG -     ( 2,10): +R5*C2
+Oct 02 12:21:43 2014 - 001729 ms -  DEBUG -     ( 2,11):  0
+Oct 02 12:21:43 2014 - 001733 ms -  DEBUG -     ( 2,12):  0
+Oct 02 12:21:43 2014 - 001736 ms -  DEBUG -     ( 2,13):  0
+Oct 02 12:21:43 2014 - 001740 ms -  DEBUG -     ( 2,14):  0
+Oct 02 12:21:43 2014 - 001743 ms -  DEBUG -     ( 2,15):  0
+Oct 02 12:21:43 2014 - 001747 ms -  DEBUG -   Row 3:
+Oct 02 12:21:43 2014 - 001750 ms -  DEBUG -     ( 3, 0):  0
+Oct 02 12:21:43 2014 - 001754 ms -  DEBUG -     ( 3, 1):  0
+Oct 02 12:21:43 2014 - 001757 ms -  DEBUG -     ( 3, 2):  0
+Oct 02 12:21:43 2014 - 001761 ms -  DEBUG -     ( 3, 3): +R1*R4*R5*C2+R3*R4*R5*C2+R4*R5*C1*C2
+Oct 02 12:21:43 2014 - 001767 ms -  DEBUG -     ( 3, 4): -R1*R4*R5*C2-R4*R5*C1*C2
+Oct 02 12:21:43 2014 - 001771 ms -  DEBUG -     ( 3, 5):  0
+Oct 02 12:21:43 2014 - 001774 ms -  DEBUG -     ( 3, 6):  0
+Oct 02 12:21:43 2014 - 001777 ms -  DEBUG -     ( 3, 7): -R3*R4*R5*C2
+Oct 02 12:21:43 2014 - 001781 ms -  DEBUG -     ( 3, 8):  0
+Oct 02 12:21:43 2014 - 001784 ms -  DEBUG -     ( 3, 9):  0
+Oct 02 12:21:43 2014 - 001787 ms -  DEBUG -     ( 3,10): -R4*R5*C2
+Oct 02 12:21:43 2014 - 001792 ms -  DEBUG -     ( 3,11):  0
+Oct 02 12:21:43 2014 - 001794 ms -  DEBUG -     ( 3,12):  0
+Oct 02 12:21:43 2014 - 001798 ms -  DEBUG -     ( 3,13):  0
+Oct 02 12:21:43 2014 - 001801 ms -  DEBUG -     ( 3,14):  0
+Oct 02 12:21:43 2014 - 001804 ms -  DEBUG -     ( 3,15):  0
+Oct 02 12:21:43 2014 - 001807 ms -  DEBUG -   Row 4:
+Oct 02 12:21:43 2014 - 001810 ms -  DEBUG -     ( 4, 0):  0
+Oct 02 12:21:43 2014 - 001813 ms -  DEBUG -     ( 4, 1):  0
+Oct 02 12:21:43 2014 - 001816 ms -  DEBUG -     ( 4, 2):  0
+Oct 02 12:21:43 2014 - 001820 ms -  DEBUG -     ( 4, 3):  0
+Oct 02 12:21:43 2014 - 001823 ms -  DEBUG -     ( 4, 4): -R1*R2*R4*R5*C2-R1*R3*R4*R5*C2-R1*R4*R5*R8*C2
+                                                         -R2*R3*R4*R5*C2-R2*R4*R5*C1*C2-R3*R4*R5*R8*C2
+                                                         -R3*R4*R5*C1*C2-R4*R5*R8*C1*C2
+Oct 02 12:21:43 2014 - 001840 ms -  DEBUG -     ( 4, 5): +R1*R2*R4*R5*C2+R2*R3*R4*R5*C2+R2*R4*R5*C1*C2
+Oct 02 12:21:43 2014 - 001845 ms -  DEBUG -     ( 4, 6):  0
+Oct 02 12:21:43 2014 - 001848 ms -  DEBUG -     ( 4, 7): +R1*R3*R4*R5*C2+R3*R4*R5*C1*C2
+Oct 02 12:21:43 2014 - 001852 ms -  DEBUG -     ( 4, 8): +R1*R4*R5*R8*C2+R3*R4*R5*R8*C2+R4*R5*R8*C1*C2
+Oct 02 12:21:43 2014 - 001858 ms -  DEBUG -     ( 4, 9):  0
+Oct 02 12:21:43 2014 - 001861 ms -  DEBUG -     ( 4,10): +R1*R4*R5*C2+R4*R5*C1*C2
+Oct 02 12:21:43 2014 - 001865 ms -  DEBUG -     ( 4,11): +R1*R4*R5*C2+R3*R4*R5*C2+R4*R5*C1*C2
+Oct 02 12:21:43 2014 - 001870 ms -  DEBUG -     ( 4,12):  0
+Oct 02 12:21:43 2014 - 001874 ms -  DEBUG -     ( 4,13):  0
+Oct 02 12:21:43 2014 - 001877 ms -  DEBUG -     ( 4,14):  0
+Oct 02 12:21:43 2014 - 001880 ms -  DEBUG -     ( 4,15):  0
+Oct 02 12:21:43 2014 - 001884 ms -  DEBUG -   Row 5:
+Oct 02 12:21:43 2014 - 001886 ms -  DEBUG -     ( 5, 0):  0
+Oct 02 12:21:43 2014 - 001890 ms -  DEBUG -     ( 5, 1):  0
+Oct 02 12:21:43 2014 - 001893 ms -  DEBUG -     ( 5, 2):  0
+Oct 02 12:21:43 2014 - 001897 ms -  DEBUG -     ( 5, 3):  0
+Oct 02 12:21:43 2014 - 001900 ms -  DEBUG -     ( 5, 4):  0
+Oct 02 12:21:43 2014 - 001903 ms -  DEBUG -     ( 5, 5): +R1*R2*R3*R4*R5*C2+R1*R2*R4*R5*R8*C2+R2*R3*R4*R5*R8*C2
+                                                         +R2*R3*R4*R5*C1*C2+R2*R4*R5*R8*C1*C2
+Oct 02 12:21:43 2014 - 001915 ms -  DEBUG -     ( 5, 6):  0
+Oct 02 12:21:43 2014 - 001918 ms -  DEBUG -     ( 5, 7): -R1*R2*R3*R4*R5*C2-R2*R3*R4*R5*C1*C2
+Oct 02 12:21:43 2014 - 001923 ms -  DEBUG -     ( 5, 8): -R1*R2*R4*R5*R8*C2-R2*R3*R4*R5*R8*C2-R2*R4*R5*R8*C1*C2
+Oct 02 12:21:43 2014 - 001929 ms -  DEBUG -     ( 5, 9):  0
+Oct 02 12:21:43 2014 - 001932 ms -  DEBUG -     ( 5,10): -R1*R2*R4*R5*C2-R2*R4*R5*C1*C2
+Oct 02 12:21:43 2014 - 001937 ms -  DEBUG -     ( 5,11): -R1*R2*R4*R5*C2-R2*R3*R4*R5*C2-R2*R4*R5*C1*C2
+Oct 02 12:21:43 2014 - 001942 ms -  DEBUG -     ( 5,12):  0
+Oct 02 12:21:43 2014 - 001945 ms -  DEBUG -     ( 5,13):  0
+Oct 02 12:21:43 2014 - 001949 ms -  DEBUG -     ( 5,14):  0
+Oct 02 12:21:43 2014 - 001952 ms -  DEBUG -     ( 5,15):  0
+Oct 02 12:21:43 2014 - 001955 ms -  DEBUG -   Row 6:
+Oct 02 12:21:43 2014 - 001958 ms -  DEBUG -     ( 6, 0):  0
+Oct 02 12:21:43 2014 - 001961 ms -  DEBUG -     ( 6, 1):  0
+Oct 02 12:21:43 2014 - 001965 ms -  DEBUG -     ( 6, 2):  0
+Oct 02 12:21:43 2014 - 001968 ms -  DEBUG -     ( 6, 3):  0
+Oct 02 12:21:43 2014 - 001972 ms -  DEBUG -     ( 6, 4):  0
+Oct 02 12:21:43 2014 - 001975 ms -  DEBUG -     ( 6, 5):  0
+Oct 02 12:21:43 2014 - 001979 ms -  DEBUG -     ( 6, 6): -R1*R2*R3*R4*R5*R6*C2-R1*R2*R4*R5*R6*R8*C2-R2*R3*R4*R5*R6*R8*C2
+                                                         -R2*R3*R4*R5*R6*C1*C2-R2*R4*R5*R6*R8*C1*C2
+Oct 02 12:21:43 2014 - 001990 ms -  DEBUG -     ( 6, 7): +R1*R2*R3*R4*R5*R6*C2+R1*R2*R4*R5*R6*R8*C2+R2*R3*R4*R5*R6*R8*C2
+                                                         +R2*R3*R4*R5*R6*C1*C2+R2*R4*R5*R6*R8*C1*C2
+Oct 02 12:21:43 2014 - 002002 ms -  DEBUG -     ( 6, 8):  0
+Oct 02 12:21:43 2014 - 002005 ms -  DEBUG -     ( 6, 9):  0
+Oct 02 12:21:43 2014 - 002009 ms -  DEBUG -     ( 6,10):  0
+Oct 02 12:21:43 2014 - 002012 ms -  DEBUG -     ( 6,11):  0
+Oct 02 12:21:43 2014 - 002015 ms -  DEBUG -     ( 6,12): +R1*R2*R3*R4*R5*C2+R1*R2*R4*R5*R8*C2+R2*R3*R4*R5*R8*C2
+                                                         +R2*R3*R4*R5*C1*C2+R2*R4*R5*R8*C1*C2
+Oct 02 12:21:43 2014 - 002026 ms -  DEBUG -     ( 6,13):  0
+Oct 02 12:21:43 2014 - 002030 ms -  DEBUG -     ( 6,14):  0
+Oct 02 12:21:43 2014 - 002033 ms -  DEBUG -     ( 6,15):  0
+Oct 02 12:21:43 2014 - 002036 ms -  DEBUG -   Row 7:
+Oct 02 12:21:43 2014 - 002039 ms -  DEBUG -     ( 7, 0):  0
+Oct 02 12:21:43 2014 - 002042 ms -  DEBUG -     ( 7, 1):  0
+Oct 02 12:21:43 2014 - 002045 ms -  DEBUG -     ( 7, 2):  0
+Oct 02 12:21:43 2014 - 002048 ms -  DEBUG -     ( 7, 3):  0
+Oct 02 12:21:43 2014 - 002051 ms -  DEBUG -     ( 7, 4):  0
+Oct 02 12:21:43 2014 - 002054 ms -  DEBUG -     ( 7, 5):  0
+Oct 02 12:21:43 2014 - 002057 ms -  DEBUG -     ( 7, 6):  0
+Oct 02 12:21:43 2014 - 002060 ms -  DEBUG -     ( 7, 7): +R1*R2*R3*R4*R5*R6*R8*C2+R2*R3*R4*R5*R6*R8*C1*C2
+Oct 02 12:21:43 2014 - 002065 ms -  DEBUG -     ( 7, 8): -R1*R2*R3*R4*R5*R6*R8*C2-R2*R3*R4*R5*R6*R8*C1*C2
+Oct 02 12:21:43 2014 - 002071 ms -  DEBUG -     ( 7, 9):  0
+Oct 02 12:21:43 2014 - 002074 ms -  DEBUG -     ( 7,10): -R1*R2*R3*R4*R5*R6*C2-R2*R3*R4*R5*R6*R8*C2-R2*R3*R4*R5*R6*C1*C2
+Oct 02 12:21:43 2014 - 002080 ms -  DEBUG -     ( 7,11): -R1*R2*R3*R4*R5*R6*C2-R2*R3*R4*R5*R6*C1*C2
+Oct 02 12:21:43 2014 - 002085 ms -  DEBUG -     ( 7,12): -R1*R2*R3*R4*R5*R6*C2-R1*R2*R4*R5*R6*R8*C2-R2*R3*R4*R5*R6*R8*C2
+                                                         -R2*R3*R4*R5*R6*C1*C2-R2*R4*R5*R6*R8*C1*C2
+Oct 02 12:21:43 2014 - 002097 ms -  DEBUG -     ( 7,13): -R1*R2*R3*R4*R5*R6*C2-R1*R2*R4*R5*R6*R8*C2-R2*R3*R4*R5*R6*R8*C2
+                                                         -R2*R3*R4*R5*R6*C1*C2-R2*R4*R5*R6*R8*C1*C2
+Oct 02 12:21:43 2014 - 002109 ms -  DEBUG -     ( 7,14):  0
+Oct 02 12:21:43 2014 - 002112 ms -  DEBUG -     ( 7,15):  0
+Oct 02 12:21:43 2014 - 002116 ms -  DEBUG -   Row 8:
+Oct 02 12:21:43 2014 - 002118 ms -  DEBUG -     ( 8, 0):  0
+Oct 02 12:21:43 2014 - 002121 ms -  DEBUG -     ( 8, 1):  0
+Oct 02 12:21:43 2014 - 002124 ms -  DEBUG -     ( 8, 2):  0
+Oct 02 12:21:43 2014 - 002127 ms -  DEBUG -     ( 8, 3):  0
+Oct 02 12:21:43 2014 - 002130 ms -  DEBUG -     ( 8, 4):  0
+Oct 02 12:21:43 2014 - 002133 ms -  DEBUG -     ( 8, 5):  0
+Oct 02 12:21:43 2014 - 002136 ms -  DEBUG -     ( 8, 6):  0
+Oct 02 12:21:43 2014 - 002139 ms -  DEBUG -     ( 8, 7):  0
+Oct 02 12:21:43 2014 - 002142 ms -  DEBUG -     ( 8, 8): -R1*R11*R2*R3*R4*R5*R6*R8*C2-R11*R2*R3*R4*R5*R6*R8*C1*C2
+Oct 02 12:21:43 2014 - 002148 ms -  DEBUG -     ( 8, 9):  0
+Oct 02 12:21:43 2014 - 002152 ms -  DEBUG -     ( 8,10): +R1*R2*R3*R4*R5*R6*R8*C2+R2*R3*R4*R5*R6*R8*C1*C2
+Oct 02 12:21:44 2014 - 002157 ms -  DEBUG -     ( 8,11): +R1*R2*R3*R4*R5*R6*R8*C2+R2*R3*R4*R5*R6*R8*C1*C2
+Oct 02 12:21:44 2014 - 002162 ms -  DEBUG -     ( 8,12): +R1*R2*R3*R4*R5*R6*R8*C2+R2*R3*R4*R5*R6*R8*C1*C2
+Oct 02 12:21:44 2014 - 002167 ms -  DEBUG -     ( 8,13): +R1*R2*R3*R4*R5*R6*R8*C2+R2*R3*R4*R5*R6*R8*C1*C2
+Oct 02 12:21:44 2014 - 002173 ms -  DEBUG -     ( 8,14): +R1*R11*R2*R3*R4*R5*R6*R8*C2+R11*R2*R3*R4*R5*R6*R8*C1*C2
+Oct 02 12:21:44 2014 - 002178 ms -  DEBUG -     ( 8,15):  0
+Oct 02 12:21:44 2014 - 002182 ms -  DEBUG -   Row 9:
+Oct 02 12:21:44 2014 - 002185 ms -  DEBUG -     ( 9, 0):  0
+Oct 02 12:21:44 2014 - 002188 ms -  DEBUG -     ( 9, 1):  0
+Oct 02 12:21:44 2014 - 002191 ms -  DEBUG -     ( 9, 2):  0
+Oct 02 12:21:44 2014 - 002194 ms -  DEBUG -     ( 9, 3):  0
+Oct 02 12:21:44 2014 - 002197 ms -  DEBUG -     ( 9, 4):  0
+Oct 02 12:21:44 2014 - 002200 ms -  DEBUG -     ( 9, 5):  0
+Oct 02 12:21:44 2014 - 002203 ms -  DEBUG -     ( 9, 6):  0
+Oct 02 12:21:44 2014 - 002206 ms -  DEBUG -     ( 9, 7):  0
+Oct 02 12:21:44 2014 - 002210 ms -  DEBUG -     ( 9, 8):  0
+Oct 02 12:21:44 2014 - 002213 ms -  DEBUG -     ( 9, 9): -R1*R11*R2*R3*R4*R5*R6*R8*C2-R11*R2*R3*R4*R5*R6*R8*C1*C2
+Oct 02 12:21:44 2014 - 002219 ms -  DEBUG -     ( 9,10): -R1*R11*R2*R3*R4*R5*R6*R8*C2-R11*R2*R3*R4*R5*R6*R8*C1*C2
+Oct 02 12:21:44 2014 - 002225 ms -  DEBUG -     ( 9,11): -R1*R11*R2*R3*R4*R5*R6*R8*C2-R11*R2*R3*R4*R5*R6*R8*C1*C2
+Oct 02 12:21:44 2014 - 002231 ms -  DEBUG -     ( 9,12): -R1*R11*R2*R3*R4*R5*R6*R8*C2-R11*R2*R3*R4*R5*R6*R8*C1*C2
+Oct 02 12:21:44 2014 - 002237 ms -  DEBUG -     ( 9,13): -R1*R11*R2*R3*R4*R5*R6*R8*C2-R11*R2*R3*R4*R5*R6*R8*C1*C2
+Oct 02 12:21:44 2014 - 002242 ms -  DEBUG -     ( 9,14):  0
+Oct 02 12:21:44 2014 - 002246 ms -  DEBUG -     ( 9,15):  0
+Oct 02 12:21:44 2014 - 002249 ms -  DEBUG -   Row 10:
+Oct 02 12:21:44 2014 - 002252 ms -  DEBUG -     (10, 0):  0
+Oct 02 12:21:44 2014 - 002255 ms -  DEBUG -     (10, 1):  0
+Oct 02 12:21:44 2014 - 002258 ms -  DEBUG -     (10, 2):  0
+Oct 02 12:21:44 2014 - 002261 ms -  DEBUG -     (10, 3):  0
+Oct 02 12:21:44 2014 - 002264 ms -  DEBUG -     (10, 4):  0
+Oct 02 12:21:44 2014 - 002267 ms -  DEBUG -     (10, 5):  0
+Oct 02 12:21:44 2014 - 002270 ms -  DEBUG -     (10, 6):  0
+Oct 02 12:21:44 2014 - 002273 ms -  DEBUG -     (10, 7):  0
+Oct 02 12:21:44 2014 - 002276 ms -  DEBUG -     (10, 8):  0
+Oct 02 12:21:44 2014 - 002279 ms -  DEBUG -     (10, 9):  0
+Oct 02 12:21:44 2014 - 002282 ms -  DEBUG -     (10,10): -R1*R11*R2*R3*R4*R5*R6*C2-R1*R11*R2*R3*R5*R6*R8*C2-R1*R2*R3*R4*R5*R6*R8*C2
+                                                         -R11*R2*R3*R4*R5*R6*R8*C2-R11*R2*R3*R4*R5*R6*C1*C2-R11*R2*R3*R5*R6*R8*C1*C2
+                                                         -R2*R3*R4*R5*R6*R8*C1*C2
+Oct 02 12:21:44 2014 - 002306 ms -  DEBUG -     (10,11): -R1*R11*R2*R3*R4*R5*R6*C2-R1*R2*R3*R4*R5*R6*R8*C2-R11*R2*R3*R4*R5*R6*C1*C2
+                                                         -R2*R3*R4*R5*R6*R8*C1*C2
+Oct 02 12:21:44 2014 - 002319 ms -  DEBUG -     (10,12): -R1*R11*R2*R3*R4*R5*R6*C2-R1*R2*R3*R4*R5*R6*R8*C2-R11*R2*R3*R4*R5*R6*R8*C2
+                                                         -R11*R2*R3*R4*R5*R6*C1*C2-R2*R3*R4*R5*R6*R8*C1*C2
+Oct 02 12:21:44 2014 - 002335 ms -  DEBUG -     (10,13): -R1*R11*R2*R3*R4*R5*R6*C2-R1*R2*R3*R4*R5*R6*R8*C2-R11*R2*R3*R4*R5*R6*R8*C2
+                                                         -R11*R2*R3*R4*R5*R6*C1*C2-R2*R3*R4*R5*R6*R8*C1*C2
+Oct 02 12:21:44 2014 - 002350 ms -  DEBUG -     (10,14): -R1*R11*R2*R3*R4*R5*R6*R8*C2-R11*R2*R3*R4*R5*R6*R8*C1*C2
+Oct 02 12:21:44 2014 - 002355 ms -  DEBUG -     (10,15): +R1*R11*R2*R3*R4*R5*R6*R8*C2+R11*R2*R3*R4*R5*R6*R8*C1*C2
+Oct 02 12:21:44 2014 - 002361 ms -  DEBUG -   Row 11:
+Oct 02 12:21:44 2014 - 002365 ms -  DEBUG -     (11, 0):  0
+Oct 02 12:21:44 2014 - 002368 ms -  DEBUG -     (11, 1):  0
+Oct 02 12:21:44 2014 - 002370 ms -  DEBUG -     (11, 2):  0
+Oct 02 12:21:44 2014 - 002373 ms -  DEBUG -     (11, 3):  0
+Oct 02 12:21:44 2014 - 002376 ms -  DEBUG -     (11, 4):  0
+Oct 02 12:21:44 2014 - 002379 ms -  DEBUG -     (11, 5):  0
+Oct 02 12:21:44 2014 - 002383 ms -  DEBUG -     (11, 6):  0
+Oct 02 12:21:44 2014 - 002386 ms -  DEBUG -     (11, 7):  0
+Oct 02 12:21:44 2014 - 002389 ms -  DEBUG -     (11, 8):  0
+Oct 02 12:21:44 2014 - 002392 ms -  DEBUG -     (11, 9):  0
+Oct 02 12:21:44 2014 - 002395 ms -  DEBUG -     (11,10):  0
+Oct 02 12:21:44 2014 - 002398 ms -  DEBUG -     (11,11): -R1*R11*R2*R3*R5*R6*C2-R1*R2*R3*R5*R6*R8*C2-R11*R2*R3*R5*R6*C1*C2
+                                                         -R2*R3*R5*R6*R8*C1*C2
+Oct 02 12:21:44 2014 - 002409 ms -  DEBUG -     (11,12): -R1*R11*R2*R3*R5*R6*C2-R1*R2*R3*R5*R6*R8*C2-R11*R2*R3*R5*R6*R8*C2
+                                                         -R11*R2*R3*R5*R6*C1*C2-R2*R3*R5*R6*R8*C1*C2
+Oct 02 12:21:44 2014 - 002421 ms -  DEBUG -     (11,13): -R1*R11*R2*R3*R5*R6*C2-R1*R2*R3*R5*R6*R8*C2-R11*R2*R3*R5*R6*R8*C2
+                                                         -R11*R2*R3*R5*R6*C1*C2-R2*R3*R5*R6*R8*C1*C2
+Oct 02 12:21:44 2014 - 002432 ms -  DEBUG -     (11,14): -R1*R11*R2*R3*R5*R6*R8*C2-R11*R2*R3*R5*R6*R8*C1*C2
+Oct 02 12:21:44 2014 - 002438 ms -  DEBUG -     (11,15): -R1*R11*R2*R3*R4*R5*R6*C2-R1*R2*R3*R4*R5*R6*R8*C2-R11*R2*R3*R4*R5*R6*R8*C2
+                                                         -R11*R2*R3*R4*R5*R6*C1*C2-R2*R3*R4*R5*R6*R8*C1*C2
+Oct 02 12:21:44 2014 - 002453 ms -  DEBUG -   Row 12:
+Oct 02 12:21:44 2014 - 002456 ms -  DEBUG -     (12, 0):  0
+Oct 02 12:21:44 2014 - 002460 ms -  DEBUG -     (12, 1):  0
+Oct 02 12:21:44 2014 - 002463 ms -  DEBUG -     (12, 2):  0
+Oct 02 12:21:44 2014 - 002466 ms -  DEBUG -     (12, 3):  0
+Oct 02 12:21:44 2014 - 002469 ms -  DEBUG -     (12, 4):  0
+Oct 02 12:21:44 2014 - 002472 ms -  DEBUG -     (12, 5):  0
+Oct 02 12:21:44 2014 - 002475 ms -  DEBUG -     (12, 6):  0
+Oct 02 12:21:44 2014 - 002478 ms -  DEBUG -     (12, 7):  0
+Oct 02 12:21:44 2014 - 002481 ms -  DEBUG -     (12, 8):  0
+Oct 02 12:21:44 2014 - 002484 ms -  DEBUG -     (12, 9):  0
+Oct 02 12:21:44 2014 - 002487 ms -  DEBUG -     (12,10):  0
+Oct 02 12:21:44 2014 - 002490 ms -  DEBUG -     (12,11):  0
+Oct 02 12:21:44 2014 - 002493 ms -  DEBUG -     (12,12): -R1*R11*R2*R3*R5*C2-R1*R11*R2*R3*R6*C2-R1*R11*R2*R5*R6*C2
+                                                         -R1*R2*R3*R5*R8*C2-R1*R2*R3*R6*R8*C2-R1*R2*R5*R6*R8*C2
+                                                         -R11*R2*R3*R5*C1*C2-R11*R2*R3*R6*C1*C2-R11*R2*R5*R6*C1*C2
+                                                         -R2*R3*R5*R8*C1*C2-R2*R3*R6*R8*C1*C2-R2*R5*R6*R8*C1*C2
+Oct 02 12:21:44 2014 - 002518 ms -  DEBUG -     (12,13): -R1*R11*R2*R5*R6*C2-R1*R2*R5*R6*R8*C2-R11*R2*R5*R6*C1*C2
+                                                         -R2*R5*R6*R8*C1*C2
+Oct 02 12:21:44 2014 - 002528 ms -  DEBUG -     (12,14):  0
+Oct 02 12:21:44 2014 - 002532 ms -  DEBUG -     (12,15):  0
+Oct 02 12:21:44 2014 - 002535 ms -  DEBUG -   Row 13:
+Oct 02 12:21:44 2014 - 002538 ms -  DEBUG -     (13, 0):  0
+Oct 02 12:21:44 2014 - 002541 ms -  DEBUG -     (13, 1):  0
+Oct 02 12:21:44 2014 - 002544 ms -  DEBUG -     (13, 2):  0
+Oct 02 12:21:44 2014 - 002547 ms -  DEBUG -     (13, 3):  0
+Oct 02 12:21:44 2014 - 002550 ms -  DEBUG -     (13, 4):  0
+Oct 02 12:21:44 2014 - 002553 ms -  DEBUG -     (13, 5):  0
+Oct 02 12:21:44 2014 - 002556 ms -  DEBUG -     (13, 6):  0
+Oct 02 12:21:44 2014 - 002559 ms -  DEBUG -     (13, 7):  0
+Oct 02 12:21:44 2014 - 002562 ms -  DEBUG -     (13, 8):  0
+Oct 02 12:21:44 2014 - 002565 ms -  DEBUG -     (13, 9):  0
+Oct 02 12:21:44 2014 - 002568 ms -  DEBUG -     (13,10):  0
+Oct 02 12:21:44 2014 - 002571 ms -  DEBUG -     (13,11):  0
+Oct 02 12:21:44 2014 - 002574 ms -  DEBUG -     (13,12):  0
+Oct 02 12:21:44 2014 - 002577 ms -  DEBUG -     (13,13): -R1*R11*R2*R6*C2-R1*R2*R6*R8*C2-R11*R2*R6*C1*C2
+                                                         -R2*R6*R8*C1*C2
+Oct 02 12:21:44 2014 - 002587 ms -  DEBUG -     (13,14):  0
+Oct 02 12:21:44 2014 - 002591 ms -  DEBUG -     (13,15):  0
+Oct 02 12:21:44 2014 - 002594 ms -  DEBUG -   Row 14:
+Oct 02 12:21:44 2014 - 002596 ms -  DEBUG -     (14, 0):  0
+Oct 02 12:21:44 2014 - 002599 ms -  DEBUG -     (14, 1):  0
+Oct 02 12:21:44 2014 - 002602 ms -  DEBUG -     (14, 2):  0
+Oct 02 12:21:44 2014 - 002605 ms -  DEBUG -     (14, 3):  0
+Oct 02 12:21:44 2014 - 002608 ms -  DEBUG -     (14, 4):  0
+Oct 02 12:21:44 2014 - 002612 ms -  DEBUG -     (14, 5):  0
+Oct 02 12:21:44 2014 - 002615 ms -  DEBUG -     (14, 6):  0
+Oct 02 12:21:44 2014 - 002618 ms -  DEBUG -     (14, 7):  0
+Oct 02 12:21:44 2014 - 002622 ms -  DEBUG -     (14, 8):  0
+Oct 02 12:21:44 2014 - 002625 ms -  DEBUG -     (14, 9):  0
+Oct 02 12:21:44 2014 - 002629 ms -  DEBUG -     (14,10):  0
+Oct 02 12:21:44 2014 - 002632 ms -  DEBUG -     (14,11):  0
+Oct 02 12:21:44 2014 - 002636 ms -  DEBUG -     (14,12):  0
+Oct 02 12:21:44 2014 - 002639 ms -  DEBUG -     (14,13):  0
+Oct 02 12:21:44 2014 - 002643 ms -  DEBUG -     (14,14): -R1*R11*R2*R6*C2-R11*R2*R6*C1*C2
+Oct 02 12:21:44 2014 - 002648 ms -  DEBUG -     (14,15): +R2*R4*R6*R8*C2
+Oct 02 12:21:44 2014 - 002652 ms -   INFO - Unknown I_Vin (10) is not required for the final result(s) and hence not computed. Its value is set to null
+Oct 02 12:21:44 2014 - 002662 ms -   INFO - Unknown I_OpTL (11) is not required for the final result(s) and hence not computed. Its value is set to null
+Oct 02 12:21:44 2014 - 002671 ms -   INFO - Unknown I_OpTM (12) is not required for the final result(s) and hence not computed. Its value is set to null
+Oct 02 12:21:44 2014 - 002680 ms -   INFO - Unknown I_OpTR (13) is not required for the final result(s) and hence not computed. Its value is set to null
+Oct 02 12:21:44 2014 - 002689 ms -   INFO - Unknown I_OpBM (14) is not required for the final result(s) and hence not computed. Its value is set to null
+Oct 02 12:21:44 2014 - 002698 ms -   INFO - The solution of the linear equation system (15,16). All constants have the physical meaning of (complex) conductance:
+  U_kOpTMIn = (not available)
+  U_kOpTMOut = (not available)
+  U_kIn = (not available)
+  U_kOpTLIn = (not available)
+  U_kOpTLOut = (not available)
+  U_kOpTMin = (not available)
+  U_kOpTRIn = (not available)
+  U_kOpTRout = (not available)
+  U_kOpBMIn = (not available)
+  U_kOpBMOut = N_Vin/D * Vin:
+    N_Vin = -R2*R4*R6*R8*C2
+  I_Vin = (not available)
+  I_OpTL = (not available)
+  I_OpTM = (not available)
+  I_OpTR = (not available)
+  I_OpBM = (not available)
+  Vout = N_Vin/D * Vin:
+    N_Vin = -R2*R4*R6*R8*C2
+  D = -R1*R11*R2*R6*C2-R11*R2*R6*C1*C2
+Oct 02 12:21:44 2014 - 002778 ms - RESULT - Oct 02 12:21:44 2014 - 002782 ms -  DEBUG - createExpressionMap: The map contains 2 expressions. 0 expressions are reused
+User-defined result G (Bode plot):
+Oct 02 12:21:44 2014 - 002806 ms -  DEBUG - createExpressionMap: The map contains 2 expressions. 0 expressions are reused
+The dependency of Vout on Vin:
+  Vout(s) = N_Vout_Vin(s)/D_Vout_Vin(s) * Vin(s), with
+    N_Vout_Vin(s) = R1*R11
+    D_Vout_Vin(s) = R1*R4*R8*C1 * s
+                    +R4*R8
+Oct 02 12:21:44 2014 - 002831 ms -  DEBUG - Template folder C:\user\vranken\projects\linNet\trunk\components\linNet\bin\win32\DEBUG\private with Octave code successfully copied to the aimed target location .\wikipediaExample
+Oct 02 12:21:44 2014 - 002843 ms -  DEBUG - Octave M file .\wikipediaExample\G.m is opened for write access
+Oct 02 12:21:44 2014 - 002848 ms -   INFO - Device constant R1 is assigned the default value 100
+Oct 02 12:21:44 2014 - 002852 ms -   INFO - Device constant R11 is assigned the default value 100
+Oct 02 12:21:44 2014 - 002857 ms -   INFO - Device constant R2 is assigned the default value 100
+Oct 02 12:21:44 2014 - 002862 ms -   INFO - Device constant R3 is assigned the default value 100
+Oct 02 12:21:44 2014 - 002866 ms -   INFO - Device constant R4 is assigned the default value 100
+Oct 02 12:21:44 2014 - 002870 ms -   INFO - Device constant R5 is assigned the default value 100
+Oct 02 12:21:44 2014 - 002875 ms -   INFO - Device constant R6 is assigned the default value 100
+Oct 02 12:21:44 2014 - 002880 ms -   INFO - Device constant R8 is assigned the default value 100
+Oct 02 12:21:44 2014 - 002884 ms -   INFO - Device constant C1 is assigned the default value 1e-005
+Oct 02 12:21:44 2014 - 002889 ms -   INFO - Device constant C2 is assigned the default value 1e-005
+Oct 02 12:21:44 2014 - 002894 ms -  DEBUG - createExpressionMap: The map contains 2 expressions. 0 expressions are reused
+Oct 02 12:21:44 2014 - 002904 ms -   INFO - Octave file .\wikipediaExample\G.m successfully written
+Oct 02 12:21:44 2014 - 002908 ms -  DEBUG - mem_deleteHeap: Delete heap Addend of frequency domain expression, with a total size of 100 data objects (27244 Byte) in 1 chunks of memory
+Oct 02 12:21:44 2014 - 002919 ms -  DEBUG - mem_deleteHeap: Delete heap Network, with a total size of 20 data objects (212 Byte) in 2 chunks of memory
+Oct 02 12:21:44 2014 - 002928 ms -  DEBUG - mem_deleteHeap: Delete heap Coefficient of LES, with a total size of 1000 data objects (16044 Byte) in 1 chunks of memory
+Oct 02 12:24:40 2014 - 000068 ms - RESULT - 
+-----------------------------------------------------------------------------
+ linNet - The Software for symbolic Analysis of linear Electronic Circuits
+ Copyright (C) 1991, 2013-2014 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ This is free software; see the source for copying conditions. There is NO
+ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+-----------------------------------------------------------------------------
+Oct 02 12:24:40 2014 - 000069 ms - RESULT - Reading circuit file wikipediaExample.cnl successfully done
+Oct 02 12:24:40 2014 - 000075 ms - RESULT - User-defined result G (Bode plot):
+The dependency of Vout on Vin:
+  Vout(s) = N_Vout_Vin(s)/D_Vout_Vin(s) * Vin(s), with
+    N_Vout_Vin(s) = R1*R11
+    D_Vout_Vin(s) = R1*R4*R8*C1 * s
+                    +R4*R8
+Oct 02 12:25:56 2014 - 000070 ms - RESULT - 
+-----------------------------------------------------------------------------
+ linNet - The Software for symbolic Analysis of linear Electronic Circuits
+ Copyright (C) 1991, 2013-2014 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ This is free software; see the source for copying conditions. There is NO
+ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+-----------------------------------------------------------------------------
+Oct 02 12:25:56 2014 - 000071 ms - RESULT - Reading circuit file wikipediaExample.cnl successfully done
+Oct 02 12:25:56 2014 - 000085 ms - RESULT - User-defined result G (Bode plot):
+The dependency of Vout on Vin:
+  Vout(s) = N_Vout_Vin(s)/D_Vout_Vin(s) * Vin(s), with
+    N_Vout_Vin(s) = R1*R11*R2*R3*R5*C2 * s
+    D_Vout_Vin(s) = R1*R2*R3*R4*R5*R8*C1*C2 * s^2
+                    +R2*R3*R4*R5*R8*C2 * s
+                    +R1*R4*R6*R8

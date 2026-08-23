@@ -1,4 +1,0 @@
-# Ignore all directories named "private" and everything inside them: All
-# of these folders are identical copies of the template folder with Octave
-# resources.
-private/
