@@ -1,0 +1,18 @@
+Dec 10 21:16:46 2014 - 000022 ms - RESULT - 
+-----------------------------------------------------------------------------
+ linNet - The Software for symbolic Analysis of linear Electronic Circuits
+ Copyright (C) 2014 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ This is free software; see the source for copying conditions. There is NO
+ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+-----------------------------------------------------------------------------
+Dec 10 21:16:46 2014 - 000022 ms - RESULT - Reading circuit file C:\user\vranken\projects\linNet\trunk\components\linNet\test\testCases\trickyOP.ckt successfully done
+Dec 10 21:16:46 2014 - 000022 ms - RESULT - User-defined result Z (Bode plot):
+The dependency of U1 on I_U1:
+  U1(s) = N_U1_I_U1(s)/D_U1_I_U1(s) * I_U1(s), with
+    N_U1_I_U1(s) = (R1*R4 - R2*R3)
+    D_U1_I_U1(s) = R4
+Dec 10 21:16:46 2014 - 000028 ms - RESULT - User-defined result G (Bode plot):
+The dependency of U2 on U1:
+  U2(s) = N_U2_U1(s)/D_U2_U1(s) * U1(s), with
+    N_U2_U1(s) = (R2*R3 + R2*R4)
+    D_U2_U1(s) = (R1*R4 - R2*R3)
