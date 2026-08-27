@@ -1,0 +1,28 @@
+/*
+   Der Versuch einen entdaempften Oszillator zu berechnen. Die Schaltung ergibt
+   sich als Analogrechner der DGL f" = -w^2 * f. Die Anfangswerte werden durch
+   Addition eines Eingangssignales realisiert, daher erhaelt man auch eine
+   Uebertragungsfkt. Man sollte -cos(w*t) als Sprungantwort erwarten.
+
+   25.1.1992  P. Vranken
+*/
+
+.AC   DEC  1000 0.0     300
+
+U1    K10     K1_gnd
+U2    K9      K1_gnd
+      
+OP    K1_gnd  K4      K7           /* Integrierer 1 */
+OP    K1_gnd  K5      K8           /* Integrierer 2 */
+OP    K1_gnd  K6      K9           /* Addition Anfangswert f(0) */
+                      
+R     K9      K4         R=1e6    /* RC-Glieder der Integratoren auf 1s */
+C     K4      K7         C=1e-6
+                      
+R2    K7      K5         R=R
+C2    K5      K8         C=C
+                      
+R3    K8      K6         R=1      /* dann sind die beiden anderen Werte gleich w^2 */
+Rw    K10     K6         R=100*R3 /* w=10/s - T=.63s */
+Rw    K6      K9         R=100*R3
+

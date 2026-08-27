@@ -1,0 +1,23 @@
+Dec 11 22:22:53 2014 - 000020 ms - RESULT - 
+-----------------------------------------------------------------------------
+ linNet - The Software for symbolic Analysis of linear Electronic Circuits
+ Copyright (C) 2014 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ This is free software; see the source for copying conditions. There is NO
+ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+-----------------------------------------------------------------------------
+Dec 11 22:22:53 2014 - 000020 ms -   WARN - Line 11: Plot info: Two frequency points should be plotted at least
+Dec 11 22:22:53 2014 - 000021 ms -   WARN - Line 17: Device name OP had been used before. Device names should be unique. The device is renamed to OP_L17. If this device should be referenced by the value definition of another device then the reference will be resolved in an unintended way without any further error message or warning
+Dec 11 22:22:53 2014 - 000021 ms -   WARN - Line 18: Device name OP had been used before. Device names should be unique. The device is renamed to OP_L18. If this device should be referenced by the value definition of another device then the reference will be resolved in an unintended way without any further error message or warning
+Dec 11 22:22:53 2014 - 000021 ms -   WARN - Line 28: Device name Rw had been used before. Device names should be unique. The device is renamed to Rw_L28. If this device should be referenced by the value definition of another device then the reference will be resolved in an unintended way without any further error message or warning
+Dec 11 22:22:53 2014 - 000021 ms - RESULT - Reading circuit file C:\user\vranken\projects\linNet\trunk\components\linNet\test\OSZILLAT.CKT successfully done
+Dec 11 22:22:53 2014 - 000023 ms - RESULT - User-defined result Z (Bode plot):
+The dependency of U1 on I_U1:
+  U1(s) = N_U1_I_U1(s)/D_U1_I_U1(s) * I_U1(s), with
+    N_U1_I_U1(s) = 100*R3
+    D_U1_I_U1(s) = 1
+Dec 11 22:22:53 2014 - 000047 ms - RESULT - User-defined result G (Bode plot):
+The dependency of U2 on U1:
+  U2(s) = N_U2_U1(s)/D_U2_U1(s) * U1(s), with
+    N_U2_U1(s) = -R^2*C^2 * s^2
+    D_U2_U1(s) = R^2*C^2 * s^2
+                 +100
