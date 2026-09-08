@@ -1,0 +1,22 @@
+*
+*  Die Bandsperre aus der Impulstechnikvorlesung
+*
+*  (c) 24/11/1991 Peter Vranken
+*
+*
+U1 1 6; U2  5 6  /* Festlegung der Ein/Ausg„nge sollte am Anfang stehen */
+
+C   1 2       /* Die namengebenden Bauteile in alphabetischer Ordnung am   */
+R1  1 4       /* Anfang der Knotenliste fhrt zum optisch sch”nsten Ergeb- */
+R2  2 7       /* nis */
+R3  2 6 
+
+R12 3 5  R=R1 /* fr die Bauelemente, auf die diese bezogen werden, werden */
+R13 4 5  R=R1 /* keine numerischen Vorgaben gemacht. Somit werden ihnen sp„- */
+R31 1 2  R=R3 /* ter Defaultvorgaben gemacht, die so gew„hlt sind, da alle */
+C1  7 3  C=C  /* Eckfrequenzen im NF-Bereich liegen sollten. */
+*
+* nun noch die Operationsverst„rker
+*
+OP  2 3 5     /* der obere */
+OP  3 4 7     /* sowie der untere */

@@ -1,0 +1,19 @@
+/*
+   Zwei ideale Integrierer, die in Reihe geschaltet sind. W„hlt man U2 zwi-
+   schen int1 und gnd, bleibt der zweite unbercksichtigt. Mit int2 als Aus-
+   gangsknoten hat man hingegen beide in der šbertragungsfunktion.
+*/
+
+U1    in    gnd
+U2    int1  gnd
+*U2    int2  gnd
+
+OP    op1p  gnd   int1
+OP    op2p  gnd   int2
+
+C     op1p  int1
+C1    op2p  int2           C=C
+R     in    op1p
+R1    int1  op2p           R=2*R /* die Zeitkonstante des zweiten Inte- */
+                                 /* grierers ist doppelt so gro, wie die */
+                                 /* des ersten */

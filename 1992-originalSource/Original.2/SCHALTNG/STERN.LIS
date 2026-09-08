@@ -1,0 +1,15 @@
+LIN_NETZ - Das Programm zur Analyse linearer Netzwerke Thu Feb 06 10:42:12 1992
+Copyright (c) 1991 Peter Vranken
+Bearbeitung von a:\schaltng\stern.ckt
+
+****************
+* Das Ergebnis *
+****************
+
+ i) šbertragungsfunktion: G(s) = Z(s)/N(s), mit
+ Z(s)=  +945
+ N(s)=  +1890
+
+ii) Eingangsimpedanz: Zi(s) = Z(s)/N(s), mit
+ Z(s)=  +1890*R
+ N(s)=  +2205

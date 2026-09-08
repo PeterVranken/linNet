@@ -1,0 +1,26 @@
+/*
+/* Hier wird ein Transistor-Ersatzschaltbild als Knotenliste dargestellt
+/*
+*/ Ein Eingangangswiderstand vor der Basis erlaubt es, auch die Frequenz-
+*/ abhÑngigkeiten des Eingangswiderstandes zu betrachten.
+*/
+
+/*
+   (c) Peter Vranken 13/11/1991
+*/
+
+/* Es handelt sich um eine einfache Emitterschaltung mit Arbeitswiderstand */
+
+Ri  Eingang   Basis   /* Innenwiderstand der ansteuernden Quelle */
+Rde Basis     Emitter /* dynamischer Basiswiderstand im Arbeitspunkt */
+Cde Basis     Emitter /* dazu parallel die DiffusionskapazitÑt der Basis */
+
+/* Kollektor als spannungsgesteuerte Stromquelle: */
+G   Kollektor Emitter /**/ Basis Emitter
+
+Cm  Kollektor Basis   /* RÅckwirkung auf Basis: Millereffekt */
+Rc  Kollektor Emitter /* schlieûlich noch ein Arbeitswiderstand */
+
+/* wichtig fÅr die öbertragungsfunktion: Definition von Ein- und Ausgang */
+U1  Eingang   Emitter
+U2  Kollektor Emitter   

@@ -1,0 +1,9 @@
+U1    A  M
+U2    B  E
+R1    M  B
+R2    C  B
+R3    C  D
+R4    A  C
+R5    D  E
+G     E  D  C  D;
+S     C  D  A  B

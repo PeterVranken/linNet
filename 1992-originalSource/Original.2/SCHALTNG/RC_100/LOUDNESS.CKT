@@ -1,0 +1,21 @@
+/*
+   Loudness-Schaltung des Receivers RC 100
+*/
+
+U1    i  g
+U2    o  g
+
+* Das Lautst„rkepoti wird dreigeteilt dargestellt. Alle Teile zusammen mssen
+* 100 KOhm haben. Abgegriffen von diesen wird Teil c. Einstellungen von mehr
+* als 50% sind in dieser Form nicht m”glich, denn dann mte U2 oberhalb von
+* Knoten c abgenommen werden.
+RPa   a  c     R=50K    /* oberer H„lfte des Lautst„rkepotis */
+RPb   c  o     R=40K    /* mittlerer Teil des Potis */
+RPc   o  g     R=10K    /* unterer Teil des Potis, ist Abgriff */
+
+R1    i  a     R=1000
+R2    g  b     R=2700
+C1    a  c     C=470n
+C2    c  b     C=150n
+
+

@@ -1,0 +1,25 @@
+* Aufgabe 3 der Theo Klausur F84, Unterpunkt d)
+
+* Teil 1: Berechnung von Ua = I1*R1
+* Quotient I1/I2 erh„lt man also aus Z1(s)*R2 / Z2(s)*R1, da die Nennerdeter-
+* minate die in beiden Teilen identische Systemdeterminante ist.
+
+* Transistor durch Stromquelle mit Steilheit g ersetzt. Daž die Beziehung 
+* g = k/Rc besteht, kann man wegen des erforderlichen Grenzberganges k->ß
+* aužer acht lassen.
+
+U1    6  7
+U2    6  3
+
+R1    6  3
+R2    6  5
+R3    2  7
+R4    4  7
+Rb    3  2
+Rb2   3  4        R=Rb
+Rc    3  2
+Rc2   5  4        R=Rc
+
+g     3  2  3  2
+g2    5  4  3  4  g
+

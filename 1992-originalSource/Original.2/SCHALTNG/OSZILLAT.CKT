@@ -1,0 +1,28 @@
+/*
+   Der Versuch einen entd„mpften Oszillator zu berechnen. Die Schaltung ergibt
+   sich als Analogrechner der DGL f" = -w^2 * f. Die Anfangswerte werden durch
+   Addition eines Eingangssignales realisiert, daher erh„lt man auch eine
+   šbertragungsfkt. Man sollte -cos(w*t) als Sprungantwort erwarten.
+
+   25.1.1992  P. Vranken
+*/
+
+.AC   DEC  50 0.01   300
+
+U1    10 1
+U2    9  1
+
+OP    1  4  7           /* Integrierer 1 */
+OP    1  5  8           /* Integrierer 2 */
+OP    1  6  9           /* Addition Anfangswert f(0) */
+
+R     9  4     R=1e6    /* RC-Glieder der Integratoren auf 1s */
+C     4  7     C=1e-6
+
+R2    7  5     R=R
+C2    5  8     C=C
+
+R3    8  6     R=1      /* dann sind die beiden anderen Werte gleich w^2 */
+Rw    10 6     R=100*R3 /* w=10/s - T=.63s */
+Rw    6  9     R=100*R3
+

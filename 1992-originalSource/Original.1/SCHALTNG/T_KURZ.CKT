@@ -1,0 +1,26 @@
+/*
+/* Hier wird ein Transistor-Ersatzschaltbild als Knotenliste dargestellt
+/*
+*/ Ein Einangswiderstand vor der Basis erlaubt es, auch die Frequenz-
+*/ abh„ngigkeiten des Innenwiderstandes zu betrachten.
+*/
+
+/*
+   (c) Peter Vranken 13/11/1991
+*/
+
+/* Es handelt sich um eine einfache Emitterschaltung mit Arbeitswiderstand */
+
+Ri   In B       /* Innenwiderstand der ansteuernden Quelle */
+Rde  B  E       /* dynamischer Bwiderstand im Arbeitspunkt */
+Cde  B  E       /* dazu parallel die Diffusionskapazit„t der B */
+
+/* C als spannungsgesteuerte Stromquelle: */
+S    C  E  /* Steuerspannung: */ B  E
+
+Cm   C  B       /* Rckwirkung auf B: Millereffekt */
+Rc   C  E       /* schlielich noch ein Arbeitswiderstand */
+
+/* wichtig fr die šbertragungsfunktion: Definition von Ein- und Ausgang */
+U1  In  E
+U2  C   E  

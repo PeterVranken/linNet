@@ -1,0 +1,245 @@
+Hinweise zur Benutzung der Programme des Netzwerkprojektes
+
+1. Verwendungszweck und Funktionsumfang des Programmpaketes
+  Das Programmpaket umfat drei Teile, die eine anspruchsvolle Analyse 
+linearer, elektrischer Netzwerke erm”glichen. Dabei liegt der Schwerpunkt 
+im Gegensatz zu den g„ngigen Programmen nicht so sehr auf der 
+numerisch-graphischen Untersuchung, als auf der analytischen Berechnung. 
+Darum darf auch nicht erwartet werden, da sich sehr umfangreiche 
+Schaltungen erfassen lassen, bei diesen w„re mit dem analytischen Ergebnis 
+nicht viel anzufangen. Es werden die komplexe šbertragungsfunktion und die 
+Laplace-Transformierte der Eingangsimpedanz berechnet. Da die Rechnung 
+symbolisch vorgenommen wird, ist sie fehlerfrei, solange das Programm keine 
+anderslautende Meldung ausgibt. Die Eingabe der Schaltung erfolgt als 
+Knotenliste, zu deren Syntax noch etwas zu sagen sein wird. Zugelassen 
+werden nur ideale Bauelemente, da eine geschlossenene L”sung sonst im 
+allgemeinen gar nicht existiert, es sind dies im einzelnen: Widerstand, 
+Leitwert, Spule, Kondensator, Operationsverst„rker und spannungsgesteuerte 
+Stromquelle. Um die Interpretation der Ergebnisse zu erleichtern, enth„lt 
+das Programmpaket noch ein Numerikprogramm, das die erstellten Funktionen 
+einliest, mit w„hlbaren Bauteilgr”en in einem angebbaren Frequenzbereich 
+auswertet und eine Datei mit den Ergebnissen anlegt. Fr ATARI ST existiert 
+auch noch ein Zeichenprogramm zu deren graphischer Ausgabe. Ein 
+Kommandointerpreter mit einer auf den vorliegenden Fall zugeschnittenen 
+Prozedur wird fr diesen Computer mitgeliefert. In jedem Fall mu aber noch 
+ein Editor fr die Eingabedateien vom Anwender hinzugefgt werden.
+
+2. Systeminstallation (nur fr ATARI ST)
+  Es ist fr eine zgige Arbeit mit dem Paket ein schnelles Laufwerk 
+erforderlich. Soll eine Ramdisk verwendet werden, dann sollte man ber 
+mindestens 1 MB verfgen. In diesem Fall kann man die ben”tigten Dateien 
+mit dem Programm autocopy.ttp zu Beginn der Arbeit in die Ramdisk kopieren. 
+Bei Aufruf des Kopierprogrammes ist a:autocopy.bat als Parameter zu 
+bergeben. Die Ramdisk sollte etwa mit 300K bemessen werden. Eine Harddisk 
+tuts natrlich auch, ein Kopierprogramm ist dann berflssig. In jedem Fall 
+mu sich im Arbeitsverzeichnis folgendes befinden:
+
+        i)  lin_netz.ttp
+       ii)  auswertg.ttp
+      iii)  plot_400.ttp  (plot_200.ttp bei mittlerer Aufl”sung)
+       iv)  make.prg
+        v)  arbeit.mke
+       vi)  eine Knotenliste (*.ckt) oder der Ordner 'schaltng' mit
+            Beispielschaltungen
+      vii)  ein g„ngiger Editor, z.B. tempus.prg
+
+3. Beschreibung von Aufruf und Bedienung der Programme
+
+3.1 Kommandointerpreter (nur fr ATARI ST)
+  Der Aufruf des Kommandointerpreters erfolgt mit make.prg (bzw. mit 
+Doppelklick, diesen trivialen Hinweis spare ich mir im weiteren), wenn nur 
+auer arbeit.mke keine weitere Datei *.mke im Arbeitsverzeichnis liegt. Die 
+ausgefhrte Prozedur fragt nach einer Knotenliste, bis die Angegebene 
+wirklich gefunden wird. Daher sollte vor dem ersten Start eine solche auch 
+vorhanden sein, eventuell mit dem Editor eine Dummydatei anlegen. Es wird 
+dann ein Men angezeigt, dessen Auswahlpunkte selbsterkl„rend sind, wenn 
+man die noch folgende Einzelbeschreibung der Programme gelesen hat. Es soll 
+nur gesagt sein, da stets versucht wird, m”glichst zgig, solange kein 
+Fehler gemeldet wird, ein Programm nach dem anderen aufzurufen, ohne 
+jedesmal das Men wieder aufzubauen. Die Prozedur kann sowohl ber den 
+entsprechenden Auswahlpunkt, wie auch durch einen von Null verschiedenen 
+Returncode des Editors beendet werden (z.B. Shift-Alternate-1 bei Tempus). 
+Wenn ein anderer Editor verwendet werden soll, dann mu er entweder in 
+tempus.prg umbenannt werden, oder die Kommandoprozedur arbeit.mke 
+entsprechend ver„ndert werden. Wichtig: CAPSLOCK mu abgeschaltet sein, da 
+Grobuchstaben nicht erkannt werden.3.2 Das Analyseprogramm LIN_NETZ  Es 
+handelt sich, wie die anderen auch, um ein kommandozeilenorientiertes 
+Programm. Es gibt seine Optionen als Ged„chnissttze aus, wenn man es ohne 
+Parameter aufruft. (Auch das hat es mit den brigen gemeinsam.) Ein 
+Parameter ohne fhrendes '-' wird als Name der Eingabedatei, i.e. die 
+Knotenliste, interpretiert. Wird eine numerische Auswertung der berechneten 
+Funktionen gewnscht, mu eine entsprechende Bin„rdatei erzeugt werden, 
+dies geschieht mit der Option '-B', ohne Leerzeichen gefolgt von einem 
+Dateinamen, wenn nicht der Name der Eingabedatei bernommen werden soll. 
+Als Dateiendung wird hier in jedem Fall '.fkt' angeh„ngt. Soll fr die 
+Ausgabedatei, die die analytischen Ergebnisse enth„lt, nicht der Name der 
+Eingabedatei verwendet werden, dann mu '-A', gefolgt vom gewnschten 
+Namen, bergeben werden. Die Ausgabedatei endet immer auf '.lis'. 
+Schlielich besteht noch die M”glichkeit, den Umfang der ausgegebenen 
+Information mit '-Vn' zu beeinflussen. In voreingestellten Fall n=0 wird 
+nur das Ergebnis, also die beiden genannten Funktionen ausgegeben. Fr n=1 
+kommt noch die Ausgabe des erzeugten linearen Gleichungssystems hinzu, fr 
+n=2 gar das Ergebnis jedes einzelnen Eliminationsschrittes desselben, sowie 
+eine Kontrollausgabe der gelesenen Netzwerkstruktur.3.3 Das Numerikprogramm 
+AUSWERTG  Man sollte ihm den Namen der von LIN_NETZ erzeugten 
+Funktionsdatei als Parameter angeben. Es erzeugt, wenn der Name der 
+Ausgabedatei nicht mit '-A...' explizit ge„ndert wird, unter demselben 
+Namen eine Liste mit den berechneten Zahlenwerten. Die Endung der 
+Ausgabedatei ist '.dat'. Ein weiterer optionaler Parameter ist '-Dx', wobei 
+x die Werte 'a' bis 'd' annehmen kann. Es wird in diesem Fall kein Dialog 
+mit dem Benutzer gefhrt, sondern der Menpunkt x (s.u.) sofort ausgefhrt. 
+Natrlich mu man dann mit den numerischen Defaultwerten vorliebnehmen, da 
+man ja keine Gelegenheit hat sie zu „ndern. Diese sind allerdings so 
+gew„hlt, da es nicht g„nzlich unwahrscheinlich ist, da sich ein 
+sinnvolles Ergebnis ergibt, und auerdem kann man sie ber die Knotenliste 
+beeinflussen.
+  Nun zur Beschreibung des Benutzerdialoges. Zuoberst werden die aktuellen 
+Variablenwerte angezeigt. Zus„tzlich zu den Bauteilen der Knotenliste 
+findet man in der ersten Zeile die beiden Grenzfrequenzen, zwischen denen 
+die Funktionen ausgewertet werden, und die Aufl”sung, d.h. die Anzahl der 
+Frequenzpunkte, die berechnet wird. Erfahrungsgem„ sollte diese bei ca. 
+100 liegen. Alle Zahlenwerte werden mit den aus der physikalischen Praxis 
+bekannten symbolischen Exponenten angegeben, sie sollen hier nicht extra 
+aufgelistet werden. Auch die Eingabe kann in dieser Form gemacht werden, 
+die bliche Computerschreibweise ist aber ebenso erlaubt. Unsinnige Werte 
+(zu gro, zu klein, negativ) werden nicht angenommen. Es wird jeweils die 
+markierte Variable ver„ndert (ATARI ST: Inversschrift, MS-DOS: '>...<').Die 
+Markierung kann mit den Tasten '+' und '-', sowie '*' und '/' verschoben 
+werden. Mit der Taste 'e' kann die Darstellungsart ausgew„hlt werden. Dabei 
+kann zwischen linearer und logarithmischer Achsskalierung gew„hlt werden. 
+Es mu aber ausdrcklich darauf hingewiesen werden, da dies nur insofern 
+von AUSWERTG bercksichtig werden kann, als es um die Wahl der zu 
+berechnenden Frequenzpunkte geht; ob diese sp„ter im Plotprogramm auch 
+wirklich logarithmisch oder linear angezeigt werden, mu dort eingestellt 
+werden. Im Falle des ATARI ST ist allerdings durch einen kleinen Header vor 
+den Daten sichergestellt, da sich das Plotprogramm automatisch richtig auf 
+die Wahl einstellen kann.
+  Erst wenn alle Eingaben solcherart sinnvoll gemacht sind, sollte man 
+einen der Menpunkte (a) bis (d) anw„hlen, denn mit ihm wird der 
+Programmlauf beendet. Die ersten drei Punkte erkl„ren sich von selbst, 
+daher sollen nur zu (d), der Berechnung von Sprung- und Stoantwort, noch 
+ein paar Worte verloren werden. Um es sogleich und unverblmt zu sagen: Bei 
+der Berechnung der beiden Zeitfunktionen wurde das falsche Verfahren 
+gew„hlt. Sie werden als numerische Rcktransformierte des entsprechenden 
+Spektrums berechnet. Dies hat zur Folge, da prinzipiell eine ideale 
+Tiefpafilterung hinzugemogelt wird (es wird keine Fensterfunktion 
+verwendet), die bei 'fo' einsetzt. Sollte es sich also nicht gerade um eine 
+Tiefpaschaltung handeln, die bei dieser Frequenz ohnehin schon eine starke 
+D„mpfung erzeugt, so da die zus„tzliche Filterung nicht viel „ndert, dann 
+sind starke šberschwinger und Verzerrungen die Folge, die mit den echten 
+Schaltungseigenschaften nichts mehr zu tun haben. Hat man z.B. einen 
+Tiefpa mit einer Grenzfrequenz>>fo, dann wird Menpunkt (d) lediglich 
+einen idealen Tiefpa mit fg=fo berechnen, nicht aber die eingegebene 
+Schaltung. Eine numerische Integration w„re hier das einzig Wahre gewesen. 
+Vielleicht darf aber an dieser Stelle daran erinnert werden, da mit dem 
+analytischen Ausdruck der šbertragungsfunktion auch die Koeffizienten der 
+die Schaltung beschreibenden Differentialgleichung bekannt sind, wodurch 
+jedes Programm zur numerischen Integration anwendbar wird. Die 
+Transformation wird wegen des verwendeten Algorithmusses von Cooley & Tukey 
+mit einer festen Anzahl Sttzwerte ausgefhrt, die Einstellung 'Punkte' 
+beeinflut lediglich die dargestellte Anzahl. Die Variable 'fu' ist sogar 
+v”llig wirkungslos. Zu beachten ist deshalb, da die šbertragungsfunktion 
+stets bei s=0 ausgewertet wird, hier darf also keine Singularit„t 
+vorliegen, wie z.B. beim ansonsten problemlos berechenbaren Integrator.
+
+3.4 Das Plotprogramm PLOT_X00 (nur fr ATARI ST)
+  Zun„chst sei darauf hingewiesen, da die Zahl im Namen des Programmes die 
+Zeilenzahl angibt, mit der das Programm l„uft. Es ist je nach Bildschirm 
+das passende auszusuchen. Als Parameter ist der Name der Datendatei 
+anzugeben. Das Programm ist ein Anwendung der von Georg Dittie in der c't 
+2/1990 ver”ffentlichten Diagrammzeichenroutine, zu der ich nur eine 
+Zahleneinleseroutine und eine Umskalierung fr die zweite Funktion 
+hinzugefgt habe. Leider hat es daher neben den vielf„ltigen Vorzgen des 
+Originals auch dessen Fehler und Schw„chen (vielleicht nur Abtippfehler?), 
+als da w„ren das šbereinanderschreiben der Achsskalierungen, sowie die 
+Absturzgefahr bei der Darstellung konstanter oder sehr groer 
+Funktionswerte. W„hrend jenes nur l„stig ist, ist dieses ausgesprochen 
+unangenehm, da viele Operationsverst„rkerschaltungen konstante oder gar 
+unendliche Eingangswiderst„nde haben. (AUSWERTG schreibt die gr”te 
+darstellbare Fliekommazahl (ca. 10^308) fr unendlich.) Es werden immer 
+zwei Funktionen berechnet, da bei weiteren das Diagramm sehr 
+unbersichtlich wrde. Die jeweils zweite Funktion wird mit kleinen 
+Vierecken markiert. Da die Diagrammroutine nicht in der Lage ist, mehrere 
+unterschiedlich skalierte Y-Achsen zu zeichnen, blieb mir nichts anderes 
+brig, als die zweite Funktion in den Wertebereich der ersten zu 
+transformieren. Sie ist also ausschlielich qualitativ zu bewerten. Will 
+man die Zahlenwerte wissen, dann mu man sich entweder die angegebenen 
+Transformationswerte merken, oder von der Menprozedur des 
+Kommandointerpreters ber 'd' den Datensatz listen. Die Bedeutung der von 
+PLOT_X00 erwarteten Headerdaten ist im Zusammenhang mit diesem 
+Programmpaket irrelevant, man kann sie aber in der 'read-me'-Datei zum 
+Plotprogramm nachlesen.
+
+4. Aufbau und Syntax der Knotenliste
+  Da es kaum angemessen ist, eine formale Syntax bis ins Detail verbal zu 
+beschreiben, sei zun„chst auf die BNF der Syntax, die man in der Datei 
+'parser.bnf' einsehen kann, und die vielen Beispiele im Ordner 'schaltng' 
+hingewiesen. Es sollen aber an dieser Stelle doch einige Erkl„rungen zur 
+Syntax erfolgen. Die Syntax ist an die des numerischen 
+Netzwerkanalyseprogrammes 'Berkley-Spice' angelehnt. Daraus darf man 
+allerdings wegen des stark unterschiedlichen Funktionsumfanges der beiden 
+Programme nicht schlieen, da Eingabedateien beliebig austauschbar w„ren. 
+Ich m”chte es so formulieren: vielleicht ist es m”glich, eine sinnvolle 
+Knotenliste zu erstellen, die unver„ndert von beiden Paketen verarbeitet 
+werden kann. Sinn und Zweck der Syntaxwahl liegt nur darin, da der 
+Benutzer sich nicht zwei Syntaxen merken mu. Nun die Erkl„rung einiger 
+Details.  Kommentare sind in /* C-Klammerung */ zu setzen, oder, wenn sie 
+die ganze Zeile umfassen, durch einen '*' am Zeilenanfang zu kennzeichnen. 
+Ansonsten besteht eine Zeile aus einem Hinweis auf sp„tere numerische 
+Bearbeitung (eingeleitet durch .AC) oder aus einer Bauteilangabe, d.h. der 
+Beschreibung eines Zweiges des Netzes. Zun„chst sei auf die .AC-Zeile 
+eingegangen. Es folgt auf das .AC eine Angabe, ob der sp„tere Plot mit 
+linearer ('LIN') oder logarithmischer ('DEC') Frequenzachsenskalierung 
+erfolgt, sodann eine ganze Zahl, die in diesem Fall die Anzahl der Punkte 
+je Dekade, in jenem die Anzahl der Punkte insgesamt angibt. Die beiden 
+verbleibenden Fliekommazahlen in der Zeile geben untere und oberer 
+Frequenzgrenze der Berechnung an. Wird die .AC-Zeile fortgelassen, dann 
+wird als Defaultbereich der NF-Bereich gesetzt. Die Zweigbeschreibungszeile 
+enth„lt zun„chst den symbolischen Namen des Bauteiles, der auch sp„ter in 
+der Ergebnisfunktion verwendet wird. Er sollte darum eindeutig sein, und 
+m”glichst kurz, obwohl das eine wie das andere nicht zwingend 
+vorgeschrieben ist. Der erste Buchstabe des Namens legt fest, um welch ein 
+Bauelement es sich handelt. Es drfen R, L, C, Y, G und S verwendet werden. 
+G und S stehen austauschbar fr die spannungsgesteuerte Stromquelle, Y 
+bezeichnet einen Leitwert, R,L,C erkl„rt sich von allein. Ideale 
+Operationsverst„rker k”nnen nicht in die Ergebnisfunktion eingehen, sie 
+haben daher keinen symbolischen Namen, und eine entsprechende Zeile wird 
+nur mit OP eingeleitet. Nun folgen zwei (bei passiven Bauelementen), drei 
+(bei Operationsverst„rkern) oder vier (bei Stromquellen) Knotenangaben. Bei 
+Operationsverst„rkern haben sie die Bedeutung Eingang, Eingang, Ausgang, 
+wobei die Polung der Eing„nge keine Rolle spielt, sie ist nur eine Frage 
+des praktischen Schaltungsaufbaues, geht aber nicht in die 
+šbertragungsfunktion ein. Die Bedeutung der Knoten bei der Stromquelle: 
+Stromabfluknoten, Zufluknoten, Pluspol der Steuerspannung, dito Minuspol. 
+Bei Bauteilen mit symbolischen Namen darf nun noch eine Zuweisung 
+vorgenommen werden. Sie ist entweder numerischer Art, indem z.B. im Falle 
+eines Widerstandes R=12.5K angegeben wird, oder stellt einen Bezug zu einem 
+anderen, bereits definierten Bauelement her, im Falle einer Spule z.B. 
+L=5*L1. Dabei steht vor dem '=' nur der erste Buchstabe des symbolischen 
+Namens, falls es eine Stromquelle ist, mu das 'S=' bzw. 'G=' sogar ganz 
+fortgelassen werden, Berkley-Spice schreibt dies so vor. Bezge auf andere 
+Bauteile sind nur erlaubt, wenn diese schon bekannt sind und selbst nicht 
+auf ein drittes Bezug nehmen. Das ist keine Einschr„nkung, sondern setzt 
+nur eine bestimmte Reihenfolge voraus. Um die Exaktheit des analytischen 
+Funktionsausdrucks nicht zu gef„hrden, sind Fliekommaangaben bei Bezgen 
+verboten. Es sei ausdrcklich darauf hingewiesen, da alle numerischen 
+Angaben in der Knotenliste keinerlei Einflu auf den Programmlauf von 
+LIN_NETZ nehmen, sie werden nur registriert, und an das Numerikprogramm 
+AUSWERTG weitergeleitet. Um nun eine šbertragungsfunktion berhaupt angeben 
+zu k”nnen, mssen Eingang und Ausgang noch spezifiziert werden. 
+Entsprechende Zeilen lauten U1 k+ k- fr den Eingang, bzw. U2 k+ k- fr den 
+Ausgang. Die kx bezeichnen die Knoten, an denen Plus- und Minuspol der 
+Spannungen anliegen. Die Knotennamen drfen beliebige Buchstaben und 
+Zahlenkombinationen sein, es sind somit insbesondere auch reine 
+Zahlenangaben zugelassen. Wegen der internen Verarbeitung ist es unbedingt 
+erforderlich, da vor der ersten Verwendung eines Operationsverst„rkers die 
+Eingangsspannung bereits definiert ist. Man sollte es sich daher zur 
+Gewohnheit machen, die beiden Angaben an den Anfang der Knotenliste zu 
+stellen.
+
+Der Autor wnscht Ihnen viel Freude mit dem Programmpaket, das als 
+Studienarbeit fr die RWTH Aachen, Institut fr technische Elektronik, 
+Prof. B. Hill, entstanden ist und gerne weiterkopiert werden darf.
+
+Aachen, den 7. Dezember 1991
+Peter Vranken

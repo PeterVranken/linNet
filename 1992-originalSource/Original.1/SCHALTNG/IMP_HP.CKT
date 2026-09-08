@@ -1,0 +1,34 @@
+/*
+   Knotenliste zum Hochpa zweiter Ordnung aus der Vorlesung Impulstechnik
+
+   (c) 23/11/1991 Peter Vranken
+*/
+
+U1  IN    GND           /* Eingangsspannung definieren */
+U2  OP1Q  GND           /* Ausgangsspannung definieren */
+
+/* Zur Nomenklatur: positve Operationsverst„rkereing„nge heien OPiP, die
+   gemeinsamen negativen OPM, Ausg„nge OPiQ. Mehr Knoten sind hier schon
+   gar nicht mehr zu benennen.
+   Eine allgemeine bemerkung: da die Bauelemente bei der Ausgabe nicht al-
+   phabetisch sortiert werden, sollte man sie in dieser Reihenfolge defi-
+   nieren, denn die Definitionsreihenfolge bleibt erhalten. */
+
+OP  OP1P  OPM  OP1Q     /* der obere Operationsverst„rker */
+OP  OP2P  OPM  OP2Q     /* und der untere */
+
+C   IN    OP1P C = 1n   /* ergibt Im{Pol} = 8.2Khz *2*pi */
+R1  OP2P  GND  R = 15k  /* sowie  Re{pol} = -800Hz *2*pi */
+R2  OP1P  OP2Q R = 25k  /* daher wird die Frequenzangabe entsprechend gemacht */
+R3  OP1P  GND  R = 100k
+
+.AC DEC /* d.h. logarithmisch */ 35 /* d.h. 35 Punkte je Dekade */ 100 100K 
+* das sind also 3*35=105 zu berechnende Punkte
+
+/* ab hier werden keine neuen Namen eingefhrt  die Namen der weiteren
+   Bauteile werden nur intern benutzt  daher spielt ihre Reihenfolge keine
+   Rolle fr das Aussehen des Ergebnisses mehr. */
+
+C1  OP2Q  OPM  C = C    /* obwohl man auch diesen C h„tte nennen k”nnen */
+R12 OPM   OP1Q R = R1   /* sollte man es wegen der Lesbarkeit unterlassen */
+R13 OP1Q  OP2P R = R1

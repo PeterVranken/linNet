@@ -1,0 +1,7 @@
+/*
+   Schaltung 3)
+   Spannungsfolger
+*/
+u1 1 gnd
+u2 2 gnd
+op 1 2 2

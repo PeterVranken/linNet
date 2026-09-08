@@ -1,0 +1,15 @@
+/*
+   Filter fÅr Oberwellenreduzierung eines Rechtecksignals
+*/
+
+u1    in    gnd
+u2    opq   gnd
+
+r1    in    opp   r=12K
+r2    opm   opq   r=11K
+r3    opm   gnd   r=60K
+
+c1    opp   gnd   c=22n
+c2    opq   opm   c=22n
+
+op    opp   opm   opq

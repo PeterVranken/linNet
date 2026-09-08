@@ -1,0 +1,16 @@
+/* Aufgsbe drei der Theo-Klausur Herbst 1990, Unterpunkt d) */
+
+U1    1  6
+U2    1  11
+
+R     2  1
+R2    3  4        R=R
+R3    46 6        R=R
+R4    1  11       R=R
+R5    2  3        R=R
+
+g     4  46 3  6        /* Alpha heižt hier also g */
+g2    2  3  4  3  g
+g3    1  2  1  2  g     /* so etwas stellt einen einfachen Widerstand dar! */
+g5    1  4  1  2  g
+gb    11 1  1  2        /* Beta heižt also gb */

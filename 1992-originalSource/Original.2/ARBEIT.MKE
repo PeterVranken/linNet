@@ -1,0 +1,132 @@
+#
+# Eine Prozedur fÅr die sinnvolle Verwendung der Programme des 
+# 
+#           N E T Z W E R K  -- P R O J E K T es
+#
+#
+# (c) 11/1991 Peter Vranken
+#
+# Die Prozedur kann von TEMPUS aus mit Shift-Alternate-1 jederzeit unter-
+# brochen werden.
+#
+# neue Version vom Juni 1992 fÅr MAKE 2.02
+#
+FUNC menue()
+   PUTC c:27, "E",c:27,"p  ****** AuswahlmenÅ zur Anwendung der Programme des Netzwerk-Projektes ******  ", c:27,"q"
+   PUTC                 "in Arbeit befindliche Schaltung: ", schaltung$.
+   PUTC c:10,c:10,      "   (K)notenliste ansehen, erstellen, Ñndern".
+   PUTC c:10,           "   (B)earbeitung sonstiger Dateien".
+   PUTC c:10,           "   (A)nalyse der erstellten Schaltung".
+   PUTC c:10,           "   (L)isting ansehen".
+   PUTC c:10,           "   (V)orgabe numerischer Daten zur Simulation".
+   PUTC c:10,           "   (D)atensatz ansehen".
+   PUTC c:10,           "   (P)lotten der Simulationsergebnisse".
+   PUTC c:10,           "   (W)ahl einer anderen Schaltung".
+   PUTC c:10,           "   (T)OS - Shell starten".
+   PUTC c:10,           "   (E)nde dieser Prozedur".
+   PUTC c:10,           "ich warte auf Ihre Entscheidung..."
+   REPEAT
+      PUTC c:27,"Y",c:34,c:32,"Systemzeit: ", DATE$
+      LET c = TOLOWER(SCANCHAR())
+   UNTIL c=='k' || c=='b' || c=='a' || c=='l' || c=='v' || c=='d' || c=='p' || c=='w' || c=='e' || c=='t'
+   LET menue = c
+   PUTC c:13, c:27, "J"
+ENDFUNC
+
+WARN_VER 202
+let editor$ = "tempus.prg"; # Namen des verwendeten Editors einsetzen
+DEL "auswertg.inf"
+PUTC c:27,"f","Eine Bedienungsprozedur fÅr die Programme des Netzwerk-Projektes".
+SEARCH auswahl$, "*.ckt"
+IF auswahl==0
+   LET schaltung$ = "TEST.CKT"
+ELSE
+   LET schaltung$ = 'auswahl$[1]'
+ENDIF
+REPEAT
+   LET listing$ = 'schaltung$';   # Namen der Ergebnisdatei bilden
+   CHG_EXT listing$, "LIS"
+   LET bin_output$ = 'schaltung$';# Namen der BinÑrdatei bilden
+   CHG_EXT bin_output$, "FKT"
+   LET daten$ = 'schaltung$';     # Name der Datei mit den numerischen Daten
+   CHG_EXT daten$, "DAT"
+   
+   LET c='m'
+   REPEAT
+      IF c=='m'
+         LET c = menue()
+      ENDIF
+      IF c=='k'; # Editierwunsch der Knotenliste
+         editor$ schaltung$ 
+         EXIT RC; # Prozedurabbruch auf diese Weise ist immer praktisch
+         LET c='a'
+      ENDIF
+      IF c=='b'
+         editor$
+         EXIT RC
+         LET c='m'; # zurÅck zum MenÅ
+      ENDIF
+      IF c=='a'; # Knotenliste analysieren
+         lin_netz.ttp -v0 -b/bin_output$ -a/listing$ schaltung$
+         IF RC==-39
+            PUTC "Zu wenig Speicher: Ramdisk verkleinern!".
+            GOSUB GETCHAR()
+            RETURN
+         ENDIF
+         IF RC; # Fehler im Programmlauf, vermutlich Fehler in der Knotenliste
+            PUTC "bitte eine Taste zum Fortfahren...".
+            GOSUB GETCHAR()
+            editor$ schaltung$
+            EXIT RC; # Prozedurabbruch auf diese Weise ist immer praktisch
+            LET c='a'
+         ELSE
+            LET c='v'; # kein Fehler, also zur Simulation
+         ENDIF
+      ENDIF
+      IF c=='l'
+         editor$ listing$;# erstelltes Listing betrachten
+         EXIT RC ;# Prozedurabbruch auf diese Weise ist immer praktisch
+         LET c='m'
+      ENDIF
+      IF c=='v';# Numerikprogramm starten
+         auswertg.ttp bin_output$
+         IF RC>0; # dann ist sofortiger Plot gewÅnscht
+            LET c='p'
+         ELSE; IF RC<0 ; # dann ein Fehler, Zeit zum Lesen lassen
+            GOSUB GETCHAR()
+            LET c='m';   # zurÅck zum MenÅ
+         ELSE
+            LET c='m';   # keine weitere Ablaufsteuerung, zurÅck zum MenÅ
+         ENDIF; ENDIF
+      ENDIF
+      IF c=='d'
+         editor$ daten$; # erstellten Datensatz betrachten
+         EXIT RC; # Prozedurabbruch auf diese Weise ist immer praktisch
+         LET c='m'
+      ENDIF
+      IF c=='p';# Plotroutine mit berechneten Werten starten
+         plot*.ttp daten$
+         PUTC c:27, "f"; # leider schaltet plot_x00 den Cursor an, aber nicht
+         LET c='m';      # wieder aus
+      ENDIF
+      IF c=='t'; # Eine Shell starten, zunÑchst unter d:\ suchen
+         SEARCH shellpath$, d:\mupfel.app, a:\mupfel.app, b:\mupfel.app
+         IF shellpath==0;# dann um explizite Angabe bitten
+            DIR shellpath$, d:\*.prg
+            IF RC; # wurde eine Wahl getroffen?
+               shellpath$
+            ENDIF  
+         ELSE
+            shellpath$[1]
+         ENDIF
+         LET c='m'
+      ENDIF
+   UNTIL c=='e' || c=='w'
+   IF c=='w';           # alte Variablenwerte sollten nicht fÅr die neue
+      DEL auswertg.inf; # Schaltung verwendet werden
+      DIR schaltung$, d:\*.ckt
+      CHG_EXT schaltung$, "CKT"
+   ENDIF
+UNTIL c!='w'
+END.
+      

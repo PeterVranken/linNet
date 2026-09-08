@@ -1,0 +1,57 @@
+;
+; Beispiel-ASSIGN.SYS fÅr NVDI
+; Diese Datei muû im Wurzelverzeichnis des Startlaufwerks liegen!
+;
+; Das vorangestellte 's' dient zum Einbinden neuer Systemfonts.
+;
+PATH = B:\NVDI\         ;Pfadangabe
+
+01p SCREEN.SYS                   ;aktuelle Auflîsung
+s MONACO08.FNT                   ;Monaco    8 Punkte Systemfont
+s MONACO09.FNT                   ;Monaco    9 Punkte Systemfont
+s MONACO10.FNT                   ;Monaco   10 Punkte Systemfont
+s MONACO20.FNT                   ;Monaco   20 Punkte Systemfont
+BLUE10.FNT                       ;Big Blue 10 Punkte
+
+02p SCREEN.SYS                   ;niedrige ST-Auflîsung (320*200)
+s MONACO08.FNT                   ;Monaco    8 Punkte
+s MONACO09.FNT                   ;Monaco    9 Punkte
+s MONACO10.FNT                   ;Monaco   10 Punkte
+s MONACO20.FNT                   ;Monaco   20 Punkte
+BLUE10.FNT                       ;Big Blue 10 Punkte
+
+03p SCREEN.SYS                   ;mittlere ST-Auflîsung (640*200)
+s MONACO08.FNT                   ;Monaco    8 Punkte
+s MONACO09.FNT                   ;Monaco    9 Punkte
+s MONACO10.FNT                   ;Monaco   10 Punkte
+s MONACO20.FNT                   ;Monaco   20 Punkte
+BLUE10.FNT                       ;Big Blue 10 Punkte
+
+04p SCREEN.SYS                   ;hohe ST-Auflîsung (640*400)
+s MONACO08.FNT                   ;Monaco    8 Punkte Systemfont
+s MONACO09.FNT                   ;Monaco    9 Punkte Systemfont
+s MONACO10.FNT                   ;Monaco   10 Punkte Systemfont
+s MONACO20.FNT                   ;Monaco   20 Punkte Systemfont
+BLUE10.FNT                       ;Big Blue 10 Punkte
+
+06p SCREEN.SYS                   ;mittlere TT-Auflîsung (640*480)
+s MONACO08.FNT                   ;Monaco    8 Punkte
+s MONACO09.FNT                   ;Monaco    9 Punkte
+s MONACO10.FNT                   ;Monaco   10 Punkte
+s MONACO20.FNT                   ;Monaco   20 Punkte
+BLUE10.FNT                       ;Big Blue 10 Punkte
+
+08p SCREEN.SYS                   ;hohe TT-Auflîsung (1280*960)
+s MONACO08.FNT                   ;Monaco    8 Punkte Systemfont
+s MONACO09.FNT                   ;Monaco    9 Punkte Systemfont
+s MONACO10.FNT                   ;Monaco   10 Punkte Systemfont
+s MONACO20.FNT                   ;Monaco   20 Punkte Systemfont
+BLUE10.FNT                       ;Big Blue 10 Punkte
+
+09p SCREEN.SYS                   ;niedrige TT-Auflîsung (320*480)
+s MONACO08.FNT                   ;Monaco    8 Punkte
+s MONACO09.FNT                   ;Monaco    9 Punkte
+s MONACO10.FNT                   ;Monaco   10 Punkte
+s MONACO20.FNT                   ;Monaco   20 Punkte
+BLUE10.FNT                       ;Big Blue 10 Punkte
+

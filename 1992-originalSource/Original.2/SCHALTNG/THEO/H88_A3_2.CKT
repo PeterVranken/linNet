@@ -1,0 +1,17 @@
+/* L”sung des Unterpunktes d) der Aufgabe 3 der Theo-Klausur Herbst '88 */
+
+* Teil 1: Abh„ngigkeit von Quelle e1, Knoten a = Knoten 5
+
+U1    4  6
+U2    2  6
+
+R1    5  1
+R2    1  2
+R3    2  4
+R4    3  4
+Rb    3  2
+Rb2   6  5        R=Rb
+Rl    2  6
+
+g     1  2  3  2
+g     3  5  6  5  g

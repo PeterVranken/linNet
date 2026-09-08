@@ -1,0 +1,125 @@
+#
+# universelle Make-Prozedur
+#
+# fr alle Module wird eine Abh„ngigkeit von einer
+# eventuellen Gesamtprojekt-Includedatei und eventuellen modulspezifischen
+# Includedateien, die denselben Namen wie das Modul tragen, angenommen.
+#
+# lauff„hig erst ab Interpreterversion 2.01
+#
+# (c) P.Vranken, 4.6.1992
+#
+# Bemerkung: da auf konsequente Anwendung von "" verzichtet wurde, ist
+# darauf zu achten, daž keine Variablen des Namens c, h, o, s, cll, mke  u.a.
+# verwendet werden.
+
+func set_options()
+#
+# hier die gewnschten Optionen angeben
+#
+# Programmname:
+   let progname$ = "lin_netz.prg"
+# Module (ohne .C) und ihre Anzahl eintragen:
+   let anz_module = 8
+   let modul$[1] = "lin_netz"
+   let modul$[2] = "solver"
+   let modul$[3] = "bin_aus"
+   let modul$[4] = "filename"
+   let modul$[5] = "ausgabe"
+   let modul$[6] = "ln_globl"
+   let modul$[7] = "mach_lgs"
+   let modul$[8] = "memory"
+# Gesamtprojekt-Include:
+   let include$  = "lin_netz.h"
+# Stapelgr”že:
+   let stacksize = 8192
+# Compiler:
+   let cc_optionen$ = "-w -itcc"
+# Linker:
+   let cl_optionen$ = '-o=progname$ -s=stacksize tcc\tcstart.o' 
+   let cl_library$  = "tcc\flt.lb tcc\std.lb tcc\tos.lb"
+endfunc
+
+func cc_comline(); # hier wird die Compilerkommandozeile erzeugt
+   let cc_com$ = cc_optionen$
+   for t=1 to anz_module
+      if istomake(modul$[t].o: modul$[t].c, modul$[t].h, include$, "standard.mke")
+         let cc_com$ += ' modul$[t].c'
+      endif
+   next
+   let cc_comline = strcmp('cc_optionen$', 'cc_com$')
+endfunc
+
+func cl_comfile(); # hier wird die Linkeranweisungsliste erstellt
+   puts "Eine Datei mit Linkeranweisungen"
+   OUT_TO tcc\modul$[1].cll
+   puts cl_optionen$.
+   for t=1 to anz_module
+      puts modul$[t], ".o "
+   next
+   puts c:13, c:10, cl_library$.
+   OUT_TO stdout
+   puts " wurde erstellt:".
+   shows tcc\modul$[1].cll
+endfunc
+
+func mustlink(); # muž der Linker aufgerufen werden?
+   let mustlink = istomake(progname$: tcc\modul$[1].cll)
+   for t=1 to anz_module
+      let mustlink = mustlink || istomake(progname$: modul$[t].o)
+   next
+endfunc
+
+#
+# Beginn des Hauptprogramms
+#
+warn_ver 201
+putc " >>>>>> Makeprozedur zur Erzeugung von ", progname$, " <<<<<< ".
+putc DATE$.
+gosub set_options()
+
+if istomake(tcc\modul$[1].cll: "standard.mke");# Linkeranweisungen mssen neu erzeugt werden
+   del tcc\modul$[1].cll
+   gosub cl_comfile()
+endif
+
+# šbersetzung, solange n”tig
+while cc_comline();     # dann ist eine šbersetzung erforderlich
+   putc "cc.prg ", cc_com$.
+   del tcc\c_err
+   out_to tcc\c_err;    # Ausgabe umlenken
+   cc.prg cc_com$;      # tcc aufrufen
+   out_to stdout
+   if RC;               # es trat ein Fehler auf
+      if !strcmpnc(argv$[1], "ed");# kein Editoraufruf, wenn mit 'ed' gestar-
+         showc tcc\c_err;          # tet; wenn man von Tempus aus bersetzt,
+         gosub getchar();          # ist das wnschenswert
+         exit 1
+      endif
+      ed.prg tcc\c_err
+      exit RC;          # Tempus mit SH-Alt-[1-3] verlassen => Prozedur abbrechen
+   else
+      showc tcc\c_err;  # Warnungen anzeigen
+   endif
+again
+#
+# Zusammenbinden, falls erforderlich
+#
+# Da die Ausgabeumlenkung mit tlink 1.1 nicht funktioniert, wird auf den
+# Versuch auch gleich verzichtet.
+#
+if mustlink()
+   putc "cl.prg -c=tcc\", modul$[1], ".cll".
+   cl.prg -c=tcc\modul$[1].cll
+   if RC;                   # Link-Fehler: Ausgabe anhalten, damit man die
+      putc "eine Taste zum Fortfahren". 
+      gosub getchar();      # Meldung des Linkers lesen kann
+      del progname$;        # sonst k”nnen fehlerhafte Programme erzeugt werden
+   else
+      putc progname$, " wurde erzeugt".
+   endif
+else
+   putc progname$, " ist auf dem aktuellen Stand!".
+   gosub getchar()
+endif
+end.

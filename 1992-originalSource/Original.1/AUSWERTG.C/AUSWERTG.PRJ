@@ -1,0 +1,12 @@
+; Projektdatei fÅr AUSWERTG.TTP mit TC 2.0
+
+auswertg.ttp
+=
+tcstart.o
+auswertg.c
+fft.c       (fft.dat)
+filename.c
+
+tcfltlib.lib
+tcstdlib.lib
+tctoslib.lib

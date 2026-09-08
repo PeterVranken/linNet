@@ -1,0 +1,17 @@
+/* Theo Klausur Herbst 91, Aufgabe 3, Unterpunkt c) */
+
+U1    5  6
+U2    3  4
+
+R     2  3                 /* R1 = R */
+R0    1  2        R=2*R
+R0    1  2        R=2*R    /* da e1 =0 */
+R2    3  4        R=R
+R3    1  5        R=R
+R4    2  5        R=R
+R5    3  6        R=R
+
+s     4  6  5  6           /* s = 1/R6 = 1/(b*R), d.h. s ist gesucht */
+g     3  2  3  4           /* g = 1/R ist sp„ter von Hand einzusetzen */
+g     4  1  1  5  g
+     

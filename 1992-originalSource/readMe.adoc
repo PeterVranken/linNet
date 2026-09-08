@@ -1,0 +1,32 @@
+linNet was first released on Google Code in 2013. However, an early
+predecessor named LIN_NETZ had already existed since 1991, developed on
+and for the Atari ST -- a popular and powerful computer at the time.
+Shortly thereafter, it was ported to MS-DOS. Two original 3.5-inch floppy
+disks survived and served as a crucial foundation for the release of
+linNet more than twenty years later.
+
+The two disks contained slightly different versions of the source code as
+well as the executable files: one disk held the executables for the Atari
+ST, while the other contained the corresponding MS-DOS binaries. At the
+time linNet was being implemented, the MS-DOS version could still be run
+on a Windows system and was used for regression testing.
+
+The folder `Original.1` in this directory contains everthing that was
+found on the diskette titled:
+
+    Netzwerk: Quelltexte für MS-DOS
+    EXE-Dateien: lin_netz, auswertg, iteplot
+    (nicht mehr up to date (6.1.92), aber neue Version von auswertg. ist noch
+    nicht MS-Dos erprobt (numerische Integrat.))
+
+The folder `Original.2` contains everthing that was found on the diskette
+titled:
+
+    Kopie der Arbeitsdiskette als Backup (Netzwerk)
+    21.7.92: Plotter.ttp 1.0 und Make 2.03
+    Normalformatierung
+
+`Original.2` appears to contain the newer files. These served as the basis
+for the attempt to restore the software. Despite of these available
+sources, linNet -- dating from 2013 -- is a complete reimplementation of
+the mathematical concept, which had been invented in 1991.

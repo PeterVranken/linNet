@@ -1,0 +1,15 @@
+/*
+   zuschaltbares H”henfilter des Receivers RC 100
+*/
+
+U1    in    gnd
+U2    out   gnd
+
+R1    in    a     R=2700
+R2    a     out   R=3500
+R3    out   gnd   R=27K
+
+C1    a     gnd   C=3.9n
+C2    out   gnd   C=2.7n
+
+

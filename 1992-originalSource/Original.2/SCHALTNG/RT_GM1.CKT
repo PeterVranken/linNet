@@ -1,0 +1,35 @@
+/*
+   Hierbei handelt es sich um eine Schaltung aus der Regelungstechnikvorle-
+   sung: bei der Beschreibung der Gleichstrommotor-Kaskadenregelung tritt sie
+   als innerster Kreis auf. Vergl. dazu S. 172 Fig. 4, es wird die šbertra-
+   gungsfunktion (9) berechnet.
+
+   23/1/92 P.Vranken
+*/
+
+
+* Es gelten folgende Beziehungen:
+
+* K2/K3 = R*C2
+* K1 = R/R1
+* Ta = R1*C1
+* Tm = R*R*C2/R1
+
+.AC   DEC   60    0.01  50
+
+U1    7  0
+U2    5  0
+
+OP    1  0  4
+OP    2  0  5
+OP    3  0  6
+
+R     7  1        R=10k
+R1    1  4        R=274.7K
+R61   6  1        R=R
+R42   4  2        R=R
+R52   5  2        R=R
+R53   5  3        R=R
+
+C1    1  4        C=218.4n
+C2    6  3        C=2960u

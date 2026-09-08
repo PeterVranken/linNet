@@ -1,0 +1,18 @@
+/*
+   Zwei ideale, in Reihe geschaltete Differenzierer.
+   Mit U2 zwischen diff1 und gnd ist nur der erste wirksam, bei Wahl von
+   diff2 als Ausgang sind beide wirksam.
+*/
+
+U1    in    gnd
+U2    diff1 gnd
+*U2    diff2 gnd
+
+OP    op1p  gnd   diff1
+OP    op2p  gnd   diff2
+
+C     in    op1p
+C2    diff1 op2p           C=C
+R     op1p  diff1
+R2    op2p  diff2          R=2*R /* die zweite Zeitkonstante ist also */
+                                 /* doppelt so grož wie die erste */

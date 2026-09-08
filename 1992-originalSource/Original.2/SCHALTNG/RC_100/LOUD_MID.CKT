@@ -1,0 +1,16 @@
+/*
+   Loudness-Schaltung in Mittelstellung
+*/
+
+U1    i  g
+U2    o  g
+
+RPa   a  o     R=50K    /* oberer H„lfte des Lautst„rkepotis */
+RPb   g  o     R=RPa    /* mittlerer Teil des Potis */
+
+R1    i  a     R=1000
+R2    g  b     R=2700
+C1    a  o     C=470n
+C2    o  b     C=150n
+
+

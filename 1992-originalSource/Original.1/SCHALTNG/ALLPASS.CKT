@@ -1,0 +1,11 @@
+/*
+   vermutlich ein Allpaž
+*/
+
+U1  IN  GND
+U2  OUT GND
+R   IN  OP1
+R1  IN  OP2
+R2  OP1 OUT R=R
+C   OP2 GND
+OP  OP1 OP2 OUT

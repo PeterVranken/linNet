@@ -1,0 +1,14 @@
+/* Teilnetz Nr. 2 fr die Berechnung der Aufagbe 38 aus der Theoretischen
+   Elektrotechnik. Abh„ngigkeit der Gr”e R1*I1 von e1. */
+
+U1    3  1x3
+U2    3  2
+
+R0    2  1
+R0b   3  4  R=R0
+R1    3  2
+R2    1  4
+R3    1  1x3
+
+g     2  1  1x3 1  /* da e0=0 gesetzt ist, wird Knoten 5 zu 1x3 */
+gb    3  4  2  4  g

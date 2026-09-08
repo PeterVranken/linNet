@@ -1,0 +1,36 @@
+/*
+   Hier wird eine Schaltung in invertierender Operationsverst„rkergrund-
+   schaltung, die im Eingangszweig einen Widerstand und im Rckkoppelzweig
+   eine Reihenschaltung aus drei RC-Parallelgliedern und einem Widerstand hat.
+   Wenn alle Widersta„nde identisch gw„hlt werden, dann sollte, da fr kleine
+   w alle drei wirksam sind, fr mittlere Frequenzen aber einer, fr hohe 
+   zwei kurzgeschlossen sind, schlielich fr ganze hohe nur noch einer wirksam
+   bleibt, zu erwarten sein, da G in drei Stufen von 4 ber 3 und 2 auf 1
+   f„llt. Es bietet sich an, im Numerikprogramm den Widerstandswert auf
+   1/(2*PI) zu setzen, dann sind die Eckfrequenzen gleich den Reziprokwerten
+   der Kapazit„ten.
+
+   (c) 7/12/1991 Peter Vranken 
+*/
+
+U1  IN  GND
+U2  OPQ GND
+
+.AC DEC 30 10. 10M   /* 6 Dekaden, man die Zeitkonstanten je 2 Dekaden auseinan- */
+                     /* derhalten, dann wird oben beschriebenes Verhalten deutlich */
+OP  OP1 GND OPQ
+
+R   IN  OP1 R = .159155  /* mit r=1/2*PI erreicht man, da sich Eckfrequen-
+                            zen und Kapazit„ten reziprok verhalten */
+
+Rt1 OP1 P1  R = R    /* erste Zeitkonstante: Parallelglied aus Rt1 und Ct1 */
+Ct1 OP1 P1  C = 10m  /* also f=100Hz */
+
+Rt2 P1  P2  R = R    /* zweite Zeitkonstante: Parallelglied aus Rt2 und Ct2 */
+Ct2 P1  P2  C = 100u /* also f=10KHz  */
+
+Rt3 P2  P3  R = R    /* dritte Zeitkonstante: Parallelglied aus Rt3 und Ct3 */
+Ct3 P2  P3  C = 1u   /* also f=1MHz  */
+
+Ru  P3  OPQ R = R    /* und der dritte Widerstand  der den Frequenzgang fr
+                        w gegen unendlich festlegt */

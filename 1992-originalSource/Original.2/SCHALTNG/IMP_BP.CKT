@@ -1,0 +1,31 @@
+/*
+   Knotenliste zum Bandpaž zweiter Ordnung aus der Vorlesung Impulstechnik
+
+   (c) 23/11/1991 Peter Vranken
+*/
+
+U1  IN    GND        /* Eingangsspannung definieren */
+U2  OP1Q  GND        /* Ausgangsspannung definieren */
+
+/* Zur Nomenklatur: positve Operationsverst„rkereing„nge heižen OPiP, die
+   gemeinsamen negativen OPM, Ausg„nge OPiQ. Mehr Knoten sind hier schon
+   gar nicht mehr zu benennen.
+   Eine allgemeine Bemerkung: da die Bauelemente bei der Ausgabe nicht al-
+   phabetisch sortiert werden, sollte man sie in dieser Reihenfolge defi-
+   nieren, denn die Definitionsreihenfolge bleibt erhalten. */
+
+OP  OP1P  OPM  OP1Q  /* der obere Operationsverst„rker */
+OP  OP2P  OPM  OP2Q  /* und der untere */
+
+/* zun„chst die Bezugsbauelemente */
+
+R1  OP1Q  OPM
+R2  OP1P  OP2Q
+R3  IN    OP1P
+C   OP2Q  OPM
+
+/* nun die Bezugnehmenden */
+
+R12  OP1Q  OP2P  R = R1 
+R13  OP2P  GND   R = R1 
+C1   OP1P  GND   C = C 

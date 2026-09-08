@@ -1,0 +1,17 @@
+/*
+   Hier ist die Knotenliste zur Tiefpažschaltung aus der Impulstechnik-
+   vorlesung. Es handelt sich um einen Tiefpaž zweiter Ordnung.
+
+   21/11/1991  P.Vranken
+*/
+U1    IN    GND
+U2    OP1Q  GND
+OP    OP1P  OPM   OP1Q  /* oberer Operationsverst„rker */
+OP    OP2P  OPM   OP2Q  /* unterer Operationsverst„rker */
+R3    IN    OP1P
+C     OP1P  OP2Q
+R2    OP2Q  OPM
+C1    OPM   OP1Q        C=C
+R1    OPM   OP1Q
+R4    OP2P  OP1Q        R=R2
+R5    OP2P  GND         R=R2

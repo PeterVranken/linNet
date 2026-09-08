@@ -1,0 +1,20 @@
+/*
+   Schaltung 4)
+   Zuf„lliges mit zwei Operationsverst„rkern, ergab einen PI-Regler, wenn
+   man die irrelevanten Bauelemente wegstreicht. Dazu ist zu sagen, daž die
+   beiden 'geschachtelten' Operationsverst„rker aufgrund der zugrundeliegen-
+   den Beschreibung „quivalent zu einem einzelnen sind. In der Praxis klappt
+   dies nicht, weil man wegen endlicher Verst„rkung zwischen beiden Eing„n-
+   gen zu unterscheiden hat.
+*/
+
+u1  in   gnd; u2  o2q  gnd
+op  o1p  om  o2p
+op  o2p  om  o2q
+r4  in   o1p
+r3  gnd  om
+r2  o2q  gnd
+r1  o2q  1
+c1  o1p  1
+  
+

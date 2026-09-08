@@ -1,0 +1,11 @@
+/*
+   Schaltung 2)
+   Operationsverst„rker mit Rckkoppelzweigen zu beiden Eing„ngen
+*/
+
+u1  in   gnd; u2 opq  gnd
+op  opp  opm  opq          /* Operationsverst„rker */
+r1  in   opp; r2 opq  opp  /* oberere Rckkopplung */
+r3  opm  gnd; r4 opq  opm  /*  untere Rckkopplung */
+
+ 

@@ -1,0 +1,12 @@
+ln_globl.o
+lin_netz.o
+filename.o
+mach_lgs.o
+solver.o
+memory.o
+ausgabe.o
+bin_aus.o
+
+tcc\flt.lb
+tcc\std.lb
+tcc\tos.lb

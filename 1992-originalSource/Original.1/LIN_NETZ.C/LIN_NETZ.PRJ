@@ -1,0 +1,20 @@
+; Projektdatei fÅr die Kompaktversion von TC 2.0
+;
+; Projektname: LIN_NETZ, das Programm zur formalen Berechnung linearer
+; elektrischer Netzwerke.
+;
+lin_netz.ttp
+=
+tcstart.o
+ln_globl.c
+lin_netz.c
+ausgabe.c
+bin_aus.c
+mach_lgs.c
+solver.c
+memory.c
+filename.c
+
+tcfltlib.lib
+tcstdlib.lib
+tctoslib.lib

@@ -1,0 +1,31 @@
+/*
+   Klangregelstufe des Receivers RC 100
+   Die Transistorstufe wurde durch eine vergleichbare mit Operationsver-
+   st„rker ersetzt. Dabei wurde aber die Frequenzabh„ngigkeit der Transistor-
+   stufe vernachl„ssigt.
+*/
+
+U1    1  5
+U2    3  5
+
+* Operationsverst„rker
+
+Ri    2  4     R=12.5K
+Rr    3  4     R=74*Ri
+OP    4  5  3
+
+* Tiefpažbereich
+
+RBa   1  9     R=60K    /* RBa und Rbb bilden das Tiefenstellpoti */
+RBb   9  3     R=60K    /* sie haben zusammen 120 KOhm */
+C0    9  2     C=1.2n
+
+* Hochpažbereich
+
+R1    2  6     R=27K
+R2    1  7     R=5.6K
+R3    8  3     R=5.6K
+RHa   7  6     R=50K    /* RHa und RHb bilden das H”henstellpoti */
+RHb   6  8     R=50K    /* sie haben zusammen 100 KOhm */
+C1    7  6     C=6.8n
+C2    6  8     C=6.8n

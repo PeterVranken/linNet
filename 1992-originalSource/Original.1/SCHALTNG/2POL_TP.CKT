@@ -1,0 +1,31 @@
+/*
+   Hier wird eine Schaltung in invertierender Operationsverst„rkergrund-
+   schaltung, die im Eingangszweig einen Widerstand und im Rckkoppelzweig
+   eine Reihenschaltung aus zwei RC-Parallelgliedern und einem Widerstand hat.
+   Wenn alle Widersta„nde identisch gw„hlt werden, dann sollte, da fr kleine
+   w alle drei wirksam sind, fr mittlere Frequenzen aber einer, fr hohe 
+   zwei kurzgeschlossen sind, zu erwarten sein, da G in zwei Stufen von 3
+   ber 2 auf 1 f„llt. Es bietet sich an, im Numerikprogramm den Widerstands-
+   wert auf 1/(2*PI) zu setzen, dann sind die Eckfrequenzen gleich den Rezi-
+   prokwerten der Kapazit„ten.
+
+   (c) 28/11/1991 Peter Vranken 
+*/
+
+U1  IN  GND
+U2  OPQ GND
+
+.AC DEC 40 10. 100K
+OP  OP1 GND OPQ
+
+R   IN  OP1 R = .159155  /* mit r=1/2*PI erreicht man, da sich Eckfrequen-
+                            zen und Kapazit„ten reziprok verhalten */
+
+RT1 OP1 P1  R = R    /* erste Zeitkonstante  Parallelglied aus Rt1 und Ct1 */
+CT1 OP1 P1  C = 0.01 /* also f=100Hz */
+
+RT2 P1  P2  R = R    /* zweite Zeitkonstante  Parallelglied aus Rt2 und Ct2 */
+CT2 P1  P2  C = .1m  /* also f=10KHz  */
+
+RU  P2  OPQ R = R  /* und der dritte Widerstand  der den Frequenzgang fr
+                      w gegen unendlich festlegt */

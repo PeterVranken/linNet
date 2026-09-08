@@ -1,0 +1,40 @@
+/*
+   Um auch mal eine etwas umfangreichere Schaltung testen zu k”nnen, ohne
+   sie von Hand nachrechnen zu mssen, sollen hier einmal Hoch- und Tiefpa
+   aus der Impulstechnikbung kaskadiert werden. Da die Schaltungen einen
+   Operationsverst„rkerausgang haben, multiplizieren sich die šbertragungs-
+   funktionen, und die Eingangsimpedanz ist die unver„nderte Funktion des
+   Hochpasses.
+
+   (c) 24/11/1991 Peter Vranken
+*/
+
+/* zun„chst der Hochpa */
+U1  1 0
+
+OP  2 4 6
+OP  4 5 3
+
+R1  4 6
+R2  2 3
+R3  2 0
+C   1 2
+
+C1  3 4 C=C
+R12 5 6 R=R1
+R13 5 0 R=R1
+
+/* nun der nachgeschaltete Tiefpa */
+OP  7  9  11
+OP  9  10 8
+
+R31 6  7  R=R3
+C2  7  8  C=C
+R21 8  9  R=R2
+C3  9  11 C=C
+R14 9  11 R=R1
+R23 10 11 R=R2
+R22 10 0  R=R2
+
+/* schlielich die gewnschte Ausgangsspannung festlegen */
+U2  11 0

@@ -1,0 +1,50 @@
+Das Programm erwartet einen einzigen Parameter, n„mlich den Namen der 
+Datei,die die Zahlenkolonnen enth„lt. Alle weiteren Parameter erfolgen ber 
+den Kopf der Datei. Dieser mu wie folgt aufgebaut sein:
+
+zun„chst mu eine Kommentarzeile kommen, da das Programm daran zwischen dem 
+normalen Header und einem speziellen unterscheidet. Der spezielle Header 
+ist kompatibel zu dem der Programme PLOT_X00, bietet aber weniger 
+M”glichkeiten und ist zudem unleserlich. Er sollte also nur verwendet 
+werden, wenn alte Dateien dargestellt werden, die diesen noch haben. 
+N„heres findet man in der read_me-Datei zu PLOT_X00. Der normale Header 
+besteht neben optionalen Kommentarzeilen, die durch ein # am Zeilenanfang 
+kenntlich sind, aus ein (oder zwei) Zeilen, die die Angaben ber die 
+darzustellende(n) Funktion(en) beinhaltet. Wenn eine Funktion dargestellt 
+werden soll, dann wird die Zeile mit f: eingeleitet, sonst f1: und f2: zur 
+Unterscheidung der zwei Funktionen. Es folgt eine Angabe ber die 
+Darstellung der Achsen: X_Achse, Y_Achse. Die Platzhalter stehen fr lin, 
+log oder x1. Damit kann fr beide Achse getrennt zwischen linearer oder 
+logarithmischer Skalierung gew„hlt werden. x1 kann nur bei der Beschreibung 
+der X-Achse von f2 verwendet werden und sagt aus, da die zweite Funktion 
+dieselben X-Werte hat wie die erste. Schlielich kann noch ein ,n erfolgen, 
+wobei n die Anzahl der anschlieend einzulesenden Wertepaare ist. Erfolgt 
+keine Angabe, dann wird der H”chstwert (500) angenommen. Sollten weniger 
+Werte gefunden werden als gewnscht, dann macht das Programm eine warnende 
+Ausgabe. Werden fr beide Funktionen die identischen X-Werte verwendet, 
+dann mssen auch beide Anzahlen bereinstimmen. Wenn beide Funktionen 
+unterschiedlich viele Werte haben, sollte man die n unbedingt angeben, weil 
+von den vier Zahlenkolonnen ja irgendwann zwei aufh”ren, und das Programm 
+sonst nicht wissen kann, ob die verbleibenden Kolonnen zu f1 oder zu f2 
+geh”ren. Daher wrde es das Einlesen an dieser kritischen Stelle abbrechen.
+Beispiel:
+# unbedingt erforderliche Kommentarzeile (kann leer sein)
+
+# erste Funktion: vier Zahlenpaare in den Kolonnen 1 und 2, Y-Werte werden
+# logarithmiert, X-Werte nicht.
+f1: lin, log, 4
+# zweite Funktion: hat zwei Paare mehr, X-Werte befinden sich in Spalte 3
+# und werden logarithmiert, Y-Werte in Spalte 4 werden linear dargestellt.
+f2: log, lin, 6
+
+0.0   1        1e3     -0.9
+0.2   2        1e4      0.0
+0.4   1.6      1e5      0.9
+0.5   0.01     1e6      1.8
+# ab nun stehen die Paare von f2 in den Spalten 1 und 2, jedoch darf man
+# sie (nur mit Space, keine Tabs!) einrcken.
+               1e7      2.7
+               1e8      3.6
+# f2 ergibt eine Gerade, da die X-Achse logarithmisch ist.
+
+PLOTTER l„uft nur in der 640*400 Aufl”sung des Atari.

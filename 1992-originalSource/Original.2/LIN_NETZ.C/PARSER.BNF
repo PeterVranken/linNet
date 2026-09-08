@@ -1,0 +1,35 @@
+/*
+   Die Beschreibung der Syntax der Eingabedatei (Knotenliste) als
+   Backus-Naur-Form
+*/
+
+<Schaltung>   ::= {{' '} [<Bauteil_def> | <Plot_info> | <Kommentar>] {' '} ('\r'|'\n'|';')}
+<Plot_info>   ::= '.AC' <Space> ('DEC' | 'LIN') <Space> <Integer> <Space> <Zahl> <Space> <Zahl>
+<Zahl>        ::= <Integer> ['.' [<Integer>]] [<Exponent>]
+<Integer>     ::= <Digit> {<Digit>}
+<Exponent>    ::= ('p'|'n'|'u'|'m'|'K'|'M'|'G'|'T')|('E' ['+'|'-'] <Integer>)
+<Digit>       ::= '0' | ... | '9'
+<Kommentar>   ::= '*' {<Zeichen>}
+<Bauteil_def> ::= <Bauteil_bez> <Space> <Knotenname> <Space> <Knotenname> 
+                  [ (<Space> <Knotenname)                                             /* 1) */ 
+                  | (<Space> <Knotenname> <Space> <Knotenname> [<Space> <Wertangabe>])/* 2) */
+                  | (<Space> <Zuweisung>) ]                                           /* 3) */
+                   
+<Bauteil_bez> ::= <Bauteilname> | 'U1' | 'U2' | 'OP'
+<Bauteilname> ::= ('R'|'C'|'L'|'G'|'S'|'Y') {<Zeichen>}
+<Knotenname>  ::= <Zeichen> {<Zeichen>}
+<Wertangabe>  ::= <Zahl> | <Bezugnahme>
+<Zuweisung>   ::= ('R'|'C'|'L'|'Y') '=' <Wertangabe>
+<Bezugnahme>  ::= [<Integer> '*'] <Bauteilname>
+<Zeichen>     ::= <Letter> | <Digit>
+<Letter>      ::= 'a' | ... | 'z' | 'A' | ... | 'Z' | '_'
+<Space>       ::= ' ' {' '}
+
+/* Ende der Syntaxbeschreibung */
+
+Bemerkungen:
+ 1) dies ist der Fall, daž ein Operationsverst„rker beschrieben wird
+ 2) dieser Fall liegt nur bei einer Stromquelle vor
+ 3) Normalfall, passives Element
+ wenn 1) bis 3) nicht vorliegen, dann muž es sich um die Definition von Ein-
+ oder Ausgangsspannung handeln.

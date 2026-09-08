@@ -1,0 +1,37 @@
+*
+* zum 6. Versuch des Simulationspraktikums:
+* dort wird eine Leitung aus RC-Gliedern nachgebildet. Es soll nun einmal
+* der analytische Ausdruck einer Leitnug mit verschieden vielen Gliedern
+* berechnet werden, vielleicht ist dabei ein Bildungsgesetz zu erkennen, das
+* dann mit vollst„ndiger Induktion zu beweisen w„re.
+*
+* n=7
+*
+U1    I  GND  /* Angabe der Ein- und Ausgangsspannung, unabh„nig von n */
+U2    O  GND
+
+R     O  GND  /* Abschluwiderst„nde, unabh„ngig von n */
+RI    I  1    R=R
+
+C     1  GND  /* fr jedes n ein Element eintragen, beim letzten Verbindung */
+L     1  2    /* mit O beachten */
+
+C2    2  GND  C=C
+L2    2  3    L=L
+
+C3    3  GND  C=C
+L3    3  4    L=L
+
+C4    4  GND  C=C
+L4    4  5    L=L
+
+C5    5  GND  C=C
+L5    5  6    L=L
+
+C6    6  GND  C=C
+L6    6  7    L=L
+
+C7    7  GND  C=C
+L7    7  O    L=L
+
+

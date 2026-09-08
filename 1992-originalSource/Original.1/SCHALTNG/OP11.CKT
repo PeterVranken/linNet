@@ -1,0 +1,11 @@
+/*
+   Operationsverst„rker mit Rckkoppelzweigen zu beiden Eing„ngen
+   frequenbestimmend ist eine RLC-Serienschaltung
+*/
+
+u1  in   gnd; u2  opq  gnd
+op  opp  opm  opq             /* Operationsverst„rker */
+r1  in   opp; r2  opq opp     /* oberere Rckkopplung */
+l   opm  gnd; c   opq  rc     /* untere Rckkopplung, RLC-Serienglied */
+rd  opm  rc                   /* D„mpfungsglied */
+ 

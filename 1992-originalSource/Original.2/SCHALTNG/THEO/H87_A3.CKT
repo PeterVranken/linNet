@@ -1,0 +1,16 @@
+/* Aufgabe 3 der Theo-Klausur H87, letzter Unterpunkt, Berechnung von w, g */
+
+U1    6  5
+U2    4  5
+
+g     1  5     4  5        /* Transistorstromquelle */
+S1    6  4     5  2s       /* Stromquelle (*), Steilheit S1 ist sC */
+S2    1  2s    4  6        /* Stromquelle (**), Steilheit S2 ist 1/sL */
+
+R1    6  4
+Rb    4  5
+Rc    1  5
+
+L     1  2s
+
+C     2s 5

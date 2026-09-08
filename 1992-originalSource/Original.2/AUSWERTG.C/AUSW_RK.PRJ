@@ -1,0 +1,10 @@
+auswertg.ttp
+=
+tcstart.o
+auswertg.c  (tcc\rk4.h)
+filename.c
+rk4.c       (tcc\rk4.h)
+
+tcfltlib.lib
+tcstdlib.lib
+tctoslib.lib

@@ -1,0 +1,12 @@
+plotter.ttp
+=
+tcstart.o
+datei.c        (plotter.h)
+grafik.c       (plotter.h)
+berechne.c     (plotter.h)
+
+tcfltlib.lib
+tcstdlib.lib
+tcgemlib.lib
+tcbgilib.lib
+tctoslib.lib
