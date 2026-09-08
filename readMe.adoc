@@ -1,0 +1,7 @@
+linNet was first released on Google Code in 2013. However, an early
+predecessor named LIN_NETZ had already existed since 1991, developed on
+and for the Atari ST -- a popular and powerful computer at the time.
+Shortly thereafter, it was ported to MS-DOS. Two original 3.5-inch floppy
+disks survived and served as a crucial foundation for the release of
+linNet more than twenty years later. The contents of these disks have been
+stored in folder `1992-originalSource`.
