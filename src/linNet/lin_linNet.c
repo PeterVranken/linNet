@@ -166,7 +166,7 @@ static const char *getLogFileName( const opt_cmdLineOptions_t * const pCmdLine
         {
             /* If there are several input files, then we use the application name for the
                log file. */
-            return fil_concatPathFile(path, SL LIN_LOG_FILE_NAME);
+            return fil_concatPathFile(path, LIN_LOG_FILE_NAME);
         }
         else
         {
