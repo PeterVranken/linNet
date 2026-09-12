@@ -217,11 +217,6 @@ $(targetDir)$(target).a: $(objFileList)
 
 
 # Let the linker create the Windows executable.
-#   CAUTION: gcc 4.8.1 under MinGW-W64 produces a warning when producing a cross reference
-# using switch --cref. The warning can be ignored, the executable build product is not
-# affected. If a cross refenerce in the map file is of no particular use, one might
-# simply remove the switch to avoid the warning.
-#lFlags = -Wl,--print-map,--cref,--warn-common
 lFlags = -Wl,--gc-sections -Wl,-sort-common -Wl,-Map="$(targetDir)$(target).map" -Wl,--cref \
          -Wl,--warn-common,--warn-once -Wl,-g -Wl,--print-memory-usage
 
