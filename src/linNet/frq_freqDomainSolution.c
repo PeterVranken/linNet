@@ -1864,7 +1864,7 @@ static const frq_frqDomExpressionAddend_t *
     {
         /* The opening bracket. */
         col += print(stream, "(");
-        
+
         /* The just printed parenthesis is not counted for the indentation since the next
            addend on the new line will start with the pattern " + ", which includes the
            addtional heading blank. */
@@ -1877,7 +1877,7 @@ static const frq_frqDomExpressionAddend_t *
     else
     {
         /* The single addend to print is not enclosed in parenthesis. */
-        
+
         /* The tab string is actually not used in this case; we only have a single addend
            to print and surely no line break. */
         extendedTabString[0] = '\0';
@@ -2164,6 +2164,9 @@ static void printNamedExpression( FILE * const stream
  *   @param pTableOfVars
  * The data structure holding all information about the symbolic elements of the system's
  * equations. Ignored if \a nameRHS is not NULL.
+ *   @param baseIndentation
+ * All output lines will begin with this number of blanks (potentially followed by more
+ * blanks as required for pretty formatting of wrapped lines).
  *   @param printMargin
  * Line wrapping takes place when the margin is exceeded but the currently printed addend
  * of the expression is still not completed. Checking the margin only after completing an
@@ -2177,12 +2180,13 @@ static void printNamedExpressionAsMCode( FILE * const stream
                                        , const frq_frqDomExpression_t * const pExpr
                                        , boolean invertSign
                                        , const tbv_tableOfVariables_t * const pTableOfVars
+                                       , const unsigned int baseIndentation
                                        , const unsigned int printMargin
                                        )
 {
     const unsigned int noConst = pTableOfVars->noConstants;
 
-    print(stream, "%s = ", name);
+    print(stream, "%*s%s = ", baseIndentation, "", name);
 
     if(nameRHS != NULL  &&  !isExpressionSimple(pExpr, noConst))
     {
@@ -2194,7 +2198,7 @@ static void printNamedExpressionAsMCode( FILE * const stream
     {
         /* Usual complex case: Print the RHS as an expression in all details. In Octave
            this is a row vector of coefficients in falling power of s. */
-        print(stream, "%s[ ",  invertSign? "-": "");
+        print(stream, "%s[ ", invertSign? "-": "");
 
         /* The printing sub-routine will use several lines. Each coefficient (or vector
            element) will begin with the string composed here. We want to see
@@ -2204,7 +2208,10 @@ static void printNamedExpressionAsMCode( FILE * const stream
                          , sizeof(tabStringVecElem)
                          , /* existingTabString */ ""
                          , /* additionalIndentation */
-                           strlen(name) + sizeof(" = ") - 1 + (invertSign? 1: 0)
+                           strlen(name)
+                           + sizeof(" = ")-1
+                           + (invertSign? 1: 0)
+                           + baseIndentation
                          );
 
         if(isExpressionAddendNull(pExpr))
@@ -2981,7 +2988,15 @@ static boolean printSolution( const frq_freqDomainSolution_t * const pSolution
 
     /* The human readable text parts are preceded by a comment character if we produce
        Octave script code. */
-    const char * const tabStringText = asOctaveCode? "% ": "";
+    const unsigned int baseIndentation = asOctaveCode? 4u: 0u;
+    char tabStringText[baseIndentation+sizeof("% ")];
+    snprintf( tabStringText
+            , sizeof(tabStringText)
+            , "%*s%s"
+            , baseIndentation
+            , ""
+            , asOctaveCode? "% ": ""
+            );
 
     /* Print a title line. */
     const char * const strIsBodePlot = frq_getIsBodePlot(pSolution)? " (Bode plot)": ""
@@ -3147,6 +3162,7 @@ static boolean printSolution( const frq_freqDomainSolution_t * const pSolution
                                            , pExpr
                                            , isExpressionNegated
                                            , pTabOfVars
+                                           , baseIndentation
                                            , printMargin
                                            );
 
@@ -3154,13 +3170,17 @@ static boolean printSolution( const frq_freqDomainSolution_t * const pSolution
                    functions don't respond with useful error feedback in this case. */
                 if(isExpressionAddendNull(pExpr))
                 {
+                    char strIndent[baseIndentation+1u];
+                    snprintf(strIndent, sizeof(strIndent), "%*s", baseIndentation, "");
                     print( stream
-                         , "error(['Denominator expression %s is zero. The transfer"
+                         , "%serror(['Denominator expression %s is zero. The transfer"
                            " function is' ...\n"
-                           "       ' undefined and no plots can be generated. Please"
+                           "%s       ' undefined and no plots can be generated. Please"
                            " check your circuit'] ...\n"
                            "     );\n"
+                         , strIndent
                          , LHS
+                         , strIndent
                          );
                 }
             } /* End for(All of the dependent's denominators related to the knowns) */
@@ -3192,6 +3212,7 @@ static boolean printSolution( const frq_freqDomainSolution_t * const pSolution
                                            , pExpr
                                            , isExpressionNegated
                                            , pTabOfVars
+                                           , baseIndentation
                                            , printMargin
                                            );
             } /* End for(All of the dependent's numerators related to the knowns) */
@@ -3474,7 +3495,7 @@ boolean frq_createFreqDomainSolution( const frq_freqDomainSolution_t * * const p
                     else
                     {
                         success = false;
-                        
+
                         /* The search succeeded sucessfully and unambiguous but is the
                            found quantity an input quantity? */
                         if(noMatches == 1)
@@ -3485,7 +3506,7 @@ boolean frq_createFreqDomainSolution( const frq_freqDomainSolution_t * * const p
                                        " system (i.e., a system input)"
                                      , nameOfUnknown
                                      , nameOfUnknown
-                                     )                            
+                                     )
                         }
                         /* else: The problem has been reported by sol_findName. */
 
@@ -3987,12 +4008,6 @@ void frq_logFreqDomainSolution( const frq_freqDomainSolution_t * const pSolution
     if(!log_checkLogLevel(hLog, logLevel))
         return;
 
-//    /* Log a title line, which also produces the line header. */
-//    const char * const strIsBodePlot = frq_getIsBodePlot(pSolution)? " (Bode plot)": ""
-//             , * const strFormat = pSolution->idxResult >= 0
-//                                   ? "User-defined result %s%s:\n"
-//                                   : "Result %s%s in the frequency domain:\n";
-//    log_log(hLog, logLevel, strFormat, frq_getResultName(pSolution), strIsBodePlot);
     /* Log a line header only - printSolution will complete the line by printing the titel
        text. */
     log_log(hLog, logLevel, "");
@@ -4010,7 +4025,7 @@ void frq_logFreqDomainSolution( const frq_freqDomainSolution_t * const pSolution
             if(!printSolution( pSolution
                              , hStream[idxStream]
                              , /* asOctaveCode */ false
-                             , /* printMargin */ 72
+                             , /* printMargin */ 72u
                              )
               )
             {
@@ -4063,21 +4078,28 @@ boolean frq_exportAsMCode( const frq_freqDomainSolution_t * const pSolution
        the generated script. */
     /* Write into the stream associated with the M script object. */
     FILE *stream = msc_borrowStream(pMScript);
-    print(stream, "error(nargchk(0, 1, nargin))\nif nargin == 1\n");
+    print( stream
+         , "    error(nargchk(0, 1, nargin))\n"
+           "    if nargin == 1\n"
+         );
     msc_releaseStream(pMScript);
-    tbv_exportAsMCode(pTableOfVars, pMScript, tbv_assignParameterStruct, "    ");
+    tbv_exportAsMCode(pTableOfVars, pMScript, tbv_assignParameterStruct, "        ");
     stream = msc_borrowStream(pMScript);
-    print(stream, "else\n");
+    print(stream, "    else\n");
     msc_releaseStream(pMScript);
-    tbv_exportAsMCode(pTableOfVars, pMScript, tbv_assignDefaultValues,   "    ");
+    tbv_exportAsMCode(pTableOfVars, pMScript, tbv_assignDefaultValues,   "        ");
     stream = msc_borrowStream(pMScript);
-    print(stream, "end\nerror(nargchk(0, 4, nargout))\nif nargout >= 2\n");
+    print( stream
+         , "    end\n"
+           "    error(nargchk(0, 4, nargout))\n"
+           "    if nargout >= 2\n"
+         );
     msc_releaseStream(pMScript);
-    tbv_exportAsMCode(pTableOfVars, pMScript, tbv_copyToParameterStruct, "    ");
+    tbv_exportAsMCode(pTableOfVars, pMScript, tbv_copyToParameterStruct, "        ");
     stream = msc_borrowStream(pMScript);
-    print(stream, "end\n\n");
+    print(stream, "    end\n\n");
 
-    if(!printSolution(pSolution, stream, /* asOctaveCode */ true, /* printMargin */ 72))
+    if(!printSolution(pSolution, stream, /* asOctaveCode */ true, /* printMargin */ 72u))
     {
         success = false;
         LOG_ERROR( _log
@@ -4086,22 +4108,28 @@ boolean frq_exportAsMCode( const frq_freqDomainSolution_t * const pSolution
                    " and should be discarded"
                  , getFileName(pMScript)
                  )
-        print(stream, "\nerror('Invalid script: Errors occured during script generation')\n");
+        print( stream
+             , "\n    error('Invalid script: Errors occured during script generation')\n"
+             );
     }
 
     /* Let Octave create the LTI system object. First we create a descriptor object. */
     print( stream
-         , "\n%% Create an Octave LTI system object from the data above. First shape a"
+         , "\n    %% Create an Octave LTI system object from the data above. First shape a"
            " descriptor object.\n"
          );
-    print(stream, "systemDesc_%s.name = '%s';\n", systemName, systemName);
+    print(stream, "    systemDesc_%s.name = '%s';\n", systemName, systemName);
 
     /* Print the cell array of numerators like
          systemDesc_myResult.numeratorAry = ...
              { N_U_out_U1 N_U_out_U2
                N_U_K_L_U1 N_U_K_L_U2
              }; */
-    print(stream, "systemDesc_%s.numeratorAry = ...\n    {", systemName);
+    print( stream
+         , "    systemDesc_%s.numeratorAry = ...\n"
+           "        {"
+         , systemName
+         );
     unsigned int idxDependent,  idxIndependent;
     for(idxDependent=0; idxDependent<noDependents; ++idxDependent)
     {
@@ -4111,9 +4139,9 @@ boolean frq_exportAsMCode( const frq_freqDomainSolution_t * const pSolution
         /* A new line (for the next dependent) differs after writing the last dependent; we
            need to close the brace expression (i.e., the cell array). */
         if(idxDependent+1 < noDependents)
-            print(stream, "\n     ");
+            print(stream, "\n         ");
         else
-            print(stream, "\n    ");
+            print(stream, "\n        ");
     }
     print(stream, "};\n");
 
@@ -4122,7 +4150,11 @@ boolean frq_exportAsMCode( const frq_freqDomainSolution_t * const pSolution
              { D_U_out_U1 D_U_out_U2
                D_U_K_L_U1 D_U_K_L_U2
              }; */
-    print(stream, "systemDesc_%s.denominatorAry = ...\n    {", systemName);
+    print( stream
+         , "    systemDesc_%s.denominatorAry = ...\n"
+           "        {"
+         , systemName
+         );
     for(idxDependent=0; idxDependent<noDependents; ++idxDependent)
     {
         for(idxIndependent=0; idxIndependent<noIndependents; ++idxIndependent)
@@ -4136,9 +4168,9 @@ boolean frq_exportAsMCode( const frq_freqDomainSolution_t * const pSolution
         /* A new line (for the next dependent) differs after writing the last dependent; we
            need to close the brace expression (i.e., the cell array). */
         if(idxDependent+1 < noDependents)
-            print(stream, "\n     ");
+            print(stream, "\n         ");
         else
-            print(stream, "\n    ");
+            print(stream, "\n        ");
     }
     print(stream, "};\n");
 
@@ -4148,7 +4180,11 @@ boolean frq_exportAsMCode( const frq_freqDomainSolution_t * const pSolution
              { 'U1'
                'U2'
              }; */
-    print(stream, "systemDesc_%s.inputNameAry = ...\n    {", systemName);
+    print( stream
+         , "    systemDesc_%s.inputNameAry = ...\n"
+           "        {"
+         , systemName
+         );
     for(idxIndependent=0; idxIndependent<noIndependents; ++idxIndependent)
     {
         print(stream, " '%s'", frq_getNameOfIndependent(pSolution, idxIndependent));
@@ -4156,14 +4192,18 @@ boolean frq_exportAsMCode( const frq_freqDomainSolution_t * const pSolution
         /* A new line (for the next name) differs after writing the last name; we
            need to close the brace expression (i.e., the cell array). */
         if(idxIndependent+1 < noIndependents)
-            print(stream, "\n     ");
+            print(stream, "\n         ");
         else
-            print(stream, "\n    ");
+            print(stream, "\n        ");
     }
     print(stream, "};\n");
 
     /* Now we need a similar list of names for the system output, which are our dependents. */
-    print(stream, "systemDesc_%s.outputNameAry = ...\n    {", systemName);
+    print( stream
+         , "    systemDesc_%s.outputNameAry = ...\n"
+           "        {"
+         , systemName
+         );
     for(idxDependent=0; idxDependent<noDependents; ++idxDependent)
     {
         print(stream, " '%s'", frq_getNameOfDependent(pSolution, idxDependent));
@@ -4171,9 +4211,9 @@ boolean frq_exportAsMCode( const frq_freqDomainSolution_t * const pSolution
         /* A new line (for the next name) differs after writing the last name; we
            need to close the brace expression (i.e., the cell array). */
         if(idxDependent+1 < noDependents)
-            print(stream, "\n     ");
+            print(stream, "\n         ");
         else
-            print(stream, "\n    ");
+            print(stream, "\n        ");
     }
     print(stream, "};\n");
 
@@ -4190,24 +4230,24 @@ boolean frq_exportAsMCode( const frq_freqDomainSolution_t * const pSolution
     }
     else
         pPlotInfo = NULL;
-    print(stream, "systemDesc_%s.plotInfo = ...\n", systemName);
+    print(stream, "    systemDesc_%s.plotInfo = ...\n", systemName);
     msc_releaseStream(pMScript);
-    pci_exportPlotInfoAsMCode(pMScript, pPlotInfo, /* indentStr */ "    ");
+    pci_exportPlotInfoAsMCode(pMScript, pPlotInfo, /* indentStr */ "        ");
     stream = msc_borrowStream(pMScript);
     print(stream, ";\n\n");
 
     /* Make Octave create the actual LTI system object by calling a creator function with
        the descriptor object shaped just before. */
-    print(stream, "%% Create the Octave LTI system object from the descriptor.\n");
-    print(stream, "tf_%s = createLtiSystem(systemDesc_%s);\n\n", systemName, systemName);
+    print(stream, "    %% Create the Octave LTI system object from the descriptor.\n");
+    print(stream, "    tf_%s = createLtiSystem(systemDesc_%s);\n\n", systemName, systemName);
 
     /* Offer to produce a returned vector of frequency and time points. These series are
        made according to the plotInfo object in the circuit file. They can be passed to the
        member function of the Octave's transfer function class, like bode or step. */
     print( stream
-         , "%% Compute a suitable vector of frequency and time points.\n"
-           "wBode  = getFrequencyVector(systemDesc_%s);\n"
-           "tiStep = getSampleTimeVector(systemDesc_%s);\n\n"
+         , "    %% Compute a suitable vector of frequency and time points.\n"
+           "    wBode  = getFrequencyVector(systemDesc_%s);\n"
+           "    tiStep = getSampleTimeVector(systemDesc_%s);\n\n"
          , systemName
          , systemName
          );
@@ -4216,67 +4256,68 @@ boolean frq_exportAsMCode( const frq_freqDomainSolution_t * const pSolution
        in an if: If the function arguments are consumed by the (user owned and designed)
        embedding code then the function keeps silent and and only returns the transfer
        function object and the realted things for further, whatever use. */
-    print(stream, "if nargout == 0\n");
+    print(stream, "    if nargout == 0\n");
     if(frq_getIsBodePlot(pSolution))
     {
         print( stream
-             , "    %% Plot the transfer function of %s. By post-processing, disable LaTeX\n"
-               "    %% interpretation in all graphic subelements of the new figure window.\n"
+             , "        %% Plot the transfer function of %s. By post-processing, disable\n"
+               "        %% LaTeX interpretation in all graphic subelements of the new figure\n"
+               "        %% window.\n"
              , systemName
              );
         print( stream
-             , "    hFig = figure('Name', 'Frequency Response of %s', 'NumberTitle', 'off');\n"
-               "    if ~isempty(wBode)\n"
-               "        bode(tf_%s, wBode)\n"
-               "    else\n"
-               "        bode(tf_%s)\n"
-               "    end\n"
+             , "        hFig = figure('Name', 'Frequency Response of %s', 'NumberTitle', 'off');\n"
+               "        if ~isempty(wBode)\n"
+               "            bode(tf_%s, wBode)\n"
+               "        else\n"
+               "            bode(tf_%s)\n"
+               "        end\n"
              , systemName
              , systemName
              , systemName
              );
         print( stream
-             , "    set(findobj(hFig, '-property', 'interpreter'), 'interpreter', 'none')\n"
+             , "        set(findobj(hFig, '-property', 'interpreter'), 'interpreter', 'none')\n"
              );
     }
     else
     {
         /* Octave refuses to print a Bode plot for MIMO systems. We print the step response
            as initial plot. */
-        print(stream, "    %% Plot the step response of %s.\n", systemName);
+        print(stream, "        %% Plot the step response of %s.\n", systemName);
         print( stream
-             , "    %% Plot the step response of %s. By post-processing, disable LaTeX\n"
-               "    %% interpretation in all graphic subelements of the new figure window.\n"
+             , "        %% Plot the step response of %s. By post-processing, disable LaTeX\n"
+               "        %% interpretation in all graphic subelements of the new figure window.\n"
              , systemName
              );
         print( stream
-             , "    hFig = figure('Name', 'Step Response of %s', 'NumberTitle', 'off');\n"
-               "    step(tf_%s, tiStep)\n"
+             , "        hFig = figure('Name', 'Step Response of %s', 'NumberTitle', 'off');\n"
+               "        step(tf_%s, tiStep)\n"
              , systemName
              , systemName
              );
         print( stream
-             , "    hAx = findall(hFig, 'type', 'axes');\n"
-               "    hYLabel = cell2mat(get(hAx, 'ylabel'));\n"
-               "    set(hYLabel, 'interpreter', 'none')\n"
-               "    hTitle = cell2mat(get(hAx, 'title'));\n"
-               "    set(hTitle, 'interpreter', 'none')\n"
+             , "        hAx = findall(hFig, 'type', 'axes');\n"
+               "        hYLabel = cell2mat(get(hAx, 'ylabel'));\n"
+               "        set(hYLabel, 'interpreter', 'none')\n"
+               "        hTitle = cell2mat(get(hAx, 'title'));\n"
+               "        set(hTitle, 'interpreter', 'none')\n"
              );
     }
 
     /* Let the script give some feedback to the user what happened and what he can do now. */
 #define NL  " char(10) ...\n"
-#define IND "          "
+#define IND "              "
     print( stream
-         , "    disp(["
-           "'This function can create the LTI system object tf_%s for you; please, type'" NL
-           IND "'help %s for more.'" NL
-           IND "'  You can use this object with functions like bode to plot the transfer function'" NL
-           IND "'or step and impulse to plot the step or impulse response time functions or lsim'" NL
-           IND "'to compute or plot the system response to arbitrary input signals. A stability'" NL
-           IND "'analysis can be done using function nyquist. Please refer to the online help'" NL
-           IND "'for these commands' char(10)] ...\n" 
-           "        );\n"
+         , "        disp(["
+           "'This function can create the LTI system object tf_%s for you;'" NL
+           IND "'please, type help %s for more.'" NL
+           IND "'  You can use this object with functions like bode to plot the transfer'" NL
+           IND "'function or step and impulse to plot the step or impulse response time'" NL
+           IND "'functions or lsim to compute or plot the system response to arbitrary input'" NL
+           IND "'signals. A stability analysis can be done using function nyquist. Please'" NL
+           IND "'refer to the online help for these commands' char(10)] ...\n"
+           "            );\n"
          , systemName
          , systemName
          );
@@ -4287,8 +4328,8 @@ boolean frq_exportAsMCode( const frq_freqDomainSolution_t * const pSolution
        output arguments; otherwise the user is enforced to use the line-closing semicolon
        when calling the function. */
     print( stream
-         , "    clear tf_%s tiStep wBode\n"
-           "end\n"
+         , "        clear tf_%s tiStep wBode\n"
+           "    end\n"
          , systemName
          );
     fflush(stream);
@@ -4298,7 +4339,3 @@ boolean frq_exportAsMCode( const frq_freqDomainSolution_t * const pSolution
     return success;
 
 } /* End of frq_exportAsMCode */
-
-
-
-

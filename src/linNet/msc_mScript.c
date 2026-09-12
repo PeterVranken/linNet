@@ -200,7 +200,6 @@ function [tf_%s deviceConstants wBode tiStep] = %s(deviceConstants)\n\
 static boolean writeFileTrailer(msc_mScript_t * const pMScript)
 {
 #define M_FILE_TRAILER "\
-\n\
 end %% of function %s\n\
 "
     const char *mfilename = fil_splitPath( /* pPath */ NULL
@@ -458,14 +457,14 @@ boolean msc_writeTextBlock( msc_mScript_t * const pMScript
         break;
 
     case msc_txtBlkAddPath:
-        success = fputs("addpath " "linNet_private" ";\n", pMScript->hFile) >= 0;
+        success = fputs("    addpath " "linNet_private" ";\n", pMScript->hFile) >= 0;
         break;
 
     case msc_txtBlkLoadPkgs:
-        success = fputs( "% Load the required Octave packages.\n"
-                         "if isOctave\n"
-                         "    pkg load control\n"
-                         "end\n"
+        success = fputs( "    % Load the required Octave packages.\n"
+                         "    if isOctave\n"
+                         "        pkg load control\n"
+                         "    end\n"
                          "\n"
                        , pMScript->hFile
                        ) >= 0;
