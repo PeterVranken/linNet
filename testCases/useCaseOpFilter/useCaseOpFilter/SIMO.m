@@ -57,125 +57,124 @@ function [tf_SIMO deviceConstants wBode tiStep] = SIMO(deviceConstants)
 %   You should have received a copy of the GNU General Public License along
 %   with this program. If not, see <http://www.gnu.org/licenses/>.
 
-% Load the required Octave packages.
-if isOctave
-    pkg load control
-end
+    % Load the required Octave packages.
+    if isOctave
+        pkg load control
+    end
 
-error(nargchk(0, 1, nargin))
-if nargin == 1
-    % The values of the device constants are taken from function argument deviceConstants.
-    R1	= deviceConstants.R1;
-    R2	= deviceConstants.R2;
-    C1	= deviceConstants.C1;
-    C2	= deviceConstants.C2;
-else
-    % The default values of the device constants.
-    R1	= 1000;
-    R2	= 1000;
-    C1	= 1e-06;
-    C2	= 2.2e-05;
-end
-error(nargchk(0, 4, nargout))
-if nargout >= 2
-    % The values of the device constants are assigned to function result deviceConstants.
-    deviceConstants  	= struct;
-    deviceConstants.R1	= R1;
-    deviceConstants.R2	= R2;
-    deviceConstants.C1	= C1;
-    deviceConstants.C2	= C2;
-end
+    error(nargchk(0, 1, nargin))
+    if nargin == 1
+        % The values of the device constants are taken from function argument deviceConstants.
+        R1	= deviceConstants.R1;
+        R2	= deviceConstants.R2;
+        C1	= deviceConstants.C1;
+        C2	= deviceConstants.C2;
+    else
+        % The default values of the device constants.
+        R1	= 1000;
+        R2	= 1000;
+        C1	= 1e-06;
+        C2	= 2.2e-05;
+    end
+    error(nargchk(0, 4, nargout))
+    if nargout >= 2
+        % The values of the device constants are assigned to function result deviceConstants.
+        deviceConstants  	= struct;
+        deviceConstants.R1	= R1;
+        deviceConstants.R2	= R2;
+        deviceConstants.C1	= C1;
+        deviceConstants.C2	= C2;
+    end
 
-% User-defined result SIMO:
+    % User-defined result SIMO:
 
-% The solution for unknown Uout:
-%   Uout(s) = N_Uout_Uin(s)/D_Uout_Uin(s) * Uin(s), with
-%     N_Uout_Uin(s) = (R1*R2*C1 + R1*R2*C2) * s
-%                     +(R1 + R2)
-%     D_Uout_Uin(s) = R1*R2*C1 * s
-%                     +R2
-D_Uout_Uin = [ R1*R2*C1	 % s^1
-             ; R2	 % s^0
-             ].';
-N_Uout_Uin = [ (R1*R2*C1 + R1*R2*C2)	 % s^1
-             ; (R1 + R2)	 % s^0
-             ].';
+    % The solution for unknown Uout:
+    %   Uout(s) = N_Uout_Uin(s)/D_Uout_Uin(s) * Uin(s), with
+    %     N_Uout_Uin(s) = (R1*R2*C1 + R1*R2*C2) * s
+    %                     +(R1 + R2)
+    %     D_Uout_Uin(s) = R1*R2*C1 * s
+    %                     +R2
+    D_Uout_Uin = [ R1*R2*C1	 % s^1
+                 ; R2	 % s^0
+                 ].';
+    N_Uout_Uin = [ (R1*R2*C1 + R1*R2*C2)	 % s^1
+                 ; (R1 + R2)	 % s^0
+                 ].';
 
-% The solution for unknown U_Im:
-%   U_Im(s) = N_U_Im_Uin(s)/D_U_Im_Uin(s) * Uin(s), with
-%     N_U_Im_Uin(s) = 1
-%     D_U_Im_Uin(s) = 1
-D_U_Im_Uin = [ 1	 % s^0
-             ].';
-N_U_Im_Uin = [ 1	 % s^0
-             ].';
+    % The solution for unknown U_Im:
+    %   U_Im(s) = N_U_Im_Uin(s)/D_U_Im_Uin(s) * Uin(s), with
+    %     N_U_Im_Uin(s) = 1
+    %     D_U_Im_Uin(s) = 1
+    D_U_Im_Uin = [ 1	 % s^0
+                 ].';
+    N_U_Im_Uin = [ 1	 % s^0
+                 ].';
 
-% The solution for unknown I_OP:
-%   I_OP(s) = N_I_OP_Uin(s)/D_I_OP_Uin(s) * Uin(s), with
-%     N_I_OP_Uin(s) = R1*R2*C1*C2 * s^2
-%                     +(R1*C1 + R2*C2) * s
-%                     +1
-%     D_I_OP_Uin(s) = D_Uout_Uin(s)
-D_I_OP_Uin = D_Uout_Uin;
-N_I_OP_Uin = [ R1*R2*C1*C2	 % s^2
-             ; (R1*C1 + R2*C2)	 % s^1
-             ; 1	 % s^0
-             ].';
+    % The solution for unknown I_OP:
+    %   I_OP(s) = N_I_OP_Uin(s)/D_I_OP_Uin(s) * Uin(s), with
+    %     N_I_OP_Uin(s) = R1*R2*C1*C2 * s^2
+    %                     +(R1*C1 + R2*C2) * s
+    %                     +1
+    %     D_I_OP_Uin(s) = D_Uout_Uin(s)
+    D_I_OP_Uin = D_Uout_Uin;
+    N_I_OP_Uin = [ R1*R2*C1*C2	 % s^2
+                 ; (R1*C1 + R2*C2)	 % s^1
+                 ; 1	 % s^0
+                 ].';
 
-% Create an Octave LTI system object from the data above. First shape a descriptor object.
-systemDesc_SIMO.name = 'SIMO';
-systemDesc_SIMO.numeratorAry = ...
-    { N_Uout_Uin
-      N_U_Im_Uin
-      N_I_OP_Uin
-    };
-systemDesc_SIMO.denominatorAry = ...
-    { D_Uout_Uin
-      D_U_Im_Uin
-      D_I_OP_Uin
-    };
-systemDesc_SIMO.inputNameAry = ...
-    { 'Uin'
-    };
-systemDesc_SIMO.outputNameAry = ...
-    { 'Uout'
-      'U_Im'
-      'I_OP'
-    };
-systemDesc_SIMO.plotInfo = ...
-    struct( 'isLogX', {} ...
-          , 'noPoints', {} ...
-          , 'freqMin', {} ...
-          , 'freqMax', {} ...
-          );
+    % Create an Octave LTI system object from the data above. First shape a descriptor object.
+    systemDesc_SIMO.name = 'SIMO';
+    systemDesc_SIMO.numeratorAry = ...
+        { N_Uout_Uin
+          N_U_Im_Uin
+          N_I_OP_Uin
+        };
+    systemDesc_SIMO.denominatorAry = ...
+        { D_Uout_Uin
+          D_U_Im_Uin
+          D_I_OP_Uin
+        };
+    systemDesc_SIMO.inputNameAry = ...
+        { 'Uin'
+        };
+    systemDesc_SIMO.outputNameAry = ...
+        { 'Uout'
+          'U_Im'
+          'I_OP'
+        };
+    systemDesc_SIMO.plotInfo = ...
+        struct( 'isLogX', {} ...
+              , 'noPoints', {} ...
+              , 'freqMin', {} ...
+              , 'freqMax', {} ...
+              );
 
-% Create the Octave LTI system object from the descriptor.
-tf_SIMO = createLtiSystem(systemDesc_SIMO);
+    % Create the Octave LTI system object from the descriptor.
+    tf_SIMO = createLtiSystem(systemDesc_SIMO);
 
-% Compute a suitable vector of frequency and time points.
-wBode  = getFrequencyVector(systemDesc_SIMO);
-tiStep = getSampleTimeVector(systemDesc_SIMO);
+    % Compute a suitable vector of frequency and time points.
+    wBode  = getFrequencyVector(systemDesc_SIMO);
+    tiStep = getSampleTimeVector(systemDesc_SIMO);
 
-if nargout == 0
-    % Plot the step response of SIMO.
-    % Plot the step response of SIMO. By post-processing, disable LaTeX
-    % interpretation in all graphic subelements of the new figure window.
-    hFig = figure('Name', 'Step Response of SIMO', 'NumberTitle', 'off');
-    step(tf_SIMO, tiStep)
-    hAx = findall(hFig, 'type', 'axes');
-    hYLabel = cell2mat(get(hAx, 'ylabel'));
-    set(hYLabel, 'interpreter', 'none')
-    hTitle = cell2mat(get(hAx, 'title'));
-    set(hTitle, 'interpreter', 'none')
-    disp(['This function can create the LTI system object tf_SIMO for you; please, type' char(10) ...
-          'help SIMO for more.' char(10) ...
-          '  You can use this object with functions like bode to plot the transfer function' char(10) ...
-          'or step and impulse to plot the step or impulse response time functions or lsim' char(10) ...
-          'to compute or plot the system response to arbitrary input signals. A stability' char(10) ...
-          'analysis can be done using function nyquist. Please refer to the online help' char(10) ...
-          'for these commands' char(10)] ...
-        );
-    clear tf_SIMO tiStep wBode
-end
-
+    if nargout == 0
+        % Plot the step response of SIMO.
+        % Plot the step response of SIMO. By post-processing, disable LaTeX
+        % interpretation in all graphic subelements of the new figure window.
+        hFig = figure('Name', 'Step Response of SIMO', 'NumberTitle', 'off');
+        step(tf_SIMO, tiStep)
+        hAx = findall(hFig, 'type', 'axes');
+        hYLabel = cell2mat(get(hAx, 'ylabel'));
+        set(hYLabel, 'interpreter', 'none')
+        hTitle = cell2mat(get(hAx, 'title'));
+        set(hTitle, 'interpreter', 'none')
+        disp(['This function can create the LTI system object tf_SIMO for you;' char(10) ...
+              'please, type help SIMO for more.' char(10) ...
+              '  You can use this object with functions like bode to plot the transfer' char(10) ...
+              'function or step and impulse to plot the step or impulse response time' char(10) ...
+              'functions or lsim to compute or plot the system response to arbitrary' char(10) ...
+              'input signals. A stability analysis can be done using function nyquist.' char(10) ...
+              'Please refer to the online help for these commands.' char(10)] ...
+            );
+        clear tf_SIMO tiStep wBode
+    end
 end % of function SIMO

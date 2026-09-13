@@ -1,12 +1,12 @@
-Jul 26 17:25:21 2026 - 000003 ms - RESULT - 
+Sep 13 14:13:55 2026 - 000001 ms - RESULT - 
 -----------------------------------------------------------------------------
  linNet - The Software for symbolic Analysis of linear Electronic Circuits
  Copyright (C) 2014-2026 Peter Vranken (https://github.com/PeterVranken/linNet)
  This is free software; see the source for copying conditions. There is NO
  warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 -----------------------------------------------------------------------------
-Jul 26 17:25:21 2026 - 000021 ms - RESULT - Reading circuit file testCases\useCaseAnalogAdd\useCaseAnalogAdd.cnl successfully done
-Jul 26 17:25:21 2026 - 000025 ms - RESULT - User-defined result MIMO:
+Sep 13 14:13:56 2026 - 000075 ms - RESULT - Reading circuit file testCases\useCaseAnalogAdd\useCaseAnalogAdd.cnl successfully done
+Sep 13 14:13:56 2026 - 000075 ms - RESULT - User-defined result MIMO:
 The solution for unknown U_out:
   U_out(s) = N_U_out_U1(s)/D_U_out_U1(s) * U1(s)
              + N_U_out_U2(s)/D_U_out_U2(s) * U2(s), with
@@ -24,7 +24,7 @@ The solution for unknown I_OP:
     D_I_OP_U1(s) = R1
     N_I_OP_U2(s) = -2
     D_I_OP_U2(s) = R1
-Jul 26 17:25:21 2026 - 000054 ms - RESULT - User-defined result G1 (Bode plot):
+Sep 13 14:13:56 2026 - 000077 ms - RESULT - User-defined result G1 (Bode plot):
 The dependency of U_out on U1:
   U_out(s) = N_U_out_U1(s)/D_U_out_U1(s) * U1(s), with
     N_U_out_U1(s) = -4*R1*C1 * s

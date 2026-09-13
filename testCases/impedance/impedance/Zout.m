@@ -57,98 +57,98 @@ function [tf_Zout deviceConstants wBode tiStep] = Zout(deviceConstants)
 %   You should have received a copy of the GNU General Public License along
 %   with this program. If not, see <http://www.gnu.org/licenses/>.
 
-% Load the required Octave packages.
-if isOctave
-    pkg load control
-end
-
-error(nargchk(0, 1, nargin))
-if nargin == 1
-    % The values of the device constants are taken from function argument deviceConstants.
-    Rc	= deviceConstants.Rc;
-    Rl	= deviceConstants.Rl;
-    L	= deviceConstants.L;
-    C	= deviceConstants.C;
-else
-    % The default values of the device constants.
-    Rc	= 100;
-    Rl	= 100;
-    L	= 0.001;
-    C	= 1e-05;
-end
-error(nargchk(0, 4, nargout))
-if nargout >= 2
-    % The values of the device constants are assigned to function result deviceConstants.
-    deviceConstants  	= struct;
-    deviceConstants.Rc	= Rc;
-    deviceConstants.Rl	= Rl;
-    deviceConstants.L	= L;
-    deviceConstants.C	= C;
-end
-
-% User-defined result Zout (Bode plot):
-
-% The dependency of Uout on Iload:
-%   Uout(s) = N_Uout_Iload(s)/D_Uout_Iload(s) * Iload(s), with
-%     N_Uout_Iload(s) = Rc*Rl*L * s
-%     D_Uout_Iload(s) = Rc*Rl*L*C * s^2
-%                       +(Rc*L + Rl*L) * s
-%                       +Rc*Rl
-D_Uout_Iload = [ Rc*Rl*L*C	 % s^2
-               ; (Rc*L + Rl*L)	 % s^1
-               ; Rc*Rl	 % s^0
-               ].';
-N_Uout_Iload = [ Rc*Rl*L	 % s^1
-               ; 0	 % s^0
-               ].';
-
-% Create an Octave LTI system object from the data above. First shape a descriptor object.
-systemDesc_Zout.name = 'Zout';
-systemDesc_Zout.numeratorAry = ...
-    { N_Uout_Iload
-    };
-systemDesc_Zout.denominatorAry = ...
-    { D_Uout_Iload
-    };
-systemDesc_Zout.inputNameAry = ...
-    { 'Iload'
-    };
-systemDesc_Zout.outputNameAry = ...
-    { 'Uout'
-    };
-systemDesc_Zout.plotInfo = ...
-    struct( 'isLogX', {} ...
-          , 'noPoints', {} ...
-          , 'freqMin', {} ...
-          , 'freqMax', {} ...
-          );
-
-% Create the Octave LTI system object from the descriptor.
-tf_Zout = createLtiSystem(systemDesc_Zout);
-
-% Compute a suitable vector of frequency and time points.
-wBode  = getFrequencyVector(systemDesc_Zout);
-tiStep = getSampleTimeVector(systemDesc_Zout);
-
-if nargout == 0
-    % Plot the transfer function of Zout. By post-processing, disable LaTeX
-    % interpretation in all graphic subelements of the new figure window.
-    hFig = figure('Name', 'Frequency Response of Zout', 'NumberTitle', 'off');
-    if ~isempty(wBode)
-        bode(tf_Zout, wBode)
-    else
-        bode(tf_Zout)
+    % Load the required Octave packages.
+    if isOctave
+        pkg load control
     end
-    set(findobj(hFig, '-property', 'interpreter'), 'interpreter', 'none')
-    disp(['This function can create the LTI system object tf_Zout for you; please, type' char(10) ...
-          'help Zout for more.' char(10) ...
-          '  You can use this object with functions like bode to plot the transfer function' char(10) ...
-          'or step and impulse to plot the step or impulse response time functions or lsim' char(10) ...
-          'to compute or plot the system response to arbitrary input signals. A stability' char(10) ...
-          'analysis can be done using function nyquist. Please refer to the online help' char(10) ...
-          'for these commands' char(10)] ...
-        );
-    clear tf_Zout tiStep wBode
-end
 
+    error(nargchk(0, 1, nargin))
+    if nargin == 1
+        % The values of the device constants are taken from function argument deviceConstants.
+        Rc	= deviceConstants.Rc;
+        Rl	= deviceConstants.Rl;
+        L	= deviceConstants.L;
+        C	= deviceConstants.C;
+    else
+        % The default values of the device constants.
+        Rc	= 100;
+        Rl	= 100;
+        L	= 0.001;
+        C	= 1e-05;
+    end
+    error(nargchk(0, 4, nargout))
+    if nargout >= 2
+        % The values of the device constants are assigned to function result deviceConstants.
+        deviceConstants  	= struct;
+        deviceConstants.Rc	= Rc;
+        deviceConstants.Rl	= Rl;
+        deviceConstants.L	= L;
+        deviceConstants.C	= C;
+    end
+
+    % User-defined result Zout (Bode plot):
+
+    % The dependency of Uout on Iload:
+    %   Uout(s) = N_Uout_Iload(s)/D_Uout_Iload(s) * Iload(s), with
+    %     N_Uout_Iload(s) = Rc*Rl*L * s
+    %     D_Uout_Iload(s) = Rc*Rl*L*C * s^2
+    %                       +(Rc*L + Rl*L) * s
+    %                       +Rc*Rl
+    D_Uout_Iload = [ Rc*Rl*L*C	 % s^2
+                   ; (Rc*L + Rl*L)	 % s^1
+                   ; Rc*Rl	 % s^0
+                   ].';
+    N_Uout_Iload = [ Rc*Rl*L	 % s^1
+                   ; 0	 % s^0
+                   ].';
+
+    % Create an Octave LTI system object from the data above. First shape a descriptor object.
+    systemDesc_Zout.name = 'Zout';
+    systemDesc_Zout.numeratorAry = ...
+        { N_Uout_Iload
+        };
+    systemDesc_Zout.denominatorAry = ...
+        { D_Uout_Iload
+        };
+    systemDesc_Zout.inputNameAry = ...
+        { 'Iload'
+        };
+    systemDesc_Zout.outputNameAry = ...
+        { 'Uout'
+        };
+    systemDesc_Zout.plotInfo = ...
+        struct( 'isLogX', {} ...
+              , 'noPoints', {} ...
+              , 'freqMin', {} ...
+              , 'freqMax', {} ...
+              );
+
+    % Create the Octave LTI system object from the descriptor.
+    tf_Zout = createLtiSystem(systemDesc_Zout);
+
+    % Compute a suitable vector of frequency and time points.
+    wBode  = getFrequencyVector(systemDesc_Zout);
+    tiStep = getSampleTimeVector(systemDesc_Zout);
+
+    if nargout == 0
+        % Plot the transfer function of Zout. By post-processing, disable
+        % LaTeX interpretation in all graphic subelements of the new figure
+        % window.
+        hFig = figure('Name', 'Frequency Response of Zout', 'NumberTitle', 'off');
+        if ~isempty(wBode)
+            bode(tf_Zout, wBode)
+        else
+            bode(tf_Zout)
+        end
+        set(findobj(hFig, '-property', 'interpreter'), 'interpreter', 'none')
+        disp(['This function can create the LTI system object tf_Zout for you;' char(10) ...
+              'please, type help Zout for more.' char(10) ...
+              '  You can use this object with functions like bode to plot the transfer' char(10) ...
+              'function or step and impulse to plot the step or impulse response time' char(10) ...
+              'functions or lsim to compute or plot the system response to arbitrary' char(10) ...
+              'input signals. A stability analysis can be done using function nyquist.' char(10) ...
+              'Please refer to the online help for these commands.' char(10)] ...
+            );
+        clear tf_Zout tiStep wBode
+    end
 end % of function Zout

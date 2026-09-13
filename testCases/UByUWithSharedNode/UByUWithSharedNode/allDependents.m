@@ -57,140 +57,139 @@ function [tf_allDependents deviceConstants wBode tiStep] = allDependents(deviceC
 %   You should have received a copy of the GNU General Public License along
 %   with this program. If not, see <http://www.gnu.org/licenses/>.
 
-% Load the required Octave packages.
-if isOctave
-    pkg load control
-end
+    % Load the required Octave packages.
+    if isOctave
+        pkg load control
+    end
 
-error(nargchk(0, 1, nargin))
-if nargin == 1
-    % The values of the device constants are taken from function argument deviceConstants.
-    k	= deviceConstants.k;
-    R1	= deviceConstants.R1;
-    R2	= deviceConstants.R2;
-    R3	= deviceConstants.R3;
-else
-    % The default values of the device constants.
-    k	= 1;
-    R1	= 100;
-    R2	= 100;
-    R3	= 100;
-end
-error(nargchk(0, 4, nargout))
-if nargout >= 2
-    % The values of the device constants are assigned to function result deviceConstants.
-    deviceConstants  	= struct;
-    deviceConstants.k	= k;
-    deviceConstants.R1	= R1;
-    deviceConstants.R2	= R2;
-    deviceConstants.R3	= R3;
-end
+    error(nargchk(0, 1, nargin))
+    if nargin == 1
+        % The values of the device constants are taken from function argument deviceConstants.
+        k	= deviceConstants.k;
+        R1	= deviceConstants.R1;
+        R2	= deviceConstants.R2;
+        R3	= deviceConstants.R3;
+    else
+        % The default values of the device constants.
+        k	= 1;
+        R1	= 100;
+        R2	= 100;
+        R3	= 100;
+    end
+    error(nargchk(0, 4, nargout))
+    if nargout >= 2
+        % The values of the device constants are assigned to function result deviceConstants.
+        deviceConstants  	= struct;
+        deviceConstants.k	= k;
+        deviceConstants.R1	= R1;
+        deviceConstants.R2	= R2;
+        deviceConstants.R3	= R3;
+    end
 
-% Result AllDependents in the frequency domain:
+    % Result AllDependents in the frequency domain:
 
-% The solution for unknown U_K1:
-%   U_K1(s) = N_U_K1_U0(s)/D_U_K1_U0(s) * U0(s), with
-%     N_U_K1_U0(s) = 1
-%     D_U_K1_U0(s) = 1
-D_U_K1_U0 = [ 1	 % s^0
-            ].';
-N_U_K1_U0 = [ 1	 % s^0
-            ].';
+    % The solution for unknown U_K1:
+    %   U_K1(s) = N_U_K1_U0(s)/D_U_K1_U0(s) * U0(s), with
+    %     N_U_K1_U0(s) = 1
+    %     D_U_K1_U0(s) = 1
+    D_U_K1_U0 = [ 1	 % s^0
+                ].';
+    N_U_K1_U0 = [ 1	 % s^0
+                ].';
 
-% The solution for unknown U_K2:
-%   U_K2(s) = N_U_K2_U0(s)/D_U_K2_U0(s) * U0(s), with
-%     N_U_K2_U0(s) = (k*R2 + R2)
-%     D_U_K2_U0(s) = (k*R2 + R1 + R2)
-D_U_K2_U0 = [ (k*R2 + R1 + R2)	 % s^0
-            ].';
-N_U_K2_U0 = [ (k*R2 + R2)	 % s^0
-            ].';
+    % The solution for unknown U_K2:
+    %   U_K2(s) = N_U_K2_U0(s)/D_U_K2_U0(s) * U0(s), with
+    %     N_U_K2_U0(s) = (k*R2 + R2)
+    %     D_U_K2_U0(s) = (k*R2 + R1 + R2)
+    D_U_K2_U0 = [ (k*R2 + R1 + R2)	 % s^0
+                ].';
+    N_U_K2_U0 = [ (k*R2 + R2)	 % s^0
+                ].';
 
-% The solution for unknown U_K3:
-%   U_K3(s) = N_U_K3_U0(s)/D_U_K3_U0(s) * U0(s), with
-%     N_U_K3_U0(s) = k*R2
-%     D_U_K3_U0(s) = D_U_K2_U0(s)
-D_U_K3_U0 = D_U_K2_U0;
-N_U_K3_U0 = [ k*R2	 % s^0
-            ].';
+    % The solution for unknown U_K3:
+    %   U_K3(s) = N_U_K3_U0(s)/D_U_K3_U0(s) * U0(s), with
+    %     N_U_K3_U0(s) = k*R2
+    %     D_U_K3_U0(s) = D_U_K2_U0(s)
+    D_U_K3_U0 = D_U_K2_U0;
+    N_U_K3_U0 = [ k*R2	 % s^0
+                ].';
 
-% The solution for unknown I_U0:
-%   I_U0(s) = N_I_U0_U0(s)/D_I_U0_U0(s) * U0(s), with
-%     N_I_U0_U0(s) = 1
-%     D_I_U0_U0(s) = D_U_K2_U0(s)
-D_I_U0_U0 = D_U_K2_U0;
-N_I_U0_U0 = [ 1	 % s^0
-            ].';
+    % The solution for unknown I_U0:
+    %   I_U0(s) = N_I_U0_U0(s)/D_I_U0_U0(s) * U0(s), with
+    %     N_I_U0_U0(s) = 1
+    %     D_I_U0_U0(s) = D_U_K2_U0(s)
+    D_I_U0_U0 = D_U_K2_U0;
+    N_I_U0_U0 = [ 1	 % s^0
+                ].';
 
-% The solution for unknown I_k:
-%   I_k(s) = N_I_k_U0(s)/D_I_k_U0(s) * U0(s), with
-%     N_I_k_U0(s) = (k*R2 - R3)
-%     D_I_k_U0(s) = (k*R2*R3 + R1*R3 + R2*R3)
-D_I_k_U0 = [ (k*R2*R3 + R1*R3 + R2*R3)	 % s^0
-           ].';
-N_I_k_U0 = [ (k*R2 - R3)	 % s^0
-           ].';
+    % The solution for unknown I_k:
+    %   I_k(s) = N_I_k_U0(s)/D_I_k_U0(s) * U0(s), with
+    %     N_I_k_U0(s) = (k*R2 - R3)
+    %     D_I_k_U0(s) = (k*R2*R3 + R1*R3 + R2*R3)
+    D_I_k_U0 = [ (k*R2*R3 + R1*R3 + R2*R3)	 % s^0
+               ].';
+    N_I_k_U0 = [ (k*R2 - R3)	 % s^0
+               ].';
 
-% Create an Octave LTI system object from the data above. First shape a descriptor object.
-systemDesc_allDependents.name = 'allDependents';
-systemDesc_allDependents.numeratorAry = ...
-    { N_U_K1_U0
-      N_U_K2_U0
-      N_U_K3_U0
-      N_I_U0_U0
-      N_I_k_U0
-    };
-systemDesc_allDependents.denominatorAry = ...
-    { D_U_K1_U0
-      D_U_K2_U0
-      D_U_K3_U0
-      D_I_U0_U0
-      D_I_k_U0
-    };
-systemDesc_allDependents.inputNameAry = ...
-    { 'U0'
-    };
-systemDesc_allDependents.outputNameAry = ...
-    { 'U_K1'
-      'U_K2'
-      'U_K3'
-      'I_U0'
-      'I_k'
-    };
-systemDesc_allDependents.plotInfo = ...
-    struct( 'isLogX', {} ...
-          , 'noPoints', {} ...
-          , 'freqMin', {} ...
-          , 'freqMax', {} ...
-          );
+    % Create an Octave LTI system object from the data above. First shape a descriptor object.
+    systemDesc_allDependents.name = 'allDependents';
+    systemDesc_allDependents.numeratorAry = ...
+        { N_U_K1_U0
+          N_U_K2_U0
+          N_U_K3_U0
+          N_I_U0_U0
+          N_I_k_U0
+        };
+    systemDesc_allDependents.denominatorAry = ...
+        { D_U_K1_U0
+          D_U_K2_U0
+          D_U_K3_U0
+          D_I_U0_U0
+          D_I_k_U0
+        };
+    systemDesc_allDependents.inputNameAry = ...
+        { 'U0'
+        };
+    systemDesc_allDependents.outputNameAry = ...
+        { 'U_K1'
+          'U_K2'
+          'U_K3'
+          'I_U0'
+          'I_k'
+        };
+    systemDesc_allDependents.plotInfo = ...
+        struct( 'isLogX', {} ...
+              , 'noPoints', {} ...
+              , 'freqMin', {} ...
+              , 'freqMax', {} ...
+              );
 
-% Create the Octave LTI system object from the descriptor.
-tf_allDependents = createLtiSystem(systemDesc_allDependents);
+    % Create the Octave LTI system object from the descriptor.
+    tf_allDependents = createLtiSystem(systemDesc_allDependents);
 
-% Compute a suitable vector of frequency and time points.
-wBode  = getFrequencyVector(systemDesc_allDependents);
-tiStep = getSampleTimeVector(systemDesc_allDependents);
+    % Compute a suitable vector of frequency and time points.
+    wBode  = getFrequencyVector(systemDesc_allDependents);
+    tiStep = getSampleTimeVector(systemDesc_allDependents);
 
-if nargout == 0
-    % Plot the step response of allDependents.
-    % Plot the step response of allDependents. By post-processing, disable LaTeX
-    % interpretation in all graphic subelements of the new figure window.
-    hFig = figure('Name', 'Step Response of allDependents', 'NumberTitle', 'off');
-    step(tf_allDependents, tiStep)
-    hAx = findall(hFig, 'type', 'axes');
-    hYLabel = cell2mat(get(hAx, 'ylabel'));
-    set(hYLabel, 'interpreter', 'none')
-    hTitle = cell2mat(get(hAx, 'title'));
-    set(hTitle, 'interpreter', 'none')
-    disp(['This function can create the LTI system object tf_allDependents for you; please, type' char(10) ...
-          'help allDependents for more.' char(10) ...
-          '  You can use this object with functions like bode to plot the transfer function' char(10) ...
-          'or step and impulse to plot the step or impulse response time functions or lsim' char(10) ...
-          'to compute or plot the system response to arbitrary input signals. A stability' char(10) ...
-          'analysis can be done using function nyquist. Please refer to the online help' char(10) ...
-          'for these commands' char(10)] ...
-        );
-    clear tf_allDependents tiStep wBode
-end
-
+    if nargout == 0
+        % Plot the step response of allDependents.
+        % Plot the step response of allDependents. By post-processing, disable LaTeX
+        % interpretation in all graphic subelements of the new figure window.
+        hFig = figure('Name', 'Step Response of allDependents', 'NumberTitle', 'off');
+        step(tf_allDependents, tiStep)
+        hAx = findall(hFig, 'type', 'axes');
+        hYLabel = cell2mat(get(hAx, 'ylabel'));
+        set(hYLabel, 'interpreter', 'none')
+        hTitle = cell2mat(get(hAx, 'title'));
+        set(hTitle, 'interpreter', 'none')
+        disp(['This function can create the LTI system object tf_allDependents for you;' char(10) ...
+              'please, type help allDependents for more.' char(10) ...
+              '  You can use this object with functions like bode to plot the transfer' char(10) ...
+              'function or step and impulse to plot the step or impulse response time' char(10) ...
+              'functions or lsim to compute or plot the system response to arbitrary' char(10) ...
+              'input signals. A stability analysis can be done using function nyquist.' char(10) ...
+              'Please refer to the online help for these commands.' char(10)] ...
+            );
+        clear tf_allDependents tiStep wBode
+    end
 end % of function allDependents

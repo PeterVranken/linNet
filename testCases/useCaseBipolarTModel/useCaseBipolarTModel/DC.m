@@ -57,265 +57,271 @@ function [tf_DC deviceConstants wBode tiStep] = DC(deviceConstants)
 %   You should have received a copy of the GNU General Public License along
 %   with this program. If not, see <http://www.gnu.org/licenses/>.
 
-% Load the required Octave packages.
-if isOctave
-    pkg load control
-end
+    % Load the required Octave packages.
+    if isOctave
+        pkg load control
+    end
 
-error(nargchk(0, 1, nargin))
-if nargin == 1
-    % The values of the device constants are taken from function argument deviceConstants.
-    beta	= deviceConstants.beta;
-    R1	= deviceConstants.R1;
-    R2	= deviceConstants.R2;
-    Rc	= deviceConstants.Rc;
-    Re	= deviceConstants.Re;
-    Rec	= deviceConstants.Rec;
-    Ce	= deviceConstants.Ce;
-    Cin	= deviceConstants.Cin;
-    Cout	= deviceConstants.Cout;
-else
-    % The default values of the device constants.
-    beta	= 250;
-    R1	= 10000;
-    R2	= 1200;
-    Rc	= 6800;
-    Re	= 680;
-    Rec	= 68;
-    Ce	= 4.7e-06;
-    Cin	= 0.0001;
-    Cout	= 1.5e-06;
-end
-error(nargchk(0, 4, nargout))
-if nargout >= 2
-    % The values of the device constants are assigned to function result deviceConstants.
-    deviceConstants  	= struct;
-    deviceConstants.beta	= beta;
-    deviceConstants.R1	= R1;
-    deviceConstants.R2	= R2;
-    deviceConstants.Rc	= Rc;
-    deviceConstants.Re	= Re;
-    deviceConstants.Rec	= Rec;
-    deviceConstants.Ce	= Ce;
-    deviceConstants.Cin	= Cin;
-    deviceConstants.Cout	= Cout;
-end
+    error(nargchk(0, 1, nargin))
+    if nargin == 1
+        % The values of the device constants are taken from function argument deviceConstants.
+        beta	= deviceConstants.beta;
+        R1	= deviceConstants.R1;
+        R2	= deviceConstants.R2;
+        Rc	= deviceConstants.Rc;
+        Re	= deviceConstants.Re;
+        Rec	= deviceConstants.Rec;
+        Ce	= deviceConstants.Ce;
+        Cin	= deviceConstants.Cin;
+        Cout	= deviceConstants.Cout;
+    else
+        % The default values of the device constants.
+        beta	= 250;
+        R1	= 10000;
+        R2	= 1200;
+        Rc	= 6800;
+        Re	= 680;
+        Rec	= 68;
+        Ce	= 4.7e-06;
+        Cin	= 0.0001;
+        Cout	= 1.5e-06;
+    end
+    error(nargchk(0, 4, nargout))
+    if nargout >= 2
+        % The values of the device constants are assigned to function result deviceConstants.
+        deviceConstants  	= struct;
+        deviceConstants.beta	= beta;
+        deviceConstants.R1	= R1;
+        deviceConstants.R2	= R2;
+        deviceConstants.Rc	= Rc;
+        deviceConstants.Re	= Re;
+        deviceConstants.Rec	= Rec;
+        deviceConstants.Ce	= Ce;
+        deviceConstants.Cin	= Cin;
+        deviceConstants.Cout	= Cout;
+    end
 
-% User-defined result DC:
+    % User-defined result DC:
 
-% The solution for unknown U_C:
-%   U_C(s) = N_U_C_Ubatt(s)/D_U_C_Ubatt(s) * Ubatt(s)
-%            + N_U_C_Uin(s)/D_U_C_Uin(s) * Uin(s)
-%            + N_U_C_Ube(s)/D_U_C_Ube(s) * Ube(s), with
-%     N_U_C_Ubatt(s) = (beta*R1*R2*Re*Rec*Ce*Cin + R1*R2*Re*Rec*Ce*Cin) * s^2
-%                      +(beta*R1*R2*Re*Cin + beta*R1*Re*Rec*Ce - beta*R2*Rc*Re*Ce
-%                        - beta*R2*Rc*Rec*Ce + beta*R2*Re*Rec*Ce + R1*R2*Re*Ce
-%                        + R1*R2*Re*Cin + R1*R2*Rec*Ce + R1*Re*Rec*Ce + R2*Re*Rec*Ce
-%                       ) * s
-%                      +(beta*R1*Re - beta*R2*Rc + beta*R2*Re + R1*R2 + R1*Re
-%                        + R2*Re
-%                       )
-%     D_U_C_Ubatt(s) = (beta*R1*R2*Re*Rec*Ce*Cin + R1*R2*Re*Rec*Ce*Cin) * s^2
-%                      +(beta*R1*R2*Re*Cin + beta*R1*Re*Rec*Ce + beta*R2*Re*Rec*Ce
-%                        + R1*R2*Re*Ce + R1*R2*Re*Cin + R1*R2*Rec*Ce + R1*Re*Rec*Ce
-%                        + R2*Re*Rec*Ce
-%                       ) * s
-%                      +(beta*R1*Re + beta*R2*Re + R1*R2 + R1*Re + R2*Re)
-%     N_U_C_Uin(s) = -(beta*R1*R2*Rc*Re*Ce*Cin + beta*R1*R2*Rc*Rec*Ce*Cin) * s^2
-%                    -beta*R1*R2*Rc*Cin * s
-%     D_U_C_Uin(s) = D_U_C_Ubatt(s)
-%     N_U_C_Ube(s) = (beta*R1*R2*Rc*Re*Ce*Cin + beta*R1*R2*Rc*Rec*Ce*Cin) * s^2
-%                    +(beta*R1*R2*Rc*Cin + beta*R1*Rc*Re*Ce + beta*R1*Rc*Rec*Ce
-%                      + beta*R2*Rc*Re*Ce + beta*R2*Rc*Rec*Ce
-%                     ) * s
-%                    +(beta*R1*Rc + beta*R2*Rc)
-%     D_U_C_Ube(s) = D_U_C_Ubatt(s)
-D_U_C_Ubatt = [ (beta*R1*R2*Re*Rec*Ce*Cin + R1*R2*Re*Rec*Ce*Cin)	 % s^2
-              ; (beta*R1*R2*Re*Cin + beta*R1*Re*Rec*Ce + beta*R2*Re*Rec*Ce ...
-                 + R1*R2*Re*Ce + R1*R2*Re*Cin + R1*R2*Rec*Ce + R1*Re*Rec*Ce ...
-                 + R2*Re*Rec*Ce ...
-                )	 % s^1
-              ; (beta*R1*Re + beta*R2*Re + R1*R2 + R1*Re + R2*Re)	 % s^0
-              ].';
-D_U_C_Uin = D_U_C_Ubatt;
-D_U_C_Ube = D_U_C_Ubatt;
-N_U_C_Ubatt = [ (beta*R1*R2*Re*Rec*Ce*Cin + R1*R2*Re*Rec*Ce*Cin)	 % s^2
-              ; (beta*R1*R2*Re*Cin + beta*R1*Re*Rec*Ce - beta*R2*Rc*Re*Ce ...
-                 - beta*R2*Rc*Rec*Ce + beta*R2*Re*Rec*Ce + R1*R2*Re*Ce + R1*R2*Re*Cin ...
-                 + R1*R2*Rec*Ce + R1*Re*Rec*Ce + R2*Re*Rec*Ce ...
-                )	 % s^1
-              ; (beta*R1*Re - beta*R2*Rc + beta*R2*Re + R1*R2 + R1*Re + R2*Re)	 % s^0
-              ].';
-N_U_C_Uin = [ -(beta*R1*R2*Rc*Re*Ce*Cin + beta*R1*R2*Rc*Rec*Ce*Cin)	 % s^2
-            ; -beta*R1*R2*Rc*Cin	 % s^1
-            ; 0	 % s^0
-            ].';
-N_U_C_Ube = [ (beta*R1*R2*Rc*Re*Ce*Cin + beta*R1*R2*Rc*Rec*Ce*Cin)	 % s^2
-            ; (beta*R1*R2*Rc*Cin + beta*R1*Rc*Re*Ce + beta*R1*Rc*Rec*Ce + beta*R2*Rc*Re*Ce ...
-               + beta*R2*Rc*Rec*Ce ...
-              )	 % s^1
-            ; (beta*R1*Rc + beta*R2*Rc)	 % s^0
-            ].';
-
-% The solution for unknown U_B:
-%   U_B(s) = N_U_B_Ubatt(s)/D_U_B_Ubatt(s) * Ubatt(s)
-%            + N_U_B_Uin(s)/D_U_B_Uin(s) * Uin(s)
-%            + N_U_B_Ube(s)/D_U_B_Ube(s) * Ube(s), with
-%     N_U_B_Ubatt(s) = (beta*R2*Re*Rec*Ce + R2*Re*Rec*Ce) * s
-%                      +(beta*R2*Re + R2*Re)
-%     D_U_B_Ubatt(s) = D_U_C_Ubatt(s)
-%     N_U_B_Uin(s) = (beta*R1*R2*Re*Rec*Ce*Cin + R1*R2*Re*Rec*Ce*Cin) * s^2
-%                    +(beta*R1*R2*Re*Cin + R1*R2*Re*Cin) * s
-%     D_U_B_Uin(s) = D_U_C_Ubatt(s)
-%     N_U_B_Ube(s) = (R1*R2*Re*Ce + R1*R2*Rec*Ce) * s
-%                    +R1*R2
-%     D_U_B_Ube(s) = D_U_C_Ubatt(s)
-D_U_B_Ubatt = D_U_C_Ubatt;
-D_U_B_Uin = D_U_C_Ubatt;
-D_U_B_Ube = D_U_C_Ubatt;
-N_U_B_Ubatt = [ (beta*R2*Re*Rec*Ce + R2*Re*Rec*Ce)	 % s^1
-              ; (beta*R2*Re + R2*Re)	 % s^0
-              ].';
-N_U_B_Uin = [ (beta*R1*R2*Re*Rec*Ce*Cin + R1*R2*Re*Rec*Ce*Cin)	 % s^2
-            ; (beta*R1*R2*Re*Cin + R1*R2*Re*Cin)	 % s^1
-            ; 0	 % s^0
-            ].';
-N_U_B_Ube = [ (R1*R2*Re*Ce + R1*R2*Rec*Ce)	 % s^1
-            ; R1*R2	 % s^0
-            ].';
-
-% The solution for unknown I_Ubatt:
-%   I_Ubatt(s) = N_I_Ubatt_Ubatt(s)/D_I_Ubatt_Ubatt(s) * Ubatt(s)
-%                + N_I_Ubatt_Uin(s)/D_I_Ubatt_Uin(s) * Uin(s)
-%                + N_I_Ubatt_Ube(s)/D_I_Ubatt_Ube(s) * Ube(s), with
-%     N_I_Ubatt_Ubatt(s) = (beta*R2*Re*Rec*Ce*Cin + R2*Re*Rec*Ce*Cin) * s^2
-%                          +(beta*R2*Re*Ce + beta*R2*Re*Cin + beta*R2*Rec*Ce
-%                            + beta*Re*Rec*Ce + R2*Re*Ce + R2*Re*Cin + R2*Rec*Ce
-%                            + Re*Rec*Ce
-%                           ) * s
-%                          +(beta*R2 + beta*Re + R2 + Re)
-%     D_I_Ubatt_Ubatt(s) = D_U_C_Ubatt(s)
-%     N_I_Ubatt_Uin(s) = (beta*R1*R2*Re*Ce*Cin + beta*R1*R2*Rec*Ce*Cin - beta*R2*Re*Rec*Ce*Cin
-%                         - R2*Re*Rec*Ce*Cin
-%                        ) * s^2
-%                        +(beta*R1*R2*Cin - beta*R2*Re*Cin - R2*Re*Cin) * s
-%     D_I_Ubatt_Uin(s) = D_U_C_Ubatt(s)
-%     N_I_Ubatt_Ube(s) = -(beta*R1*R2*Re*Ce*Cin + beta*R1*R2*Rec*Ce*Cin) * s^2
-%                        -(beta*R1*R2*Cin + beta*R1*Re*Ce + beta*R1*Rec*Ce
-%                          + beta*R2*Re*Ce + beta*R2*Rec*Ce + R2*Re*Ce + R2*Rec*Ce
-%                         ) * s
-%                        -(beta*R1 + beta*R2 + R2)
-%     D_I_Ubatt_Ube(s) = D_U_C_Ubatt(s)
-D_I_Ubatt_Ubatt = D_U_C_Ubatt;
-D_I_Ubatt_Uin = D_U_C_Ubatt;
-D_I_Ubatt_Ube = D_U_C_Ubatt;
-N_I_Ubatt_Ubatt = [ (beta*R2*Re*Rec*Ce*Cin + R2*Re*Rec*Ce*Cin)	 % s^2
-                  ; (beta*R2*Re*Ce + beta*R2*Re*Cin + beta*R2*Rec*Ce + beta*Re*Rec*Ce ...
-                     + R2*Re*Ce + R2*Re*Cin + R2*Rec*Ce + Re*Rec*Ce ...
+    % The solution for unknown U_C:
+    %   U_C(s) = N_U_C_Ubatt(s)/D_U_C_Ubatt(s) * Ubatt(s)
+    %            + N_U_C_Uin(s)/D_U_C_Uin(s) * Uin(s)
+    %            + N_U_C_Ube(s)/D_U_C_Ube(s) * Ube(s), with
+    %     N_U_C_Ubatt(s) = (beta*R1*R2*Re*Rec*Ce*Cin + R1*R2*Re*Rec*Ce*Cin) * s^2
+    %                      +(beta*R1*R2*Re*Cin + beta*R1*Re*Rec*Ce - beta*R2*Rc*Re*Ce
+    %                        - beta*R2*Rc*Rec*Ce + beta*R2*Re*Rec*Ce + R1*R2*Re*Ce
+    %                        + R1*R2*Re*Cin + R1*R2*Rec*Ce + R1*Re*Rec*Ce
+    %                        + R2*Re*Rec*Ce
+    %                       ) * s
+    %                      +(beta*R1*Re - beta*R2*Rc + beta*R2*Re + R1*R2
+    %                        + R1*Re + R2*Re
+    %                       )
+    %     D_U_C_Ubatt(s) = (beta*R1*R2*Re*Rec*Ce*Cin + R1*R2*Re*Rec*Ce*Cin) * s^2
+    %                      +(beta*R1*R2*Re*Cin + beta*R1*Re*Rec*Ce + beta*R2*Re*Rec*Ce
+    %                        + R1*R2*Re*Ce + R1*R2*Re*Cin + R1*R2*Rec*Ce
+    %                        + R1*Re*Rec*Ce + R2*Re*Rec*Ce
+    %                       ) * s
+    %                      +(beta*R1*Re + beta*R2*Re + R1*R2 + R1*Re + R2*Re)
+    %     N_U_C_Uin(s) = -(beta*R1*R2*Rc*Re*Ce*Cin + beta*R1*R2*Rc*Rec*Ce*Cin) * s^2
+    %                    -beta*R1*R2*Rc*Cin * s
+    %     D_U_C_Uin(s) = D_U_C_Ubatt(s)
+    %     N_U_C_Ube(s) = (beta*R1*R2*Rc*Re*Ce*Cin + beta*R1*R2*Rc*Rec*Ce*Cin) * s^2
+    %                    +(beta*R1*R2*Rc*Cin + beta*R1*Rc*Re*Ce + beta*R1*Rc*Rec*Ce
+    %                      + beta*R2*Rc*Re*Ce + beta*R2*Rc*Rec*Ce
+    %                     ) * s
+    %                    +(beta*R1*Rc + beta*R2*Rc)
+    %     D_U_C_Ube(s) = D_U_C_Ubatt(s)
+    D_U_C_Ubatt = [ (beta*R1*R2*Re*Rec*Ce*Cin + R1*R2*Re*Rec*Ce*Cin)	 % s^2
+                  ; (beta*R1*R2*Re*Cin + beta*R1*Re*Rec*Ce + beta*R2*Re*Rec*Ce ...
+                     + R1*R2*Re*Ce + R1*R2*Re*Cin + R1*R2*Rec*Ce + R1*Re*Rec*Ce ...
+                     + R2*Re*Rec*Ce ...
                     )	 % s^1
-                  ; (beta*R2 + beta*Re + R2 + Re)	 % s^0
+                  ; (beta*R1*Re + beta*R2*Re + R1*R2 + R1*Re + R2*Re)	 % s^0
                   ].';
-N_I_Ubatt_Uin = [ (beta*R1*R2*Re*Ce*Cin + beta*R1*R2*Rec*Ce*Cin - beta*R2*Re*Rec*Ce*Cin ...
-                   - R2*Re*Rec*Ce*Cin ...
-                  )	 % s^2
-                ; (beta*R1*R2*Cin - beta*R2*Re*Cin - R2*Re*Cin)	 % s^1
+    D_U_C_Uin = D_U_C_Ubatt;
+    D_U_C_Ube = D_U_C_Ubatt;
+    N_U_C_Ubatt = [ (beta*R1*R2*Re*Rec*Ce*Cin + R1*R2*Re*Rec*Ce*Cin)	 % s^2
+                  ; (beta*R1*R2*Re*Cin + beta*R1*Re*Rec*Ce - beta*R2*Rc*Re*Ce ...
+                     - beta*R2*Rc*Rec*Ce + beta*R2*Re*Rec*Ce + R1*R2*Re*Ce ...
+                     + R1*R2*Re*Cin + R1*R2*Rec*Ce + R1*Re*Rec*Ce + R2*Re*Rec*Ce ...
+                    )	 % s^1
+                  ; (beta*R1*Re - beta*R2*Rc + beta*R2*Re + R1*R2 + R1*Re ...
+                     + R2*Re ...
+                    )	 % s^0
+                  ].';
+    N_U_C_Uin = [ -(beta*R1*R2*Rc*Re*Ce*Cin + beta*R1*R2*Rc*Rec*Ce*Cin)	 % s^2
+                ; -beta*R1*R2*Rc*Cin	 % s^1
                 ; 0	 % s^0
                 ].';
-N_I_Ubatt_Ube = [ -(beta*R1*R2*Re*Ce*Cin + beta*R1*R2*Rec*Ce*Cin)	 % s^2
-                ; -(beta*R1*R2*Cin + beta*R1*Re*Ce + beta*R1*Rec*Ce + beta*R2*Re*Ce ...
-                    + beta*R2*Rec*Ce + R2*Re*Ce + R2*Rec*Ce ...
-                   )	 % s^1
-                ; -(beta*R1 + beta*R2 + R2)	 % s^0
+    N_U_C_Ube = [ (beta*R1*R2*Rc*Re*Ce*Cin + beta*R1*R2*Rc*Rec*Ce*Cin)	 % s^2
+                ; (beta*R1*R2*Rc*Cin + beta*R1*Rc*Re*Ce + beta*R1*Rc*Rec*Ce ...
+                   + beta*R2*Rc*Re*Ce + beta*R2*Rc*Rec*Ce ...
+                  )	 % s^1
+                ; (beta*R1*Rc + beta*R2*Rc)	 % s^0
                 ].';
 
-% The solution for unknown I_base:
-%   I_base(s) = N_I_base_Ubatt(s)/D_I_base_Ubatt(s) * Ubatt(s)
-%               + N_I_base_Uin(s)/D_I_base_Uin(s) * Uin(s)
-%               + N_I_base_Ube(s)/D_I_base_Ube(s) * Ube(s), with
-%     N_I_base_Ubatt(s) = (R2*Re*Ce + R2*Rec*Ce) * s
-%                         +R2
-%     D_I_base_Ubatt(s) = D_U_C_Ubatt(s)
-%     N_I_base_Uin(s) = (R1*R2*Re*Ce*Cin + R1*R2*Rec*Ce*Cin) * s^2
-%                       +R1*R2*Cin * s
-%     D_I_base_Uin(s) = D_U_C_Ubatt(s)
-%     N_I_base_Ube(s) = -(R1*R2*Re*Ce*Cin + R1*R2*Rec*Ce*Cin) * s^2
-%                       -(R1*R2*Cin + R1*Re*Ce + R1*Rec*Ce + R2*Re*Ce + R2*Rec*Ce) * s
-%                       -(R1 + R2)
-%     D_I_base_Ube(s) = D_U_C_Ubatt(s)
-D_I_base_Ubatt = D_U_C_Ubatt;
-D_I_base_Uin = D_U_C_Ubatt;
-D_I_base_Ube = D_U_C_Ubatt;
-N_I_base_Ubatt = [ (R2*Re*Ce + R2*Rec*Ce)	 % s^1
-                 ; R2	 % s^0
-                 ].';
-N_I_base_Uin = [ (R1*R2*Re*Ce*Cin + R1*R2*Rec*Ce*Cin)	 % s^2
-               ; R1*R2*Cin	 % s^1
-               ; 0	 % s^0
-               ].';
-N_I_base_Ube = [ -(R1*R2*Re*Ce*Cin + R1*R2*Rec*Ce*Cin)	 % s^2
-               ; -(R1*R2*Cin + R1*Re*Ce + R1*Rec*Ce + R2*Re*Ce + R2*Rec*Ce)	 % s^1
-               ; -(R1 + R2)	 % s^0
-               ].';
+    % The solution for unknown U_B:
+    %   U_B(s) = N_U_B_Ubatt(s)/D_U_B_Ubatt(s) * Ubatt(s)
+    %            + N_U_B_Uin(s)/D_U_B_Uin(s) * Uin(s)
+    %            + N_U_B_Ube(s)/D_U_B_Ube(s) * Ube(s), with
+    %     N_U_B_Ubatt(s) = (beta*R2*Re*Rec*Ce + R2*Re*Rec*Ce) * s
+    %                      +(beta*R2*Re + R2*Re)
+    %     D_U_B_Ubatt(s) = D_U_C_Ubatt(s)
+    %     N_U_B_Uin(s) = (beta*R1*R2*Re*Rec*Ce*Cin + R1*R2*Re*Rec*Ce*Cin) * s^2
+    %                    +(beta*R1*R2*Re*Cin + R1*R2*Re*Cin) * s
+    %     D_U_B_Uin(s) = D_U_C_Ubatt(s)
+    %     N_U_B_Ube(s) = (R1*R2*Re*Ce + R1*R2*Rec*Ce) * s
+    %                    +R1*R2
+    %     D_U_B_Ube(s) = D_U_C_Ubatt(s)
+    D_U_B_Ubatt = D_U_C_Ubatt;
+    D_U_B_Uin = D_U_C_Ubatt;
+    D_U_B_Ube = D_U_C_Ubatt;
+    N_U_B_Ubatt = [ (beta*R2*Re*Rec*Ce + R2*Re*Rec*Ce)	 % s^1
+                  ; (beta*R2*Re + R2*Re)	 % s^0
+                  ].';
+    N_U_B_Uin = [ (beta*R1*R2*Re*Rec*Ce*Cin + R1*R2*Re*Rec*Ce*Cin)	 % s^2
+                ; (beta*R1*R2*Re*Cin + R1*R2*Re*Cin)	 % s^1
+                ; 0	 % s^0
+                ].';
+    N_U_B_Ube = [ (R1*R2*Re*Ce + R1*R2*Rec*Ce)	 % s^1
+                ; R1*R2	 % s^0
+                ].';
 
-% Create an Octave LTI system object from the data above. First shape a descriptor object.
-systemDesc_DC.name = 'DC';
-systemDesc_DC.numeratorAry = ...
-    { N_U_C_Ubatt N_U_C_Uin N_U_C_Ube
-      N_U_B_Ubatt N_U_B_Uin N_U_B_Ube
-      N_I_Ubatt_Ubatt N_I_Ubatt_Uin N_I_Ubatt_Ube
-      N_I_base_Ubatt N_I_base_Uin N_I_base_Ube
-    };
-systemDesc_DC.denominatorAry = ...
-    { D_U_C_Ubatt D_U_C_Uin D_U_C_Ube
-      D_U_B_Ubatt D_U_B_Uin D_U_B_Ube
-      D_I_Ubatt_Ubatt D_I_Ubatt_Uin D_I_Ubatt_Ube
-      D_I_base_Ubatt D_I_base_Uin D_I_base_Ube
-    };
-systemDesc_DC.inputNameAry = ...
-    { 'Ubatt'
-      'Uin'
-      'Ube'
-    };
-systemDesc_DC.outputNameAry = ...
-    { 'U_C'
-      'U_B'
-      'I_Ubatt'
-      'I_base'
-    };
-systemDesc_DC.plotInfo = ...
-    struct( 'isLogX', {} ...
-          , 'noPoints', {} ...
-          , 'freqMin', {} ...
-          , 'freqMax', {} ...
-          );
+    % The solution for unknown I_Ubatt:
+    %   I_Ubatt(s) = N_I_Ubatt_Ubatt(s)/D_I_Ubatt_Ubatt(s) * Ubatt(s)
+    %                + N_I_Ubatt_Uin(s)/D_I_Ubatt_Uin(s) * Uin(s)
+    %                + N_I_Ubatt_Ube(s)/D_I_Ubatt_Ube(s) * Ube(s), with
+    %     N_I_Ubatt_Ubatt(s) = (beta*R2*Re*Rec*Ce*Cin + R2*Re*Rec*Ce*Cin) * s^2
+    %                          +(beta*R2*Re*Ce + beta*R2*Re*Cin + beta*R2*Rec*Ce
+    %                            + beta*Re*Rec*Ce + R2*Re*Ce + R2*Re*Cin
+    %                            + R2*Rec*Ce + Re*Rec*Ce
+    %                           ) * s
+    %                          +(beta*R2 + beta*Re + R2 + Re)
+    %     D_I_Ubatt_Ubatt(s) = D_U_C_Ubatt(s)
+    %     N_I_Ubatt_Uin(s) = (beta*R1*R2*Re*Ce*Cin + beta*R1*R2*Rec*Ce*Cin
+    %                         - beta*R2*Re*Rec*Ce*Cin - R2*Re*Rec*Ce*Cin
+    %                        ) * s^2
+    %                        +(beta*R1*R2*Cin - beta*R2*Re*Cin - R2*Re*Cin) * s
+    %     D_I_Ubatt_Uin(s) = D_U_C_Ubatt(s)
+    %     N_I_Ubatt_Ube(s) = -(beta*R1*R2*Re*Ce*Cin + beta*R1*R2*Rec*Ce*Cin) * s^2
+    %                        -(beta*R1*R2*Cin + beta*R1*Re*Ce + beta*R1*Rec*Ce
+    %                          + beta*R2*Re*Ce + beta*R2*Rec*Ce + R2*Re*Ce
+    %                          + R2*Rec*Ce
+    %                         ) * s
+    %                        -(beta*R1 + beta*R2 + R2)
+    %     D_I_Ubatt_Ube(s) = D_U_C_Ubatt(s)
+    D_I_Ubatt_Ubatt = D_U_C_Ubatt;
+    D_I_Ubatt_Uin = D_U_C_Ubatt;
+    D_I_Ubatt_Ube = D_U_C_Ubatt;
+    N_I_Ubatt_Ubatt = [ (beta*R2*Re*Rec*Ce*Cin + R2*Re*Rec*Ce*Cin)	 % s^2
+                      ; (beta*R2*Re*Ce + beta*R2*Re*Cin + beta*R2*Rec*Ce ...
+                         + beta*Re*Rec*Ce + R2*Re*Ce + R2*Re*Cin + R2*Rec*Ce ...
+                         + Re*Rec*Ce ...
+                        )	 % s^1
+                      ; (beta*R2 + beta*Re + R2 + Re)	 % s^0
+                      ].';
+    N_I_Ubatt_Uin = [ (beta*R1*R2*Re*Ce*Cin + beta*R1*R2*Rec*Ce*Cin - beta*R2*Re*Rec*Ce*Cin ...
+                       - R2*Re*Rec*Ce*Cin ...
+                      )	 % s^2
+                    ; (beta*R1*R2*Cin - beta*R2*Re*Cin - R2*Re*Cin)	 % s^1
+                    ; 0	 % s^0
+                    ].';
+    N_I_Ubatt_Ube = [ -(beta*R1*R2*Re*Ce*Cin + beta*R1*R2*Rec*Ce*Cin)	 % s^2
+                    ; -(beta*R1*R2*Cin + beta*R1*Re*Ce + beta*R1*Rec*Ce + beta*R2*Re*Ce ...
+                        + beta*R2*Rec*Ce + R2*Re*Ce + R2*Rec*Ce ...
+                       )	 % s^1
+                    ; -(beta*R1 + beta*R2 + R2)	 % s^0
+                    ].';
 
-% Create the Octave LTI system object from the descriptor.
-tf_DC = createLtiSystem(systemDesc_DC);
+    % The solution for unknown I_base:
+    %   I_base(s) = N_I_base_Ubatt(s)/D_I_base_Ubatt(s) * Ubatt(s)
+    %               + N_I_base_Uin(s)/D_I_base_Uin(s) * Uin(s)
+    %               + N_I_base_Ube(s)/D_I_base_Ube(s) * Ube(s), with
+    %     N_I_base_Ubatt(s) = (R2*Re*Ce + R2*Rec*Ce) * s
+    %                         +R2
+    %     D_I_base_Ubatt(s) = D_U_C_Ubatt(s)
+    %     N_I_base_Uin(s) = (R1*R2*Re*Ce*Cin + R1*R2*Rec*Ce*Cin) * s^2
+    %                       +R1*R2*Cin * s
+    %     D_I_base_Uin(s) = D_U_C_Ubatt(s)
+    %     N_I_base_Ube(s) = -(R1*R2*Re*Ce*Cin + R1*R2*Rec*Ce*Cin) * s^2
+    %                       -(R1*R2*Cin + R1*Re*Ce + R1*Rec*Ce + R2*Re*Ce
+    %                         + R2*Rec*Ce
+    %                        ) * s
+    %                       -(R1 + R2)
+    %     D_I_base_Ube(s) = D_U_C_Ubatt(s)
+    D_I_base_Ubatt = D_U_C_Ubatt;
+    D_I_base_Uin = D_U_C_Ubatt;
+    D_I_base_Ube = D_U_C_Ubatt;
+    N_I_base_Ubatt = [ (R2*Re*Ce + R2*Rec*Ce)	 % s^1
+                     ; R2	 % s^0
+                     ].';
+    N_I_base_Uin = [ (R1*R2*Re*Ce*Cin + R1*R2*Rec*Ce*Cin)	 % s^2
+                   ; R1*R2*Cin	 % s^1
+                   ; 0	 % s^0
+                   ].';
+    N_I_base_Ube = [ -(R1*R2*Re*Ce*Cin + R1*R2*Rec*Ce*Cin)	 % s^2
+                   ; -(R1*R2*Cin + R1*Re*Ce + R1*Rec*Ce + R2*Re*Ce + R2*Rec*Ce)	 % s^1
+                   ; -(R1 + R2)	 % s^0
+                   ].';
 
-% Compute a suitable vector of frequency and time points.
-wBode  = getFrequencyVector(systemDesc_DC);
-tiStep = getSampleTimeVector(systemDesc_DC);
+    % Create an Octave LTI system object from the data above. First shape a descriptor object.
+    systemDesc_DC.name = 'DC';
+    systemDesc_DC.numeratorAry = ...
+        { N_U_C_Ubatt N_U_C_Uin N_U_C_Ube
+          N_U_B_Ubatt N_U_B_Uin N_U_B_Ube
+          N_I_Ubatt_Ubatt N_I_Ubatt_Uin N_I_Ubatt_Ube
+          N_I_base_Ubatt N_I_base_Uin N_I_base_Ube
+        };
+    systemDesc_DC.denominatorAry = ...
+        { D_U_C_Ubatt D_U_C_Uin D_U_C_Ube
+          D_U_B_Ubatt D_U_B_Uin D_U_B_Ube
+          D_I_Ubatt_Ubatt D_I_Ubatt_Uin D_I_Ubatt_Ube
+          D_I_base_Ubatt D_I_base_Uin D_I_base_Ube
+        };
+    systemDesc_DC.inputNameAry = ...
+        { 'Ubatt'
+          'Uin'
+          'Ube'
+        };
+    systemDesc_DC.outputNameAry = ...
+        { 'U_C'
+          'U_B'
+          'I_Ubatt'
+          'I_base'
+        };
+    systemDesc_DC.plotInfo = ...
+        struct( 'isLogX', {} ...
+              , 'noPoints', {} ...
+              , 'freqMin', {} ...
+              , 'freqMax', {} ...
+              );
 
-if nargout == 0
-    % Plot the step response of DC.
-    % Plot the step response of DC. By post-processing, disable LaTeX
-    % interpretation in all graphic subelements of the new figure window.
-    hFig = figure('Name', 'Step Response of DC', 'NumberTitle', 'off');
-    step(tf_DC, tiStep)
-    hAx = findall(hFig, 'type', 'axes');
-    hYLabel = cell2mat(get(hAx, 'ylabel'));
-    set(hYLabel, 'interpreter', 'none')
-    hTitle = cell2mat(get(hAx, 'title'));
-    set(hTitle, 'interpreter', 'none')
-    disp(['This function can create the LTI system object tf_DC for you; please, type' char(10) ...
-          'help DC for more.' char(10) ...
-          '  You can use this object with functions like bode to plot the transfer function' char(10) ...
-          'or step and impulse to plot the step or impulse response time functions or lsim' char(10) ...
-          'to compute or plot the system response to arbitrary input signals. A stability' char(10) ...
-          'analysis can be done using function nyquist. Please refer to the online help' char(10) ...
-          'for these commands' char(10)] ...
-        );
-    clear tf_DC tiStep wBode
-end
+    % Create the Octave LTI system object from the descriptor.
+    tf_DC = createLtiSystem(systemDesc_DC);
 
+    % Compute a suitable vector of frequency and time points.
+    wBode  = getFrequencyVector(systemDesc_DC);
+    tiStep = getSampleTimeVector(systemDesc_DC);
+
+    if nargout == 0
+        % Plot the step response of DC.
+        % Plot the step response of DC. By post-processing, disable LaTeX
+        % interpretation in all graphic subelements of the new figure window.
+        hFig = figure('Name', 'Step Response of DC', 'NumberTitle', 'off');
+        step(tf_DC, tiStep)
+        hAx = findall(hFig, 'type', 'axes');
+        hYLabel = cell2mat(get(hAx, 'ylabel'));
+        set(hYLabel, 'interpreter', 'none')
+        hTitle = cell2mat(get(hAx, 'title'));
+        set(hTitle, 'interpreter', 'none')
+        disp(['This function can create the LTI system object tf_DC for you;' char(10) ...
+              'please, type help DC for more.' char(10) ...
+              '  You can use this object with functions like bode to plot the transfer' char(10) ...
+              'function or step and impulse to plot the step or impulse response time' char(10) ...
+              'functions or lsim to compute or plot the system response to arbitrary' char(10) ...
+              'input signals. A stability analysis can be done using function nyquist.' char(10) ...
+              'Please refer to the online help for these commands.' char(10)] ...
+            );
+        clear tf_DC tiStep wBode
+    end
 end % of function DC

@@ -57,127 +57,126 @@ function [tf_stepResp deviceConstants wBode tiStep] = stepResp(deviceConstants)
 %   You should have received a copy of the GNU General Public License along
 %   with this program. If not, see <http://www.gnu.org/licenses/>.
 
-% Load the required Octave packages.
-if isOctave
-    pkg load control
-end
+    % Load the required Octave packages.
+    if isOctave
+        pkg load control
+    end
 
-error(nargchk(0, 1, nargin))
-if nargin == 1
-    % The values of the device constants are taken from function argument deviceConstants.
-    Rl	= deviceConstants.Rl;
-    L	= deviceConstants.L;
-    C	= deviceConstants.C;
-else
-    % The default values of the device constants.
-    Rl	= 100;
-    L	= 0.001;
-    C	= 1e-05;
-end
-error(nargchk(0, 4, nargout))
-if nargout >= 2
-    % The values of the device constants are assigned to function result deviceConstants.
-    deviceConstants  	= struct;
-    deviceConstants.Rl	= Rl;
-    deviceConstants.L	= L;
-    deviceConstants.C	= C;
-end
+    error(nargchk(0, 1, nargin))
+    if nargin == 1
+        % The values of the device constants are taken from function argument deviceConstants.
+        Rl	= deviceConstants.Rl;
+        L	= deviceConstants.L;
+        C	= deviceConstants.C;
+    else
+        % The default values of the device constants.
+        Rl	= 100;
+        L	= 0.001;
+        C	= 1e-05;
+    end
+    error(nargchk(0, 4, nargout))
+    if nargout >= 2
+        % The values of the device constants are assigned to function result deviceConstants.
+        deviceConstants  	= struct;
+        deviceConstants.Rl	= Rl;
+        deviceConstants.L	= L;
+        deviceConstants.C	= C;
+    end
 
-% User-defined result stepResp:
+    % User-defined result stepResp:
 
-% The solution for unknown U2:
-%   U2(s) = N_U2_U1(s)/D_U2_U1(s) * U1(s), with
-%     N_U2_U1(s) = Rl
-%     D_U2_U1(s) = Rl*L^9*C^9 * s^18
-%                  +(Rl^2*L^8*C^9 + L^9*C^8) * s^17
-%                  +18*Rl*L^8*C^8 * s^16
-%                  +(16*Rl^2*L^7*C^8 + 16*L^8*C^7) * s^15
-%                  +135*Rl*L^7*C^7 * s^14
-%                  +(105*Rl^2*L^6*C^7 + 105*L^7*C^6) * s^13
-%                  +546*Rl*L^6*C^6 * s^12
-%                  +(364*Rl^2*L^5*C^6 + 364*L^6*C^5) * s^11
-%                  +1287*Rl*L^5*C^5 * s^10
-%                  +(715*Rl^2*L^4*C^5 + 715*L^5*C^4) * s^9
-%                  +1782*Rl*L^4*C^4 * s^8
-%                  +(792*Rl^2*L^3*C^4 + 792*L^4*C^3) * s^7
-%                  +1386*Rl*L^3*C^3 * s^6
-%                  +(462*Rl^2*L^2*C^3 + 462*L^3*C^2) * s^5
-%                  +540*Rl*L^2*C^2 * s^4
-%                  +(120*Rl^2*L*C^2 + 120*L^2*C) * s^3
-%                  +81*Rl*L*C * s^2
-%                  +(9*Rl^2*C + 9*L) * s
-%                  +2*Rl
-D_U2_U1 = [ Rl*L^9*C^9	 % s^18
-          ; (Rl^2*L^8*C^9 + L^9*C^8)	 % s^17
-          ; 18*Rl*L^8*C^8	 % s^16
-          ; (16*Rl^2*L^7*C^8 + 16*L^8*C^7)	 % s^15
-          ; 135*Rl*L^7*C^7	 % s^14
-          ; (105*Rl^2*L^6*C^7 + 105*L^7*C^6)	 % s^13
-          ; 546*Rl*L^6*C^6	 % s^12
-          ; (364*Rl^2*L^5*C^6 + 364*L^6*C^5)	 % s^11
-          ; 1287*Rl*L^5*C^5	 % s^10
-          ; (715*Rl^2*L^4*C^5 + 715*L^5*C^4)	 % s^9
-          ; 1782*Rl*L^4*C^4	 % s^8
-          ; (792*Rl^2*L^3*C^4 + 792*L^4*C^3)	 % s^7
-          ; 1386*Rl*L^3*C^3	 % s^6
-          ; (462*Rl^2*L^2*C^3 + 462*L^3*C^2)	 % s^5
-          ; 540*Rl*L^2*C^2	 % s^4
-          ; (120*Rl^2*L*C^2 + 120*L^2*C)	 % s^3
-          ; 81*Rl*L*C	 % s^2
-          ; (9*Rl^2*C + 9*L)	 % s^1
-          ; 2*Rl	 % s^0
-          ].';
-N_U2_U1 = [ Rl	 % s^0
-          ].';
+    % The solution for unknown U2:
+    %   U2(s) = N_U2_U1(s)/D_U2_U1(s) * U1(s), with
+    %     N_U2_U1(s) = Rl
+    %     D_U2_U1(s) = Rl*L^9*C^9 * s^18
+    %                  +(Rl^2*L^8*C^9 + L^9*C^8) * s^17
+    %                  +18*Rl*L^8*C^8 * s^16
+    %                  +(16*Rl^2*L^7*C^8 + 16*L^8*C^7) * s^15
+    %                  +135*Rl*L^7*C^7 * s^14
+    %                  +(105*Rl^2*L^6*C^7 + 105*L^7*C^6) * s^13
+    %                  +546*Rl*L^6*C^6 * s^12
+    %                  +(364*Rl^2*L^5*C^6 + 364*L^6*C^5) * s^11
+    %                  +1287*Rl*L^5*C^5 * s^10
+    %                  +(715*Rl^2*L^4*C^5 + 715*L^5*C^4) * s^9
+    %                  +1782*Rl*L^4*C^4 * s^8
+    %                  +(792*Rl^2*L^3*C^4 + 792*L^4*C^3) * s^7
+    %                  +1386*Rl*L^3*C^3 * s^6
+    %                  +(462*Rl^2*L^2*C^3 + 462*L^3*C^2) * s^5
+    %                  +540*Rl*L^2*C^2 * s^4
+    %                  +(120*Rl^2*L*C^2 + 120*L^2*C) * s^3
+    %                  +81*Rl*L*C * s^2
+    %                  +(9*Rl^2*C + 9*L) * s
+    %                  +2*Rl
+    D_U2_U1 = [ Rl*L^9*C^9	 % s^18
+              ; (Rl^2*L^8*C^9 + L^9*C^8)	 % s^17
+              ; 18*Rl*L^8*C^8	 % s^16
+              ; (16*Rl^2*L^7*C^8 + 16*L^8*C^7)	 % s^15
+              ; 135*Rl*L^7*C^7	 % s^14
+              ; (105*Rl^2*L^6*C^7 + 105*L^7*C^6)	 % s^13
+              ; 546*Rl*L^6*C^6	 % s^12
+              ; (364*Rl^2*L^5*C^6 + 364*L^6*C^5)	 % s^11
+              ; 1287*Rl*L^5*C^5	 % s^10
+              ; (715*Rl^2*L^4*C^5 + 715*L^5*C^4)	 % s^9
+              ; 1782*Rl*L^4*C^4	 % s^8
+              ; (792*Rl^2*L^3*C^4 + 792*L^4*C^3)	 % s^7
+              ; 1386*Rl*L^3*C^3	 % s^6
+              ; (462*Rl^2*L^2*C^3 + 462*L^3*C^2)	 % s^5
+              ; 540*Rl*L^2*C^2	 % s^4
+              ; (120*Rl^2*L*C^2 + 120*L^2*C)	 % s^3
+              ; 81*Rl*L*C	 % s^2
+              ; (9*Rl^2*C + 9*L)	 % s^1
+              ; 2*Rl	 % s^0
+              ].';
+    N_U2_U1 = [ Rl	 % s^0
+              ].';
 
-% Create an Octave LTI system object from the data above. First shape a descriptor object.
-systemDesc_stepResp.name = 'stepResp';
-systemDesc_stepResp.numeratorAry = ...
-    { N_U2_U1
-    };
-systemDesc_stepResp.denominatorAry = ...
-    { D_U2_U1
-    };
-systemDesc_stepResp.inputNameAry = ...
-    { 'U1'
-    };
-systemDesc_stepResp.outputNameAry = ...
-    { 'U2'
-    };
-systemDesc_stepResp.plotInfo = ...
-    struct( 'isLogX', {} ...
-          , 'noPoints', {} ...
-          , 'freqMin', {} ...
-          , 'freqMax', {} ...
-          );
+    % Create an Octave LTI system object from the data above. First shape a descriptor object.
+    systemDesc_stepResp.name = 'stepResp';
+    systemDesc_stepResp.numeratorAry = ...
+        { N_U2_U1
+        };
+    systemDesc_stepResp.denominatorAry = ...
+        { D_U2_U1
+        };
+    systemDesc_stepResp.inputNameAry = ...
+        { 'U1'
+        };
+    systemDesc_stepResp.outputNameAry = ...
+        { 'U2'
+        };
+    systemDesc_stepResp.plotInfo = ...
+        struct( 'isLogX', {} ...
+              , 'noPoints', {} ...
+              , 'freqMin', {} ...
+              , 'freqMax', {} ...
+              );
 
-% Create the Octave LTI system object from the descriptor.
-tf_stepResp = createLtiSystem(systemDesc_stepResp);
+    % Create the Octave LTI system object from the descriptor.
+    tf_stepResp = createLtiSystem(systemDesc_stepResp);
 
-% Compute a suitable vector of frequency and time points.
-wBode  = getFrequencyVector(systemDesc_stepResp);
-tiStep = getSampleTimeVector(systemDesc_stepResp);
+    % Compute a suitable vector of frequency and time points.
+    wBode  = getFrequencyVector(systemDesc_stepResp);
+    tiStep = getSampleTimeVector(systemDesc_stepResp);
 
-if nargout == 0
-    % Plot the step response of stepResp.
-    % Plot the step response of stepResp. By post-processing, disable LaTeX
-    % interpretation in all graphic subelements of the new figure window.
-    hFig = figure('Name', 'Step Response of stepResp', 'NumberTitle', 'off');
-    step(tf_stepResp, tiStep)
-    hAx = findall(hFig, 'type', 'axes');
-    hYLabel = cell2mat(get(hAx, 'ylabel'));
-    set(hYLabel, 'interpreter', 'none')
-    hTitle = cell2mat(get(hAx, 'title'));
-    set(hTitle, 'interpreter', 'none')
-    disp(['This function can create the LTI system object tf_stepResp for you; please, type' char(10) ...
-          'help stepResp for more.' char(10) ...
-          '  You can use this object with functions like bode to plot the transfer function' char(10) ...
-          'or step and impulse to plot the step or impulse response time functions or lsim' char(10) ...
-          'to compute or plot the system response to arbitrary input signals. A stability' char(10) ...
-          'analysis can be done using function nyquist. Please refer to the online help' char(10) ...
-          'for these commands' char(10)] ...
-        );
-    clear tf_stepResp tiStep wBode
-end
-
+    if nargout == 0
+        % Plot the step response of stepResp.
+        % Plot the step response of stepResp. By post-processing, disable LaTeX
+        % interpretation in all graphic subelements of the new figure window.
+        hFig = figure('Name', 'Step Response of stepResp', 'NumberTitle', 'off');
+        step(tf_stepResp, tiStep)
+        hAx = findall(hFig, 'type', 'axes');
+        hYLabel = cell2mat(get(hAx, 'ylabel'));
+        set(hYLabel, 'interpreter', 'none')
+        hTitle = cell2mat(get(hAx, 'title'));
+        set(hTitle, 'interpreter', 'none')
+        disp(['This function can create the LTI system object tf_stepResp for you;' char(10) ...
+              'please, type help stepResp for more.' char(10) ...
+              '  You can use this object with functions like bode to plot the transfer' char(10) ...
+              'function or step and impulse to plot the step or impulse response time' char(10) ...
+              'functions or lsim to compute or plot the system response to arbitrary' char(10) ...
+              'input signals. A stability analysis can be done using function nyquist.' char(10) ...
+              'Please refer to the online help for these commands.' char(10)] ...
+            );
+        clear tf_stepResp tiStep wBode
+    end
 end % of function stepResp

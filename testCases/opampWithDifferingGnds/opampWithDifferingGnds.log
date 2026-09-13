@@ -1,30 +1,30 @@
-Jul 26 17:25:21 2026 - 000001 ms - RESULT - 
+Sep 13 14:13:53 2026 - 000003 ms - RESULT - 
 -----------------------------------------------------------------------------
  linNet - The Software for symbolic Analysis of linear Electronic Circuits
  Copyright (C) 2014-2026 Peter Vranken (https://github.com/PeterVranken/linNet)
  This is free software; see the source for copying conditions. There is NO
  warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 -----------------------------------------------------------------------------
-Jul 26 17:25:21 2026 - 000018 ms - RESULT - Reading circuit file testCases\opampWithDifferingGnds\opampWithDifferingGnds.cnl successfully done
-Jul 26 17:25:21 2026 - 000024 ms -   WARN - Input file specifies 2 unconnected graphs
-Jul 26 17:25:21 2026 - 000026 ms - RESULT - User-defined result G1 (Bode plot):
+Sep 13 14:13:53 2026 - 000081 ms - RESULT - Reading circuit file testCases\opampWithDifferingGnds\opampWithDifferingGnds.cnl successfully done
+Sep 13 14:13:53 2026 - 000082 ms -   WARN - Input file specifies 2 unconnected graphs
+Sep 13 14:13:53 2026 - 000082 ms - RESULT - User-defined result G1 (Bode plot):
 The dependency of Uout1 on Uin1:
   Uout1(s) = N_Uout1_Uin1(s)/D_Uout1_Uin1(s) * Uin1(s), with
     N_Uout1_Uin1(s) = -Rfb1*C1 * s
                       -1
     D_Uout1_Uin1(s) = Rin1*C1 * s
-Jul 26 17:25:21 2026 - 000040 ms - RESULT - User-defined result Z1 (Bode plot):
+Sep 13 14:13:53 2026 - 000083 ms - RESULT - User-defined result Z1 (Bode plot):
 The dependency of Uin1 on I_Uin1:
   Uin1(s) = N_Uin1_I_Uin1(s)/D_Uin1_I_Uin1(s) * I_Uin1(s), with
     N_Uin1_I_Uin1(s) = Rin1
     D_Uin1_I_Uin1(s) = 1
-Jul 26 17:25:21 2026 - 000049 ms - RESULT - User-defined result G2 (Bode plot):
+Sep 13 14:13:53 2026 - 000084 ms - RESULT - User-defined result G2 (Bode plot):
 The dependency of Uout2 on Uin2:
   Uout2(s) = N_Uout2_Uin2(s)/D_Uout2_Uin2(s) * Uin2(s), with
     N_Uout2_Uin2(s) = -Rfb2*C2 * s
                       -1
     D_Uout2_Uin2(s) = Rin2*C2 * s
-Jul 26 17:25:21 2026 - 000063 ms - RESULT - User-defined result Z2 (Bode plot):
+Sep 13 14:13:53 2026 - 000085 ms - RESULT - User-defined result Z2 (Bode plot):
 The dependency of Uin2 on I_Uin2:
   Uin2(s) = N_Uin2_I_Uin2(s)/D_Uin2_I_Uin2(s) * I_Uin2(s), with
     N_Uin2_I_Uin2(s) = 1

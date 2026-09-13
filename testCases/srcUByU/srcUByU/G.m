@@ -57,94 +57,93 @@ function [tf_G deviceConstants wBode tiStep] = G(deviceConstants)
 %   You should have received a copy of the GNU General Public License along
 %   with this program. If not, see <http://www.gnu.org/licenses/>.
 
-% Load the required Octave packages.
-if isOctave
-    pkg load control
-end
+    % Load the required Octave packages.
+    if isOctave
+        pkg load control
+    end
 
-error(nargchk(0, 1, nargin))
-if nargin == 1
-    % The values of the device constants are taken from function argument deviceConstants.
-    k	= deviceConstants.k;
-    Rgnd	= deviceConstants.Rgnd;
-    Rin	= deviceConstants.Rin;
-    Rout	= deviceConstants.Rout;
-else
-    % The default values of the device constants.
-    k	= 1;
-    Rgnd	= 100;
-    Rin	= 100;
-    Rout	= 100;
-end
-error(nargchk(0, 4, nargout))
-if nargout >= 2
-    % The values of the device constants are assigned to function result deviceConstants.
-    deviceConstants  	= struct;
-    deviceConstants.k	= k;
-    deviceConstants.Rgnd	= Rgnd;
-    deviceConstants.Rin	= Rin;
-    deviceConstants.Rout	= Rout;
-end
+    error(nargchk(0, 1, nargin))
+    if nargin == 1
+        % The values of the device constants are taken from function argument deviceConstants.
+        k	= deviceConstants.k;
+        Rgnd	= deviceConstants.Rgnd;
+        Rin	= deviceConstants.Rin;
+        Rout	= deviceConstants.Rout;
+    else
+        % The default values of the device constants.
+        k	= 1;
+        Rgnd	= 100;
+        Rin	= 100;
+        Rout	= 100;
+    end
+    error(nargchk(0, 4, nargout))
+    if nargout >= 2
+        % The values of the device constants are assigned to function result deviceConstants.
+        deviceConstants  	= struct;
+        deviceConstants.k	= k;
+        deviceConstants.Rgnd	= Rgnd;
+        deviceConstants.Rin	= Rin;
+        deviceConstants.Rout	= Rout;
+    end
 
-% User-defined result G:
+    % User-defined result G:
 
-% The solution for unknown U2:
-%   U2(s) = N_U2_Uin(s)/D_U2_Uin(s) * Uin(s), with
-%     N_U2_Uin(s) = k*Rout
-%     D_U2_Uin(s) = (Rgnd + Rout)
-D_U2_Uin = [ (Rgnd + Rout)	 % s^0
-           ].';
-N_U2_Uin = [ k*Rout	 % s^0
-           ].';
+    % The solution for unknown U2:
+    %   U2(s) = N_U2_Uin(s)/D_U2_Uin(s) * Uin(s), with
+    %     N_U2_Uin(s) = k*Rout
+    %     D_U2_Uin(s) = (Rgnd + Rout)
+    D_U2_Uin = [ (Rgnd + Rout)	 % s^0
+               ].';
+    N_U2_Uin = [ k*Rout	 % s^0
+               ].';
 
-% Create an Octave LTI system object from the data above. First shape a descriptor object.
-systemDesc_G.name = 'G';
-systemDesc_G.numeratorAry = ...
-    { N_U2_Uin
-    };
-systemDesc_G.denominatorAry = ...
-    { D_U2_Uin
-    };
-systemDesc_G.inputNameAry = ...
-    { 'Uin'
-    };
-systemDesc_G.outputNameAry = ...
-    { 'U2'
-    };
-systemDesc_G.plotInfo = ...
-    struct( 'isLogX', {} ...
-          , 'noPoints', {} ...
-          , 'freqMin', {} ...
-          , 'freqMax', {} ...
-          );
+    % Create an Octave LTI system object from the data above. First shape a descriptor object.
+    systemDesc_G.name = 'G';
+    systemDesc_G.numeratorAry = ...
+        { N_U2_Uin
+        };
+    systemDesc_G.denominatorAry = ...
+        { D_U2_Uin
+        };
+    systemDesc_G.inputNameAry = ...
+        { 'Uin'
+        };
+    systemDesc_G.outputNameAry = ...
+        { 'U2'
+        };
+    systemDesc_G.plotInfo = ...
+        struct( 'isLogX', {} ...
+              , 'noPoints', {} ...
+              , 'freqMin', {} ...
+              , 'freqMax', {} ...
+              );
 
-% Create the Octave LTI system object from the descriptor.
-tf_G = createLtiSystem(systemDesc_G);
+    % Create the Octave LTI system object from the descriptor.
+    tf_G = createLtiSystem(systemDesc_G);
 
-% Compute a suitable vector of frequency and time points.
-wBode  = getFrequencyVector(systemDesc_G);
-tiStep = getSampleTimeVector(systemDesc_G);
+    % Compute a suitable vector of frequency and time points.
+    wBode  = getFrequencyVector(systemDesc_G);
+    tiStep = getSampleTimeVector(systemDesc_G);
 
-if nargout == 0
-    % Plot the step response of G.
-    % Plot the step response of G. By post-processing, disable LaTeX
-    % interpretation in all graphic subelements of the new figure window.
-    hFig = figure('Name', 'Step Response of G', 'NumberTitle', 'off');
-    step(tf_G, tiStep)
-    hAx = findall(hFig, 'type', 'axes');
-    hYLabel = cell2mat(get(hAx, 'ylabel'));
-    set(hYLabel, 'interpreter', 'none')
-    hTitle = cell2mat(get(hAx, 'title'));
-    set(hTitle, 'interpreter', 'none')
-    disp(['This function can create the LTI system object tf_G for you; please, type' char(10) ...
-          'help G for more.' char(10) ...
-          '  You can use this object with functions like bode to plot the transfer function' char(10) ...
-          'or step and impulse to plot the step or impulse response time functions or lsim' char(10) ...
-          'to compute or plot the system response to arbitrary input signals. A stability' char(10) ...
-          'analysis can be done using function nyquist. Please refer to the online help' char(10) ...
-          'for these commands' char(10)] ...
-        );
-    clear tf_G tiStep wBode
-end
-
+    if nargout == 0
+        % Plot the step response of G.
+        % Plot the step response of G. By post-processing, disable LaTeX
+        % interpretation in all graphic subelements of the new figure window.
+        hFig = figure('Name', 'Step Response of G', 'NumberTitle', 'off');
+        step(tf_G, tiStep)
+        hAx = findall(hFig, 'type', 'axes');
+        hYLabel = cell2mat(get(hAx, 'ylabel'));
+        set(hYLabel, 'interpreter', 'none')
+        hTitle = cell2mat(get(hAx, 'title'));
+        set(hTitle, 'interpreter', 'none')
+        disp(['This function can create the LTI system object tf_G for you;' char(10) ...
+              'please, type help G for more.' char(10) ...
+              '  You can use this object with functions like bode to plot the transfer' char(10) ...
+              'function or step and impulse to plot the step or impulse response time' char(10) ...
+              'functions or lsim to compute or plot the system response to arbitrary' char(10) ...
+              'input signals. A stability analysis can be done using function nyquist.' char(10) ...
+              'Please refer to the online help for these commands.' char(10)] ...
+            );
+        clear tf_G tiStep wBode
+    end
 end % of function G

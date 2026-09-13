@@ -1,12 +1,12 @@
-Aug 12 14:10:15 2026 - 000002 ms - RESULT - 
+Sep 13 14:13:55 2026 - 000001 ms - RESULT - 
 -----------------------------------------------------------------------------
  linNet - The Software for symbolic Analysis of linear Electronic Circuits
  Copyright (C) 2014-2026 Peter Vranken (https://github.com/PeterVranken/linNet)
  This is free software; see the source for copying conditions. There is NO
  warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 -----------------------------------------------------------------------------
-Aug 12 14:10:15 2026 - 000014 ms - RESULT - Reading circuit file testCases\4Nodes\4Nodes.cnl successfully done
-Aug 12 14:10:15 2026 - 000017 ms - RESULT - User-defined result msResult:
+Sep 13 14:13:55 2026 - 000072 ms - RESULT - Reading circuit file testCases\4Nodes\4Nodes.cnl successfully done
+Sep 13 14:13:55 2026 - 000072 ms - RESULT - User-defined result msResult:
 The solution for unknown Uout:
   Uout(s) = N_Uout_U1(s)/D_Uout_U1(s) * U1(s)
             + N_Uout_U2(s)/D_Uout_U2(s) * U2(s), with

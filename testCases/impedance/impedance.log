@@ -1,12 +1,12 @@
-Jul 26 17:25:21 2026 - 000001 ms - RESULT - 
+Sep 13 14:13:54 2026 - 000002 ms - RESULT - 
 -----------------------------------------------------------------------------
  linNet - The Software for symbolic Analysis of linear Electronic Circuits
  Copyright (C) 2014-2026 Peter Vranken (https://github.com/PeterVranken/linNet)
  This is free software; see the source for copying conditions. There is NO
  warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 -----------------------------------------------------------------------------
-Jul 26 17:25:21 2026 - 000018 ms - RESULT - Reading circuit file testCases\impedance\impedance.cnl successfully done
-Jul 26 17:25:21 2026 - 000022 ms - RESULT - User-defined result G (Bode plot):
+Sep 13 14:13:54 2026 - 000084 ms - RESULT - Reading circuit file testCases\impedance\impedance.cnl successfully done
+Sep 13 14:13:54 2026 - 000085 ms - RESULT - User-defined result G (Bode plot):
 The dependency of Uout on Uin:
   Uout(s) = N_Uout_Uin(s)/D_Uout_Uin(s) * Uin(s), with
     N_Uout_Uin(s) = Rc*Rl*L*C * s^2
@@ -14,7 +14,7 @@ The dependency of Uout on Uin:
     D_Uout_Uin(s) = Rc*Rl*L*C * s^2
                     +(Rc*L + Rl*L) * s
                     +Rc*Rl
-Jul 26 17:25:21 2026 - 000039 ms - RESULT - User-defined result Zin (Bode plot):
+Sep 13 14:13:54 2026 - 000086 ms - RESULT - User-defined result Zin (Bode plot):
 The dependency of Uin on I_Uin:
   Uin(s) = N_Uin_I_Uin(s)/D_Uin_I_Uin(s) * I_Uin(s), with
     N_Uin_I_Uin(s) = Rc*Rl*L*C * s^2
@@ -23,7 +23,7 @@ The dependency of Uin on I_Uin:
     D_Uin_I_Uin(s) = Rc*L*C * s^2
                      +(Rc*Rl*C + L) * s
                      +Rl
-Jul 26 17:25:21 2026 - 000054 ms - RESULT - User-defined result Zout (Bode plot):
+Sep 13 14:13:54 2026 - 000089 ms - RESULT - User-defined result Zout (Bode plot):
 The dependency of Uout on Iload:
   Uout(s) = N_Uout_Iload(s)/D_Uout_Iload(s) * Iload(s), with
     N_Uout_Iload(s) = Rc*Rl*L * s

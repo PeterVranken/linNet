@@ -1,12 +1,12 @@
-Jul 26 17:25:22 2026 - 000001 ms - RESULT - 
+Sep 13 14:14:05 2026 - 000002 ms - RESULT - 
 -----------------------------------------------------------------------------
  linNet - The Software for symbolic Analysis of linear Electronic Circuits
  Copyright (C) 2014-2026 Peter Vranken (https://github.com/PeterVranken/linNet)
  This is free software; see the source for copying conditions. There is NO
  warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 -----------------------------------------------------------------------------
-Jul 26 17:25:22 2026 - 000017 ms - RESULT - Reading circuit file testCases\srcUByU\srcUByU.cnl successfully done
-Jul 26 17:25:22 2026 - 000020 ms - RESULT - User-defined result G:
+Sep 13 14:14:05 2026 - 000073 ms - RESULT - Reading circuit file testCases\srcUByU\srcUByU.cnl successfully done
+Sep 13 14:14:05 2026 - 000073 ms - RESULT - User-defined result G:
 The solution for unknown U2:
   U2(s) = N_U2_Uin(s)/D_U2_Uin(s) * Uin(s), with
     N_U2_Uin(s) = k*Rout

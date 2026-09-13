@@ -57,99 +57,99 @@ function [tf_Iop deviceConstants wBode tiStep] = Iop(deviceConstants)
 %   You should have received a copy of the GNU General Public License along
 %   with this program. If not, see <http://www.gnu.org/licenses/>.
 
-% Load the required Octave packages.
-if isOctave
-    pkg load control
-end
-
-error(nargchk(0, 1, nargin))
-if nargin == 1
-    % The values of the device constants are taken from function argument deviceConstants.
-    R1	= deviceConstants.R1;
-    R2	= deviceConstants.R2;
-    C1	= deviceConstants.C1;
-    C2	= deviceConstants.C2;
-else
-    % The default values of the device constants.
-    R1	= 1000;
-    R2	= 1000;
-    C1	= 1e-06;
-    C2	= 2.2e-05;
-end
-error(nargchk(0, 4, nargout))
-if nargout >= 2
-    % The values of the device constants are assigned to function result deviceConstants.
-    deviceConstants  	= struct;
-    deviceConstants.R1	= R1;
-    deviceConstants.R2	= R2;
-    deviceConstants.C1	= C1;
-    deviceConstants.C2	= C2;
-end
-
-% User-defined result Iop (Bode plot):
-
-% The dependency of I_OP on Uin:
-%   I_OP(s) = N_I_OP_Uin(s)/D_I_OP_Uin(s) * Uin(s), with
-%     N_I_OP_Uin(s) = R1*R2*C1*C2 * s^2
-%                     +(R1*C1 + R2*C2) * s
-%                     +1
-%     D_I_OP_Uin(s) = R1*R2*C1 * s
-%                     +R2
-D_I_OP_Uin = [ R1*R2*C1	 % s^1
-             ; R2	 % s^0
-             ].';
-N_I_OP_Uin = [ R1*R2*C1*C2	 % s^2
-             ; (R1*C1 + R2*C2)	 % s^1
-             ; 1	 % s^0
-             ].';
-
-% Create an Octave LTI system object from the data above. First shape a descriptor object.
-systemDesc_Iop.name = 'Iop';
-systemDesc_Iop.numeratorAry = ...
-    { N_I_OP_Uin
-    };
-systemDesc_Iop.denominatorAry = ...
-    { D_I_OP_Uin
-    };
-systemDesc_Iop.inputNameAry = ...
-    { 'Uin'
-    };
-systemDesc_Iop.outputNameAry = ...
-    { 'I_OP'
-    };
-systemDesc_Iop.plotInfo = ...
-    struct( 'isLogX', {} ...
-          , 'noPoints', {} ...
-          , 'freqMin', {} ...
-          , 'freqMax', {} ...
-          );
-
-% Create the Octave LTI system object from the descriptor.
-tf_Iop = createLtiSystem(systemDesc_Iop);
-
-% Compute a suitable vector of frequency and time points.
-wBode  = getFrequencyVector(systemDesc_Iop);
-tiStep = getSampleTimeVector(systemDesc_Iop);
-
-if nargout == 0
-    % Plot the transfer function of Iop. By post-processing, disable LaTeX
-    % interpretation in all graphic subelements of the new figure window.
-    hFig = figure('Name', 'Frequency Response of Iop', 'NumberTitle', 'off');
-    if ~isempty(wBode)
-        bode(tf_Iop, wBode)
-    else
-        bode(tf_Iop)
+    % Load the required Octave packages.
+    if isOctave
+        pkg load control
     end
-    set(findobj(hFig, '-property', 'interpreter'), 'interpreter', 'none')
-    disp(['This function can create the LTI system object tf_Iop for you; please, type' char(10) ...
-          'help Iop for more.' char(10) ...
-          '  You can use this object with functions like bode to plot the transfer function' char(10) ...
-          'or step and impulse to plot the step or impulse response time functions or lsim' char(10) ...
-          'to compute or plot the system response to arbitrary input signals. A stability' char(10) ...
-          'analysis can be done using function nyquist. Please refer to the online help' char(10) ...
-          'for these commands' char(10)] ...
-        );
-    clear tf_Iop tiStep wBode
-end
 
+    error(nargchk(0, 1, nargin))
+    if nargin == 1
+        % The values of the device constants are taken from function argument deviceConstants.
+        R1	= deviceConstants.R1;
+        R2	= deviceConstants.R2;
+        C1	= deviceConstants.C1;
+        C2	= deviceConstants.C2;
+    else
+        % The default values of the device constants.
+        R1	= 1000;
+        R2	= 1000;
+        C1	= 1e-06;
+        C2	= 2.2e-05;
+    end
+    error(nargchk(0, 4, nargout))
+    if nargout >= 2
+        % The values of the device constants are assigned to function result deviceConstants.
+        deviceConstants  	= struct;
+        deviceConstants.R1	= R1;
+        deviceConstants.R2	= R2;
+        deviceConstants.C1	= C1;
+        deviceConstants.C2	= C2;
+    end
+
+    % User-defined result Iop (Bode plot):
+
+    % The dependency of I_OP on Uin:
+    %   I_OP(s) = N_I_OP_Uin(s)/D_I_OP_Uin(s) * Uin(s), with
+    %     N_I_OP_Uin(s) = R1*R2*C1*C2 * s^2
+    %                     +(R1*C1 + R2*C2) * s
+    %                     +1
+    %     D_I_OP_Uin(s) = R1*R2*C1 * s
+    %                     +R2
+    D_I_OP_Uin = [ R1*R2*C1	 % s^1
+                 ; R2	 % s^0
+                 ].';
+    N_I_OP_Uin = [ R1*R2*C1*C2	 % s^2
+                 ; (R1*C1 + R2*C2)	 % s^1
+                 ; 1	 % s^0
+                 ].';
+
+    % Create an Octave LTI system object from the data above. First shape a descriptor object.
+    systemDesc_Iop.name = 'Iop';
+    systemDesc_Iop.numeratorAry = ...
+        { N_I_OP_Uin
+        };
+    systemDesc_Iop.denominatorAry = ...
+        { D_I_OP_Uin
+        };
+    systemDesc_Iop.inputNameAry = ...
+        { 'Uin'
+        };
+    systemDesc_Iop.outputNameAry = ...
+        { 'I_OP'
+        };
+    systemDesc_Iop.plotInfo = ...
+        struct( 'isLogX', {} ...
+              , 'noPoints', {} ...
+              , 'freqMin', {} ...
+              , 'freqMax', {} ...
+              );
+
+    % Create the Octave LTI system object from the descriptor.
+    tf_Iop = createLtiSystem(systemDesc_Iop);
+
+    % Compute a suitable vector of frequency and time points.
+    wBode  = getFrequencyVector(systemDesc_Iop);
+    tiStep = getSampleTimeVector(systemDesc_Iop);
+
+    if nargout == 0
+        % Plot the transfer function of Iop. By post-processing, disable
+        % LaTeX interpretation in all graphic subelements of the new figure
+        % window.
+        hFig = figure('Name', 'Frequency Response of Iop', 'NumberTitle', 'off');
+        if ~isempty(wBode)
+            bode(tf_Iop, wBode)
+        else
+            bode(tf_Iop)
+        end
+        set(findobj(hFig, '-property', 'interpreter'), 'interpreter', 'none')
+        disp(['This function can create the LTI system object tf_Iop for you;' char(10) ...
+              'please, type help Iop for more.' char(10) ...
+              '  You can use this object with functions like bode to plot the transfer' char(10) ...
+              'function or step and impulse to plot the step or impulse response time' char(10) ...
+              'functions or lsim to compute or plot the system response to arbitrary' char(10) ...
+              'input signals. A stability analysis can be done using function nyquist.' char(10) ...
+              'Please refer to the online help for these commands.' char(10)] ...
+            );
+        clear tf_Iop tiStep wBode
+    end
 end % of function Iop

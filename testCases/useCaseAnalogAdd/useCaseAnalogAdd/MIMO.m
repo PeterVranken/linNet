@@ -57,120 +57,119 @@ function [tf_MIMO deviceConstants wBode tiStep] = MIMO(deviceConstants)
 %   You should have received a copy of the GNU General Public License along
 %   with this program. If not, see <http://www.gnu.org/licenses/>.
 
-% Load the required Octave packages.
-if isOctave
-    pkg load control
-end
+    % Load the required Octave packages.
+    if isOctave
+        pkg load control
+    end
 
-error(nargchk(0, 1, nargin))
-if nargin == 1
-    % The values of the device constants are taken from function argument deviceConstants.
-    R1	= deviceConstants.R1;
-    C1	= deviceConstants.C1;
-else
-    % The default values of the device constants.
-    R1	= 1000;
-    C1	= 1e-07;
-end
-error(nargchk(0, 4, nargout))
-if nargout >= 2
-    % The values of the device constants are assigned to function result deviceConstants.
-    deviceConstants  	= struct;
-    deviceConstants.R1	= R1;
-    deviceConstants.C1	= C1;
-end
+    error(nargchk(0, 1, nargin))
+    if nargin == 1
+        % The values of the device constants are taken from function argument deviceConstants.
+        R1	= deviceConstants.R1;
+        C1	= deviceConstants.C1;
+    else
+        % The default values of the device constants.
+        R1	= 1000;
+        C1	= 1e-07;
+    end
+    error(nargchk(0, 4, nargout))
+    if nargout >= 2
+        % The values of the device constants are assigned to function result deviceConstants.
+        deviceConstants  	= struct;
+        deviceConstants.R1	= R1;
+        deviceConstants.C1	= C1;
+    end
 
-% User-defined result MIMO:
+    % User-defined result MIMO:
 
-% The solution for unknown U_out:
-%   U_out(s) = N_U_out_U1(s)/D_U_out_U1(s) * U1(s)
-%              + N_U_out_U2(s)/D_U_out_U2(s) * U2(s), with
-%     N_U_out_U1(s) = -4*R1*C1 * s
-%                     -40
-%     D_U_out_U1(s) = 41*R1*C1 * s
-%                     +10
-%     N_U_out_U2(s) = -8*R1*C1 * s
-%                     -80
-%     D_U_out_U2(s) = D_U_out_U1(s)
-D_U_out_U1 = [ 41*R1*C1	 % s^1
-             ; 10	 % s^0
-             ].';
-D_U_out_U2 = D_U_out_U1;
-N_U_out_U1 = [ -4*R1*C1	 % s^1
-             ; -40	 % s^0
-             ].';
-N_U_out_U2 = [ -8*R1*C1	 % s^1
-             ; -80	 % s^0
-             ].';
+    % The solution for unknown U_out:
+    %   U_out(s) = N_U_out_U1(s)/D_U_out_U1(s) * U1(s)
+    %              + N_U_out_U2(s)/D_U_out_U2(s) * U2(s), with
+    %     N_U_out_U1(s) = -4*R1*C1 * s
+    %                     -40
+    %     D_U_out_U1(s) = 41*R1*C1 * s
+    %                     +10
+    %     N_U_out_U2(s) = -8*R1*C1 * s
+    %                     -80
+    %     D_U_out_U2(s) = D_U_out_U1(s)
+    D_U_out_U1 = [ 41*R1*C1	 % s^1
+                 ; 10	 % s^0
+                 ].';
+    D_U_out_U2 = D_U_out_U1;
+    N_U_out_U1 = [ -4*R1*C1	 % s^1
+                 ; -40	 % s^0
+                 ].';
+    N_U_out_U2 = [ -8*R1*C1	 % s^1
+                 ; -80	 % s^0
+                 ].';
 
-% The solution for unknown I_OP:
-%   I_OP(s) = N_I_OP_U1(s)/D_I_OP_U1(s) * U1(s)
-%             + N_I_OP_U2(s)/D_I_OP_U2(s) * U2(s), with
-%     N_I_OP_U1(s) = -1
-%     D_I_OP_U1(s) = R1
-%     N_I_OP_U2(s) = -2
-%     D_I_OP_U2(s) = R1
-D_I_OP_U1 = [ R1	 % s^0
-            ].';
-D_I_OP_U2 = [ R1	 % s^0
-            ].';
-N_I_OP_U1 = [ -1	 % s^0
-            ].';
-N_I_OP_U2 = [ -2	 % s^0
-            ].';
+    % The solution for unknown I_OP:
+    %   I_OP(s) = N_I_OP_U1(s)/D_I_OP_U1(s) * U1(s)
+    %             + N_I_OP_U2(s)/D_I_OP_U2(s) * U2(s), with
+    %     N_I_OP_U1(s) = -1
+    %     D_I_OP_U1(s) = R1
+    %     N_I_OP_U2(s) = -2
+    %     D_I_OP_U2(s) = R1
+    D_I_OP_U1 = [ R1	 % s^0
+                ].';
+    D_I_OP_U2 = [ R1	 % s^0
+                ].';
+    N_I_OP_U1 = [ -1	 % s^0
+                ].';
+    N_I_OP_U2 = [ -2	 % s^0
+                ].';
 
-% Create an Octave LTI system object from the data above. First shape a descriptor object.
-systemDesc_MIMO.name = 'MIMO';
-systemDesc_MIMO.numeratorAry = ...
-    { N_U_out_U1 N_U_out_U2
-      N_I_OP_U1 N_I_OP_U2
-    };
-systemDesc_MIMO.denominatorAry = ...
-    { D_U_out_U1 D_U_out_U2
-      D_I_OP_U1 D_I_OP_U2
-    };
-systemDesc_MIMO.inputNameAry = ...
-    { 'U1'
-      'U2'
-    };
-systemDesc_MIMO.outputNameAry = ...
-    { 'U_out'
-      'I_OP'
-    };
-systemDesc_MIMO.plotInfo = ...
-    struct( 'isLogX', {} ...
-          , 'noPoints', {} ...
-          , 'freqMin', {} ...
-          , 'freqMax', {} ...
-          );
+    % Create an Octave LTI system object from the data above. First shape a descriptor object.
+    systemDesc_MIMO.name = 'MIMO';
+    systemDesc_MIMO.numeratorAry = ...
+        { N_U_out_U1 N_U_out_U2
+          N_I_OP_U1 N_I_OP_U2
+        };
+    systemDesc_MIMO.denominatorAry = ...
+        { D_U_out_U1 D_U_out_U2
+          D_I_OP_U1 D_I_OP_U2
+        };
+    systemDesc_MIMO.inputNameAry = ...
+        { 'U1'
+          'U2'
+        };
+    systemDesc_MIMO.outputNameAry = ...
+        { 'U_out'
+          'I_OP'
+        };
+    systemDesc_MIMO.plotInfo = ...
+        struct( 'isLogX', {} ...
+              , 'noPoints', {} ...
+              , 'freqMin', {} ...
+              , 'freqMax', {} ...
+              );
 
-% Create the Octave LTI system object from the descriptor.
-tf_MIMO = createLtiSystem(systemDesc_MIMO);
+    % Create the Octave LTI system object from the descriptor.
+    tf_MIMO = createLtiSystem(systemDesc_MIMO);
 
-% Compute a suitable vector of frequency and time points.
-wBode  = getFrequencyVector(systemDesc_MIMO);
-tiStep = getSampleTimeVector(systemDesc_MIMO);
+    % Compute a suitable vector of frequency and time points.
+    wBode  = getFrequencyVector(systemDesc_MIMO);
+    tiStep = getSampleTimeVector(systemDesc_MIMO);
 
-if nargout == 0
-    % Plot the step response of MIMO.
-    % Plot the step response of MIMO. By post-processing, disable LaTeX
-    % interpretation in all graphic subelements of the new figure window.
-    hFig = figure('Name', 'Step Response of MIMO', 'NumberTitle', 'off');
-    step(tf_MIMO, tiStep)
-    hAx = findall(hFig, 'type', 'axes');
-    hYLabel = cell2mat(get(hAx, 'ylabel'));
-    set(hYLabel, 'interpreter', 'none')
-    hTitle = cell2mat(get(hAx, 'title'));
-    set(hTitle, 'interpreter', 'none')
-    disp(['This function can create the LTI system object tf_MIMO for you; please, type' char(10) ...
-          'help MIMO for more.' char(10) ...
-          '  You can use this object with functions like bode to plot the transfer function' char(10) ...
-          'or step and impulse to plot the step or impulse response time functions or lsim' char(10) ...
-          'to compute or plot the system response to arbitrary input signals. A stability' char(10) ...
-          'analysis can be done using function nyquist. Please refer to the online help' char(10) ...
-          'for these commands' char(10)] ...
-        );
-    clear tf_MIMO tiStep wBode
-end
-
+    if nargout == 0
+        % Plot the step response of MIMO.
+        % Plot the step response of MIMO. By post-processing, disable LaTeX
+        % interpretation in all graphic subelements of the new figure window.
+        hFig = figure('Name', 'Step Response of MIMO', 'NumberTitle', 'off');
+        step(tf_MIMO, tiStep)
+        hAx = findall(hFig, 'type', 'axes');
+        hYLabel = cell2mat(get(hAx, 'ylabel'));
+        set(hYLabel, 'interpreter', 'none')
+        hTitle = cell2mat(get(hAx, 'title'));
+        set(hTitle, 'interpreter', 'none')
+        disp(['This function can create the LTI system object tf_MIMO for you;' char(10) ...
+              'please, type help MIMO for more.' char(10) ...
+              '  You can use this object with functions like bode to plot the transfer' char(10) ...
+              'function or step and impulse to plot the step or impulse response time' char(10) ...
+              'functions or lsim to compute or plot the system response to arbitrary' char(10) ...
+              'input signals. A stability analysis can be done using function nyquist.' char(10) ...
+              'Please refer to the online help for these commands.' char(10)] ...
+            );
+        clear tf_MIMO tiStep wBode
+    end
 end % of function MIMO

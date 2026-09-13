@@ -57,121 +57,121 @@ function [tf_G deviceConstants wBode tiStep] = G(deviceConstants)
 %   You should have received a copy of the GNU General Public License along
 %   with this program. If not, see <http://www.gnu.org/licenses/>.
 
-% Load the required Octave packages.
-if isOctave
-    pkg load control
-end
-
-error(nargchk(0, 1, nargin))
-if nargin == 1
-    % The values of the device constants are taken from function argument deviceConstants.
-    beta	= deviceConstants.beta;
-    R1	= deviceConstants.R1;
-    R2	= deviceConstants.R2;
-    Rc	= deviceConstants.Rc;
-    Re	= deviceConstants.Re;
-    Rec	= deviceConstants.Rec;
-    Ce	= deviceConstants.Ce;
-    Cin	= deviceConstants.Cin;
-    Cout	= deviceConstants.Cout;
-else
-    % The default values of the device constants.
-    beta	= 250;
-    R1	= 10000;
-    R2	= 1200;
-    Rc	= 6800;
-    Re	= 680;
-    Rec	= 68;
-    Ce	= 4.7e-06;
-    Cin	= 0.0001;
-    Cout	= 1.5e-06;
-end
-error(nargchk(0, 4, nargout))
-if nargout >= 2
-    % The values of the device constants are assigned to function result deviceConstants.
-    deviceConstants  	= struct;
-    deviceConstants.beta	= beta;
-    deviceConstants.R1	= R1;
-    deviceConstants.R2	= R2;
-    deviceConstants.Rc	= Rc;
-    deviceConstants.Re	= Re;
-    deviceConstants.Rec	= Rec;
-    deviceConstants.Ce	= Ce;
-    deviceConstants.Cin	= Cin;
-    deviceConstants.Cout	= Cout;
-end
-
-% User-defined result G (Bode plot):
-
-% The dependency of U_out on Uin:
-%   U_out(s) = N_U_out_Uin(s)/D_U_out_Uin(s) * Uin(s), with
-%     N_U_out_Uin(s) = -(beta*R1*R2*Rc*Re*Ce*Cin + beta*R1*R2*Rc*Rec*Ce*Cin) * s^2
-%                      -beta*R1*R2*Rc*Cin * s
-%     D_U_out_Uin(s) = (beta*R1*R2*Re*Rec*Ce*Cin + R1*R2*Re*Rec*Ce*Cin) * s^2
-%                      +(beta*R1*R2*Re*Cin + beta*R1*Re*Rec*Ce + beta*R2*Re*Rec*Ce
-%                        + R1*R2*Re*Ce + R1*R2*Re*Cin + R1*R2*Rec*Ce + R1*Re*Rec*Ce
-%                        + R2*Re*Rec*Ce
-%                       ) * s
-%                      +(beta*R1*Re + beta*R2*Re + R1*R2 + R1*Re + R2*Re)
-D_U_out_Uin = [ (beta*R1*R2*Re*Rec*Ce*Cin + R1*R2*Re*Rec*Ce*Cin)	 % s^2
-              ; (beta*R1*R2*Re*Cin + beta*R1*Re*Rec*Ce + beta*R2*Re*Rec*Ce ...
-                 + R1*R2*Re*Ce + R1*R2*Re*Cin + R1*R2*Rec*Ce + R1*Re*Rec*Ce ...
-                 + R2*Re*Rec*Ce ...
-                )	 % s^1
-              ; (beta*R1*Re + beta*R2*Re + R1*R2 + R1*Re + R2*Re)	 % s^0
-              ].';
-N_U_out_Uin = [ -(beta*R1*R2*Rc*Re*Ce*Cin + beta*R1*R2*Rc*Rec*Ce*Cin)	 % s^2
-              ; -beta*R1*R2*Rc*Cin	 % s^1
-              ; 0	 % s^0
-              ].';
-
-% Create an Octave LTI system object from the data above. First shape a descriptor object.
-systemDesc_G.name = 'G';
-systemDesc_G.numeratorAry = ...
-    { N_U_out_Uin
-    };
-systemDesc_G.denominatorAry = ...
-    { D_U_out_Uin
-    };
-systemDesc_G.inputNameAry = ...
-    { 'Uin'
-    };
-systemDesc_G.outputNameAry = ...
-    { 'U_out'
-    };
-systemDesc_G.plotInfo = ...
-    struct( 'isLogX', true ...
-          , 'noPoints', 165 ...
-          , 'freqMin', 10 ... % Hz
-          , 'freqMax', 20000 ... % Hz
-          );
-
-% Create the Octave LTI system object from the descriptor.
-tf_G = createLtiSystem(systemDesc_G);
-
-% Compute a suitable vector of frequency and time points.
-wBode  = getFrequencyVector(systemDesc_G);
-tiStep = getSampleTimeVector(systemDesc_G);
-
-if nargout == 0
-    % Plot the transfer function of G. By post-processing, disable LaTeX
-    % interpretation in all graphic subelements of the new figure window.
-    hFig = figure('Name', 'Frequency Response of G', 'NumberTitle', 'off');
-    if ~isempty(wBode)
-        bode(tf_G, wBode)
-    else
-        bode(tf_G)
+    % Load the required Octave packages.
+    if isOctave
+        pkg load control
     end
-    set(findobj(hFig, '-property', 'interpreter'), 'interpreter', 'none')
-    disp(['This function can create the LTI system object tf_G for you; please, type' char(10) ...
-          'help G for more.' char(10) ...
-          '  You can use this object with functions like bode to plot the transfer function' char(10) ...
-          'or step and impulse to plot the step or impulse response time functions or lsim' char(10) ...
-          'to compute or plot the system response to arbitrary input signals. A stability' char(10) ...
-          'analysis can be done using function nyquist. Please refer to the online help' char(10) ...
-          'for these commands' char(10)] ...
-        );
-    clear tf_G tiStep wBode
-end
 
+    error(nargchk(0, 1, nargin))
+    if nargin == 1
+        % The values of the device constants are taken from function argument deviceConstants.
+        beta	= deviceConstants.beta;
+        R1	= deviceConstants.R1;
+        R2	= deviceConstants.R2;
+        Rc	= deviceConstants.Rc;
+        Re	= deviceConstants.Re;
+        Rec	= deviceConstants.Rec;
+        Ce	= deviceConstants.Ce;
+        Cin	= deviceConstants.Cin;
+        Cout	= deviceConstants.Cout;
+    else
+        % The default values of the device constants.
+        beta	= 250;
+        R1	= 10000;
+        R2	= 1200;
+        Rc	= 6800;
+        Re	= 680;
+        Rec	= 68;
+        Ce	= 4.7e-06;
+        Cin	= 0.0001;
+        Cout	= 1.5e-06;
+    end
+    error(nargchk(0, 4, nargout))
+    if nargout >= 2
+        % The values of the device constants are assigned to function result deviceConstants.
+        deviceConstants  	= struct;
+        deviceConstants.beta	= beta;
+        deviceConstants.R1	= R1;
+        deviceConstants.R2	= R2;
+        deviceConstants.Rc	= Rc;
+        deviceConstants.Re	= Re;
+        deviceConstants.Rec	= Rec;
+        deviceConstants.Ce	= Ce;
+        deviceConstants.Cin	= Cin;
+        deviceConstants.Cout	= Cout;
+    end
+
+    % User-defined result G (Bode plot):
+
+    % The dependency of U_out on Uin:
+    %   U_out(s) = N_U_out_Uin(s)/D_U_out_Uin(s) * Uin(s), with
+    %     N_U_out_Uin(s) = -(beta*R1*R2*Rc*Re*Ce*Cin + beta*R1*R2*Rc*Rec*Ce*Cin) * s^2
+    %                      -beta*R1*R2*Rc*Cin * s
+    %     D_U_out_Uin(s) = (beta*R1*R2*Re*Rec*Ce*Cin + R1*R2*Re*Rec*Ce*Cin) * s^2
+    %                      +(beta*R1*R2*Re*Cin + beta*R1*Re*Rec*Ce + beta*R2*Re*Rec*Ce
+    %                        + R1*R2*Re*Ce + R1*R2*Re*Cin + R1*R2*Rec*Ce
+    %                        + R1*Re*Rec*Ce + R2*Re*Rec*Ce
+    %                       ) * s
+    %                      +(beta*R1*Re + beta*R2*Re + R1*R2 + R1*Re + R2*Re)
+    D_U_out_Uin = [ (beta*R1*R2*Re*Rec*Ce*Cin + R1*R2*Re*Rec*Ce*Cin)	 % s^2
+                  ; (beta*R1*R2*Re*Cin + beta*R1*Re*Rec*Ce + beta*R2*Re*Rec*Ce ...
+                     + R1*R2*Re*Ce + R1*R2*Re*Cin + R1*R2*Rec*Ce + R1*Re*Rec*Ce ...
+                     + R2*Re*Rec*Ce ...
+                    )	 % s^1
+                  ; (beta*R1*Re + beta*R2*Re + R1*R2 + R1*Re + R2*Re)	 % s^0
+                  ].';
+    N_U_out_Uin = [ -(beta*R1*R2*Rc*Re*Ce*Cin + beta*R1*R2*Rc*Rec*Ce*Cin)	 % s^2
+                  ; -beta*R1*R2*Rc*Cin	 % s^1
+                  ; 0	 % s^0
+                  ].';
+
+    % Create an Octave LTI system object from the data above. First shape a descriptor object.
+    systemDesc_G.name = 'G';
+    systemDesc_G.numeratorAry = ...
+        { N_U_out_Uin
+        };
+    systemDesc_G.denominatorAry = ...
+        { D_U_out_Uin
+        };
+    systemDesc_G.inputNameAry = ...
+        { 'Uin'
+        };
+    systemDesc_G.outputNameAry = ...
+        { 'U_out'
+        };
+    systemDesc_G.plotInfo = ...
+        struct( 'isLogX', true ...
+              , 'noPoints', 165 ...
+              , 'freqMin', 10 ... % Hz
+              , 'freqMax', 20000 ... % Hz
+              );
+
+    % Create the Octave LTI system object from the descriptor.
+    tf_G = createLtiSystem(systemDesc_G);
+
+    % Compute a suitable vector of frequency and time points.
+    wBode  = getFrequencyVector(systemDesc_G);
+    tiStep = getSampleTimeVector(systemDesc_G);
+
+    if nargout == 0
+        % Plot the transfer function of G. By post-processing, disable
+        % LaTeX interpretation in all graphic subelements of the new figure
+        % window.
+        hFig = figure('Name', 'Frequency Response of G', 'NumberTitle', 'off');
+        if ~isempty(wBode)
+            bode(tf_G, wBode)
+        else
+            bode(tf_G)
+        end
+        set(findobj(hFig, '-property', 'interpreter'), 'interpreter', 'none')
+        disp(['This function can create the LTI system object tf_G for you;' char(10) ...
+              'please, type help G for more.' char(10) ...
+              '  You can use this object with functions like bode to plot the transfer' char(10) ...
+              'function or step and impulse to plot the step or impulse response time' char(10) ...
+              'functions or lsim to compute or plot the system response to arbitrary' char(10) ...
+              'input signals. A stability analysis can be done using function nyquist.' char(10) ...
+              'Please refer to the online help for these commands.' char(10)] ...
+            );
+        clear tf_G tiStep wBode
+    end
 end % of function G

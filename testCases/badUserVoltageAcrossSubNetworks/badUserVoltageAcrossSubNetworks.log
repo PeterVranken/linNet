@@ -1,12 +1,12 @@
-Jul 26 17:25:21 2026 - 000002 ms - RESULT - 
+Sep 13 14:13:58 2026 - 000002 ms - RESULT - 
 -----------------------------------------------------------------------------
  linNet - The Software for symbolic Analysis of linear Electronic Circuits
  Copyright (C) 2014-2026 Peter Vranken (https://github.com/PeterVranken/linNet)
  This is free software; see the source for copying conditions. There is NO
  warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 -----------------------------------------------------------------------------
-Jul 26 17:25:21 2026 - 000022 ms - RESULT - Reading circuit file testCases\badUserVoltageAcrossSubNetworks\badUserVoltageAcrossSubNetworks.cnl successfully done
-Jul 26 17:25:21 2026 - 000027 ms -  ERROR - The user-defined voltage U2 is defined as voltage potential difference between two nodes that belong to different unconnected sub-networks. The voltage potential difference between such nodes and hence the meaning of the voltage is undefined
-Jul 26 17:25:21 2026 - 000036 ms -  ERROR - The user-defined voltage U3 is defined as voltage potential difference between two nodes that belong to different unconnected sub-networks. The voltage potential difference between such nodes and hence the meaning of the voltage is undefined
-Jul 26 17:25:21 2026 - 000046 ms -  ERROR - Please correct your circuit and re-run the application
-Jul 26 17:25:21 2026 - 000048 ms -  ERROR - Input file doesn't specify a valid, computable electric circuit. Don't know what to do
+Sep 13 14:13:58 2026 - 000068 ms - RESULT - Reading circuit file testCases\badUserVoltageAcrossSubNetworks\badUserVoltageAcrossSubNetworks.cnl successfully done
+Sep 13 14:13:58 2026 - 000069 ms -  ERROR - The user-defined voltage U2 is defined as voltage potential difference between two nodes that belong to different unconnected sub-networks. The voltage potential difference between such nodes and hence the meaning of the voltage is undefined
+Sep 13 14:13:58 2026 - 000069 ms -  ERROR - The user-defined voltage U3 is defined as voltage potential difference between two nodes that belong to different unconnected sub-networks. The voltage potential difference between such nodes and hence the meaning of the voltage is undefined
+Sep 13 14:13:58 2026 - 000069 ms -  ERROR - Please correct your circuit and re-run the application
+Sep 13 14:13:58 2026 - 000069 ms -  ERROR - Input file doesn't specify a valid, computable electric circuit. Don't know what to do

@@ -1,12 +1,12 @@
-Jul 26 17:25:22 2026 - 000000 ms - RESULT - 
+Sep 13 14:14:09 2026 - 000001 ms - RESULT - 
 -----------------------------------------------------------------------------
  linNet - The Software for symbolic Analysis of linear Electronic Circuits
  Copyright (C) 2014-2026 Peter Vranken (https://github.com/PeterVranken/linNet)
  This is free software; see the source for copying conditions. There is NO
  warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 -----------------------------------------------------------------------------
-Jul 26 17:25:22 2026 - 000014 ms - RESULT - Reading circuit file testCases\useCaseBipolarTModel\useCaseBipolarTModel.cnl successfully done
-Jul 26 17:25:22 2026 - 000018 ms - RESULT - User-defined result DC:
+Sep 13 14:14:09 2026 - 000092 ms - RESULT - Reading circuit file testCases\useCaseBipolarTModel\useCaseBipolarTModel.cnl successfully done
+Sep 13 14:14:09 2026 - 000093 ms - RESULT - User-defined result DC:
 The solution for unknown U_C:
   U_C(s) = N_U_C_Ubatt(s)/D_U_C_Ubatt(s) * Ubatt(s)
            + N_U_C_Uin(s)/D_U_C_Uin(s) * Uin(s)
@@ -83,7 +83,7 @@ The solution for unknown I_base:
                       -(R1*R2*Cin + R1*Re*Ce + R1*Rec*Ce + R2*Re*Ce + R2*Rec*Ce) * s
                       -(R1 + R2)
     D_I_base_Ube(s) = D_U_C_Ubatt(s)
-Jul 26 17:25:22 2026 - 000227 ms - RESULT - User-defined result G (Bode plot):
+Sep 13 14:14:09 2026 - 000109 ms - RESULT - User-defined result G (Bode plot):
 The dependency of U_out on Uin:
   U_out(s) = N_U_out_Uin(s)/D_U_out_Uin(s) * Uin(s), with
     N_U_out_Uin(s) = -(beta*R1*R2*Rc*Re*Ce*Cin + beta*R1*R2*Rc*Rec*Ce*Cin) * s^2
@@ -94,7 +94,7 @@ The dependency of U_out on Uin:
                        + R2*Re*Rec*Ce
                       ) * s
                      +(beta*R1*Re + beta*R2*Re + R1*R2 + R1*Re + R2*Re)
-Jul 26 17:25:22 2026 - 000258 ms - RESULT - User-defined result Z (Bode plot):
+Sep 13 14:14:09 2026 - 000114 ms - RESULT - User-defined result Z (Bode plot):
 The dependency of Uin on I_Uin:
   Uin(s) = N_Uin_I_Uin(s)/D_Uin_I_Uin(s) * I_Uin(s), with
     N_Uin_I_Uin(s) = (beta*R1*R2*Re*Rec*Ce*Cin + R1*R2*Re*Rec*Ce*Cin) * s^2
@@ -109,7 +109,7 @@ The dependency of Uin on I_Uin:
                      +(beta*R1*Re*Cin + beta*R2*Re*Cin + R1*R2*Cin + R1*Re*Cin
                        + R2*Re*Cin
                       ) * s
-Jul 26 17:25:23 2026 - 000298 ms - RESULT - User-defined result humSupp (Bode plot):
+Sep 13 14:14:09 2026 - 000120 ms - RESULT - User-defined result humSupp (Bode plot):
 The dependency of U_out on Ubatt:
   U_out(s) = N_U_out_Ubatt(s)/D_U_out_Ubatt(s) * Ubatt(s), with
     N_U_out_Ubatt(s) = (beta*R1*R2*Re*Rec*Ce*Cin + R1*R2*Re*Rec*Ce*Cin) * s^2

@@ -57,89 +57,88 @@ function [tf_Step deviceConstants wBode tiStep] = Step(deviceConstants)
 %   You should have received a copy of the GNU General Public License along
 %   with this program. If not, see <http://www.gnu.org/licenses/>.
 
-% Load the required Octave packages.
-if isOctave
-    pkg load control
-end
+    % Load the required Octave packages.
+    if isOctave
+        pkg load control
+    end
 
-error(nargchk(0, 1, nargin))
-if nargin == 1
-    % The values of the device constants are taken from function argument deviceConstants.
-    R	= deviceConstants.R;
-    C	= deviceConstants.C;
-else
-    % The default values of the device constants.
-    R	= 10000;
-    C	= 0.0001;
-end
-error(nargchk(0, 4, nargout))
-if nargout >= 2
-    % The values of the device constants are assigned to function result deviceConstants.
-    deviceConstants  	= struct;
-    deviceConstants.R	= R;
-    deviceConstants.C	= C;
-end
+    error(nargchk(0, 1, nargin))
+    if nargin == 1
+        % The values of the device constants are taken from function argument deviceConstants.
+        R	= deviceConstants.R;
+        C	= deviceConstants.C;
+    else
+        % The default values of the device constants.
+        R	= 10000;
+        C	= 0.0001;
+    end
+    error(nargchk(0, 4, nargout))
+    if nargout >= 2
+        % The values of the device constants are assigned to function result deviceConstants.
+        deviceConstants  	= struct;
+        deviceConstants.R	= R;
+        deviceConstants.C	= C;
+    end
 
-% User-defined result Step:
+    % User-defined result Step:
 
-% The solution for unknown U_out:
-%   U_out(s) = N_U_out_U1(s)/D_U_out_U1(s) * U1(s), with
-%     N_U_out_U1(s) = -1
-%     D_U_out_U1(s) = R*C * s
-D_U_out_U1 = [ R*C	 % s^1
-             ; 0	 % s^0
-             ].';
-N_U_out_U1 = [ -1	 % s^0
-             ].';
+    % The solution for unknown U_out:
+    %   U_out(s) = N_U_out_U1(s)/D_U_out_U1(s) * U1(s), with
+    %     N_U_out_U1(s) = -1
+    %     D_U_out_U1(s) = R*C * s
+    D_U_out_U1 = [ R*C	 % s^1
+                 ; 0	 % s^0
+                 ].';
+    N_U_out_U1 = [ -1	 % s^0
+                 ].';
 
-% Create an Octave LTI system object from the data above. First shape a descriptor object.
-systemDesc_Step.name = 'Step';
-systemDesc_Step.numeratorAry = ...
-    { N_U_out_U1
-    };
-systemDesc_Step.denominatorAry = ...
-    { D_U_out_U1
-    };
-systemDesc_Step.inputNameAry = ...
-    { 'U1'
-    };
-systemDesc_Step.outputNameAry = ...
-    { 'U_out'
-    };
-systemDesc_Step.plotInfo = ...
-    struct( 'isLogX', {} ...
-          , 'noPoints', {} ...
-          , 'freqMin', {} ...
-          , 'freqMax', {} ...
-          );
+    % Create an Octave LTI system object from the data above. First shape a descriptor object.
+    systemDesc_Step.name = 'Step';
+    systemDesc_Step.numeratorAry = ...
+        { N_U_out_U1
+        };
+    systemDesc_Step.denominatorAry = ...
+        { D_U_out_U1
+        };
+    systemDesc_Step.inputNameAry = ...
+        { 'U1'
+        };
+    systemDesc_Step.outputNameAry = ...
+        { 'U_out'
+        };
+    systemDesc_Step.plotInfo = ...
+        struct( 'isLogX', {} ...
+              , 'noPoints', {} ...
+              , 'freqMin', {} ...
+              , 'freqMax', {} ...
+              );
 
-% Create the Octave LTI system object from the descriptor.
-tf_Step = createLtiSystem(systemDesc_Step);
+    % Create the Octave LTI system object from the descriptor.
+    tf_Step = createLtiSystem(systemDesc_Step);
 
-% Compute a suitable vector of frequency and time points.
-wBode  = getFrequencyVector(systemDesc_Step);
-tiStep = getSampleTimeVector(systemDesc_Step);
+    % Compute a suitable vector of frequency and time points.
+    wBode  = getFrequencyVector(systemDesc_Step);
+    tiStep = getSampleTimeVector(systemDesc_Step);
 
-if nargout == 0
-    % Plot the step response of Step.
-    % Plot the step response of Step. By post-processing, disable LaTeX
-    % interpretation in all graphic subelements of the new figure window.
-    hFig = figure('Name', 'Step Response of Step', 'NumberTitle', 'off');
-    step(tf_Step, tiStep)
-    hAx = findall(hFig, 'type', 'axes');
-    hYLabel = cell2mat(get(hAx, 'ylabel'));
-    set(hYLabel, 'interpreter', 'none')
-    hTitle = cell2mat(get(hAx, 'title'));
-    set(hTitle, 'interpreter', 'none')
-    disp(['This function can create the LTI system object tf_Step for you; please, type' char(10) ...
-          'help Step for more.' char(10) ...
-          '  You can use this object with functions like bode to plot the transfer function' char(10) ...
-          'or step and impulse to plot the step or impulse response time functions or lsim' char(10) ...
-          'to compute or plot the system response to arbitrary input signals. A stability' char(10) ...
-          'analysis can be done using function nyquist. Please refer to the online help' char(10) ...
-          'for these commands' char(10)] ...
-        );
-    clear tf_Step tiStep wBode
-end
-
+    if nargout == 0
+        % Plot the step response of Step.
+        % Plot the step response of Step. By post-processing, disable LaTeX
+        % interpretation in all graphic subelements of the new figure window.
+        hFig = figure('Name', 'Step Response of Step', 'NumberTitle', 'off');
+        step(tf_Step, tiStep)
+        hAx = findall(hFig, 'type', 'axes');
+        hYLabel = cell2mat(get(hAx, 'ylabel'));
+        set(hYLabel, 'interpreter', 'none')
+        hTitle = cell2mat(get(hAx, 'title'));
+        set(hTitle, 'interpreter', 'none')
+        disp(['This function can create the LTI system object tf_Step for you;' char(10) ...
+              'please, type help Step for more.' char(10) ...
+              '  You can use this object with functions like bode to plot the transfer' char(10) ...
+              'function or step and impulse to plot the step or impulse response time' char(10) ...
+              'functions or lsim to compute or plot the system response to arbitrary' char(10) ...
+              'input signals. A stability analysis can be done using function nyquist.' char(10) ...
+              'Please refer to the online help for these commands.' char(10)] ...
+            );
+        clear tf_Step tiStep wBode
+    end
 end % of function Step

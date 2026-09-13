@@ -57,130 +57,133 @@ function [tf_humSupp deviceConstants wBode tiStep] = humSupp(deviceConstants)
 %   You should have received a copy of the GNU General Public License along
 %   with this program. If not, see <http://www.gnu.org/licenses/>.
 
-% Load the required Octave packages.
-if isOctave
-    pkg load control
-end
-
-error(nargchk(0, 1, nargin))
-if nargin == 1
-    % The values of the device constants are taken from function argument deviceConstants.
-    beta	= deviceConstants.beta;
-    R1	= deviceConstants.R1;
-    R2	= deviceConstants.R2;
-    Rc	= deviceConstants.Rc;
-    Re	= deviceConstants.Re;
-    Rec	= deviceConstants.Rec;
-    Ce	= deviceConstants.Ce;
-    Cin	= deviceConstants.Cin;
-    Cout	= deviceConstants.Cout;
-else
-    % The default values of the device constants.
-    beta	= 250;
-    R1	= 10000;
-    R2	= 1200;
-    Rc	= 6800;
-    Re	= 680;
-    Rec	= 68;
-    Ce	= 4.7e-06;
-    Cin	= 0.0001;
-    Cout	= 1.5e-06;
-end
-error(nargchk(0, 4, nargout))
-if nargout >= 2
-    % The values of the device constants are assigned to function result deviceConstants.
-    deviceConstants  	= struct;
-    deviceConstants.beta	= beta;
-    deviceConstants.R1	= R1;
-    deviceConstants.R2	= R2;
-    deviceConstants.Rc	= Rc;
-    deviceConstants.Re	= Re;
-    deviceConstants.Rec	= Rec;
-    deviceConstants.Ce	= Ce;
-    deviceConstants.Cin	= Cin;
-    deviceConstants.Cout	= Cout;
-end
-
-% User-defined result humSupp (Bode plot):
-
-% The dependency of U_out on Ubatt:
-%   U_out(s) = N_U_out_Ubatt(s)/D_U_out_Ubatt(s) * Ubatt(s), with
-%     N_U_out_Ubatt(s) = (beta*R1*R2*Re*Rec*Ce*Cin + R1*R2*Re*Rec*Ce*Cin) * s^2
-%                        +(beta*R1*R2*Re*Cin + beta*R1*Re*Rec*Ce - beta*R2*Rc*Re*Ce
-%                          - beta*R2*Rc*Rec*Ce + beta*R2*Re*Rec*Ce + R1*R2*Re*Ce
-%                          + R1*R2*Re*Cin + R1*R2*Rec*Ce + R1*Re*Rec*Ce + R2*Re*Rec*Ce
-%                         ) * s
-%                        +(beta*R1*Re - beta*R2*Rc + beta*R2*Re + R1*R2 + R1*Re
-%                          + R2*Re
-%                         )
-%     D_U_out_Ubatt(s) = (beta*R1*R2*Re*Rec*Ce*Cin + R1*R2*Re*Rec*Ce*Cin) * s^2
-%                        +(beta*R1*R2*Re*Cin + beta*R1*Re*Rec*Ce + beta*R2*Re*Rec*Ce
-%                          + R1*R2*Re*Ce + R1*R2*Re*Cin + R1*R2*Rec*Ce + R1*Re*Rec*Ce
-%                          + R2*Re*Rec*Ce
-%                         ) * s
-%                        +(beta*R1*Re + beta*R2*Re + R1*R2 + R1*Re + R2*Re)
-D_U_out_Ubatt = [ (beta*R1*R2*Re*Rec*Ce*Cin + R1*R2*Re*Rec*Ce*Cin)	 % s^2
-                ; (beta*R1*R2*Re*Cin + beta*R1*Re*Rec*Ce + beta*R2*Re*Rec*Ce ...
-                   + R1*R2*Re*Ce + R1*R2*Re*Cin + R1*R2*Rec*Ce + R1*Re*Rec*Ce ...
-                   + R2*Re*Rec*Ce ...
-                  )	 % s^1
-                ; (beta*R1*Re + beta*R2*Re + R1*R2 + R1*Re + R2*Re)	 % s^0
-                ].';
-N_U_out_Ubatt = [ (beta*R1*R2*Re*Rec*Ce*Cin + R1*R2*Re*Rec*Ce*Cin)	 % s^2
-                ; (beta*R1*R2*Re*Cin + beta*R1*Re*Rec*Ce - beta*R2*Rc*Re*Ce ...
-                   - beta*R2*Rc*Rec*Ce + beta*R2*Re*Rec*Ce + R1*R2*Re*Ce ...
-                   + R1*R2*Re*Cin + R1*R2*Rec*Ce + R1*Re*Rec*Ce + R2*Re*Rec*Ce ...
-                  )	 % s^1
-                ; (beta*R1*Re - beta*R2*Rc + beta*R2*Re + R1*R2 + R1*Re + R2*Re)	 % s^0
-                ].';
-
-% Create an Octave LTI system object from the data above. First shape a descriptor object.
-systemDesc_humSupp.name = 'humSupp';
-systemDesc_humSupp.numeratorAry = ...
-    { N_U_out_Ubatt
-    };
-systemDesc_humSupp.denominatorAry = ...
-    { D_U_out_Ubatt
-    };
-systemDesc_humSupp.inputNameAry = ...
-    { 'Ubatt'
-    };
-systemDesc_humSupp.outputNameAry = ...
-    { 'U_out'
-    };
-systemDesc_humSupp.plotInfo = ...
-    struct( 'isLogX', true ...
-          , 'noPoints', 500 ...
-          , 'freqMin', 10 ... % Hz
-          , 'freqMax', 100 ... % Hz
-          );
-
-% Create the Octave LTI system object from the descriptor.
-tf_humSupp = createLtiSystem(systemDesc_humSupp);
-
-% Compute a suitable vector of frequency and time points.
-wBode  = getFrequencyVector(systemDesc_humSupp);
-tiStep = getSampleTimeVector(systemDesc_humSupp);
-
-if nargout == 0
-    % Plot the transfer function of humSupp. By post-processing, disable LaTeX
-    % interpretation in all graphic subelements of the new figure window.
-    hFig = figure('Name', 'Frequency Response of humSupp', 'NumberTitle', 'off');
-    if ~isempty(wBode)
-        bode(tf_humSupp, wBode)
-    else
-        bode(tf_humSupp)
+    % Load the required Octave packages.
+    if isOctave
+        pkg load control
     end
-    set(findobj(hFig, '-property', 'interpreter'), 'interpreter', 'none')
-    disp(['This function can create the LTI system object tf_humSupp for you; please, type' char(10) ...
-          'help humSupp for more.' char(10) ...
-          '  You can use this object with functions like bode to plot the transfer function' char(10) ...
-          'or step and impulse to plot the step or impulse response time functions or lsim' char(10) ...
-          'to compute or plot the system response to arbitrary input signals. A stability' char(10) ...
-          'analysis can be done using function nyquist. Please refer to the online help' char(10) ...
-          'for these commands' char(10)] ...
-        );
-    clear tf_humSupp tiStep wBode
-end
 
+    error(nargchk(0, 1, nargin))
+    if nargin == 1
+        % The values of the device constants are taken from function argument deviceConstants.
+        beta	= deviceConstants.beta;
+        R1	= deviceConstants.R1;
+        R2	= deviceConstants.R2;
+        Rc	= deviceConstants.Rc;
+        Re	= deviceConstants.Re;
+        Rec	= deviceConstants.Rec;
+        Ce	= deviceConstants.Ce;
+        Cin	= deviceConstants.Cin;
+        Cout	= deviceConstants.Cout;
+    else
+        % The default values of the device constants.
+        beta	= 250;
+        R1	= 10000;
+        R2	= 1200;
+        Rc	= 6800;
+        Re	= 680;
+        Rec	= 68;
+        Ce	= 4.7e-06;
+        Cin	= 0.0001;
+        Cout	= 1.5e-06;
+    end
+    error(nargchk(0, 4, nargout))
+    if nargout >= 2
+        % The values of the device constants are assigned to function result deviceConstants.
+        deviceConstants  	= struct;
+        deviceConstants.beta	= beta;
+        deviceConstants.R1	= R1;
+        deviceConstants.R2	= R2;
+        deviceConstants.Rc	= Rc;
+        deviceConstants.Re	= Re;
+        deviceConstants.Rec	= Rec;
+        deviceConstants.Ce	= Ce;
+        deviceConstants.Cin	= Cin;
+        deviceConstants.Cout	= Cout;
+    end
+
+    % User-defined result humSupp (Bode plot):
+
+    % The dependency of U_out on Ubatt:
+    %   U_out(s) = N_U_out_Ubatt(s)/D_U_out_Ubatt(s) * Ubatt(s), with
+    %     N_U_out_Ubatt(s) = (beta*R1*R2*Re*Rec*Ce*Cin + R1*R2*Re*Rec*Ce*Cin) * s^2
+    %                        +(beta*R1*R2*Re*Cin + beta*R1*Re*Rec*Ce - beta*R2*Rc*Re*Ce
+    %                          - beta*R2*Rc*Rec*Ce + beta*R2*Re*Rec*Ce + R1*R2*Re*Ce
+    %                          + R1*R2*Re*Cin + R1*R2*Rec*Ce + R1*Re*Rec*Ce
+    %                          + R2*Re*Rec*Ce
+    %                         ) * s
+    %                        +(beta*R1*Re - beta*R2*Rc + beta*R2*Re + R1*R2
+    %                          + R1*Re + R2*Re
+    %                         )
+    %     D_U_out_Ubatt(s) = (beta*R1*R2*Re*Rec*Ce*Cin + R1*R2*Re*Rec*Ce*Cin) * s^2
+    %                        +(beta*R1*R2*Re*Cin + beta*R1*Re*Rec*Ce + beta*R2*Re*Rec*Ce
+    %                          + R1*R2*Re*Ce + R1*R2*Re*Cin + R1*R2*Rec*Ce
+    %                          + R1*Re*Rec*Ce + R2*Re*Rec*Ce
+    %                         ) * s
+    %                        +(beta*R1*Re + beta*R2*Re + R1*R2 + R1*Re + R2*Re)
+    D_U_out_Ubatt = [ (beta*R1*R2*Re*Rec*Ce*Cin + R1*R2*Re*Rec*Ce*Cin)	 % s^2
+                    ; (beta*R1*R2*Re*Cin + beta*R1*Re*Rec*Ce + beta*R2*Re*Rec*Ce ...
+                       + R1*R2*Re*Ce + R1*R2*Re*Cin + R1*R2*Rec*Ce + R1*Re*Rec*Ce ...
+                       + R2*Re*Rec*Ce ...
+                      )	 % s^1
+                    ; (beta*R1*Re + beta*R2*Re + R1*R2 + R1*Re + R2*Re)	 % s^0
+                    ].';
+    N_U_out_Ubatt = [ (beta*R1*R2*Re*Rec*Ce*Cin + R1*R2*Re*Rec*Ce*Cin)	 % s^2
+                    ; (beta*R1*R2*Re*Cin + beta*R1*Re*Rec*Ce - beta*R2*Rc*Re*Ce ...
+                       - beta*R2*Rc*Rec*Ce + beta*R2*Re*Rec*Ce + R1*R2*Re*Ce ...
+                       + R1*R2*Re*Cin + R1*R2*Rec*Ce + R1*Re*Rec*Ce + R2*Re*Rec*Ce ...
+                      )	 % s^1
+                    ; (beta*R1*Re - beta*R2*Rc + beta*R2*Re + R1*R2 + R1*Re ...
+                       + R2*Re ...
+                      )	 % s^0
+                    ].';
+
+    % Create an Octave LTI system object from the data above. First shape a descriptor object.
+    systemDesc_humSupp.name = 'humSupp';
+    systemDesc_humSupp.numeratorAry = ...
+        { N_U_out_Ubatt
+        };
+    systemDesc_humSupp.denominatorAry = ...
+        { D_U_out_Ubatt
+        };
+    systemDesc_humSupp.inputNameAry = ...
+        { 'Ubatt'
+        };
+    systemDesc_humSupp.outputNameAry = ...
+        { 'U_out'
+        };
+    systemDesc_humSupp.plotInfo = ...
+        struct( 'isLogX', true ...
+              , 'noPoints', 500 ...
+              , 'freqMin', 10 ... % Hz
+              , 'freqMax', 100 ... % Hz
+              );
+
+    % Create the Octave LTI system object from the descriptor.
+    tf_humSupp = createLtiSystem(systemDesc_humSupp);
+
+    % Compute a suitable vector of frequency and time points.
+    wBode  = getFrequencyVector(systemDesc_humSupp);
+    tiStep = getSampleTimeVector(systemDesc_humSupp);
+
+    if nargout == 0
+        % Plot the transfer function of humSupp. By post-processing, disable
+        % LaTeX interpretation in all graphic subelements of the new figure
+        % window.
+        hFig = figure('Name', 'Frequency Response of humSupp', 'NumberTitle', 'off');
+        if ~isempty(wBode)
+            bode(tf_humSupp, wBode)
+        else
+            bode(tf_humSupp)
+        end
+        set(findobj(hFig, '-property', 'interpreter'), 'interpreter', 'none')
+        disp(['This function can create the LTI system object tf_humSupp for you;' char(10) ...
+              'please, type help humSupp for more.' char(10) ...
+              '  You can use this object with functions like bode to plot the transfer' char(10) ...
+              'function or step and impulse to plot the step or impulse response time' char(10) ...
+              'functions or lsim to compute or plot the system response to arbitrary' char(10) ...
+              'input signals. A stability analysis can be done using function nyquist.' char(10) ...
+              'Please refer to the online help for these commands.' char(10)] ...
+            );
+        clear tf_humSupp tiStep wBode
+    end
 end % of function humSupp
