@@ -27,8 +27,8 @@
 doc ?= linNet-userGuide
 
 # Include the required sub-makefiles.
-sharedMakefilePath := ../../../shared/makefile/
-include $(sharedMakefilePath)operatingSystem.mk
+sharedMakefilePath := ../../makefile/
+include $(sharedMakefilePath)globalVariables.mk
 
 
 # The list of include paths to be considered.
