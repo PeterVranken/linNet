@@ -4,9 +4,9 @@
 command line arguments and all its output is text based, either printed
 to the console or written into the output files.
 
-All interaction with \linnet{} is done from a shell window. From such a
-window type \code{linNet --help} to get a short reminder on the available
-command line options.
+All interaction with \linnet{} is done from a shell window. Having such a
+window opened, type \code{linNet --help} to get a short reminder on the
+available command line options.
 
 The command line may contain program options and the names of the input
 files, which are always circuit netlist files. The order of options and
@@ -23,15 +23,15 @@ is reserved and must not be used.
 All the information that impacts the conducted computations is placed in
 the circuit netlist files; the program options only affect the generated
 output. The verbositiy of the console output can be controlled, a log file
-can be created and the output for Octave is an option only. The command
+can be created and script generation for Octave is an option. The command
 line arguments in detail:
 \begin{itemize}
   \item \emph{-h, --help}
     \linnet{} prints a short help text and terminates again. The return
-    value to the shell is 0. Can be combined with \code{-r}
+    value to the shell is 0. Can be combined with \code{-r}.
   \item \emph{-r, --version}
     \linnet{} prints the software revision and terminates again. The
-    return value to the shell is 0. Can be combined with \code{-h}
+    return value to the shell is 0. Can be combined with \code{-h}.
   \item \emph{-v LEVEL, --verbosity=LEVEL}
     The verbosity LEVEL of the application; LEVEL is an enumeration value.
     It doesn't matter whether it is written in upper or lower case
@@ -45,39 +45,39 @@ line arguments in detail:
         linear equation system is printed prior to and after running the
         solver. For complex circuits this can mean many thousand lines of
         output or much time to wait.
-        
+
         A strong recommendation is to use this level of verbosity solely
         in conjunction with the other option \code{-s}, which suppresses
         all console output. (Writing to the log file only is times faster
-        then writing to the console)
-        
+        then writing to the console.)
+
       \item \code{INFO}: Some progress information is printed. Among more,
         the algebraic solution of the linear equation system is printed,
         which can still mean bulky output. Use this level of verbosity
-        with care 
-        
+        with care.
+
       \item \code{RESULT}: This is the default level of verbosity. All
-        final results are printed, i.e. the requested variables in the
+        final results are printed, i.e., the requested variables in the
         frequency domain.
-        
-        Additionally, if a concise log format is chosen (see \code{-f}),
+
+        Additionally, if a concise log format is chosen (see \code{-f})
         which doesn't have time stamps, then \code{RESULT} will also print
         some timing information.
-        
+
       \item \code{WARN}: The warnings are printed. Computation results can
-        be found only exported as Octave code (see~\code{-o})
-        
+        be found only exported as Octave code (see~\code{-o}).
+
       \item \code{ERROR} The error messages are printed. Computation
-        results can be found only exported as Octave code (see~\code{-o})
-        
+        results can be found only exported as Octave code (see~\code{-o}).
+
       \item \code{FATAL}: Only the fatal error messages are printed. Fatal
         errors (as opposed to the ``normal'' errors) are those, which lead
         to immediate (but still controlled) program termination; the
         out-of-memory error is a prominent example. Computation results --
         if any -- can be found only exported as Octave code (see~\code{-o})
     \end{itemize}
-    Default is \code{RESULT}. Any verbosity level includes all output of
-    the less verbose levels.
+    Each verbosity level includes all output of the less verbose levels.
+    The default level is \code{RESULT}.
 
   \item \emph{-f FORMAT, --format-of-log-entry=FORMAT}
     Log entry format. FORMAT is an enumeration value. It doesn't matter
@@ -85,41 +85,49 @@ line arguments in detail:
     between -f and FORMAT is optional. FORMAT is one out of:
     \begin{itemize}
       \item \code{raw}: Only the pure message text is printed to the
-        console and the log file
-        
+        console and the log file.
+
       \item \code{short}: Each message is preceeded by a short line
         header, which contains the consumed CPU time and the severeness of
-        the message
-        
+        the message.
+
       \item \code{long}: Each message is preceeded by a line header, which
         contains a time stamp, the consumed CPU time and the severeness of
         the message.
     \end{itemize}
-    The default format is \code{long}
+    The default format is \code{long}.
 
   \item \emph{-s, --silent}
     Silent operation, only a greeting is emitted. Do not write progress
     information to the console, only write into the log file. To avoid
     useless runs of the application it is not allowed to choose silent
-    operation if no log file is in use (see~\code{-l})
-    
+    operation if no log file is in use (see~\code{-l}).
+
   \item \emph{-l[FILENAME], --log-file-name[=FILENAME]}
     This option enables the use of a log file and controls its name. No
     log file is opened if this option is not used.
-    
+
     You may state the name of the log file but normally you won't: If the
     option is used without argument \code{FILENAME} then an appropriate
     file name is chosen by the application. It is derived from the name of
-    the circuit netlist if a single input file is given and otherwise a
-    generic name is chosen.
+    the circuit netlist if a single input file is given and otherwise the
+    generic name \file{linNet.log} is chosen.
+
+    If the name of the log file is not explicitly given (which may of
+    course include the file path) then the location of the log file is the
+    output folder set with \code{-o} or the current working directory
+    otherwise.
+
+    The folder path to the specified log file is created if it doesn't
+    exist yet.
     
-    There's a constraint: Either using a log file is specified with
-    \code~{-l} or~\code{-s} (or \code{--silent}) is not given 
-    
+    There's a constraint: Either using a log file is specified
+    with~\code{-l} or~\code{-s} is not given.
+
   \item \emph{-c, --clear-log-file}
     Clear the log file at the beginning of operation. Default is to append
-    to a possibly already existing log file
-    
+    to a possibly already existing log file.
+
   \item \emph{-o[DIRNAME], --Octave-output-directory[=DIRNAME]}
     This option enables the generation of Octave script code and controls
     the location. No Octave code is generated if this option is not used.
@@ -129,21 +137,32 @@ line arguments in detail:
     folders will be created as input files are given. All of these folders
     will be placed into a common parent directory and this directory is
     designated by \code{DIRNAME}. If \code{DIRNAME} is omitted then the
-    current working directory is used as common parent directory
+    current working directory is used as common parent directory.
+
+    The folder path to and including the specified parent directory is
+    created if it doesn't exist yet.
+    
+    A distinction is made regarding the generated script code based on
+    whether it is problem-specific or static (some common, always
+    identical sub-routines). The static code component is generated only
+    if the netlist related output folder does not already exist. This
+    distinction allows the static code component to be modified locally
+    without the risk of it being overwritten during a subsequent run of
+    \linnet{}. See \code{-i} also.
 
   \item \emph{-i, --do-not-copy-common-Octave-code}
     The generated Octave code builds on some common scripts, which are
     normally copied into each of the netlist related output folders. This
-    way the generated code will run just like that in Octave, without the
-    need of manipulating Octave's search path. If you dislike the over and
-    over copied, always identical files you can consider to install them
-    once in your Octave environment and to let them no longer be produced
-    by \linnet{}.
-    
-    If you give this option then copying the common files into each output
-    folder is simply not done.
-    
-    This switch is relevant only if \code{-o} is also given
+    way, the generated code will run just like that in Octave, without the
+    need of manipulating Octave's search path. If you disapprove copying
+    these common scripts into each ouput folder, you can consider to
+    install them once in your Octave environment and to let them no longer
+    be produced by \linnet{}.
+
+    If you give this option then copying the common scripts into each
+    output folder is simply not done.
+
+    This switch is relevant only if \code{-o} is also given.
 
 \end{itemize}
 
