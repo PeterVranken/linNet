@@ -65,7 +65,7 @@ function [sys] = createLtiSystem(sysDesc)
     [noY noU] = size(sysDesc.numeratorAry);
 
     if noY > maxOutputs
-        error('Spliting systems not yet supported');
+        error('Spliting systems not yet supported.');
     else
         sys = tf(sysDesc.numeratorAry, sysDesc.denominatorAry);
         if isOctave

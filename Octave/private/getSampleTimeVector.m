@@ -56,5 +56,3 @@ function [t] = getSampleTimeVector(systemDesc)
         t = [];
     end
 end % of function getSampleTimeVector.
-
-

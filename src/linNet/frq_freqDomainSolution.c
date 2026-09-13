@@ -4109,7 +4109,7 @@ boolean frq_exportAsMCode( const frq_freqDomainSolution_t * const pSolution
                  , getFileName(pMScript)
                  )
         print( stream
-             , "\n    error('Invalid script: Errors occured during script generation')\n"
+             , "\n    error('Invalid script: Errors occured during script generation.')\n"
              );
     }
 
@@ -4314,9 +4314,9 @@ boolean frq_exportAsMCode( const frq_freqDomainSolution_t * const pSolution
            IND "'please, type help %s for more.'" NL
            IND "'  You can use this object with functions like bode to plot the transfer'" NL
            IND "'function or step and impulse to plot the step or impulse response time'" NL
-           IND "'functions or lsim to compute or plot the system response to arbitrary input'" NL
-           IND "'signals. A stability analysis can be done using function nyquist. Please'" NL
-           IND "'refer to the online help for these commands' char(10)] ...\n"
+           IND "'functions or lsim to compute or plot the system response to arbitrary'" NL
+           IND "'input signals. A stability analysis can be done using function nyquist.'" NL
+           IND "'Please refer to the online help for these commands.' char(10)] ...\n"
            "            );\n"
          , systemName
          , systemName
