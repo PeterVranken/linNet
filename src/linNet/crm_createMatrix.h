@@ -60,10 +60,10 @@
  *   @remark                                                                                \
  * The matrix is implemented as array of pointers to rows. For rectangular shapes it can    \
  * significantly save memory if noRows << noCols; consider to transpose your matrix in      \
- * case.                                                                                    \
+ * this case.                                                                               \
  *   @remark                                                                                \
  * This function is implemented by expansion of the generic macro #CRM_CREATE_MATRIX.       \
- * The type of the matrix elements an their common initial value are passed as macro        \
+ * The type of the matrix elements and their common initial value are passed as macro       \
  * parameters and are thus hard-coded at compile time.                                      \
  *   @see void crm_deleteMatrix()                                                           \
  */                                                                                         \
@@ -77,7 +77,7 @@ elementType_t **mmm##_createMatrix(unsigned int noRows, unsigned int noCols)    
        common alignment to the matrix element array on all systems, where the               \
        alignment of a pointer is identical either to the common alignment or to the         \
        half of the common alignment. This should be the case for most systems. */           \
-    const unsigned int noRowPointers = (noRows+1) & ~1u                                     \
+    const unsigned int noRowPointers = (noRows+1u) & ~1u                                    \
                      , sizeOfChunk = noRowPointers*(sizeof(elementType_t*))                 \
                                      + noRows*noCols*sizeof(elementType_t);                 \
                                                                                             \
@@ -87,17 +87,17 @@ elementType_t **mmm##_createMatrix(unsigned int noRows, unsigned int noCols)    
     elementType_t *pRow = (elementType_t*)((char*)A                                         \
                                            + noRowPointers*sizeof(elementType_t*)           \
                                           );                                                \
-    unsigned m, n;                                                                          \
-    for(m=0; m<noRows; ++m)                                                                 \
+    for(unsigned int m=0; m<noRows; ++m)                                                    \
         A[m] = pRow + m*noCols;                                                             \
-    assert((char*)A[noRows-1] + noCols*sizeof(elementType_t) == (char*)A + sizeOfChunk      \
-           &&  (char*)&A[noRows-1][noCols-1] + sizeof(elementType_t)                        \
-               == (char*)A + sizeOfChunk                                                    \
+                                                                                            \
+    assert((noRows == 0u                                                                    \
+            ||  (char*)A[noRows-1u] + noCols*sizeof(elementType_t) == (char*)A + sizeOfChunk\
+           )                                                                                \
           );                                                                                \
                                                                                             \
     /* Initialize the array. */                                                             \
-    for(m=0; m<noRows; ++m)                                                                 \
-        for(n=0; n<noCols; ++n)                                                             \
+    for(unsigned int m=0; m<noRows; ++m)                                                    \
+        for(unsigned int n=0; n<noCols; ++n)                                                \
             A[m][n] = (initialElementValue);                                                \
                                                                                             \
     return A;                                                                               \
