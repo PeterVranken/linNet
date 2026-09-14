@@ -82,8 +82,8 @@ Suffix & Meaning & Value \\ \hline
 \code{T} & tera  & \raisebox{0pt}[10pt][0pt]{$10^{12}$}  \\ 
 \code{P} & peta  & \raisebox{0pt}[10pt][0pt]{$10^{15}$}  \\ 
 \code{X}\footnote{According to
-http://searchstorage.techtarget.com/definition/Kilo-mega-giga-tera-peta-and-all-that,
-as of Feb 9, 2014, exa should be abbreviated with \code{E}. This is
+https://www.techtarget.com/it-infrastructure/definition/Kilo-mega-giga-tera-peta-exa-zetta-and-all-that/,
+visited Sep 14, 2026, exa should be abbreviated with \code{E}. This is
 ambiguous with the traditional form of an exponent. \code{1E+2} could be
 either $10^{18}+2$ or $100$. We use \code{X} instead.}
          & exa   & \raisebox{0pt}[10pt][0pt]{$10^{18}$}  \\
@@ -123,17 +123,18 @@ be unique in order to avoid ambiguities in the result presentation. Then
 the names of the nodes the device is connected to follow up as a blank
 separated list. The kind of device determines the required number of
 nodes, see below.\footnote{The syntax format defines the nodes by position
-in the line only. If a node name is missing in the line the next token
-will be taken as this node and a missleading error message can result.
-Which might be particularly confusing if it is not the last node, which
-has been omitted.} There's no explicit definition of nodes; a node is
-defined implicitly when referencing it in a device definition the very
-first time. This doesn't hold for the voltage sensing inputs of a voltage
-controlled source (the third and forth node in the device definition).
-They are pure references to a pair of nodes, which need to be defined
-elsewhere. Normally the parser doesn't support forward references but here
-we have one of the few exceptions; the actual definition of the the source
-controlling nodes may be made with a later device definition:
+in the line only. If, e.g., the node name is missing in a line then the
+next token will be interpreted as this name and a missleading error
+message can result. Which might be particularly confusing if it is not the
+last node which has been omitted.} There's no explicit definition of
+nodes; a node is defined implicitly when referencing it in a device
+definition the very first time. This doesn't hold for the voltage sensing
+inputs of a voltage controlled source (the third and forth node in the
+device definition). They are pure references to a pair of nodes, which
+need to be defined elsewhere. Normally the parser doesn't support forward
+references but here we have one of the few exceptions; the actual
+definition of the the source controlling nodes may be made with a later
+device definition:
 
 % Wrap text after line 87 in the verbatiom section.
 \begin{verbatim}
@@ -173,20 +174,20 @@ hardcoded standard values of all affected devices are listed in table
 
 More important than value assignments are relations between devices of
 same kind. The most simple case would be the identity of the values of two
-devices, e.g. \code{R1=R2}. Many circuits depend on such a relation; a
+devices, e.g., \code{R1=R2}. Many circuits depend on such a relation; a
 voltage divider with two identical resistors is for example often used to
 pin the input voltage of an op-amp to half the operational voltage. If a
 pair of devices has a fixed value relation as a principle of operation of
 the circuit then this should be expressed in the netlist. The knowledge
 about value relations enables \linnet{} to perform according
-simplifications of the final result, it would e.g. simplify a term like
+simplifications of the final result, it would, e.g., simplify a term like
 $R_1 R_2 C$ to ${R_2}^2 C$ in the previous example. An impressive example
 of such simplifications is found as \file{octagon.cnl} in the set of test
 cases in the source code distribution of \linnet{}.
 
-Device relations can be made recursively. The netlist\footnote{The tokens
-\code{DEF} and \code{RES} are explained below in section
-\ref{secResultSpec}.}
+Device relations can be made recursively. The netlist defines a voltage
+divider into four identical voltages:\footnote{The tokens \code{DEF} and
+\code{RES} are explained below in section \ref{secResultSpec}.}
 
 \begin{verbatim}
 U Uin in gnd
@@ -198,10 +199,9 @@ DEF Uout k3 gnd
 RES VDiv Uout
 \end{verbatim}
 
-\noindent
-defines a voltage divider into four identical voltages. Due to the given
-relations, the result formula will no longer contain any device symbol,
-but simply states $\frac{1}{4}U_{in}$ for the output voltage.
+Due to the given relations, the result formula will no longer contain any
+device symbol, but simply states $\frac{1}{4}U_{in}$ for the output
+voltage.
 
 Device relations can use rational ratios. We could achieve the same result
 with the following netlist:
@@ -238,7 +238,7 @@ RES VDiv Uout
 \noindent
 To reduce the danger of overflows due to careless use of the rational
 ratios the values of numerator and denominator of the ratios are limited
-to the range $1..999$. Null and negative ratios are generally not
+to the range $1..999$. Zero and negative ratios are generally not
 permitted. Negative ratios can be useful with controlled sources; if so
 the appropriate sign has to be chosen by the polarity of either the source
 or the control voltage or current.
@@ -471,9 +471,7 @@ An example netlist is shown in figure \ref{figNonInvOp}.
 The voltage controlled voltage source \code{U(U)} has four connectors. The
 actual source has two; these are the first two nodes referenced in the
 device definition. The first node designates the positive pole of the
-source, the second one the negative pole. First and second referenced
-node designate start and end of the voltage defining arrow in the
-schematic.
+source, the second one the negative pole.
 
 The control voltage is defined by the voltage potential difference between
 node three and four, in this order. The third and forth referenced node
@@ -560,7 +558,7 @@ keywords designates the name the specified object gets. This name must not
 clash with any other name already in use, regardless whether it are names
 of nodes or devices or if they have been introduced before by these
 keywords. Furthermore, the internally derived names of unknowns need to be
-avoided to. The current through a voltage source is e.g. derived from the
+avoided to. The current through a voltage source is, e.g., derived from the
 name of the source by prefixing it with \code{I\_}. Please refer to section
 \ref{secModellingDevices} for a complete consideration.
 
@@ -575,23 +573,22 @@ identical to an already existing unknown voltage, then the same voltage
 will be computed and reported twice with different names.
 
 To give an example, we could extend our introductory example from section
-\ref{secIntro}, figure \ref{figFirstIntroExample}, by adding the 
-line
+\ref{secIntro}, figure \ref{figFirstIntroExample} on page
+\pageref{figFirstIntroExample}, by adding the following line to the
+netlist file:
 
 \begin{verbatim}
 DEF U_c K1 out
 \end{verbatim}
 
-\noindent
-to the netlist file. The first token behind keyword \code{DEF} is an
-identifier, which gives a name to the new voltage. The two referenced
-nodes follow. These nodes might be defined later; forward references are
-allowed here.
+The first token behind keyword \code{DEF} is an identifier, which gives a
+name to the new voltage. The two referenced nodes follow. These nodes
+might be defined later; forward references are allowed here.
 
 Our example would add a user-defined voltage $U_c$ to the set of
 unknowns that models the voltage drop at the capacitor.
 
-There's no keyword for user-defined currents: If a specific current (e.g.
+There's no keyword for user-defined currents: If a specific current (e.g.,
 the current through the capacitor) should be put into the result then a
 special, virtual device is applied, the current probe; please see section
 \ref{secSyntaxCurrentProbe}.
@@ -623,23 +620,24 @@ unknowns can be found in table \ref{tabUnknownsOfLES} on page
 In the Octave export this result is modeled as an LTI transfer function
 object of kind MIMO (multiple inputs, multiple outputs). The default
 operation of the generated script code is to plot a rectangular array of
-step responses, where each sub-plot presents the step reponse of one
+step responses, where each sub-plot presents the step response of one
 output if one but only one input undergoes a step and all others are
-constantly null.
+constantly zero.
 
-Extending our example so far, we could add the line
+Extending our example from section \ref{secUserDefVoltage}, we could add
+the following line to our file \file{rlc.cnl}:
 
 \begin{verbatim}
 RES U_c_r U_c U_out
 \end{verbatim}
 
-\noindent
-to our file \file{rlc.cnl}. The specification of result \code{U\_c\_r}
-demands to compute the voltage drop at the capacitor and at the resistor.
-The result specification builds on the previously made user-defined
-voltage definition and exploits the fact that the voltage drop at the
-resistor is identical to the voltage potential of network node \code{out};
-the other end of the resistor is namely connected to the ground node.
+The specification of the new result named \code{U\_c\_r} demands to
+compute the voltage drops across the capacitor and across the resistor.
+The voltage drop across the capacitor had already been defined as
+\code{U\_c} in the previous section. The voltage drop across the resistor
+is identical to the voltage potential of network node \code{out} -- the
+other end of the resistor is connected to the ground node -- and we can
+reference it as \code{U\_out}.
 
 Two formulas can be expected. Both voltages will depend on the input
 voltage, which is the only independent quantity of the system. An LTI
@@ -667,7 +665,7 @@ plot. The dependent quantity can be an actually given, known quantity,
 whereas the independent quantity can be an unknown to the internal
 computation. This permits to compute and plot inverse transfer functions.
 The most important use case is the computation of the input impedance of a
-circuit: The (known) input voltage is plotted in dependence on the
+circuit: The (known) input voltage is plotted as a function of the
 (unknown) input current.
 
 Even two unknowns can serve as a pair of independent and dependent
@@ -746,37 +744,43 @@ themselves so that this normally is the simplest and best way to do.
 A valid network of devices may consist of any number of unconnected
 sub-networks. (It's probably hard to find reasonable uses cases for
 unconnected sub-nets with maybe the exception of sub-nets coupled by
-controlled sources.) \linnet{} assumes an unknown voltage potential for
-each but one of the sub-network nodes; the last voltage potential is
-linear dependent inside a sub-network. The excluded nodes are called the
-ground nodes and their voltage potential is null by definition. Normally
-\linnet{} will select suitable ground nodes for you and the final results
-won't depend on this selection.
+controlled sources.) \linnet{} assumes an unknown electrical potential for
+each of the sub-network nodes except one; the last electrical potential
+inside a sub-network is linear dependent. These last nodes are called the
+ground nodes. Their electrical potential is zero by definition and the
+potentials of the other nodes become node voltages.
 
-If you want to define the ground node of a sub-network yourself you can do
-this by naming. If there's one node whose name contains either ``gnd'' or
-``ground'', either capitalized or in all lower or all upper case, then
-this node will become the ground node. If two or more nodes have such a
-name within the same sub-network then the computation is refused.
+You define the ground node of a sub-network by naming. If there's one node
+whose name contains either ``gnd'' or ``ground'', either capitalized or in
+all lower or all upper case, then this node will become the ground node.
+If two or more nodes have such a name within the same sub-network then the
+computation aborts.
 
 The explicit choice of a ground node is often advantageous to simplify the
-result specification. The voltage potentials of all nodes but the ground
-nodes can be referenced by name in the result specification. If you define
-your circuit such that system in- and output voltage are the voltage
-difference between an in- and output node and a common other node then
-you'd preferrably define this common node as ground node - system in- and
-output voltage are now directly accessible as node voltage potentials. If
-you leave the choice of the ground node to \linnet{} or if you'd make
-another node the ground node then you had to define the system in- and
-output voltages explicitly as potential differences using the keyword
-\code{DEF}, please see section \ref{secUserDefVoltage} for details.
+result specification. The voltages at all nodes but the ground nodes can
+be referenced by name in the result specification. If you define your
+circuit such that system in- and output voltage are the voltage difference
+between an in- and output node and a common other node then you'd
+preferrably define this common node as ground node -- system in- and
+output voltage are now directly accessible as node voltages. If you'd
+leave the choice of the ground node to \linnet{} or if you'd make another
+node the ground node then you had to define the system in- and output
+voltages explicitly as user-defined voltages using the keyword \code{DEF};
+please see section \ref{secUserDefVoltage} on page
+\pageref{secUserDefVoltage} for details.
+
+If you don't define the ground node in at least one sub-networks then
+\linnet{} can make the choice for you. However, this is not recommended
+because all demanded results, which don't build solely on user-defined
+voltages will depend on this automatic choice. \linnet{} issues a warning
+to draw attention to this situation.
 
 The definition of the ground node is no longer a matter of convenience
 only but directly impacts the computation result if you use at least one
 operational amplifier in a sub-network. Op-amps are modeled as controlled
 voltage sources connected to the ground node, this is why. If an op-amp is
 used then \linnet{} can no longer decide autonomously which node to take
-as ground node - it can't guess your intentions. You have to define the
+as ground node -- it can't guess your intentions. You have to define the
 ground node explicitly, the computation is refused otherwise.
 
 It's natural and considered good practice to always define the ground
