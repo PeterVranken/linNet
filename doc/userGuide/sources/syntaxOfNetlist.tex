@@ -153,7 +153,7 @@ references. The device relation supports numeric post-processing and
 simplifications of the final result. The simplest form of a device
 relation is the assignment of a numeric value. Such an assignment has no
 impact on \linnet's computation, it is solely passed on to Octave for
-numeric evaluation via the generated script code. An example would be
+numeric evaluation via the generated script code. An example would be:
 
 \begin{verbatim}
 R R1 k0 k1 R1=5.6k
@@ -185,9 +185,10 @@ $R_1 R_2 C$ to ${R_2}^2 C$ in the previous example. An impressive example
 of such simplifications is found as \file{octagon.cnl} in the set of test
 cases in the source code distribution of \linnet{}.
 
-Device relations can be made recursively. The netlist defines a voltage
-divider into four identical voltages:\footnote{The tokens \code{DEF} and
-\code{RES} are explained below in section \ref{secResultSpec}.}
+Device relations can be made recursively. The next netlist defines a
+voltage divider into four identical voltages:\footnote{The tokens
+\code{DEF} and \code{RES} are explained below in section
+\ref{secResultSpec}.}
 
 \begin{verbatim}
 U Uin in gnd
@@ -473,7 +474,7 @@ actual source has two; these are the first two nodes referenced in the
 device definition. The first node designates the positive pole of the
 source, the second one the negative pole.
 
-The control voltage is defined by the voltage potential difference between
+The control voltage is defined by the voltage difference between
 node three and four, in this order. The third and forth referenced node
 designate start and end of the voltage arrow in the schematic,
 respectively.
@@ -512,7 +513,7 @@ into the source from the first referenced node. This way the first and
 second referenced node designate start and end of the arrow in the symbol
 of the source, respectively.
 
-The control voltage is defined by the voltage potential difference between
+The control voltage is defined by the voltage difference between
 node three and four, in this order. The third and forth referenced node
 designate start and end of the voltage arrow in the schematic,
 respectively.
@@ -566,11 +567,11 @@ name of the source by prefixing it with \code{I\_}. Please refer to section
 \subsection{User-defined voltages}
 \label{secUserDefVoltage}
 
-The keyword \code{DEF} defines new voltages as difference of two nodes'
-voltage potentials. Such a so called user-defined voltage is a new
-explicitely defined unknown of the system. It doesn't matter if it is
-identical to an already existing unknown voltage, then the same voltage
-will be computed and reported twice with different names.
+The keyword \code{DEF} defines new voltages as difference of two node
+voltages. This so called user-defined voltage is a new explicitely defined
+unknown of the system. It doesn't matter if it is identical to an already
+existing unknown voltage, then the same voltage will be computed and
+reported twice with different names.
 
 To give an example, we could extend our introductory example from section
 \ref{secIntro}, figure \ref{figFirstIntroExample} on page
@@ -611,11 +612,10 @@ currents on all known voltages and currents. (Known voltage and currents
 are the device values of the constant voltage and current sources.) Since
 the independents are always \emph{all} knowns of the system the command
 only has the set of desired unknowns as parameter, as a blank separated
-list of identifiers. Such an unknown can be a node's voltage potential,
-the current through a voltage source or current probe, the output current
-of an op-amp or a user-defined voltage. A complete list of knowns and
-unknowns can be found in table \ref{tabUnknownsOfLES} on page
-\pageref{tabUnknownsOfLES}.
+list of identifiers. Such an unknown can be a node voltage, the current
+through a voltage source or current probe, the output current of an op-amp
+or a user-defined voltage. A complete list of knowns and unknowns can be
+found in table \ref{tabUnknownsOfLES} on page \pageref{tabUnknownsOfLES}.
 
 In the Octave export this result is modeled as an LTI transfer function
 object of kind MIMO (multiple inputs, multiple outputs). The default
@@ -625,7 +625,7 @@ output if one but only one input undergoes a step and all others are
 constantly zero.
 
 Extending our example from section \ref{secUserDefVoltage}, we could add
-the following line to our file \file{rlc.cnl}:
+the following line to file \file{rlc.cnl}:
 
 \begin{verbatim}
 RES U_c_r U_c U_out
@@ -635,9 +635,9 @@ The specification of the new result named \code{U\_c\_r} demands to
 compute the voltage drops across the capacitor and across the resistor.
 The voltage drop across the capacitor had already been defined as
 \code{U\_c} in the previous section. The voltage drop across the resistor
-is identical to the voltage potential of network node \code{out} -- the
-other end of the resistor is connected to the ground node -- and we can
-reference it as \code{U\_out}.
+is identical to the voltage of network node \code{out} -- the other end of
+the resistor is connected to the ground node -- and we can reference it as
+\code{U\_out}.
 
 Two formulas can be expected. Both voltages will depend on the input
 voltage, which is the only independent quantity of the system. An LTI
@@ -685,7 +685,7 @@ export: Using \code{PLOT} we get a Bode transfer function plot, using
 exactely the same; in either case you can get the other plot, too. It just
 needs a few more key strokes inside Octave.
 
-In our introductory example we had used the line
+In our introductory example we had used the line:
 
 \begin{verbatim}
 PLOT G U_out U_in
@@ -694,9 +694,9 @@ PLOT G U_out U_in
 \noindent
 to specify the result \code{G}, which means the SISO system's transfer
 function, the dependency of its single output on its single input. The
-result specification refers to the voltage potentials of the in- and
-output node, which is suitable as the other, negative end of the in- and
-output voltage definitions is the ground node.
+result specification refers to the voltage at the in- and output node,
+which is suitable as the other, negative end of the in- and output voltage
+definitions is the ground node.
 
 A list of the knowns and unknowns, which can be referenced from a
 \code{PLOT} result specification can be found in table
@@ -757,7 +757,7 @@ If two or more nodes have such a name within the same sub-network then the
 computation aborts.
 
 The explicit choice of a ground node is often advantageous to simplify the
-result specification. The voltages at all nodes but the ground nodes can
+result specification. The voltages of all nodes but the ground nodes can
 be referenced by name in the result specification. If you define your
 circuit such that system in- and output voltage are the voltage difference
 between an in- and output node and a common other node then you'd
@@ -769,19 +769,19 @@ voltages explicitly as user-defined voltages using the keyword \code{DEF};
 please see section \ref{secUserDefVoltage} on page
 \pageref{secUserDefVoltage} for details.
 
-If you don't define the ground node in at least one sub-networks then
+If you don't define the ground node in at least one sub-network then
 \linnet{} can make the choice for you. However, this is not recommended
-because all demanded results, which don't build solely on user-defined
-voltages will depend on this automatic choice. \linnet{} issues a warning
-to draw attention to this situation.
+because all demanded results, which don't build exclusively on
+user-defined voltages will depend on this automatic choice. \linnet{}
+issues a warning to draw attention to this situation.
 
-The definition of the ground node is no longer a matter of convenience
-only but directly impacts the computation result if you use at least one
-operational amplifier in a sub-network. Op-amps are modeled as controlled
-voltage sources connected to the ground node, this is why. If an op-amp is
-used then \linnet{} can no longer decide autonomously which node to take
-as ground node -- it can't guess your intentions. You have to define the
-ground node explicitly, the computation is refused otherwise.
+If you use at least one operational amplifier in a sub-network then the
+definition of the ground node is no longer a matter of convenience only
+but directly impacts the computation result. Op-amps are modeled as
+controlled voltage sources connected to the ground node, this is why. If
+an op-amp is used then \linnet{} can no longer decide autonomously which
+node to take as ground node -- it can't guess your intentions. You have to
+define the ground node explicitly, the computation is refused otherwise.
 
 It's natural and considered good practice to always define the ground
 nodes of a circuit explicitly.
