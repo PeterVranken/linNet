@@ -1,16 +1,16 @@
-/* LP with "normal" ground */
+/* PI-controller with "normal" ground */
 U    Uin1  in1    gnd1
      
 OP   OP1   opInv1 gnd1   opOut1
 R    Rin1  in1    opInv1
 R    Rfb1  k1     opOut1
 C    C1    opInv1 k1
-     
+
 DEF  Uout1 opOut1 gnd1
 PLOT G1    Uout1  Uin1
 PLOT Z1    Uin1   I_Uin1  
 
-/* Same LP with other ground */
+/* Same circuit with other ground */
 U    Uin2  gnd2   null2
      
 OP   OP2   opInv2 null2  opOut2

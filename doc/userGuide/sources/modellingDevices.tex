@@ -374,8 +374,8 @@ The constant current source doesn't add any unknowns to the LES.
 % Sample circuit: Op-amp LP 2 times with two different ground nodes
 {
 % This define is related to the specifics of the array package; see
-% http://texwelt.de/wissen/fragen/3401/zentrieren-text-in-tabelle (as of
-% July 25 2014) for more
+% https://texwelt.de/fragen/3401/zentrieren-text-in-tabelle (visited
+% Sep 16 2026) for more.
 \newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
 
 \begin{figure}[tb]
@@ -386,7 +386,7 @@ The constant current source doesn't add any unknowns to the LES.
 \includegraphics[width=5.89cm]{OpampLPWithDifferingGnds}
 
 \end{tabular}
-\caption{Low-pass filter with op-amp and two choices of ground node}
+\caption{PI-controller with op-amp and two choices of ground node}
 \label{figOpampLPWithDifferingGnds}
 \end{center}
 \end{figure}
@@ -439,14 +439,14 @@ of the true circuit; the DC behavior with all supply voltages and currents
 and the related power distribution can't be figured out. Furthermore, the
 decision to model the output by a voltage source, whose other end is
 connected to ground means that the full picture of the solution depends on
-the choice of the ground node. An example is given. A low-pass filter is
+the choice of the ground node. An example is given. A PI-controller is
 implemented twice in a single netlist, where the only difference (besides
 indexing of the object names) is the different choice of the ground
 node. Please refer to figure \ref{figOpampLPWithDifferingGnds}.
 
 \linnet{} computes the same transfer function from input to output voltage
 for both variants of the filter. Please compare $U_{out_1}$ with
-$U_{out_2}$:
+$U_{out_2}$. Both transfer functions are identical:
 
 \begin{verbatim}
 RESULT - User-defined result G1 (Bode plot):
@@ -476,20 +476,37 @@ The dependency of Uin2 on I_Uin2:
 \begin{figure}[tb]
 \begin{center}
 \includegraphics[width=5.96cm]{OpampLPWithDifferingGnds_equivalent}
-\caption{Internal, computed model of low-pass filter 2}
+\caption{Internal, computed model of 2\textsuperscript{nd} variant of PI-controller}
 \label{figOpampLPWithDifferingGnds_equivalent}
 \end{center}
 \end{figure}
 
 However, the input impedance (i.e. the transfer function $Z$ from
 $I\left(U_{in}\right)$ to $U_{in}$) differs significantly. Variant $1$ of
-the filter yields $R_{in}$, which is what we expect but variant $2$ has an
+the circuit yields $R_{in}$, which is what we expect but variant $2$ has an
 input impedance of infinite (represented by $\frac{1}{0}$ in the result
-log). The infinite input impedance is explained by schematic
+log). The infinite input impedance is explained by schematic diagram
 \ref{figOpampLPWithDifferingGnds_equivalent} that shows how \linnet{}
 models the op-amp in this case. The input connectors are open ended and no
 current will ever flow into the circuit; this is the meaning of an
-infinite input impedance.
+infinite input impedance.\footnote{
+  If we connect a load resistor $R_{l}$
+to both circuits then we find the input impedance of the first circuit
+unchanged but the second variant now has a negative input impedance, which
+is a function of $R_{l}$. This is contradictory to our understanding of a
+real op-amp. The explanation is that the output voltage of the controlled
+source drives a current through $R_{l}$, which necessarily flows back via
+the source that drives the input of the circuit.}
+
+% Here is the calculation result:
+%%\begin{verbatim}
+%RESULT - User-defined result Z2 (Bode plot):
+%The dependency of Uin2 on I_Uin2:
+%  Uin2(s) = N_Uin2_I_Uin2(s)/D_Uin2_I_Uin2(s) * I_Uin2(s), with
+%    N_Uin2_I_Uin2(s) = -Rin2*Rl*C2 * s
+%    D_Uin2_I_Uin2(s) = Rfb2*C2 * s
+%                       +1
+%%\end{verbatim}
 
 It gets even more confusing if we define the node between resistor and
 capacitor in the feedback line to be the ground node, please refer to
@@ -499,6 +516,9 @@ impact on the op-amp's input voltage; the current it can drive only flows
 through the resistor in the feedback line. The equation that the op-amp's
 input voltage needs to be null can't be fulfilled, the system determinant
 is null and the computation fails with error message.
+
+Using an op-amp means to carefully consider the right choice of the ground
+node! Please refer to section \ref{secGndNode}, too.
 
 Last but not least the chosen modelling of the op-amp implies that the
 output of the op-amp must not be connected to a ground node or to the
@@ -567,7 +587,7 @@ definition.
 \includegraphics[width=5.96cm]{OpampLPWithDifferingGnds_variant3}
 
 \end{tabular}
-\caption{Same low-pass filter with invalid third choice of ground node}
+\caption{3\textsuperscript{rd} variant of PI-controller with invalid choice of ground node}
 \label{figOpampLPWithDifferingGnds_variant3}
 \end{center}
 \end{figure}
