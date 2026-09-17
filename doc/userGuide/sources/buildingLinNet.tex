@@ -3,58 +3,98 @@
 
 \linnet{} is distributed as source code together with makefiles to compile
 and link the code. The distribution contains ready-to-use binaries for
-Windows, for both the win32 and win64 ABI and as debug or production
-compilation\footnote{Windows 7 has been used.}. In all other environments
-a build of the sources needs to be done prior to the use of \linnet{}.
+Windows and as debug and production compilation\footnote{Windows 11 has
+been used.}. In all other environments a build of the sources needs to be
+done prior to the use of \linnet{}.
 
-To start the build you need to \code{cd} in a shell window to the root
-directory of component \code{linNet} in the source code distribution; this
-is folder \file{components/linNet}, where the file \file{GNUmakefile} is
-located. Here, you issue the command:
+To start the build you need to open a shell window and \code{cd} into the
+root directory of the cloned project; this is the folder, where the file
+\file{GNUmakefile} is located. Here, you issue the command:
 \begin{verbatim}
-make -s build
+make -sO build
 \end{verbatim}
 The makefile has some more useful targets and options than just
-\ident{build}. Tpye \code{make help} to find out.
+\ident{build}. Type \code{make help} to find out.
 
 
 \section{Portability of makefiles}
 
 The makefile -- actually it is a set of nested makefiles -- is compatible
 with the GNU make processor of at least revision 3.81; 3.80 is not
-sufficient. Different derivates of make always tended to be quite
-incompatible to one another and other derivates of make will hence require
-heavy modifications of the makefiles.
+sufficient. On a Windows platform, it needs to be the MinGW port of GNU
+make; the Cygwin port has another shell interface and doesn't work.
+
+Different derivates of make always tended to be quite incompatible to one
+another and other derivates of make will hence require heavy modifications
+of the makefiles.
 
 The makefile directly supports the build of the software for Windows with
 GCC in the MinGW 32 and 64 Bit ports. The compilation and the compiled
-software have been tested with GCC 4.5.2 (32 Bit) and 4.8.1 (64 Bit) and
-under Windows 7 only. Other revisions may cause problems: Even between
-these two severe incompatibilities have been found, which had to be
-tackled by conditional code (see below).
+software have been tested with:
+
+\begin{itemize}
+  \item GCC 4.5.2 (32 Bit, Windows 7)
+  \item GCC 4.8.1 (64 Bit, Windows 7)
+  \item mingw-w64-x86\_64-8.1.0-posix-seh-rt\_v6-rev0 (64 Bit, Windows 10)
+  \item mingw-w64-gcc-13.2.0-x64 (64 Bit, Windows 11)
+  \item mingw-w64-gcc-mcf\_20260501\_16.1.0\_x86-msvcrt (32 Bit, Windows 11)
+  \item mingw-w64-gcc-mcf\_20260501\_16.1.0\_x64-msvcrt (64 Bit, Windows 11)
+\end{itemize}
+
+Other revisions may cause problems: Severe incompatibilities, which had to
+be tackled by conditional code, have been found even between these
+versions (see below).
 
 The build process has been designed to support the compilation under Linux
 and Mac OS, too. GNU make's \code{if}/\code{else}/\code{endif} statements
-have been applied to do so. As of today, this has been tested with a
-single Linux distribution only (Fedora 18) and might not work out of the
-box for other environments. Particularly, you should have a look at the
+have been applied to do so. Unfortunately, this has been barely tested and
+might not work out of the box. Particularly, you should have a look at the
 tool localization in \file{locateTools.mk} and the compiler and linker
 command line options in \file{compileAndLink.mk}.
 
-The makefile needs to know, where GCC is installed. For Windows systems
-the environment variable \ident{MINGW\_\-HOME} has been introduced. It may
-be used to specify the root folder of a MinGW installation. If it is set,
-either persistently or on the command line of the make processor -- e.g.
-to switch on the fly between 32 Bit and 64 Bit builds -- then the
-directory \file{\$\{MINGW\_\-HOME\}/bin} supersedes the normal system
-search path. If the variable is not set then all executables will be
-located via the system search path as specified in environment variable
-PATH. This would be the natural choice for a Linux system. Please refer to
-file \file{locateTools.mk} for details.\footnote{Although designed for
-Windows, where typically several different competing ports of GCC can
-reside, the environment variable can be used for Linux and Mac OS, too.
-Don't bother with the name but let the variable point to the parent folder
-of GCC's bin folder.}
+The build depends on two packages:
+
+\begin{itemize}
+  \item The GNU compiler collection GCC (see above).
+  \item A set of common UNIX command line tools like \code{echo},
+    \code{mkdir} and \code{rm}. On a Windows platform, these tools aren't
+    natively available. You will probably find them inside the
+    installation directory of your Git 
+    (\file{\textless{}gitinstalldir\textgreater{}\textbackslash{}usr\textbackslash{}bin})
+    or you can download them from the MinGW project.
+\end{itemize}
+ 
+The makefile needs to know, where these packages are installed. Two
+options are supported. 
+
+You can add the directories with the binaries of GCC and the UNIX tools
+to your global search path, i.e., ensure that the environment variable
+\ident{PATH} contains these directories.
+
+Or you set the following two environment variables, which are evaluated by
+the makefile:
+
+\begin{itemize}
+  \item \ident{MINGW\_\-HOME}: This variable explicitly specifies the root
+    folder of the MinGW GCC installation to be used. (The relative path to
+    the GCC executables is added by the makefile.)
+  \item \ident{UNIX\_TOOLS\_BIN}: This variable explicitly specifies the
+    directory with the UNIX tools, i.e.,
+    \file{\%UNIX\_TOOLS\_BIN\%\textbackslash{}echo.exe} or
+    \file{\$(UNIX\_TOOLS\_BIN)/echo} should be a valid executable file.
+\end{itemize}
+
+An advantage of the second method is that the variables can be set easily
+still on the command line of the make processor. This allows, e.g., to
+switch on the fly between 32 Bit and 64 Bit builds, and it overrules a
+persistent setting made in the global system search path variable
+\ident{PATH}.
+
+Please refer to file \file{locateTools.mk} for details.\footnote{Although
+designed for Windows, where typically several different competing ports of
+GCC can reside, the environment variable can be used for Linux and Mac OS,
+too. Don't bother with the name but let the variable point to the parent
+folder of GCC's bin folder.}
 
 
 \subsection{Resource compiler}

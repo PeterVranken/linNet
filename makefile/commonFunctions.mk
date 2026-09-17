@@ -45,6 +45,15 @@ comma := ,
 # Example:
 #$(info Here, we have a comma: $(comma))
 
+# Return the platform path separator, ; or :. No parameters, can be called without $(call).
+ifeq ($(OS),Windows_NT)
+    pathSep := ;
+else
+    pathSep := :
+endif
+# Example:
+#$(info This $(OS) machine uses this path separator character: $(pathSep))
+
 
 # Function isDefined
 #   The main makefile offers a variable "defineList", with user configurable settings for
@@ -99,13 +108,27 @@ trailingSlash = $(addsuffix /,$(call noTrailingSlash,$(1)))
 #   Look for a single file pattern in a search path, i.e., a list of directories.
 #   $(1): Blank separated path list to search through
 #   $(2): File name without path to be searched in the path. Can be file pattern like *.c.
-#   The call of this function returns the list of file-path designations containing all
-# matching files in any of the directories in the search path.
+#   The call of this function returns the first match of the file pattern $(2) in one of
+# the directories in the path list $(1).
 pathSearch = $(firstword $(wildcard $(addsuffix $(2),$(call trailingSlash,$(1)))))
-# Example:
-#$(info make is $(call pathSearch,$(subst ;,$(blank),$(PATH)),*make*))
-#$(info make is $(call pathSearch,$(subst ;,$(blank),$(PATH)),make.exe))
-#$(info make is $(call pathSearch,$(subst ;,$(blank),$(PATH)),mingw*make*))
+# Examples:
+#$(info make is $(call pathSearch,$(subst $(pathSep),$(blank),$(PATH)),*make*))
+#$(info make is $(call pathSearch,$(subst $(pathSep),$(blank),$(PATH)),make.exe))
+#$(info make is $(call pathSearch,$(subst $(pathSep),$(blank),$(PATH)),mingw*make*))
+
+
+# Function systemPathSearch
+#   Look for a single file pattern in the system search path $(PATH).
+#   $(1): File name without path to be searched in the path. Can be file pattern like *.c.
+#   The call of this function returns the first match of the file pattern $(2) in one of
+# the directories in the system search path $(PATH).
+#   Caution: The mechanism failes for system path entries, which contain blanks.
+systemPathSearch = $(call pathSearch,$(call w2u,$(subst $(pathSep),$(blank),$(PATH))),$(1))
+# Examples:
+#$(info make is $(call systemPathSearch,*make*))
+#$(info echo is $(call systemPathSearch,echo.exe))
+#$(info make is $(call systemPathSearch,make.exe))
+#$(info make is $(call systemPathSearch,mingw*make*))
 
 
 # Helper for wildcard searches and UNIX shell calls if the searched paths potentially
@@ -113,7 +136,7 @@ pathSearch = $(firstword $(wildcard $(addsuffix $(2),$(call trailingSlash,$(1)))
 # accepted by $(wildcard).
 #   $(1): A single path, which may contain one or more blanks.
 #   Note, this function must not be called for a list of paths. Such a list would use
-# another blanks as element separator and, consequently, this function would join all paths
+# additional blanks as element separator and, consequently, this function would join all paths
 # from a list.
 #   The function returns the escaped path designation with UNIX path separator characters.
 escapeBlanks = $(subst $(blank),\$(blank),$(call w2u,$(1)))
@@ -137,7 +160,7 @@ hasBlanks = $(if $(word 2,$(1)),true,)
 # contains blanks. The file-path designation of the executable is quoted.
 #   $(1): The designation of a single file. It may contain blanks.
 #   The function returns the quoted designation. In Windows it is embedded in double
-# qioutes, in UNIX the backslash is used to escape the blanks.
+# quotes, in UNIX the backslash is used to escape the blanks.
 quoteExecutable = $(if $(call hasBlanks,$(1)),$(if $(call eq,$(OS),Windows_NT),"$(call u2w,$(1))",$(call escapeBlanks,$(call w2u,$(1)))),$(if $(call eq,$(OS),Windows_NT),$(call u2w,$(1)),$(call w2u,$(1))))
 
 # Recursive search for files. Use cases are similar to those of built-in function wildcard.
