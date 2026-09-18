@@ -15,18 +15,18 @@ LOCATE_TOOLS_INCLUDED := 1
 getToolPath = $(call u2w,$(1)$(2))
 
 # Check for the presence of a file, $(1). Note, $(1) may contains blanks.
-#   The function returns either the (confirmed) file-path or nothing if the file is not
+#	The function returns either the (confirmed) file-path or nothing if the file is not
 # existent.
 checkForFile = $(wildcard $(call escapeBlanks,$(call w2u,$(1))))
 #$(info This file exists: $(if $(call checkForFile,makefile/locateTools.mk),true (as $(call checkForFile,makefile/locateTools.mk)),false))
 
 # Check if a tool named $(2) can be found and started from directory $(1). $(1) may contain
 # blanks and it ends with a trailing backslash.
-#   If the file is not found in $(1) then is is searched in the system search path. Please
+#	If the file is not found in $(1) then is is searched in the system search path. Please
 # note, that path entries containing blanks are not supported. Executables in such
 # directories won't be found.
-#   If the file is found then it is returned as quoted file path designation.
-#   If it is not found there then an error is raised.
+#	If the file is found then it is returned as quoted file path designation.
+#	If it is not found there then an error is raised.
 getAndValidateToolPath = $(call quoteExecutable,$(or $(call checkForFile,$(call getToolPath,$(1),$(2))),$(call systemPathSearch,$(2)),$(error Configured tool $(2) doesn't exist. Please check the specified installation path $(1) and your system PATH variable)))
 
 # Different releases of GCC use different executable names.
@@ -65,12 +65,12 @@ export PATH := $(dir $(gcc))$(pathSep)$(PATH)
 
 .PHONY: versionGCC helpGCC builtinMacrosGCC
 versionGCC:
-    $(info GCC: $(call u2w,$(gcc)))
-    $(gcc) --version
+	$(info GCC: $(call u2w,$(gcc)))
+	$(gcc) --version
 helpGCC:
-    $(gcc) -v --help
+	$(gcc) -v --help
 builtinMacrosGCC:
-    $(gcc) -dM -E - < nul
+	$(gcc) -dM -E - < nul
 
 # Temporarily uncomment the next line to double check the correct selection of tool
 # binaries.
