@@ -18,41 +18,40 @@ Device & Known quantity & Unknown quantity & Meaning \\
 
 % Table entries start here.
 
-Node & - & \ident{U\_$<$nameOfNode$>$} & Voltage potential of node.
-There's no such unknown for the ground node \\
+Node & - & \ident{U\_$<$nameOfNode$>$} & Node voltage. There's no such unknown for the ground node, which has voltage zero by definition. \\
 \hline
 
 Passive device & - & - & Passive devices, R, Y, C and L, don't introduce
 knowns or unknowns to the LES. They only appear as symbols in the computed
-results \\
+results. \\
 \hline
 
 Constant voltage source & \ident{$<$nameOfDev$>$} & - & Given voltage of
-source; 1st connected node is plus pole \\
+source; 1st connected node is plus pole. \\
 \hline
 
 Constant current source & \ident{$<$nameOfDev$>$} & - & Given current through
-source flowing from 1st to 2nd connected node \\
+source flowing from 1st to 2nd connected node. \\
 \hline
 
 Op-amp & - & \ident{I\_$<$nameOfDev$>$} & Output current of op-amp. The current
-flows from ground node to output node, then into the network\\
+flows from ground node to output node, then into the network. \\
 \hline
 
 Voltage controlled voltage source & - & \ident{I\_$<$nameOfDev$>$} &
-Current through source flowing from 2nd to 1st connected node \\
+Current through source flowing from 2nd to 1st connected node. \\
 \hline
 
 Current controlled voltage source & - & \ident{I\_$<$nameOfDev$>$} &
-Current through source flowing from 2nd to 1st connected node \\
+Current through source flowing from 2nd to 1st connected node. \\
 \hline
 
 Voltage controlled current source & - & \ident{I\_$<$nameOfDev$>$} &
-Current through source flowing from 1st to 2nd connected node \\
+Current through source flowing from 1st to 2nd connected node. \\
 \hline
 
 Current controlled current source & - & \ident{I\_$<$nameOfDev$>$} &
-Current through source flowing from 1st to 2nd connected node \\
+Current through source flowing from 1st to 2nd connected node. \\
 \hline
 
 Current probe & - & \ident{I\_$<$nameOfDev$>$} or \ident{$<$nameOfDev$>$}
@@ -61,7 +60,7 @@ node.
 
 The prefix \ident{I\_} in the name of the unknown current is omitted
 if the probe's name already begins with \ident{I\_} (case sensitive
-comparison) \\
+comparison). \\
 \hline
 
 \end{tabular}
@@ -77,7 +76,7 @@ equations. These equations basically describe the current balances at the
 nodes: since the nodes are conceptually free of the capabilty of storing
 charge all influent currents are in sum at any time equal to the sum of
 affluent currents. If the flow direction is expressed by a current's sign
-than this statement is simplified to the sum of currents is null at any
+then this statement is simplified to the sum of currents is zero at any
 time. This is applied to most of the nodes and gives us a number of
 equations.
 
@@ -111,7 +110,7 @@ one dependent equation per sub-circuit.
 A voltage is always defined as the difference of two voltage potentials,
 in our application the voltage potential difference between two nodes
 only. The last, dependent node of any sub-circuit is called the ground
-node and gets the arbitrary voltage potential null at any time by
+node and gets the arbitrary voltage potential zero at any time by
 definition. Which means that voltages were even defined between nodes of
 different, unconnected sub-circuits, although this is not described by the
 schematic and physically undefined. To avoid misleading results, which
@@ -124,7 +123,7 @@ The terms of the current balance equation of a particular node $N$ are
 principally dictated by the linear devices connected to this node as they
 conduct the in- and affluent currents but there are also some additional
 constraints, mainly introduced by the sources. How the equation system is
-build up from the list of devices (i.e. the netlist) is documented in the
+build up from the list of devices (i.e., the netlist) is documented in the
 next sections. Table \ref{tabUnknownsOfLES} gives an overview on the
 knowns and unknowns of the evolving equation system. The quantities listed
 in the table can be referenced when specifying a user-defined result in
@@ -150,11 +149,11 @@ voltage between the two ends of device $s$, is the difference of the
 voltage potentials of the nodes the device is connected to. The sign of a
 current is a matter of definition and \linnet{} defines it to be positive
 if it is influent. We get: $I_s=s(U_{n_j} - U_{n_i})$, where $n_i$ is the
-node under progress, i.e. the node the current balance is made for and
+node under progress, i.e., the node the current balance is made for and
 $n_j$ is the other node the device is connected to. If these terms are
 taken for all devices, which are connected to node $n_i$ than the current
 balance of this node is widely done for this node; the other side of the
-equation simply is a null.
+equation simply is a zero.
 
 \begin{figure}
   \centering
@@ -276,7 +275,7 @@ This current is unknown. It is defined to be the current flowing out of
 the source's plus pole; it's influent and thus positive at the node
 connected to the plus pole and affluent or negative at the minus pole's
 connetced node. We get a second additional column, which has a pair of
-$\pm 1$ as only non null coefficients (or a single signed one if one of
+$\pm 1$ as only non zero coefficients (or a single signed one if one of
 the nodes would be the ground node).
 
 As an example, the source $U_0$ would be connected with its plus and minus
@@ -301,7 +300,7 @@ extended to:
 Only the constant sources, either voltage or current, introduce the knowns
 into the LES. At least one known, hence constant source, is required
 otherwise \linnet{} refuses to compute the circuit. The system would
-remain unstimulated and all voltages and currents would anyway be null.
+remain unstimulated and all voltages and currents would anyway be zero.
 
 If more than one constant source is used then the system changes to a MIMO
 system and the result function for an unknown has several terms to
@@ -329,12 +328,12 @@ or full result.
 \section{Constant current source}
 
 A constant current source is modeled as a known current, which is
-influent (i.e. positive) at the node connected to the source's plus pole
-and affluent (i.e. negative) at its minus pole's connected node. This
+influent (i.e., positive) at the node connected to the source's plus pole
+and affluent (i.e., negative) at its minus pole's connected node. This
 leads to a new column for the additional known, which has just a pair of
 $\pm 1$ coefficients at the rows related to the connected nodes (and hence
 only a single signed one if one of these nodes is the ground node). All
-other coefficients in this column remain null.
+other coefficients in this column remain zero.
 
 As an example, the current source $I_0$ would be connected with its plus
 and minus pole between the nodes $N_1$ and $N_3$, respectively, of the
@@ -395,7 +394,7 @@ The constant current source doesn't add any unknowns to the LES.
 
 Linear operational amplifier circuits are based on the principle, that the
 voltage between the two inputs is highly amplified but fed back to one of
-the inputs such that the input voltage is compensated till close to null.
+the inputs such that the input voltage is compensated till close to zero.
 The remaining input voltage is in the magnitude of a few micro Volts only
 and the output voltage in the magnitude of a few volts. The high dynamic
 capabilities of the implementation of the op-amp ensure that this balance
@@ -409,7 +408,7 @@ range.)
 
 The real op-amp is modeled by \linnet{} in an idealized manner. The
 amplification is made infinite and the feedback by the outer circuitry
-thus leads to a voltage of exactely null between the inputs. The dynamic
+thus leads to a voltage of exactely zero between the inputs. The dynamic
 capabilities become infinitely fast; there's no reaction time, the
 equations hold at any time.
 
@@ -418,11 +417,11 @@ linear behavior of the true implementation of an op-amp and can't be
 modeled as such by \linnet{}. Instead, \linnet{} approaches this behavior
 by a controlled voltage source, which is connected between ground and the
 op-amp's output. The voltage is controlled such that the input voltage
-becomes null.
+becomes zero.
 
 Modelling an op-amp like this has several important implications. Most
 striking, this model doesn't require any distinction of the two inputs of
-the op-amp. The output condition simply is that the input voltage be null;
+the op-amp. The output condition simply is that the input voltage be zero;
 only the real implementation of the circuitry requires careful selection
 of the right input so that the feedback leads to a voltage compensation
 rather than to a boost. Contrariwise, any kind of circuit, which founds on
@@ -476,15 +475,15 @@ The dependency of Uin2 on I_Uin2:
 \begin{figure}[tb]
 \begin{center}
 \includegraphics[width=5.96cm]{OpampLPWithDifferingGnds_equivalent}
-\caption{Internal, computed model of 2\textsuperscript{nd} variant of PI-controller}
+\caption{Internal, computed model of 2nd variant of PI-controller}
 \label{figOpampLPWithDifferingGnds_equivalent}
 \end{center}
 \end{figure}
 
-However, the input impedance (i.e. the transfer function $Z$ from
+However, the input impedance (i.e., the transfer function $Z$ from
 $I\left(U_{in}\right)$ to $U_{in}$) differs significantly. Variant $1$ of
-the circuit yields $R_{in}$, which is what we expect but variant $2$ has an
-input impedance of infinite (represented by $\frac{1}{0}$ in the result
+the circuit yields $R_{in}$, which is what we expect but variant $2$ has
+an input impedance of infinite (represented by $\frac{1}{0}$ in the result
 log). The infinite input impedance is explained by schematic diagram
 \ref{figOpampLPWithDifferingGnds_equivalent} that shows how \linnet{}
 models the op-amp in this case. The input connectors are open ended and no
@@ -514,8 +513,8 @@ figure \ref{figOpampLPWithDifferingGnds_variant3}. The controlled voltage
 source in \linnet{}'s internal model of the op-amp now doesn't have any
 impact on the op-amp's input voltage; the current it can drive only flows
 through the resistor in the feedback line. The equation that the op-amp's
-input voltage needs to be null can't be fulfilled, the system determinant
-is null and the computation fails with error message.
+input voltage needs to be zero can't be fulfilled, the system determinant
+is zero and the computation fails with error message.
 
 Using an op-amp means to carefully consider the right choice of the ground
 node! Please refer to section \ref{secGndNode}, too.
@@ -531,7 +530,7 @@ system. It is the current flowing from the ground node through the device
 and out of its output. The name of this unknown is derived from the name
 of the op-amp, the prefix \ident{I\_} is added. 
 
-The new unknown current means a new column in the LES. It contains null
+The new unknown current means a new column in the LES. It contains zero
 coefficients anywhere but in the row that holds the current balance
 of the op-amp's output node. Here, the unknown current is influent and a
 one appears as coefficient.
@@ -587,7 +586,7 @@ definition.
 \includegraphics[width=5.96cm]{OpampLPWithDifferingGnds_variant3}
 
 \end{tabular}
-\caption{3\textsuperscript{rd} variant of PI-controller with invalid choice of ground node}
+\caption{3rd variant of PI-controller with invalid choice of ground node}
 \label{figOpampLPWithDifferingGnds_variant3}
 \end{center}
 \end{figure}
@@ -609,7 +608,7 @@ the voltage source is connected to nodes $n_i$ and $n_j$, $k$ is its
 dimensionless device constant and the control voltage is the voltage
 potential difference between the nodes $n_u$ and $n_v$.
  
-The additional equation means a further row to the LES, which has all null
+The additional equation means a further row to the LES, which has all zero
 coefficients but a pair of $\pm 1$ and a pair of $\pm k$. (Both pairs can
 reduce to a single signed one or $k$ if one of the references nodes is a
 ground node. If both nodes of the control voltage are the ground node then
@@ -623,7 +622,7 @@ current flowing out of the source's plus pole, which is the first
 connected node. This current is influent and thus positive at the node
 connected to the plus pole and affluent or negative at the minus pole's
 connected node. We get an additional column in the LES, which has a pair
-of $\pm 1$ as only non null coefficients (or a single signed one if one of
+of $\pm 1$ as only non zero coefficients (or a single signed one if one of
 the connected nodes would be the ground node).
 
 
@@ -660,7 +659,7 @@ The additional equation is $U_{n_i} - U_{n_j} - k I_c = 0$;
 the voltage source is connected to nodes $n_i$ and $n_j$, $k$ is its
 device constant and $I_c$ is the control current, an unknown of the LES.
 
-The additional equation means a further row to the LES, which has all null
+The additional equation means a further row to the LES, which has all zero
 coefficients but a pair of $\pm 1$ (or a single signed one if one of the
 connected nodes would be the ground node) and a single signed $k$.
 
@@ -672,7 +671,7 @@ current flowing out of the source's plus pole, which is the first
 connected node. This current is influent and thus positive at the node
 connected to the plus pole and affluent or negative at the minus pole's
 connected node. We get an additional column in the LES, which has a pair
-of $\pm 1$ as only non null coefficients (or a single signed one if one of
+of $\pm 1$ as only non zero coefficients (or a single signed one if one of
 the connected nodes would be the ground node).
 
 
@@ -750,7 +749,7 @@ positive at this node. Vice versa, it is flowing back into the source at
 the first node in the netlist or affluent or negative at this node. A pair
 of $\pm k$ appears in the column of the LES that belongs to the unknown
 control current $I_c$ (or a single signed $k$ if one of the connected
-nodes is the ground node). Besides null coefficients this column can also
+nodes is the ground node). Besides zero coefficients this column can also
 contain the same pattern from other instances of such sources, if they are
 controlled by the same unknown current, and it will contain a pair of $\pm
 1$ from the referenced current probe itself. If the devices share their
@@ -784,12 +783,12 @@ the current through this wire becomes a new unknown of the LES and can be
 queried in result specifications.
 
 Actually, the current probe is a constant voltage source with voltage
-null. Please refer to section \ref{secModellingDevs_ConstVoltSrc} to see
+zero. Please refer to section \ref{secModellingDevs_ConstVoltSrc} to see
 how such a source is modeled. The current probe is different in two
 aspects: The way, the name of the new unknown is derived from the device
 name is different and no additional known (the constant source voltage) is
-introduced to the LES since the voltage is null by definition. All
-according terms of the result would have to be taken times null anyway.
+introduced to the LES since the voltage is zero by definition. All
+according terms of the result would have to be taken times zero anyway.
 
 The polarity of the unknown current through the current probe is defined
 as for the current sources: The unknown current is the one, which flows
