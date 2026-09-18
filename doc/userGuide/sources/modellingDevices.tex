@@ -18,7 +18,7 @@ Device & Known quantity & Unknown quantity & Meaning \\
 
 % Table entries start here.
 
-Node & - & \ident{U\_$<$nameOfNode$>$} & Node voltage. There's no such unknown for the ground node, which has voltage zero by definition. \\
+Node & - & \ident{U\_$<$nameOfNode$>$} & Voltage at node. There's no such unknown for the ground node, which has voltage zero by definition. \\
 \hline
 
 Passive device & - & - & Passive devices, R, Y, C and L, don't introduce
@@ -392,6 +392,14 @@ The constant current source doesn't add any unknowns to the LES.
 } % Sample circuit: Op-amp LP 2 times with two different ground nodes
 
 
+\begin{figure}[tb]
+\begin{center}
+\includegraphics[width=5.96cm]{OpampLPWithDifferingGnds_equivalent1}
+\caption{Internal, computed model of 1st variant of PI-controller}
+\label{figOpampLPWithDifferingGnds_equivalent1}
+\end{center}
+\end{figure}
+
 Linear operational amplifier circuits are based on the principle, that the
 voltage between the two inputs is highly amplified but fed back to one of
 the inputs such that the input voltage is compensated till close to zero.
@@ -417,7 +425,10 @@ linear behavior of the true implementation of an op-amp and can't be
 modeled as such by \linnet{}. Instead, \linnet{} approaches this behavior
 by a controlled voltage source, which is connected between ground and the
 op-amp's output. The voltage is controlled such that the input voltage
-becomes zero.
+becomes zero. As an example, figure
+\ref{figOpampLPWithDifferingGnds_equivalent1} illustrates \linnet's
+calculation model for the upper circuit shown in figure
+\ref{figOpampLPWithDifferingGnds}.
 
 Modelling an op-amp like this has several important implications. Most
 striking, this model doesn't require any distinction of the two inputs of
@@ -440,7 +451,7 @@ decision to model the output by a voltage source, whose other end is
 connected to ground means that the full picture of the solution depends on
 the choice of the ground node. An example is given. A PI-controller is
 implemented twice in a single netlist, where the only difference (besides
-indexing of the object names) is the different choice of the ground
+indexing of the device names) is the different choice of the ground
 node. Please refer to figure \ref{figOpampLPWithDifferingGnds}.
 
 \linnet{} computes the same transfer function from input to output voltage
@@ -474,9 +485,9 @@ The dependency of Uin2 on I_Uin2:
 
 \begin{figure}[tb]
 \begin{center}
-\includegraphics[width=5.96cm]{OpampLPWithDifferingGnds_equivalent}
+\includegraphics[width=5.96cm]{OpampLPWithDifferingGnds_equivalent2}
 \caption{Internal, computed model of 2nd variant of PI-controller}
-\label{figOpampLPWithDifferingGnds_equivalent}
+\label{figOpampLPWithDifferingGnds_equivalent2}
 \end{center}
 \end{figure}
 
@@ -485,7 +496,7 @@ $I\left(U_{in}\right)$ to $U_{in}$) differs significantly. Variant $1$ of
 the circuit yields $R_{in}$, which is what we expect but variant $2$ has
 an input impedance of infinite (represented by $\frac{1}{0}$ in the result
 log). The infinite input impedance is explained by schematic diagram
-\ref{figOpampLPWithDifferingGnds_equivalent} that shows how \linnet{}
+\ref{figOpampLPWithDifferingGnds_equivalent2} that shows how \linnet{}
 models the op-amp in this case. The input connectors are open ended and no
 current will ever flow into the circuit; this is the meaning of an
 infinite input impedance.\footnote{
@@ -512,9 +523,11 @@ capacitor in the feedback line to be the ground node, please refer to
 figure \ref{figOpampLPWithDifferingGnds_variant3}. The controlled voltage
 source in \linnet{}'s internal model of the op-amp now doesn't have any
 impact on the op-amp's input voltage; the current it can drive only flows
-through the resistor in the feedback line. The equation that the op-amp's
-input voltage needs to be zero can't be fulfilled, the system determinant
-is zero and the computation fails with error message.
+through the resistor in the feedback line. This can be seen most easily in
+figure \ref{figOpampLPWithDifferingGnds_equivalent3}, which illustrates
+\linnet's internal calculation model of the circuit. The equation that the
+op-amp's input voltage needs to be zero can't be fulfilled, the system
+determinant is zero and the computation fails with error message.
 
 Using an op-amp means to carefully consider the right choice of the ground
 node! Please refer to section \ref{secGndNode}, too.
@@ -592,6 +605,13 @@ definition.
 \end{figure}
 } % Same op-amp LP, here with third choice of gnd node
 
+\begin{figure}[tb]
+\begin{center}
+\includegraphics[width=5.96cm]{OpampLPWithDifferingGnds_equivalent3}
+\caption{Internal, computed model of 3rd variant of PI-controller}
+\label{figOpampLPWithDifferingGnds_equivalent3}
+\end{center}
+\end{figure}
 
 \section{Voltage controlled voltage source}
 

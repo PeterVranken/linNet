@@ -1,0 +1,66 @@
+% See https://holatex.app/playground.html# for an online viewer.
+
+\documentclass[tikz]{standalone} % Standalone: Only graphics export.
+\usepackage[european,siunitx]{circuitikz}
+\usetikzlibrary{arrows.meta}
+\usepackage{listings}
+\lstset{basicstyle=\footnotesize\ttfamily}
+\begin{document}
+
+  \newcommand{\eq}{=}
+  \tikzset{ameter/.style={rmeterwa, t=A}}
+  \begin{circuitikz}
+  %\begin{circuitikz}[american voltages, american currents]
+
+    \tikzset{>=Triangle} % Define tip of arrows drawn with [->]
+    \ctikzset{voltage=straight}
+
+    \def\lR{2.5}        % Length of device like R
+    \def\dFbY{2.5}      % Delta in direction Y of feedback line
+    \def\dOpX{1*\lR}    % Move OP-emulating source in x to middle of feedback line
+    \def\sizeY{\lR}     % Height Uin
+    \def\yOut{0.8*\lR}  % Height Uout, should resemble omitted OP
+    \def\lUio{0.8}      % Length of I/O connectors
+    \def\gapUio{0.3}    % Gap between I/O connector and voltage arrow
+
+    % Input, continued by feedback line.
+    \draw (0,\sizeY) coordinate(in)
+      to[R,l=$R{{in}_1}$,*-*] ++(\lR,0) coordinate(RhtRin)
+      -- ++(0,\dFbY) 
+      to[C,l=$C_1$] ++(\lR,0)
+      to[R,l=$R_{{fb}_1}$] ++(\lR,0) coordinate(RhtRfb);
+    
+    % Ground line.
+    \coordinate(origin) at (0,0);
+    \draw (origin)
+      to[short,*-*] (origin-|RhtRin) coordinate(BotRin)
+      to[short,-*] ++(\dOpX,0) coordinate(BotOp+)
+      to[short,-*] ($(origin-|RhtRfb)+(\lUio,0)$) coordinate(gndOut);
+    
+    % OP-emulating source, direction output, to Rfb1.
+    \draw (BotOp+)
+       to[V,v<=$OP_1$] ++(0,\yOut) coordinate(here)
+       -- (RhtRfb|-here) coordinate(BotRhtFb)
+       -- (RhtRfb);
+    
+    % Ground node.
+    \draw (BotOp+)
+      -- ++(0,-0.5) node[rground, label=left:$gnd_1$]{};
+
+    % Voltage arrow for input voltage Uin1.
+    \draw[->] ($(in)+(0,-\gapUio)$) -- node[midway,left]{$U_{{in}_1}$} ($(origin)+(0,\gapUio)$);
+
+    % Voltage arrow for input voltage Uop1in.
+    \draw[->] ($(RhtRin)+(0,-\gapUio)$) 
+      -- node[midway,left]{$U_{OP_{1_{in}}}\eq 0$} ($(BotRin)+(0,\gapUio)$);
+
+    % Connectors for output voltage.
+    \draw (BotRhtFb) to[short, *-*] ++(\lUio,0) coordinate(out);
+
+    % Voltage arrow for output voltage.
+    \draw[->] ($(out)+(0,-\gapUio)$) -- node[midway,right]{$U_{{out}_1}$}
+      ($(gndOut)+(0,\gapUio)$);
+
+  \end{circuitikz}
+
+\end{document}

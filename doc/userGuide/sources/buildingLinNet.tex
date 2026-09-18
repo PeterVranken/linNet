@@ -36,6 +36,7 @@ software have been tested with:
   \item GCC 4.5.2 (32 Bit, Windows 7)
   \item GCC 4.8.1 (64 Bit, Windows 7)
   \item mingw-w64-x86\_64-8.1.0-posix-seh-rt\_v6-rev0 (64 Bit, Windows 10)
+  \item mingw-x86\_64-11.2.0-release-win32-sjlj-rt\_v9-rev1 (64 Bit, Windows 11)
   \item mingw-w64-gcc-13.2.0-x64 (64 Bit, Windows 11)
   \item mingw-w64-gcc-mcf\_20260501\_16.1.0\_x86-msvcrt (32 Bit, Windows 11)
   \item mingw-w64-gcc-mcf\_20260501\_16.1.0\_x64-msvcrt (64 Bit, Windows 11)
@@ -178,7 +179,7 @@ share the same file stream, too; here, we'd expect a similar mess.
 
 For module \ident{pci\_parserCircuit}, the parser of the circuit netlist
 files, the decision to use a few global variables (e.g. for error
-reporting by side effect) has just been taken for convenience, to keep the
+reporting by side effect) has been taken just for convenience, to keep the
 code lean. An application for a fully reentrant implementation was simply
 not in the scope of the development. It's however straightforward and only
 little effort to make the parser reentrant. One just has to put the few
