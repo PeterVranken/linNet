@@ -102,7 +102,10 @@ void log_initModule()
 #endif
 
 #ifdef  DEBUG
-    /* Check if patch of snprintf is either not required or properly installed. */
+    /* Elder revisions of the GCC c-lib have a bad snprintf, which may not properly
+       terminate truncated strings. See snprintf_patch() in file src/environment/snprintf.h
+       for details. Here, we check if the patch of snprintf is either not required or
+       properly installed. */
     char buf[3] = {[2] = '\0'};
     
     /* The warning "format-truncation" is locally switched off. Justification: The
@@ -112,8 +115,9 @@ void log_initModule()
 #pragma GCC diagnostic ignored "-Wformat-truncation"
     snprintf(buf, 2, "%s World", "Hello");
 #pragma GCC diagnostic pop
+    /* If this assertion fails then enable the patch of snprintf in file
+       src/environment/snprintf.h. */
     assert(strlen(buf) == 1);
-
 #endif
 } /* End of log_initModule */
 

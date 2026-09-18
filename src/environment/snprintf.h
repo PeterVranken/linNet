@@ -37,8 +37,8 @@
 
 /* Find out if we have a revision of GCC, which requires a patch of snprintf: The DEBUG
    compilation executes an according test at the beginning of execution (see file
-   code/logger/log_logger.c, l.107). Try with and without the patch and see if you run into
-   the assertion. Use the patch only if the assertion fires when the patch is off. */
+   src/logger/log_logger.c, l.107). Try with and without the patch and see if you run into
+   the assertion. Use the patch only if the assertion fails when the patch is off. */
 #if defined(__GNUC__)
 # if 10000*__GNUC__ + 100*__GNUC_MINOR__ + __GNUC_PATCHLEVEL__ <= 40801 \
      &&  defined(__MINGW64__)
@@ -48,13 +48,7 @@
        (Checked for mingw-i686-8.1.0-release-win32-dwarf-rt_v6-rev0 and
        mingw-w64-x86_64-8.1.0-posix-seh-rt_v6-rev0.) */
 #  define DO_PATCH_SNPRINTF
-# elif 10000*__GNUC__ + 100*__GNUC_MINOR__ + __GNUC_PATCHLEVEL__ == 160100      \
-       || 10000*__GNUC__ + 100*__GNUC_MINOR__ + __GNUC_PATCHLEVEL__ == 130200
-# else
-#  error Double-check if patch of snprintf is still needed for this revision of GCC
 # endif
-#else
-# error Double-check if patch of snprintf is needed for this compiler or c library
 #endif
 
 #ifdef DO_PATCH_SNPRINTF

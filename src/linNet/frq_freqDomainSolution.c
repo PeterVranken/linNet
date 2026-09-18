@@ -3547,7 +3547,8 @@ boolean frq_createFreqDomainSolution( const frq_freqDomainSolution_t * * const p
                                           ) == 1;
 
                 /* Figure out, which situation we have. */
-                const coe_coef_t *pAlgebraicNum, *pAlgebraicDenom;
+                const coe_coef_t *pAlgebraicNum = NULL
+                               , *pAlgebraicDenom = NULL;
 
                 if(success)
                 {

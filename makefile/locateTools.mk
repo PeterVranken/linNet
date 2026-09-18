@@ -58,14 +58,19 @@ rm := $(call getAndValidateToolPath,$(UNIX_TOOLS_BIN)\,rm$(gcc-suffix))
 # and as is executing this makefile fragment.
 make := $(call quoteExecutable,$(MAKE))
 
+# Some GCC installations require that the bin folder, where gcc.exe is located, is in the
+# system search path.
+export PATH := $(dir $(gcc))$(pathSep)$(PATH)
+#$(info PATH: $(PATH))
+
 .PHONY: versionGCC helpGCC builtinMacrosGCC
 versionGCC:
-	$(info GCC: $(call u2w,$(gcc)))
-	$(gcc) --version
+    $(info GCC: $(call u2w,$(gcc)))
+    $(gcc) --version
 helpGCC:
-	$(gcc) -v --help
+    $(gcc) -v --help
 builtinMacrosGCC:
-	$(gcc) -dM -E - < nul
+    $(gcc) -dM -E - < nul
 
 # Temporarily uncomment the next line to double check the correct selection of tool
 # binaries.
