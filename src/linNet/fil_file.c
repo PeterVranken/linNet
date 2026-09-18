@@ -35,21 +35,21 @@
  * Include files
  */
 
-#include <stdlib.h>
-#include <dirent.h>
-#include <stdio.h>
-#include <sys/stat.h>
-#include <string.h>
-#include <stdarg.h>
-#include <unistd.h>
 #include <assert.h>
+#include <dirent.h>
+#include <errno.h>
+#include <stdarg.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/stat.h>
+#include <unistd.h>
 
 #include "types.h"
 #include "smalloc.h"
 #include "snprintf.h"
 #include "lin_linNet.h"
 #include "fil_file.h"
-
 
 /*
  * Defines
