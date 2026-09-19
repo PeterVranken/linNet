@@ -47,7 +47,7 @@ linnet -l -o opFilter.cnl
 \end{verbatim}
 
 The most natural thing to do is to compute the transfer function of the
-filter, i.e. the dependency of the output signal on the input signal as a
+filter, i.e., the dependency of the output signal on the input signal as a
 complex function. The line \verb+PLOT G Uout Uin+ specifies this result.
 \linnet{} responds with:
 \begin{verbatim}
@@ -60,7 +60,7 @@ The dependency of Uout on Uin:
                     +R2
 \end{verbatim}
 
-The second requested result, \ident{Gf}, uses the keyword \code{RES} in
+The second requested result $G_f$ uses the keyword \code{RES} in
 the specification. A full result is demanded. \linnet{} responds with:
 \begin{verbatim}
 RESULT - User-defined result Gf:
@@ -325,7 +325,7 @@ result definition is valid or invalid, respectively.
 The constraint disappears for SIMO systems: If the system only has a
 single input then the relationship between two dependent quantities is well
 defined; both follow a modulation of the only input in a certain,
-computable way and hence their relationship is known.
+computable way and hence their complex ratio is known.
 
 In principle, this behavior is natural and easy to understand but it might
 be hard to accept due to the in practice typically very similar names of a
@@ -362,7 +362,7 @@ If we run the generated Octave script \file{Zin.m} to plot the input
 impedance then the standard Bode plot settings are used. Which means that
 the $y$ axis is scaled in decibel. For the purpose of an impedance value
 maybe not the most convenient convention. To get the values in Ohm
-you will have to inverse the dB definition, if you e.g. read a value of
+you will have to inverse the dB definition, if you, e.g., read a value of
 80\,dB in the plot then type \verb+10^(80/20)+ on the Ocatve command
 line to get the impedance in Ohm.
 
@@ -389,7 +389,7 @@ demanded ratio of both will become positive; this is the conventional sign
 definition for an output impedance.
 
 Please note, that the extension of the circuit doesn't necessarily need to
-be done in a separate step. Other user-defined \code{PLOT} results, e.g.
+be done in a separate step. Other user-defined \code{PLOT} results, e.g.,
 the transfer function $G$, do not suffer from this additional current
 source. If we demanded the full result for the output voltage then we'd
 get a changed formula, now with two addends instead of a single term: Each
@@ -494,7 +494,7 @@ that the circuit's output impedance has nearly the same value as $R_c$.
 According to our requirement we choose a value of $R_c=6.8$\,k, which
 means $R_{e_{eff}} \simeq 68\,\Omega$.
 
-The operating point of the collector (i.e. the voltage at input voltage
+The operating point of the collector (i.e., the voltage at input voltage
 zero) should be somewhat above the middle of the supply voltage to get a
 symmetric limit for both polarities of the input voltage. Given $R_c=6.8$\,k
 we want to have a collector current
@@ -597,7 +597,7 @@ The dependency of U_out on Uin:
 \end{verbatim}
 
 Due to our initial considerations we take this result for high input
-frequencies, i.e. for high frequencies of $U_{in}$. The amplification $V$
+frequencies, i.e., for high frequencies of $U_{in}$. The amplification $V$
 is got as limit $s \to \inf$. We take the quotient of the numerator and
 denominator terms of highest power in s:
 
