@@ -76,7 +76,7 @@ endif
 # Where to place all generated products? The variable holds the build-configuration
 # dependent folder name to place the artifacts in. The name should distinguish between all
 # supported target systems and build configurations.
-targetDirName := $(if $(findstring Windows,$(OS)),$(if $(findstring x86,$(MINGW_HOME)),win32,win64)/,$(OS)/)
+targetDirName := $(if $(findstring Windows,$(OS)),win,$(OS))/
 #$(info $$(targetDirName)="$(targetDirName)")
 
 # Where to place all generated products? The variable holds the path of the root folder of
