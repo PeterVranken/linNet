@@ -3,8 +3,8 @@
 
 \linnet{} is distributed as source code together with makefiles to compile
 and link the code. The distribution contains ready-to-use binaries for
-Windows and as debug and production compilation\footnote{Windows 11 has
-been used.}. In all other environments a build of the sources needs to be
+Windows, as debug and production compilation\footnote{Windows 11 has been
+used.}. In all other environments a build from the sources needs to be
 done prior to the use of \linnet{}.
 
 To start the build you need to open a shell window and \code{cd} into the
@@ -21,8 +21,10 @@ The makefile has some more useful targets and options than just
 
 The makefile -- actually it is a set of nested makefiles -- is compatible
 with the GNU make processor of at least revision 3.81; 3.80 is not
-sufficient. On a Windows platform, it needs to be the MinGW port of GNU
-make; the Cygwin port has another shell interface and doesn't work.
+sufficient.\footnote{Latest tests have been run with GNU make 4.4.1 and it
+is recommended to use a recent revision of GNU make.} On a Windows
+platform, it needs to be the MinGW port of GNU make; the Cygwin port has
+another shell interface and doesn't work.
 
 Different derivates of make always tended to be quite incompatible to one
 another and other derivates of make will hence require heavy modifications
@@ -33,26 +35,16 @@ GCC in the MinGW 32 and 64 Bit ports. The compilation and the compiled
 software have been tested with:
 
 \begin{itemize}
-  \item GCC 4.5.2 (32 Bit, Windows 7)
-  \item GCC 4.8.1 (64 Bit, Windows 7)
-  \item mingw-w64-x86\_64-8.1.0-posix-seh-rt\_v6-rev0 (64 Bit, Windows 10)
+  \item mingw-i686-8.1.0-release-win32-dwarf-rt\_v6-rev0 (32 Bit, Windows 11)
+  \item mingw-w64-x86\_64-8.1.0-posix-seh-rt\_v6-rev0 (64 Bit, Windows 11)
   \item mingw-x86\_64-11.2.0-release-win32-sjlj-rt\_v9-rev1 (64 Bit, Windows 11)
+  \item GCC 12.2.0, x86\_64-posix-seh-rev2 (64 Bit, Windows 11)
   \item mingw-w64-gcc-13.2.0-x64 (64 Bit, Windows 11)
   \item mingw-w64-gcc-mcf\_20260501\_16.1.0\_x86-msvcrt (32 Bit, Windows 11)
   \item mingw-w64-gcc-mcf\_20260501\_16.1.0\_x64-msvcrt (64 Bit, Windows 11)
 \end{itemize}
 
-Other revisions may cause problems: Severe incompatibilities, which had to
-be tackled by conditional code, have been found even between these
-versions (see below).
-
-The build process has been designed to support the compilation under Linux
-and Mac OS, too. GNU make's \code{if}/\code{else}/\code{endif} statements
-have been applied to do so. Unfortunately, this has been barely tested and
-might not work out of the box. Particularly, you should have a look at the
-tool localization in \file{locateTools.mk} and the compiler and linker
-command line options in \file{compileAndLink.mk}.
-
+\noindent
 The build depends on two packages:
 
 \begin{itemize}
@@ -73,30 +65,34 @@ to your global search path, i.e., ensure that the environment variable
 \ident{PATH} contains these directories.
 
 Or you set the following two environment variables, which are evaluated by
-the makefile:
+the makefile:\footnote{Although designed for Windows, where typically
+several different competing ports of GCC can reside, the environment
+variables can be used for Linux and Mac OS, too.}
 
 \begin{itemize}
-  \item \ident{MINGW\_\-HOME}: This variable explicitly specifies the root
-    folder of the MinGW GCC installation to be used. (The relative path to
-    the GCC executables is added by the makefile.)
+  \item \ident{CC\_BIN}: This variable explicitly specifies the folder
+    with the compiler binaries, i.e., the folder, where \file{gcc.exe} is
+    located in.
   \item \ident{UNIX\_TOOLS\_BIN}: This variable explicitly specifies the
     directory with the UNIX tools, i.e.,
     \file{\%UNIX\_TOOLS\_BIN\%\textbackslash{}echo.exe} or
     \file{\$(UNIX\_TOOLS\_BIN)/echo} should be a valid executable file.
 \end{itemize}
 
-An advantage of the second method is that the variables can be set easily
+An advantage of the second method is that the variables can be set
 still on the command line of the make processor. This allows, e.g., to
 switch on the fly between 32 Bit and 64 Bit builds, and it overrules a
 persistent setting made in the global system search path variable
 \ident{PATH}.
 
-Please refer to file \file{locateTools.mk} for details.\footnote{Although
-designed for Windows, where typically several different competing ports of
-GCC can reside, the environment variable can be used for Linux and Mac OS,
-too. Don't bother with the name but let the variable point to the parent
-folder of GCC's bin folder.}
-
+The build process has been designed to support the compilation under Linux
+and Mac OS, too. GNU make's \code{if}/\code{else}/\code{endif} statements
+have been applied to do so. Unfortunately, this has been barely tested and
+might not work out of the box. In case of doubts, you should have a look
+at the tool localization in \file{locateTools.mk} and at the compiler and
+linker command line options in \file{compileAndLink.mk}.
+\file{locateTools.mk} offers some debugging support; look for commented
+\code{\$(info ...)} statements and uncomment them temporarily.
 
 \subsection{Resource compiler}
 
@@ -107,34 +103,24 @@ associations between \linnet{} in- and output files and the executable in
 the file system browser.
 
 In the makefile the according build rules are placed in
-\code{if}/\code{endif} clauses; they should have no effect under either
-Linux or Mac OS. Similar mechanisms will probably exist for these operating
-systems as well. You may consider to extend the makefiles by adding
-appropriate \code{else} paths; an OS indicating variable already exists.
+\code{if}/\code{endif} clauses; on a Linux or Mac OS system, they have no
+effect. Similar mechanisms will probably exist for these operating systems
+as well. You may consider to extend the makefiles by adding appropriate
+\code{else} paths; an OS indicating variable already exists.
 
 
 \section{Portability of source code}
 
-The source code itself is system independent; only the abstract functions
-from the GNU C library are used. The sources have been compiled and linked
-without errors and warnings with GCC 4.5.2 (32 Bit) and 4.8.1 (64 Bit),
-both Windows 7, and GCC 4.7.2 under Linux in the Fedora 18-i686
-distribution.
-
-The compilation with a different compiler tool chain (including another
-revision or port of GCC) will probably introduce some changes on the
-source files. The applied compiler needs to support the standard C99.
-
+The source code itself is platform independent; only the abstract
+functions from the GNU C library are used. The language standard is C99.
 
 \subsection{GNU extensions}
 
 In module \ident{rat\_rationalNumber} a GNU extension is used: Initialized
-structs are used as RHS of assignment expressions. This has been done
-for convenience only, to achieve at tense and meaningful representation of
-the required functionality. It should however be easy and straightforward
-to eliminate these (few) constructs. All the rest is according to the
-standard C99.
-
+structs are used as RHS of assignment expressions. This has been done for
+convenience only, to achieve a tense and meaningful representation of the
+required functionality. It is easy and straightforward to eliminate these
+(few) constructs. All the rest is according to the language standard C99.
 
 \subsection{Incompatibilities of linked libraries}
 
@@ -145,21 +131,13 @@ All of the command line evaluation related code will probably require a
 complete re-implementation with another compiler tool chain. Please refer
 to module \ident{opt\_getOpt} for details.
 
-The two tested ports of GCC have different sets of standard functions. The
-MinGW 64 Bit port provides \ident{stricmp} while MinGW 32 Bit doesn't. A
-simple implementation of this function has been added to the \linnet{}
-sources. Depending on the availability of this function in your
-environment you will have to modify the according preprocessor switches to
-let it or don't let it compile the substitute. Please refer to file
-\file{stricmp.h} for details.
-
-The standard function snprintf was found to be buggy in the used 64 Bit
-port of GCC. A work around has been implemented, which is compiled only
-for the 64 Bit MinGW ports. You will have to check if your revision of GCC
-has the same problems and maybe have to modify the preprocessor code that
-controls the conditional compilation of the substitute. Please refer to
-file \file{snprintf.h} for details.
-
+The standard function snprintf was found to be buggy in elder releases of
+GCC and up to 8.1. A workaround has been implemented in file
+\file{snprintf.h}, which is compiled only for explicitly selected compiler
+releases. In debug compilation, an assertion checks if the problem is
+present or not. Code execution is halted if your compiler would require
+the workaround. A related source code comment tells, what to do in this
+situation.
 
 \section{Re-entrance of code}
 
@@ -170,15 +148,16 @@ multi-core support is implemented to speed up the computations. As long as
 the code is used as of today in a single-threaded self-contained
 application the following considerations are irrelevant.
 
-Although the implementation of module \ident{log\_logger} is made in a reentrant
-style, the logging process is not reentrant by principle. All logger
-instances write to the same global stream \ident{stdout} and concurrent
-use would lead to a mess of text at the console. Furthermore, all modules
-of \linnet{} use one and the same global logger instance and they hence
-share the same file stream, too; here, we'd expect a similar mess.
+Although the implementation of module \ident{log\_logger} is made in a
+reentrant style, the logging process is not reentrant by principle. All
+logger instances write to the same global stream \ident{stdout} and
+concurrent use would lead to a mess of text at the console. Furthermore,
+all modules of \linnet{} use one and the same global logger instance and
+they hence share the same file stream, too; here, we'd expect a similar
+mess.
 
 For module \ident{pci\_parserCircuit}, the parser of the circuit netlist
-files, the decision to use a few global variables (e.g. for error
+files, the decision to use a few global variables (e.g., for error
 reporting by side effect) has been taken just for convenience, to keep the
 code lean. An application for a fully reentrant implementation was simply
 not in the scope of the development. It's however straightforward and only

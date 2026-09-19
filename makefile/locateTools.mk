@@ -37,13 +37,13 @@ gcc-suffix := $(if $(call eq,$(OS),Windows_NT),.exe,)
 
 # The required tools are located using the configuration settings, particularly the
 # installation directories.
-gcc := $(call getAndValidateToolPath,$(MINGW_HOME)\bin\,$(gcc-prefix)gcc$(gcc-suffix))
-g++ := $(call getAndValidateToolPath,$(MINGW_HOME)\bin\,$(gcc-prefix)g++$(gcc-suffix))
-ar := $(call getAndValidateToolPath,$(MINGW_HOME)\bin\,$(gcc-prefix)ar$(gcc-suffix))
-objcopy := $(call getAndValidateToolPath,$(MINGW_HOME)\bin\,$(gcc-prefix)objcopy$(gcc-suffix))
-size := $(call getAndValidateToolPath,$(MINGW_HOME)\bin\,$(gcc-prefix)size$(gcc-suffix))
+gcc := $(call getAndValidateToolPath,$(CC_BIN)\,$(gcc-prefix)gcc$(gcc-suffix))
+g++ := $(call getAndValidateToolPath,$(CC_BIN)\,$(gcc-prefix)g++$(gcc-suffix))
+ar := $(call getAndValidateToolPath,$(CC_BIN)\,$(gcc-prefix)ar$(gcc-suffix))
+objcopy := $(call getAndValidateToolPath,$(CC_BIN)\,$(gcc-prefix)objcopy$(gcc-suffix))
+size := $(call getAndValidateToolPath,$(CC_BIN)\,$(gcc-prefix)size$(gcc-suffix))
 ifeq ($(OS),Windows_NT)
-windres := $(call getAndValidateToolPath,$(MINGW_HOME)\bin\,$(gcc-prefix)windres$(gcc-suffix))
+windres := $(call getAndValidateToolPath,$(CC_BIN)\,$(gcc-prefix)windres$(gcc-suffix))
 endif
 
 #java := $(call getAndValidateToolPath,$(JAVA_BIN)\,java$(gcc-suffix))

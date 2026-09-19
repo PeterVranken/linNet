@@ -382,8 +382,7 @@ The constant current source doesn't add any unknowns to the LES.
 \begin{tabular}{M{6cm}M{5.89cm}}
 \verbatiminput{OpampLPWithDifferingGnds.cnl}
 &
-\includegraphics[width=5.89cm]{OpampLPWithDifferingGnds}
-
+\includegraphics[width=5.89cm]{OpampLPWithDifferingGnds.jpg}
 \end{tabular}
 \caption{PI-controller with op-amp and two choices of ground node}
 \label{figOpampLPWithDifferingGnds}
@@ -394,7 +393,7 @@ The constant current source doesn't add any unknowns to the LES.
 
 \begin{figure}[tb]
 \begin{center}
-\includegraphics[width=5.96cm]{OpampLPWithDifferingGnds_equivalent1}
+\includegraphics[width=6.6cm]{OpampLPWithDifferingGnds_equivalent1}
 \caption{Internal, computed model of 1st variant of PI-controller}
 \label{figOpampLPWithDifferingGnds_equivalent1}
 \end{center}
@@ -451,8 +450,8 @@ decision to model the output by a voltage source, whose other end is
 connected to ground means that the full picture of the solution depends on
 the choice of the ground node. An example is given. A PI-controller is
 implemented twice in a single netlist, where the only difference (besides
-indexing of the device names) is the different choice of the ground
-node. Please refer to figure \ref{figOpampLPWithDifferingGnds}.
+indexing of the voltage and device names) is the different choice of the
+ground node. Please refer to figure \ref{figOpampLPWithDifferingGnds}.
 
 \linnet{} computes the same transfer function from input to output voltage
 for both variants of the filter. Please compare $U_{out_1}$ with
@@ -607,7 +606,7 @@ definition.
 
 \begin{figure}[tb]
 \begin{center}
-\includegraphics[width=5.96cm]{OpampLPWithDifferingGnds_equivalent3}
+\includegraphics[width=6.6cm]{OpampLPWithDifferingGnds_equivalent3}
 \caption{Internal, computed model of 3rd variant of PI-controller}
 \label{figOpampLPWithDifferingGnds_equivalent3}
 \end{center}
