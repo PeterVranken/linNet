@@ -6,7 +6,7 @@
 The basic principle of the linear equation system solver is the Gaussian
 elimination method. This algorithm replaces a row of coefficients of the
 LES with a linear combination of this row and a reference row such that
-the leading coefficient of the row becomes a null. Doing this with two
+the leading coefficient of the row becomes a zero. Doing this with two
 nested loops in an systematic way leads to a triangular matrix of
 coefficients, that still represents an equivalent LES and the solution of
 the last unknown is already figured out. (The others need additional,
@@ -24,7 +24,7 @@ If we want to apply the Gaussian method to coefficients of a ring than we
 have to use another linear combination: Both combined rows are multiplied
 crosswise with the leading coefficient of the other row and these two
 products are then subtracted. Replacing the row under operation with this
-linear combination still fulfills the requirement of shaping null values
+linear combination still fulfills the requirement of shaping zero values
 in a controlled way and we indeed end up with a triangular matrix and a
 solution for the last unknown (and could proceed to figure out the others
 as in the standard case).
@@ -198,7 +198,7 @@ $-7$ &  $3$ &   $5$ &    $7$ &      $-6$            &       $1$           \\
 \noindent
 The solution for the last unknown is $1023/-6616$. The coefficients of the
 last row of the last elimination step designate the determinants of the
-LES (i.e. the main determinant and the one related to the unknown
+LES (i.e., the main determinant and the one related to the unknown
 according to Cramer's rule):
 
 \begin{displaymath}
@@ -399,15 +399,15 @@ a_{41} & a_{42} & a_{46}
 \end{equation*}
 
 \noindent
-(Please note, that this example refers to a coefficient,
-which has not the final value of the complete elimination, there will also
-be the value $a^{(3)}_{46}$ during further processing.)
+(Please note, this example refers to a coefficient, which has not the
+final value of the complete elimination; there will also be the value
+$a^{(3)}_{46}$ during further processing.)
 
 In the first elimination step and when the process reaches rows 2 and 4
 then shared coefficients are touched. The factors of the linear
 combination of rows ($(a_{11}, a_{21})$ and $(a_{11}, a_{41})$ for rows 2
 and 4, respectively) are located at according positions in $M$ and
-$M^{[3]}_{46}$ (i.e. in the first column) and thus the elimination of $M$
+$M^{[3]}_{46}$ (i.e., in the first column) and thus the elimination of $M$
 is exactly the same operation as seen in its sub-matrix $M^{[3]}_{46}$.
 For both matrices the identical row replacements
 
@@ -511,17 +511,17 @@ M|$, share all rows but row $j$, hence all sub-determinants $D_{jc}, c=1
 \ldots n$ are identical for both. Therefore the sum in the first addend in
 (\ref{eqProveLemmaLinCombRowsD}) is the Laplace expansion of the
 determinant of $M$. The sum in the second addend in
-(\ref{eqProveLemmaLinCombRowsD}) is null; it is the Laplace expansion of a
+(\ref{eqProveLemmaLinCombRowsD}) is zero; it is the Laplace expansion of a
 similar determinant: all rows but $j$ are identical but row $j$ is
 replaced by row $i$. The determinant of a matrix with two identical thus
-linear dependent rows is null. Equation (\ref{eqProveLemmaLinCombRowsD})
+linear dependent rows is zero. Equation (\ref{eqProveLemmaLinCombRowsD})
 reduces to lemma (\ref{eqLemmaLinCombRowsD}).
 
-% Determinant with identical rows is null: Swap two rows: Expansion
+% Determinant with identical rows is zero: Swap two rows: Expansion
 % according to sum of all permutated tupels proves that the sign of the
 % determinant is inverted. If these rows are identical then the
 % determinant has not changed at all, so the value is unchanged. This can
-% only hold for the particular value null.
+% only hold for the particular value zero.
 
 
 \subsection{Prove for square sub-matrix}
@@ -695,7 +695,7 @@ section \ref{secProveOfNonQuadraticCoef} and the following.
 \subsection{Pivoting}
 
 The linear combination used in an elimination step must never multiply the
-destination row with null; all the information of the related equation
+destination row with zero; all the information of the related equation
 would be discarded and the final solution could not be figured out.
 Therefore, an implementation of the Gauss elimination method uses pivoting
 and so does \linnet{}'s extended method. If it holds $a^{(k-1)}_{kk} = 0$
@@ -726,7 +726,7 @@ $n$-fold elimination for the $n$ unknowns, which means a complexity of
 $O(n^4)$ in terms of elementary steps for a full solution of the LES.
 
 In the \linnet{} use case the latter is irrelevant as the number of
-unknowns of interest, i.e. the really figured out unknowns, does typically
+unknowns of interest, i.e., the really figured out unknowns, does typically
 not depend on the size of the circuit or the total number of unknowns; for
 this use case with a rather constant number of computed unknowns $O(n^3)$
 still holds.
@@ -744,7 +744,7 @@ interconnectivity won't ever occur, sparse matrices are typical. Which makes
 it better but the order will still be far from good.
 
 A possible approach is the simplification that a network has a (more or
-less) constant number $c$ of interconnections (i.e. devices) between its
+less) constant number $c$ of interconnections (i.e., devices) between its
 nodes. If we furthermore disregard terms, which eliminate each other in
 the computed products of coefficients then the lengths of the coefficients
 were taken to the power of two in each elimination step and when using the
@@ -762,7 +762,7 @@ complexity of still $O(c^n)$.
 % c^4*(n-2)^2 + c^8*(n-3)^2 etc. and c^2*(n-1)^2 + c^3*(n-2)^2 +
 % c^4*(n-3)^2 etc.
 Combining these considerations with the complexity of the elimination
-pattern, i.e. considering the quadraticly decreasing number of affected
+pattern, i.e., considering the quadraticly decreasing number of affected
 coefficients, could be tried to refine the result but the complexity of
 the elementary step will anyway be dominant.
 
@@ -782,7 +782,7 @@ proportional to the memory consumption.
 Since the growth in length of the coefficients seems to have the
 overwhelming impact on memory and computational effort a possible
 optimization idea is an extended pivoting. Rather than looking for the
-first non null coefficient we could look for the row with the shortest
+first non zero coefficient we could look for the row with the shortest
 coefficients. (If the longer rows are processed later than far less
 coefficients are affected.) However this kind of pivoting would in turn
 bring a significant additional complexity as it in turn depends on all
@@ -805,11 +805,11 @@ with respect to the imaginable practical use cases of the software.
 
 \subsection{Common divisors in final solution}
 
-The proposed elimination does not guarantee that the found solution (i.e.
+The proposed elimination does not guarantee that the found solution (i.e.,
 the found numerator and denominator for the right-most unknown) is free of
 common divisors. It can only guarantee that it won't introduce additional
 common divisors as the unmodified Gaussian elimination without the
-factorization would. If the method is e.g. applied to a matrix of
+factorization would. If the method is, e.g., applied to a matrix of
 integers, where all coefficients of a row or column have a common divisor
 then this common divisor will be propagated into the final result.
 
@@ -817,7 +817,7 @@ then this common divisor will be propagated into the final result.
 % common divisors then this doesn't guarantee that the result is free of
 % a common divisor; an according example exists for integer numbers (see
 % above in section "Example: Elimination with integer numbers"). This is
-% probably an integer effect, where sums can lead to new factors, e.g. the
+% probably an integer effect, where sums can lead to new factors, e.g., the
 % two prime numbers 5 and 7 have the factorisable sum 12. For our
 % unrelated symbols this effect is not present: s+t is generally not
 % factorisable if s and t are atoms.
@@ -845,7 +845,7 @@ The elimination method as pointed out in section
 ring. The implementation of the solver will however strongly depend on the
 specific kind of object. The basic operations store, add and multiply and
 the factorization $a = d \tilde a$ need to be implemented. Our kind of
-objects, i.e. our kind of matrix coefficients, has some particular
+objects, i.e., our kind of matrix coefficients, has some particular
 characteristics, which are strongly exploited in the implementation.
 
 Section \ref{secModellingDevices} on page \pageref{secModellingDevices}
@@ -867,7 +867,7 @@ coefficients (symbols taken to the power of one, no identical addends
 leading to products of symbols and a number other than $\pm 1$) are
 retained. The coefficients can thus be represented by a list of signed
 products of symbols. Each known symbol is either present in the product
-(power of one) or not (power of null). The product can be represented by a
+(power of one) or not (power of zero). The product can be represented by a
 bit vector, where each bit is related to one known symbol. The sign of an
 addend could be represented by a Boolean, but actually isn't: The numeric
 factor in an addend is $\pm 1$ for a coefficient prior to and after each
@@ -881,7 +881,7 @@ modelling of the devices in the setup phase of the LES is the preservation
 of these characteristics during the elimination far from self-explanatory.
 This one and the next sections give the required proves. In the first step it
 is proven that the symbols in the products in the addends will never
-appear with a power other than one or null.
+appear with a power other than one or zero.
 
 % @{}: Discard indentation of before and/or behind columns
 \medskip
@@ -890,7 +890,7 @@ appear with a power other than one or null.
 Lemma: The value of the determinant of any of the sub-matrices of the LES
 according to definition (\ref{eqDefSubMatrix}) can be brought into the
 form of a sum of products of a numeric factor $f$ and all the device
-symbols taken to a power of either null or one. In this form no two
+symbols taken to a power of either zero or one. In this form no two
 addends of the sum have the same set of symbol powers.
 & \eqnum \label{eqLemmaNoQuadratic} \\
 \end{tabular}
@@ -932,7 +932,7 @@ characteristic pattern:
 The explanation of the pattern is the meaning of symbol $s$: It designates
 the current flow through device $s$ from one node of the network to
 another one\footnote{In the internal representation of the network all
-devices have the meaning of conductance, i.e. the complex proportionality
+devices have the meaning of conductance, i.e., the complex proportionality
 factor between current and voltage.}; and the current is the same at both
 ends. The sign of a current is defined from the node's perspective:
 Effluent is a negative current influent is positive by definition. A row
@@ -948,7 +948,7 @@ as we take the perspective of the other node.
 Two exceptions have to be considered. We always have a ground node, which
 no current balance is made for, and $s$ might be connected to this node. In
 which case one of the two rows would disappear. Furthermore, the ground
-node has null potential by definition, there's no related unknown or
+node has potential zero by definition, there's no related unknown or
 column. One of the two columns disappears. $s$ appears only once in the
 LES with negative sign.
 
@@ -1083,7 +1083,7 @@ of an elimination step can be represented as a sum of products of a
 numeric factor and a subset of the device symbols. Here, we will give the
 prove that this factor can only have the values plus and minus one. We
 show, that the expansion of the determinant of any of the sub-matrices of
-the LES only has addends, which differ (i.e. differ in the tuple of
+the LES only has addends, which differ (i.e., differ in the tuple of
 multiplied symbols). Since all addends (whose sum is the value of the
 determinant) are different in this sense, no pair of two of those can be
 gathered together, which would yield a numeric factor other than absolute
@@ -1103,7 +1103,7 @@ has a value of either one or minus one.
 
 \noindent
 In the first step, this is shown for determinants of sub-matrices solely
-containing null values and sums of symbols in the possible appearance
+containing zero values and sums of symbols in the possible appearance
 patterns according to equation (\ref{eqPatternsOfAppearance}).
 
 The prove is recursive, we start with a determinant of dimension two. An
@@ -1252,7 +1252,7 @@ on, till we reach our anchor with dimension $N=2$.
 In the next step we need to extend the prove to some more patterns: With
 respect to the \emph{symbols} everything has been said but the
 coefficients of the LES also have addends $\pm 1$ or with other words
-addends with all symbols' power equal to null. Arbitrarily placed ones in
+addends with all symbols' power equal to zero. Arbitrarily placed ones in
 the LES (and hence in the determinant of its sub-matrices) would
 immediately break our prove but fortunately the ones also have specific
 appearance pattern and similar considerations as for the symbols prove
@@ -1289,10 +1289,10 @@ into one node and returns to the source from another node; this leads to a
 column with a vertical pair of $\pm 1$. The new unknown comes along with
 the additional equation that says that the difference between the source's
 voltage and the potential difference between the connected nodes becomes
-null; this leads to a horizontal pair of $\pm 1$ and the one and only one
+zero; this leads to a horizontal pair of $\pm 1$ and the one and only one
 in the new RHS column. This last mentioned one actually has a negative
 sign as the internal representation of the equations is defined such that
-summing up all columns (including the ``RHS'') is equal to null. We get
+summing up all columns (including the ``RHS'') is equal to zero. We get
 the following structure of the LES. The $S_{ij}$ are the sums of the
 symbols:
 
@@ -1335,15 +1335,15 @@ respectively. Which leads to a determinant with
   \item a bottom row with the pattern of the last row of the matrix.
 \end{itemize}
 
-Depending on which sub-matrix is taken any of the three elements might be
+Depending on which sub-matrix is taken, any of the three elements might be
 not present. Furthermore the pairs $\pm 1$ might be reduced to a single
-$\pm 1$ and the right-most column might even contains all nulls.
+$\pm 1$ and the right-most column might even contains all zeros.
 (actually, even the original matrix pattern may only contain single ones
 instead of pairs if one of the two related nodes is the ground node.)
 
 Most of the possible patterns of the sub-matrix do not require a further
-consideration. If a column holds only null values it's trivial since the
-determinant is null, too. If the new $\pm 1$-rows or columns are not
+consideration. If a column holds only zero values it's trivial since the
+determinant is zero, too. If the new $\pm 1$-rows or columns are not
 contained it's the same situation as in the first step of the prove. If a
 sub-matrix has inherited the column with the single one then its
 determinant can be expanded along this column and -- disregarding the sign
@@ -1355,7 +1355,7 @@ then we can modify it similar to the first step of the prove. If a pair
 $\pm 1$ is present in the last row (column) then one of the columns (rows)
 is replaced by the sum of both, which reduces the pair to a single one. We
 will always end up with a determinant with modified symbol area and a row
-and a column (both optional) with all nulls and a single one. The
+and a column (both optional) with all zeros and a single one. The
 modification of such a determinant is show for LES
 (\ref{eqLESWithVoltageSource}); be the number of rows $N$, then equation
 (\ref{eqLESWithVoltageSourceSubDet}) presents $\left|M^{[N]}_{NN}\right|$
@@ -1380,7 +1380,7 @@ S_{z1}        &        & S_{zi}        &        & S_{zi}+S_{zj}  &        & S_{z
 \end{equation}
 
 The suggested modifications will reduce the subdeterminant always to a row
-and column (both optional) with all nulls and a single one and a symbol area.
+and column (both optional) with all zeros and a single one and a symbol area.
 The expansion is done along the column with the single one and leads to a
 single sub-subdeterminant. It has inherited the special row and can be
 expanded along this row; this in turn leads to a single
@@ -1407,7 +1407,7 @@ $S_{ij}$ is a sum of any symbols, where the appearance pattern of each
 symbol across the $S_{ij}$ in the original matrix is again described by
 (\ref{eqPatternsOfAppearance}). To end this step of the prove we still
 need to show that in (\ref{eqLESWithVoltageSourceSubDetExpanded}) the
-appearance pattern is unharmed for all symbols. If we e.g. look at the
+appearance pattern is unharmed for all symbols. If we, e.g., look at the
 middle column: For all rows but the middle it is the sum of the original
 column $j$ with original column $i$. The original row $i$ has been
 scratched out during the expansion of the determinant, so the sum of
@@ -1421,8 +1421,8 @@ for symbol $t$ in determinant (\ref{eqDetWithSingleSAndTheTs}): The
 appearance pattern of the symbols is retained in the relevant
 sub-determinant.
 
-Please note: These considerations include the situation, where the symbol
-area is empty (meaning the area is null not the coefficients). In which
+Please note, these considerations include the situation, where the symbol
+area is empty (meaning the area is null, not the coefficients). In which
 case the expansion of the subdeterminant will always yield the absolute
 value one.
 
@@ -1437,8 +1437,8 @@ the LES with a single constant voltage source.
 The considerations of this step can be applied recursively to handle all
 the LES with any number of constant voltage sources. Additional sources
 add additional rows and pairs of columns to the LES and each have the same
-structure with respect to the ones and null values. All of these rows and
-columns can be reduced to all nulls and a single one in the same way and
+structure with respect to the ones and zero values. All of these rows and
+columns can be reduced to all zeros and a single one in the same way and
 the appearance pattern in the symbol area is still not harmed: If the
 required quality is retained in the first iteration than the output of
 this iteration is legal input to the same prove or consideration again,
@@ -1496,7 +1496,7 @@ unknown currents and thus adding a LHS column to the LES and an additional
 equation. The constant current source also adds a RHS column. The
 character of the additional rows and columns is always the same; the
 symbols (for controlled sources only) appear in pairs and the only numbers
-are pairs of $\pm 1$ or a single one in a column of nulls otherwise. The
+are pairs of $\pm 1$ or a single one in a column of zeros otherwise. The
 idea of reducing the additional rows and columns to a single value without
 destroying the appearance pattern of the symbols in the symbol area is the
 same as shown in detail for the constant voltage sources. The determinant
@@ -1521,7 +1521,7 @@ numeric factors.
 
 Nonetheless, the prove is even useful for the intermediate results: An
 implication of the prove is that the numeric factor appearing in the
-intermediate result can only grow incrementally, i.e. one by one with the
+intermediate result can only grow incrementally, i.e., one by one with the
 result's addends being figured out in a loop. (In far the most cases it
 still stays absolute one.) The implementation foregos a range check for
 the required integer operations: It's proven that an overrun can occur
@@ -1533,7 +1533,7 @@ value to the software or its behavior.
 \section{User-defined voltages}
 
 It can be proven that the properties of the coefficients -- no symbol
-powers other than null or one and all numeric factors absolute one -- hold
+powers other than zero or one and all numeric factors absolute one -- hold
 for the user-defined voltages, too. User-defined voltages are differences
 of two node potentials, where the two nodes are arbitrarily chosen. If one
 of the nodes is the ground node then the difference is trivial, either an
@@ -1561,11 +1561,12 @@ a_{m1} & \ldots & a_{mm} & a_{m, m+1} & \ldots & a_{mn}
 \right)
 \end{equation*}
 
-Be the user-defined voltage $\hat U$ the difference of the unknowns in column $u$
-and $v$, i.e. $\hat U = U_u - U_v$. This equation could be put into the LES in
-order to directly figure out the user wanted $\hat U$. We substitute e.g.
-$U_u$ by $U_u = \hat U + U_v$. The LES is transformed into an equivalent
-LES using a new vector of unknowns, where $\hat U$ replaces $U_u$:
+Be the user-defined voltage $\hat U$ the difference of the unknowns in
+column $u$ and $v$, i.e., $\hat U = U_u - U_v$. This equation could be put
+into the LES in order to directly figure out the user wanted $\hat U$. We
+substitute, e.g., $U_u$ by $U_u = \hat U + U_v$. The LES is transformed
+into an equivalent LES using a new vector of unknowns, where $\hat U$
+replaces $U_u$:
 
 \begin{equation*}
 \hat M =
@@ -1614,7 +1615,7 @@ The $n-m$ other determinants share the left-most $m-1$ columns of $\tilde
 M$ and have columns $m+1$ till $n$ of $\tilde M$ as right-most column.
 These determinants contain the column $v$ with the sum of two original
 coefficients but don't contain the column where the added coefficients
-origin (i.e. column $m$ of $\tilde M$ or column $u$ of the original matrix
+origin (i.e., column $m$ of $\tilde M$ or column $u$ of the original matrix
 $M$). With respect to the appearance patterns of symbols according to
 (\ref{eqPatternsOfAppearance}) this means a move of the symbols from the
 original column $u$ to column $v$, which doesn't harm the patterns. Due to
@@ -1656,9 +1657,9 @@ resulting $a^{(k)}$ at the LHS of equation (\ref{eqElemStep}) -- it holds
 due to former proves:
 \begin{itemize}
   \item $a$ is a sum of addends. Each addend is a product of symbols to
-    the power of either null or one and a numeric factor of either plus or
+    the power of either zero or one and a numeric factor of either plus or
     minus one
-  \item No two addends of $a$ have the same product of symbols, i.e. the
+  \item No two addends of $a$ have the same product of symbols, i.e., the
     vectors of powers are different between all pairs of addends
 \end{itemize}
 
@@ -1690,7 +1691,7 @@ produce symbol powers of 0, 1 or 2. The hypothetic implementation of a
 variable will use a 2 Bit integer value to store a symbol's power. It'll
 furthermore order these two Bit values in a certain order of symbols,
 which is defined arbitrarily but fixed for all variables. (Alphabetic
-order of symbols would e.g. suffice.) Reading this sequence of bits as a
+order of symbols would, e.g., suffice.) Reading this sequence of bits as a
 whole as an unsigned binary number gives us a one-by-one relation between
 any appearing combination of symbols and an integer number. We call this
 number the ``value'' of the symbols or simply symbol value of an addend of
@@ -1716,7 +1717,7 @@ The product of two addends is figured out by multiplying their numeric
 factors. The result is an integer as the operands are. The products of
 symbols are multiplied by adding the powers. All the 2 Bit fields have to
 be added separately, one pair of 2 Bit values for each symbol. However,
-since we only add two values each either null or one, we will never see an
+since we only add two values each either zero or one, we will never see an
 overrun in any of the 2 Bit sums and therefore the result of all the 2 Bit
 sums is identical to the arithmetic sum of the symbol values of the
 addends. This implies for example that the product of a variable with an
@@ -1742,17 +1743,17 @@ value of the addends and adding the numeric factors.
 In the hypothetic implementation the polynomial division starts when all
 addends of the numerator in equation (\ref{eqElemStep}) are figured out. A
 loop iterates along the numerator variable in decreasing order of the
-symbol value, i.e. from the left to the right. The computation finishes
+symbol value, i.e., from the left to the right. The computation finishes
 when the last addend of the numerator has been processed. The first
 operation is to divide the addend under progress by the first, left-most
 addend of the denominator variable. Three possibilities exist:
 
 \begin{compactenum}[a)]
-  \item The division is possible with respect to the symbols (i.e. the
+  \item The division is possible with respect to the symbols (i.e., the
     numerator addend contains a superset of symbols of the denominator
-    addend) and results in symbol powers of either null or one
+    addend) and results in symbol powers of either zero or one
   \item Like a) but at least one symbol power of two results
-  \item The division is not possible (i.e. the numerator addend lacks
+  \item The division is not possible (i.e., the numerator addend lacks
     at least one symbol from the denominator addend's set)
 \end{compactenum}
 
@@ -1803,8 +1804,8 @@ will be processed later in the main loop.
 \subsection{Finiteness of algorithm}
 
 The last statement already proves the finiteness of the algorithm.
-Although the numerator can become longer due to the back-multiplication
-the highest symbol value, i.e. the symbol value of the addend under
+Although the numerator can become longer due to the back-multiplication,
+the highest symbol value, i.e., the symbol value of the addend under
 progress, is lowered in every cycle of the main loop. At latest when this
 symbol value is lower than the symbol value of the left-most addend of the
 denominator the algorithm would terminate: If the symbol value of the
@@ -1879,7 +1880,7 @@ result term again. However, due to the sort order of the numerator
 addends, all later result addends will have symbol values that are lower
 than the one of the unwanted addend and the elimination of an already
 found result term is simply impossible. This is a contradiction with the
-prove of symbol powers only being null or one. Which means that it can't
+prove of symbol powers only being zero or one. Which means that it can't
 ever happen that the main loop encounters a numerator addend under
 progress, which yields a power of two for at least one symbol when being
 divided by the left-most denominator addend.
@@ -1898,7 +1899,7 @@ throw according counterpart-addends away during back-multiplication.
 A further optimization becomes possible in the real implementation: Any
 numerator addend which yields a power of two for at least one symbol after
 division is immediately thrown away, thus not stored in the numerator
-variable. All stored addends yield symbol powers of either null or one
+variable. All stored addends yield symbol powers of either zero or one
 after division by the left-most addend of the denominator. The real
 implementation doesn't safe the addends of the numerator of
 (\ref{eqElemStep}) but the addends of (\ref{eqElemStep}) \emph{after}
@@ -1945,7 +1946,7 @@ one minor exception the implementation of the elementary step (and the
 elimination method according to section \ref{secEliminationMethod} anyway)
 would continue to work with LESs, where the addends can have arbitrary numeric
 integer factors (but still symbols, which are restricted to a power of
-null or one).
+zero or one).
 
 The critical point is the decision a), b) or c). With arbitrary integer
 factors we could expect addends, which are indivisible with regard to a
@@ -1960,7 +1961,7 @@ contradiction to the prove of a remainder-less final result.
 A difference to the same consideration for the quotient of products of
 symbols is that the addends of the numerator computation, which show
 indivisible numeric factors must not be discarded. Here, combination with
-later addends (i.e. either in the further computation of the numerator of
+later addends (i.e., either in the further computation of the numerator of
 equation (\ref{eqElemStep}) or in a later back-multiplication of the
 polynomial division) can change them to hold well divisible numeric
 factors but won't surely eliminate them as shown for addends with
