@@ -7,85 +7,62 @@ generator; this folder is called \file{private} and is located next to the
 directory. The environment variable \code{LINNET\_HOME} points to this
 parent directory.
 
-Accordingly, this is what you have to do to install \linnet{}: 
+Accordingly, this is what you have to do to install \linnet{}:
 
 Create an empty folder, the installation directory, e.g.,
-\file{/ProgramFiles/linNet}. Copy the \linnet{} executable file into this
-directory. Copy the folder \file{private} into this folder. Create a
-persistent environment variable \code{LINNET\_HOME} and assign the path to
-the installation directory, \code{/ProgramFiles/linNet} in our example.
+\file{c:\bs{}ProgramFiles\bs{}linNet} (Windows) or \file{/usr/bin/linNet}
+(Linux, Mac OS). Copy the \linnet{} executable file and the folder
+\file{private} into this directory. Create a persistent environment
+variable \code{LINNET\_HOME} and assign the path to the installation
+directory.
+
+Linux and Mac OS users need to open a shell and run command \code{chmod +x
+/usr/bin/linNet/linNet} to make the binary file executable.
 
 The usual way to use \linnet{} is to run it from a shell window. You will
 probably organize your input circuits in a folder or a set of such and
-\code{cd} in your shell to this folder. To run \linnet{} in this scenario
-in a convenient way it is useful to place a reference to the installation
+\code{cd} to this folder. To run \linnet{} in this scenario in a
+convenient way, it is useful to place a reference to the installation
 directory in the system environment variable \code{PATH}. In our example
-you'd append \code{:/ProgramFiles/linNet} (UNIX) and
-\code{;\bs{}ProgramFiles\bs{}linNet} (Windows) to the current value of
-this variable.
+you'd append \code{;\bs{}ProgramFiles\bs{}linNet} (Windows) or
+\code{:/usr/bin/linNet} (Linux, Mac OS) to the current value of this
+variable.
 
-The definition of a shell command alias pointing to the \linnet{}
+The definition of a shell command-alias pointing to the \linnet{}
 executable file can be a reasonable alternative to extending the
 environment variable \code{PATH}.
 
-If the environment variable is not set then \linnet{} makes an attempt to
-find its resources via the path to itself. However, it depends on the
-system, the shell in use and the way the command is typed, whether this
-information is completely passed to the application or not. If it can't
-find out where to find itself it'll refuse to generate Octave code as it
-lacks the folder \file{private} with code templates.\footnote{There are
-system specific functions which let an application find out, where its
-executable file is located, e.g., \code{GetModuleFileName} for Windows, but
-the use of such functions would make \linnet{} system dependent. This
-price is much too high for an a bit simpler installation.} Not setting the
-environment variable can be a safe option if you decide to run \linnet{}
-solely from a shell window with an alias, which expands to the full,
-absolute path of the executable.
-
-
-\section{Mac OS}
-
-Unfortunately, Macintosh users will have to compile \linnet{} from the
-sources prior to use. At the moment no pre-built executables are available
-for this system. Please refer to section \ref{secBuildingLinNet} on page
-\pageref{secBuildingLinNet}.
-
-
-\section{Linux}
-
-The download of \linnet{} contains pre-build executable files for Linux
-(in DEBUG and PRODUCTION compilation). The executable files are already
-bundled with the resources folder \file{private} so that the installation
-reduces to copying the build folder of choice to any location, preferably
-\file{/usr/bin}, renaming the folder itself to \file{\linnet{}}, running
-\code{chmod +x} to make the binary file executable and setting the
-environment variable \code{LINNET\_HOME}; it would be set to
-\file{/usr/\-bin/\-\linnet{}} if the suggested installation folder was
-used. The chosen installation path should not contain blanks.
-
-The Linux files have been built and run in a single environment only; this
-was a Fedora 18 distribution. It can't be guaranteed that the binaries are
-compatible with any other Linux derivate. Furthermore, no profound testing
-has been done under Linux, only the few test cases from the distribution
-have been run to prove that the expected program output is yielded. No
-testing with Octave has been done under Linux.
-
+If environment variable \code{LINNET\_HOME} is not set then \linnet{}
+makes an attempt to find its resources via the path to itself. However, it
+depends on the system, the shell in use and the way the command is typed,
+whether this information is completely passed to the application or not.
+If it can't find out where to find itself it'll refuse to generate Octave
+code as it lacks the folder \file{private} with code
+templates.\footnote{There are system specific functions which let an
+application find out, where its executable file is located, e.g.,
+\code{GetModuleFileName} for Windows, but the use of such functions would
+make the source code of \linnet{} platform dependent. This price is too
+high for a slightly simpler installation.} Not setting the environment
+variable can be a safe option if you decide to run \linnet{} solely from a
+shell window with an alias, which expands to the full, absolute path of
+the executable.
 
 \section{Windows}
 
 \subsection{Pre-built executables}
 
-The download of \linnet{} contains pre-build executable files for Windows.
-A build for 32 and 64 Bit is contained, each as DEBUG or PRODUCTION
-compilation. The executable files are already bundled with the resources
-folder \file{private} so that the installation reduces to copying the
-build folder of choice to any location, preferably
+% TODO Add link to GitHub Releases page
+
+The download of \linnet{} contains pre-build, ready-to-use executable
+files for Windows (DEBUG and PRODUCTION compilation). The executable files
+are already bundled with the resources folder \file{private} so that the
+installation reduces to copying the wanted build folder -- \file{DEBUG}
+or \file{PRODUCTION} -- to any location of choice, preferably
 \file{c:\bs{}\-Program\-Files}, renaming the folder itself to
 \file{\linnet{}} and setting the environment variable \code{LINNET\_HOME};
 it would be set to \file{c:\bs{}\-Program\-Files\bs{}\-\linnet{}} if the
-suggested installation folder was used. The chosen installation path
+suggested installation folder is used. The chosen installation path
 should not contain blanks.
-
 
 \subsection{Required DLLs}
 
@@ -96,25 +73,35 @@ the GNU compiler collection build on some Windows DLLs. These DLLs need to
 be available in order to execute \linnet{}. Normally, this should always
 be the case. In the rare case that such a library should be missing on
 your system then the only way out will be to install the GCC port of MinGW
-and to rebuild \linnet{}. If you can run the simplest \code{helloWorld}
-application compiled with GCC then you should also be able to run
-\linnet{}.
+and to rebuild \linnet{}. This would bring all required DLLs into your
+computer -- if you can run the simplest \code{helloWorld} application
+compiled with GCC then you should also be able to run \linnet{}.
 
-For a Windows 7 system and using the 32 Bit build the following list of
-DLLs appeared to be loaded by \linnet{}. For different Windows releases or
-for the 64 Bit build the list may vary:
+The 64 Bit build of \linnet{} with GCC \ident{mingw-w64-gcc-13.2.0-x64} on
+a Windows 11 system loads these DLLs:
 
 \begin{verbatim}
-c:\Windows\SYSTEM32\ntdll.dll
-c:\Windows\SYSTEM32\wow64.dll
-c:\Windows\SYSTEM32\wow64cpu.dll
-c:\Windows\SYSTEM32\wow64win.dll
-c:\Windows\SysWOW64\ntdll.dll
-c:\Windows\syswow64\KERNELBASE.dll
-c:\Windows\syswow64\kernel32.dll
-c:\Windows\syswow64\msvcrt.dll
+C:\WINDOWS\SYSTEM32\ntdll.dll
+C:\WINDOWS\System32\KERNEL32.DLL
+C:\WINDOWS\System32\KERNELBASE.dll
+C:\WINDOWS\System32\ucrtbase.dll
 \end{verbatim}
 
+Other target platforms or other compiler releases will probably require
+other DLLs. For example, the 64 Bit build with GCC
+\ident{mingw-w64-gcc-mcf\_20260501\_16.1.0\_x64-msvcrt}, also on Windows
+11, requires an additional DLL, which is located in the compiler's
+installation directory:
+
+\begin{verbatim}
+libmcfgthread-2.dll
+\end{verbatim}
+
+To run the \linnet{} executable in this scenario, you would either have to
+copy that particular DLL into the folder, where \file{linNet.exe} is
+located or you would need to add folder \file{mingw64\bs{}bin} in the
+installation of GCC to the system environment variable \code{PATH}, so
+that Windows can find this DLL.
 
 \subsection{Start from Windows Explorer (file name association)}
 
@@ -125,7 +112,8 @@ for circuit netlist files. With right-click on the file you can load the
 netlist file into a text editor and by double-click you can run the
 computation with \linnet{}. Please note, if starting \linnet{} this way
 Windows will swallow all the program output and you will have to open the
-log file after computation to find out if the computation was successful.
+log file after the computation to find out if the computation was
+successful.
 
 Here's a template for a Windows registry script to make an appropriate
 file class definition:
@@ -136,44 +124,50 @@ file class definition:
 \begin{verbatim}
 REGEDIT4
 
-[HKEY_CLASSES_ROOT\.cnl]
+[HKEY_CURRENT_USER\Software\Classes\.cnl]
 @="FileClass_cnl"
 
-[HKEY_CLASSES_ROOT\.ckt]
+[HKEY_CURRENT_USER\Software\Classes\.ckt]
 @="FileClass_cnl"
 
-[HKEY_CLASSES_ROOT\FileClass_cnl]
+[HKEY_CURRENT_USER\Software\Classes\FileClass_cnl]
 @="linNet Circuit Netlist"
 
-[HKEY_CLASSES_ROOT\FileClass_cnl\shell]
-@="Compute"
+[HKEY_CURRENT_USER\Software\Classes\FileClass_cnl\shell]
+@="Edit"
 
-[HKEY_CLASSES_ROOT\FileClass_cnl\DefaultIcon]
+[HKEY_CURRENT_USER\Software\Classes\FileClass_cnl\DefaultIcon]
 @="c:\\ProgramFiles\\linNet\\linNet.exe,1"
 
-[HKEY_CLASSES_ROOT\FileClass_cnl\shell\Edit]
+[HKEY_CURRENT_USER\Software\Classes\FileClass_cnl\shell\Edit]
 @="&Edit"
-[HKEY_CLASSES_ROOT\FileClass_cnl\shell\Edit\command]
-@="c:\\ProgramFiles\\emacs-24.0.92\\bin\\emacsclient.exe -n \"%1\""
+[HKEY_CURRENT_USER\Software\Classes\FileClass_cnl\shell\Edit\command]
+@="c:\\ProgramFiles\\emacs-30.2\\bin\\emacsclient.exe -n \"%1\""
 
-[HKEY_CLASSES_ROOT\FileClass_cnl\shell\Compute]
+[HKEY_CURRENT_USER\Software\Classes\FileClass_cnl\shell\Compute]
 @="Run linNet"
-[HKEY_CLASSES_ROOT\FileClass_cnl\shell\Compute\command]
-@="c:\\ProgramFiles\\linNet\\linNet.exe -l -c -s -o \"%1\" %*"
+[HKEY_CURRENT_USER\Software\Classes\FileClass_cnl\shell\Compute\command]
+@="c:\\ProgramFiles\\linNet\\linNet.exe -l -c -s -o -- \"%1\""
 \end{verbatim}
 } % End of decreased script size for the listing
 
 Copy this code into a text file. Save it using a file name with extension
 \file{.reg}, e.g., \file{fileClassCnl.reg}.
 
-Please note, that you will have to modify the proposed code as it uses
-absolute paths to the installed applications; replace these paths with
-your system's paths. Furthermore, the text editor for editing the circuit
-netlists is just a suggestion; you will probably replace the reference to
-Emacs with a reference to your favorite text editor.
+Please note, that you will have to modify the proposed registry code as it
+uses absolute paths to the installed applications; replace these paths
+with paths from your computer. Furthermore, the text editor for editing
+the circuit netlists is just a suggestion; you will probably replace the
+reference to Emacs with a reference to your favorite text editor.
 
-After customization, double-click this file or run it from a shell window.
-If your system has no file name association for \file{*.reg} files then
-you need to import it explicitly using a command like \code{regedit.exe
-fileClassCnl.reg}. In either case you will need local administrator rights
-to complete.
+After customization, double-click this file. If your system has no file
+name association for \file{*.reg} files then you need to run the registry
+script from a shell window. Submit a command like \code{regedit.exe
+fileClassCnl.reg}. Administrator rights are not required to complete.
+
+\section{Linux and Mac OS}
+
+Unfortunately, Linux and Macintosh users will have to build \linnet{} from
+the sources prior to use. At the moment no pre-built executables are
+available for these systems. Please refer to section
+\ref{secBuildingLinNet} on page \pageref{secBuildingLinNet}.
