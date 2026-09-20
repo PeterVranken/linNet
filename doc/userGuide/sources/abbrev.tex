@@ -1,6 +1,13 @@
 \chapter*{Abbreviations}
 \label{secAbbreviations}
 
+% longtable fails to produce correct references in the PDF. A click on a
+% reference always jumps to page 1. We replace the longtable with a
+% floating standard table. This issue has been seen first in 2026. The
+% first issue from 2014 (with an elder LaTeX release) didn't have this
+% problem.
+\ifthenelse{1=0}{
+
 \begin{longtable}[c]{|l|l|}
 
 \hline
@@ -27,28 +34,67 @@ Abbreviation & Explanation \\ \hline
 \hline
 
 % Table entries start here.
-AC      & Alternating current                                  \\ 
-CPU     & Central processing unit                              \\ 
-DC      & Direct current                                       \\ 
-DLL     & Dynamic link library                                 \\ 
-GCC     & GNU compiler collection                              \\ 
-GCD     & Greatest common divisor                              \\ 
-GNU     & GNU is not UNIX                                      \\ 
-LCM     & Least or lowest common multiple                      \\ 
-LES     & Linear equation system                               \\ 
-LHS     & Left-hand side (of an equation)                      \\ 
-LTI     & Linear time-invariant (system)                       \\ 
-MIMO    & Multiple input, multiple output (system)             \\ 
-NPN     & N-type, p-type, n-type donated (transistor)          \\ 
-op-amp  & Operational amplifier                                \\ 
-R       & Resistor                                             \\ 
-RHS     & Right-hand side (of an equation)                     \\ 
-SIMO    & Single input, multiple output (system)               \\ 
-SISO    & Single input, single output (system)                 \\ 
-SW      & Software                                             \\ 
-TBC     & To be checked                                        \\ 
-TBD     & To be defined                                        \\ 
+AC      & Alternating current                                  \\
+CPU     & Central processing unit                              \\
+DC      & Direct current                                       \\
+DLL     & Dynamic link library                                 \\
+GCC     & GNU compiler collection                              \\
+GCD     & Greatest common divisor                              \\
+GNU     & GNU is not UNIX                                      \\
+LCM     & Least or lowest common multiple                      \\
+LES     & Linear equation system                               \\
+LHS     & Left-hand side (of an equation)                      \\
+LTI     & Linear time-invariant (system)                       \\
+MIMO    & Multiple input, multiple output (system)             \\
+NPN     & N-type, p-type, n-type donated (transistor)          \\
+op-amp  & Operational amplifier                                \\
+R       & Resistor                                             \\
+RHS     & Right-hand side (of an equation)                     \\
+SIMO    & Single input, multiple output (system)               \\
+SISO    & Single input, single output (system)                 \\
+SW      & Software                                             \\
+TBC     & To be checked                                        \\
+TBD     & To be defined                                        \\
 TODO    & To be done                                           \\
 \hline
 
 \end{longtable}
+} % End of disabled, formerly used longtable
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{|l|l|}
+
+\hline
+Abbreviation & Explanation \\ \hline
+
+% Table entries start here.
+AC      & Alternating current                                  \\
+CPU     & Central processing unit                              \\
+DC      & Direct current                                       \\
+DLL     & Dynamic link library                                 \\
+GCC     & GNU compiler collection                              \\
+GCD     & Greatest common divisor                              \\
+GNU     & GNU is not UNIX                                      \\
+LCM     & Least or lowest common multiple                      \\
+LES     & Linear equation system                               \\
+LHS     & Left-hand side (of an equation)                      \\
+LTI     & Linear time-invariant (system)                       \\
+MIMO    & Multiple input, multiple output (system)             \\
+NPN     & N-type, p-type, n-type donated (transistor)          \\
+op-amp  & Operational amplifier                                \\
+R       & Resistor                                             \\
+RHS     & Right-hand side (of an equation)                     \\
+SIMO    & Single input, multiple output (system)               \\
+SISO    & Single input, single output (system)                 \\
+SW      & Software                                             \\
+TBC     & To be checked                                        \\
+TBD     & To be defined                                        \\
+TODO    & To be done                                           \\
+\hline
+
+\end{tabular}
+\caption{Abbreviations}
+\label{tabAbbrev}
+\end{center}
+\end{table}

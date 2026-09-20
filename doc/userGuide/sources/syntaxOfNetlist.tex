@@ -33,6 +33,12 @@ it is common in SPICE netlists.
 The names of knowns and unknowns are internally derived from the device
 and node names and are in turn ``identifiers''. 
 
+% longtable fails to produce correct references in the PDF. A click on a
+% reference always jumps to page 1. We replace the longtable with a
+% floating standard table. This issue has been seen first in 2026. The
+% first issue from 2014 (with an elder LaTeX release) didn't have this
+% problem.
+\ifthenelse{1=0}{
 
 \begin{longtable}{|c|c|c|}
 
@@ -91,6 +97,50 @@ either $10^{18}+2$ or $100$. We use \code{X} instead.}
 \code{Y} & yotta & \raisebox{0pt}[10pt][0pt]{$10^{24}$}  \\ 
 
 \end{longtable}
+} % End of disabled, formerly used longtable
+
+
+\begin{table}[hbt]
+\begin{center}
+{
+\setlength{\extrarowheight}{1pt} % Locally increase cells for superscript.
+\begin{tabular}{|c|c|c|}
+
+\hline
+% The column headers (first page):
+Suffix & Meaning & Value \\
+\hline
+
+% Table entries start here.
+\code{y} & yocto & $10^{-24}$ \\
+\code{z} & zepto & $10^{-21}$ \\ 
+\code{a} & atto  & $10^{-18}$ \\ 
+\code{f} & femto & $10^{-15}$ \\ 
+\code{p} & pico  & $10^{-12}$ \\ 
+\code{n} & nano  & $10^{-9}$  \\ 
+\code{u} & micro & $10^{-6}$  \\ 
+\code{m} & milli & $10^{-3}$  \\ 
+\code{c} & centi & $10^{-2}$  \\ 
+\code{d} & deci  & $10^{-1}$  \\ 
+\code{D} & deka  & $10^{1}$   \\ 
+\code{h} & hecto & $10^{2}$   \\ 
+\code{k} & kilo  & $10^{3}$   \\ 
+\code{M} & mega  & $10^{6}$   \\ 
+\code{G} & giga  & $10^{9}$   \\ 
+\code{T} & tera  & $10^{12}$  \\ 
+\code{P} & peta  & $10^{15}$  \\ 
+\code{X}\footnotemark & exa & $10^{18}$  \\
+\code{Z} & zetta & $10^{21}$  \\ 
+\code{Y} & yotta & $10^{24}$  \\
+
+\hline
+
+\end{tabular}
+\caption{Suffixes for exponents in floating point literals}
+\label{tabExponentSuffixes}
+} % End of local \extrarowheight
+\end{center}
+\end{table}
 
 Numbers are either decimal integer literals as known from the language C
 or floating point numbers, depending on the context. Floating point numbers
@@ -117,6 +167,13 @@ type that indicates the kind of device. Table \ref{tabSupportedDevices} on
 page \pageref{tabSupportedDevices} gives an overview on the available
 devices. The type identifier as found in column ID is used as first token
 of a device definition in the netlist file.
+
+% Footnote from table tabExponentSuffixes:
+\footnotetext{According to
+https://www.techtarget.com/it-infrastructure/definition/Kilo-mega-giga-tera-peta-exa-zetta-and-all-that/,
+visited Sep 14, 2026, exa should be abbreviated with \code{E}. This is
+ambiguous with the traditional form of an exponent. \code{1E+2} could be
+either $10^{18}+2$ or $100$. We use \code{X} instead.}
 
 The name of the device follows after some white space. All names need to
 be unique in order to avoid ambiguities in the result presentation. Then

@@ -155,6 +155,8 @@ and the same netlist file is not recommended.
 
 \begin{table}[bt]
 \begin{center}
+{
+\setlength{\extrarowheight}{1pt} % Locally increase cells for superscript.
 \begin{tabular}{|l|c|c|l|}
 
 \hline
@@ -165,8 +167,6 @@ Device & Symbol & Value & Remark \\
 % The next hline makes the column titles a separate rectangular box,
 % comment it out to get just a line as separator.
 %\hline
-
-\hline
 
 % Table entries start here.
 Resistor                          & R    & 100 $\Omega$     & RLC should yield audio frequencies \\
@@ -183,6 +183,7 @@ Current controlled current source & I(I) & 250              & Use case bipolar t
 \end{tabular}
 \caption{Device standard values}
 \label{tabDeviceStdValues}
+} % End of local \extrarowheight
 \end{center}
 \end{table}
 

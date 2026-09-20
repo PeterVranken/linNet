@@ -3,13 +3,13 @@
 A valid installation looks like this: The \linnet{} application is a
 simple executable file plus a folder with resources for the Octave code
 generator; this folder is called \file{private} and is located next to the
-\linnet{} executable file, i.e. both are siblings in the same parent
+\linnet{} executable file, i.e., both are siblings in the same parent
 directory. The environment variable \code{LINNET\_HOME} points to this
 parent directory.
 
 Accordingly, this is what you have to do to install \linnet{}: 
 
-Create an empty folder, the installation directory, e.g.
+Create an empty folder, the installation directory, e.g.,
 \file{/ProgramFiles/linNet}. Copy the \linnet{} executable file into this
 directory. Copy the folder \file{private} into this folder. Create a
 persistent environment variable \code{LINNET\_HOME} and assign the path to
@@ -35,7 +35,7 @@ information is completely passed to the application or not. If it can't
 find out where to find itself it'll refuse to generate Octave code as it
 lacks the folder \file{private} with code templates.\footnote{There are
 system specific functions which let an application find out, where its
-executable file is located, e.g. \code{GetModuleFileName} for Windows, but
+executable file is located, e.g., \code{GetModuleFileName} for Windows, but
 the use of such functions would make \linnet{} system dependent. This
 price is much too high for an a bit simpler installation.} Not setting the
 environment variable can be a safe option if you decide to run \linnet{}
@@ -164,7 +164,7 @@ REGEDIT4
 } % End of decreased script size for the listing
 
 Copy this code into a text file. Save it using a file name with extension
-\file{.reg}, e.g. \file{fileClassCnl.reg}.
+\file{.reg}, e.g., \file{fileClassCnl.reg}.
 
 Please note, that you will have to modify the proposed code as it uses
 absolute paths to the installed applications; replace these paths with

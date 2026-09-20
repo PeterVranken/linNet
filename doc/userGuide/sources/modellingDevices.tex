@@ -3,6 +3,8 @@
 
 \begin{table}[bt]
 \begin{center}
+{
+\setlength{\extrarowheight}{1pt} % Locally increase cells for superscript.
 \begin{tabular}{|p{2.8cm}|p{2.5cm}|p{2.9cm}|p{5.9cm}|} % 14.3cm in total available
 
 \hline
@@ -13,8 +15,6 @@ Device & Known quantity & Unknown quantity & Meaning \\
 % The next hline makes the column titles a separate rectangular box,
 % comment it out to get just a line as separator.
 %\hline
-
-\hline
 
 % Table entries start here.
 
@@ -67,6 +67,7 @@ comparison). \\
 \caption{Knowns and unknowns of the LES. These quantities can be
 referenced in user-defined results}
 \label{tabUnknownsOfLES}
+} % End of local \extrarowheight
 \end{center}
 \end{table}
 
@@ -203,6 +204,8 @@ our matrix then this fragment would lead to the following matrix:
 
 \begin{table}[bt]
 \begin{center}
+{
+\setlength{\extrarowheight}{2pt} % Locally increase cells for fractions.
 \begin{tabular}{|l|c|p{2cm}|}
 
 \hline
@@ -214,18 +217,17 @@ Kind of device & Substitute of symbol & Meaning \\
 % comment it out to get just a line as separator.
 %\hline
 
-\hline
-
 % Table entries start here.
-R & \raisebox{0pt}[10pt][5pt]{$\frac{1}{R}$}  & Resistor    \\
-Y & $Y$                                       & Conductance \\
-L & \raisebox{0pt}[10pt][5pt]{$\frac{1}{Ls}$} & Impedance   \\
-C & $Cs$                                      & Capacitor   \\
+R & $\frac{1}{R}$  & Resistor    \\
+Y & $Y$            & Conductance \\
+L & $\frac{1}{Ls}$ & Impedance   \\
+C & $Cs$           & Capacitor   \\
 
  \hline
 \end{tabular}
 \caption{Substitution of symbols in the final result}
 \label{tabSubstOfSymbols}
+} % End of local \extrarowheight
 \end{center}
 \end{table}
 

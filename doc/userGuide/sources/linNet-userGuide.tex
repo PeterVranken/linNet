@@ -31,11 +31,11 @@
        \includegraphics[]{Linnet_small.jpg}
        \end{figure} \linebreak
        The Software for symbolic Analysis of linear Electronic Circuits \linebreak
-       Version 1.0 \linebreak
+       Version 1.1 \linebreak
        User Guide
       }
 \author{Peter Vranken}
-\date{November 2014}
+\date{September 2026}
 
 % Place chapter name and page number in the head of each page.
 \pagestyle{headings}
@@ -87,7 +87,7 @@
 
 \bigskip
 \begin{quote}
-    Copyright \copyright{} 2014  Peter Vranken, mailto:Peter\_Vranken@Yahoo.de
+    Copyright \copyright{} 2014-2026  Peter Vranken, mailto:Peter\_Vranken@Yahoo.de
     
     Permission is granted to copy, distribute and/or modify this document
     under the terms of the GNU Free Documentation License, Version 1.3
@@ -120,7 +120,19 @@
 \appendixpage
 \addappheadtotoc
 \input{BNF-cnl}
+
+% Appendix math has many matrixes, which makes it difficult the LaTeX to
+% perfectly fill the pages in vertical direction. This leads to quite
+% variable v-space between paragraphs and bullet points. The alternative
+% is \raggedbottom (as opposed to the standard mode \flushbottom), which
+% allows different bottom page boundaries. Either option is not perfect
+% but a variable bottom margin seems to look still better.
+%   The problem: \raggedbottom removes the variable distances and makes
+% text appearance consistent but the result is not necessarily nicer...
+\raggedbottom
 \input{math}
+\flushbottom
+
 \input{simBipolarTModel}
 \input{GNUFreeDocumentationLicense}
 

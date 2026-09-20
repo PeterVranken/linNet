@@ -1,39 +1,42 @@
 \chapter{Introduction}
 \label{secIntro}
 
-\linnet{} is an application to compute the transfer function of linear,
-electronic circuits. The computation is done symbolically, not
+\linnet{} is an application for computing the transfer function of linear
+electronic circuits. The computation is performed symbolically rather than
 numerically, and the result is a formula rather than a number or a series
-of such. The found formula is the Laplace transform of the dependencies of
-the voltages and currents in the circuit on the input voltages and
-currents.
-
+of numbers. The resulting formula is the Laplace transform describing the
+dependencies of the voltages and currents in the circuit on the input
+voltages and currents. 
 
 % Locally define a figure representation specific to the table.
 {
 \newcommand{\incTabFig}[2]{\includegraphics[width=#2]{#1}}
 
 % This define is related to the specifics of the array package; see
-% http://texwelt.de/wissen/fragen/3401/zentrieren-text-in-tabelle (as of
-% July 25 2014) for more
+% https://texwelt.de/fragen/3401/zentrieren-text-in-tabelle (visited Sep
+% 20, 2026) for more.
 \newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
 
+\setlength{\extrarowheight}{5pt} % Locally increase cells for device icons.
 \begin{table}[t]
 \begin{center}
 \begin{tabular}{|l|c|M{2cm}|}
 
 \hline
 
-% The column headers:
-Device                               & ID          & Symbol                        \\
+% The column headers.
+%   \multicolumn is applied to overrule the column cell type, we have
+% defined with M{2cm}. Without, the word "Symbol" is horizontally centered
+% but vertically bottom alined and sits lower than the other column
+% titles.
+Device                               & ID          & \multicolumn{1}{c|}{Symbol}   \\
 \hline
-
-\hline
+% This hline makes the column titles a separate rectangular box, comment out to get just a
+% line as separator.
+%\hline
 
 % Table entries start here.
-%   The raisebox command is used to avoid a hiding overlap of the topmost
-% figure with the header separating line.
-\raisebox{0pt}[15pt][0pt]{Resistor}  & \code{R}    & \incTabFig{DeviceR}{1.9cm}    \\ 
+Resistor                             & \code{R}    & \incTabFig{DeviceR}{1.9cm}    \\ 
 Conductance                          & \code{Y}    & \incTabFig{DeviceY}{1.9cm}    \\
 Capacitor                            & \code{C}    & \incTabFig{DeviceC}{0.8cm}    \\ 
 Inductivity                          & \code{L}    & \incTabFig{DeviceL}{2cm}      \\ 
@@ -44,22 +47,24 @@ Current controlled voltage source    & \code{U(I)} & \incTabFig{DeviceU(i)}{1cm}
 Constant current source              & \code{I}    & \incTabFig{DeviceI0}{0.4cm}   \\
 Voltage controlled current source    & \code{I(U)} & \incTabFig{DeviceI(u)}{0.4cm} \\
 Current controlled current source    & \code{I(I)} & \incTabFig{DeviceI(i)}{0.4cm} \\
-Current probe (wire)                 & \code{PI}   & \incTabFig{DevicePI}{1.8cm}   \\ \hline
+Current probe (wire)                 & \code{PI}   & \incTabFig{DevicePI}{1.8cm}   \\ 
+\hline
 \end{tabular}
 \caption{Supported linear devices}
 \label{tabSupportedDevices}
 \end{center}
 \end{table}
-} % End of local scope of \incTabFig
+} % End of local scope of \incTabFig and \extrarowheight
 
 A linear electronic circuit is a combination of the supported basic
-devices as listed in table \ref{tabSupportedDevices}. The circuit is input
-to \linnet{}. The representation of the circuit is a list of devices with
+devices listed in table~\ref{tabSupportedDevices}. The circuit is input to
+\linnet{}. The representation of the circuit is a list of devices with
 connectivity information. The interconnections are expressed by references
-to nodes, where a node is a point of the circuit, which normally at least
-two devices are connected to. This leads to a simple formal syntax, the
-circuit network list. This list can be created and maintained with a text
-editor; there's no graphical interface for editing a circuit.
+to nodes, where a node is a point in the circuit to which normally at
+least two devices are connected. This leads to a simple formal syntax, the
+circuit network list, or simply netlist. This list can be created and
+maintained with a text editor; there is no graphical interface for editing
+a circuit.
 
 \begin{figure}
 \centering
@@ -69,21 +74,21 @@ editor; there's no graphical interface for editing a circuit.
 \end{figure}
 
 The computed formulas are printed to the console and to the application
-log file and can be used for further investigation or for publications or
-didactic purpose.
+log file and can be used for further investigation, publications, or
+didactic purposes.
 
-To make the application somewhat more attractive it exports the computed
-formulas as Octave or MATLAB script code, too. Numeric evaluation becomes
-a simple one-line command in Octave. The formulas are exported as LTI
-transfer function objects so that the complete set of analysis functions
-from the Octave control toolbox can be applied just like that. This
-reaches from simple transfer function plotting to stability analyses and
-system response computation on arbitrary system input.
+To make the application somewhat more attractive, it also exports the
+computed formulas as Octave or MATLAB script code. Numeric evaluation then
+becomes a simple one-line command in Octave. The formulas are exported as
+LTI transfer function objects so that the complete set of analysis
+functions from the Octave Control package can be applied directly. This
+ranges from simple transfer function plotting to stability analysis and
+the computation of system responses to arbitrary inputs.
 
-Please refer to figure \ref{figFirstIntroExample} as an example
-of how \linnet{} works. This is a simple RLC element with a transfer
-function of second order. It can be represented by the following circuit
-netlist:
+Please refer to figure~\ref{figFirstIntroExample} for an example of how
+\linnet{} works. This is a simple RLC circuit with a second-order transfer
+function. It can be represented by the following circuit netlist:
+
 \begin{verbatim}
 U Uin in  gnd
 L L   in  K1
@@ -91,12 +96,17 @@ C C   K1  out
 R R   out gnd
 PLOT G U_out U_in
 \end{verbatim}
-Given this was put into file rlc.cnl, then we can run \linnet{}:
+
+\noindent
+If this netlist is stored in file \file{rlc.cnl}, we can run \linnet{}:
+
 \begin{verbatim}
 linNet -o rlc.cnl
 \end{verbatim}
-%\clearpage
-and would yield the output:
+
+\noindent
+This would yield the output:
+
 \begin{verbatim}
 User-defined result G (Bode plot):
 The dependency of U_out on U_in:
@@ -115,20 +125,22 @@ The dependency of U_out on U_in:
 \label{figFirstIntroExample_OctaveOutput}
 \end{figure}
 
+\noindent
 Going to Octave and typing \code{G} to plot the transfer function (still
-using default device values) gives us figure
-\ref{figFirstIntroExample_OctaveOutput}. More plots or plots with altered
-device values are a matter of single commands in Octave.
+using the default device values) gives us
+figure~\ref{figFirstIntroExample_OctaveOutput}. Additional plots or plots
+with modified device values are then a matter of single commands in
+Octave.
 
-\linnet{} means ``linear network''. It founds on a symbolic solver for
-linear equation systems. There's no way to model any non linear effects
-like noise, voltage or current limits, non-linear distortions or switching
+\linnet{} means ``linear network''. It is based on a symbolic solver for
+linear equation systems. There is no way to model non-linear effects such
+as noise, voltage or current limits, non-linear distortions, or switching
 operations. All of these effects play an important role in real electronic
-circuits and a good deal even uses these effects as their principle of
-operation -- you won't find \linnet{} helpful for an investigation of
-these kind of effects or circuits. There are many numeric circuit
-simulation tools, which are capable to do this, in the first place the
-popular open source tool SPICE with all its derivates. \linnet{} is
-conceptually not a competitor of these tools, although it can behave a
-tiny bit alike when using Octave as numeric post-processor. \linnet{} is
-not the worse SPICE, \linnet{} is different.
+circuits, and many circuits even use these effects as their principle of
+operation. You will not find \linnet{} helpful for the investigation of
+such effects or circuits. There are many numeric circuit simulation tools
+that are capable of this, first and foremost the popular open-source tool
+SPICE and its many derivatives. \linnet{} is conceptually not a competitor
+to these tools, although it can behave somewhat similarly when using
+Octave as a numeric post-processor. \linnet{} is not the worse SPICE;
+\linnet{} is different. 
