@@ -78,12 +78,12 @@ log file and can be used for further investigation, publications, or
 didactic purposes.
 
 To make the application somewhat more attractive, it also exports the
-computed formulas as Octave or MATLAB script code. Numeric evaluation then
-becomes a simple one-line command in Octave. The formulas are exported as
-LTI transfer function objects so that the complete set of analysis
-functions from the Octave Control package can be applied directly. This
-ranges from simple transfer function plotting to stability analysis and
-the computation of system responses to arbitrary inputs.
+computed formulas as GNU Octave or MATLAB script code. Numeric evaluation
+then becomes a simple one-line command in Octave. The formulas are
+exported as LTI transfer function objects so that the complete set of
+analysis functions from the Octave Control package can be applied
+directly. This ranges from simple transfer function plotting to stability
+analysis and the computation of system responses to arbitrary inputs.
 
 Please refer to figure~\ref{figFirstIntroExample} for an example of how
 \linnet{} works. This is a simple RLC circuit with a second-order transfer
@@ -125,12 +125,13 @@ The dependency of U_out on U_in:
 \label{figFirstIntroExample_OctaveOutput}
 \end{figure}
 
-\noindent
-Going to Octave and typing \code{G} to plot the transfer function (still
-using the default device values) gives us
-figure~\ref{figFirstIntroExample_OctaveOutput}. Additional plots or plots
-with modified device values are then a matter of single commands in
-Octave.
+\noindent 
+The command line switch -o made \linnet{} generate Octave script
+\file{G.m}. Going to Octave and typing \code{G} to plot the transfer
+function gives us figure~\ref{figFirstIntroExample_OctaveOutput}. For this
+plot, Octave used default values for \ident{R}, \ident{L} and \ident{C}.
+Additional plots or plots with modified device values are then a matter of
+single commands in Octave.
 
 \linnet{} means ``linear network''. It is based on a symbolic solver for
 linear equation systems. There is no way to model non-linear effects such

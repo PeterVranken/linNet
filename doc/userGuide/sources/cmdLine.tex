@@ -26,13 +26,13 @@ output. The verbositiy of the console output can be controlled, a log file
 can be created and script generation for Octave is an option. The command
 line arguments in detail:
 \begin{itemize}
-  \item \emph{-h, --help}
+  \item \emph{-h, -{}-help}
     \linnet{} prints a short help text and terminates again. The return
     value to the shell is 0. Can be combined with \code{-r}.
-  \item \emph{-r, --version}
+  \item \emph{-r, -{}-version}
     \linnet{} prints the software revision and terminates again. The
     return value to the shell is 0. Can be combined with \code{-h}.
-  \item \emph{-v LEVEL, --verbosity=LEVEL}
+  \item \emph{-v LEVEL, -{}-verbosity=LEVEL}
     The verbosity LEVEL of the application; LEVEL is an enumeration value.
     It doesn't matter whether it is written in upper or lower case
     characters. The blank between \mbox{-v} and LEVEL is optional. LEVEL
@@ -74,12 +74,13 @@ line arguments in detail:
         errors (as opposed to the ``normal'' errors) are those, which lead
         to immediate (but still controlled) program termination; the
         out-of-memory error is a prominent example. Computation results --
-        if any -- can be found only exported as Octave code (see~\code{-o})
+        if any -- can be found only exported as Octave code
+        (see~\code{-o}).
     \end{itemize}
     Each verbosity level includes all output of the less verbose levels.
     The default level is \code{RESULT}.
 
-  \item \emph{-f FORMAT, --format-of-log-entry=FORMAT}
+  \item \emph{-f FORMAT, -{}-format-of-log-entry=FORMAT}
     Log entry format. FORMAT is an enumeration value. It doesn't matter
     whether it is written in upper or lower case characters. The blank
     between -f and FORMAT is optional. FORMAT is one out of:
@@ -97,26 +98,41 @@ line arguments in detail:
     \end{itemize}
     The default format is \code{long}.
 
-  \item \emph{-s, --silent}
+  \item \emph{-s, -{}-silent}
     Silent operation, only a greeting is emitted. Do not write progress
     information to the console, only write into the log file. To avoid
     useless runs of the application it is not allowed to choose silent
     operation if no log file is in use (see~\code{-l}).
 
-  \item \emph{-l[FILENAME], --log-file-name[=FILENAME]}
-    This option enables the use of a log file and controls its name. No
-    log file is opened if this option is not used.
+  \item \emph{-l[FILENAME], -{}-log-file-name[=FILENAME]} This option
+    enables the use of a log file and controls its name. No log file is
+    opened if this option is not used. Please note, there must be no blank
+    between \emph{-l} and the file name.\footnote{%
+      When PowerShell is used to invoke \linnet{}, it may interpret
+    command-line arguments before passing them to the application. For
+    example, \code{-lmyLogFile.txt} may be split at the period character
+    and passed to \linnet{} as two separate arguments, \code{-lmyLogFile}
+    and \code{.txt}. This can lead to the confusing error message that a
+    netlist file named \file{.txt} could not be found.
+  
+    Possible workarounds are: Either enclose the entire argument in double
+    quotes (\code{"-lmyLogFile.txt"}) or use \code{--\%} as the first
+    pseudo-argument on the command line. PowerShell recognizes this token
+    as an instruction to stop parsing the remainder of the command line
+    and to pass all subsequent whitespace-separated tokens to the
+    application unchanged. The token \code{--\%} itself is not passed to
+    the application.}
 
-    You may state the name of the log file but normally you won't: If the
-    option is used without argument \code{FILENAME} then an appropriate
-    file name is chosen by the application. It is derived from the name of
-    the circuit netlist if a single input file is given and otherwise the
-    generic name \file{linNet.log} is chosen.
+    You may state the name of the log file (which may of course include
+    the file path) but normally you won't: If the option is used without
+    argument \code{FILENAME} then an appropriate file name is chosen by
+    the application. It is derived from the name of the circuit netlist if
+    a single input file is given and otherwise the generic name
+    \file{linNet.log} is chosen.
 
-    If the name of the log file is not explicitly given (which may of
-    course include the file path) then the location of the log file is the
-    output folder set with \code{-o} or the current working directory
-    otherwise.
+    If the name of the log file is not explicitly given then the location
+    of the log file is the output folder set with \code{-o} or the current
+    working directory otherwise.
 
     The folder path to the specified log file is created if it doesn't
     exist yet.
@@ -124,13 +140,15 @@ line arguments in detail:
     There's a constraint: Either using a log file is specified
     with~\code{-l} or~\code{-s} is not given.
 
-  \item \emph{-c, --clear-log-file}
+  \item \emph{-c, -{}-clear-log-file}
     Clear the log file at the beginning of operation. Default is to append
     to a possibly already existing log file.
 
-  \item \emph{-o[DIRNAME], --Octave-output-directory[=DIRNAME]}
+  \item \emph{-o[DIRNAME], -{}-Octave-output-directory[=DIRNAME]}
     This option enables the generation of Octave script code and controls
     the location. No Octave code is generated if this option is not used.
+    Please note, there must be no blank between \emph{-l} and the
+    directory name.
 
     Octave code generated from a circuit netlist will be placed into a
     folder whose name is derived from the netlist file. As many output
@@ -142,7 +160,7 @@ line arguments in detail:
     The folder path to and including the specified parent directory is
     created if it doesn't exist yet.
     
-    A distinction is made regarding the generated script code based on
+    A distinction is made regarding the generated script code, based on
     whether it is problem-specific or static (some common, always
     identical sub-routines). The static code component is generated only
     if the netlist related output folder does not already exist. This
@@ -150,7 +168,7 @@ line arguments in detail:
     without the risk of it being overwritten during a subsequent run of
     \linnet{}. See \code{-i} also.
 
-  \item \emph{-i, --do-not-copy-common-Octave-code}
+  \item \emph{-i, -{}-do-not-copy-common-Octave-code}
     The generated Octave code builds on some common scripts, which are
     normally copied into each of the netlist related output folders. This
     way, the generated code will run just like that in Octave, without the
@@ -169,8 +187,8 @@ line arguments in detail:
 If the command line parser detects a problem then it tends to print the
 help text for convenience. This is done into stdout. The concrete error
 report is however printed into stderr. It depends on your shell in which
-fashion these two text streams are separated (or interchanged). Carefully
-look for the actual error message; if you are lucky it's presented in a
+fashion these two text streams are separated (or mixed). Carefully look
+for the actual error message; if you are lucky it's presented in a
 different color.
 
 If \linnet{} is integrated in a scripting environment then its return

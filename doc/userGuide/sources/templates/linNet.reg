@@ -1,0 +1,26 @@
+REGEDIT4
+
+[HKEY_CURRENT_USER\Software\Classes\.cnl]
+@="FileClass_cnl"
+
+[HKEY_CURRENT_USER\Software\Classes\.ckt]
+@="FileClass_cnl"
+
+[HKEY_CURRENT_USER\Software\Classes\FileClass_cnl]
+@="linNet Circuit Netlist"
+
+[HKEY_CURRENT_USER\Software\Classes\FileClass_cnl\shell]
+@="Edit"
+
+[HKEY_CURRENT_USER\Software\Classes\FileClass_cnl\DefaultIcon]
+@="c:\\ProgramFiles\\linNet\\linNet.exe,1"
+
+[HKEY_CURRENT_USER\Software\Classes\FileClass_cnl\shell\Edit]
+@="&Edit"
+[HKEY_CURRENT_USER\Software\Classes\FileClass_cnl\shell\Edit\command]
+@="c:\\ProgramFiles\\emacs-30.2\\bin\\emacsclient.exe -n \"%1\""
+
+[HKEY_CURRENT_USER\Software\Classes\FileClass_cnl\shell\Compute]
+@="Run linNet"
+[HKEY_CURRENT_USER\Software\Classes\FileClass_cnl\shell\Compute\command]
+@="c:\\ProgramFiles\\linNet\\linNet.exe -l -c -s -o -- \"%1\""
