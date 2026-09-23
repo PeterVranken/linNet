@@ -58,16 +58,13 @@ The build depends on two packages:
 \end{itemize}
  
 The makefile needs to know, where these packages are installed. Two
-options are supported. 
-
-You can add the directories with the binaries of GCC and the UNIX tools
-to your global search path, i.e., ensure that the environment variable
-\ident{PATH} contains these directories.
-
-Or you set the following two environment variables, which are evaluated by
-the makefile:\footnote{Although designed for Windows, where typically
-several different competing ports of GCC can reside, the environment
-variables can be used for Linux and Mac OS, too.}
+options are supported. You can add the directories with the binaries of
+GCC and the UNIX tools to your global search path, i.e., ensure that the
+environment variable \ident{PATH} contains these directories. Or you set
+the following two environment variables, which are evaluated by the
+makefile:\footnote{Although designed for Windows, where typically several
+different competing ports of GCC can reside, the environment variables can
+be used for Linux and Mac OS, too.}
 
 \begin{itemize}
   \item \ident{CC\_BIN}: This variable explicitly specifies the folder
@@ -75,8 +72,8 @@ variables can be used for Linux and Mac OS, too.}
     located in.
   \item \ident{UNIX\_TOOLS\_BIN}: This variable explicitly specifies the
     directory with the UNIX tools, i.e.,
-    \file{\%UNIX\_TOOLS\_BIN\%\textbackslash{}echo.exe} or
-    \file{\$(UNIX\_TOOLS\_BIN)/echo} should be a valid executable file.
+    \file{\$env:UNIX\_TOOLS\_BIN\bs{}echo.exe} (Windows) or
+    \file{\$(UNIX\_TOOLS\_BIN)/echo} (Linux, Mac OS) should be a valid executable file.
 \end{itemize}
 
 An advantage of the second method is that the variables can be set

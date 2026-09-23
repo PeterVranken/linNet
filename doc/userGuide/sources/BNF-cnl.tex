@@ -51,18 +51,18 @@ nodes may be defined later by being connected to actual devices.
 \code{<deviceDef>}: The number of nodes depends:
 \begin{itemize}
   \item Most devices have two connectors. They specify two nodes (2 times
-    \code{<node>}), which they are connected to
+    \code{<node>}), which they are connected to.
   \item The case having 3 times \code{<node>} is for operational
-    amplifiers only
+    amplifiers only.
   \item The case having 4 times \code{<node>} is for the voltage
     controlled sources. The first two nodes indicate where the source is
     connected and the second pair (\code{<control>}) defines the
-    controlling voltage potential difference
+    controlling electrical potential difference.
   \item The case having 2 times \code{<node>} followed by a device name
     (\code{<control>}) is for the current controlled sources. The device
     name references an already defined current probe element (type
     \code{PI}). The current through this element is the control current of
-    the source
+    the source.
 \end{itemize}
 
 \code{<deviceRef>}: \code{<rationalNum>} is a quotient of two positive

@@ -417,7 +417,7 @@ our example netlist and Octave will begin with initial standard values.
 
 \section{Transistor model}
 
-The final use case is the complexest one. Figure \ref{figBipolarTModel}
+The final use case is the most complex one. Figure \ref{figBipolarTModel}
 shows a typical transistor amplifier circuit. The input voltage $U_{in}$
 is amplified to the output voltage $U_{out}$. Main characteristics of the
 circuit is the frequency response of the output in dependency of the
@@ -820,7 +820,7 @@ without this trick.
 
 The hum suppression might be of interest for a real application of the
 circuit if it has a conventional power supply, which might contain some
-remains of the 50\,Hz frequency of the public grid. Hum suppression
+remains of the 50\,Hz frequency from the public grid. Hum suppression
 describes to which extend such remains will be apparent at the circuit
 output.
 
@@ -844,14 +844,13 @@ without noticeable damping.
 The explanation: In the computation of a MIMO system and if we ask for the
 transfer function of one of its inputs to one of its outputs, then the
 answer holds under the assumption that the other inputs have given values,
-e.g., zero all the time (however the actual input function is irrelevant).
-With other words its assumed that the inputs are driven with a source of
-output impedance zero. For our circuit this has the consequence that the
-input capacitor $C_{in}$ stabilizes the base voltage of the transistor -
-here we have a good hum suppression. Accordingly, the collector current is
-also stablized but unfortunately this means that the collector voltage
-exactely follows the battery voltage -- and this is what we read from the
-Bode plot.
+e.g., zero all the time. Which means, it's assumed that the inputs are
+driven with a source of output impedance zero. For our circuit this has
+the consequence that the input capacitor $C_{in}$ stabilizes the base
+voltage of the transistor - here we have a good hum suppression.
+Accordingly, the collector current is also stablized but unfortunately
+this means that the collector voltage exactely follows the battery voltage
+-- and this is what we read from the Bode plot.
 
 Please note that $C_{out}$ doesn't appear in the transfer function
 $U_{batt}$ to $U_{out}$. All computation is ideal and since there's no

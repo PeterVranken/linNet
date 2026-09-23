@@ -16,7 +16,7 @@
     \ctikzset{voltage=straight}
 
     \def\lR{2.5}        % Length of device like R
-    \def\dFbY{2.5}      % Delta in direction Y of feedback line
+    \def\dFbY{1.4}      % Delta in direction Y of feedback line
     \def\dOpX{1*\lR}    % Move OP-emulating source in x to middle of feedback line
     \def\sizeY{\lR}     % Height Uin
     \def\yOut{0.8*\lR}  % Height Uout, should resemble omitted OP
@@ -43,7 +43,7 @@
     
     % OP-emulating source, direction output, to Rfb3.
     \draw (CR)
-       to[V,v_=$OP_3$] (\px,\yOut) coordinate(here)
+       to[V,v_<=$OP_3$] (\px,\yOut) coordinate(here)
        -- (RhtRfb|-here) coordinate(BotRhtFb)
        -- (RhtRfb);
     

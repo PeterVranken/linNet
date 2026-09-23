@@ -510,7 +510,8 @@ The first two referenced nodes are the inputs. Different to real
 circuits no distinction needs to be made between the two inputs; there's
 no inverted or non inverted input. The computation needs to assume the linear
 operation -- everytking else is out of scope of \linnet{} -- and in this
-sense the connection is always made correct.
+sense the connection is always made correct.\footnote{An explanation can
+be found in section \ref{secModellingDevs_opAmp}.}
 
 The third referenced node is the output of the op-amp.
 
@@ -763,7 +764,7 @@ A list of the knowns and unknowns, which can be referenced from a
 \subsection{Plot control}
 
 The generated Octave script code defaults to some initial plots. (Using
-the created LTI transfer function objects any other arbitrary plots and
+the created LTI transfer function, objects any other arbitrary plots and
 figures can be created in Octave.) These initial plots can be controlled
 in a rather limited way from the netlist file with some additional syntax
 elements.
@@ -785,14 +786,14 @@ your input.}
 If the default plot is a time domain plot (as for full results) then the
 plot-info still relates to the (actually not presented) Bode transfer
 function plot of the system. The according range of the time variable of
-the actual plot is derived from this information. Basically, the upper
+the actual plot is derived from this information. Essentially, the upper
 limit of the time range is the reciprocal of the upper limit of the
 specified frequency range.
 
 If the optional plot-info block is not used then \linnet{} won't pass any
 plot related information on to Octave. Most of the Ocatve functions from
-the control toolbox will safely find suitable ranges for plotting
-themselves so that this normally is the simplest and best way to do.
+the Control package will find suitable ranges for plotting on their own so
+that this normally is the simplest and best way to do.
 
 
 \section{Ground nodes}
@@ -801,11 +802,11 @@ themselves so that this normally is the simplest and best way to do.
 A valid network of devices may consist of any number of unconnected
 sub-networks. (It's probably hard to find reasonable uses cases for
 unconnected sub-nets with maybe the exception of sub-nets coupled by
-controlled sources.) \linnet{} assumes an unknown electrical potential for
-each of the sub-network nodes except one; the last electrical potential
-inside a sub-network is linear dependent. These last nodes are called the
-ground nodes. Their electrical potential is zero by definition and the
-potentials of the other nodes become node voltages.
+controlled sources.) In each sub-network, \linnet{} assumes an unknown
+electrical potential for all nodes except one; the last electrical
+potential inside a sub-network is linear dependent. These last nodes are
+called the ground nodes. Their electrical potential is zero by definition
+and the potentials of the other nodes become node voltages.
 
 You define the ground node of a sub-network by naming. If there's one node
 whose name contains either ``gnd'' or ``ground'', either capitalized or in
@@ -847,11 +848,11 @@ nodes of a circuit explicitly.
 \section{The deprecated netlist format \code{*.ckt}}
 
 The parser of \linnet{} still supports an elder, deprecated input format.
-It had been used by an initial, much simpler implementation of the core
-algorithm, which had served as prove of concept. It had limited
+It had been used by an initial and simpler implementation of the core
+algorithm which had served as prove of concept. It had limited
 capabilities and its netlist syntax, which followed the SPICE netlist
 format could not easily be extended to express the features of the
-\linnet{} release. Furthermore the similarity with the SPICE syntax turned
+\linnet{} release. Furthermore, the similarity with the SPICE syntax turned
 out to be rather disadvantageous as it promised much more compatibility
 as could ever be kept due to the different concepts of the programs.
 
@@ -860,5 +861,6 @@ only; the \linnet{} release should yield the same results as the prove of
 concept. It is not intended to support this format in future releases and
 you're not encouraged to ever use it. This is why it is not explained in
 this manual. A formal syntax description in Backus-Naur form can however
-be found as \file{parser-ckt-bnf.txt}. The file is part of the \linnet{}
-sources.
+be found as \file{parser-ckt-bnf.txt} in folder \file{doc} of the cloned
+project.
+
