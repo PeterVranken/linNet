@@ -251,7 +251,7 @@ $i=1..k-1,m$ and $j=1..k-1,n$ with $m, n \geq k$.
 $M^{[k]}_{m n}$ is a square matrix. It inherits the upper-left
 square of $M$ and has one additional row that has the
 coefficients of row $m$ of $ M$ and one additional column that
-has the coefficients of row $n$ of $M$.
+has the coefficients of column $n$ of $M$.
 
 Examples: If $M$ is the matrix (\ref{eqSampleLES}) from the example
 in section \ref{secExampleElimMethod} then we have $M^{[1]}_{1 4}=7$,
@@ -831,7 +831,7 @@ For explanatory purpose it has to be mentioned that the relations between
 the values of devices of same kind, which can be stated in the netlist
 file are completely irrelevant to the elimination process of the LES.
 These relations are simply not known by the solver. They are applied only
-in the final rendering of the found solution and respecting the wanted
+in the final rendering of the found solution, and respecting the wanted
 absence of common divisors in the rendered result becomes a simple matter
 of traditional computation of the greatest common divisor of all affected
 numeric factors.
