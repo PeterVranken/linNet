@@ -10,6 +10,10 @@ of numbers. The resulting formula is the Laplace transform describing the
 dependencies of the voltages and currents in the circuit on the input
 voltages and currents. 
 
+[[figFirstIntroExample]]
+.Simple example of a linear electronic circuit
+image::doc/userGuide/sources/figures/FirstIntroExample.jpg[Simple example of a linear electronic circuit, width="60%", pdfwidth="60%", align="center"]
+
 A linear electronic circuit is a combination of the supported basic
 devices listed in <<tabSupportedDevices>>. The circuit is input to
 linNet. The representation of the circuit is a list of devices with
@@ -20,13 +24,8 @@ circuit network list, or simply netlist. This list can be created and
 maintained with a text editor; there is no graphical interface for editing
 a circuit.
 
-The computed formulas are printed to the console and to the application
-log file and can be used for further investigation, publications, or
-didactic purposes.
-
 [[tabSupportedDevices]]
 .Supported linear electronic devices
-//[caption="Table 1: "]
 [options="header",cols="<6,^2", width="50%"]
 |=======
 |Device |Symbol
@@ -45,17 +44,18 @@ didactic purposes.
 |Current probe (wire) |PI
 |=======
 
-To make the application somewhat more attractive, it also exports the
-computed formulas as GNU Octave or MATLAB script code. Numeric evaluation
-then becomes a simple one-line command in Octave. The formulas are
-exported as LTI transfer function objects so that the complete set of
-analysis functions from the Octave Control package can be applied
-directly. This ranges from simple transfer function plotting to stability
-analysis and the computation of system responses to arbitrary inputs.
+The computed formulas are printed to the console and to the application
+log file and can be used for further investigation, publications, or
+didactic purposes.
 
-[[figFirstIntroExample]]
-.Titel Simple example of a linear electronic circuit
-image::doc/userGuide/sources/figures/FirstIntroExample.jpg[Simple example of a linear electronic circuit, width="40%", pdfwidth="40%", align="center"]
+To make the application somewhat more attractive, it also exports the
+computed formulas as link:https://octave.org/[GNU Octave^] or MATLAB
+script code. Numeric evaluation then becomes a simple one-line command in
+Octave. The formulas are exported as LTI transfer function objects so that
+the complete set of analysis functions from the Octave Control package can
+be applied directly. This ranges from simple transfer function plotting to
+stability analysis and the computation of system responses to arbitrary
+inputs.
 
 Please refer to <<figFirstIntroExample>> for an example of how
 linNet works. This is a simple RLC circuit with a second-order transfer
@@ -88,20 +88,13 @@ _L_ and _C_. Additional plots or plots with modified device values are
 then a matter of single commands in Octave.
 
 [[figOctaveOutput]]
-.Titel Octave plot using the linNet generated LTI object
+.Octave plot using the linNet generated LTI object
 image::doc/userGuide/sources/figures/FirstIntroExample_OctaveOutput.jpg[Octave plot using the linNet generated LTI object, width="70%", pdfwidth="70%", align="center"]
 
 For detailed information about linNet, including installation
 instructions, the netlist syntax, the Octave interface, and the
 mathematical concepts behind the program, please refer to the user guide,
 link:doc/userGuide/linNet-userGuide.pdf[linNet-userGuide.pdf^].
-
-//The source code of linNet is hosted at GitHub; please see
-//link:https://github.com/PeterVranken/linNet/tree/main/[https://github.com/PeterVranken/linNet/tree/main/].
-//In the repository's _Releases_ area, you find the links to download
-//ready-to-use distributions with manual, samples and executable binaries
-//for Windows. Mac and Linux users will have to compile the software, the
-//makefile and source code files are prepared to do so.
 
 linNet means "linear network". It is based on a symbolic solver for
 linear equation systems. There is no way to model non-linear effects such
