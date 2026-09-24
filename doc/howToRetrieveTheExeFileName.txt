@@ -1,6 +1,6 @@
 For Windows only:
 
-// http://msdn.microsoft.com/en-us/library/windows/desktop/ms683197.aspx
+https://learn.microsoft.com/en-us/windows/win32/api/libloaderapi/nf-libloaderapi-getmodulefilenamea
 
 #include "windows.h"
 

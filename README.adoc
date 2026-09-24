@@ -12,7 +12,7 @@ voltages and currents.
 
 [[figFirstIntroExample]]
 .Simple example of a linear electronic circuit
-image::doc/userGuide/sources/figures/FirstIntroExample.jpg[Simple example of a linear electronic circuit, width="60%", pdfwidth="60%", align="center"]
+image::doc/userGuide/sources/figures/FirstIntroExample.jpg[Simple example of a linear electronic circuit, width="50%", pdfwidth="50%", align="center"]
 
 A linear electronic circuit is a combination of the supported basic
 devices listed in <<tabSupportedDevices>>. The circuit is input to
