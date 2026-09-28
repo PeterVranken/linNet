@@ -1,133 +1,101 @@
 @echo off
-:: Get all files which are relevant for the end user from the SVN repository and pack them
-:: into an archive for shipping. See usage message at file end for more details.
+REM  Get all files which are relevant for the end user from the Git repository and pack them
+REM  into an archive for shipping. See usage message at file end for more details.
 
-if "%1" == "" goto LUsage
+REM if "%1" == "" goto LUsage
 if "%1" == "--help" goto LUsage
 if "%1" == "-h" goto LUsage
 if "%1" == "-?" goto LUsage
 if "%1" == "/?" goto LUsage
 if "%1" == "/h" goto LUsage
+if not "%2" == "" goto LUsage
 
 setlocal
 
-:: Check prerequisites for successful run of this script.
+REM Check prerequisites for successful run of this script.
 if "%TEMP%" == "" (
     echo To run this script the environment variable TEMP needs to be set properly.
     echo TEMP needs to point to a directory with write access for temporarily used files.
     goto :eof
 )
-:: Availability of SVN command line tool.
-svn --version > nul
+REM Availability of Git command line tool.
+git --version > nul
 if ERRORLEVEL 1 (
-    echo The command line tool SVN could not be found. This may happen if you use SVN
-    echo solely via its GUI client Tortoise. Please install the SVN command line tool and
-    echo restart this script.
+    echo The command line tool Git could not be found. Please install the GIT command line
+    echo tool and restart this script.
     goto :eof
 )
 
-:: Calculate time information and use it to make file and folder names unique.
+REM Calculate time information and use it to make file and folder names unique.
 set now=%date%
 set timeInfo=%now:~-2%%now:~-7,2%%now:~-10,2%
 set now=%time%
 set timeInfo=%timeInfo%%now:~0,2%%now:~3,2%%now:~6,2%%now:~9,2%
 set tmpCheckoutFolder=%TEMP%\linNet-%timeInfo%
+echo tmpCheckoutFolder=%tmpCheckoutFolder%
 
-:: Evaluate the command line. The revision number is optional.
-::   A special, reserved revision designation is "trunk" which refers to the head
-:: revision of the software trunk. This choice is very helpful for maintenance and
-:: test work on the export scripting itself. Same for "branches".
-if /I "%1" == "trunk" (
-    set rev=
-    set tag=trunk
-    set url=trunk
-    
-) else ( if /I "%1" == "branches" (
-    set rev=
-    set tag=%2
-    set url=branches/%2
-
-) else ( :: Normal situation: We reference a tag.
-    if "%2" == "" (
-        set rev=
-        set tag=%1
-        set url=tags/%1
-    ) else (
-        set rev=-r %1
-        set tag=%2
-        set url=tags/%2
-    )
-) )
-
-
-:: The file name of the aimed setup is tagged with the version information.
-if "%2" == "" (
-    set setupFileNameWithSrcs=linNet-%tag%.zip
-    set setupFileNameBinaries=linNet-binaries-%tag%.zip
-) else (
-    set setupFileNameWithSrcs=linNet-%tag%-r-%1.zip
-    set setupFileNameBinaries=linNet-binaries-%tag%-r-%1.zip
+REM Evaluate the command line. The revision to use can be designated by a commit hash or a
+REM echo tag name. Default is commit HEAD.
+if /I "%1" == "" (
+    set rev=HEAD
 )
 
-set url=https://linnet.googlecode.com/svn/%url%
-:: echo rev=%rev%, url=%url%
-:: echo setup with sources=%setupFileNameWithSrcs%
-:: echo setup with binaries only=%setupFileNameBinaries%
-:: goto :eof
+REM The file name of the aimed setup is tagged with the version information.
+set setupFileNameBinaries=linNet-%rev%.zip
 
-:: Get the wanted version, put it into the TEMP dir. Then go there and run the
-:: setup-creating script there: this way, the setup creation process really fits to the
-:: wanted version of the file set. Do not use the current working version of this script!
-svn checkout %rev% %url% "%tmpCheckoutFolder%"
+set url=https://github.com/PeterVranken/linNet
+REM echo url=%url%, rev=%rev%, setup=%setupFileNameBinaries%
+REM goto :eof
+
+REM Get the wanted version, put it into the TEMP dir. Then go there and run the
+REM setup-creating script there: this way, the setup creation process really fits to the
+REM wanted version of the file set. Do not use the current working version of this script!
+
+git clone %url% "%tmpCheckoutFolder%" && git -C "%tmpCheckoutFolder%" checkout --detach %rev%
 if ERRORLEVEL 1 (
-    echo Setup could not be created. SVN returned an error. Please inspect the screen output for details.
+    echo Setup could not be created. Git returned an error. Please inspect the screen output
+    echo for details.
     goto :eof
 )
+REM goto :eof
 
-:: Go to the directory in the got file where the setup creation will take place.
-pushd "%tmpCheckoutFolder%\components\linNet\cm\createSetup"
+REM Go to the directory in the got file tree where the setup creation will take place.
+pushd "%tmpCheckoutFolder%\cm\createSetup"
 
-:: Create a version description.
-pushd "%tmpCheckoutFolder%\components\linNet"
-echo Generating version file from SVN information
-SubWCRev.exe . cm\createSetup\template_version.txt cm\createSetup\version.txt -f
-popd
+REM Create a version description.
+echo Generating version file from Git information
+GitWCRev.exe . template_version.txt version.txt -MU
 
-:: Complete the version description.
+REM Complete the version description.
 echo Archive Compilation Date:>> version.txt
 date /T>> version.txt
 time /T>> version.txt
-if /I not "%rev%" == "" (
-    echo Source: %url%, %rev%>> version.txt
+echo Source: >> version.txt
+if /I not "%rev%" == "HEAD" (
+    echo %url%, %rev%>> version.txt
 ) else (
-    echo Source: %url%>> version.txt
+    echo %url%>> version.txt
 )
 
-:: Build the software in all Windows configurations from the got source files. (The
-:: binaries for the other systems need to be uploaded in SVN and can be copied only.)
-::   An external script is applied although it just contains a few, simple commands: As the
-:: other script is part of the exported revision, these commands can become subject to
-:: changes in the life cycle of the software (as opposed to this script which must not
-:: undergo any essential changes).
+REM Build the software in all Windows configurations from the got source files. (The
+REM binaries for the other systems need to be uploaded in Git and can be copied only.)
+REM   An external script is applied although it just contains a few, simple commands: As
+REM the other script is part of the exported revision, these commands can become subject to
+REM changes in the life cycle of the software (as opposed to this script which must not
+REM undergo any essential changes).
 call buildAll.cmd
 
-:: Create the dependent documentary files which are not under source control but which need
-:: to be in the setup. An external script is applied although it just contains a few,
-:: simple commands: As the other script is part of the exported revision, these commands
-:: can become subject to changes in the life cycle of the software (as opposed to this
-:: script which must not undergo any essential changes).
+REM Create the dependent documentary files which are not under source control but which need
+REM to be in the setup. An external script is applied although it just contains a few,
+REM simple commands: As the other script is part of the exported revision, these commands
+REM can become subject to changes in the life cycle of the software (as opposed to this
+REM script which must not undergo any essential changes).
 call makeDoc.cmd
+goto :eof
 
-:: Now create the archives by running the file copying script. The executed scripts are the
-:: ones got from SVN, thus those which define the file set required in the exported
-:: software version (as opposed to in the current head of the repository).
-call copyAndZipFiles.withSources.cmd %setupFileNameWithSrcs%
-if ERRORLEVEL 1 (
-    echo Setup with sources could not be created. copyAndZipFiles.withSources
-    echo returned an error. Please inspect the screen output for details.
-    popd
-    goto :eof
-)
+REM Now create the archive by running the file copying script. The executed script is the
+REM one got from Git, thus the very revision, which defines the file set required in the
+REM exported software version (as opposed to in the current HEAD of the repository).
 call copyAndZipFiles.binaries.cmd %setupFileNameBinaries%
 if ERRORLEVEL 1 (
     echo Setup with binary files could not be created. copyAndZipFiles.binaries
@@ -136,36 +104,28 @@ if ERRORLEVEL 1 (
     goto :eof
 )
 
-:: Safe the setups, then remove temporarily used files. Suppress related messages.
+REM Safe the setups, then remove temporarily used files. Suppress related messages.
 cd /D "%TEMP%"
-move "%tmpCheckoutFolder%\components\linNet\cm\createSetup\%setupFileNameWithSrcs%" .
 move "%tmpCheckoutFolder%\components\linNet\cm\createSetup\%setupFileNameBinaries%" .
 rmdir /S/Q "%tmpCheckoutFolder%" > nul 2> nul
 
-:: Move target files from temporary directory to final location.
+REM Move target file from temporary directory to final location.
 popd
-move "%TEMP%\%setupFileNameWithSrcs%" .
 move "%TEMP%\%setupFileNameBinaries%" .
 
 echo *****************************************************************************************
-echo Please, find the newly created archives %setupFileNameWithSrcs% and
-echo %setupFileNameBinaries% in your local working directory:
+echo Please, find the newly created archive %setupFileNameBinaries% in your local working
+echo directory:
 dir *.zip
 echo *****************************************************************************************
 
 goto :eof
 
 :LUsage
-echo usage: createSetup [revision] svn-tag
-echo   CAUTION: Run this script exclusively from the directory cm\createSetup in the
-echo component directory!
-echo   The script creates two archives containing the linNet installation (with and without
-echo the source files). The bundled files are taken from the project's SVN repository and
-echo are addressed by the name of the wanted version's tag and optionally by a revision
-echo number of this tag. If revision is omitted the head version of the tag is used.
-echo   The created archives linNet-*.zip are found in the current working directory.
-echo svn-tag: Refers to a revision in the folder "tags" in the SVN repository. Only
-echo versioned file sets can be exported.
-echo   Alternatively, but for testing purpose only, revision may either be trunk or branches.
-echo In either case the head revision is addressed. If trunk is stated, svn-tag becomes
-echo useless and must not be given.
+echo usage: createSetup [commitOrGitTag]
+echo   CAUTION: Run this script exclusively from the directory cm\createSetup!
+echo   The script creates an archive containing the linNet installation. The bundled files
+echo are taken from the project's GIT repository and are addressed by a commit ID or the
+echo wanted version's tag. If commitOrGitTag is omitted then the HEAD of the current branch
+echo is used.
+echo   The created archive linNet-*.zip is found in the current working directory.

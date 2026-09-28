@@ -1,3 +1,4 @@
 linNet - The Software for symbolic Analysis of linear Electronic Circuits
-Version 1.1, SVN revision $WCREV$ as of $WCDATE=%H:%M:%S %d.%m.%Y$
-Copyright (C) 2014-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+Version 1.1.$WCLOGCOUNT$, SVN revision $WCREV=8$ as of $WCDATE=%H:%M:%S %d.%m.%Y$
+Copyright (C) 2014-2026 Peter Vranken (mailto:peter_vranken@yahoo.de)
+

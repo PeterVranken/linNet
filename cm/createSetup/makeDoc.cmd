@@ -1,7 +1,7 @@
 @echo off
-:: See usage message for help. See
-:: http://en.wikibooks.org/wiki/Windows_Programming/Programming_CMD for syntax of batch
-:: scripts.
+REM See usage message for help. See
+REM http://en.wikibooks.org/wiki/Windows_Programming/Programming_CMD for syntax of batch
+REM scripts.
 goto LStart
 :LUsage
 echo usage: makeDoc
@@ -10,9 +10,9 @@ echo are not under source control. This script is part of the setup generation p
 echo start directory is cm\createSetup.
 goto :eof
 
-:: 
-:: Copyright (c) 2014, Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
-:: 
+REM 
+REM Copyright (c) 2014-2026, Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+REM 
 
 :LStart
 ::if /i "%1" == "" goto LUsage
@@ -26,10 +26,10 @@ if not "%1" == "" goto LUsage
 setlocal
 
 echo Compiling the documentation
-pushd "..\..\doc\userGuide"
+pushd "doc\userGuide"
 make
 popd
-pushd "..\..\doc\doxygen"
+pushd "doc\doxygen"
 doxygen
 popd
 
