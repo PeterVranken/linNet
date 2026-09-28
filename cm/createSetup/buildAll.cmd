@@ -33,10 +33,8 @@ REM set CC_BIN=C:\ProgramFiles\mingw-w64-gcc-mcf_20260501_16.1.0_x64-msvcrt\ming
 REM set CC_BIN=C:\ProgramFiles\mingw-w64-gcc-mcf_20260501_16.1.0_x86-msvcrt\mingw32\bin
 set UNIX_TOOLS_BIN=C:\Programme\Git\usr\bin
 
-echo pushd "%tmpCheckoutFolder%"
 pushd "%tmpCheckoutFolder%"
 echo Compiling the software in all Windows configurations
 make -sO CONFIG=DEBUG rebuild
 make -sO CONFIG=PRODUCTION rebuild
 popd
-    exit /B 1

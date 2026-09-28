@@ -82,7 +82,7 @@ popd
 
 REM Replace the current archive with the zipped temporary directory tree.
 del /F/Q %1 > nul 2> nul
-7za a -tzip %1 .\%tmpFolder%\* -r
+7z a -tzip %1 .\%tmpFolder%\* -r
 if ERRORLEVEL 1 (
     echo Error: Files could not be archived completely
     exit /B 1

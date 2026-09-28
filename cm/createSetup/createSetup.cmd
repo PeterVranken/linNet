@@ -91,7 +91,6 @@ REM simple commands: As the other script is part of the exported revision, these
 REM can become subject to changes in the life cycle of the software (as opposed to this
 REM script which must not undergo any essential changes).
 call makeDoc.cmd
-goto :eof
 
 REM Now create the archive by running the file copying script. The executed script is the
 REM one got from Git, thus the very revision, which defines the file set required in the
