@@ -105,8 +105,8 @@ if ERRORLEVEL 1 (
 
 REM Safe the setups, then remove temporarily used files. Suppress related messages.
 cd /D "%TEMP%"
-move "%tmpCheckoutFolder%\components\linNet\cm\createSetup\%setupFileNameBinaries%" .
-rmdir /S/Q "%tmpCheckoutFolder%" > nul 2> nul
+move "%tmpCheckoutFolder%\cm\createSetup\%setupFileNameBinaries%" .
+REM rmdir /S/Q "%tmpCheckoutFolder%" > nul 2> nul
 
 REM Move target file from temporary directory to final location.
 popd
