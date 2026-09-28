@@ -26,10 +26,11 @@ if not "%1" == "" goto LUsage
 setlocal
 
 echo Compiling the documentation
-pushd "doc\userGuide"
+echo pushd "%tmpCheckoutFolder%\doc\userGuide"
+pushd "%tmpCheckoutFolder%\doc\userGuide"
 make
 popd
-pushd "doc\doxygen"
+pushd "%tmpCheckoutFolder%\doc\doxygen"
 doxygen
 popd
 
