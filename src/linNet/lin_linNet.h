@@ -50,7 +50,7 @@
 
 /** The name of the environment variable that should point to the installation directory of
     this application. */
-#define LIN_ENV_VAR_HOME    "LINNET_HOME"
+#define LIN_ENV_VAR_BIN    "LINNET_BIN"
 
 /** The name of the template folder holding the static parts of the generated Octave script
     code. This folder is copied into the output folder as part of code generation. */

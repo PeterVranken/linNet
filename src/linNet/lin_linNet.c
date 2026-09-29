@@ -308,7 +308,7 @@ static boolean makeOctaveOutputDir( const char * const outputPath
             LOG_ERROR( hLog
                      , "Application installation directory is unknown; important program"
                        " resources can't be accessed. The generated Octave scripts won't"
-                       " be usable. Please set environment variable " LIN_ENV_VAR_HOME
+                       " be usable. Please set environment variable " LIN_ENV_VAR_BIN
                      )
         }
 
@@ -632,7 +632,7 @@ signed int main(signed int argc, char *argv[])
     {
         LOG_ERROR( hGlobalLogger
                  , "Can't locate the application's installation directory. Please set"
-                   " environment variable " LIN_ENV_VAR_HOME ", which should hold the"
+                   " environment variable " LIN_ENV_VAR_BIN ", which should hold the"
                    " name of the directory, where the executable file of this application"
                    " is located"
                  )

@@ -2225,7 +2225,7 @@ static void printNamedExpressionAsMCode( FILE * const stream
         {
             /* The indentation for line breaks in between the addends of a coefficient
                needs to consider the "[ " or "; " in front of a coefficient. */
-            char tabStringAddend[128];
+            char tabStringAddend[130];
             getBlankTabString( tabStringAddend
                              , sizeof(tabStringAddend)
                              , /* existingTabString */ tabStringVecElem

@@ -284,10 +284,10 @@ static rat_num_t approximate(rat_signed_long_int n, rat_signed_long_int d)
 /**
  * Check a number for overflow. The principle is trivial. We first do the operation in an
  * integer size, which is larger than the result type. Then we test the operation result if
- * it would also fit into the shorter result type and truncate it safely. The test done by
- * this function.\n
+ * it would also fit into the shorter result type and truncate it safely. The test is done
+ * by this function.\n
  *   If an overflow is recognized then it is reported by side effect in the global error
- * variable, which the client can query after his computations. This way of doing is more
+ * variable, which the client can query after its computations. This way of doing is more
  * efficient than permanent return code checks but makes the operations implemented in this
  * module non re-entrant.
  *   @return

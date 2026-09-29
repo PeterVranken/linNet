@@ -4,7 +4,7 @@ A valid installation looks like this: The \linnet{} application is a
 simple executable file plus a folder with resources for the Octave code
 generator; this folder is called \file{private} and is located next to the
 \linnet{} executable file, i.e., both are siblings in the same parent
-directory. The environment variable \ident{LINNET\_HOME} points to this
+directory. The environment variable \ident{LINNET\_BIN} points to this
 parent directory.
 
 Accordingly, this is what you have to do to install \linnet{}:
@@ -13,7 +13,7 @@ Create an empty folder, the installation directory, e.g.,
 \file{c:\bs{}ProgramFiles\bs{}linNet} (Windows) or \file{/usr/\-bin/\-linNet}
 (Linux, Mac OS). Copy the \linnet{} executable file and the folder
 \file{private} into this directory. Create a persistent environment
-variable \ident{LINNET\_HOME} and assign the path to the installation
+variable \ident{LINNET\_BIN} and assign the path to the installation
 directory.
 
 Linux and Mac OS users need to open a shell and run command \code{chmod +x
@@ -31,7 +31,7 @@ The definition of a shell command-alias pointing to the \linnet{}
 executable file can be a reasonable alternative to extending the
 environment variable \ident{PATH}.
 
-If environment variable \ident{LINNET\_HOME} is not set then \linnet{}
+If environment variable \ident{LINNET\_BIN} is not set then \linnet{}
 makes an attempt to find its resources via the path to itself. However, it
 depends on the system, the shell in use and the way the command is typed,
 whether this information is completely passed to the application or not.
@@ -58,7 +58,7 @@ are already bundled with the resources folder \file{private} so that the
 installation reduces to copying the wanted build folder -- \file{DEBUG}
 or \file{PRODUCTION} -- to any location of choice, preferably
 \file{c:\bs{}\-Program\-Files}, renaming the folder itself to
-\file{\linnet{}} and setting the environment variable \ident{LINNET\_HOME};
+\file{\linnet{}} and setting the environment variable \ident{LINNET\_BIN};
 it would be set to \file{c:\bs{}\-Program\-Files\bs{}\-\linnet{}} if the
 suggested installation folder is used. The chosen installation path
 should not contain blanks.
@@ -73,8 +73,8 @@ installation:
 basicstyle=\ttfamily\footnotesize]
 # Assign the chosen installation directory.
 $linnet = "C:\ProgramFiles\linNet"
-# Set LINNET_HOME permanently for the current user.
-[System.Environment]::SetEnvironmentVariable("LINNET_HOME", $linnet, "User")
+# Set LINNET_BIN permanently for the current user.
+[System.Environment]::SetEnvironmentVariable("LINNET_BIN", $linnet, "User")
 # Append the linNet binary directory to PATH.
 $path = [System.Environment]::GetEnvironmentVariable( "Path", "User" )
 [System.Environment]::SetEnvironmentVariable("Path", $path+";$linnet", "User")
@@ -85,7 +85,7 @@ changes to take effect. You can verify the configuration using:
 
 \begin{lstlisting} [%language=bash,
 basicstyle=\ttfamily\footnotesize]
-echo $env:LINNET_HOME 
+echo $env:LINNET_BIN
 echo $env:PATH 
 \end{lstlisting}
 

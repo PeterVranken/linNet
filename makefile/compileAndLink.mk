@@ -81,15 +81,16 @@ $(objDirList):
 	-$(mkdir) -pv $@
 
 # Create software version information based on revision information found in .svn.
-#   Note, we execute tool SubWCRev.exe unconditionally in each build. We can't write a
-# dependency rule as execution depends on some internal information in .svn, which is not
+#   Note, we execute tool GitWCRev.exe unconditionally in each build. We can't write a
+# dependency rule as execution depends on some internal information in .git, which is not
 # decodable by make. However, fortunately the tool itself has a built-in make-alike rule:
 # If the template expansion yields the same file as already existent then it won't
 # re-create the file or even update the file date. Therefore, make won't see a new file and
 # won't trigger re-compilation and linkage.
 .PHONY: generateVersionFile
 generateVersionFile:
-	-$(SubWCRev) . APSW/rev_softwareRevision.c.template APSW/rev_softwareRevision.c $(if $(call isOption,s),> nul,)
+	$(info Calling $(GitWCRev))
+	-$(GitWCRev) . src/rev_softwareRevision.c.template src/rev_softwareRevision.c $(if $(call isOption,s),> nul,)
 
 # Pattern rules for assembler language source files.
 asmFlags = -Wall                                                                            \
@@ -123,7 +124,7 @@ cFlags = -fno-common -fno-exceptions -ffunction-sections -fdata-sections        
          -Werror=implicit-function-declaration -Werror=maybe-uninitialized                  \
          -Wno-nested-externs -Werror=int-to-pointer-cast -Werror=pointer-sign               \
          -Werror=pointer-to-int-cast -Werror=return-local-addr -Werror=missing-prototypes   \
-         -Werror=missing-field-initializers -Werror=overflow                                \
+         -Werror=missing-field-initializers -Werror=overflow -fwrapv                        \
          -MMD -MP -std=gnu11                                                                \
          $(foreach path,$(call noTrailingSlash,$(incDirList) $(srcDirInUseList)),-I$(path)) \
          $(cDefines) $(foreach def,$(defineList),-D$(def))

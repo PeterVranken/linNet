@@ -665,7 +665,7 @@ boolean fil_copyDir(const char * const targetDir, const char * const srcDir)
 /**
  * This function tries to find out, where the application linNet is installed. It uses
  * several prioritzed rules to do so:\n
- *   If the application related environment variable LINNET_HOME is set it is expected to
+ *   If the application related environment variable LINNET_BIN is set it is expected to
  * point to the installation directory.\n
  *   If not, it uses the first program argument to find its own executable. This is not a
  * safe mechanism as the shell might pass the full or a relative path.\n
@@ -693,17 +693,17 @@ const char *fil_findApplication(const char * const appArg0)
 
     /* The user should have set an environment variable that points to the installation
        directory. */
-    const char * const home = getenv(LIN_ENV_VAR_HOME);
+    const char * const home = getenv(LIN_ENV_VAR_BIN);
     if(home != NULL  && checkForInstallDir(home))
     {
-        PRINTF( "Installation dir %s found via enviroment variable " LIN_ENV_VAR_HOME "\n"
+        PRINTF( "Installation dir %s found via enviroment variable " LIN_ENV_VAR_BIN "\n"
               , home
               );
         return removeTrailingSlash(stralloccpy(home));
     }
     else
     {
-        PRINTF("Environment variable " LIN_ENV_VAR_HOME " not set or wrong\n");
+        PRINTF("Environment variable " LIN_ENV_VAR_BIN " not set or wrong\n");
     }
 
     /* Try to separate a path from the first program argument. This could point to the
