@@ -32,8 +32,8 @@ copy doc\installation.txt %output%\doc
 copy doc\readMe.forSetupBinaries.txt %output%\readMe.txt
 
 REM User guide without sources
-mkdir %output%\doc\userGuide
-copy doc\userGuide\linNet-userGuide.pdf %output%\doc\userGuide
+mkdir %output%\doc
+copy doc\userGuide\linNet-userGuide.pdf %output%\doc
 
 REM The binaries
 mkdir %output%\bin

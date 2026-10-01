@@ -50,17 +50,16 @@ the executable.
 
 \subsection{Pre-built executables}
 
-% TODO Add link to GitHub Releases page
-
-The download of \linnet{} contains pre-build, ready-to-use executable
-files for Windows (DEBUG and PRODUCTION compilation). The executable files
-are already bundled with the resources folder \file{private} so that the
-installation reduces to copying the wanted build folder -- \file{DEBUG}
-or \file{PRODUCTION} -- to any location of choice, preferably
-\file{c:\bs{}\-Program\-Files}, renaming the folder itself to
-\file{\linnet{}} and setting the environment variable \ident{LINNET\_BIN};
-it would be set to \file{c:\bs{}\-Program\-Files\bs{}\-\linnet{}} if the
-suggested installation folder is used. The chosen installation path
+The download of \linnet{} from the GibHub Release page,
+\href{https://github.com/PeterVranken/linNet/releases}{https://\-github.com/\-Peter\-Vranken/\-linNet/\-releases}
+contains pre-build, ready-to-use executable files for Windows (DEBUG and
+PRODUCTION compilation). The executable files are already bundled with the
+resources folder \file{private} so that the installation reduces to
+extracting the contents of the archive to a location of choice, preferably
+\file{c:\bs{}\-Program\-Files}, and setting the environment variable
+\ident{LINNET\_BIN}; it would be set to
+\file{c:\bs{}\-Program\-Files\bs{}\-linNet\bs{}\-bin\bs{}\-win\bs{}\-PRODUCTION}
+if the suggested installation folder is used. The chosen installation path
 should not contain blanks.
 
 \subsubsection{How to set the environment variables}
@@ -72,7 +71,7 @@ installation:
 \begin{lstlisting} [%language=bash,
 basicstyle=\ttfamily\footnotesize]
 # Assign the chosen installation directory.
-$linnet = "C:\ProgramFiles\linNet"
+$linnet = "C:\ProgramFiles\linNet\bin\win\PRODUCTION"
 # Set LINNET_BIN permanently for the current user.
 [System.Environment]::SetEnvironmentVariable("LINNET_BIN", $linnet, "User")
 # Append the linNet binary directory to PATH.
@@ -86,7 +85,10 @@ changes to take effect. You can verify the configuration using:
 \begin{lstlisting} [%language=bash,
 basicstyle=\ttfamily\footnotesize]
 echo $env:LINNET_BIN
-echo $env:PATH 
+echo $env:PATH
+linNet --help --version
+linNet -o -l $env:LINNET_BIN\..\..\..\testCases\2poleLP\2poleLP.cnl
+dir 2poleLP*
 \end{lstlisting}
 
 \subsection{Required DLLs}
@@ -112,8 +114,9 @@ Windows 11 system loads these DLLs:\newline
 \file{C:\bs{}WINDOWS\bs{}System32\bs{}ucrtbase.dll}\newline
 
 Other target platforms or other compiler releases will probably require
-other DLLs. For example, the 64 Bit build with GCC
-mingw-w64-gcc-mcf\_20260501\_16.1.0\_x64-msvcrt, also on Windows
+other DLLs. For example, the build with GCC
+mingw-w64-gcc-mcf\_20260501\_16.1.0\_x86-msvcrt or
+mingw-w64-\-gcc-\-mcf\_\-20260501\_\-16.1.0\_x64-msvcrt, also on Windows
 11, requires an additional DLL, which is located in the compiler's
 installation directory:\newline
 
@@ -122,9 +125,9 @@ installation directory:\newline
 
 To run the \linnet{} executable in this scenario, you would either have to
 copy that particular DLL into the folder, where \file{linNet.exe} is
-located or you would need to add folder \file{mingw64\bs{}bin} in the
-installation of GCC to the system environment variable \ident{PATH}, so
-that Windows can find this DLL.
+located or you would need to add folder \file{mingw32\bs{}bin} or
+\file{mingw64\bs{}bin} in the installation of GCC to the system
+environment variable \ident{PATH}, so that Windows can find this DLL.
 
 \subsection{Start from Windows Explorer (file name association)}
 

@@ -1,15 +1,29 @@
-linNet - The Software for symbolic Analysis of linear Electronic Circuits
+= linNet - The Software for symbolic Analysis of linear Electronic Circuits
 
-The installation of linNet is briefly described in file
-doc/installation.txt.
+The installation of linNet is explained in the user guide, Chapter 2 on page 12.
 
-A detailed description of installation and build of linNet and the usage
-of linNet are documented in the user guide, please refer to file
-doc/userGuide/linNet-userGuide.pdf.
+Chapters 3 and 4 of the user guide explain the usage of the application.
 
-* Release notes:
+The user guide is locally available as file
+`<linNetInstallDir>/doc/linNet-userGuide.pdf` or online at GitHub as
+https://github.com/PeterVranken/linNet/blob/main/doc/userGuide/linNet-userGuide.pdf
 
-** Revision 1.0.1
+
+== Release notes:
+
+=== Revision 1.1, 2026
+
+- Revision of the user guide with several clarifictions and modifications
+  related to the new hosting platform GitHub and the modifications in the
+  user interface.
+- Careful refinement of the source code with a few user interface
+  improvements.
+- Source code modernization to ensure compatibility with current compiler
+  releases.
+- A few minor bug fixes, all related to error paths with wrong or
+  misleading error messages.
+
+=== Revision 1.0.1
 
 - No functional changes but the sources and makefiles are now compatible
   with Linux. The build has been tested with Fedora 18. The compiled
@@ -20,7 +34,6 @@ doc/userGuide/linNet-userGuide.pdf.
 - The distributed packages contain some more out of the original test
   cases
 
+=== Revision 1.0
 
-** Revision 1.0
-
-- First release of linNet
+- First release of linNet in 2014

@@ -31,15 +31,14 @@ sharedMakefilePath := ../../makefile/
 include $(sharedMakefilePath)globalVariables.mk
 
 
-# The list of include paths to be considered.
+# The list of include paths to be considered and general LaTeX arguments.
+texFlags := -halt-on-error -c-style-errors -time-statistics -max-print-line=94
 ifeq ($(OS),Windows_NT)
    includeDirs := sources sources/figures sources/templates
-   texFlags := -halt-on-error -c-style-errors -synctex=1 -time-statistics -max-print-line=255
    texFlags += $(foreach dir,$(includeDirs),-include-directory=$(dir))
 else
    TEXINPUTS := /usr/share/texlive//:.//:sources:sources/figures:sources/templates
    export TEXINPUTS
-   texFlags := -halt-on-error -synctex=1
 endif
 
 .PHONY: $(doc).pdf
