@@ -4,7 +4,7 @@
  * @file opt_getOpt.h
  * Definition of global interface of module opt_getOpt.c
  *
- * Copyright (C) 2014 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ * Copyright (C) 2014-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -24,8 +24,8 @@
  * Include files
  */
 
-#include "types.h"
-
+#include <stdbool.h>
+#include <stdio.h>
 
 /*
  * Defines
@@ -46,10 +46,10 @@ typedef struct opt_cmdLineOptions_t
 {
     /** Either help has been demanded or a command line usage error let to the ouput of the
         program help text. */
-    boolean help;
+    bool help;
 
     /** The revision information has been requested. */
-    boolean showVersion;
+    bool showVersion;
 
     /** The verbosity level of logging. */
     const char *logLevel;
@@ -61,17 +61,17 @@ typedef struct opt_cmdLineOptions_t
     const char *lineFormat;
 
     /** Logging is done to the log file and to the console. */
-    boolean echoToConsole;
+    bool echoToConsole;
 
     /** Logging output is appended to the (existing) log file. */
-    boolean doAppend;
+    bool doAppend;
 
     /** The name and path of the Octave output folder. */
     const char *octaveOutputPath;
 
     /** Generated Octave output doesn't comprise static, problem independent parts of
         scripting. */
-    boolean dontCopyPrivateOctaveScripts;
+    bool dontCopyPrivateOctaveScripts;
 
     /** The number of input files. */
     unsigned int noInputFiles;
@@ -92,10 +92,10 @@ typedef struct opt_cmdLineOptions_t
  */
 
 /** Parse the command line using the POSIX function getopt with only one character options. */
-boolean opt_parseCmdLine( opt_cmdLineOptions_t * const pCmdLineOptions
-                        , signed int argc
-                        , char *argv[]
-                        );
+bool opt_parseCmdLine( opt_cmdLineOptions_t * const pCmdLineOptions
+                     , signed int argc
+                     , char *argv[]
+                     );
 
 #ifdef DEBUG
 /** Print the parsed user input in a formatted way. */

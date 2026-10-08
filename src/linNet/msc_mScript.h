@@ -4,7 +4,7 @@
  * @file msc_mScript.h
  * Definition of global interface of module msc_mScript.c
  *
- * Copyright (C) 2013 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ * Copyright (C) 2013-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -24,7 +24,7 @@
  * Include files
  */
 
-#include "types.h"
+#include <stdbool.h>
 #include "log_logger.h"
 
 
@@ -62,7 +62,7 @@ typedef struct msc_mScript_t
 #ifdef DEBUG
     /** Is the file handle borrowed by a client of the object? In which case not output is
         possible. */
-    boolean handleBorrowed;
+    bool handleBorrowed;
 #endif
 } msc_mScript_t;
 
@@ -121,11 +121,11 @@ void msc_initModule(log_hLogger_t hGlobalLogger);
 void msc_shutdownModule(void);
 
 /** Create a new M script object. */
-boolean msc_createMScript( msc_mScript_t ** const ppMScript
-                         , const char * const fileName
-                         , const char * const circuitFileName
-                         , const char * const resultName
-                         );
+bool msc_createMScript( msc_mScript_t ** const ppMScript
+                      , const char * const fileName
+                      , const char * const circuitFileName
+                      , const char * const resultName
+                      );
 
 /** Get another reference to the same object. */
 msc_mScript_t *msc_cloneByReference(msc_mScript_t * const pExistingObj);
@@ -134,9 +134,7 @@ msc_mScript_t *msc_cloneByReference(msc_mScript_t * const pExistingObj);
 void msc_deleteMScript(msc_mScript_t * const pMScript);
 
 /** Write a particular, predefined part of the generated M script. */
-boolean msc_writeTextBlock( msc_mScript_t * const pMScript
-                          , msc_enumTextBlock_t kindOfTextBlock
-                          );
+bool msc_writeTextBlock(msc_mScript_t * const pMScript, msc_enumTextBlock_t kindOfTextBlock);
                           
 /** Borrow the stream object from the M script object to do direct output. */
 FILE *msc_borrowStream(msc_mScript_t * const pMScript);

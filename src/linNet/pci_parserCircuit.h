@@ -24,14 +24,12 @@
  * Include files
  */
 
+#include <stdbool.h>
 #include <limits.h>
-
-#include "types.h"
 #include "log_logger.h"
 #include "rat_rationalNumber.h"
 #include "coe_coefficient.h"
 #include "msc_mScript.h"
-
 
 /*
  * Defines
@@ -176,7 +174,7 @@ typedef struct pci_voltageDef_t
 typedef struct
 {
     /** Should the frequency axis be linear or logarithmic? */
-    boolean isLogX;
+    bool isLogX;
 
     /** The number of points of the plotted curve. */
     unsigned int noPoints;
@@ -269,10 +267,10 @@ void pci_initModule(void);
 void pci_shutdownModule(void);
 
 /** Parse the input file. */
-boolean pci_parseCircuitFile( log_hLogger_t logger
-                            , const pci_circuit_t * * const ppParseResult
-                            , const char * const inputFileName
-                            );
+bool pci_parseCircuitFile( log_hLogger_t logger
+                         , const pci_circuit_t * * const ppParseResult
+                         , const char * const inputFileName
+                         );
 
 /** Get another reference to the same object. */
 const pci_circuit_t *pci_cloneByConstReference(const pci_circuit_t * const pParseResult);

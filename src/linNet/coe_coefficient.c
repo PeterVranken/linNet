@@ -3,7 +3,7 @@
  *   Basic data structures and types for handling the coefficients of the linear equation
  * system. The coefficients are sums of products of (physical) constants.
  *
- * Copyright (C) 2013 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ * Copyright (C) 2013-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -38,6 +38,9 @@
  * Include files
  */
 
+#include "coe_coefficient.h"
+
+#include <stdbool.h>
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
@@ -46,7 +49,6 @@
 #include "log_logger.h"
 #include "mem_memoryManager.h"
 #include "tbv_tableOfVariables.h"
-#include "coe_coefficient.h"
 #include "coe_coefficient.inlineInterface.h"
 
 
@@ -263,8 +265,7 @@ CRM_CREATE_MATRIX( /* modulePrefix */        coe
  *   @param pCoef
  * * \a pCoef is the double-checked coefficient object.
  */
-
-boolean coe_checkOrderOfAddends(coe_coef_t *pCoef)
+bool coe_checkOrderOfAddends(coe_coef_t *pCoef)
 {
     if(!coe_isCoefAddendNull(pCoef))
     {
@@ -369,7 +370,7 @@ void coe_logCoefficient( const coe_coef_t * const pCoef
         do
         {
             coe_integerFactor_t i;
-            boolean firstTerm = true;
+            bool firstTerm = true;
 
             /* Prepare a string, which is used to indent the second, third, etc. line of
                output. */

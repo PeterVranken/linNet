@@ -35,6 +35,9 @@
  * Include files
  */
 
+#include "msc_mScript.h"
+
+#include <stdbool.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -46,7 +49,6 @@
 #include "log_logger.h"
 #include "lin_linNet.h"
 #include "fil_file.h"
-#include "msc_mScript.h"
 
 
 /*
@@ -90,7 +92,7 @@ static unsigned int _noRefsToObjects = 0;
  * The pointer to the object to operate on.
  */
 
-static boolean writeFileHeader(msc_mScript_t * const pMScript)
+static bool writeFileHeader(msc_mScript_t * const pMScript)
 {
 #define M_FILE_HDR "\
 function [tf_%s deviceConstants wBode tiStep] = %s(deviceConstants)\n\
@@ -197,7 +199,7 @@ function [tf_%s deviceConstants wBode tiStep] = %s(deviceConstants)\n\
  * The pointer to the object to operate on.
  */
 
-static boolean writeFileTrailer(msc_mScript_t * const pMScript)
+static bool writeFileTrailer(msc_mScript_t * const pMScript)
 {
 #define M_FILE_TRAILER "\
 end %% of function %s\n\
@@ -298,15 +300,15 @@ void msc_shutdownModule()
  *   @see void msc_deleteMScript(msc_mScript_t * const)
  */
 
-boolean msc_createMScript( msc_mScript_t ** const ppMScript
-                         , const char * const fileName
-                         , const char * const circuitFileName
-                         , const char * const resultName
-                         )
+bool msc_createMScript( msc_mScript_t ** const ppMScript
+                      , const char * const fileName
+                      , const char * const circuitFileName
+                      , const char * const resultName
+                      )
 {
     assert(_log != LOG_HANDLE_TO_EMPTY_LOGGER_OBJECT);
 
-    const boolean doAppend = false;
+    const bool doAppend = false;
     assert(fileName != NULL  &&  *fileName != '\000');
     FILE *pFile = fopen(fileName, doAppend? "a": "w");
     if(pFile != NULL)
@@ -435,13 +437,13 @@ void msc_deleteMScript(msc_mScript_t * const pMScript)
  * Which predefined text block to write?
  */
 
-boolean msc_writeTextBlock( msc_mScript_t * const pMScript
-                          , msc_enumTextBlock_t kindOfTextBlock
-                          )
+bool msc_writeTextBlock( msc_mScript_t * const pMScript
+                       , msc_enumTextBlock_t kindOfTextBlock
+                       )
 {
     assert(pMScript != NULL  &&  !pMScript->handleBorrowed);
 
-    boolean success;
+    bool success;
     switch(kindOfTextBlock)
     {
     case msc_txtBlkHeader:

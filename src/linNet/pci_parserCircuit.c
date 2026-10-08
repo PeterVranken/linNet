@@ -58,6 +58,9 @@
  * Include files
  */
 
+#include "pci_parserCircuit.h"
+
+#include <stdbool.h>
 #include <stdlib.h>
 #include <string.h>
 #include <limits.h>
@@ -65,11 +68,9 @@
 #include <math.h>
 #include <assert.h>
 
-#include "types.h"
 #include "smalloc.h"
 #include "snprintf.h"
 #include "rat_rationalNumber.h"
-#include "pci_parserCircuit.h"
 #include "tok_tokenStream.h"
 
 
@@ -100,7 +101,7 @@ enum { tokenTypePlotInfo = tok_tokenType_firstCustomToken
  * Local prototypes
  */
 
-static boolean getToken();
+static bool getToken();
 
 
 /*
@@ -118,13 +119,13 @@ static tok_token_t _token = TOK_UNINITIALIZED_TOKEN;
 
 /** The overall parse result can be accessed from any nested sub-routine. We use a global
     variable to implement this. */
-static boolean _parseError = false;
+static bool _parseError = false;
 
 /** The parser still supports an old-fashioned style of circuit input files, which is
     compatible with the netlist of an early release of the simulation tool SPICE.\n
       At run-time, this flag indicates to the parser's sub-routines, which input format to
     support. true means the new, standard format. */
-static boolean _isStdFormat = false;
+static bool _isStdFormat = false;
 
 /* The number of voltage sources needs to be one and only one in the elder format; there it
    is the system input definition (i.e., the only independent of the only result) at the
@@ -156,7 +157,7 @@ static unsigned int _noRefsToObjects = 0;
  * false to close the input file.
  */
 
-static boolean openInput(const char * const fileName, boolean open)
+static bool openInput(const char * const fileName, bool open)
 {
     if(open)
     {
@@ -191,13 +192,13 @@ static boolean openInput(const char * const fileName, boolean open)
 
         /* Open the token stream. No object is returned if this fails. */
         char *errMsg;
-        boolean success = tok_createTokenStream( &_hTokenStream
-                                               , &errMsg
-                                               , fileName
-                                               , hStream
-                                               , /* customGetChar */ NULL
-                                               , &tokenDescriptorTable
-                                               );
+        bool success = tok_createTokenStream( &_hTokenStream
+                                            , &errMsg
+                                            , fileName
+                                            , hStream
+                                            , /* customGetChar */ NULL
+                                            , &tokenDescriptorTable
+                                            );
         if(success)
         {
             assert(errMsg == NULL);
@@ -268,7 +269,7 @@ static pci_circuit_t *createParseResult()
  * of an error.
  */
 
-static boolean getToken()
+static bool getToken()
 {
     /* Read next lexical atom from the input stream. */
     if(!tok_getNextToken(_hTokenStream, &_token))
@@ -328,10 +329,10 @@ static void sync()
  * of an error.
  */
 
-static boolean enterNode( unsigned int *pIdxNode
-                        , pci_circuit_t * const pParseResult
-                        , const char * const nodeName
-                        )
+static bool enterNode( unsigned int *pIdxNode
+                     , pci_circuit_t * const pParseResult
+                     , const char * const nodeName
+                     )
 {
     assert(_parseError == false);
 
@@ -424,11 +425,11 @@ static const char *deviceTypeToString(pci_deviceType_t type)
  * The demanded name of the device.
  */
 
-static boolean findDevice( unsigned int * const pIdxDev
-                         , const pci_circuit_t * const pParseResult
-                         , pci_deviceType_t devType
-                         , const char * const devName
-                         )
+static bool findDevice( unsigned int * const pIdxDev
+                      , const pci_circuit_t * const pParseResult
+                      , pci_deviceType_t devType
+                      , const char * const devName
+                      )
 {
     unsigned int u;
     const pci_device_t * const * ppDev = pParseResult->pDeviceAry;
@@ -490,14 +491,14 @@ static boolean findDevice( unsigned int * const pIdxDev
  * of an error.
  */
 
-static boolean enterDeviceDef( pci_circuit_t * const pParseResult
-                             , pci_deviceType_t devType
-                             , const char * const devName
-                             , unsigned int idxNodeAry[4]
-                             , unsigned int idxDevCurrentProbe
-                             , double deviceValue
-                             , const pci_deviceRelation_t deviceRelation
-                             )
+static bool enterDeviceDef( pci_circuit_t * const pParseResult
+                          , pci_deviceType_t devType
+                          , const char * const devName
+                          , unsigned int idxNodeAry[4]
+                          , unsigned int idxDevCurrentProbe
+                          , double deviceValue
+                          , const pci_deviceRelation_t deviceRelation
+                          )
 {
     assert(_parseError == false);
 
@@ -577,10 +578,10 @@ static boolean enterDeviceDef( pci_circuit_t * const pParseResult
  * of an error.
  */
 
-static boolean parseListOfNodes( pci_circuit_t * const pParseResult
-                               , unsigned int idxNodeAry[]
-                               , unsigned int noNodes
-                               )
+static bool parseListOfNodes( pci_circuit_t * const pParseResult
+                            , unsigned int idxNodeAry[]
+                            , unsigned int noNodes
+                            )
 {
     assert(_parseError == false);
 
@@ -675,17 +676,17 @@ static boolean parseListOfNodes( pci_circuit_t * const pParseResult
  * of an error.
  */
 
-static boolean disambiguateDeviceName( const char * * const pNewName
-                                     , const pci_circuit_t * const pParseResult
-                                     , const char * const name
-                                     )
+static bool disambiguateDeviceName( const char * * const pNewName
+                                  , const pci_circuit_t * const pParseResult
+                                  , const char * const name
+                                  )
 {
     assert(_parseError == false);
 
     const char *newName = name;
 
     /* First attempt: Use line number to disambiguate; later attempts: use global ID. */
-    boolean isUnique;
+    bool isUnique;
     unsigned int try = 0;
     do
     {
@@ -800,12 +801,12 @@ static boolean disambiguateDeviceName( const char * * const pNewName
  * is to \a true, in the latter case it is set to \a false.
  */
 
-static boolean parseRatNum( unsigned long *pNumerator
-                          , unsigned long *pDenominator
-                          , boolean *pIsQuotient
-                          )
+static bool parseRatNum( unsigned long *pNumerator
+                       , unsigned long *pDenominator
+                       , bool *pIsQuotient
+                       )
 {
-    boolean success = true;
+    bool success = true;
     *pNumerator = 0;
     *pDenominator = 1;
     *pIsQuotient = false;
@@ -890,22 +891,22 @@ static boolean parseRatNum( unsigned long *pNumerator
  * of an error.
  */
 
-static boolean parseDeviceRelation( double * const pDeviceValue
-                                  , pci_deviceRelation_t * const pDeviceRelation
-                                  , const pci_circuit_t * const pParseResult
-                                  , pci_deviceType_t devType
-                                  )
+static bool parseDeviceRelation( double * const pDeviceValue
+                               , pci_deviceRelation_t * const pDeviceRelation
+                               , const pci_circuit_t * const pParseResult
+                               , pci_deviceType_t devType
+                               )
 {
 /* To avoid too complex (and anyway useless) relations between devices the range of
    numerator and denominator is limited to a reasonable range. Permitting arbitrary ranges
    would significantly increase the danger of a computational overflow. */
 #define MAX_NUMBER  999
 
-    boolean success = true;
+    bool success = true;
 
     /* An integer number can either be the physical value of the device or the factor in a
        relation to another device. This can only be decided with the next token. */
-    boolean isPhysicalValue = false;
+    bool isPhysicalValue = false;
     double deviceValue = -1.0;
     unsigned long numerator = 1
                 , denominator = 1;
@@ -920,7 +921,7 @@ static boolean parseDeviceRelation( double * const pDeviceValue
         if(!getToken())
             return false;
 
-        boolean isQuotient;
+        bool isQuotient;
         if(!parseRatNum(&numerator, &denominator, &isQuotient))
             success = false;
 
@@ -950,7 +951,7 @@ static boolean parseDeviceRelation( double * const pDeviceValue
     {
         /* The currently seen integer can still be both. Let's read it as a rational number
            and see. */
-        boolean isQuotient;
+        bool isQuotient;
         if(!parseRatNum(&numerator, &denominator, &isQuotient))
             success = false;
 
@@ -1192,13 +1193,13 @@ static boolean parseDeviceRelation( double * const pDeviceValue
  * of an error.
  */
 
-static boolean parseDevValueAssignment( boolean *pAssignmentFound
-                                      , double * const pDeviceValue
-                                      , pci_deviceRelation_t * const pDeviceRelation
-                                      , const pci_circuit_t * const pParseResult
-                                      , pci_deviceType_t devType
-                                      , const char * const devName
-                                      )
+static bool parseDevValueAssignment( bool *pAssignmentFound
+                                   , double * const pDeviceValue
+                                   , pci_deviceRelation_t * const pDeviceRelation
+                                   , const pci_circuit_t * const pParseResult
+                                   , pci_deviceType_t devType
+                                   , const char * const devName
+                                   )
 {
     assert(_parseError == false);
 
@@ -1276,7 +1277,7 @@ static boolean parseDevValueAssignment( boolean *pAssignmentFound
             {
                 /* Parse the LHS, e.g., R= */
                 assert(_token.type == tok_tokenTypeIdentifier);
-                boolean okay = strlen(_token.value.identifier) == 1;
+                bool okay = strlen(_token.value.identifier) == 1;
                 if(okay)
                 {
                     const char devTypeChar = toupper(_token.value.identifier[0]);
@@ -1373,7 +1374,7 @@ static boolean parseDevValueAssignment( boolean *pAssignmentFound
  * of an error.
  */
 
-static boolean parseDeviceDef(pci_circuit_t * const pParseResult)
+static bool parseDeviceDef(pci_circuit_t * const pParseResult)
 {
     /* On entry, the token shows the kind of device. */
     assert(_token.type == tok_tokenTypeIdentifier);
@@ -1544,7 +1545,7 @@ static boolean parseDeviceDef(pci_circuit_t * const pParseResult)
         }
     } /* End if(Which input format?) */
 
-    boolean success = getToken();
+    bool success = getToken();
 
     /* Read the number of nodes references. */
     assert(noNodes >= 2  &&  noNodes <= 4);
@@ -1601,7 +1602,7 @@ static boolean parseDeviceDef(pci_circuit_t * const pParseResult)
                                           };
     if(success)
     {
-        boolean assignmentFound;
+        bool assignmentFound;
         success = parseDevValueAssignment( &assignmentFound
                                          , &deviceValue
                                          , &deviceRelation
@@ -1710,7 +1711,7 @@ static boolean parseDeviceDef(pci_circuit_t * const pParseResult)
  * of an error.
  */
 
-static boolean parseOldStyleOutput(pci_circuit_t * const pParseResult)
+static bool parseOldStyleOutput(pci_circuit_t * const pParseResult)
 {
     unsigned int idxNodeAry[2];
     if(!parseListOfNodes(pParseResult, idxNodeAry, /* noNodes */ 2))
@@ -1792,7 +1793,7 @@ static pci_plotInfo_t *parsePlotInfo()
                         , tokenTypeLog = _isStdFormat
                                          ? tokenTypePlotLogAxis
                                          : tokenTypePlotLogAxisOld;
-    const boolean isLogX = _token.type == tokenTypeLog;
+    const bool isLogX = _token.type == tokenTypeLog;
     if(!isLogX &&  _token.type != tokenTypeLin)
     {
         _parseError = true;
@@ -1986,7 +1987,7 @@ static const char *parseIdentifier(const char * const meaningOfIdent)
  * of an error.
  */
 
-static boolean parseVoltageDefintion(pci_circuit_t * const pParseResult)
+static bool parseVoltageDefintion(pci_circuit_t * const pParseResult)
 {
     assert(_parseError == false);
 
@@ -2082,7 +2083,7 @@ static boolean parseVoltageDefintion(pci_circuit_t * const pParseResult)
  * of an error.
  */
 
-static boolean parseResultDefintion(pci_circuit_t * const pParseResult, boolean isFullResult)
+static bool parseResultDefintion(pci_circuit_t * const pParseResult, bool isFullResult)
 {
     assert(_parseError == false);
 
@@ -2249,9 +2250,9 @@ static boolean parseResultDefintion(pci_circuit_t * const pParseResult, boolean 
  * The node index to validate.
  */ 
 
-static boolean checkNodeReference( const pci_circuit_t * const pParseResult
-                                 , unsigned int nodeIdx
-                                 )
+static bool checkNodeReference( const pci_circuit_t * const pParseResult
+                              , unsigned int nodeIdx
+                              )
 {
     assert(nodeIdx < pParseResult->noNodes);
     
@@ -2305,7 +2306,7 @@ static boolean checkNodeReference( const pci_circuit_t * const pParseResult
  * The completed parse result.
  */ 
 
-static boolean checkNodeReferences(const pci_circuit_t * const pParseResult)
+static bool checkNodeReferences(const pci_circuit_t * const pParseResult)
 {
     /* The validation is sensible only after successful parsing and we use the global
        variable for the return value of this function. */
@@ -2321,7 +2322,7 @@ static boolean checkNodeReferences(const pci_circuit_t * const pParseResult)
         {
             /* We do not stop after the first failing validation in order to have best user
                feedback. */
-            boolean success = checkNodeReference(pParseResult, pDev->idxNodeCtrlPlus);
+            bool success = checkNodeReference(pParseResult, pDev->idxNodeCtrlPlus);
             if(!checkNodeReference(pParseResult, pDev->idxNodeCtrlMinus))
                 success = false;
                 
@@ -2340,7 +2341,7 @@ static boolean checkNodeReferences(const pci_circuit_t * const pParseResult)
     for(u=0; u<pParseResult->noVoltageDefs; ++u)
     {
         const pci_voltageDef_t * const pVolDef = &pParseResult->voltageDefAry[u];
-        boolean success = checkNodeReference(pParseResult, pVolDef->idxNodePlus);
+        bool success = checkNodeReference(pParseResult, pVolDef->idxNodePlus);
         if(!checkNodeReference(pParseResult, pVolDef->idxNodeMinus))
             success = false;
 
@@ -2427,12 +2428,12 @@ void pci_shutdownModule()
  *   @see void pci_deleteParseResult(const pci_deviceRelation_t *pParseResult)
  */
 
-boolean pci_parseCircuitFile( log_hLogger_t hLogger
-                            , const pci_circuit_t * * const ppParseResult
-                            , const char * const inputFileName
-                            )
+bool pci_parseCircuitFile( log_hLogger_t hLogger
+                         , const pci_circuit_t * * const ppParseResult
+                         , const char * const inputFileName
+                         )
 {
-    boolean parseError = false;
+    bool parseError = false;
 
     /* Use the passed logger during the parsing process. */
     _log = hLogger;
@@ -2479,7 +2480,7 @@ boolean pci_parseCircuitFile( log_hLogger_t hLogger
             _parseError = false;
 
             /* Trivial case: Token end-of-file. This line is done. */
-            boolean recognized = _token.type == EOF;
+            bool recognized = _token.type == EOF;
 
             /* The most simple kind of line: a blank line. */
             while(!recognized && _token.type == tok_tokenTypeEndOfLine)
@@ -2572,7 +2573,7 @@ boolean pci_parseCircuitFile( log_hLogger_t hLogger
             {
                 recognized = true;
 
-                const boolean isFullResult = _token.type == tokenTypeResultDef;
+                const bool isFullResult = _token.type == tokenTypeResultDef;
                 getToken();
                 parseResultDefintion(pParseResult, isFullResult);
             }
@@ -2741,7 +2742,7 @@ boolean pci_parseCircuitFile( log_hLogger_t hLogger
  * Pointer to the object to be cloned by reference. The object has originally been created
  * by a successful call of pci_parseCircuitFile, but another copied reference got from this
  * function may also be passed.
- *   @see boolean pci_parseCircuitFile(log_hLogger_t, const pci_circuit_t * * const, const
+ *   @see bool pci_parseCircuitFile(log_hLogger_t, const pci_circuit_t * * const, const
  * char * const)
  *   @see void pci_deleteParseResult(const pci_circuit_t *)
  */
@@ -2774,7 +2775,7 @@ const pci_circuit_t *pci_cloneByConstReference(const pci_circuit_t * const pPars
  * then the object itself is deleted, all memory is freed.
  *   @param pParseResult
  * * \a pParseResult is the unchanged parse result as got from pci_parseCircuitFile before.
- *   @see boolean pci_parseCircuitFile(log_hLogger_t, const pci_circuit_t * * const, const
+ *   @see bool pci_parseCircuitFile(log_hLogger_t, const pci_circuit_t * * const, const
  * char * const)
  *   @see const pci_circuit_t *pci_cloneByConstReference(const pci_circuit_t * const)
  */
@@ -2858,7 +2859,7 @@ const char *pci_getNameOfDeviceType(const pci_device_t * const pDevice)
  * no specific plot information is known and plot attributes are modelled as "don't care".
  *   @param pMScript
  * The pointer to an M script object. The generated M code is written into this M script.
- * The object is the result of a successful call of boolean msc_createMScript(msc_mScript_t
+ * The object is the result of a successful call of bool msc_createMScript(msc_mScript_t
  * ** const, const char * const, const char * const, const char * const).
  *   @param indentStr
  * The generated code starts with a new line. This and each other required line will begin

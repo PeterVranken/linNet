@@ -4,7 +4,7 @@
  * @file sol_solver.h
  * Definition of global interface of module sol_solver.c
  *
- * Copyright (C) 2013-2014 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ * Copyright (C) 2013-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -24,6 +24,7 @@
  * Include files
  */
 
+#include <stdbool.h>
 #include "log_logger.h"
 #include "coe_coefficient.h"
 #include "tbv_tableOfVariables.h"
@@ -51,7 +52,7 @@ typedef struct sol_solution_t
 
     /** A Boolean vector indicating which of the dependent quantities have been computed.
         The other solutions in \a numeratorAry are null coefficients (representing zero). */
-    const boolean *pIsDependentAvailableAry;    
+    const bool *pIsDependentAvailableAry;    
     
     /** The determinant of the LES and the denominator of all terms of the solution at the
         same time. */
@@ -82,9 +83,9 @@ void sol_initModule(log_hLogger_t hGlobalLogger);
 void sol_shutdownModule(void);
 
 /** Compute the solution of a LES and return it as a dedicated object. */
-boolean sol_createSolution( const sol_solution_t * * const ppSolution
-                          , les_linearEquationSystem_t * const pLES
-                          );
+bool sol_createSolution( const sol_solution_t * * const ppSolution
+                       , les_linearEquationSystem_t * const pLES
+                       );
 
 /** Get another reference to an existing object. */
 sol_solution_t *sol_cloneByReference(sol_solution_t * const pExistingObj);
@@ -120,7 +121,7 @@ unsigned int sol_findName( const sol_solution_t * const pSolution
                          , signed int * const pIdxUserDefVoltage
                          , signed int * const pIdxKnown
                          , const char * const nameOfQuantity
-                         , boolean doErrorReporting
+                         , bool doErrorReporting
                          );
 
 /** Print a complete solution to the application log. */

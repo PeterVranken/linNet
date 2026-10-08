@@ -28,6 +28,9 @@
  * Include files
  */
 
+#include "opt_getOpt.h"
+
+#include <stdbool.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -42,7 +45,6 @@
 #endif
 
 #include "lin_linNet.h"
-#include "opt_getOpt.h"
 
 
 /*
@@ -182,9 +184,9 @@
  * The command line parse result.
  */
 
-static boolean checkUserInput( boolean parseSuccess
-                             , const opt_cmdLineOptions_t * const pCmdLineOptions
-                             )
+static bool checkUserInput( bool parseSuccess
+                          , const opt_cmdLineOptions_t * const pCmdLineOptions
+                          )
 {
     /* Don't do further checks and print error messages if the user just wants to get the
        help. */
@@ -251,10 +253,10 @@ static boolean checkUserInput( boolean parseSuccess
  * program argument. An additional array entry NULL indicates the end of the list.
  */
 
-boolean opt_parseCmdLine( opt_cmdLineOptions_t * const pCmdLineOptions
-                        , signed int argc
-                        , char *argv[]
-                        )
+bool opt_parseCmdLine( opt_cmdLineOptions_t * const pCmdLineOptions
+                     , signed int argc
+                     , char *argv[]
+                     )
 {
     /* POSIX: Truncate function call; discard two addition arguments to match the call of
        the simpler getopt. */
@@ -305,7 +307,7 @@ boolean opt_parseCmdLine( opt_cmdLineOptions_t * const pCmdLineOptions
     pCmdLineOptions->idxFirstInputFile = UINT_MAX;
 
     /* See libc.pdf, Chapter 25: The Basic Program/System Interface 651 and 653 */
-    boolean success = true;
+    bool success = true;
     opterr = 0; /* Global variable of getopt. */
     signed int c;
 #if OPT_USE_POSIX_GETOPT == 0

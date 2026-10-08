@@ -10,7 +10,7 @@
  * functions. By placing the inline interface in a secondary file, any client can decide
  * whether to include the additional header (and instantiate the functions) or not.
  *
- * Copyright (C) 2014 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ * Copyright (C) 2014-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -36,6 +36,7 @@
  * Include files
  */
 
+#include <stdbool.h>
 #include "pci_parserCircuit.h"
 #include "tbv_tableOfVariables.h"
 #include "frq_freqDomainSolution.h"
@@ -70,9 +71,9 @@
  * The pointer to the solution object.
  */
 
-static inline boolean frq_getIsBodePlot(const frq_freqDomainSolution_t * const pSolution)
+static inline bool frq_getIsBodePlot(const frq_freqDomainSolution_t * const pSolution)
 {
-    boolean isBodePlot;
+    bool isBodePlot;
     const tbv_tableOfVariables_t * const pTableOfVars = pSolution->pTableOfVars;
     if(pSolution->idxResult >= 0)
     {

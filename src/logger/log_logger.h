@@ -4,7 +4,7 @@
  * @file log_logger.h
  * Definition of global interface of module log_logger.c
  *
- * Copyright (C) 2013 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ * Copyright (C) 2013-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -24,10 +24,9 @@
  * Include files
  */
 
-#include <stdio.h>
 #include <stdarg.h>
-#include "types.h"
-
+#include <stdbool.h>
+#include <stdio.h>
 
 /*
  * Defines
@@ -126,7 +125,7 @@ typedef struct
     log_lineFormat_t lineFormat;
 
     /** True if all output should be written to stdout also. */
-    boolean echoToConsole;
+    bool echoToConsole;
 
     /** The return code from the last file operation. */
     int lastFileSystemErr;
@@ -155,13 +154,13 @@ void log_initModule(void);
 void log_shutdownModule(void);
 
 /** Create a new logger. */
-boolean log_createLogger( log_hLogger_t * const phNewLogger
-                        , const char * const fileName
-                        , log_logLevel_t logLevel
-                        , log_lineFormat_t lineFormat
-                        , boolean initialEchoToConsole
-                        , boolean doAppend
-                        );
+bool log_createLogger( log_hLogger_t * const phNewLogger
+                     , const char * const fileName
+                     , log_logLevel_t logLevel
+                     , log_lineFormat_t lineFormat
+                     , bool initialEchoToConsole
+                     , bool doAppend
+                     );
 
 /** Get another reference or handle to the same object. */
 log_hLogger_t log_cloneByReference(log_hLogger_t hObj);
@@ -176,7 +175,7 @@ log_hLogger_t log_setGlobalLogger(log_hLogger_t hObj);
 log_hLogger_t log_getGlobalLogger();
 
 /** Enable/disable writing all output to the console (stdout) also. */
-void log_setEchoToConsole(log_hLogger_t hObj, boolean echoToConsole);
+void log_setEchoToConsole(log_hLogger_t hObj, bool echoToConsole);
 
 /** Set or change the level of verbosity. */
 void log_setLogLevel(log_hLogger_t hObj, log_logLevel_t logLevel);
@@ -208,7 +207,7 @@ static inline int log_ferror(log_hLogger_t hObj)
     { return hObj->lastFileSystemErr; }
 
 /** Close a log file. */
-boolean log_close(log_hLogger_t hObj);
+bool log_close(log_hLogger_t hObj);
 
 /** Request access to the output streams for for direct writing using the C stdio library
     functions. */
@@ -235,7 +234,7 @@ unsigned int log_logLine( log_logger_t * const hObj
       @return true if and only if a message of given level should be logged.
       @param hObj The logger object.
       @param logLevel The log level of the message to be (possibly) logged. */
-static inline boolean log_checkLogLevel(log_logger_t * const hObj, log_logLevel_t logLevel)
+static inline bool log_checkLogLevel(log_logger_t * const hObj, log_logLevel_t logLevel)
     { return (unsigned int)logLevel >= (unsigned int)hObj->logLevel; }
       
 #endif  /* LOG_LOGGER_INCLUDED */

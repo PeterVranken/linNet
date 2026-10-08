@@ -41,16 +41,19 @@
  * Include files
  */
 
+#include "sol_solver.h"
+
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
+
 #include "smalloc.h"
 #include "log_logger.h"
 #include "coe_coefficient.h"
 #include "coe_coefficient.inlineInterface.h"
 #include "les_linearEquationSystem.h"
-#include "sol_solver.h"
 
 
 /*
@@ -93,7 +96,7 @@ static unsigned int _noRefsToObjects = 0;
  * considers all user-defined results, which may directly refer to unknowns of the LES but
  * also indirectly by referencing user-defined voltages.
  *   @return
- * The set is returned as an ordered vector of Boolean, where element \a i of the vector
+ * The set is returned as an ordered vector of Booleans, where element \a i of the vector
  * relates to unknown \a i of the LES, if \a i is lower then the number \a n of unknowns.
  * Otherwise element \a i refers to user defined voltage \a i - \a n. The related
  * dependent is required if the element is \a true.\n
@@ -103,7 +106,7 @@ static unsigned int _noRefsToObjects = 0;
  * variables and the circuit netlist need to be setup before this function may be called.
  */
 
-static const boolean *getVectorOfReqDependents(const sol_solution_t * const pSolution)
+static const bool *getVectorOfReqDependents(const sol_solution_t * const pSolution)
 {
     const tbv_tableOfVariables_t * const pTableOfVars = pSolution->pTableOfVars;
     const pci_circuit_t * const pCircuitNetList = pTableOfVars->pCircuitNetList;
@@ -114,11 +117,11 @@ static const boolean *getVectorOfReqDependents(const sol_solution_t * const pSol
     const unsigned int noUnknowns  = pTableOfVars->noUnknowns 
                      , noVoltagesDefs = pCircuitNetList->noVoltageDefs
                      , noDependents = noUnknowns+noVoltagesDefs;
-    boolean * const pVectorOfReqDependents = smalloc( sizeof(*pVectorOfReqDependents)
-                                                      * noDependents
-                                                    , __FILE__
-                                                    , __LINE__
-                                                    );
+    bool * const pVectorOfReqDependents = smalloc( sizeof(*pVectorOfReqDependents)
+                                                   * noDependents
+                                                 , __FILE__
+                                                 , __LINE__
+                                                 );
     
     /* The list of required unknowns is solely determined by the user defined results.
        Iterate over all such results. If there's no user-defined result: All unknowns are
@@ -129,7 +132,7 @@ static const boolean *getVectorOfReqDependents(const sol_solution_t * const pSol
         pVectorOfReqDependents[u] = noUserResults == 0;
     if(noUserResults > 0)
     {
-        boolean isUnknownRequested = false;
+        bool isUnknownRequested = false;
         unsigned int u;
         for(u=0; u<noUserResults; ++u)
         {
@@ -579,10 +582,10 @@ static void elementaryStep( coe_coefMatrix_t A
  *   @see void elementaryStep(coe_coefMatrix_t, int, int, int, coe_coef_t *)
  */
 
-static boolean solverLES( coe_coefMatrix_t A
-                        , const unsigned int m
-                        , const unsigned int n
-                        )
+static bool solverLES( coe_coefMatrix_t A
+                     , const unsigned int m
+                     , const unsigned int n
+                     )
 {
     /* The first elimination step doesn't know a common divisor yet. The divisor is
        initialized with one. */
@@ -591,7 +594,7 @@ static boolean solverLES( coe_coefMatrix_t A
 
     /* Do all m-1 elimination steps. */
     unsigned int elimStep;
-    boolean doSignInversion = false;
+    bool doSignInversion = false;
     for(elimStep=0; elimStep<m-1; ++elimStep)
     {
         /* Pivoting: Avoid a generalizing product with a null coefficient (representing
@@ -775,9 +778,9 @@ void sol_shutdownModule()
  *   @see void sol_deleteSolution(const sol_solution_t * const)
  */
 
-boolean sol_createSolution( const sol_solution_t * * const ppSolution
-                          , les_linearEquationSystem_t * const pLES
-                          )
+bool sol_createSolution( const sol_solution_t * * const ppSolution
+                       , les_linearEquationSystem_t * const pLES
+                       )
 {
     sol_solution_t *pSol = smalloc(sizeof(sol_solution_t), __FILE__, __LINE__);
 
@@ -827,9 +830,9 @@ boolean sol_createSolution( const sol_solution_t * * const ppSolution
          We need a loop over all unknowns. */
     const tbv_unknownVariable_t * const unknownAry = les_getTableOfUnknowns(pLES, NULL);
 
-    boolean success = true
-          , storeDet = true
-          , isSignOfDetInv = true;
+    bool success = true
+       , storeDet = true
+       , isSignOfDetInv = true;
     unsigned int idxUnknown;
     for(idxUnknown=0; success && idxUnknown<noUnknowns; ++idxUnknown)
     {
@@ -1084,7 +1087,7 @@ sol_solution_t *sol_cloneByReference(sol_solution_t * const pExistingObj)
  * A read-only copy of the passed pointer \a pExistingObj is returned.
  *   @param pExistingObj
  * Pointer to the (read-only) object to be cloned by reference.
- *   @see boolean sol_createSolution(log_hLogger_t, const sol_solution_t ** const,
+ *   @see bool sol_createSolution(log_hLogger_t, const sol_solution_t ** const,
  * les_linearEquationSystem_t * const)
  *   @see sol_solution_t *sol_cloneByReference(sol_solution_t * const)
  *   @see void sol_deleteSolution(const sol_solution_t * const)
@@ -1112,7 +1115,7 @@ const sol_solution_t *sol_cloneByConstReference(const sol_solution_t * const pEx
 
 
 /**
- * Delete a solution object, which had been created by boolean
+ * Delete a solution object, which had been created by bool
  * sol_createSolution(log_hLogger_t, const sol_solution_t ** const,
  * les_linearEquationSystem_t * const).
  *   @param pConstSolution
@@ -1144,7 +1147,7 @@ void sol_deleteSolution(const sol_solution_t * const pConstSolution)
                         , pTabOfVars->noKnowns
                         );
         tbv_deleteTableOfVariables((tbv_tableOfVariables_t*)pTabOfVars);
-        free((boolean*)pSolution->pIsDependentAvailableAry);
+        free((bool*)pSolution->pIsDependentAvailableAry);
         free((sol_solution_t*)pSolution);
     }
 
@@ -1268,7 +1271,7 @@ unsigned int sol_findName( const sol_solution_t * const pSolution
                          , signed int * const pIdxUserDefVoltage
                          , signed int * const pIdxKnown
                          , const char * const nameOfQuantity
-                         , boolean doErrorReporting
+                         , bool doErrorReporting
                          )
 {
     unsigned int noMatches = 0;
@@ -1407,7 +1410,7 @@ const char *sol_getNameOfDependent( const sol_solution_t * const pSolution
  * Print the solution of the linear equation system to the global application log.
  *   @param pSolution
  * The pointer to the object representing the solution to print. The object is  the result
- * of a successful call of boolean sol_createSolution(log_hLogger_t, const sol_solution_t
+ * of a successful call of bool sol_createSolution(log_hLogger_t, const sol_solution_t
  * ** const, les_linearEquationSystem_t * const).
  *   @param logLevel
  * The log level at which the output becomes visible. No output is created if the logger

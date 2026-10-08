@@ -4,7 +4,7 @@
  * @file rat_rationalNumber.h
  * Definition of global interface of module rat_rationalNumber.c
  *
- * Copyright (C) 2014 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ * Copyright (C) 2014-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -24,9 +24,10 @@
  * Include files
  */
 
-#include <limits.h>
+#include <assert.h>
+#include <stdbool.h>
 #include <stdint.h>
-#include "types.h"
+#include <limits.h>
 #include "log_logger.h"
 
 
@@ -104,7 +105,7 @@ typedef struct rat_num_t
 /** A global flag to indicate overflows.
       @remark Despite of its global declaration is this a module internal variable. Never
     touch this variable! */
-extern boolean rat_overflowFlag;
+extern bool rat_overflowFlag;
 
 
 /*
@@ -141,7 +142,7 @@ static inline rat_signed_int rat_sign(rat_num_t a)
  * The second number to compare.
  */
 
-static inline boolean rat_isEqual(rat_num_t a, rat_num_t b)
+static inline bool rat_isEqual(rat_num_t a, rat_num_t b)
 {
     return (rat_signed_long_int)a.n*b.d == (rat_signed_long_int)a.d*b.n;
     
@@ -275,7 +276,7 @@ static inline void rat_clearError()
  * to get accurate error information.
  */
 
-static inline boolean rat_getError()
+static inline bool rat_getError()
 {
     return rat_overflowFlag;
     

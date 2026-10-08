@@ -4,7 +4,7 @@
  * @file les_linearEquationSystem.h
  * Definition of global interface of module les_linearEquationSystem.c
  *
- * Copyright (C) 2013 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ * Copyright (C) 2013-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -24,6 +24,7 @@
  * Include files
  */
 
+#include <stdbool.h>
 #include "lin_linNet.h"
 #include "log_logger.h"
 #include "coe_coefficient.h"
@@ -57,7 +58,7 @@ typedef struct
     /** The object undergoes some the data validating operations repeatedly. All
         informative and warning output should not be done repeatedly. The next (internal)
         flag indicates to the validation algorithms if output should take place. */
-    boolean doWarn;
+    bool doWarn;
     
 } les_linearEquationSystem_t;
 
@@ -80,9 +81,9 @@ void les_initModule(log_hLogger_t hGlobalLogger);
 void les_shutdownModule(void);
 
 /** Create the linear equation system from the netlist representing the electric circuit. */
-boolean les_createLES( les_linearEquationSystem_t * * const ppLES
-                     , const pci_circuit_t * const pCircuitNetList
-                     );
+bool les_createLES( les_linearEquationSystem_t * * const ppLES
+                  , const pci_circuit_t * const pCircuitNetList
+                  );
 
 /** Delete a linear equation system object after use. */
 void les_deleteLES(les_linearEquationSystem_t *pLES);
@@ -106,8 +107,6 @@ const tbv_unknownVariable_t *les_getTableOfUnknowns
                                         
 /** Setup the LES (compute its coefficients), so that the solver can compute the solution
     for a specific unknown. */
-boolean les_setupLES( les_linearEquationSystem_t * const pLES
-                    , const char * const nameOfUnknown
-                    );
+bool les_setupLES(les_linearEquationSystem_t * const pLES, const char * const nameOfUnknown);
 
 #endif  /* LES_LINEAREQUATIONSYSTEM_INCLUDED */

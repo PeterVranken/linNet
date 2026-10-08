@@ -4,7 +4,7 @@
  * @file tbv_tableOfVariables.h
  * Definition of global interface of module tbv_tableOfVariables.c
  *
- * Copyright (C) 2013 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ * Copyright (C) 2013-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -24,7 +24,7 @@
  * Include files
  */
 
-#include "types.h"
+#include <stdbool.h>
 #include "log_logger.h"
 #include "rat_rationalNumber.h"
 #include "pci_parserCircuit.h"
@@ -201,18 +201,18 @@ void tbv_deleteTableOfVariables(const tbv_tableOfVariables_t * const pTabOfVars)
 void tbv_logTableOfVariables(const tbv_tableOfVariables_t * const pTable);
 
 /** Add a known variable to the table. */
-boolean tbv_addKnown( tbv_tableOfVariables_t * const pTable
-                    , const char * const name
-                    , unsigned int idxDevice
-                    );
+bool tbv_addKnown( tbv_tableOfVariables_t * const pTable
+                 , const char * const name
+                 , unsigned int idxDevice
+                 );
 
 /** Add an unknown variable to the table. */
-boolean tbv_addUnknown( tbv_tableOfVariables_t * const pTable
-                      , const char * const name
-                      , unsigned int idxNode
-                      , unsigned int idxSubNet
-                      , unsigned int idxDevice
-                      );
+bool tbv_addUnknown( tbv_tableOfVariables_t * const pTable
+                   , const char * const name
+                   , unsigned int idxNode
+                   , unsigned int idxSubNet
+                   , unsigned int idxDevice
+                   );
 
 /** Add a constant to the table. */
 void tbv_addConstant( tbv_tableOfVariables_t * const pTable, unsigned int idxDevice);
@@ -257,16 +257,16 @@ const pci_device_t *tbv_getDeviceByBitIndex( const tbv_tableOfVariables_t * cons
 
 /** Look for the decription of the device indirectly referenced by the constant
     representing a device. */
-boolean tbv_getReferencedDeviceByBitIndex( const tbv_tableOfVariables_t * const pTable
-                                         , rat_num_t *pRefFactor
-                                         , const pci_device_t * * const ppDevice
-                                         , unsigned int *pIdxBitRefDev
-                                         , unsigned int idxBit
-                                         );
+bool tbv_getReferencedDeviceByBitIndex( const tbv_tableOfVariables_t * const pTable
+                                      , rat_num_t *pRefFactor
+                                      , const pci_device_t * * const ppDevice
+                                      , unsigned int *pIdxBitRefDev
+                                      , unsigned int idxBit
+                                      );
 
 /** Select a specific unknown for result computation. */
-boolean tbv_setTargetUnknownForSolver( tbv_tableOfVariables_t * const pTable
-                                     , const char * const nameOfUnknown
-                                     );
+bool tbv_setTargetUnknownForSolver( tbv_tableOfVariables_t * const pTable
+                                  , const char * const nameOfUnknown
+                                  );
 
 #endif  /* TBV_TABLEOFVARIABLES_INCLUDED */

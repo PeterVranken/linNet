@@ -170,6 +170,9 @@
  * Include files
  */
 
+#include "frq_freqDomainSolution.h"
+
+#include <stdbool.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -182,7 +185,6 @@
 #include "coe_coefficient.inlineInterface.h"
 #include "sol_solver.h"
 #include "crm_createMatrix.h"
-#include "frq_freqDomainSolution.h"
 #include "msc_mScript.h"
 #include "frq_freqDomainSolution.inlineInterface.h"
 
@@ -212,7 +214,7 @@ typedef struct resultExpressionOrigin_t
     unsigned int idxIndependent;
 
     /** Is the name giving term a numerator or a denominator term? */
-    boolean isNumerator;
+    bool isNumerator;
 
 } resultExpressionOrigin_t;
 
@@ -228,7 +230,7 @@ typedef struct resultExpression_t
     const frq_frqDomExpression_t *pExpr;
 
     /** Boolean flag, if the expression is used at least once as denominator. */
-    boolean isUsedAsDenom;
+    bool isUsedAsDenom;
 
     /** The identification of the sub-term of a frequency domain solution, which was name
         giving to this expression. This field is invalid as long as the name is still
@@ -383,8 +385,7 @@ static inline frq_frqDomExpressionAddend_t *expressionAddendOne()
  * Get the Boolean answer.
  */
 
-static inline boolean isExpressionAddendNull
-                                    (const frq_frqDomExpressionAddend_t * const pAddend)
+static inline bool isExpressionAddendNull(const frq_frqDomExpressionAddend_t * const pAddend)
 {
     return pAddend == NULL;
 
@@ -479,7 +480,7 @@ static inline frq_normalizedFrqDomExpression_t *normalizedExpressionOne()
  * Get the Boolean answer.
  */
 
-static inline boolean isNormalizedExpressionNull
+static inline bool isNormalizedExpressionNull
                                 (const frq_normalizedFrqDomExpression_t * const pExpr)
 {
     return pExpr == NULL;
@@ -584,7 +585,7 @@ CRM_CREATE_MATRIX( /* context */             string
 static signed int cmpExprAddendPower( const frq_frqDomExpressionAddend_t * const pOp1
                                     , const frq_frqDomExpressionAddend_t * const pOp2
                                     , const unsigned int noConst
-                                    , boolean ignoreFreqVar
+                                    , bool ignoreFreqVar
                                     )
 {
     /* Zero is less than any other addend. */
@@ -716,10 +717,10 @@ static signed int estimateSignOfExpression
  * The total number of device constants, which are in use in the given system.
  */
 
-static boolean isEqualExpressions( const frq_frqDomExpression_t *pOp1
-                                 , const frq_frqDomExpression_t *pOp2
-                                 , const unsigned int noConst
-                                 )
+static bool isEqualExpressions( const frq_frqDomExpression_t *pOp1
+                              , const frq_frqDomExpression_t *pOp2
+                              , const unsigned int noConst
+                              )
 {
     /* Loop over pairs of addends. These can directly be compared to one another as both
        lists are sorted in a unique order. If the first not equal pair of addends is
@@ -761,11 +762,11 @@ static boolean isEqualExpressions( const frq_frqDomExpression_t *pOp1
  * The total number of device constants, which are in use in the given system.
  */
 
-static boolean isAbsEqualExpressions( boolean * const pHaveSameSign
-                                    , const frq_frqDomExpression_t *pOp1
-                                    , const frq_frqDomExpression_t *pOp2
-                                    , const unsigned int noConst
-                                    )
+static bool isAbsEqualExpressions( bool * const pHaveSameSign
+                                 , const frq_frqDomExpression_t *pOp1
+                                 , const frq_frqDomExpression_t *pOp2
+                                 , const unsigned int noConst
+                                 )
 {
     /* Handle trivial situations: One or both operands are zero. */
     if(isExpressionAddendNull(pOp1) && isExpressionAddendNull(pOp2))
@@ -783,7 +784,7 @@ static boolean isAbsEqualExpressions( boolean * const pHaveSameSign
         /* If the two operands are candidates for being totally identical or only with
            inverted sign can safely be decided at the very first addend. */
 //        const signed int deltaSign = rat_sign(pOp1->factor) * rat_sign(pOp2->factor);
-        const boolean haveSameSign = rat_sign(pOp1->factor) == rat_sign(pOp2->factor);
+        const bool haveSameSign = rat_sign(pOp1->factor) == rat_sign(pOp2->factor);
 
         /* Loop over pairs of addends. These can directly be compared to one another as both
            lists are sorted in a unique order. If the first not equal pair of addends is
@@ -809,7 +810,7 @@ static boolean isAbsEqualExpressions( boolean * const pHaveSameSign
             pOp2 = pOp2->pNext;
         }
 
-        boolean isAbsEqual = isExpressionAddendNull(pOp1) && isExpressionAddendNull(pOp2);
+        bool isAbsEqual = isExpressionAddendNull(pOp1) && isExpressionAddendNull(pOp2);
         *pHaveSameSign = isAbsEqual && haveSameSign;
         return isAbsEqual;
     }
@@ -1201,12 +1202,12 @@ static inline const char *getNameOfDenominator
  * describe.
  */
 
-static boolean transformAddend( frq_frqDomExpressionAddend_t ** const ppFrqDomExpressionAddend
-                              , const coe_coefAddend_t * const pAlgebraicAddend
-                              , const tbv_tableOfVariables_t * const pTableOfVars
-                              )
+static bool transformAddend( frq_frqDomExpressionAddend_t ** const ppFrqDomExpressionAddend
+                           , const coe_coefAddend_t * const pAlgebraicAddend
+                           , const tbv_tableOfVariables_t * const pTableOfVars
+                           )
 {
-    boolean success = true;
+    bool success = true;
 
     /* We create a one to benefit from the side effect of setting most members to
        zero/NULL. */
@@ -1446,11 +1447,10 @@ static frq_normalizedFrqDomExpression_t *createNormalizedExpression
  * describe.
  */
 
-static boolean transformExpression
-                        ( frq_normalizedFrqDomExpression_t * * const ppFrqDomExpression
-                        , const coe_coef_t * const pAlgebraicExpr
-                        , const tbv_tableOfVariables_t * const pTableOfVars
-                        )
+static bool transformExpression( frq_normalizedFrqDomExpression_t * * const ppFrqDomExpression
+                               , const coe_coef_t * const pAlgebraicExpr
+                               , const tbv_tableOfVariables_t * const pTableOfVars
+                               )
 {
     const unsigned int noConst = pTableOfVars->noConstants;
 
@@ -1463,7 +1463,7 @@ static boolean transformExpression
        one; only later because of variable substitutions we will be able the aggregate the
        addends of the frequency domain expressions to less addends. */
     const coe_coefAddend_t *pAlgebraicAddend = pAlgebraicExpr;
-    boolean success = true;
+    bool success = true;
     while(success && !coe_isCoefAddendNull(pAlgebraicAddend))
     {
         frq_frqDomExpressionAddend_t *pNewFreqDomainExprAddend;
@@ -1614,7 +1614,7 @@ static void printExpression( FILE * const stream
         /* Loop over all groups of addends of the expression. A group is a series of
            addends of same power of the frequency variable. */
         const frq_frqDomExpressionAddend_t *pAddend = pExpr;
-        boolean isFirstGroup = true;
+        bool isFirstGroup = true;
         unsigned int groupIndention;
         do
         {
@@ -1652,9 +1652,9 @@ static void printExpression( FILE * const stream
 
             /* Loop over all addends in the group. */
             const unsigned int noConst = pTableOfVars->noConstants;
-            boolean isFirstGroupAddend = true
-                  , firstFactor = true
-                  , wrappedGroup = false;
+            bool isFirstGroupAddend = true
+               , firstFactor = true
+               , wrappedGroup = false;
             unsigned int idxAddendInGroup;
             for(idxAddendInGroup=0; idxAddendInGroup<sizeOfGroup; ++idxAddendInGroup)
             {
@@ -1889,13 +1889,13 @@ static const frq_frqDomExpressionAddend_t *
 
     /* Loop over all addends in the group. */
     const unsigned int noConst = pTableOfVars->noConstants;
-    boolean isFirstAddend = true
-          , wrappedGroup = false;
+    bool isFirstAddend = true
+       , wrappedGroup = false;
     unsigned int idxAddendInGroup;
     for(idxAddendInGroup=0; idxAddendInGroup<sizeOfGroup; ++idxAddendInGroup)
     {
         /* Print a single addend from the group. */
-        boolean firstFactor = true;
+        bool firstFactor = true;
 
         /* Write the numeric factor. In general we force having a sign but we omit the sign
            of the first addend: this sign has already been written as sign of the group. */
@@ -1996,16 +1996,16 @@ static const frq_frqDomExpressionAddend_t *
  * referencing an earlier copy. Most popular examples of such simple examples are a zero or
  * a one expression.\n
  *   @return
- * Get the boolean statement if the the passed epression is simple.
+ * Get the bool statement if the the passed epression is simple.
  *   @param pExpr
  * The investigated expression.
  *   @param noConst
  * The total number of device constants, which are in use in the given system.
  */
 
-static boolean isExpressionSimple( const frq_frqDomExpression_t * const pExpr
-                                 , const unsigned int noConst
-                                 )
+static bool isExpressionSimple( const frq_frqDomExpression_t * const pExpr
+                              , const unsigned int noConst
+                              )
 {
     /* Definition: A simple expression is a purely numeric expression. The power of s and
        the powers of all device constants are zero in all terms. */
@@ -2084,7 +2084,7 @@ static void printNamedExpression( FILE * const stream
                                 , const char * const name
                                 , const char * const nameRHS
                                 , const frq_frqDomExpression_t * const pExpr
-                                , boolean invertSign
+                                , bool invertSign
                                 , const tbv_tableOfVariables_t * const pTableOfVars
                                 , const unsigned int printMargin
                                 , const char * const tabString
@@ -2178,7 +2178,7 @@ static void printNamedExpressionAsMCode( FILE * const stream
                                        , const char * const name
                                        , const char * const nameRHS
                                        , const frq_frqDomExpression_t * const pExpr
-                                       , boolean invertSign
+                                       , bool invertSign
                                        , const tbv_tableOfVariables_t * const pTableOfVars
                                        , const unsigned int baseIndentation
                                        , const unsigned int printMargin
@@ -2467,7 +2467,7 @@ static void cancelFraction( frq_frqDomExpression_t ** const ppCancelledExprNum
 
 static unsigned int moveExprIntoMap( resultExpressionMap_t * const pMap
                                    , const frq_frqDomExpression_t * const pExpr
-                                   , boolean isUsedAsDenominator
+                                   , bool isUsedAsDenominator
                                    )
 {
     const unsigned int noConst = pMap->pSolution->pTableOfVars->noConstants;
@@ -2478,7 +2478,7 @@ static unsigned int moveExprIntoMap( resultExpressionMap_t * const pMap
     unsigned int idxExpr;
     for(idxExpr=0; idxExpr<pMap->noResExpr; ++idxExpr)
     {
-        boolean haveSameSign;
+        bool haveSameSign;
         if(isAbsEqualExpressions( &haveSameSign
                                 , pMap->resExprAry[idxExpr].pExpr
                                 , pExpr
@@ -2653,7 +2653,7 @@ static void setNameOfExpression( resultExpressionMap_t * const pExprMap
 {
     const unsigned int idxDependent = pOrigin->idxDependent;
     const unsigned int idxIndependent = pOrigin->idxIndependent;
-    const boolean isNumerator = pOrigin->isNumerator;
+    const bool isNumerator = pOrigin->isNumerator;
 
     unsigned int idxExprInMap;
     if(isNumerator)
@@ -2764,8 +2764,8 @@ static void determineOrderOfRendering( resultExpressionMap_t * const pExprMap
 {
     const unsigned int noDependents = frq_getNoDependents(pExprMap->pSolution)
                      , noIndependents = frq_getNoIndependents(pExprMap->pSolution);
-    boolean isNamedAry[pExprMap->noResExpr]
-          , isReleasedAry[noDependents];
+    bool isNamedAry[pExprMap->noResExpr]
+       , isReleasedAry[noDependents];
 
     /* Initialization: No expression is already named, no dependent is released for
        rendering. */
@@ -2780,7 +2780,7 @@ static void determineOrderOfRendering( resultExpressionMap_t * const pExprMap
     /* Outer loop: We repeat looking for the next dependents to release as long as we
        released at least one in the preceding loop. */
     unsigned noReleasedDependents = 0;
-    boolean doContinue;
+    bool doContinue;
     do
     {
         /* Continue the outer loop only if at least one dependent could be newly released
@@ -2798,7 +2798,7 @@ static void determineOrderOfRendering( resultExpressionMap_t * const pExprMap
                manipulation is established only after the test is found to be true.
                Therefore we need a temporary manipulation of the map. The map is copied to
                do so. */
-            boolean isNamedAryTmp[pExprMap->noResExpr];
+            bool isNamedAryTmp[pExprMap->noResExpr];
             memcpy(isNamedAryTmp, isNamedAry, sizeof(isNamedAryTmp));
 
             /* First we would name the expressions of the denominators of the result for
@@ -2816,7 +2816,7 @@ static void determineOrderOfRendering( resultExpressionMap_t * const pExprMap
             /* Test of dependent: It is released if all required expressions are either
                named or not used by a denominator - in which case they could now be named
                by the numerator. */
-            boolean isReleased = true;
+            bool isReleased = true;
             for( idxIndependent=0
                ; isReleased && idxIndependent<noIndependents
                ; ++idxIndependent
@@ -2909,11 +2909,11 @@ static void determineOrderOfRendering( resultExpressionMap_t * const pExprMap
 
 static void getExpression( const resultExpressionMap_t * const pExprMap
                          , const char ** const pName
-                         , boolean * const pIsExpressionNegated
+                         , bool * const pIsExpressionNegated
                          , const frq_frqDomExpression_t ** const ppExpression
                          , unsigned int idxDependent
                          , unsigned int idxIndependent
-                         , boolean isNumerator
+                         , bool isNumerator
                          )
 {
     unsigned int idxExprInMap;
@@ -2976,11 +2976,11 @@ static void getExpression( const resultExpressionMap_t * const pExprMap
  * says. So take a rather small value for the margin.
  */
 
-static boolean printSolution( const frq_freqDomainSolution_t * const pSolution
-                            , FILE * const stream
-                            , boolean asOctaveCode
-                            , const unsigned int printMargin
-                            )
+static bool printSolution( const frq_freqDomainSolution_t * const pSolution
+                         , FILE * const stream
+                         , bool asOctaveCode
+                         , const unsigned int printMargin
+                         )
 {
     /* Safe error recognition and location requires that the global error flag is reset on
        function entry. */
@@ -3026,7 +3026,7 @@ static boolean printSolution( const frq_freqDomainSolution_t * const pSolution
                      );
 
     /* The output looks a bit different for Bode plots. */
-    const boolean isBodePlot = frq_getIsBodePlot(pSolution);
+    const bool isBodePlot = frq_getIsBodePlot(pSolution);
 
     unsigned int u;
     for(u=0; u<noDependents; ++u)
@@ -3083,7 +3083,7 @@ static boolean printSolution( const frq_freqDomainSolution_t * const pSolution
 
             /* Retrieve the numerator expression from the map. */
             const char *nameOfExpr;
-            boolean isExpressionNegated;
+            bool isExpressionNegated;
             const frq_frqDomExpression_t *pExpr;
             getExpression( pExprMap
                          , &nameOfExpr
@@ -3140,7 +3140,7 @@ static boolean printSolution( const frq_freqDomainSolution_t * const pSolution
             {
                 /* Retrieve the denominator expression from the map. */
                 const char *nameOfExpr;
-                boolean isExpressionNegated;
+                bool isExpressionNegated;
                 const frq_frqDomExpression_t *pExpr;
                 getExpression( pExprMap
                              , &nameOfExpr
@@ -3190,7 +3190,7 @@ static boolean printSolution( const frq_freqDomainSolution_t * const pSolution
             {
                 /* Retrieve the numerator expression from the map. */
                 const char *nameOfExpr;
-                boolean isExpressionNegated;
+                bool isExpressionNegated;
                 const frq_frqDomExpression_t *pExpr;
                 getExpression( pExprMap
                              , &nameOfExpr
@@ -3228,7 +3228,7 @@ static boolean printSolution( const frq_freqDomainSolution_t * const pSolution
 
     /* Check global arithmetic error flag. An error message has already been printed to the
        log in case. */
-    boolean success = rat_getError() == false;
+    bool success = rat_getError() == false;
     rat_clearError();
 
     return success;
@@ -3343,7 +3343,7 @@ void frq_shutdownModule()
  *   In case of an error a null object, FRQ_NULL_SOLUTION, is returned.
  *   @param pAlgebraicSolution
  * The frequency domain solution is derived from an algebraic solution as figured out by the
- * symbolic solver. Please, refer to boolean sol_createSolution(log_hLogger_t, const
+ * symbolic solver. Please, refer to bool sol_createSolution(log_hLogger_t, const
  * sol_solution_t ** const, les_linearEquationSystem_t * const). This object contains a
  * solution for all unknowns of the LES and for all user-defined voltages.
  *   @param idxResult
@@ -3353,16 +3353,16 @@ void frq_shutdownModule()
  *   @see void frq_deleteFreqDomainSolution(frq_freqDomainSolution_t * const)
  */
 
-boolean frq_createFreqDomainSolution( const frq_freqDomainSolution_t * * const ppFrqDomSolution
-                                    , const sol_solution_t * const pAlgebraicSolution
-                                    , signed int idxResult
-                                    )
+bool frq_createFreqDomainSolution( const frq_freqDomainSolution_t * * const ppFrqDomSolution
+                                 , const sol_solution_t * const pAlgebraicSolution
+                                 , signed int idxResult
+                                 )
 {
     assert(_log != LOG_HANDLE_TO_EMPTY_LOGGER_OBJECT);
 
     /* Safe error recognition and location requires that the global error flag is reset on
        function entry. */
-    boolean success = !rat_getError();
+    bool success = !rat_getError();
     assert(success);
 
     frq_freqDomainSolution_t *pRes = smalloc( sizeof(frq_freqDomainSolution_t)
@@ -4056,16 +4056,16 @@ void frq_logFreqDomainSolution( const frq_freqDomainSolution_t * const pSolution
  * sol_solution_t * const, unsigned int idxResult).
  *   @param pMScript
  * The pointer to an M script object. The generated M code is written into this M script.
- * The object is the result of a successful call of boolean msc_createMScript(msc_mScript_t
+ * The object is the result of a successful call of bool msc_createMScript(msc_mScript_t
  * ** const, const char * const, const char * const, const char * const).
  */
 
-boolean frq_exportAsMCode( const frq_freqDomainSolution_t * const pSolution
-                         , msc_mScript_t * const pMScript
-                         )
+bool frq_exportAsMCode( const frq_freqDomainSolution_t * const pSolution
+                      , msc_mScript_t * const pMScript
+                      )
 {
     assert(pSolution != FRQ_NULL_SOLUTION);
-    boolean success = true;
+    bool success = true;
     const unsigned int noDependents = frq_getNoDependents(pSolution)
                      , noIndependents = frq_getNoIndependents(pSolution);
     assert(noDependents > 0  &&  noIndependents > 0);

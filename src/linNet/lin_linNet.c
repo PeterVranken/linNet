@@ -30,6 +30,9 @@
  * Include files
  */
 
+#include "lin_linNet.h"
+
+#include <stdbool.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <sys/stat.h>
@@ -53,7 +56,6 @@
 #include "msc_mScript.h"
 #include "sol_solver.h"
 #include "opt_getOpt.h"
-#include "lin_linNet.h"
 
 
 /*
@@ -179,7 +181,7 @@ static const char *getLogFileName( const opt_cmdLineOptions_t * const pCmdLine
                          , circuitFileName
                          );
 
-            /* File name with new extension. */            
+            /* File name with new extension. */
             char logFileName[strlen(pureFileName) + sizeof(LIN_LOG_FILE_NAME_EXT)];
             snprintf( logFileName
                     , sizeof(logFileName)
@@ -188,9 +190,9 @@ static const char *getLogFileName( const opt_cmdLineOptions_t * const pCmdLine
                     , LIN_LOG_FILE_NAME_EXT
                     );
             free(pureFileName);
-            
+
             return fil_concatPathFile(path, logFileName);
-            
+
         } /* End if(One or multiple input files?) */
 
     } /* End if(Trivial situation or do we have to figure out the name?) */
@@ -223,11 +225,11 @@ static const char *getLogFileName( const opt_cmdLineOptions_t * const pCmdLine
  * Success and problem reports are made in this logger.
  */
 
-static boolean makeOctaveOutputDir( const char * const outputPath
-                                  , const char * const folderName
-                                  , boolean dontCopyPrivateScripts
-                                  , log_hLogger_t hLog
-                                  )
+static bool makeOctaveOutputDir( const char * const outputPath
+                               , const char * const folderName
+                               , bool dontCopyPrivateScripts
+                               , log_hLogger_t hLog
+                               )
 {
     /* Compose the full path to the folder to be made. */
     const char * const octavePath = fil_concatPathFile(outputPath, folderName);
@@ -259,7 +261,7 @@ static boolean makeOctaveOutputDir( const char * const outputPath
     }
 
     /* Create the Octave folder at the aimed output path. */
-    boolean success = fil_mkdirRecursive(octavePath) >= 0;
+    bool success = fil_mkdirRecursive(octavePath) >= 0;
     if(!success)
     {
         LOG_ERROR( hLog
@@ -351,18 +353,18 @@ static boolean makeOctaveOutputDir( const char * const outputPath
  *   @remark
  */
 
-static boolean processInputFile( const char * const circuitFileName
-                               , const char * const octaveOutputPath
-                               , boolean dontCopyPrivateOctaveScripts
-                               , log_hLogger_t hLog
-                               )
+static bool processInputFile( const char * const circuitFileName
+                            , const char * const octaveOutputPath
+                            , bool dontCopyPrivateOctaveScripts
+                            , log_hLogger_t hLog
+                            )
 {
     /* Parse the input file and generate a netlist object. */
     const pci_circuit_t *pParseResult = NULL;
-    boolean success = pci_parseCircuitFile( hLog
-                                          , &pParseResult
-                                          , circuitFileName
-                                          );
+    bool success = pci_parseCircuitFile( hLog
+                                       , &pParseResult
+                                       , circuitFileName
+                                       );
 
     /* Create a linear equation system object from the parse result. */
     les_linearEquationSystem_t *pLES = NULL;
@@ -408,10 +410,10 @@ static boolean processInputFile( const char * const circuitFileName
 
             /* Generate the requested result from the algebraic solution of the LES. */
             const frq_freqDomainSolution_t *pFreqDomainSolution;
-            boolean successResult = frq_createFreqDomainSolution( &pFreqDomainSolution
-                                                                , pSolution
-                                                                , idxResult
-                                                                );
+            bool successResult = frq_createFreqDomainSolution( &pFreqDomainSolution
+                                                             , pSolution
+                                                             , idxResult
+                                                             );
 
             /* Print the solution of the LES in the frequency domain. */
             if(successResult)
@@ -478,7 +480,7 @@ static boolean processInputFile( const char * const circuitFileName
                             successResult = false;
                     }
                     free((char*)octaveFilePath);
-                    
+
                     /* The M script is now generated, the object is no longer used. */
                     msc_deleteMScript(pMScript);
                 }
@@ -535,7 +537,7 @@ signed int main(signed int argc, char *argv[])
            " This is free software; see the source for copying conditions. There is NO\n"
            " warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n"
            "-----------------------------------------------------------------------------";
-    
+
     /* Print the greeting, which may disregard the switch -s, "be silent". Doing command
        line parsing first (to have the knowledge whether -s is given) would however mean,
        that all feedback to the command line interface (including output of the help text)
@@ -544,7 +546,7 @@ signed int main(signed int argc, char *argv[])
 
     /* Parse the command line. Errors and problems are reported to both stdout and stderr. */
     opt_cmdLineOptions_t cmdLine;
-    boolean success = opt_parseCmdLine(&cmdLine, argc, argv);
+    bool success = opt_parseCmdLine(&cmdLine, argc, argv);
 
 #ifdef DEBUG
     //opt_echoUserInput(stdout, &cmdLine);
@@ -564,7 +566,7 @@ signed int main(signed int argc, char *argv[])
     log_initModule();
 
     /* Create the logger object. */
-    boolean cantOpenLogFile = false;
+    bool cantOpenLogFile = false;
     log_hLogger_t hGlobalLogger = LOG_HANDLE_TO_EMPTY_LOGGER_OBJECT;
     if(!log_createLogger( &hGlobalLogger
                         , logFileName

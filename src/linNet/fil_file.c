@@ -35,21 +35,22 @@
  * Include files
  */
 
+#include "fil_file.h"
+
 #include <assert.h>
 #include <dirent.h>
 #include <errno.h>
 #include <stdarg.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <sys/stat.h>
 #include <unistd.h>
 
-#include "types.h"
 #include "smalloc.h"
 #include "snprintf.h"
 #include "lin_linNet.h"
-#include "fil_file.h"
 
 /*
  * Defines
@@ -97,7 +98,7 @@
  *   @param[in] c
  * The character to check.
  */
-static inline boolean isSlash(char c)
+static inline bool isSlash(char c)
 {
     return c == '\\'  ||  c == '/';
 }
@@ -141,7 +142,7 @@ static char *removeTrailingSlash(char * const path)
  * The supposed installation directory.
  */
 
-static boolean checkForInstallDir(const char *candidate)
+static bool checkForInstallDir(const char *candidate)
 {
 #if 0
 # define PRINTF(formatStr, ...)  printf("checkForInstallDir: " formatStr, __VA_ARGS__)
@@ -265,7 +266,7 @@ const char *fil_concatPathFile(const char * const path, const char * const fileN
 {
     const size_t strLenPath = path != NULL? strlen(path): 0u;
 
-    boolean needSL;
+    bool needSL;
     if(strLenPath > 0u)
     {
         /* Special case Windows: if the path is no more then "c:" then we must not add a
@@ -381,7 +382,7 @@ char *fil_changeFileName( const char * const fileName
  * The name of the source file to be copied including the path.
  */
 
-boolean fil_copyFile(const char * const targetFilePath, const char * const srcFile)
+bool fil_copyFile(const char * const targetFilePath, const char * const srcFile)
 {
 #if 0
 # define PRINTF(formatStr, ...)  printf("fil_copyFile: " formatStr, __VA_ARGS__)
@@ -389,7 +390,7 @@ boolean fil_copyFile(const char * const targetFilePath, const char * const srcFi
 # define PRINTF(formatStr, ...)
 #endif
 
-    boolean success = true;
+    bool success = true;
     FILE *hSrcFile = NULL
        , *hTargetFile = NULL;
 
@@ -471,7 +472,7 @@ boolean fil_copyFile(const char * const targetFilePath, const char * const srcFi
  * simple reason that it already existed on entry into the function.\n
  *   \a false: The function returns \a true only if the directory has been newly created.
  */
-static inline boolean makeDir(const char * const path, boolean existingDirIsOk)
+static inline bool makeDir(const char * const path, bool existingDirIsOk)
 {
     assert(path != NULL);
     const int res = mkdir( path
@@ -583,7 +584,7 @@ int fil_mkdirRecursive(const char * const path)
  *   @param srcDir
  * The source file or directory to be copied. May be a single file or a directory of those.
  */
-boolean fil_copyDir(const char * const targetDir, const char * const srcDir)
+bool fil_copyDir(const char * const targetDir, const char * const srcDir)
 {
 #if 0
 # define PRINTF(formatStr, ...)  printf("fil_copyDir: " formatStr, __VA_ARGS__)
@@ -602,7 +603,7 @@ boolean fil_copyDir(const char * const targetDir, const char * const srcDir)
     /* If it is a directory: Create such a directory as empty directory at the target
        location and copy all contained files by using this function recursively.
          Otherwise just copy the file. */
-    boolean success = false;
+    bool success = false;
     if(hDir != NULL)
     {
         /* Create empty directory at target location. */
@@ -612,7 +613,7 @@ boolean fil_copyDir(const char * const targetDir, const char * const srcDir)
 
             /* Look for all files in srcDir (be it true files or sub-directories) and copy
                each by a recursive call of the same function. */
-            boolean successAllFiles = true;
+            bool successAllFiles = true;
             struct dirent *pDirEntry;
             while((pDirEntry=readdir(hDir)) != NULL)
             {

@@ -50,6 +50,9 @@
  * Include files
  */
 
+#include "les_linearEquationSystem.h"
+
+#include <stdbool.h>
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
@@ -61,7 +64,6 @@
 #include "tbv_tableOfVariables.h"
 #include "coe_coefficient.h"
 #include "coe_coefficient.inlineInterface.h"
-#include "les_linearEquationSystem.h"
 
 
 /*
@@ -101,11 +103,11 @@ typedef struct networkNodeRef_t
 
     /** A specific check of the device interconnection: No two op-amps must be connected to
         the same node. This flags is used to recognize this problem. */
-    boolean isOpampOutput;
+    bool isOpampOutput;
 
 #ifdef DEBUG
     /** Protection against misuse. */
-    boolean isInUse;
+    bool isInUse;
 #endif
 } networkNodeRef_t;
 
@@ -140,7 +142,7 @@ typedef struct
 
     /** Used for user feedback only: If a circuit has at least one controlled source, that
         unconnected sub-graphs are less suspicious and no warning is emitted. */
-    boolean hasControlledSources;
+    bool hasControlledSources;
 
     /** The entries in this data structure refer to a parse result, that describes all
         nodes and devices in the circuit. A copy (by reference) of this netlist
@@ -332,9 +334,9 @@ static void logNetworkTopology(const network_t * const pNetwork)
  *   @see void deleteNetwork(network_t * const)
  */
 
-static boolean analyseNetworkTopology( network_t * * const ppNetwork
-                                     , const pci_circuit_t * const pCircuitNetList
-                                     )
+static bool analyseNetworkTopology( network_t * * const ppNetwork
+                                  , const pci_circuit_t * const pCircuitNetList
+                                  )
 {
     /* Targeted data structure: The built data structure is a list of unconnected
        sub-networks. (The input file may define n unconnected graphs of interconnected
@@ -371,7 +373,7 @@ static boolean analyseNetworkTopology( network_t * * const ppNetwork
         struct
         {
             unsigned int idxNode;
-            boolean isInterconnection;
+            bool isInterconnection;
 
         } nodeAry[4];
         unsigned int noNodes;
@@ -525,7 +527,7 @@ static boolean analyseNetworkTopology( network_t * * const ppNetwork
     }
     /* Replace the list of networks with the output list (of none empty networks only). All
        invalid references to meanwhile freed objects are deleted in this step. */
-    boolean success = true;
+    bool success = true;
     pNetwork->pHeadOfSubNetList = pNewNotEmptyList;
     if(pNetwork->noSubNets == 0)
     {
@@ -742,21 +744,21 @@ static void deleteNetwork(network_t * const pNetwork)
  * The list of nodes belonging to the sub-graph.
  */
 
-static boolean findNodeGnd( unsigned int * const pIdxGroundNode
-                          , const pci_circuit_t * const pCircuitNetList
-                          , const networkNodeRef_t * const pHeadOfNodeList
-                          )
+static bool findNodeGnd( unsigned int * const pIdxGroundNode
+                       , const pci_circuit_t * const pCircuitNetList
+                       , const networkNodeRef_t * const pHeadOfNodeList
+                       )
 {
     assert(pHeadOfNodeList != NULL);
     const networkNodeRef_t *pNode = pHeadOfNodeList;
 
-    boolean success = true;
+    bool success = true;
 
     /* If at least one op-amp is in the circuit then the user needs to unambiguously define
        the ground node; the op-amp is modelled as a controlled voltage source between
        ground and the op-amp's output and this evidently depends on the selection of the
        ground node. */
-    boolean opAmpInCircuit = false;
+    bool opAmpInCircuit = false;
 
     /* Respect the user's choice: We do a simple string compare on the nodes' names and
        look for one called gnd or similar. */
@@ -867,7 +869,7 @@ static boolean findNodeGnd( unsigned int * const pIdxGroundNode
 
 static void createNameOfUnknown( char name[]
                                , unsigned int maxLen
-                               , boolean isVoltage
+                               , bool isVoltage
                                , const char * const userObject
                                )
 {
@@ -912,9 +914,9 @@ static void createNameOfUnknown( char name[]
  * to do so.
  */
 
-static boolean determineReqVariables( tbv_tableOfVariables_t * * const ppTableOfVars
-                                    , const network_t * const pNetwork
-                                    )
+static bool determineReqVariables( tbv_tableOfVariables_t * * const ppTableOfVars
+                                 , const network_t * const pNetwork
+                                 )
 {
     unsigned int noKnowns = 0
                , noUnknowns = 0
@@ -962,7 +964,7 @@ static boolean determineReqVariables( tbv_tableOfVariables_t * * const ppTableOf
 
     /* Add the unknowns for the node voltages. To find only independent node voltages we
        need to iterate through the entire network; begin with its unconnected sub-graphs. */
-    boolean success = true;
+    bool success = true;
     const subNetwork_t *pSubNet = pNetwork->pHeadOfSubNetList;
     unsigned int idSubNet = 1;
     while(pSubNet != NULL)
@@ -2234,9 +2236,9 @@ void les_shutdownModule()
  *   @see void les_deleteLES(les_linearEquationSystem_t *)
  */
 
-boolean les_createLES( les_linearEquationSystem_t * * const ppLES
-                     , const pci_circuit_t * const pCircuitNetList
-                     )
+bool les_createLES( les_linearEquationSystem_t * * const ppLES
+                  , const pci_circuit_t * const pCircuitNetList
+                  )
 {
     /* Allocate matrix and initialize all coefficients to NULL. */
     les_linearEquationSystem_t *pLES = smalloc( sizeof(les_linearEquationSystem_t)
@@ -2250,7 +2252,7 @@ boolean les_createLES( les_linearEquationSystem_t * * const ppLES
     /* Analyse the network topology expressed in the netlist representing the circuit and
        transform it into a more useful data structure. */
     network_t *pNetwork = NULL;
-    boolean success = analyseNetworkTopology(&pNetwork, pCircuitNetList);
+    bool success = analyseNetworkTopology(&pNetwork, pCircuitNetList);
     if(!success)
     {
         LOG_ERROR( _log
@@ -2312,7 +2314,7 @@ boolean les_createLES( les_linearEquationSystem_t * * const ppLES
  * Delete a linear equation system object. All memory is freed.
  *   @param pLES
  * The pointer to the deleted object. No action if this is NULL.
- *   @see boolean les_createLES(les_linearEquationSystem_t * * const, const pci_circuit_t *
+ *   @see bool les_createLES(les_linearEquationSystem_t * * const, const pci_circuit_t *
  * const)
  */
 
@@ -2401,9 +2403,9 @@ const tbv_tableOfVariables_t *les_getTableOfVariables
  * invariant during the life time of * \a pLES, but their order of appearance in the LES
  * is variant; it is influenced by two functions, which select a specific unknown for the
  * sover.
- *   @see boolean tbv_setTargetUnknownForSolver(tbv_tableOfVariables_t * const, const char
+ *   @see bool tbv_setTargetUnknownForSolver(tbv_tableOfVariables_t * const, const char
  * * const)
- *   @see boolean les_setupLES(les_linearEquationSystem_t * const, const char * const)
+ *   @see bool les_setupLES(les_linearEquationSystem_t * const, const char * const)
  */
 
 const tbv_unknownVariable_t *les_getTableOfUnknowns
@@ -2438,9 +2440,9 @@ const tbv_unknownVariable_t *les_getTableOfUnknowns
  * The unknown, which the LES is to be solved for is identified by name.
  */
 
-boolean les_setupLES( les_linearEquationSystem_t * const pLES
-                    , const char * const nameOfUnknown
-                    )
+bool les_setupLES( les_linearEquationSystem_t * const pLES
+                 , const char * const nameOfUnknown
+                 )
 {
     assert(pLES != NULL  &&  pLES->pTableOfVars != NULL);
 
@@ -2451,7 +2453,7 @@ boolean les_setupLES( les_linearEquationSystem_t * const pLES
        (later) LES on user demand, we can achieve that any unknown is represented in column
        m of the LES and this is the column, which the solver returns the fully figured out
        solution for. */
-    boolean success = tbv_setTargetUnknownForSolver(pLES->pTableOfVars, nameOfUnknown);
+    bool success = tbv_setTargetUnknownForSolver(pLES->pTableOfVars, nameOfUnknown);
 
     /* Compute all coefficients of the LES. */
     if(success)

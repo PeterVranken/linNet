@@ -71,10 +71,11 @@
  * parameter, serving as context. The context is initially passed to the qsort function.
  */
 
+#include "qsort_c.h"
+
 #include <assert.h>
 #include <stdint.h>
 #include <sys/types.h>
-#include "qsort_c.h"
 
 static inline char *med3( char *
                         , char *

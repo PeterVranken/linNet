@@ -44,6 +44,7 @@
 
 #include "log_logger.h"
 
+#include <stdbool.h>
 #include <stdlib.h>
 #include <stdint.h>
 #include <inttypes.h>
@@ -55,7 +56,6 @@
 #include "fil_file.h"
 #include "smalloc.h"
 #include "snprintf.h"
-#include "types.h"
 
 /*
  * Defines
@@ -171,13 +171,13 @@ void log_shutdownModule()
  * file is deleted and reopened if set to false.
  */
 
-boolean log_createLogger( log_hLogger_t * const phNewLogger
-                        , const char * const fileName
-                        , log_logLevel_t logLevel
-                        , log_lineFormat_t lineFormat
-                        , boolean initialEchoToConsole
-                        , boolean doAppend
-                        )
+bool log_createLogger( log_hLogger_t * const phNewLogger
+                     , const char * const fileName
+                     , log_logLevel_t logLevel
+                     , log_lineFormat_t lineFormat
+                     , bool initialEchoToConsole
+                     , bool doAppend
+                     )
 {
     log_logger_t * const pNewLogger = smalloc(sizeof(log_logger_t), __FILE__, __LINE__);
 
@@ -229,8 +229,8 @@ boolean log_createLogger( log_hLogger_t * const phNewLogger
  * A copy of the passed handle \a hObj is returned.
  *   @param hObj
  * Pointer to the object to be cloned by reference.
- *   @see boolean log_createLogger(log_hLogger_t *, const char * const, log_logLevel_t
- *                                , boolean, boolean)
+ *   @see bool log_createLogger( log_hLogger_t *, const char * const, log_logLevel_t
+ *                             , bool, bool)
  *   @see void log_deleteLOgger(log_hLogger_t)
  */
 
@@ -293,7 +293,7 @@ void log_deleteLogger(log_hLogger_t hObj)
  * The new value of the flag. True enables echoing.
  */
 
-void log_setEchoToConsole(log_hLogger_t hObj, boolean echoToConsole)
+void log_setEchoToConsole(log_hLogger_t hObj, bool echoToConsole)
 {
     hObj->echoToConsole = echoToConsole;
 
@@ -465,7 +465,7 @@ unsigned int log_getLengthOfLineHeader(log_logger_t * const hObj)
  * The handle to the logger object to operate on.
  */
 
-boolean log_close(log_logger_t * const hObj)
+bool log_close(log_logger_t * const hObj)
 {
     if(hObj->pLogFile != NULL)
     {
@@ -594,7 +594,7 @@ static unsigned int logInternal( log_logger_t * const hObj
     };
 
 #define MAX_SIZE_LINE_HDR 128
-    boolean printHeader = hObj->lineFormat != log_fmtRaw  &&  logLevel != log_continueLine;
+    bool printHeader = hObj->lineFormat != log_fmtRaw  &&  logLevel != log_continueLine;
     char lineHeader[MAX_SIZE_LINE_HDR+1];
     if(printHeader)
     {
@@ -654,7 +654,7 @@ static unsigned int logInternal( log_logger_t * const hObj
 #undef F_MAXU_T
 
     unsigned int noChars = 0;
-    boolean charsCounted = false;
+    bool charsCounted = false;
 
     if(hObj->echoToConsole)
     {
@@ -734,9 +734,9 @@ static unsigned int logInternal( log_logger_t * const hObj
  * information or not. This is done by a the function call enclosing conditional phrase,
  * which is hidden in a macro.
  *   @remark
- * This function does not append a newline character to the output as boolean log_logLine
+ * This function does not append a newline character to the output as bool log_logLine()
  * does.
- *   @see boolean log_logLine(log_logger_t * const, log_logLevel_t, const char * const, ...)
+ *   @see bool log_logLine(log_logger_t * const, log_logLevel_t, const char * const, ...)
  */
 
 unsigned int log_log( log_logger_t * const hObj
@@ -787,7 +787,7 @@ unsigned int log_log( log_logger_t * const hObj
  *   @remark
  * This function will append a newline character to the output. A blank line will appear if
  * \a formatString should end with a newline also.
- *   @see boolean log_log(log_logger_t * const, log_logLevel_t, const char * const, ...)
+ *   @see bool log_log(log_logger_t * const, log_logLevel_t, const char * const, ...)
  */
 
 unsigned int log_logLine( log_logger_t * const hObj

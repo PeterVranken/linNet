@@ -4,7 +4,7 @@
  * @file tok_tokenStream.h
  * Definition of global interface of module tok_tokenStream.c
  *
- * Copyright (C) 2014 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ * Copyright (C) 2014-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -24,8 +24,8 @@
  * Include files
  */
 
-#include "types.h"
-
+#include <stdbool.h>
+#include <stdio.h>
 
 /*
  * Defines
@@ -119,7 +119,7 @@ enum { tok_tokenTypeEndOfLine = (tok_tokenType_t)'\n'
     pointer value would cause a severe error by freeing this seeming heap object. To avoid
     this problem, always use macro #TOK_UNINITIALIZED_TOKEN as a compile time initializer
     expression for instances of this type.
-      @see boolean tok_getNextToken(tok_hTokenStream_t, tok_token_t * const) */
+      @see bool tok_getNextToken(tok_hTokenStream_t, tok_token_t * const) */
 typedef struct tok_token_t
 {
     /** The type of the token. */
@@ -341,25 +341,25 @@ typedef struct tok_tokenDescriptorTable_t
  */
 
 /** A token stream object is created. */
-boolean tok_createTokenStream( tok_hTokenStream_t * const phTokenStream
-                             , char * * const pErrorString
-                             , const char * const fileName
-                             , tok_hStream_t hStream
-                             , const tok_customFctGetChar customFctGetChar
-                             , const tok_tokenDescriptorTable_t * const pCustomTokenDefinition
-                             );
+bool tok_createTokenStream( tok_hTokenStream_t * const phTokenStream
+                          , char * * const pErrorString
+                          , const char * const fileName
+                          , tok_hStream_t hStream
+                          , const tok_customFctGetChar customFctGetChar
+                          , const tok_tokenDescriptorTable_t * const pCustomTokenDefinition
+                          );
 
 /** Delete a token stream object as created by tok_createTokenStream. */
 void tok_deleteTokenStream(tok_hTokenStream_t hTokenStream);
 
 /** Set a Boolean option of the tokenizer. */
-void tok_setBoolOption(tok_hTokenStream_t hTStream, tok_syntaxOption_t option, boolean value);
+void tok_setBoolOption(tok_hTokenStream_t hTStream, tok_syntaxOption_t option, bool value);
 
 /** Get the current, last recently set error message. */
 const char *tok_getErrorMsg(tok_hTokenStream_t hTStream);
 
 /** Reset error in order to proceed scanning the input. */
-boolean tok_resetError(tok_hTokenStream_t hTStream, const char * * const pErrMsg);
+bool tok_resetError(tok_hTokenStream_t hTStream, const char * * const pErrMsg);
 
 /** Get the current line number of the input stream. */
 unsigned int tok_getLine(tok_hTokenStream_t hTStream);
@@ -374,6 +374,6 @@ void tok_fprintfToken( tok_hTokenStream_t hTStream
 #endif
 
 /** Main operation on a token stream: Read the next token (or lexical atom) from the input. */
-boolean tok_getNextToken(tok_hTokenStream_t hTStream, tok_token_t * const pToken);
+bool tok_getNextToken(tok_hTokenStream_t hTStream, tok_token_t * const pToken);
 
 #endif  /* TOK_TOKENSTREAM_INCLUDED */

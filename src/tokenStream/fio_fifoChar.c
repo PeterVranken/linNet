@@ -2,7 +2,7 @@
  * @file fio_fifoChar.c
  * 
  *
- * Copyright (C) 2014 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ * Copyright (C) 2014-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -32,14 +32,14 @@
  * Include files
  */
 
+#include "fio_fifoChar.h"
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include <assert.h>
 
 #include "smalloc.h"
-#include "fio_fifoChar.h"
-
 
 /*
  * Defines

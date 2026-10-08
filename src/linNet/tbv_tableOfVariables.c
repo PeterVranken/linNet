@@ -52,6 +52,9 @@
  * Include files
  */
 
+#include "tbv_tableOfVariables.h"
+
+#include <stdbool.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -63,7 +66,6 @@
 #include "rat_rationalNumber.h"
 #include "pci_parserCircuit.h"
 #include "msc_mScript.h"
-#include "tbv_tableOfVariables.h"
 
 
 /*
@@ -112,14 +114,14 @@ static unsigned int _noRefsToObjects = 0;
  * Pass \a true if the name of a known quantity is checked and \a false otherwise.
  */
 
-static boolean checkName( tbv_tableOfVariables_t * const pTable
-                        , const char * const nameToCheck
-                        , boolean isKnown
-                        )
+static bool checkName( tbv_tableOfVariables_t * const pTable
+                     , const char * const nameToCheck
+                     , bool isKnown
+                     )
 {
     assert(nameToCheck != NULL  &&  strlen(nameToCheck) != 0);
 
-    boolean success = true;
+    bool success = true;
     const char *kindOfOtherObj;
     unsigned int u;
 
@@ -780,17 +782,17 @@ void tbv_logTableOfVariables(const tbv_tableOfVariables_t * const pTable)
  * application log.
  */
 
-boolean tbv_addKnown( tbv_tableOfVariables_t * const pTable
-                    , const char * const name
-                    , unsigned int idxDevice
-                    )
+bool tbv_addKnown( tbv_tableOfVariables_t * const pTable
+                 , const char * const name
+                 , unsigned int idxDevice
+                 )
 {
     assert(pTable != NULL  &&  _log != LOG_HANDLE_TO_EMPTY_LOGGER_OBJECT);
 
     /* Doubly defined names are considered an error: Any reported result would become
        meaningless. This is a user input caused problem, which is reported in the
        application log. */
-    boolean success = checkName(pTable, name, /* isKnown */ true);
+    bool success = checkName(pTable, name, /* isKnown */ true);
 
     /* Try to place the known in the next free array entry. */
     if(pTable->noKnowns >= pTable->maxNoKnowns)
@@ -865,12 +867,12 @@ boolean tbv_addKnown( tbv_tableOfVariables_t * const pTable
  * application log.
  */
 
-boolean tbv_addUnknown( tbv_tableOfVariables_t * const pTable
-                      , const char * const name
-                      , unsigned int idxNode
-                      , unsigned int idSubNet
-                      , unsigned int idxDevice
-                      )
+bool tbv_addUnknown( tbv_tableOfVariables_t * const pTable
+                   , const char * const name
+                   , unsigned int idxNode
+                   , unsigned int idSubNet
+                   , unsigned int idxDevice
+                   )
 {
     assert(pTable != NULL  &&  _log != LOG_HANDLE_TO_EMPTY_LOGGER_OBJECT);
     assert(idxNode == PCI_NULL_NODE  ||  idxDevice == PCI_NULL_DEVICE);
@@ -878,7 +880,7 @@ boolean tbv_addUnknown( tbv_tableOfVariables_t * const pTable
     /* Doubly defined names are considered an error: Any reported result would become
        meaningless. This is a user input caused problem, which is reported in the
        application log. */
-    boolean success = checkName(pTable, name, /* isKnown */ false);
+    bool success = checkName(pTable, name, /* isKnown */ false);
     if(!success)
     {
         LOG_ERROR( _log
@@ -1038,7 +1040,7 @@ void tbv_sortConstants(tbv_tableOfVariables_t * const pTable)
  * The reference to the exported table of symbolic objects is passed.
  *   @param pMScript
  * The pointer to an M script object. The generated M code is written into this M script.
- * The object is the result of a successful call of boolean msc_createMScript(msc_mScript_t
+ * The object is the result of a successful call of bool msc_createMScript(msc_mScript_t
  * ** const, const char * const, const char * const, const char * const).
  *   @param context
  * The variables can be exported in different contexts of M code. Choose, which context to
@@ -1425,14 +1427,14 @@ const pci_device_t *tbv_getDeviceByBitIndex( const tbv_tableOfVariables_t * cons
  * the chain of references.
  */
 
-boolean tbv_getReferencedDeviceByBitIndex( const tbv_tableOfVariables_t * const pTable
-                                         , rat_num_t *pRefFactor
-                                         , const pci_device_t * * const ppDevice
-                                         , unsigned int *pIdxBitRefDev
-                                         , unsigned int idxBit
-                                         )
+bool tbv_getReferencedDeviceByBitIndex( const tbv_tableOfVariables_t * const pTable
+                                      , rat_num_t *pRefFactor
+                                      , const pci_device_t * * const ppDevice
+                                      , unsigned int *pIdxBitRefDev
+                                      , unsigned int idxBit
+                                      )
 {
-    boolean success = true;
+    bool success = true;
     rat_num_t refFactor = RAT_ONE;
     const pci_circuit_t * const pNetList = pTable->pCircuitNetList;
     assert(idxBit < pTable->noConstants);
@@ -1532,9 +1534,9 @@ boolean tbv_getReferencedDeviceByBitIndex( const tbv_tableOfVariables_t * const 
  * The unknown is selected by name.
  */
 
-boolean tbv_setTargetUnknownForSolver( tbv_tableOfVariables_t * const pTable
-                                     , const char * const nameOfUnknown
-                                     )
+bool tbv_setTargetUnknownForSolver( tbv_tableOfVariables_t * const pTable
+                                  , const char * const nameOfUnknown
+                                  )
 {
     tbv_unknownVariable_t * const unknownLookUpAry = pTable->unknownLookUpAry;
 

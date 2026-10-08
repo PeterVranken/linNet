@@ -25,10 +25,11 @@
  * Include files
  */
 
+#include <stdbool.h>
+#include "crm_createMatrix.h"
 #include "lin_linNet.h"
 #include "log_logger.h"
 #include "mem_memoryManager.h"
-#include "crm_createMatrix.h"
 
 
 /*
@@ -136,7 +137,7 @@ void coe_deleteMatrix(coe_coefMatrix_t A, unsigned int noRows, unsigned int noCo
 #endif
 
 /** This function double checks if a coefficient object's addends have the demanded order. */
-boolean coe_checkOrderOfAddends(coe_coef_t *pCoef);
+bool coe_checkOrderOfAddends(coe_coef_t *pCoef);
 
 /** Sort the order of addends in a (new) coefficient object prior to its first use. */
 void coe_sortAddends(coe_coef_t ** const ppCoef);

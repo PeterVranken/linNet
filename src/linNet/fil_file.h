@@ -24,8 +24,7 @@
  * Include files
  */
 
-#include "types.h"
-
+#include <stdbool.h>
 
 /*
  * Defines
@@ -69,10 +68,10 @@ char *fil_changeFileName( const char * const fileName
 int fil_mkdirRecursive(const char * const path);
 
 /** Copy a file. */
-boolean fil_copyFile(const char * const targetFilePath, const char * const srcFile);
+bool fil_copyFile(const char * const targetFilePath, const char * const srcFile);
 
 /** Copy a directory recursively. */
-boolean fil_copyDir(const char * const targetDir, const char * const srcDir);
+bool fil_copyDir(const char * const targetDir, const char * const srcDir);
 
 /** Determine the installation directory of this application. */
 const char *fil_findApplication(const char * const appArg0);

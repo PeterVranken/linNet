@@ -50,8 +50,8 @@ the executable.
 
 \subsection{Pre-built executables}
 
-The download of \linnet{} from the GibHub Release page,
-\href{https://github.com/PeterVranken/linNet/releases}{https://\-github.com/\-Peter\-Vranken/\-linNet/\-releases}
+The download of \linnet{} from the GibHub Releases page,
+\href{https://github.com/PeterVranken/linNet/releases}{https://\-github.com/\-Peter\-Vranken/\-linNet/\-re\-leases}
 contains pre-build, ready-to-use executable files for Windows (DEBUG and
 PRODUCTION compilation). The executable files are already bundled with the
 resources folder \file{private} so that the installation reduces to
@@ -75,7 +75,7 @@ $linnet = "C:\ProgramFiles\linNet\bin\win\PRODUCTION"
 # Set LINNET_BIN permanently for the current user.
 [System.Environment]::SetEnvironmentVariable("LINNET_BIN", $linnet, "User")
 # Append the linNet binary directory to PATH.
-$path = [System.Environment]::GetEnvironmentVariable( "Path", "User" )
+$path = [System.Environment]::GetEnvironmentVariable("Path", "User")
 [System.Environment]::SetEnvironmentVariable("Path", $path+";$linnet", "User")
 \end{lstlisting}
 

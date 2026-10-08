@@ -30,7 +30,7 @@
  * Include files
  */
 
-#include "types.h"
+#include <stdbool.h>
 #include "log_logger.h"
 #include "mem_memoryManager.h"
 #include "coe_coefficient.h"
@@ -122,7 +122,7 @@ static inline coe_coefAddend_t *coe_coefAddendOne()
  * Get the Boolean answer.
  */
 
-static inline boolean coe_isCoefAddendNull(const coe_coefAddend_t * const pAddend)
+static inline bool coe_isCoefAddendNull(const coe_coefAddend_t * const pAddend)
 {
     return pAddend == NULL;
 

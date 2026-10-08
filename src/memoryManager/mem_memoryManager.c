@@ -54,7 +54,7 @@
  * no system memory left, the error handling simply is the abortion of the application
  * after writing an error message to stderr.
  *
- * Copyright (C) 2013 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ * Copyright (C) 2013-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -86,15 +86,15 @@
  * Include files
  */
 
+#include "mem_memoryManager.h"
+
+#include <stdbool.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <assert.h>
 
-#include "types.h"
 #include "smalloc.h"
 #include "log_logger.h"
-#include "mem_memoryManager.h"
-
 
 /*
  * Defines
@@ -358,7 +358,7 @@ mem_hHeap_t mem_createHeap( log_hLogger_t hLogger
  * function returns a non zero value.
  */
 
-unsigned long mem_deleteHeap(heap_t *pHeap, boolean warnIfUnfreedMem)
+unsigned long mem_deleteHeap(heap_t *pHeap, bool warnIfUnfreedMem)
 {
     assert(pHeap != NULL);    
     

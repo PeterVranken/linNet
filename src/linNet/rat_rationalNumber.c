@@ -2,7 +2,7 @@
  * @file rat_rationalNumber.c
  * Simple numeric class implementing rational numbers.
  *
- * Copyright (C) 2014 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ * Copyright (C) 2014-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -38,14 +38,15 @@
  * Include files
  */
 
+#include "rat_rationalNumber.h"
+
+#include <stdbool.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include <assert.h>
 
-#include "types.h"
 #include "log_logger.h"
-#include "rat_rationalNumber.h"
 
 
 /*
@@ -90,7 +91,7 @@ static log_hLogger_t _log = LOG_HANDLE_TO_EMPTY_LOGGER_OBJECT;
 /** A global flag to indicate overflows.
       @remark Despite of its global declaration is this a module internal variable. Never
     touch this variable from outside this module! */
-boolean rat_overflowFlag = false;
+bool rat_overflowFlag = false;
 
 
 /*
@@ -190,7 +191,7 @@ static rat_num_t approximate(rat_signed_long_int n, rat_signed_long_int d)
 //printf("n_in: %ld, d_in: %ld\n", n, d);
 #endif
     /* Underflow recognition is easier, if we only have positive numbers. */
-    boolean isNegative;
+    bool isNegative;
     if(n < 0)
     {
         isNegative = true;

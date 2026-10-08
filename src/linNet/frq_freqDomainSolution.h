@@ -4,7 +4,7 @@
  * @file frq_freqDomainSolution.h
  * Definition of global interface of module frq_freqDomainSolution.c
  *
- * Copyright (C) 2013 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ * Copyright (C) 2013-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -24,6 +24,7 @@
  * Include files
  */
 
+#include <stdbool.h>
 #include "log_logger.h"
 #include "sol_solver.h"
 #include "rat_rationalNumber.h"
@@ -154,10 +155,10 @@ void frq_initModule(log_hLogger_t hGlobalLogger);
 void frq_shutdownModule(void);
 
 /** Create a result representation in the frequency domain. */
-boolean frq_createFreqDomainSolution( const frq_freqDomainSolution_t * * const ppFrqDomSolution
-                                    , const sol_solution_t * const pAlgebraicSolution
-                                    , signed int idxResult
-                                    );
+bool frq_createFreqDomainSolution( const frq_freqDomainSolution_t * * const ppFrqDomSolution
+                                 , const sol_solution_t * const pAlgebraicSolution
+                                 , signed int idxResult
+                                 );
 
 /** Get another reference to the same object. */
 frq_freqDomainSolution_t *frq_cloneByReference(frq_freqDomainSolution_t * const pExistingObj);
@@ -188,8 +189,8 @@ void frq_logFreqDomainSolution( const frq_freqDomainSolution_t * const pSolution
                               );
 
 /** Export a complete solution in the frequency domain as Octave script code. */
-boolean frq_exportAsMCode( const frq_freqDomainSolution_t * const pSolution
-                         , msc_mScript_t * const pMScript
-                         );
+bool frq_exportAsMCode( const frq_freqDomainSolution_t * const pSolution
+                      , msc_mScript_t * const pMScript
+                      );
 
 #endif  /* FRQ_FREQDOMAINSOLUTION_INCLUDED */

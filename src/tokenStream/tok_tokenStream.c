@@ -83,6 +83,9 @@
  * Include files
  */
 
+#include "tok_tokenStream.h"
+
+#include <stdbool.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <errno.h>
@@ -91,11 +94,9 @@
 #include <math.h>
 #include <assert.h>
 
-#include "types.h"
 #include "smalloc.h"
 #include "snprintf.h"
 #include "fio_fifoChar.h"
-#include "tok_tokenStream.h"
 
 
 /*
@@ -130,13 +131,13 @@
 typedef struct syntaxOptions_t
 {
     /** Decide, whether the end of line is ordinary white space only or a recognized token. */
-    boolean eolIsWhiteSpaceOnly;
+    bool eolIsWhiteSpaceOnly;
 
     /** Support binary number literals like %01101. */
-    boolean binLiteral;
+    bool binLiteral;
 
     /** Support 1-char exponent for floating point numbers, like 23.4u for 23.4e-6. */
-    boolean suffixMultipliers;
+    bool suffixMultipliers;
 
     /** Select the escape character for character constants in strings. */
     signed int escapeChar;
@@ -161,7 +162,7 @@ typedef struct tok_tokenStream_t
     /** The current error status. The error is set when the parser fails to relate an input
         character to any defined token and is reset when querying the error status via
         the class interface. */
-    boolean error;
+    bool error;
 
     /** Writing error messages in a log is an option only. The scanner also holds the error
         messages in a string variable. This makes the scanner independent of an existing
@@ -187,11 +188,11 @@ typedef struct tok_tokenStream_t
 
     /** Internal variable of character read state machine: Flag that indicates that the
         next read character belongs to the next line. */
-    boolean incLine;
+    bool incLine;
 
     /** Internal variable of character read state machine: Flag that indicates that a
         character has already been read from the actual state (for a look ahead). */
-    boolean peeked;
+    bool peeked;
 
     /** Internal variable of character read state machine: If the look ahead had been used,
         then this Variable holds the next character, not the stream. */
@@ -298,7 +299,7 @@ static const void *new_bsearch( const void * const pKey
 
 
 /**
- * Get a boolean option of the tokenizer.
+ * Get a Boolean option of the tokenizer.
  *   @return
  * True or flase, the current setting of the option.
  *   @param hTStream
@@ -307,7 +308,7 @@ static const void *new_bsearch( const void * const pKey
  * Pass in, which Boolean option to return.
  */
 
-static inline boolean boolOption(const tok_hTokenStream_t hTStream, tok_syntaxOption_t option)
+static inline bool boolOption(const tok_hTokenStream_t hTStream, tok_syntaxOption_t option)
 {
     switch(option)
     {
@@ -365,7 +366,7 @@ static inline signed int optionStringQuote(const tok_hTokenStream_t hTStream)
  * The character to test.
  */
 
-static inline boolean isodigit(signed int c)
+static inline bool isodigit(signed int c)
 {
     return c >= '0' &&  c <= '7';
 
@@ -389,7 +390,7 @@ static inline boolean isodigit(signed int c)
  * The character to test.
  */
 
-static inline boolean iswhitespace(tok_hTokenStream_t hTStream, signed int c)
+static inline bool iswhitespace(tok_hTokenStream_t hTStream, signed int c)
 {
     return c == ' '  ||  c == '\t'
            ||  (boolOption(hTStream, tok_optionEolIsWhiteSpaceOnly) &&  c == '\n')
@@ -1374,11 +1375,11 @@ static void readComment(tok_hTokenStream_t hTStream, const tok_token_t * const p
     signed int ch = currentChar(hTStream);
     const unsigned int startLine = hTStream->line;
     
-    const boolean lookForEOL = pToken->type == tok_tokenTypeCommentTillEndOfLine;
-    boolean continueSearch = true;
+    const bool lookForEOL = pToken->type == tok_tokenTypeCommentTillEndOfLine;
+    bool continueSearch = true;
     do
     {
-        boolean isFirstChar = true;
+        bool isFirstChar = true;
         const char *pComEndSymbol = lookForEOL
                                     ? "\n"
                                     : hTStream->tokenDescriptorTable.endComment;
@@ -1676,22 +1677,22 @@ static void deleteTokenDescriptorTable(tok_tokenStream_t * const pTokenStream)
  * deleted after return from the constructor.
  */
 
-boolean tok_createTokenStream( tok_hTokenStream_t * const phTokenStream
-                             , char * * const pErrorString
-                             , const char * const fileName
-                             , tok_hStream_t hStream
-                             , const tok_customFctGetChar customFctGetChar
-                             , const tok_tokenDescriptorTable_t * const pCustomTokenDefinition
-                             )
+bool tok_createTokenStream( tok_hTokenStream_t * const phTokenStream
+                          , char * * const pErrorString
+                          , const char * const fileName
+                          , tok_hStream_t hStream
+                          , const tok_customFctGetChar customFctGetChar
+                          , const tok_tokenDescriptorTable_t * const pCustomTokenDefinition
+                          )
 {
-    boolean useStdio = customFctGetChar == NULL;
+    bool useStdio = customFctGetChar == NULL;
 
     /* For stdio: We need to see either a file handle or a valid name. */
     assert(!useStdio ||  hStream.hFile != NULL  || (fileName != NULL && *fileName != '\000'));
 
     /* Most likely errors result from file open operations, therefore do this prior to
        allocating memory space for the object. */
-    boolean doOpenFile = useStdio && hStream.hFile == NULL;
+    bool doOpenFile = useStdio && hStream.hFile == NULL;
     if(doOpenFile)
     {
         hStream.hFile = fopen(fileName, "r");
@@ -1794,7 +1795,7 @@ void tok_deleteTokenStream(tok_hTokenStream_t hTokenStream)
 
 /**
  * Set an option of the tokenizer. Do this after object creation but prior to the first
- * invocation of boolean tok_getNextToken(tok_hTokenStream_t, tok_token_t * const).\n
+ * invocation of bool tok_getNextToken(tok_hTokenStream_t, tok_token_t * const).\n
  *   See enumeration \a tok_syntaxOption_t for the available options.
  *   @param hTStream
  * The handle of the token stream object.
@@ -1804,7 +1805,7 @@ void tok_deleteTokenStream(tok_hTokenStream_t hTokenStream)
  * The value to set.
  */
 
-void tok_setBoolOption(tok_hTokenStream_t hTStream, tok_syntaxOption_t option, boolean value)
+void tok_setBoolOption(tok_hTokenStream_t hTStream, tok_syntaxOption_t option, bool value)
 {
     switch(option)
     {
@@ -1848,7 +1849,7 @@ void tok_setBoolOption(tok_hTokenStream_t hTStream, tok_syntaxOption_t option, b
  * any method on the token stream object.
  *   @param hTStream
  * The handle of the token stream object.
- *   @see boolean tok_resetError(tok_hTokenStream_t, const char ** const)
+ *   @see bool tok_resetError(tok_hTokenStream_t, const char ** const)
  */
 
 const char *tok_getErrorMsg(tok_hTokenStream_t hTStream)
@@ -1876,9 +1877,9 @@ const char *tok_getErrorMsg(tok_hTokenStream_t hTStream)
  *   @see const char *tok_getErrorMsg(tok_hTokenStream_t)
  */
 
-boolean tok_resetError(tok_hTokenStream_t hTStream, const char * * const pErrMsg)
+bool tok_resetError(tok_hTokenStream_t hTStream, const char * * const pErrMsg)
 {
-    boolean curErr = hTStream->error;
+    bool curErr = hTStream->error;
 
     hTStream->error = false;
     if(pErrMsg != NULL)
@@ -1988,7 +1989,7 @@ void tok_fprintfToken( tok_hTokenStream_t hTStream
                having the same token value. */
             unsigned int u;
 #ifdef DEBUG
-            boolean found = false;
+            bool found = false;
 #endif
             for(u=0; u<hTStream->tokenDescriptorTable.noTokenDescriptions; ++u)
             {
@@ -2030,7 +2031,7 @@ void tok_fprintfToken( tok_hTokenStream_t hTStream
  * The read token is placed into * \a pToken.
  */
 
-boolean tok_getNextToken(tok_hTokenStream_t hTStream, tok_token_t * const pToken)
+bool tok_getNextToken(tok_hTokenStream_t hTStream, tok_token_t * const pToken)
 {
     /* The outer loop reads tokens as long as it is not a comment - comment tokens are not
        returned to the client. */

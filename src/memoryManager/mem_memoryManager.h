@@ -4,7 +4,7 @@
  * @file mem_memoryManager.h
  * Definition of global interface of module mem_memoryManager.c
  *
- * Copyright (C) 2013 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ * Copyright (C) 2013-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -24,7 +24,7 @@
  * Include files
  */
 
-#include "types.h"
+#include <stdbool.h>
 #include "log_logger.h"
 
 
@@ -88,6 +88,6 @@ void mem_free(mem_hHeap_t hHeap, void *pDataObj);
 void mem_freeList(mem_hHeap_t hHeap, void *pHeadElement);
 
 /** Destroy the heap, release all memory. */
-unsigned long mem_deleteHeap(mem_hHeap_t hHeap, boolean warnIfUnfreed);
+unsigned long mem_deleteHeap(mem_hHeap_t hHeap, bool warnIfUnfreed);
 
 #endif  /* MEM_MEMORYMANAGER_INCLUDED */
