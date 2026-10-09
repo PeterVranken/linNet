@@ -32,7 +32,9 @@ popd
 pushd "%tmpCheckoutFolder%\doc\doxygen"
 doxygen
 popd
-
+pushd "%tmpCheckoutFolder%"
+asciidoctor-pdf -b html README.adoc
+popd
 
 
 

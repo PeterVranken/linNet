@@ -2,6 +2,8 @@
 :Author:            Peter Vranken
 :Email:             mailto:Peter_Vranken@Yahoo.de[P. Vranken]
 :xrefstyle:         short
+:data-uri:
+:linkcss!:
 
 linNet is an application for computing the transfer function of linear
 electronic circuits. The computation is performed symbolically rather than
