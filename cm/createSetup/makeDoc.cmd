@@ -35,6 +35,9 @@ popd
 pushd "%tmpCheckoutFolder%"
 asciidoctor-pdf -b html README.adoc
 popd
+pushd "%tmpCheckoutFolder%\doc"
+asciidoctor-pdf -b html readMe.forSetup.txt
+popd
 
 
 
