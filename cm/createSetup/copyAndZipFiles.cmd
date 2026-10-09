@@ -85,6 +85,9 @@ xcopy /s/i testCases\*.txt %output%\circuits\
 xcopy /s/i testCases\*.adoc %output%\circuits\
 xcopy /s/i testCases\*.html %output%\circuits\
 xcopy /s/i testCases\*.m %output%\circuits\
+REM Until all test cases are revised, we better delete those, which are still not in their
+REM own, dedicated folder.
+del %output%\circuits\*.cnl
 
 REM After completing the aimed target file tree restore the initial working directory.
 popd
