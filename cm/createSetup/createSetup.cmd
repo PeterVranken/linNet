@@ -41,10 +41,10 @@ if /I "%1" == "" (
 )
 
 REM The file name of the aimed setup is tagged with the version information.
-set setupFileNameBinaries=linNet-%rev%.zip
+set setupFileName=linNet-%rev%.zip
 
 set url=https://github.com/PeterVranken/linNet
-REM echo url=%url%, rev=%rev%, setup=%setupFileNameBinaries%
+REM echo url=%url%, rev=%rev%, setup=%setupFileName%
 REM goto :eof
 
 REM Get the wanted version, put it into the TEMP dir. Then go there and run the
@@ -95,25 +95,25 @@ call makeDoc.cmd
 REM Now create the archive by running the file copying script. The executed script is the
 REM one got from Git, thus the very revision, which defines the file set required in the
 REM exported software version (as opposed to in the current HEAD of the repository).
-call copyAndZipFiles.binaries.cmd %setupFileNameBinaries%
+call copyAndZipFiles.cmd %setupFileName%
 if ERRORLEVEL 1 (
-    echo Setup with binary files could not be created. copyAndZipFiles.binaries
-    echo returned an error. Please inspect the screen output for details.
+    echo Setup could not be created. copyAndZipFiles.cmd returned an error. Please inspect
+    echo the screen output for details.
     popd
     goto :eof
 )
 
 REM Safe the setups, then remove temporarily used files. Suppress related messages.
 cd /D "%TEMP%"
-move "%tmpCheckoutFolder%\cm\createSetup\%setupFileNameBinaries%" .
+move "%tmpCheckoutFolder%\cm\createSetup\%setupFileName%" .
 REM rmdir /S/Q "%tmpCheckoutFolder%" > nul 2> nul
 
 REM Move target file from temporary directory to final location.
 popd
-move "%TEMP%\%setupFileNameBinaries%" .
+move "%TEMP%\%setupFileName%" .
 
 echo *****************************************************************************************
-echo Please, find the newly created archive %setupFileNameBinaries% in your local working
+echo Please, find the newly created archive %setupFileName% in your local working
 echo directory:
 dir *.zip
 echo *****************************************************************************************
