@@ -26,7 +26,7 @@
  * calculation: linNet calculates with the symbols Rin1 and Rin2, no matter, which value
  * they might have. Moreover, the demanded result depends neither on Rin1 nor on Rin2 - the
  * resistors impact the input impedances but not the transfer functions - and so the
- * shortcut would not even hinder Octave from doing the numeric calculations.
+ * shortcut would not even hinder Octave from doing the numeric calculations.\n
  *   4) The numeric coupling of the resistor values is not a functional coupling of the
  * circuits. It remain two unconnected circuits.
  *
