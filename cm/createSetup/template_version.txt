@@ -1,4 +1,4 @@
 linNet - The Software for symbolic Analysis of linear Electronic Circuits
 Version 1.1.0.$WCLOGCOUNT$, Git commit $WCREV=8$ as of $WCDATE=%H:%M:%S %d.%m.%Y$
-Copyright (C) 2014-2026 Peter Vranken (mailto:peter_vranken@yahoo.de)
+Copyright (C) 2013-2026 Peter Vranken (mailto:peter_vranken@yahoo.de)
 

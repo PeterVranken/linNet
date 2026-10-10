@@ -50,18 +50,18 @@ REM Get the wanted version, put it into the TEMP dir. Then go there and run the
 REM setup-creating script there: this way, the setup creation process really fits to the
 REM wanted version of the file set. Do not use the current working version of this script!
 
-goto :LSkipClone
+REM goto :LSkipClone
 git clone %url% "%tmpCheckoutFolder%" && git -C "%tmpCheckoutFolder%" checkout --detach %rev%
 if ERRORLEVEL 1 (
     echo Setup could not be created. Git returned an error. Please inspect the screen output
     echo for details.
     goto :eof
 )
-REM goto :eof
+goto :LEndSkipClone
 :LSkipClone
 set tmpCheckoutFolder="C:\tmp\linNet-26100922334519"
 :LEndSkipClone
-echo tmpCheckoutFolder=%tmpCheckoutFolder%
+REM echo tmpCheckoutFolder=%tmpCheckoutFolder%
 
 REM Go to the directory in the got file tree where the setup creation will take place.
 pushd "%tmpCheckoutFolder%\cm\createSetup" || (echo Directory %tmpCheckoutFolder% doesn't exist & goto :eof)
