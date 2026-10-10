@@ -26,17 +26,21 @@ if not "%1" == "" goto LUsage
 setlocal
 
 echo Compiling the documentation
+
 pushd "%tmpCheckoutFolder%\doc\userGuide"
 make
 popd
+
 pushd "%tmpCheckoutFolder%\doc\doxygen"
 doxygen
 popd
+
 pushd "%tmpCheckoutFolder%"
-asciidoctor-pdf -b html README.adoc
+call asciidoctor-pdf -b html README.adoc
 popd
+
 pushd "%tmpCheckoutFolder%\doc"
-asciidoctor-pdf -b html readMe.forSetup.txt
+call asciidoctor-pdf -b html readMe.forSetup.txt
 popd
 
 

@@ -32,7 +32,6 @@ set timeInfo=%now:~-2%%now:~-7,2%%now:~-10,2%
 set now=%time%
 set timeInfo=%timeInfo%%now:~0,2%%now:~3,2%%now:~6,2%%now:~9,2%
 set tmpCheckoutFolder=%TEMP%\linNet-%timeInfo%
-echo tmpCheckoutFolder=%tmpCheckoutFolder%
 
 REM Evaluate the command line. The revision to use can be designated by a commit hash or a
 REM echo tag name. Default is commit HEAD.
@@ -51,6 +50,7 @@ REM Get the wanted version, put it into the TEMP dir. Then go there and run the
 REM setup-creating script there: this way, the setup creation process really fits to the
 REM wanted version of the file set. Do not use the current working version of this script!
 
+goto :LSkipClone
 git clone %url% "%tmpCheckoutFolder%" && git -C "%tmpCheckoutFolder%" checkout --detach %rev%
 if ERRORLEVEL 1 (
     echo Setup could not be created. Git returned an error. Please inspect the screen output
@@ -58,9 +58,13 @@ if ERRORLEVEL 1 (
     goto :eof
 )
 REM goto :eof
+:LSkipClone
+set tmpCheckoutFolder="C:\tmp\linNet-26100922334519"
+:LEndSkipClone
+echo tmpCheckoutFolder=%tmpCheckoutFolder%
 
 REM Go to the directory in the got file tree where the setup creation will take place.
-pushd "%tmpCheckoutFolder%\cm\createSetup"
+pushd "%tmpCheckoutFolder%\cm\createSetup" || (echo Directory %tmpCheckoutFolder% doesn't exist & goto :eof)
 
 REM Create a version description.
 echo Generating version file from Git information
@@ -103,14 +107,12 @@ if ERRORLEVEL 1 (
     goto :eof
 )
 
-REM Safe the setups, then remove temporarily used files. Suppress related messages.
-cd /D "%TEMP%"
-move "%tmpCheckoutFolder%\cm\createSetup\%setupFileName%" .
-REM rmdir /S/Q "%tmpCheckoutFolder%" > nul 2> nul
-
 REM Move target file from temporary directory to final location.
 popd
-move "%TEMP%\%setupFileName%" .
+move "%tmpCheckoutFolder%\cm\createSetup\%setupFileName%" .
+
+REM Remove temporarily used files. Suppress related messages.
+REM rmdir /S/Q "%tmpCheckoutFolder%" > nul 2> nul
 
 echo *****************************************************************************************
 echo Please, find the newly created archive %setupFileName% in your local working
