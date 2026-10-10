@@ -533,7 +533,7 @@ signed int main(signed int argc, char *argv[])
            "-----------------------------------------------------------------------------\n"
            " " LIN_APP_NAME
                     " - The Software for symbolic Analysis of linear Electronic Circuits\n"
-           " Copyright (C) 2014-2026 Peter Vranken (https://github.com/PeterVranken/linNet)\n"
+           " Copyright (C) 2013-2026 Peter Vranken (https://github.com/PeterVranken/linNet)\n"
            " This is free software; see the source for copying conditions. There is NO\n"
            " warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n"
            "-----------------------------------------------------------------------------";
