@@ -1,0 +1,51 @@
+% See https://holatex.app/playground.html# for an online viewer.
+
+\documentclass[tikz]{standalone} % Standalone: Only graphics export.
+\usepackage[european,siunitx]{circuitikz}
+\usetikzlibrary{arrows.meta}
+\usepackage{listings}
+\lstset{basicstyle=\footnotesize\ttfamily}
+\begin{document}
+
+  \newcommand{\eq}{=}
+  \tikzset{ameter/.style={rmeterwa, t=A}}
+  \begin{circuitikz}
+
+    \tikzset{>=Triangle} % Define tip of arrows drawn with [->]
+    \ctikzset{voltage=straight}
+
+    \def\deltaUio{0.8}
+    \def\gapUin{0.3}
+    \def\lR{3.4}
+    \def\deltaY{0.5*\lR}
+
+    \draw (0,0) coordinate(inGnd)
+      to[short,o-*] ++(\deltaUio,0)
+      -- ++(\lR,0)
+      -- ++(0,\deltaY) coordinate(rhtC)
+      to[C,l=$C_{cyclic}$] ++(-\lR,0)
+      -- ++(0,-\deltaY);
+    \draw (0,1.2*\lR) coordinate(in)
+      to[short,o-*] ++(\deltaUio, 0) coordinate(lftDev)
+      -- ++(\lR,0) coordinate(rhtDev)
+      to[short,-*] ++(0,\deltaY) coordinate(rhtR)
+      to[R,l=$R_{cyclic}$,-*] ++(-\lR,0);
+    \draw (rhtR)
+      to[short,-*] ++(0,\deltaY) coordinate(rhtI)
+      to[dcisource,l=$I_{cyclic}$,invert,-*] ++(-\lR,0);
+    \draw (rhtI)
+      to[short,-*] ++(0,\deltaY) coordinate(rhtI3)
+      to[dcisource,l=$I\eq k_{u2i}*U_{inin}\eq 0$,invert,-*] ++(-\lR,0);
+    \draw (rhtI3)
+      to[short] ++(0,\deltaY) coordinate(rhtI2)
+      to[dcisource,l=$I\eq k2_{u2i}*U_{in}$,invert] ++(-\lR,0)
+      -- (lftDev);
+    \draw (rhtDev)
+      to[dcisource,l=I\eq $k3_{u2i}*U_{inin}\eq 0$,*-*] (rhtC);
+    
+    % Voltage arrow for input voltage Uin.
+    \draw[->] ($(in)+(0,-\gapUin)$) -- node[midway,left]{$U_{in}$} ($(inGnd)+(0,\gapUin)$);
+
+  \end{circuitikz}
+
+\end{document}

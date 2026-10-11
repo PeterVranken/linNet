@@ -20,10 +20,12 @@
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
+/* This is actually the only effective element in the circuit; the voltage
+   between the two nodes in and gnd. */
 U Uin in gnd
 
 /* The next devices are useless but harmless. They lead to
-   self-elimination in the matrix coeffiecients when setting up the LES and
+   self-elimination in the matrix coefficients when setting up the LES and
    don't appear in the result. (Besides that Icycle is reported as input
    quantity with null effect.) */
 R Rcyclic in in
@@ -31,10 +33,10 @@ C Ccyclic gnd gnd
 I Icycle in in
 
 /* The next device is well defined and handled properly. A controlled
-   current of null cycles in a circle. As currents through a controlled
-   source are not a calculated unknown of the system this has no apparemt
-   impact on the reported result. On could put a current probe in series
-   to prove that the cyclic current is indeed null. */
+   current with value zero cycles in a circle. As currents through a
+   controlled source are not a calculated unknown of the system this has
+   no apparent impact on the reported result. One could put a current
+   probe in series to prove that the cyclic current is indeed zero. */
 I(U) k_u2i in in in in
 
 /* Harmless and handled properly. A controlled current cycles in a circle.
@@ -44,17 +46,17 @@ I(U) k_u2i in in in in
    the expected value k2_u2i*Uin. */
 I(U) k2_u2i in in in gnd
 
-/* Harmless and handled properly. A controlled current of null flows from
-   in to gnd. As currents through a controlled source are not a calculated
-   unknown of the system this has no apparent impact on the reported
-   result. On could put a current probe in series to prove that the
-   current is indeed null. */
-I(U) k3_u2i in in in in
+/* Harmless and handled properly. A controlled current with value zero
+   flows from in to gnd. As currents through a controlled source are not a
+   calculated unknown of the system this has no apparent impact on the
+   reported result. One could put a current probe in series to prove that
+   the current is indeed zero. */
+I(U) k3_u2i in gnd in in
 
 /* The next elements of the netlist introduce errors and the test has to
    prove that they are recognized and reported properly. As this is
    possible only for one error at a time all of these cases are commented
-   out. Remove the comment delimiters only for one group of device at a
+   out. Remove the comment delimiters only for one group of devices at a
    time in order to run that test case. These test cases can't be merged,
    it would introduce other problems like name clashes, which are out of
    scope of the considerations here. */
