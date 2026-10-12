@@ -1,0 +1,20 @@
+This folder contains linNet test case `deviceAtSingleNode`:
+
+[[figSchematics]]
+.Schematics
+image::DeviceAtSingleNode.svg[Schematics, width="40%", pdfwidth="40%", align="center"]
+
+This test case contains no interesting circuitry. Rather, it verifies that
+borderline cases are adhered to. Meaningless and ineffective circuits are
+created, which are nevertheless formally correct and remain computable.
+linNet must be able to handle this, even if the practical benefit is zero.
+
+In the present configuration, the link:deviceAtSingleNode.cnl[netlist^]
+connects several components to the same network node on both sides.
+Currents then flow in a loop without any observable effect.
+
+Furthermore, the link:deviceAtSingleNode.cnl[netlist^] contains several
+commented-out device arrangements that are no longer formally correct.
+Uncommenting each of these arrangements allows you to examine linNet's
+error behavior. The expected behavior is described in the corresponding
+comments.
