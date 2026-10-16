@@ -22,8 +22,8 @@
 
 /* The original voltage source has been replaced by a current probe, which behaves like an
    ideal wire. */
-U  Uin IN  GND
-//PI Shortcut IN  GND
+//U  Uin IN  GND
+PI Shortcut IN  GND
 
 OP op  OP1 GND OPQ
 
