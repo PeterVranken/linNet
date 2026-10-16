@@ -2607,8 +2607,7 @@ bool pci_parseCircuitFile( log_hLogger_t hLogger
             {
                 _parseError = true;
                 LOG_ERROR( _log
-                         , "Line %u: Syntax error. Expect a device definition or plot"
-                           " information"
+                         , "Line %u: Syntax error. Expect a device or result definition"
                          , tok_getLine(_hTokenStream)
                          )
             }

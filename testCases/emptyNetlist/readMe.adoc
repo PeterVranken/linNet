@@ -1,4 +1,5 @@
-This folder contains linNet test case `emptyNetlist`:
+This folder contains linNet test case `emptyNetlist`.
 
-This test case demonstrates that an empty link:emptyNetlist.cnl[netlist file^] is handed well. The only effect is an error message in the
+This test case demonstrates that an empty link:emptyNetlist.cnl[netlist
+file^] is handed well. The only effect is an error message in the
 link:emptyNetlist.log[log file^].
