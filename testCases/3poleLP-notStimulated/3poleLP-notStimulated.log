@@ -1,0 +1,19 @@
+Oct 16 21:58:17 2026 - 000006 ms - RESULT - 
+-----------------------------------------------------------------------------
+ linNet - The Software for symbolic Analysis of linear Electronic Circuits
+ Copyright (C) 2014-2026 Peter Vranken (https://github.com/PeterVranken/linNet)
+ This is free software; see the source for copying conditions. There is NO
+ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+-----------------------------------------------------------------------------
+Oct 16 21:58:17 2026 - 000045 ms - RESULT - Reading circuit file C:\home\vranken\projects\linNetAtGitHub\linNet\testCases\3poleLP-notStimulated\3poleLP-notStimulated.cnl successfully done
+Oct 16 21:58:17 2026 - 000045 ms - RESULT - User-defined result G:
+The solution for unknown U_OPQ:
+  U_OPQ(s) = N_U_OPQ_Uin(s)/D_U_OPQ_Uin(s) * Uin(s), with
+    N_U_OPQ_Uin(s) = -R^3*Ct1*Ct2*Ct3 * s^3
+                     -(2*R^2*Ct1*Ct2 + 2*R^2*Ct1*Ct3 + 2*R^2*Ct2*Ct3) * s^2
+                     -(3*R*Ct1 + 3*R*Ct2 + 3*R*Ct3) * s
+                     -4
+    D_U_OPQ_Uin(s) = R^3*Ct1*Ct2*Ct3 * s^3
+                     +(R^2*Ct1*Ct2 + R^2*Ct1*Ct3 + R^2*Ct2*Ct3) * s^2
+                     +(R*Ct1 + R*Ct2 + R*Ct3) * s
+                     +1

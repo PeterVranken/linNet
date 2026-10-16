@@ -1,10 +1,10 @@
 /**
- * @file null.cnl
+ * @file 3poleLP-notStimulated.cnl
  *   Test case for linNet.
  * This test case proves that a not stimulated system is handled well. It
- * uses a common circuit.
+ * reuses the circuit from test case 3poleLP.
  *
- * Copyright (C) 2014 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
+ * Copyright (C) 2014-2026 Peter Vranken (mailto:Peter_Vranken@Yahoo.de)
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -20,7 +20,10 @@
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-//U  Uin IN  GND
+/* The original voltage source has been replaced by a current probe, which behaves like an
+   ideal wire. */
+U  Uin IN  GND
+//PI Shortcut IN  GND
 
 OP op  OP1 GND OPQ
 

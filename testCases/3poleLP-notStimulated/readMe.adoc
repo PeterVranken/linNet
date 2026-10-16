@@ -1,0 +1,16 @@
+This folder contains linNet test case `3poleLP-notStimulated`:
+
+[[figSchematics]]
+.Schematics
+image::3poleLP-notStimulated.svg[Schematics, width="70%", pdfwidth="70%", align="center"]
+
+This test case proves that a not stimulated system is handled well. It
+reuses the circuit from test case link:../3poleLP[`3poleLP`^] but the
+input voltage source U~1~ has been replaced by a shortcut.
+
+No Octave file is generated and not plots to see. The
+link:3poleLP-notStimulated.log[calculation results^] only contain an error
+message.
+
+See link:3poleLP-notStimulated.cnl[netlist file^] for more details of the
+circuit.
