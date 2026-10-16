@@ -1,0 +1,68 @@
+% See https://holatex.app/playground.html# for an online viewer.
+
+\documentclass[tikz]{standalone} % Standalone: Only graphics export.
+\usepackage[european,siunitx]{circuitikz}
+\usetikzlibrary{arrows.meta}
+\usepackage{listings}
+\lstset{basicstyle=\footnotesize\ttfamily}
+\begin{document}
+
+  \newcommand{\eq}{=}
+  \tikzset{ameter/.style={rmeterwa, t=A}}
+  \begin{circuitikz}
+  %\begin{circuitikz}[american voltages, american currents]
+
+    \tikzset{>=Triangle} % Define tip of arrows drawn with [->]
+    \ctikzset{voltage=straight}
+
+    \def\lR{2.5}        % Length of device like R
+%    \def\dFbY{2.5}      % Delta in direction Y of feedback line
+%    \def\dRcX{0.3}      % Delta x between RC elements
+%    \def\dRcY{0.7}      % Delta up/down of the two feedback rows
+%    \def\dOpX{2*\lR}    % Move OP in x to middle of feedback line
+    \def\sizeY{\lR}     % Heights Uin
+    \def\dX{2.7}        % Distance of two instances.
+    \def\lUio{0.8}      % Length of I/O connectors
+    \def\gapUio{0.3}    % Gap between I/O connector and voltage arrow
+
+    \draw (0*\dX,\sizeY) coordinate(in01)
+      to[short,o-] ++(\lUio,0)
+      to[R,l=$R_{01}$,-*] ++(0,-\lR) coordinate(BotR01)
+      to[short,-o] ++(-\lUio,0) coordinate(gnd01)
+      (BotR01)
+      node[ground,label=right:{$gnd_{01}$}]{};
+    % Voltage arrow for input voltage U01.
+    \draw[->] ($(in01)+(0,-\gapUio)$) -- node[midway,left]{$U_{01}$} ($(gnd01)+(0,\gapUio)$);
+
+    \draw (1*\dX,\sizeY) coordinate(in02)
+      to[short,o-] ++(\lUio,0)
+      to[R,l=$R_{02}$,-*] ++(0,-\lR) coordinate(BotR02)
+      to[short,-o] ++(-\lUio,0) coordinate(gnd02)
+      (BotR02)
+      node[ground,label=right:{$gnd_{02}$}]{};
+    % Voltage arrow for input voltage U02.
+    \draw[->] ($(in02)+(0,-\gapUio)$) -- node[midway,left]{$U_{02}$} ($(gnd02)+(0,\gapUio)$);
+
+    \draw (2*\dX,\sizeY) coordinate(in03)
+      to[short,o-] ++(\lUio,0)
+      to[R,l=$R_{03}$,-*] ++(0,-\lR) coordinate(BotR03)
+      to[short,-o] ++(-\lUio,0) coordinate(gnd03)
+      (BotR03)
+      node[ground,label=right:{$gnd_{03}$}]{};
+    % Voltage arrow for input voltage U03.
+    \draw[->] ($(in03)+(0,-\gapUio)$) -- node[midway,left]{$U_{03}$} ($(gnd03)+(0,\gapUio)$);
+
+    \node at (3*\dX,0.5*\sizeY) {...};
+    
+    \draw (3.6*\dX,\sizeY) coordinate(in64)
+      to[short,o-] ++(\lUio,0)
+      to[R,l=$R_{64}$,-*] ++(0,-\lR) coordinate(BotR64)
+      to[short,-o] ++(-\lUio,0) coordinate(gnd64)
+      (BotR64)
+      node[ground,label=right:{$gnd_{64}$}]{};
+    % Voltage arrow for input voltage U64.
+    \draw[->] ($(in64)+(0,-\gapUio)$) -- node[midway,left]{$U_{64}$} ($(gnd64)+(0,\gapUio)$);
+
+  \end{circuitikz}
+
+\end{document}
