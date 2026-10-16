@@ -1,0 +1,11 @@
+Oct 16 23:58:19 2026 - 000006 ms - RESULT - 
+-----------------------------------------------------------------------------
+ linNet - The Software for symbolic Analysis of linear Electronic Circuits
+ Copyright (C) 2014-2026 Peter Vranken (https://github.com/PeterVranken/linNet)
+ This is free software; see the source for copying conditions. There is NO
+ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+-----------------------------------------------------------------------------
+Oct 16 23:58:19 2026 - 000043 ms - RESULT - Reading circuit file C:\home\vranken\projects\linNetAtGitHub\linNet\testCases\emptyNetlist\emptyNetlist.cnl successfully done
+Oct 16 23:58:19 2026 - 000043 ms -  ERROR - No network of interconnected devices found
+Oct 16 23:58:19 2026 - 000043 ms -  ERROR - Please correct your circuit and re-run the application
+Oct 16 23:58:19 2026 - 000043 ms -  ERROR - Input file doesn't specify a valid, computable electric circuit. Don't know what to do
