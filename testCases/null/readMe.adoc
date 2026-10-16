@@ -1,0 +1,12 @@
+This folder contains linNet test case `null`:
+
+[[figSchematics]]
+.Schematics
+image::Null.svg[Schematics, width="8%", pdfwidth="8%", align="center"]
+
+This test case proves that a nearly empty, not stimulated system is
+handled well. The circuit consists of a single device. No Octave file is
+generated and no plots to see. The link:null.log[calculation results^]
+only contain an error message.
+
+See link:null.cnl[netlist file^] for more details of the circuit.
