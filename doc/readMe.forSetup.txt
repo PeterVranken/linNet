@@ -5,7 +5,8 @@ The installation of linNet is explained in the user guide, Chapter 2 on page 12.
 Chapters 3 and 4 of the user guide explain the usage of the application.
 
 The user guide is locally available as file
-`<linNetInstallDir>/doc/linNet-userGuide.pdf` or online at GitHub as
+link:doc/linNet-userGuide.pdf[`<linNetInstallDir>/doc/linNet-userGuide.pdf`^]
+or online at GitHub as
 link:https://github.com/PeterVranken/linNet/blob/main/doc/userGuide/linNet-userGuide.pdf[^].
 
 == Release notes:

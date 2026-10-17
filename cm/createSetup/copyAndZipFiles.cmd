@@ -25,7 +25,7 @@ set output=cm\createSetup\%tmpFolder%\linNet
 
 REM Global documentation
 copy LICENSE %output%
-copy readMe.html %output%\linNet.html
+copy doc\linNet.forSetup.html %output%\linNet.html
 copy doc\readMe.forSetup.txt %output%\readMe.txt
 copy doc\readMe.forSetup.html %output%\readMe.html
 REM The version file needs to be supplied by the caller of this script.
