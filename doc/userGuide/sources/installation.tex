@@ -1,11 +1,11 @@
 \chapter{Installation}
 
-A valid installation looks like this: The \linnet{} application is a
-simple executable file plus a folder with resources for the Octave code
-generator; this folder is called \file{private} and is located next to the
-\linnet{} executable file, i.e., both are siblings in the same parent
-directory. The environment variable \ident{LINNET\_BIN} points to this
-parent directory.
+A valid \linnet{} installation looks like this: The \linnet{} application
+is a simple executable file plus a folder with resources for the Octave
+code generator; this folder is called \file{private} and is located next
+to the \linnet{} executable file, i.e., both are siblings in the same
+parent directory. The environment variable \ident{LINNET\_BIN} points to
+this parent directory.
 
 Accordingly, this is what you have to do to install \linnet{}:
 
@@ -50,14 +50,15 @@ the executable.
 
 \subsection{Pre-built executables}
 
-The download of \linnet{} from the GibHub Releases page,
-\href{https://github.com/PeterVranken/linNet/releases}{https://\-github.com/\-Peter\-Vranken/\-linNet/\-re\-leases}
-contains pre-build, ready-to-use executable files for Windows (DEBUG and
-PRODUCTION compilation). The executable files are already bundled with the
-resources folder \file{private} so that the installation reduces to
-extracting the contents of the archive to a location of choice, preferably
-\file{c:\bs{}\-Program\-Files}, and setting the environment variable
-\ident{LINNET\_BIN}; it would be set to
+An installation archive for \linnet{} can be downloaded from the GibHub
+Releases page,
+\href{https://github.com/PeterVranken/linNet/releases}{https://\-github.com/\-Peter\-Vranken/\-linNet/\-re\-leases}.
+The archive contains pre-build, ready-to-use executable files for Windows
+(DEBUG and PRODUCTION compilation). The executable files are already
+bundled with the resources folder \file{private} so that the installation
+reduces to extracting the contents of the archive to a location of choice,
+preferably \file{c:\bs{}\-Program\-Files}, and setting the environment
+variable \ident{LINNET\_BIN}; it would be set to
 \file{c:\bs{}\-Program\-Files\bs{}\-linNet\bs{}\-bin\bs{}\-win\bs{}\-PRODUCTION}
 if the suggested installation folder is used. The chosen installation path
 should not contain blanks.
@@ -144,10 +145,9 @@ computation to find out if the computation was successful.
 The template for a Windows registry script, that creates an appropriate
 file class definition, is available in GitHub as
 \href{https://github.com/PeterVranken/linNet/blob/main/doc/userGuide/sources/templates/linNet.reg}
-{https://github.com/PeterVranken/linNet/blob/main/doc/userGuide/sources/templates/\-lin\-net.reg}
-(visited Sep 22, 2026) or it can be found as
-\file{doc/\-user\-Guide/\-sour\-ces/\-templates/\-linnet.reg} after
-cloning the \linnet{} project. Here are the script contents:
+{https://github.com/PeterVranken/linNet/blob/main/doc/userGuide/sources/templates/\-lin\-Net.reg}
+(visited Sep 22, 2026) and it can be found as \file{doc/\-linNet.reg} in the
+installation archive. Here are the script contents:
 
 % TODO Double-check appropriateness of \clearpage command after any change
 % of chapter Installation
@@ -169,7 +169,7 @@ Emacs with a reference to your preferred text editor.
 
 After customization, double-click this file. If your system has no file
 name association for \file{*.reg} files then you need to run the registry
-script from a shell window. Submit a command like \code{regedit.exe
+script from a shell window. Submit a command like \code{regedit.exe /s
 linNet.reg}. Administrator rights are not required to complete.
 
 \section{Linux and Mac OS}

@@ -32,6 +32,7 @@ REM The version file needs to be supplied by the caller of this script.
 copy cm\createSetup\version.txt %output%
 mkdir %output%\doc
 copy doc\installation.txt %output%\doc
+copy doc\userGuide\sources\templates\linNet.reg %output%\doc
 
 REM User guide without sources
 mkdir %output%\doc
