@@ -147,18 +147,16 @@ file class definition, is available in GitHub as
 \href{https://github.com/PeterVranken/linNet/blob/main/doc/userGuide/sources/templates/linNet.reg}
 {https://github.com/PeterVranken/linNet/blob/main/doc/userGuide/sources/templates/\-lin\-Net.reg}
 (visited Sep 22, 2026) and it can be found as \file{doc/\-linNet.reg} in the
-installation archive. Here are the script contents:
-
-% TODO Double-check appropriateness of \clearpage command after any change
-% of chapter Installation
-%\clearpage
+installation archive.
 
 \lstinputlisting[ %language=Octave,
+float=tbp,
 caption={Registry script template to associate netlist files with the \linnet{} application},
 captionpos=b,label=lstRegScriptLinNet,basicstyle=\ttfamily\footnotesize]{linNet.reg}
 
-Download the template file or copy the code from the listing into a text
-file and save it as \file{linNet.reg}.
+Download the template file or copy the code from
+listing~\ref{lstRegScriptLinNet} into a text file and save it as
+\file{linNet.reg}.
 
 Please note that, in either case, you will have to modify the proposed
 registry code, as the paths to the installed applications may differ on
