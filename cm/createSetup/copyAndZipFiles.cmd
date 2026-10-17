@@ -79,6 +79,7 @@ REM copy test\testCases\exampleManual.cnl %output%\circuits
 REM copy test\testCases\NgtD.cnl %output%\circuits
 REM copy test\testCases\rr.cnl %output%\circuits
 xcopy /s/i testCases\*.cnl %output%\circuits\
+xcopy /s/i testCases\*.pdf %output%\circuits\
 xcopy /s/i testCases\*.jpg %output%\circuits\
 xcopy /s/i testCases\*.svg %output%\circuits\
 xcopy /s/i testCases\*.log %output%\circuits\
