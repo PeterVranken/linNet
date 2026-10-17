@@ -5,19 +5,20 @@
  * Four nodes and a branch in between all nodes to get a maximally complex
  * structure of the LES.
  *
- * Check:
+ * A result check can be done by looking first at the dependency of Uout
+ * only on U1 and then only on U2. For the dependency of Uout on U1, when
+ * U2 is assumed zero, we can make these simplifications:
  *
- * Uout(U1):
- * - U1 shortcuts R5, R5 has no impact.
+ * - U1 shortcuts R5; R5 has no impact on the transfer function.
  * - U2 shortcuts R6; R6 has no impact.
- * - Node 2 become same as node gnd.
+ * - Node 2 becomes same as node gnd.
  * - R4 is parallel to R3; the pair can be replaced by R34=R3*R4/(R3+R4)
  * - R1 is parallel to R2; the pair can be replaced by R12=R1*R2/(R1+R2)
  * - U1 feeds a voltage divide of R34 and R12; Uout is the negative voltage at R12
  * - Uout=-R12/(R12+R34); this leads soon to linNets result:
  *
  *                       -(R1*R2*R3 + R1*R2*R4)
- * Uout(U1) = ---------------------------------------------
+ * Uout(U1) = --------------------------------------------- * U1
  *             (R1*R2*R3 + R1*R2*R4 + R1*R3*R4 + R2*R3*R4)
  *
  * And analogously for Uout(U2).

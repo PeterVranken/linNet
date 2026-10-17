@@ -452,21 +452,20 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 structure of the LES.</p>
 </div>
 <div class="paragraph">
-<p>Check:</p>
-</div>
-<div class="paragraph">
-<p>Uout(U<sub>1</sub>):</p>
+<p>A result check can be done by looking first at the dependency of U<sub>out</sub>
+only on U<sub>1</sub> and then only on U<sub>2</sub>. For the dependency of U<sub>out</sub> on U<sub>1</sub>,
+when U<sub>2</sub> is assumed zero, we can make these simplifications:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>U<sub>1</sub> shortcuts R<sub>5</sub>, R<sub>5</sub> has no impact.</p>
+<p>U<sub>1</sub> shortcuts R<sub>5</sub>; R<sub>5</sub> has no impact on the transfer function.</p>
 </li>
 <li>
 <p>U<sub>2</sub> shortcuts R<sub>6</sub>; R<sub>6</sub> has no impact.</p>
 </li>
 <li>
-<p>Node 2 become same as node gnd.</p>
+<p>Node 2 becomes same as node gnd.</p>
 </li>
 <li>
 <p>R<sub>4</sub> is parallel to R<sub>3</sub>; the pair can be replaced by R<sub>34</sub>=R<sub>3</sub>*R<sub>4</sub>/(R<sub>3</sub>+R<sub>4</sub>)</p>
@@ -475,17 +474,17 @@ structure of the LES.</p>
 <p>R<sub>1</sub> is parallel to R<sub>2</sub>; the pair can be replaced by R<sub>12</sub>=R<sub>1</sub>*R<sub>2</sub>/(R<sub>1</sub>+R<sub>2</sub>)</p>
 </li>
 <li>
-<p>U<sub>1</sub> feeds a voltage divide of R<sub>34</sub> and R<sub>12</sub>; Uout is the negative voltage at R<sub>12</sub></p>
+<p>U<sub>1</sub> feeds a voltage divide of R<sub>34</sub> and R<sub>12</sub>; U<sub>out</sub> is the negative voltage at R<sub>12</sub></p>
 </li>
 <li>
-<p>Uout=-R<sub>12</sub>/(R<sub>12</sub>+R<sub>34</sub>); this leads soon to linNets result:</p>
+<p>U<sub>out</sub>=-R<sub>12</sub>/(R<sub>12</sub>+R<sub>34</sub>); this leads soon to linNets result:</p>
 </li>
 </ol>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre>                      -(R1*R2*R3 + R1*R2*R4)
-Uout(U1) = ---------------------------------------------
+Uout(U1) = --------------------------------------------- * U1
             (R1*R2*R3 + R1*R2*R4 + R1*R3*R4 + R2*R3*R4)</pre>
 </div>
 </div>
@@ -501,7 +500,7 @@ Uout(U1) = ---------------------------------------------
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-06-14 13:37:10 +0200
+Last updated 2026-10-17 23:15:03 +0200
 </div>
 </div>
 </body>
