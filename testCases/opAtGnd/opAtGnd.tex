@@ -1,0 +1,85 @@
+% See https://holatex.app/playground.html# for an online viewer.
+
+\documentclass[tikz]{standalone} % Standalone: Only graphics export.
+\usepackage[european,siunitx]{circuitikz}
+\usetikzlibrary{arrows.meta}
+\usepackage{listings}
+\lstset{basicstyle=\footnotesize\ttfamily}
+\begin{document}
+
+  \newcommand{\eq}{=}
+  \tikzset{ameter/.style={rmeterwa, t=A}}
+  \begin{circuitikz}
+  %\begin{circuitikz}[american voltages, american currents]
+
+    \tikzset{>=Triangle} % Define tip of arrows drawn with [->]
+    \ctikzset{voltage=straight}
+
+    \def\sizeY{\lR}         % Heights Uin
+    \def\lR{2.5}            % Length of device like R
+    \def\dxOp12{0.3*\lR}    % Delta x between both OP input lines.
+    \def\xOp1{\lR}          % X-coordinate of left OP input line.
+    
+    \def\lUio{0.8}          % Length of I/O connectors
+    \def\gapUio{0.3}        % Gap between I/O connector and voltage arrow
+
+    \coordinate(origin) at (0,0);
+    
+    % Isolated input node.
+    \draw (0,\sizeY) coordinate(in)
+      to[short,o-] (in);
+
+%      
+%      to[R,l=$R$,o-*] ++(\lR,0) coordinate(BotLftFb)
+%      -- ++(0,\dFbY) to[short,-*] ++(\dRcX,0) coordinate(lftRc1)
+%      -- ++(0,-\dRcY)
+%      to[C,l=$C_{t_1}$,v=$U_{C_{t_1}}$] ++(\lR,0)
+%      to[ameter,i=$i_{C_{t_1}}$] ++(\lR,0)
+%      to[short,-*] ++(0,\dRcY) coordinate(rhtRc1)
+%      to[short,-*] ++(\dRcX,0) coordinate(lftRc2) -- ++(0,-\dRcY)
+%      to[C,l=$C_{t_2}$,v=$U_{C_{t_2}}$] ++(\lR,0)
+%      to[ameter,i=$i_{C_{t_2}}$] ++(\lR,0)
+%      to[short,-*] ++(0,\dRcY) coordinate(rhtRc2)
+%      to[R,l=$R_u$] ++(\lR,0) coordinate(rhtRu);
+%    
+%    % Upper left part of feedback line.
+%    \draw (lftRc1) -- ++(0,\dRcY)
+%    to[R,l=$R_{t_1}$] ++(\lR,0) coordinate(rhtRt1)
+%    -- (rhtRt1 -| rhtRc1) -- (rhtRc1);
+%    
+%    % Upper right part of feedback line.
+%    \draw (lftRc2) -- ++(0,\dRcY)
+%    to[R,l=$R_{t_2}$] ++(\lR,0) coordinate(rhtRt2)
+%    -- (rhtRt2-|rhtRc2) -- (rhtRc2);
+    
+    % OP
+    \draw (\xOp1,0)
+      to[short,*-] ++(0,\sizeY)
+      -- ++(\dxOp12,0)
+      node[plain amp,anchor=-](OP){$OP$}
+      (OP.out)
+      to[short,-o] ++(\lUio,0) coordinate(out)
+      (OP.+)
+      to[short,-*] (origin-|OP.+)
+      node[ground]{};
+    
+    % Ground line.
+    \draw (origin) to[short,o-o] (origin-|out) coordinate(botOut);
+%      to[short,-o] ($(origin-|BotRhtFb)+(\lUio,0)$) coordinate(gndOut);
+%    
+%    % OP to ground symbol.
+%    \draw (OP.+) -- (origin-|OP.-) node[ground]{};
+%
+    % Voltage arrow for input voltage U1.
+    \draw[->] ($(in)+(0,-\gapUio)$) -- node[midway,left]{$U_1$} ($(origin)+(0,\gapUio)$);
+
+%    % Connectors for output voltage.
+%    \draw (BotRhtFb) to[short, *-o] ++(\lUio,0) coordinate(out);
+
+    % Voltage arrow for output voltage.
+    \draw[->] ($(out)+(0,-\gapUio)$) -- node[midway,right]{$U_2$}
+      ($(botOut)+(0,\gapUio)$);
+
+  \end{circuitikz}
+
+\end{document}

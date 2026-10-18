@@ -1,0 +1,10 @@
+Oct 18 16:40:29 2026 - 000001 ms - RESULT - 
+-----------------------------------------------------------------------------
+ linNet - The Software for symbolic Analysis of linear Electronic Circuits
+ Copyright (C) 2013-2026 Peter Vranken (https://github.com/PeterVranken/linNet)
+ This is free software; see the source for copying conditions. There is NO
+ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+-----------------------------------------------------------------------------
+Oct 18 16:40:29 2026 - 000002 ms - RESULT - Reading circuit file C:\home\vranken\projects\linNetAtGitHub\linNet\testCases\opAtGnd\opAtGnd.cnl successfully done
+Oct 18 16:40:29 2026 - 000002 ms -  ERROR - Gauss elimination of LES is aborted. Pivoting doesn't find any non zero coefficient in the 3. elimination step. The equations are linear dependent or contradictory. Please double-check your circuit netlist
+Oct 18 16:40:29 2026 - 000002 ms -  ERROR - The LES could not be solved. The circuit has an undefined behavior. Most probable, you have an invalid interconnection of sources, current probes and/or op-amps in your circuit

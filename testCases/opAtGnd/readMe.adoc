@@ -1,0 +1,15 @@
+This folder contains linNet test case `opAtGnd`:
+
+[[figSchematics]]
+.Schematics
+image::OpAtGnd.svg[Schematics, width="70%", pdfwidth="70%", align="center"]
+
+This test case demonstrates correct error handling when both inputs of an
+operational amplifier are connected to ground. The voltage source that
+models the output of the operational amplifier has no effect on the
+inputs, and therefore the system of equations is unsolvable.
+
+No Octave file is generated and there are no plots to see. The
+link:opAtGnd.log[calculation results^] only contain an error message.
+
+See link:opAtGnd.cnl[netlist file^] for more details of the circuit.

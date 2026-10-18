@@ -1,4 +1,0 @@
-/* Prove the correct fault handling if both the op-amp's inputs are connected to ground. */
-OP  OP      gnd gnd out
-U   Uin     in  gnd
-R   Rout    out gnd
