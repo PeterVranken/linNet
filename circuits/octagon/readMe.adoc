@@ -36,6 +36,7 @@ resistor to have a different value, and only substitutes the common value
 `R` into the resulting formula afterwards. For a human, this would be a
 practically impossible task.
 
-In the end, however, both approaches lead to the same result.
+In the end, however, both approaches lead to the same
+link:octagon.log[result^].
 
 The resistor network is defined in the link:octagon.cnl[netlist file^].

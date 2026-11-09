@@ -439,62 +439,32 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="content">
 <div class="paragraph">
-<p>This folder contains linNet test case <code>octagon</code>:</p>
+<p>This folder contains linNet test case <code>3poleLP-notStimulated</code>:</p>
 </div>
 <div id="figSchematics" class="imageblock text-center">
 <div class="content">
-<img src="octagon.jpg" alt="Schematics" width="40%">
+<img src="3poleLP-notStimulated.svg" alt="Schematics" width="70%">
 </div>
 <div class="title">Figure 1. Schematics</div>
 </div>
 <div class="paragraph">
-<p>This is an interesting test case because it clearly demonstrates the large
-gap between human understanding and the machine&#8217;s brute-force
-computational power. Determining the resistance value of the elegant
-wheel-shaped network of identical resistors can be solved within a few
-minutes. Symmetry considerations allow dramatic simplifications:</p>
+<p>This test case proves that a not stimulated system is handled well. It
+reuses the circuit from test case <a href="../3poleLP" target="_blank" rel="noopener"><code>3poleLP</code></a> but the
+input voltage source U<sub>1</sub> has been replaced by a shortcut.</p>
 </div>
 <div class="paragraph">
-<p>The horizontal resistors connect nodes at the same potential on both
-sides. As a result, no current flows through them and they are therefore
-irrelevant to the final result. Conceptually, they can be replaced by a
-wire, through which no current flows either.</p>
+<p>No Octave file is generated and there are no plots to see. The
+<a href="3poleLP-notStimulated.log" target="_blank" rel="noopener">calculation results</a> only contain an error
+message.</p>
 </div>
 <div class="paragraph">
-<p>The remaining upper and lower halves are mirror images of each other, so
-it is sufficient to calculate the result for one half and then double it.</p>
-</div>
-<div class="paragraph">
-<p>The upper half can be understood as a parallel connection of three
-elements: the vertical resistor and two identical inverted Y-shaped
-networks. From these elements we obtain:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>R_y = R + R||R = 3/2*R
-R_y||R_y = 1/2*R_y = 3/4*R
-R_y||R||R_y = R||(R_y||R_y) = R*(3/4*R)/(R+3/4*R) = 3/4*R/(7/4) = 3/7*R
-R_tot = 2*(R_y||R||R_y) = 6/7*R</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>In contrast to this reasoning, linNet sets up a system of equations
-without even taking advantage of the fact that all resistors are
-identical. It solves the system in the most general form, allowing every
-resistor to have a different value, and only substitutes the common value
-<code>R</code> into the resulting formula afterwards. For a human, this would be a
-practically impossible task.</p>
-</div>
-<div class="paragraph">
-<p>In the end, however, both approaches lead to the same result.</p>
-</div>
-<div class="paragraph">
-<p>The resistor network is defined in the <a href="octagon.cnl" target="_blank" rel="noopener">netlist file</a>.</p>
+<p>See <a href="3poleLP-notStimulated.cnl" target="_blank" rel="noopener">netlist file</a> for more details of the
+circuit.</p>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-08 22:48:23 +0200
+Last updated 2026-10-18 16:39:10 +0200
 </div>
 </div>
 </body>

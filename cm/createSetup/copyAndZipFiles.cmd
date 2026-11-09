@@ -62,31 +62,31 @@ REM attrib -R %output%\bin\LINUX\PRODUCTION\linNet
 REM Copy some selected circuit files.
 mkdir %output%\circuits
 REM copy test\failingTestCases\bandStop.makesOctave3-4-3-win32Crash.cnl %output%\circuits
-REM copy test\testCases\octagon.cnl %output%\circuits
-REM copy test\testCases\octagon.jpg %output%\circuits
-REM copy test\testCases\inverseTF.cnl %output%\circuits
-REM copy test\testCases\largeAndSimple.cnl %output%\circuits
-REM copy test\testCases\deviceAtSingleNode.cnl %output%\circuits
-REM copy test\testCases\recursiveControlledVoltageSrcs.jpg %output%\circuits
-REM copy test\testCases\recursiveControlledVoltageSrcs.cnl %output%\circuits
-REM copy test\testCases\2poleLP.cnl %output%\circuits
-REM copy test\testCases\3poleLP.cnl %output%\circuits
-REM copy test\testCases\trickyOP.ckt %output%\circuits
-REM copy test\testCases\trickyOP.jpg %output%\circuits
-REM copy test\testCases\wire*.cnl %output%\circuits
-REM copy test\testCases\wire*.log %output%\circuits
-REM copy test\testCases\exampleManual.cnl %output%\circuits
-REM copy test\testCases\NgtD.cnl %output%\circuits
-REM copy test\testCases\rr.cnl %output%\circuits
-xcopy /s/i testCases\*.cnl %output%\circuits\
-xcopy /s/i testCases\*.pdf %output%\circuits\
-xcopy /s/i testCases\*.jpg %output%\circuits\
-xcopy /s/i testCases\*.svg %output%\circuits\
-xcopy /s/i testCases\*.log %output%\circuits\
-xcopy /s/i testCases\*.txt %output%\circuits\
-xcopy /s/i testCases\*.adoc %output%\circuits\
-xcopy /s/i testCases\*.html %output%\circuits\
-xcopy /s/i testCases\*.m %output%\circuits\
+REM copy test\circuits\octagon.cnl %output%\circuits
+REM copy test\circuits\octagon.jpg %output%\circuits
+REM copy test\circuits\inverseTF.cnl %output%\circuits
+REM copy test\circuits\largeAndSimple.cnl %output%\circuits
+REM copy test\circuits\deviceAtSingleNode.cnl %output%\circuits
+REM copy test\circuits\recursiveControlledVoltageSrcs.jpg %output%\circuits
+REM copy test\circuits\recursiveControlledVoltageSrcs.cnl %output%\circuits
+REM copy test\circuits\2poleLP.cnl %output%\circuits
+REM copy test\circuits\3poleLP.cnl %output%\circuits
+REM copy test\circuits\trickyOP.ckt %output%\circuits
+REM copy test\circuits\trickyOP.jpg %output%\circuits
+REM copy test\circuits\wire*.cnl %output%\circuits
+REM copy test\circuits\wire*.log %output%\circuits
+REM copy test\circuits\exampleManual.cnl %output%\circuits
+REM copy test\circuits\NgtD.cnl %output%\circuits
+REM copy test\circuits\rr.cnl %output%\circuits
+xcopy /s/i circuits\*.cnl %output%\circuits\
+xcopy /s/i circuits\*.pdf %output%\circuits\
+xcopy /s/i circuits\*.jpg %output%\circuits\
+xcopy /s/i circuits\*.svg %output%\circuits\
+xcopy /s/i circuits\*.log %output%\circuits\
+xcopy /s/i circuits\*.txt %output%\circuits\
+xcopy /s/i circuits\*.adoc %output%\circuits\
+xcopy /s/i circuits\*.html %output%\circuits\
+xcopy /s/i circuits\*.m %output%\circuits\
 REM Until all test cases are revised, we better delete those, which are still not in their
 REM own, dedicated folder.
 del %output%\circuits\*.cnl

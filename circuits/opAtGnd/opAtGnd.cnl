@@ -25,3 +25,13 @@
 OP  OP      gnd gnd out
 U   Uin     in  gnd
 R   Rout    out gnd
+
+/* Other ways to connect the OP in an illegal way:
+   1) Connect both inputs to the input source:
+     OP  OP      in  in  out
+   2) Connect one input to the input source and the other one to ground:
+     OP  OP      in  gnd out
+   Both alternatives fail with the same error message. The output has no
+   effect on the voltage balance at the inputs and this makes the LES
+   unsolvable. */
+
