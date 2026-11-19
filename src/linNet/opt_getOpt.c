@@ -129,10 +129,10 @@
 "    is derived from the input file name.\n"                                                  \
 "      If the option is used without argument, DIRNAME is the current working directory.\n"   \
 "      No Octave code is generated if this option is not used.\n"                             \
-"       Note, if an input file related output folder already exists then the common,\n"       \
-"     problem-independent Octave script code is not copied into the output folder;\n"         \
-"     this enables making local modifications of that code without the danger of\n"           \
-"     overwriting. See --do-not-copy-common-Octave-code, also.\n"                             \
+"      Note, if an input file related output folder already exists then the common,\n"        \
+"    problem-independent Octave script code is not copied into the output folder;\n"          \
+"    this enables making local modifications of that code without the danger of\n"            \
+"    overwriting. See --do-not-copy-common-Octave-code, also.\n"                              \
 "  -i, --do-not-copy-common-Octave-code\n"                                                    \
 "    Inhibit copying common, problem-independent Octave scripts. The generated Octave\n"      \
 "    code builds on some common, invariant scripts, which are normally copied into the\n"     \
